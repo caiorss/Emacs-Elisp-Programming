@@ -1,0 +1,6 @@
+#!/bin/sh -e
+sourcefile=$1
+ghc -Wall -fno-code $sourcefile
+if [ -x `which hlint` ]; then
+    hlint $sourcefile
+fi

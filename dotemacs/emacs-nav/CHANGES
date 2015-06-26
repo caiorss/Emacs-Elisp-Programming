@@ -1,0 +1,10 @@
+Release 49 (going back to non-datestamp release numbers)
+* Fixed issue 96: C-xC-f and C-xC-b not opening the file or buffer in the window
+  to the right of nav
+
+20120506b
+* Fix for issue 94: Windows resizing when nav closes
+* Fix for issue 95: Files not always opening to the right of nav
+* Removal of a bad keybinding that made it too easy to accidentally change the default width
+* Changed license from Apache to GPL v3 to make it easier to borrow code from newer versions of Emacs
+
