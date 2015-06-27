@@ -25,6 +25,9 @@
 
 Emacs is an scriptable text editor written in the lisp dialect: Elisp.
 
+* http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
+* http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
+
 **Configuration File**
 
 ``` 
@@ -480,7 +483,34 @@ ELISP> (getenv "HOME")
 * [Creating New Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html)
 
 
-## Documentation
+### Windows Functions
+
+```
+balance-windows
+delete-other-windows
+delete-window
+delete-windows-on
+display-buffer
+shrink-window-if-larger-than-buffer
+split-window
+split-window-horizontally
+split-window-vertically
+switch-to-buffer
+switch-to-buffer-other-window
+other-window
+other-window-for-scrolling
+
+;; Open a new Emacs Window
+(make-frame)
+```
+
+* http://ecb.sourceforge.net/docs/The-edit_002darea.html 
+* http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_432.html 
+* http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_441.html 
+* http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html 
+
+
+### Documentation
 
 * [Rosetta Code/ Category:Emacs Lisp](http://rosettacode.org/wiki/Category:Emacs_Lisp)
 

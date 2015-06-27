@@ -1,5 +1,7 @@
 
 
+all: html
+
 copy:
 	rsync  -arvHP --exclude=.git/ \
 	--exclude=*.elc --exclude=history \
@@ -12,5 +14,5 @@ copy:
 	~/.emacs.d/  dotemacs/
 
 html:
-	grip README.md --gfm --export ./REDME.html
+	grip README.md --gfm --export ./RAEDME.html
 
