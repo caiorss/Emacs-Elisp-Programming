@@ -22,7 +22,7 @@
     - [Date and Time](#date-and-time)
     - [Call External Commands or Apps](#call-external-commands-or-apps)
     - [Environment Variables](#environment-variables)
-    - [Read a file to a string](#read-a-file-to-a-string)
+    - [Read / Write file to a string](#read--write-file-to-a-string)
   - [Windows Functions](#windows-functions)
   - [Special Variables](#special-variables)
 - [Discoverability / Get Documentation](#discoverability--get-documentation)
@@ -39,6 +39,7 @@
 - [Solutions](#solutions)
   - [Refresh/ Reload File](#refresh-reload-file)
   - [Extract Function Documentation](#extract-function-documentation)
+  - [Edit File as Root](#edit-file-as-root)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1490,4 +1491,35 @@ ELISP> (fun2org 'sample-function)
     "
 ```
 
+### Edit File as Root
 
+```elisp
+ELISP> (defun open-as-root (filename)
+         (interactive)
+         (find-file (concat "/sudo:root@localhost:"  filename)))
+open-as-root
+ELISP> (open-as-root "/etc/host.conf")
+
+#<buffer host.conf>
+ELISP> 
+
+;;
+;; Open an already opened buffer as root
+;;
+;; M-x b
+;;
+ELISP> (defun open-buffer-as-root ()
+         (interactive)
+         (let 
+             (
+              ;; Get the current buffer file name
+              (filename (buffer-file-name (current-buffer))) 
+              ;; Get the current file name
+              (bufname  (buffer-name (current-buffer)))
+             )
+           (progn
+          (kill-buffer bufname)         ;; Kill current buffer
+          (open-as-root filename))))    ;; Open File as root
+open-buffer-as-root
+ELISP> 
+```
