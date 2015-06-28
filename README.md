@@ -18,14 +18,24 @@
   - [Functional Programming](#functional-programming)
   - [Bufffers](#bufffers)
   - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
+    - [Directory and Path](#directory-and-path)
+    - [Date and Time](#date-and-time)
+    - [Call External Commands or Apps](#call-external-commands-or-apps)
+    - [Environment Variables](#environment-variables)
+    - [Read a file to a string](#read-a-file-to-a-string)
   - [Windows Functions](#windows-functions)
+  - [Special Variables](#special-variables)
 - [Discoverability / Get Documentation](#discoverability--get-documentation)
+  - [Describe](#describe)
 - [Bytecodes](#bytecodes)
 - [Documentation](#documentation)
+  - [References](#references)
+  - [Selected Dot Emacs](#selected-dot-emacs)
 - [Customization](#customization)
   - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
   - [Themes](#themes)
   - [Misc](#misc)
+  - [Quite Startup](#quite-startup)
 - [Solutions](#solutions)
   - [Refresh/ Reload File](#refresh-reload-file)
   - [Extract Function Documentation](#extract-function-documentation)
@@ -875,6 +885,8 @@ ELISP>
 
 ### Files and Directories and OS Interface
 
+#### Directory and Path
+
 ```elisp
 ;; Get and Set current directory
 
@@ -918,7 +930,11 @@ ELISP> (directory-files "/home/tux/PycharmProjects/Haskell/")
 ("." ".." ".git" ".gitignore" ".idea" "LICENSE" "Make" "Makefile"
 "README.back.md" "README.html" "README.md" "Test.html" "build.sh" "clean.sh"
 "codes" "dict.sh" "haskell" "ocaml" "papers" "tags" "tmp")
+```
 
+#### Date and Time
+
+```elisp
 ;;;
 ;;; Print Current Time    
 ;;;
@@ -940,9 +956,11 @@ ELISP> (directory-files "/home/tux/PycharmProjects/Haskell/")
 ELISP> (format-time-string "%d/%m/%Y %H:%M:%S" (current-time))
 "27/06/2015 22:05:10"
 ELISP> 
+```
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#### Call External Commands or Apps
 
+```elisp
 
 ;;; Call External Command
 ;;;;;;
@@ -963,8 +981,11 @@ ELISP> (shell-command-to-string "uname" )
 ELISP> (shell-command-to-string "uname -a" )
 "Linux tuxhorse 3.19.0-18-generic #18-Ubuntu SMP Tue May 19 18:30:59 UTC 2015 i686 i686 i686 GNU/Linux\n"
 ELISP> 
+```
 
+#### Environment Variables
 
+```elisp
 ;; Environment Variables
 ;;
 ELISP> (getenv "PATH")
@@ -988,8 +1009,23 @@ ELISP>
 ELISP> (eq system-type 'gnu/linux)
 t
 ELISP> 
+```
 
+#### Read a file to a string
 
+```elisp
+
+ELISP> (defun file-contents (filename)
+  (interactive "fFind file: ")
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (buffer-substring-no-properties (point-min) (point-max))))
+
+ELISP> (file-contents "/proc/filesystems")
+"nodev  sysfs\nnodev    rootfs\nnodev   ramfs\nnodev    
+bdev\nnodev proc\nnodev cgroup\nnode ...
+
+    
 ```
 
 * [Current Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html)
@@ -1022,9 +1058,51 @@ other-window-for-scrolling
 * http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_441.html 
 * http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html 
 
+### Special Variables
+
+```
+ELISP> emacs-major-version
+24 (#o30, #x18, ?\C-x)    
+
+ELISP> load-path
+    ("/home/tux/.emacs.d/elpa/color-theme-cobalt-0.0.2/" 
+    "/home/tux/.emacs.d/elpa/color-theme-20080305.34/" 
+    "/home/tux/.emacs.d/elpa/company-ghc-20150613.123/" 
+    "/home/tux/.emacs.d/elpa/company-0.8.12/
+    ...)
+    
+    
+ELISP> window-system
+x
+ELISP> 
+
+ELISP> system-type
+gnu/linux
+ELISP> 
+
+ELISP> system-configuration
+"i686-pc-linux-gnu"
+ELISP> 
+
+ELISP> shell-file-name
+"/bin/bash"
+ELISP> 
+
+ELISP> user-full-name
+"tux"
+ELISP> user-mail-address
+"tux@tuxhorse"
+
+ELISP> user-emacs-directory
+"~/.emacs.d/"
+
+
+```
 
 ## Discoverability / Get Documentation
 
+
+**Apropos**
 
 ```
 M-x <apropos command>
@@ -1042,6 +1120,49 @@ apropos-variable
 apropos-value
 ```
 
+
+
+
+### Describe
+
+See also: 
+
+* [.emacs file by Alex](https://alexschroeder.ch/geocities/kensanata/dot-emacs.html)
+* [qDot's Emacs Configuration](http://qdot.github.io/conf_emacs/)
+
+**Describe Function**
+
+This calls the command describe-function. Type a function name and get documentation of it.
+
+```
+ELISP> (describe-function <function-name>)
+
+or
+
+M-x describe-function
+
+or type the keys
+
+C-h f
+```
+
+**Describe Variable**
+
+This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
+
+
+```
+ELISP> (describe-variable <variable-name>)
+ELISP> (describe-variable 'load-path)
+
+
+M-x describe-variable
+
+or
+
+C-h v
+```
+
 ## Bytecodes
 
 * http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_15.html
@@ -1050,10 +1171,15 @@ apropos-value
 
 ## Documentation
 
+### References
 
 * [GNU Emacs Lisp Reference Manual](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents)
 
 * [Rosetta Code/ Category:Emacs Lisp](http://rosettacode.org/wiki/Category:Emacs_Lisp)
+
+* [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs](http://emacslife.com/how-to-read-emacs-lisp.html)
+
+* [Read Lisp, Tweak Emacs [Beginner 1/4]: How to try Emacs Lisp](http://sachachua.com/blog/series/read-lisp-tweak-emacs/)
 
 * [Elisp Cookbook](http://emacswiki.org/emacs/ElispCookbook)
 * [ErgoEmacs](http://ergoemacs.org/)
@@ -1075,6 +1201,19 @@ apropos-value
 * [On elisp and programming in general](http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html)
 
 
+### Selected Dot Emacs
+
+* [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
+
+* [Howard Abrams dot emacs](https://github.com/howardabrams/dot-files/blob/master/emacs.org)
+
+* http://uce.uniovi.es/tips/Emacs/mydotemacs.html
+
+* http://www.dgp.toronto.edu/~ghali/emacs.html
+
+* http://whattheemacsd.com/
+
+* https://snarfed.org/dotfiles/.emacs
 
 ## Customization
 
@@ -1206,6 +1345,26 @@ Disable
 ```
 ELISP> (show-paren-mode 1)
 t
+```
+
+### Quite Startup
+
+From: [Ask HN Emacs Users: What's in your .emacs file?](https://news.ycombinator.com/item?id=1654164)
+
+
+```elisp
+;; Don't display the 'Welcome to GNU Emacs' buffer on startup
+(setq inhibit-startup-message t)
+
+;; Display this instead of "For information about GNU Emacs and the
+;; GNU system, type C-h C-a.". This has been made intentionally hard
+;; to customize in GNU Emacs so I have to resort to hackery.
+(defun display-startup-echo-area-message ()
+  "If it wasn't for this you'd be GNU/Spammed by now"
+  (message ""))
+
+;; Don't insert instructions in the *scratch* buffer
+(setq initial-scratch-message nil)
 ```
 
 ## Solutions
