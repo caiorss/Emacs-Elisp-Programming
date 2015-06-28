@@ -1250,6 +1250,36 @@ other-window-for-scrolling
 
 ;; Open a new Emacs Window
 (make-frame)
+
+;; Screen Resolution
+
+ELISP> (x-display-pixel-width)
+1366 (#o2526, #x556, ?Ֆ)
+
+ELISP> (x-display-pixel-height)
+768 (#o1400, #x300, ?̀)
+ELISP> 
+ELISP> 
+
+;; Resize and Set Emacs Windows position
+;; 
+;; From: http://uce.uniovi.es/tips/Emacs/mydotemacs.html#sec-41
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (defun resize-frame ()
+  "Set size"
+  (interactive)
+  (set-frame-width (selected-frame) 100)
+  (set-frame-height (selected-frame) 28)
+  (set-frame-position (selected-frame) 0 1))
+resize-frame
+ELISP> 
+
+ELISP> (resize-frame)
+t
+ELISP> 
+
 ```
 
 * http://ecb.sourceforge.net/docs/The-edit_002darea.html 
@@ -1415,6 +1445,19 @@ C-h v
 * http://whattheemacsd.com/
 
 * https://snarfed.org/dotfiles/.emacs
+
+* http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el
+
+
+### Selected Codes
+
+* http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el
+
+* http://repo.or.cz/w/emacs.git/blob_plain/emacs-24:/lisp/progmodes/python.el
+
+* http://emacswiki.org/emacs/file-template.el
+
+* http://aperiodic.net/phil/configs/elisp/ledger.el
 
 ## Customization
 
@@ -1716,4 +1759,97 @@ M-x open-terminal
                 nil
                 (format "--working-directory='%s'"
                         (file-name-directory (buffer-file-name)))))
+
+### Eval String in Clipboard (Xclip)
+
+It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
+
+```elisp
+
+ELISP> (defun eval-string (str) (eval (read str)))
+eval-string
+
+ELISP> (defun eval-xclip () (eval-string (shell-command-to-string "xclip -o")))
+eval-xclip
+
+;;
+;;  Copy the following line in this comment block
+;;  
+;;      (message "Loading my copypaste file...")
+
+ELISP> (eval-xclip)
+"Loading my copypaste file..."
+ELISP> 
+
 ```
+                                                
+### Save / Reload Current Session
+
+Interactive Developement
+
+```elisp
+ELISP> (defun write-file (filename content)
+         (append-to-file content nil filename))
+write-file
+ELISP> 
+
+ELISP> (defun file-contents (filename)
+  (interactive "fFind file: ")
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (buffer-substring-no-properties (point-min) (point-max))))
+file-contents
+ELISP> 
+
+ELISP> (defun write-file (filename content)
+         (append-to-file content nil filename))
+write-file
+ELISP> 
+
+
+ELISP> (defun write-file (filename content)
+         (append-to-file content nil filename))
+write-file
+ELISP> 
+
+ELISP> (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))
+("/home/tux/.emacs.d/init.el" "/sudo:root@localhost:/etc/host.conf")
+
+ELISP> (setq session-file  "~/.emacs.d/lastsession.el")
+"~/.emacs.d/lastsession.el"
+ELISP> 
+
+ELISP> 
+ELISP> (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list))))
+"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
+
+
+ELISP> (setq code  (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))))
+"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
+ELISP> 
+
+
+ELISP> (delete-file session-file)
+nil
+
+ELISP> (write-file session-file code)
+nil
+ELISP> 
+
+ELISP> (file-contents session-file)
+"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
+ELISP> 
+
+ELISP> (load-file session-file)
+t
+ELISP> last-session-files
+("/home/tux/.emacs.d/init.el" "/sudo:root@localhost:/etc/host.conf")
+
+;;; Open All files defined in Last Session
+ELISP> 
+ELISP> (mapcar 'find-file last-session-files)
+(#<buffer init.el> #<buffer host.conf>)
+
+ELISP> 
+```
+
