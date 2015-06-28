@@ -12,6 +12,10 @@
 ;; .init.el file
 (defvar dotemacs "~/.emacs.d/init.el")
 
+(setq file-manager "pcmanfm")
+
+(load-file (expand-file-name "~/.emacs.d/elutils.el"))
+
 ;; Disable Auto Save
 (setq auto-save-default nil)
 
@@ -20,6 +24,8 @@
 						 ("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" .  "http://marmalade-repo.org/packages/")
                         ))
+
+
 
 ;; Functional Programming Support for E-lisp
 ;;
@@ -290,147 +296,22 @@
 ;; Custom Functions                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun reload ()
-  "Reload init.el file"
-  (interactive)
-  (load dotemacs)
-  (message "Reloaded OK.")
-)
+;; (load-file "~/emacs.d/elutils.el")
 
 
-(defun open-dir ()
-  "Open directory of current buffer"
-  (interactive)
-  (find-file (file-name-directory (buffer-file-name))))
 
-(defun open-terminal ()
-  "Open terminal in file directory"
-  (interactive)
-  (call-process "lxterminal"
-                nil
-                (format "--working-directory='%s'"
-                        (file-name-directory (buffer-file-name)))))
-
-(defun evil-tog ()
-  "Toggle Evil mode - Vim Emulator mode"
-  (if (not evil-mode)
-      (progn (message "Evil mode ON" )  (evil-mode 1))
-      (progn (message "Evil mode Off")  (evil-mode 0))))
-
-(defun open-file-manager ()
-  "Open buffer directory in file manager (Linux Only)"
-  (interactive)
-  (call-process "pcmanfm"))
-
-(defun copy-all ()
-  "Copy entire buffer to clipboard"
-  (interactive)
-  (clipboard-kill-ring-save (point-min)
-                            (point-max)))
-
-(defun create-scratch-buffer nil
-  "create a scratch buffer"
-  (interactive)
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (lisp-interaction-mode))
-
-(defun command-to-buffer (command) (
-    progn                                     
-    (interactive)                                     
-    (switch-to-buffer (get-buffer-create "pad"))
-    (erase-buffer)                                                      
-    (insert (shell-command-to-string command))
-))               
+              
 
 (defun cmd-prompt (command)
   (interactive "sCommand: ")
   (command-to-buffer command)
 )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Popup terminal - Hit F12
-;;
-;; https://tsdh.wordpress.com/2011/10/12/a-quick-pop-up-shell-for-emacs/
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defvar th-shell-popup-buffer nil)
-
-(defun th-shell-popup ()
-  "Toggle a shell popup buffer with the current file's directory as cwd."
-  (interactive)
-  (unless (buffer-live-p th-shell-popup-buffer)
-    (save-window-excursion (shell "*Popup Shell*"))
-    (setq th-shell-popup-buffer (get-buffer "*Popup Shell*")))
-  (let ((win (get-buffer-window th-shell-popup-buffer))
-	(dir (file-name-directory (or (buffer-file-name)
-				      ;; dired
-				      dired-directory
-				      ;; use HOME
-				      "~/"))))
-    (if win
-	(quit-window nil win)
-      (pop-to-buffer th-shell-popup-buffer nil t)
-      (comint-send-string nil (concat "cd " dir "\n")))))
-
-(global-set-key (kbd "<f12>") 'th-shell-popup)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;    M E N U S                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'easymenu)
-
-                  
-(easy-menu-define djcb-menu global-map "Utils"
-  '("Utils"
-
-     ;; http://emacs-fu.blogspot.com/2008/12/running-console-programs-inside-emacs.html
-     ("Shells" ;; submenu
-       ["Ielm   - Emacs Lisp Shell"       (ielm)]
-       ["Eshell - Emacs Buitin Shell"    (eshell)]
-       ["Native Shell "                  (shell)]
-       ["Python: run-python"  ( run-python )]
-       ["Octave: run-octave"  ( run-octave)]
-       
-      );; End of shells menu   
-
-     ("Emacs /Elisp"  ;; submenu
-       
-      ["Edit  init.el" (find-file   dotemacs)]
-      ["Reload init.el" (reload)]
-      ["Ielm   - Emacs Lisp Shell"  (ielm)]
-      ["List packages"     (list-packages)]
-      ["Install package"   (package-install)]
-      ["Eval buffer"   ( eval-buffer ) ]
-      ["Emacs command history "   ( list-command-history ) ]
-      ["Describe key"  ( describe-key )  ]      
-      
-     );; End of Emacs Settings
 
 
-     ("File Utils" ;; submenu
-      ["Toggle Evil Mode"                  (evil-tog)]
-      ["Create Scratch Buffer"             (create-scratch-buffer)]
-      ["Navigation Bar - Navbar"           (nav-toggle)]
-      ["Open Directory of Current Buffer"  (open-dir) ]
-      ["Open Current Buffer directory in File Manager" (open-file-manager)]
-      ["Open Terminal"  (open-terminal)]
-      ["Copy Buffer to Clipboard" (copy-all)]
-      
-     );; End of File Utils
-     
-    ("System" ;; submenu
-       
-      ["Edit .bashrc" (find-file  "~/.bashrc")]
-      ["Edit .profile" (find-file "~/.profile")]
-      ["Edit .Xresources" (find-file "~/.Xresources")]
-      ["Edit .xsessin"    (find-file "~/.xsession")]
-      ["See all GNU MAN pages" ( info)]
-      ["See a specific Man Page" (woman)]
-      
-     );; End of Emacs Settings   
-       
- )) ;; End of Custom Menu
+
+
+
 
 ;; (require 'flycheck)
 ;(add-hook 'after-init-hook #'global-flycheck-mode)
@@ -460,11 +341,11 @@
 ;; https://github.com/tuhdo/semantic-refactor
 ;;
 
-(require 'srefactor)
-(require 'srefactor-lisp)
+;; (require 'srefactor)
+;; (require 'srefactor-lisp)
 
 ;; OPTIONAL: ADD IT ONLY IF YOU USE C/C++. 
-(semantic-mode 1) ;; -> this is optional for Lisp
+;; (semantic-mode 1) ;; -> this is optional for Lisp
 
 ;(define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
 ;(define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
