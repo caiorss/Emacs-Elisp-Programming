@@ -495,6 +495,21 @@ ELISP> (func2 6)
 ELISP> 
 ```
 
+**S-expression/ Sexp to String**
+
+```elisp
+ELISP> (setq sexp1 '(+ 1 (* 2 3)))
+(+ 1
+   (* 2 3))
+
+ELISP> (eval sexp1)
+7 (#o7, #x7, ?\C-g)
+
+ELISP> (format "%S" sexp1)
+"(+ 1 (* 2 3))"
+ELISP> 
+```
+
 **Enter Emacs Lisp mode**
 
 ```
@@ -998,6 +1013,19 @@ ELISP> (getenv "HOME")
 "/home/tux"
 
 
+;; Set Environment Variables
+;;
+
+ELISP> (setenv "JAVA_HOME" "/usr/local/java")
+"/usr/local/java"
+
+ELISP> (setenv "LANG" "en_US.UTF8")
+"en_US.UTF8"
+
+ELISP> (getenv "LANG")
+"en_US.UTF8"
+ELISP> 
+
 ;; Detect Operating System 
 ;;
 ;;
@@ -1011,7 +1039,10 @@ t
 ELISP> 
 ```
 
-#### Read a file to a string
+#### Read / Write file to a string
+
+
+**Read File**
 
 ```elisp
 
@@ -1023,9 +1054,18 @@ ELISP> (defun file-contents (filename)
 
 ELISP> (file-contents "/proc/filesystems")
 "nodev  sysfs\nnodev    rootfs\nnodev   ramfs\nnodev    
-bdev\nnodev proc\nnodev cgroup\nnode ...
+bdev\nnodev proc\nnodev cgroup\nnode ...   
+```
 
-    
+**Write to File**
+
+```elisp
+ELISP> (append-to-file "hello world" nil "/tmp/hello.txt")
+nil
+
+ELISP> (file-contents "/tmp/hello.txt")
+"hello world"
+ELISP>
 ```
 
 * [Current Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html)
@@ -1174,6 +1214,8 @@ C-h v
 ### References
 
 * [GNU Emacs Lisp Reference Manual](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents)
+
+* http://blog.gnumonk.com/2012/07/effective-emacs-part1.html
 
 * [Rosetta Code/ Category:Emacs Lisp](http://rosettacode.org/wiki/Category:Emacs_Lisp)
 
