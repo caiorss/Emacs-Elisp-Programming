@@ -16,6 +16,7 @@
     - [Eval](#eval)
     - [Control Structures](#control-structures)
   - [Functional Programming](#functional-programming)
+  - [Structures](#structures)
   - [Bufffers](#bufffers)
   - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
     - [Directory and Path](#directory-and-path)
@@ -35,7 +36,7 @@
   - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
   - [Themes](#themes)
   - [Misc](#misc)
-  - [Quite Startup](#quite-startup)
+  - [Quiet Startup](#quiet-startup)
 - [Solutions](#solutions)
   - [Refresh/ Reload File](#refresh-reload-file)
   - [Extract Function Documentation](#extract-function-documentation)
@@ -829,6 +830,123 @@ Execute the function
 M-x some-interactive-function>
 ```
 
+### Structures
+
+```elisp
+ELISP> (defstruct account id name balance)
+account
+ELISP> (make-account :id 3434 :name "John" :balance 1000.34)
+[cl-struct-account 3434 "John" 1000.34]
+
+ELISP> (setq user1 (make-account :id 3434 :name "John" :balance 1000.34))
+[cl-struct-account 3434 "John" 1000.34]
+
+ELISP> (account-name user1)
+"John"
+
+ELISP> (account-id user1)
+3434 (#o6552, #xd6a, ?൪)
+ 
+ELISP> (account-balance user1)
+1000.34
+
+;; Test if input is an account object
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ELISP> (account-p user1)
+t
+ELISP> 
+
+;; Change Field
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (defun withdraw (accc amount)
+         (setf (account-balance acc) (- (account-balance acc) amount)))
+withdraw
+
+ELISP> (withdraw user1 300)
+700.34
+ELISP> user1
+[cl-struct-account 3434 "John" 700.34]
+
+ELISP> (withdraw user1 500)
+200.34000000000003
+ELISP> user1
+[cl-struct-account 3434 "John" 200.34000000000003]
+
+ELISP> 
+
+;; Build structure from a list of parameters
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (defun build-account (id name balance)
+          (make-account :id id :name name  :balance balance))
+build-account
+
+ELISP> (build-account 3434 "O' Neil" 35434.23)
+[cl-struct-account 3434 "O' Neil" 35434.23]
+
+ELISP> (apply 'build-account '(3434 "O' Neil" 35434.23))
+[cl-struct-account 3434 "O' Neil" 35434.23]
+
+ELISP> 
+
+ELISP> (mapcar (lambda (params) (apply 'build-account params))
+               '(
+                 (34423 "O' Neil" 23.2323)
+                 (1023  "John Edwards" 1002323.23)
+                 (92323 "Mr. Dummy"  2323241.2323)
+                 (8723  "John Oliver" 9823)
+               ))
+([cl-struct-account 34423 "O' Neil" 23.2323]
+ [cl-struct-account 1023 "John Edwards" 1002323.23]
+ [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
+ [cl-struct-account 8723 "John Oliver" 9823])
+
+ELISP> 
+
+ELISP> (defun build-accounts-from-list (list-of-params)
+          (mapcar (lambda (params) (apply 'build-account params)) list-of-params))
+build-accounts-from-list
+ELISP> 
+
+ELISP> (setq accounts (build-accounts-from-list
+              '(
+                 (34423 "O' Neil" 23.2323)
+                 (1023  "John Edwards" 1002323.23)
+                 (92323 "Mr. Dummy"  2323241.2323)
+                 (8723  "John Oliver" 9823)
+               )))
+([cl-struct-account 34423 "O' Neil" 23.2323]
+ [cl-struct-account 1023 "John Edwards" 1002323.23]
+ [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
+ [cl-struct-account 8723 "John Oliver" 9823])
+
+ELISP> accounts
+([cl-struct-account 34423 "O' Neil" 23.2323]
+ [cl-struct-account 1023 "John Edwards" 1002323.23]
+ [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
+ [cl-struct-account 8723 "John Oliver" 9823])
+
+ELISP> (mapcar (lambda (acc) (account-id acc)) accounts)
+(34423 1023 92323 8723)
+
+ELISP> 
+
+ELISP> 
+ELISP> (mapcar (lambda (acc) (account-name acc)) accounts)
+("O' Neil" "John Edwards" "Mr. Dummy" "John Oliver")
+
+ELISP> 
+
+
+ELISP> (mapcar (lambda (acc) (account-balance acc)) accounts)
+(23.2323 1002323.23 2323241.2323 9823)
+
+ELISP> 
+
+```
 
 ### Bufffers
 
@@ -1430,7 +1548,7 @@ ELISP> (show-paren-mode 1)
 t
 ```
 
-### Quite Startup
+### Quiet Startup
 
 From: [Ask HN Emacs Users: What's in your .emacs file?](https://news.ycombinator.com/item?id=1654164)
 
@@ -1540,7 +1658,7 @@ ELISP> (defun open-as-root (filename)
 open-as-root
 ELISP> (open-as-root "/etc/host.conf")
 
-#<buffer host.conf>
+ #<buffer host.conf>
 ELISP> 
 
 ;;
