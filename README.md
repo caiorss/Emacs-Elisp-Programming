@@ -32,6 +32,7 @@
 - [Documentation](#documentation)
   - [References](#references)
   - [Selected Dot Emacs](#selected-dot-emacs)
+  - [Selected Codes](#selected-codes)
 - [Customization](#customization)
   - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
   - [Themes](#themes)
@@ -1828,6 +1829,7 @@ ELISP> (setq code  (format "(setq last-session-files '%S)" (remove-if 'null (map
 "(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
 ELISP> 
 
+ELISP> (setq session-file "~/.emacs.d/lastsession.el")
 
 ELISP> (delete-file session-file)
 nil
@@ -1853,3 +1855,53 @@ ELISP> (mapcar 'find-file last-session-files)
 ELISP> 
 ```
 
+Joining Everything
+
+
+File: sessions.el
+
+```
+(setq session-file "~/.emacs.d/lastsession.el")
+
+(defun write-file (filename content)
+  (append-to-file content nil filename))
+
+
+(defun make-session-code ()
+     (interactive)
+     (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))))
+   
+
+(defun save-session () 
+    "Save Current Session"
+    (interactive)
+    (when (file-exists-p session-file) (delete-file session-file))
+    (write-file session-file (make-session-code)))
+
+
+(defun load-session ()
+  (interactive)
+  (load-file session-file)
+  (mapcar 'find-file last-session-files)
+)
+
+(message "Reloaded")
+
+```
+
+
+To save all bufffers with files:
+
+```
+M-x load-file ;; Enter session.el
+M-x save-session 
+```
+
+
+Close Emacs and
+
+```
+M-x load-file    ;; Enter session.el
+M-x load-session ;; All previous files in the session 
+                 ;; saved will be opened
+```
