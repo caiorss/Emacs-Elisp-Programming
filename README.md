@@ -306,6 +306,15 @@ ELISP> (append '(1 2) nil '( "a" "b" "c" "d") nil)
 ELISP> (remove-if-not (lambda (x) (> x 2))     '(1 2 3 4 5 6 7 8 9 10))
 (3 4 5 6 7 8 9 10)
 
+;; Test if list is empty
+;; 
+ELISP> (null '(1 2 3 4 5))
+nil
+ELISP> (null '())
+t
+ELISP> (null nil)
+t
+ELISP> 
 
 ;; Drop the firsts n elements of a list
 ;;
@@ -354,6 +363,34 @@ ELISP> (coerce [1 2 3] 'list)
 ;;
 ELISP> (coerce '(1 2 3) 'vector)
 [1 2 3]
+
+ELISP> (number-sequence 0 10 2)
+(0 2 4 6 8 10)
+
+ELISP> (number-sequence 9 4 -1) 
+(9 8 7 6 5 4)
+
+
+;;Modify list variables.
+;;
+ELISP> alist
+(a b c d e)
+
+ELISP> (push 'f alist)
+(f a b c d e)
+
+ELISP> alist
+(f a b c d e)
+
+ELISP> alist
+(a b c d e)
+
+ELISP> (pop alist)
+a
+ELISP> alist
+(b c d e)
+
+ELISP> 
 ```
 
 #### Association Lists
@@ -1506,7 +1543,7 @@ ELISP>
 ;;
 ;; Open an already opened buffer as root
 ;;
-;; M-x b
+;; M-x open-buffer-as-root
 ;;
 ELISP> (defun open-buffer-as-root ()
          (interactive)
@@ -1522,4 +1559,40 @@ ELISP> (defun open-buffer-as-root ()
           (open-as-root filename))))    ;; Open File as root
 open-buffer-as-root
 ELISP> 
+```
+
+### Open Current Buffer Directory
+
+M-x open-dir
+
+```elisp
+(defun open-dir ()
+  "Open directory of current buffer"
+  (interactive)
+  (find-file (file-name-directory (buffer-file-name))))
+```  
+
+### Open Current Buffer Directory in File Manager
+
+M-x open-file-manager
+
+```elisp
+(defun open-file-manager ()
+  "Open buffer directory in file manager (Linux Only)"
+  (interactive)
+  (call-process "pcmanfm"))
+```  
+
+### Open a terminal Emulator in the directory of Current Buffer
+
+M-x open-terminal
+
+```elisp
+(defun open-terminal ()
+  "Open terminal in file directory"
+  (interactive)
+  (call-process "lxterminal"
+                nil
+                (format "--working-directory='%s'"
+                        (file-name-directory (buffer-file-name)))))
 ```
