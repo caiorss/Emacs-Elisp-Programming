@@ -30,8 +30,11 @@
   - [Bytecodes](#bytecodes)
   - [Documentation](#documentation)
     - [References](#references)
+    - [Developement Environments for Emacs](#developement-environments-for-emacs)
     - [Selected Dot Emacs](#selected-dot-emacs)
+    - [Space Emacs Default Config](#space-emacs-default-config)
     - [Selected Codes](#selected-codes)
+    - [Screencasts](#screencasts)
   - [Customization](#customization)
     - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
     - [Themes](#themes)
@@ -1402,6 +1405,12 @@ C-h v
 
 * [Emacs Bytecodes internals](http://nullprogram.com/blog/2014/01/04/)
 
+Forth Compiler to Emacs Bytecodes
+
+* https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/forth.el
+* https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth
+
+
 ## Documentation
 
 ### References
@@ -1436,6 +1445,44 @@ C-h v
 * [On elisp and programming in general](http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html)
 
 
+### Developement Environments for Emacs
+
+**Python**
+
+* [Python Settings](http://wikemacs.org/wiki/Python)
+
+* [Setting up Emacs to Support both Python 2 and Python 3](http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/)
+
+* [Pyenv Mode](https://github.com/proofit404/pyenv-mode)
+
+**Javascript**
+
+* [Java Script](http://wikemacs.org/wiki/JavaScript)
+
+**C / C++**
+
+* [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html)
+* [C make IDE](https://github.com/atilaneves/cmake-ide)
+
+**Ocaml**
+
+* [Ocaml](http://wikemacs.org/wiki/OCaml)
+
+**Haskell**
+
+* [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)
+
+
+**Non Categorized**
+
+* [Loacal Variables](http://emacswiki.org/emacs/LocalVariables)
+
+* [Project Interaction Library for Emacs](https://github.com/joelmccracken/projectile)
+
+* [The Emacs Widget Library](http://www.gnu.org/software/emacs/manual/html_node/widget/index.html)
+
+* [InteractivelyDoThings](http://www.emacswiki.org/emacs/InteractivelyDoThings)
+
 ### Selected Dot Emacs
 
 * [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
@@ -1453,6 +1500,15 @@ C-h v
 * http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el
 
 
+### Space Emacs Default Config
+
+From the documentation:
+
+Spacemacs is first intended to be used by Vim users who want to go to the next level by using Emacs. It is also a good fit for people wanting to lower the risk of RSI induced by the default Emacs key bindings (this is an assumption, there is no official studies to prove this).
+
+
+* https://github.com/syl20bnr/spacemacs
+
 ### Selected Codes
 
 * http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el
@@ -1462,6 +1518,14 @@ C-h v
 * http://emacswiki.org/emacs/file-template.el
 
 * http://aperiodic.net/phil/configs/elisp/ledger.el
+
+Large Collection of Codes to Emacs
+
+* http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html
+
+### Screencasts
+
+* [What You Can Learn From ido.el](https://vimeo.com/1013263)
 
 ## Customization
 
@@ -1566,7 +1630,44 @@ Set identation with spaces instead of tabs with 4 spaces
 
 ```
 (setq tab-width 4 indent-tabs-mode nil)
+
+
+;; set default tab char's display width to 4 spaces
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+
+;; make tab key always call a indent command.
+(setq-default tab-always-indent t)
+
+;; make tab key call indent command or insert tab character, depending on cursor position
+(setq-default tab-always-indent nil)
+
+;; make tab key do indent first then completion.
+(setq-default tab-always-indent 'complete)
+
 ```      
+
+**Font Size and Type**
+
+```
+(set-default-font "Inconsolata 14")
+```
+
+**Character Encoding Default**
+
+```
+;; Character encodings default to utf-8.
+(prefer-coding-system 'utf-8)
+
+(set-language-environment 'utf-8)
+
+(set-default-coding-systems 'utf-8)
+
+(set-terminal-coding-system 'utf-8)
+
+(set-selection-coding-system 'utf-8)
+```
+
 
 **Disable / Enable Backup Files**
 
@@ -1594,6 +1695,13 @@ Disable
 ELISP> (show-paren-mode 1)
 t
 ```
+
+**Delete trailing whitespace before saving**
+
+```
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+```
+
 
 ### Quiet Startup
 
