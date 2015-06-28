@@ -1793,11 +1793,6 @@ ELISP>
 Interactive Developement
 
 ```elisp
-ELISP> (defun write-file (filename content)
-         (append-to-file content nil filename))
-write-file
-ELISP> 
-
 ELISP> (defun file-contents (filename)
   (interactive "fFind file: ")
   (with-temp-buffer
@@ -1805,12 +1800,6 @@ ELISP> (defun file-contents (filename)
     (buffer-substring-no-properties (point-min) (point-max))))
 file-contents
 ELISP> 
-
-ELISP> (defun write-file (filename content)
-         (append-to-file content nil filename))
-write-file
-ELISP> 
-
 
 ELISP> (defun write-file (filename content)
          (append-to-file content nil filename))
