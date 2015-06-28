@@ -40,6 +40,9 @@
   - [Refresh/ Reload File](#refresh-reload-file)
   - [Extract Function Documentation](#extract-function-documentation)
   - [Edit File as Root](#edit-file-as-root)
+  - [Open Current Buffer Directory](#open-current-buffer-directory)
+  - [Open Current Buffer Directory in File Manager](#open-current-buffer-directory-in-file-manager)
+  - [Open a terminal Emulator in the directory of Current Buffer](#open-a-terminal-emulator-in-the-directory-of-current-buffer)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
