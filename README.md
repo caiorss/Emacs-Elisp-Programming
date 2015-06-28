@@ -1,52 +1,55 @@
-# Emacs - Elisp Programming and Customization
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Elisp](#elisp)
-  - [Ielm - Elisp shell](#ielm---elisp-shell)
-  - [Basic Syntax](#basic-syntax)
-    - [Basic Operations](#basic-operations)
-    - [Defining Variables](#defining-variables)
-    - [Defining Functions](#defining-functions)
-    - [List Operations](#list-operations)
-    - [Association Lists](#association-lists)
-    - [Strings](#strings)
-    - [Eval](#eval)
-    - [Control Structures](#control-structures)
-  - [Functional Programming](#functional-programming)
-  - [Structures](#structures)
-  - [Bufffers](#bufffers)
-  - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
-    - [Directory and Path](#directory-and-path)
-    - [Date and Time](#date-and-time)
-    - [Call External Commands or Apps](#call-external-commands-or-apps)
-    - [Environment Variables](#environment-variables)
-    - [Read / Write file to a string](#read--write-file-to-a-string)
-  - [Windows Functions](#windows-functions)
-  - [Special Variables](#special-variables)
-- [Discoverability / Get Documentation](#discoverability--get-documentation)
-  - [Describe](#describe)
-- [Bytecodes](#bytecodes)
-- [Documentation](#documentation)
-  - [References](#references)
-  - [Selected Dot Emacs](#selected-dot-emacs)
-  - [Selected Codes](#selected-codes)
-- [Customization](#customization)
-  - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
-  - [Themes](#themes)
-  - [Misc](#misc)
-  - [Quiet Startup](#quiet-startup)
-- [Solutions](#solutions)
-  - [Refresh/ Reload File](#refresh-reload-file)
-  - [Extract Function Documentation](#extract-function-documentation)
-  - [Edit File as Root](#edit-file-as-root)
-  - [Open Current Buffer Directory](#open-current-buffer-directory)
-  - [Open Current Buffer Directory in File Manager](#open-current-buffer-directory-in-file-manager)
-  - [Open a terminal Emulator in the directory of Current Buffer](#open-a-terminal-emulator-in-the-directory-of-current-buffer)
+- [Emacs - Elisp Programming and Customization](#emacs---elisp-programming-and-customization)
+  - [Elisp](#elisp)
+    - [Ielm - Elisp shell](#ielm---elisp-shell)
+    - [Basic Syntax](#basic-syntax)
+      - [Basic Operations](#basic-operations)
+      - [Defining Variables](#defining-variables)
+      - [Defining Functions](#defining-functions)
+      - [List Operations](#list-operations)
+      - [Association Lists](#association-lists)
+      - [Strings](#strings)
+      - [Eval](#eval)
+      - [Control Structures](#control-structures)
+    - [Functional Programming](#functional-programming)
+    - [Structures](#structures)
+    - [Bufffers](#bufffers)
+    - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
+      - [Directory and Path](#directory-and-path)
+      - [Date and Time](#date-and-time)
+      - [Call External Commands or Apps](#call-external-commands-or-apps)
+      - [Environment Variables](#environment-variables)
+      - [Read / Write file to a string](#read--write-file-to-a-string)
+    - [Windows Functions](#windows-functions)
+    - [Special Variables](#special-variables)
+  - [Discoverability / Get Documentation](#discoverability--get-documentation)
+    - [Describe](#describe)
+  - [Bytecodes](#bytecodes)
+  - [Documentation](#documentation)
+    - [References](#references)
+    - [Selected Dot Emacs](#selected-dot-emacs)
+    - [Selected Codes](#selected-codes)
+  - [Customization](#customization)
+    - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
+    - [Themes](#themes)
+    - [Misc](#misc)
+    - [Quiet Startup](#quiet-startup)
+  - [Solutions](#solutions)
+    - [Refresh/ Reload File](#refresh-reload-file)
+    - [Extract Function Documentation](#extract-function-documentation)
+    - [Edit File as Root](#edit-file-as-root)
+    - [Open Current Buffer Directory](#open-current-buffer-directory)
+    - [Open Current Buffer Directory in File Manager](#open-current-buffer-directory-in-file-manager)
+    - [Open a terminal Emulator in the directory of Current Buffer](#open-a-terminal-emulator-in-the-directory-of-current-buffer)
+    - [Eval String in Clipboard](#eval-string-in-clipboard)
+    - [Save and Reload Current Session](#save-and-reload-current-session)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# Emacs - Elisp Programming and Customization
 
 
 Emacs is an scriptable text editor written in the lisp dialect: Elisp.
@@ -1760,8 +1763,9 @@ M-x open-terminal
                 nil
                 (format "--working-directory='%s'"
                         (file-name-directory (buffer-file-name)))))
+```
 
-### Eval String in Clipboard (Xclip)
+### Eval String in Clipboard
 
 It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
 
@@ -1784,7 +1788,7 @@ ELISP>
 
 ```
                                                 
-### Save / Reload Current Session
+### Save and Reload Current Session
 
 Interactive Developement
 
@@ -1860,7 +1864,7 @@ Joining Everything
 
 File: sessions.el
 
-```
+```elisp
 (setq session-file "~/.emacs.d/lastsession.el")
 
 (defun write-file (filename content)
