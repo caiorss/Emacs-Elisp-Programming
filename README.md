@@ -3,6 +3,7 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Emacs - Elisp Programming and Customization](#emacs---elisp-programming-and-customization)
+  - [Command Line Options](#command-line-options)
   - [Elisp](#elisp)
     - [Ielm - Elisp shell](#ielm---elisp-shell)
     - [Basic Syntax](#basic-syntax)
@@ -90,6 +91,8 @@ Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
 ```
 $ emacs  --debug-init
 ```
+
+To kee multiple confiuration files see: [Emacs Bootstrap](https://github.com/caiorss/Emacs-Bootstrap)
 
 Show Emacs version
 
@@ -1327,7 +1330,7 @@ ELISP>
 
 ### Special Variables
 
-```
+```elisp
 ELISP> emacs-major-version
 24 (#o30, #x18, ?\C-x)    
 
@@ -1351,6 +1354,8 @@ ELISP> system-configuration
 "i686-pc-linux-gnu"
 ELISP> 
 
+;;;;;;;; User Settings ;;;;;;;;;
+
 ELISP> shell-file-name
 "/bin/bash"
 ELISP> 
@@ -1359,6 +1364,11 @@ ELISP> user-full-name
 "tux"
 ELISP> user-mail-address
 "tux@tuxhorse"
+
+ELISP> user-init-file
+"/home/tux/.emacs.d/init.el"
+ELISP> 
+
 
 ELISP> user-emacs-directory
 "~/.emacs.d/"
