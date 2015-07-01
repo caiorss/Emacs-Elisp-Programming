@@ -66,6 +66,37 @@ Emacs is an scriptable text editor written in the lisp dialect: Elisp.
 ~/.emacs.d/init.el
 ```
 
+
+## Command Line Options
+
+Start emacs ignoring the ~/.emacs.d/init.el or ~/.emacs configuration file.
+
+```
+$ emacs --no-init-file
+
+or
+
+$ emacs -q
+```
+
+Start Emacs with a custom configuration file:
+
+```
+$ emacs -q -l customstart.el 
+```
+
+Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
+
+```
+$ emacs  --debug-init
+```
+
+Show Emacs version
+
+```
+$ emacs --version
+```
+
 ## Elisp
 
 ### Ielm - Elisp shell
