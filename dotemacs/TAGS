@@ -1,57 +1,0 @@
-
-elutils.el,864
-(defvar HOME 13,220
-(defvar dotemacs 16,275
-(defun reload 21,347
-(defun current-dir 28,452
-(defun current-file 33,550
-(defun read-xclip 42,696
-(defun eval-string 47,816
-(defun eval-xclip 49,861
-(defun copy-to-clipboard 51,956
-(defun open-as-root 61,1150
-(defun open-current-buffer-as-root 65,1256
-(defun open-current-dir 79,1647
-(defun open-file-manager 85,1785
-(defun open-terminal 95,2029
-(defun create-scratch-buffer 104,2275
-(defun shell-to-buffer 110,2432
-(defun write-file-new 127,2802
-(defun write-file-append 134,2986
-(defun read-file-contents 137,3072
-(defun opened-files 143,3260
-(defun copy-all 148,3413
-(defun make-session-code 158,3618
-(defun test-session-code 163,3774
-(defun save-session 167,3861
-(defun load-session 173,3987
-(defun evil-tog 182,4116
-(defvar th-shell-popup-buffer 196,4493
-(defun th-shell-popup 198,4529
-
-init.el,198
-(defvar HOME 10,372
-(defvar dotemacs 13,427
-(defun xsteve-ido-choose-from-recentf 224,5939
-(defun ido-choose-from-recentf 236,6388
-(defun ielm-other-window 288,8087
-(defun cmd-prompt 305,8435
-
-opam-user-setup.el,331
-(defun opam-shell-command-to-string 6,180
-(defun opam-update-env 18,708
-(defun opam-setup-tuareg 39,1575
-(defun opam-setup-ocp-indent 43,1692
-(defun opam-setup-ocp-index 46,1750
-(defun opam-setup-merlin 49,1806
-(defun opam-setup-utop 63,2353
-(defun opam-detect-installed-tools 75,2759
-(defun opam-auto-tools-setup 85,3148
-
-utop.el,0
-
-srecode-map.el,0
-
-lastsession.el,0
-
-ede-projects.el,0

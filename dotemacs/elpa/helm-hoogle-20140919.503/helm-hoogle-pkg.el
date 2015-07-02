@@ -1,1 +1,0 @@
-(define-package "helm-hoogle" "20140919.503" "Use helm to navigate query results from Hoogle" '((helm "1.6.2")) :url "https://github.com/jwiegley/haskell-config" :keywords '("haskell" "programming" "hoogle"))

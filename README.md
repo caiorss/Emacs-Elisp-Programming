@@ -991,6 +991,8 @@ ELISP>
 
 ### Bufffers
 
+**List of Buffers**
+
 ```emacs
 ;; List of Buffers
 
@@ -1001,12 +1003,21 @@ ELISP> (buffer-list)
     *Echo Area 0*> #<buffer  *Echo Area 1*> #<buffer  *code-converting-work*> #<buffer pad>
     #<buffer *scratch*> #<buffer *Messages*>
     #<buffer *Flycheck error messages*> #<buffer *Completions*>)
+```
 
+**Show Current Buffer**
+
+```elisp
 ;; Show Current Buffer
 ;; 
 ELISP> (current-buffer)
     #<buffer *ielm*>
 ELISP>
+```
+
+**Name of all buffers**
+
+```elisp
 
 ;; Name of all buffers
 ;;
@@ -1016,7 +1027,11 @@ ELISP> (mapcar (lambda (b)(buffer-name b)) (buffer-list))
 *Echo Area 0*" " *Echo Area 1*" " *code-converting-work*" "pad" "*scratch*"
 "*Messages*" "*Flycheck error messages*" "*Completions*")
 
-;; File names of all buffers
+```
+
+**File names of all buffers**
+
+```elisp
 ;;
 ;;
 ELISP> (mapcar (lambda (b)(buffer-file-name b)) (buffer-list))
@@ -1025,8 +1040,11 @@ ELISP> (mapcar (lambda (b)(buffer-file-name b)) (buffer-list))
 "/home/tux/tmp/dummy.el"
 nil nil nil nil nil nil nil nil nil nil)
 
+```
 
-;; Kill Buffer
+**Kill Buffer**s
+
+```elisp
 
 ELISP> (kill-buffer "pad")
 t
@@ -1034,9 +1052,11 @@ ELISP>
 
 ELISP> (get-buffer "*scratch*")
     #<buffer *scratch*>
+```
 
+**Create a New Buffer**
 
-;; Create a New Buffer
+```elisp
 ;;
 ;;
 ;; This function returns a buffer named  buffer-or-name.
@@ -1097,6 +1117,46 @@ nil
 ELISP> 
 
 ```
+
+**Show Buffers Mode**
+
+```elisp
+ELISP> (mapcar (lambda (b)(
+                           let
+                            (  
+                            (name (buffer-name b))
+                            (type   (buffer-mode (buffer-name b)))
+                            )
+                            (list name type)
+                          ))
+                         (buffer-list))
+(("*ielm*" inferior-emacs-lisp-mode)
+ ("*SPEEDBAR*" speedbar-mode)
+ (" *Minibuf-1*" minibuffer-inactive-mode)
+ ("*scratch*" emacs-lisp-mode)
+ ("test3.ml" tuareg-mode)
+ ("*Help*" help-mode)
+ ("*Messages*" messages-buffer-mode)
+ ("sbet.ml" tuareg-mode)
+ (" *Minibuf-0*" minibuffer-inactive-mode)
+ ("test.el" emacs-lisp-mode)
+ ...
+ ...
+ 
+  ("ocsv.ml" tuareg-mode)
+ ("parser.ml" tuareg-mode)
+ ("prelude.back.ml" tuareg-mode)
+ ("prelude.ml" tuareg-mode)
+ ("sbet.m" objc-mode)
+ ("*etags tmp*" fundamental-mode)
+ ("*compilation*" compilation-mode)
+ ("mli" fundamental-mode)
+ ("test3.mli" tuareg-mode)
+ ("*Completions*" completion-list-mode))
+
+```
+
+
 
 ### Files and Directories and OS Interface
 
@@ -1373,7 +1433,10 @@ ELISP>
 ELISP> user-emacs-directory
 "~/.emacs.d/"
 
-
+ELISP> 
+ELISP> exec-directory
+"/usr/lib/emacs/24.4/i686-linux-gnu/"
+ELISP> 
 ```
 
 ## Discoverability / Get Documentation
