@@ -498,21 +498,235 @@ ELISP> (mapcar (lambda (cell)(cdr cell)) dict)
 
 ```
 
+Example: Filter multiple keys
+
+```elisp
+
+ELISP> (defvar language-list
+  '(
+   ("io" . ((:command . "io")
+             (:description . "Run IO Language script")))
+    ("lua" . ((:command . "lua")
+              (:description . "Run Lua script")))
+    ("groovy" . ((:command . "groovy")
+                 (:description . "Run Groovy")))
+    ("scala" . ((:command . "scala")
+                (:cmdopt . "-Dfile.encoding=UTF-8")
+                (:description . "Run Scala file with scala command")))
+
+    ("haml" . ((:command . "haml")
+               (:exec    . "%c %o %s")
+               (:description . "Convert HAML to HTML")))
+    ("sass" . ((:command . "sass")
+               (:exec    . "%c %o --no-cac")))
+ ))
+language-list
+
+
+ELISP> (assoc  "scala"  language-list )
+("scala"
+ (:command . "scala")
+ (:cmdopt . "-Dfile.encoding=UTF-8")
+ (:description . "Run Scala file with scala command"))
+
+ELISP> (assoc  "lua"  language-list )
+("lua"
+ (:command . "lua")
+ (:description . "Run Lua script"))
+
+ELISP> (assoc  "wrong"  language-list )
+nil
+
+ELISP> (assoc ':command (assoc  "scala"  language-list ))
+(:command . "scala")
+
+ELISP> (cdr (assoc ':command (assoc  "scala"  language-list )))
+"scala"
+ELISP> 
+
+ELISP> (assoc ':description (assoc  "scala"  language-list ))
+(:description . "Run Scala file with scala command")
+
+ELISP> (cdr (assoc ':description (assoc  "scala"  language-list )))
+"Run Scala file with scala command"
+ELISP> 
+
+ELISP> (mapcar 'car language-list)
+("io" "lua" "groovy" "scala" "haml" "sass")
+
+ELISP> (mapcar 'cdr language-list)
+(((:command . "io")
+  (:description . "Run IO Language script"))
+ ((:command . "lua")
+  (:description . "Run Lua script"))
+ ((:command . "groovy")
+  (:description . "Run Groovy"))
+ ((:command . "scala")
+  (:cmdopt . "-Dfile.encoding=UTF-8")
+  (:description . "Run Scala file with scala command"))
+ ((:command . "haml")
+  (:exec . "%c %o %s")
+  (:description . "Convert HAML to HTML"))
+ ((:command . "sass")
+  (:exec . "%c %o --no-cac")))
+
+ELISP> 
+
+ELISP> (mapcar (lambda (x) (
+                             list
+                             (car x)
+                             (cdr x)
+                             ))
+                            language-list)
+(("io"
+  ((:command . "io")
+   (:description . "Run IO Language script")))
+ ("lua"
+  ((:command . "lua")
+   (:description . "Run Lua script")))
+ ("groovy"
+  ((:command . "groovy")
+   (:description . "Run Groovy")))
+ ("scala"
+  ((:command . "scala")
+   (:cmdopt . "-Dfile.encoding=UTF-8")
+   (:description . "Run Scala file with scala command")))
+ ("haml"
+  ((:command . "haml")
+   (:exec . "%c %o %s")
+   (:description . "Convert HAML to HTML")))
+ ("sass"
+  ((:command . "sass")
+   (:exec . "%c %o --no-cac"))))
+
+ELISP> 
+
+ELISP> (mapcar (lambda (x) (
+     list
+     (car x)
+     (assoc ':command       (cdr x))
+     (assoc ':cmdopt        (cdr x))
+     (assoc ':description   (cdr x))                             
+     ))
+    language-list)
+    
+(("io"
+  (:command . "io")
+  nil
+  (:description . "Run IO Language script"))
+ ("lua"
+  (:command . "lua")
+  nil
+  (:description . "Run Lua script"))
+ ("groovy"
+  (:command . "groovy")
+  nil
+  (:description . "Run Groovy"))
+ ("scala"
+  (:command . "scala")
+  (:cmdopt . "-Dfile.encoding=UTF-8")
+  (:description . "Run Scala file with scala command"))
+ ("haml"
+  (:command . "haml")
+  nil
+  (:description . "Convert HAML to HTML"))
+ ("sass"
+  (:command . "sass")
+  nil nil))
+
+ELISP> 
+
+
+ELISP> (mapcar (lambda (x) (
+         list
+         (car x)
+         (cdr (assoc ':command   (cdr x)))
+         (cdr (assoc ':cmdopt       (cdr x)))
+         (cdr (assoc ':description   (cdr x)))
+         ))
+
+        language-list)
+(("io" "io" nil "Run IO Language script")
+ ("lua" "lua" nil "Run Lua script")
+ ("groovy" "groovy" nil "Run Groovy")
+ ("scala" "scala" "-Dfile.encoding=UTF-8" "Run Scala file with scala command")
+ ("haml" "haml" nil "Convert HAML to HTML")
+ ("sass" "sass" nil nil))
+
+ELISP> 
+
+ELISP> (get-value language-list "scala")
+((:command . "scala")
+ (:cmdopt . "-Dfile.encoding=UTF-8")
+ (:description . "Run Scala file with scala command"))
+
+ELISP> (get-value language-list "lua")
+((:command . "lua")
+ (:description . "Run Lua script"))
+
+ELISP> 
+ELISP> (get-value language-list "0")
+nil
+ELISP> 
+
+
+ELISP> (defun get-key-value (alist key field)
+                (cdr (assoc  field  (cdr (assoc key alist))  )))
+get-key-value
+ELISP> 
+ELISP> (get-key-value language-list "scala" ':description)
+"Run Scala file with scala command"
+ELISP> 
+
+ELISP> (get-key-value language-list "scala" ':command)
+"scala"
+ELISP> 
+```
+
+
 
 #### Strings
 
 Text Formating
 
 ```elisp
+
+;; Split String
+
+ELISP> (split-string "  two words ")
+("two" "words")
+
+ELISP> 
+
+ELISP> (split-string "o\no\no" "\n" t)
+("o" "o" "o")
+
+ELISP> (split-string "Soup is good food" "o*" t)
+("S" "u" "p" " " "i" "s" " " "g" "d" " " "f" "d")
+
+ELISP> 
+
+;; Format String
+
 ELISP> (format-time-string "%Y/%m/%d %H:%M:%S" (current-time))
 "2015/06/26 06:10:04"
 ELISP> 
 ELISP> 
+
+
+;; Concatenate Strings
+
+ELISP> (concat "The " "quick brown " "fox.")
+"The quick brown fox."
+ELISP> 
+
 ELISP> (mapconcat 'identity '("aaa" "bbb" "ccc") ",")
 "aaa,bbb,ccc"
 ELISP> (split-string "aaa,bbb,ccc" ",") 
 ELISP> (split-string "aaa,bbb,ccc" ",")
 ("aaa" "bbb" "ccc")
+
+;; String Width
 
 ELISP> (string-width "hello world")
 11 (#o13, #xb, ?\C-k)
@@ -525,7 +739,46 @@ ELISP> (string-match "ce" "central park")
 ELISP> (string-match "gt" "central park")
 nil
 ELISP> 
+
+
+;; Misc
+
+ELISP> (make-string 5 ?x)
+"xxxxx"
+ELISP> (make-string 5 ?a)
+"aaaaa"
+ELISP> (make-string 5 ?r)
+"rrrrr"
+ELISP> (make-string 15 ?r)
+"rrrrrrrrrrrrrrr"
+ELISP> 
+
+
+;;;; Read S-expression from String
+
+
+ELISP> (read-from-string
+            "(
+               (POINT1  (X  10.2323)  (Y   20.2323))
+               (POINT2  (x  0.2)          (Y 923.23))
+               (POINT3  (x -10.5)       (Y 78,23))
+             )")
+(((POINT1
+   (X 10.2323)
+   (Y 20.2323))
+  (POINT2
+   (x 0.2)
+   (Y 923.23))
+  (POINT3
+   (x -10.5)
+   (Y 78
+      (\, 23))))
+ . 174)
+
+ELISP> 
 ```
+
+
 
 #### Eval
 
@@ -1156,9 +1409,25 @@ ELISP> (mapcar (lambda (b)(
 
 ```
 
+**Get Buffer Content as String**
+
+```
+ELISP> (defun buffer-content (name) 
+    (with-current-buffer name 
+    (buffer-substring-no-properties (point-min) (point-max)  )))
+buffer-content
+ELISP> 
+
+ELISP> (buffer-content "test3.ml")
+"\n\nlet rec prodlist = function \n    | [] ... "
+
+
+```
 
 
 ### Files and Directories and OS Interface
+
+[Files](http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html)
 
 #### Directory and Path
 
@@ -1297,6 +1566,156 @@ ELISP>
 ELISP> (eq system-type 'gnu/linux)
 t
 ELISP> 
+```
+
+#### Process Management
+
+```elisp
+
+;;;; List all process
+
+ELISP> (process-list)
+(#<process ocaml-toplevel> #<process ielm> #<process merlin> #<process melpa.org> #<process melpa.milkbox.net>)
+
+;;;; Get a process, given its name.
+
+ELISP> (get-process "merlin")
+#<process merlin>
+ELISP> 
+
+;;;; Names
+
+ELISP> (mapcar 'process-name (process-list))
+("ocaml-toplevel" "ielm" "merlin" "melpa.org" "melpa.milkbox.net")
+
+ELISP> 
+
+;;;; Commmand of a process
+
+ELISP> (process-command (get-process "ocaml-toplevel"))
+("/home/tux/bin/opam" "config" "exec" "--" "ocaml")
+
+ELISP> (process-command (get-process "ielm"))
+("hexl")
+
+;;;; Process ID
+
+ELISP> 
+ELISP> (process-id (get-process "ocaml-toplevel"))
+2488 (#o4670, #x9b8, ?স)
+ELISP> 
+ELISP> (process-id (get-process "ielm"))
+25579 (#o61753, #x63eb, ?揫)
+ELISP> 
+
+;;;; Buffer Process
+
+ELISP> (process-buffer (get-process "ocaml-toplevel"))
+#<buffer *ocaml-toplevel*>
+ELISP> 
+
+ELISP> (buffer-name (process-buffer (get-process "ocaml-toplevel")))
+"*ocaml-toplevel*"
+ELISP> 
+
+ELISP> (mapcar (lambda (p) (buffer-name (process-buffer p))) (process-list))
+("pybff" "*ocaml-toplevel*" "*ielm*" " *merlin (default)*" "*ielm*" "*ielm*")
+
+;;;; Display Buffer Process Window
+
+ELISP> (display-buffer (process-buffer (get-process "py")))
+#<window 21 on pybff>
+ELISP> 
+
+;;;; Start Asyncronous Process
+
+;;  Start the process named py, with the buffer named pybff 
+;;  using the command python, /usr/bin/python (on linux)
+;;
+ELISP> (start-process "py"   "pybff" "python")
+#<process py>
+
+ELISP> (process-list)
+(#<process py> #<process ocaml-toplevel> #<process ielm> 
+#<process merlin> #<process melpa.org> #<process melpa.milkbox.net>)
+
+
+;;;; End Asynchronous Process
+
+;; End the process named py
+ELISP> (process-send-eof "py")
+"py"
+
+ELISP> (process-send-eof "py")
+*** Eval error ***  Process py does not exist
+ELISP> 
+
+;;;; Send String to Process
+
+ELISP> (process-send-string "py" "print 'Hello world'\n")
+nil
+ELISP> 
+
+;;;; Get Multiple Fields
+
+ELISP> (mapcar
+        (lambda (p)(list
+                     p
+                    (process-name p)                    
+                    (process-command p)
+                    (list (process-buffer p) (buffer-name (process-buffer p)))
+                    (process-id p)
+                    (process-status p)                    
+        ))
+        (process-list))
+((#<process py> "py"
+            ("python")
+            (#<buffer pybff> "pybff")
+            3374 run)
+ (#<process ocaml-toplevel> "ocaml-toplevel"
+            ("/home/tux/bin/opam" "config" "exec" "--" "ocaml")
+            (#<buffer *ocaml-toplevel*> "*ocaml-toplevel*")
+            2488 run)
+ (#<process ielm> "ielm"
+            ("hexl")
+            (#<buffer *ielm*> "*ielm*")
+            25579 run)
+ (#<process merlin> "merlin"
+            ("ocamlmerlin" "-protocol" "sexp")
+            (#<buffer  *merlin
+                       (default)
+                       *> " *merlin (default)*")
+            24926 run)
+ (#<process melpa.org> "melpa.org" nil
+            (nil "*ielm*")
+            nil open)
+ (#<process melpa.milkbox.net> "melpa.milkbox.net" nil
+            (nil "*ielm*")
+            nil open))
+
+ELISP>
+```
+
+
+#### File Name Components
+
+[File Name Components](http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html)
+
+```elisp
+ELISP> (file-name-directory "/usr/bin/env")
+"/usr/bin/"
+ELISP> 
+
+ELISP> (file-name-nondirectory "/usr/bin/env")
+"env"
+ELISP> 
+
+
+ELISP> (file-name-base "/home/foo/zoo1.c")
+"zoo1"
+ELISP> (file-name-base "/home/foo/zoo1.c.back")
+"zoo1.c"
+ELISP
 ```
 
 #### Read / Write file to a string
@@ -1519,9 +1938,13 @@ Forth Compiler to Emacs Bytecodes
 
 ### References
 
+#### Manual
+
 * [GNU Emacs Lisp Reference Manual](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents)
 
 * http://blog.gnumonk.com/2012/07/effective-emacs-part1.html
+
+#### Tutorials
 
 * [Rosetta Code/ Category:Emacs Lisp](http://rosettacode.org/wiki/Category:Emacs_Lisp)
 
@@ -1533,6 +1956,8 @@ Forth Compiler to Emacs Bytecodes
 * [ErgoEmacs](http://ergoemacs.org/)
 * [Essential Elisp Libraries - Functional Programmin in Elisp](http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/)
 
+
+#### Wikis
 
 * [Emacs / Arch Wiki](https://wiki.archlinux.org/index.php/Emacs)
 
@@ -1548,6 +1973,10 @@ Forth Compiler to Emacs Bytecodes
 
 * [On elisp and programming in general](http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html)
 
+
+#### Issues
+
+* [Emacs on Windows / Cygwin](http://www.khngai.com/emacs/cygwin.php)
 
 ### Developement Environments for Emacs
 
