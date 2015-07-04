@@ -1380,6 +1380,13 @@ ELISP>
 **Show Buffers Mode**
 
 ```elisp
+
+ELISP> (defun buffer-mode (buffer-or-string)
+  "Returns the major mode associated with a buffer."
+  (with-current-buffer buffer-or-string
+     major-mode))
+buffer-mode
+
 ELISP> (mapcar (lambda (b)(
                            let
                             (  
