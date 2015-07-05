@@ -1034,13 +1034,72 @@ Dash is functional programming library to Emacs with many useful higher order fu
 **Mapcar / Equivalent to map**
 
 ```elisp
+ELISP> (defun my-fun (x) (* x 10))
+my-fun
+ELISP> 
+
+ELISP> (mapcar 'my-fun '(1 2 3 5 6))
+(10 20 30 50 60)
+
+ELISP> (mapcar 'capitalize '("hello" "world" "emacs"))
+("Hello" "World" "Emacs")
+
+;;  Anonymous Functions
+;;
 ELISP> (mapcar (lambda (x) (* x x))   '(1 2 3 4 5 6))
 (1 4 9 16 25 36)
 
-ELISP>
+
+ELISP> (setq anon (lambda (x) (* x x)))
+(lambda
+  (x)
+  (* x x))
+
+ELISP> (mapcar anon '(1 2 3 4 5 6))
+(1 4 9 16 25 36)
 ```
 
-Anonymous/ Lambda function
+**Filter**
+
+```elisp
+ELISP> (null nil)
+t
+ELISP> (null 23)
+nil
+ELISP>
+
+ELISP> (remove-if 'null '(1 2 3 nil 5 6 nil nil )) 
+(1 2 3 5 6)
+
+ELISP> (remove-if-not 'null '(1 2 3 nil 5 6 nil nil )) 
+(nil nil nil)
+
+ 
+ELISP> (defun range (step start stop)
+  (if (> start stop)
+      nil
+      (cons start (range step (+ step start) stop))
+     
+  );; End If
+);; End range
+
+ELISP> (range 1 0 10)
+(0 1 2 3 4 5 6 7 8 9 10)
+
+ELISP> (range 2 0 20)
+(0 2 4 6 8 10 12 14 16 18 20)
+
+
+ELISP> (remove-if-not (lambda (x) (= (% x 2) 0)) (range 1 0 20))
+(0 2 4 6 8 10 12 14 16 18 20)
+
+ELISP> (remove-if-not (lambda (x) (= (% x 3) 0)) (range 1 0 20))
+(0 3 6 9 12 15 18)
+
+ELISP> 
+```
+
+**Anonymous/ Lambda function**
 
 ```elisp
 ELISP> (lambda (x)(* x 10))
