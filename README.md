@@ -1405,6 +1405,22 @@ nil nil nil nil nil nil nil nil nil nil)
 
 ```
 
+**List all opened files**
+
+```elisp
+ELISP> (defun opened-files ()
+  "List all opened files in the current session"
+  (interactive)
+  (remove-if 'null (mapcar 'buffer-file-name  (buffer-list))))
+ 
+opened-files
+
+ELISP> (opened-files)
+("/home/tux/.emacs.d/elutils.el" "/home/tux/.emacs.d/init.el" "/home/tux/PycharmProjects/ocaml/prelude/mtree.ml" "/home/tux/.emacs.d/ntmux.el" "/home/tux/PycharmProjects/ocaml/prelude/tree.ml" "/home/tux/dirwalk.ml" "/home/tux/PycharmProjects/ocaml/prelude/http1.ml" "/home/tux/PycharmProjects/ocaml/prelude/docgen.ml")
+
+
+```
+
 **Kill Buffer**s
 
 ```elisp
@@ -1415,6 +1431,61 @@ ELISP>
 
 ELISP> (get-buffer "*scratch*")
     #<buffer *scratch*>
+```
+
+**Open a File Programmatically **
+
+``elisp
+ELISP> (find-file "/etc/fstab")
+ #<buffer fstab>
+ELISP> 
+
+;; Open a list of files programmatically
+;;
+ELISP> (mapcar 'find-file '("/etc/hosts" "/etc/host.conf" "/etc/hosts.allow" "/etc/hosts.deny"))
+(#<buffer hosts> #<buffer host.conf> #<buffer hosts.allow> #<buffer hosts.deny>)
+
+ELISP> 
+```
+
+**Find Buffer Associated With a File**
+
+```
+ELISP> (defun find-buffer-file (filename) 
+            (car (remove-if-not
+              (lambda (b) (equal (buffer-file-name b) filename)) (buffer-list))))
+find-buffer-file
+ELISP> 
+
+ELISP> (find-buffer-file "/etc/hosts.allow")
+#<buffer hosts.allow>
+ELISP> 
+
+ELISP> (find-buffer-file "/etc/file_not_opened")
+nil
+
+ELISP> (mapcar 'find-buffer-file '("/etc/hosts" "/etc/host.conf" "/etc/hosts.allow" "/etc/hosts.deny"))
+(#<buffer hosts> #<buffer host.conf> #<buffer hosts.allow> #<buffer hosts.deny>)
+
+ELISP> 
+```
+
+**Close a list of files**
+
+```elisp
+(mapcar 
+  (lambda (f) (kill-buffer (find-buffer-file f))) 
+ '("/etc/hosts" "/etc/host.conf" "/etc/hosts.allow" "/etc/hosts.deny"))
+ 
+ELISP> (defun close-files (filelist)
+         (mapcar (lambda (f) (kill-buffer (find-buffer-file f))) filelist)) 
+close-files
+ELISP>
+
+;;;; Close All Files ;;;;
+
+ELISP> (close-files (opened-files))
+(t t t t t t)
 ```
 
 **Create a New Buffer**
