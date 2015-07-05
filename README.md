@@ -56,6 +56,7 @@
     - [Open a terminal Emulator in the directory of Current Buffer](#open-a-terminal-emulator-in-the-directory-of-current-buffer)
     - [Eval String in Clipboard](#eval-string-in-clipboard)
     - [Save and Reload Current Session](#save-and-reload-current-session)
+    - [Create a menu with all color themes available](#create-a-menu-with-all-color-themes-available)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -2551,4 +2552,40 @@ Close Emacs and
 M-x load-file    ;; Enter session.el
 M-x load-session ;; All previous files in the session 
                  ;; saved will be opened
+```
+
+### Create a menu with all color themes available
+
+![](image/colortheme_menu.png)
+
+
+Copy and paste the code below to the scratch buffer and enter M-x eval-buffers
+
+```elisp
+(defun eval-string (str) (eval (read str)))
+
+(defun make-menu-rows () 
+ (mapcar
+   (lambda (x)
+      (format "[\"%s\" (load-theme '%s)]"  (symbol-name x) (symbol-name x) ))
+   (custom-available-themes))
+ )
+
+
+(defun make-color-menu-code ()
+  (format
+   "
+   (easy-menu-define djcb-menu global-map \"Color Themes\"
+     '(\"Color Themes\"
+        %s
+      )   
+   )
+   "
+  (mapconcat 'identity (make-menu-rows) "\n")
+   
+  ) ;; End of format
+) ;; End of make-color-menu
+
+
+(eval-string (make-color-menu-code))
 ```
