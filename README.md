@@ -1416,12 +1416,15 @@ ELISP> (defun opened-files ()
 opened-files
 
 ELISP> (opened-files)
-("/home/tux/.emacs.d/elutils.el" "/home/tux/.emacs.d/init.el" "/home/tux/PycharmProjects/ocaml/prelude/mtree.ml" "/home/tux/.emacs.d/ntmux.el" "/home/tux/PycharmProjects/ocaml/prelude/tree.ml" "/home/tux/dirwalk.ml" "/home/tux/PycharmProjects/ocaml/prelude/http1.ml" "/home/tux/PycharmProjects/ocaml/prelude/docgen.ml")
-
+("/home/tux/.emacs.d/elutils.el" 
+"/home/tux/.emacs.d/init.el" 
+"/home/tux/PycharmProjects/ocaml/prelude/mtree.ml" 
+"/home/tux/.emacs.d/ntmux.el" 
+...)
 
 ```
 
-**Kill Buffer**s
+**Kill Buffer**
 
 ```elisp
 
@@ -1433,9 +1436,10 @@ ELISP> (get-buffer "*scratch*")
     #<buffer *scratch*>
 ```
 
-**Open a File Programmatically **
+**Open a File Programmatically**
 
-``elisp
+```elisp
+
 ELISP> (find-file "/etc/fstab")
  #<buffer fstab>
 ELISP> 
@@ -1445,12 +1449,12 @@ ELISP>
 ELISP> (mapcar 'find-file '("/etc/hosts" "/etc/host.conf" "/etc/hosts.allow" "/etc/hosts.deny"))
 (#<buffer hosts> #<buffer host.conf> #<buffer hosts.allow> #<buffer hosts.deny>)
 
-ELISP> 
 ```
 
 **Find Buffer Associated With a File**
 
-```
+```elisp
+
 ELISP> (defun find-buffer-file (filename) 
             (car (remove-if-not
               (lambda (b) (equal (buffer-file-name b) filename)) (buffer-list))))
@@ -1458,7 +1462,7 @@ find-buffer-file
 ELISP> 
 
 ELISP> (find-buffer-file "/etc/hosts.allow")
-#<buffer hosts.allow>
+ #<buffer hosts.allow>
 ELISP> 
 
 ELISP> (find-buffer-file "/etc/file_not_opened")
@@ -1467,7 +1471,6 @@ nil
 ELISP> (mapcar 'find-buffer-file '("/etc/hosts" "/etc/host.conf" "/etc/hosts.allow" "/etc/hosts.deny"))
 (#<buffer hosts> #<buffer host.conf> #<buffer hosts.allow> #<buffer hosts.deny>)
 
-ELISP> 
 ```
 
 **Close a list of files**
