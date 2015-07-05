@@ -2556,10 +2556,10 @@ M-x load-session ;; All previous files in the session
 
 ### Create a menu with all color themes available
 
-![](image/colortheme_menu.png)
+![](images/colortheme_menu.png)
 
 
-Copy and paste the code below to the scratch buffer and enter M-x eval-buffers
+Copy and paste the code below to the scratch buffer and enter M-x eval-buffers. This code can also be put in ~/emacs.d/init.el, in the config file.
 
 ```elisp
 (defun eval-string (str) (eval (read str)))
