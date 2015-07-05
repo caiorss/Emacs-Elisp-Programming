@@ -690,11 +690,8 @@ ELISP> (get-key-value language-list "scala" ':command)
 ELISP> 
 ```
 
-
-
 #### Strings
 
-Text Formating
 
 ```elisp
 
@@ -748,7 +745,7 @@ nil
 ELISP> 
 
 
-;; Misc
+;;;;; Misc
 
 ELISP> (make-string 5 ?x)
 "xxxxx"
@@ -760,10 +757,28 @@ ELISP> (make-string 15 ?r)
 "rrrrrrrrrrrrrrr"
 ELISP> 
 
+```
 
-;;;; Read S-expression from String
+**Elisp Symbol / String Conversion**
+
+```elisp
+
+; Convert a symbol to string 
+;;
+ELISP> (symbol-name 'wombat)
+"wombat"
 
 
+; Convert a String to Symbol
+
+ELISP> (intern "wombat")
+wombat
+```
+
+
+**Read S-expression from String**
+
+```elisp
 ELISP> (read-from-string
             "(
                (POINT1  (X  10.2323)  (Y   20.2323))
@@ -1251,7 +1266,7 @@ ELISP>
 
 ### Bufffers
 
-**List of Buffers**
+**List all Buffers**
 
 ```emacs
 ;; List of Buffers
@@ -1425,7 +1440,7 @@ ELISP> (mapcar (lambda (b)(
 
 **Get Buffer Content as String**
 
-```
+```elisp
 ELISP> (defun buffer-content (name) 
     (with-current-buffer name 
     (buffer-substring-no-properties (point-min) (point-max)  )))
@@ -1435,9 +1450,32 @@ ELISP>
 ELISP> (buffer-content "test3.ml")
 "\n\nlet rec prodlist = function \n    | [] ... "
 
-
 ```
 
+**Get Selected text in current buffer as string**
+
+You can test the function: select a text in any buffer, enter M-x get-selection, it
+will print in another window the selected text
+
+```elisp
+(defun get-selection ()
+ "Get the text selected in current buffer as string"
+ (interactive)
+ (buffer-substring-no-properties (region-beginning) (region-end))
+)
+```
+
+**Get current line in current buffer**
+
+To test it: M-x eval-expression and enter (get-current-line)
+
+```elisp
+(defun get-current-line ()
+   (interactive)
+   "Get current line, where the cursor lies in the current buffer"
+   (replace-regexp-in-string "[\n|\s\t]+$" "" (thing-at-point 'line t))
+)
+```
 
 ### Files and Directories and OS Interface
 
@@ -1594,7 +1632,7 @@ ELISP> (process-list)
 ;;;; Get a process, given its name.
 
 ELISP> (get-process "merlin")
-#<process merlin>
+ #<process merlin>
 ELISP> 
 
 ;;;; Names
@@ -1625,7 +1663,7 @@ ELISP>
 ;;;; Buffer Process
 
 ELISP> (process-buffer (get-process "ocaml-toplevel"))
-#<buffer *ocaml-toplevel*>
+ #<buffer *ocaml-toplevel*>
 ELISP> 
 
 ELISP> (buffer-name (process-buffer (get-process "ocaml-toplevel")))
@@ -1638,7 +1676,7 @@ ELISP> (mapcar (lambda (p) (buffer-name (process-buffer p))) (process-list))
 ;;;; Display Buffer Process Window
 
 ELISP> (display-buffer (process-buffer (get-process "py")))
-#<window 21 on pybff>
+ #<window 21 on pybff>
 ELISP> 
 
 ;;;; Start Asyncronous Process
@@ -1647,11 +1685,11 @@ ELISP>
 ;;  using the command python, /usr/bin/python (on linux)
 ;;
 ELISP> (start-process "py"   "pybff" "python")
-#<process py>
+ #<process py>
 
 ELISP> (process-list)
 (#<process py> #<process ocaml-toplevel> #<process ielm> 
-#<process merlin> #<process melpa.org> #<process melpa.milkbox.net>)
+ #<process merlin> #<process melpa.org> #<process melpa.milkbox.net>)
 
 
 ;;;; End Asynchronous Process
@@ -2559,7 +2597,7 @@ M-x load-session ;; All previous files in the session
 ![](images/colortheme_menu.png)
 
 
-Copy and paste the code below to the scratch buffer and enter M-x eval-buffers. This code can also be put in ~/emacs.d/init.el, in the config file.
+Copy and paste the code below to the scratch buffer and enter <kbd>M-x eval-buffer</kbd>. This code can also be put in ~/emacs.d/init.el, in the config file.
 
 ```elisp
 (defun eval-string (str) (eval (read str)))
