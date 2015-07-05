@@ -16,8 +16,15 @@
       - [Eval](#eval)
       - [Control Structures](#control-structures)
     - [Functional Programming](#functional-programming)
+      - [Map and Filter](#map-and-filter)
+      - [Anonymous functions/ Lambda functions](#anonymous-functions-lambda-functions)
+      - [Function Composition](#function-composition)
+      - [Interactive Functions](#interactive-functions)
     - [Structures](#structures)
     - [Bufffers](#bufffers)
+      - [Buffer Attributes](#buffer-attributes)
+      - [Buffer Mode](#buffer-mode)
+      - [Get Buffer Contents / Selection / Line](#get-buffer-contents--selection--line)
     - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
       - [Directory and Path](#directory-and-path)
       - [Date and Time](#date-and-time)
@@ -1030,6 +1037,7 @@ See also: [Dash Library Github repository](https://github.com/magnars/dash.el)
 
 Dash is functional programming library to Emacs with many useful higher order functions.
 
+#### Map and Filter
 
 **Mapcar / Equivalent to map**
 
@@ -1068,11 +1076,22 @@ ELISP> (null 23)
 nil
 ELISP>
 
+;; Equivalent to  Haskell idiom:  
+;;
+;; > filter predicate list 
+;;
+ELISP> (remove-if-not 'null '(1 2 3 nil 5 6 nil nil )) 
+(nil nil nil)
+
+;; Equivalent to Haskell idiom:
+;;
+;;   > filter (\x -> not (predicate x)) list
+;;
+;; a more apropriate name would be reject
+;;
 ELISP> (remove-if 'null '(1 2 3 nil 5 6 nil nil )) 
 (1 2 3 5 6)
 
-ELISP> (remove-if-not 'null '(1 2 3 nil 5 6 nil nil )) 
-(nil nil nil)
 
  
 ELISP> (defun range (step start stop)
@@ -1090,8 +1109,15 @@ ELISP> (range 2 0 20)
 (0 2 4 6 8 10 12 14 16 18 20)
 
 
+ELISP> (remove-if (lambda (x) (= (% x 2) 0)) (range 1 0 20))
+(1 3 5 7 9 11 13 15 17 19)
+
 ELISP> (remove-if-not (lambda (x) (= (% x 2) 0)) (range 1 0 20))
 (0 2 4 6 8 10 12 14 16 18 20)
+
+
+ELISP> (remove-if (lambda (x) (= (% x 3) 0)) (range 1 0 20))
+(1 2 4 5 7 8 10 11 13 14 16 17 19 20)
 
 ELISP> (remove-if-not (lambda (x) (= (% x 3) 0)) (range 1 0 20))
 (0 3 6 9 12 15 18)
@@ -1099,7 +1125,7 @@ ELISP> (remove-if-not (lambda (x) (= (% x 3) 0)) (range 1 0 20))
 ELISP> 
 ```
 
-**Anonymous/ Lambda function**
+#### Anonymous functions/ Lambda functions
 
 ```elisp
 ELISP> (lambda (x)(* x 10))
@@ -1166,9 +1192,9 @@ ELISP> (mapcar (lambda (x) (apply 'f x)) '( (2 3 5) (4 5 6) (8 9 5)))
 
 ```
 
-**Function Composition**
+#### Function Composition
 
-From: [Elisp Function Composition](http://nullprogram.com/blog/2010/11/15/)
+Credits: [Elisp Function Composition](http://nullprogram.com/blog/2010/11/15/)
 
 
 ```elisp
@@ -1188,7 +1214,7 @@ ELISP>
 
 ```
 
-**Interactive Functions**
+#### Interactive Functions
 
 Interactive functions can be called using: M-x <function>. The user can create custom emacs commands with interactive functions.
 
@@ -1325,6 +1351,9 @@ ELISP>
 
 ### Bufffers
 
+
+#### Buffer Attributes
+
 **List all Buffers**
 
 ```emacs
@@ -1452,6 +1481,8 @@ ELISP>
 
 ```
 
+#### Buffer Mode
+
 **Show Buffers Mode**
 
 ```elisp
@@ -1496,6 +1527,8 @@ ELISP> (mapcar (lambda (b)(
  ("*Completions*" completion-list-mode))
 
 ```
+
+#### Get Buffer Contents / Selection / Line
 
 **Get Buffer Content as String**
 
@@ -2684,5 +2717,14 @@ Copy and paste the code below to the scratch buffer and enter <kbd>M-x eval-buff
 ) ;; End of make-color-menu
 
 
+
+;;
+;; "Eval is evil". It must be avoided, because, it is hard to refactor,  
+;; hard to debug and vulnerable to code injection on Web Apps, so a better
+;; way to write it is to use Elisp macros.
+;;
+;; @TODO: Change eval-string for a Elisp macro.
+;;
 (eval-string (make-color-menu-code))
+
 ```
