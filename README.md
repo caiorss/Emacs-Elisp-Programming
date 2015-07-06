@@ -135,6 +135,8 @@ M-x ielm
 
 #### Basic Operations
 
+Arithmetic 
+
 ```elisp
 ELISP> (+ 20 30)
 50 (#o62, #x32, ?2)
@@ -174,6 +176,42 @@ ELISP> (tan (/ pi 2))
 ELISP> 
 ```
 
+Comparison
+
+```elisp
+
+;;;; Compare Numbers
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (= 2 (+ 1 1))
+t
+
+;;; Compare Symbols and Numbers
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (eq 1 1)
+t
+ELISP> (eq 1 2)
+nil
+ELISP> 
+
+ELISP> (eq 'x 'x)
+t
+ELISP> 
+
+;;; Compare Elements of a List
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (equal (list 1 2 3 4) (list 1 2 3 4))
+t
+
+;;; Compare Strings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (string= "hello" "hello")
+t
+```
+
 Lists
 
 ```
@@ -193,6 +231,20 @@ ELISP>
 #### Defining Variables
 
 ```elisp
+
+;;; Constants
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (defconst zsh-shell "/usr/bin/zsh")
+zsh-shell
+
+ELISP> zsh-shell
+"/usr/bin/zsh"
+ELISP> 
+
+;;; Define a variable
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ELISP> (setq x 10)
 10 (#o12, #xa, ?\C-j)
 ELISP> (set avar "hello world")
@@ -213,8 +265,8 @@ ELISP> (setq my-list '(10 20 30 40))
 ELISP> my-list
 (10 20 30 40)
 
-;; Dynamic Scoping
-;; 
+;; Dynamic Scoping  (Local Variables)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 ;;
 ELISP> (let ((x 1) (y 10)) (+ (* 4 x) (* 5 y)) )
 54 (#o66, #x36, ?6)
@@ -240,6 +292,32 @@ myfun
 ELISP> (myfun)
 "Hello Emacs"
 ELISP> 
+
+
+ELISP> 
+ELISP> (defun signum (n)
+     (cond ((> n 0) 1 )
+           ((< n 0) -1)
+           (0)))
+signum
+ELISP> (signum 10)
+1 (#o1, #x1, ?\C-a)
+ELISP> (signum 0)
+0 (#o0, #x0, ?\C-@)
+ELISP> (signum -23)
+-1 (#o7777777777, #x3fffffff)
+ELISP> 
+
+
+ELISP> (defun factorial (n)
+     (if (= n 0)
+         1
+         (* n (factorial (- n 1)))))
+factorial
+
+ELISP> (factorial 5)
+120 (#o170, #x78, ?x)
+ELISP
 ```
 #### List Operations
 
@@ -2498,14 +2576,14 @@ Source:
 
 * [Generate emacs-lisp documentation](http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/)
 
+Primitives:
 
-```emacs
+```elisp
 ELISP> 
 ELISP> (defun sample-function (a b c)
            "Function Docstring"
          (+ a (* 5 b) (* 3 c)))
-sample-function
-ELISP> 
+ 
 
 ;; Extract Documentation
 ;;
@@ -2525,11 +2603,11 @@ ELISP> (symbol-function 'sample-function)
 ;; Extract Arguments
 ELISP> (help-function-arglist 'sample-function)
 (a b c)
+```
+Final Code
 
-ELISP> 
-
-
-ELISP> (fun2org 'sample-function)
+```elisp
+(fun2org 'sample-function)
     "** sample-function (a b c)\nFunction Docstring\n\n#+BEGIN_SRC emacs-lisp\n(lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))\n#+END_SRC\n"
     ELISP> 
     ELISP> (defun fun2org (function-symbol)
@@ -2542,50 +2620,54 @@ ELISP> (fun2org 'sample-function)
     #+BEGIN_SRC emacs-lisp
     %S
     #+END_SRC
-    " function-symbol args doc code))))
-    fun2org
-    ELISP> (fun2org 'sample-function)
+    " function-symbol args doc code)))) ;; End of fun2org
+```    
+       
+    
+```elisp    
+ELISP> (fun2org 'sample-function)
 
-    "** sample-function (a b c)
-    Function Docstring
+"** sample-function (a b c)
+Function Docstring
 
-    #+BEGIN_SRC emacs-lisp
-    (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
-    #+END_SRC
-    "
+#+BEGIN_SRC emacs-lisp
+(lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
+#+END_SRC
+"
 ```
 
 ### Edit File as Root
 
 ```elisp
-ELISP> (defun open-as-root (filename)
-         (interactive)
-         (find-file (concat "/sudo:root@localhost:"  filename)))
-open-as-root
-ELISP> (open-as-root "/etc/host.conf")
+(defun open-as-root (filename)
+  (interactive)
+  (find-file (concat "/sudo:root@localhost:"  filename)))
 
- #<buffer host.conf>
-ELISP> 
+
+;; Example: 
+;; ELISP> (open-as-root "/etc/host.conf")
+;;
+
 
 ;;
 ;; Open an already opened buffer as root
 ;;
 ;; M-x open-buffer-as-root
 ;;
-ELISP> (defun open-buffer-as-root ()
-         (interactive)
-         (let 
-             (
-              ;; Get the current buffer file name
-              (filename (buffer-file-name (current-buffer))) 
-              ;; Get the current file name
-              (bufname  (buffer-name (current-buffer)))
-             )
-           (progn
-          (kill-buffer bufname)         ;; Kill current buffer
-          (open-as-root filename))))    ;; Open File as root
-open-buffer-as-root
-ELISP> 
+(defun open-buffer-as-root ()
+ (interactive)
+ (let 
+     (
+      ;; Get the current buffer file name
+      (filename (buffer-file-name (current-buffer))) 
+      ;; Get the current file name
+      (bufname  (buffer-name (current-buffer)))
+     )
+   (progn
+  (kill-buffer bufname)         ;; Kill current buffer
+  (open-as-root filename))))    ;; Open File as root
+
+
 ```
 
 ### Open Current Buffer Directory
