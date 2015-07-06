@@ -106,7 +106,7 @@ Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
 $ emacs  --debug-init
 ```
 
-To kee multiple confiuration files see: [Emacs Bootstrap](https://github.com/caiorss/Emacs-Bootstrap)
+To keep multiple confiuration files see: [Emacs Bootstrap](https://github.com/caiorss/Emacs-Bootstrap)
 
 Show Emacs version
 
