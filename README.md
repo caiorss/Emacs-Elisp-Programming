@@ -1017,9 +1017,11 @@ or
 
 #### Control Structures
 
-**Conditional Statement**
+##### Conditional Statement
 
-```
+**If Else Statement**
+
+```elisp
 
 ;;
 ;; Any value different from nil or '() is true, otherwise false.
@@ -1029,40 +1031,115 @@ or
 ;;
 ELISP> (if t 5 6)
 5 (#o5, #x5, ?\C-e)
+
 ELISP> (if 10 5 6)
 5 (#o5, #x5, ?\C-e)
+
 ELISP> (if 0 5 6)
 5 (#o5, #x5, ?\C-e)
 
 ;; False
 ELISP> (if nil 5 6)
 6 (#o6, #x6, ?\C-f)
+
 ELISP> (if '() 5 6)
 6 (#o6, #x6, ?\C-f)
-ELISP> 
+
 
 ;; Inverting Predicate
 ;;
 ELISP> (if (not t) 5 6)
 6 (#o6, #x6, ?\C-f)
+
 ELISP> (if (not nil) 5 6)
 5 (#o5, #x5, ?\C-e)
-ELISP> 
+
 
 ELISP> (if (< 5 10)  (message "less than 10") (message "greater or equal to 10") )
 "less than 10"
+
 ELISP> (if (< 30 10)  (message "less than 10") (message "greater or equal to 10") )
 "greater or equal to 10"
 ELISP> 
 
+;;; If else with multiple statements
+
+ELISP> (setq x 10)
+10 (#o12, #xa, ?\C-j)
+
+ELISP> (if (> x 5)
+       ;; Then Statement
+       (progn 
+         
+         (message "Positive Number")
+         (print "Greater than five")
+         (split-window-vertically)
+         78 ;;  Return Value
+        ) 
+     ;; Else Statement
+     (progn
+       (print "Less than five")
+       (split-window-horizontally)
+       12 ;;  Return Value
+     ))
+
+"Greater than five"
+
+78 (#o116, #x4e, ?N)
+ELISP> 
+
+
+```
+
+**When**
+
+```elisp
 
 ELISP> (when t 3)
 3 (#o3, #x3, ?\C-c)
+
 ELISP> (when nil 3)
+nil
+
+
+ELISP> (setq x 5)
+5 (#o5, #x5, ?\C-e)
+
+ELISP> (when (> x 3)
+         (message "Less than 3"))
+"Less than 3"
+ELISP> 
+
+ELISP> (setq x 1)
+1 (#o1, #x1, ?\C-a)
+
+ELISP> (when (> x 3)
+         (message "Less than 3"))
 nil
 ELISP> 
 
 
+;;;;; When with Multiple Statements
+
+ELISP> (setq x 10)
+10 (#o12, #xa, ?\C-j)
+
+ELISP> (when (> x 7)
+     (progn
+       (message "Greater than 7 OK.")
+       (message "Print message 2")
+       (split-window-horizontally)
+      ))
+      
+#<window 8 on *ielm*>
+ELISP> 
+    
+
+```
+
+**Case Switch Statement**
+
+```elisp
 ELISP> (setq a 3)       ;; a = 3
 3 (#o3, #x3, ?\C-c)
 ELISP> 
@@ -1077,7 +1154,9 @@ ELISP> (cond
 ELISP> 
 ```
 
-**Loops**
+##### Loops
+
+It is better to use map and filter instead of loops. See the section: [Functional Programming](#functional-programming)
 
 ```elisp
 
@@ -1100,16 +1179,8 @@ nil
 ELISP> a
 2 (#o2, #x2, ?\C-b)
 ELISP> 
-
-
 ```
 
-
-Multiple S expressions
-
-```elisp
-
-```
 
 ### Functional Programming
 
