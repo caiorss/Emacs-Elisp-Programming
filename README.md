@@ -2674,6 +2674,8 @@ M-x refresh
 ![](images/utils_menu2.png)
 
 ```elisp
+
+(require 'easymenu)
                   
 (easy-menu-define djcb-menu global-map "Utils"
   '("Utils"
