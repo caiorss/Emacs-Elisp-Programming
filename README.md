@@ -55,7 +55,9 @@
     - [Misc](#misc)
     - [Quiet Startup](#quiet-startup)
   - [Solutions](#solutions)
+    - [Quick edit and reload Emac Configuration File.](#quick-edit-and-reload-emac-configuration-file)
     - [Refresh/ Reload File](#refresh-reload-file)
+    - [Creating Quick Access Menu](#creating-quick-access-menu)
     - [Extract Function Documentation](#extract-function-documentation)
     - [Edit File as Root](#edit-file-as-root)
     - [Open Current Buffer Directory](#open-current-buffer-directory)
@@ -2554,21 +2556,91 @@ From: [Ask HN Emacs Users: What's in your .emacs file?](https://news.ycombinator
 
 ## Solutions
 
+### Quick edit and reload Emac Configuration File.
+
+It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
+
+```elisp
+;; Usage: M-x reload-init-file
+;;
+(defun reload-init-file ()
+  "Reload init.el file"
+  (interactive)
+  (load user-init-file)
+  (message "Reloaded init.el OK.")
+)
+
+;; Usage: M-x open-init-file
+;;
+(defun open-init-file ()
+    (interactive)
+    (find-file user-init-file)
+)  
+```
+
+
 ### Refresh/ Reload File
 
-```
-M-x reload
-```
+Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
 
-or
 
-```
-;; Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
-(defun revert-buffer-no-confirm ()
+```elisp
+(defun refresh ()
     "Revert buffer without confirmation."
     (interactive)
     (revert-buffer t t))
 ```
+
+Usage:
+
+```
+M-x refresh
+```
+
+### Creating Quick Access Menu
+
+![](images/utils_menu1.png)
+![](images/utils_menu2.png)
+
+```elisp
+                  
+(easy-menu-define djcb-menu global-map "Utils"
+  '("Utils"
+
+     ("Shells" ;; submenu
+       ["Ielm   - Emacs Lisp Shell"       (ielm)]
+       ["Eshell - Emacs Buitin Shell"    (eshell)]
+       ["Native Shell "                  (shell)]
+      ["---------------------" nil]       
+      ["Edit .bashrc" (find-file  "~/.bashrc")]
+      ["Edit .profile" (find-file "~/.profile")]
+      ["Edit .Xresources" (find-file "~/.Xresources")]
+      ["Edit .xsessin"    (find-file "~/.xsession")]
+      ["See all GNU MAN pages" ( info)]
+      ["See a specific Man Page" (woman)]       
+       
+      );; End of shells menu   
+
+     ("Emacs /Elisp"  ;; submenu
+
+      ["Ielm   - Emacs Lisp Shell"  (ielm)]
+      ["Eval buffer"   ( eval-buffer ) ]      
+      ["---------------------" nil]
+      
+      ["Edit  init.el" (find-file  user-init-file)]
+      ["Reload init.el" (load-file user-init-file)]      
+      ["Open .emac.d dir" (find-file "~/.emacs.d")]
+      ["List packages"     (list-packages)]
+      ["Install package"   (package-install)]
+      
+     ) ;; End of Emacs / Elisp submenu
+   
+ )) ;; End of Custom Menu
+
+
+```
+
+
 
 ### Extract Function Documentation
 
@@ -2629,10 +2701,10 @@ ELISP> (fun2org 'sample-function)
 
 "** sample-function (a b c)
 Function Docstring
-
-#+BEGIN_SRC emacs-lisp
-(lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
-#+END_SRC
+ 
+ #+BEGIN_SRC emacs-lisp
+ (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
+ #+END_SRC
 "
 ```
 
@@ -2694,7 +2766,15 @@ M-x open-file-manager
 
 ### Open a terminal Emulator in the directory of Current Buffer
 
+Despite Emacs can run a shell like python, bash, zsh, it cannot run ncurses based applications. In these cases is necessary to launch an external terminal. This command can be added to the menu in the section: [Creating Quick Access Menu](#creating-quick-access-menu)
+
+Usage:
+
+```
 M-x open-terminal
+```
+
+Code:
 
 ```elisp
 (defun open-terminal ()
