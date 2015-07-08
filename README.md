@@ -247,9 +247,19 @@ ELISP>
 ;;; Define a variable
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;; Set is not used very much the 
+;;
+ELISP> (set 'avar "hello world")
+"hello world"
+
+ELISP> avar
+"hello world"
+ELISP> 
+
+;;;;; The most used command for assignment is setq
+;;
 ELISP> (setq x 10)
 10 (#o12, #xa, ?\C-j)
-ELISP> (set avar "hello world")
 
 ELISP> (setq avar "hello world")
 "hello world"
@@ -266,6 +276,18 @@ ELISP> (setq my-list '(10 20 30 40))
 
 ELISP> my-list
 (10 20 30 40)
+
+;;; Multiple Assignment
+;;
+ELISP> (setq a 10 b 20 c "Emacs")
+"Emacs"
+ELISP> a
+10 (#o12, #xa, ?\C-j)
+ELISP> b
+20 (#o24, #x14, ?\C-t)
+ELISP> c
+"Emacs"
+ELISP>
 
 ;; Dynamic Scoping  (Local Variables)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
