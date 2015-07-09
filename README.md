@@ -889,6 +889,8 @@ ELISP> (mapcar (lambda (x) (
 
 ELISP> 
 
+ELISP> (defun get-value (alist key) (cdr (assoc key alist)))
+get-value
 ELISP> (get-value language-list "scala")
 ((:command . "scala")
  (:cmdopt . "-Dfile.encoding=UTF-8")
