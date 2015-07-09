@@ -518,12 +518,21 @@ ELISP> (member 10 '(0 1 2 3 4 5))
 nil
 ELISP> 
 
-;; Postion of list element
+;; Position of list element (prior to emacs 24.4)
 ;;
 ELISP> (position 7 '(5 6 7 8))
 2 (#o2, #x2, ?\C-b)
 
 ELISP> (position 17 '(5 6 7 8))
+nil
+ELISP> 
+
+;; Position of list element (emacs 24.4 or later)
+;;
+ELISP> (cl-position 7 '(5 6 7 8))
+2 (#o2, #x2, ?\C-b)
+
+ELISP> (cl-position 17 '(5 6 7 8))
 nil
 ELISP> 
 
