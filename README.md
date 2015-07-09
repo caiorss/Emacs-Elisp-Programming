@@ -3,9 +3,11 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Emacs - Elisp Programming and Customization](#emacs---elisp-programming-and-customization)
+  - [Default Keybindings](#default-keybindings)
   - [Command Line Options](#command-line-options)
   - [Elisp](#elisp)
     - [Ielm - Elisp shell](#ielm---elisp-shell)
+    - [Emacs Terminology](#emacs-terminology)
     - [Basic Syntax](#basic-syntax)
       - [Basic Operations](#basic-operations)
       - [Defining Variables](#defining-variables)
@@ -15,6 +17,8 @@
       - [Strings](#strings)
       - [Eval](#eval)
       - [Control Structures](#control-structures)
+        - [Conditional Statement](#conditional-statement)
+        - [Loops](#loops)
     - [Functional Programming](#functional-programming)
       - [Map and Filter](#map-and-filter)
       - [Anonymous functions/ Lambda functions](#anonymous-functions-lambda-functions)
@@ -83,12 +87,116 @@ Emacs is an scriptable text editor written in the lisp dialect: Elisp.
 ~/.emacs.d/init.el
 ```
 
+## Default Keybindings
+
+
+**Key Notation**
+
+| Key | Name        |  Modern Keyboard Equivalence   |
+|-----|-------------|--------------------------------|
+|  M  | Meta        | Alt                            |
+|  C  | Control     | Ctrl                           |
+|  S  | Shift       | Shift                          |
+| SPC | Space       | Space                          |
+
+
+**File**
+
+|                         |                       |
+|-------------------------|-----------------------|
+| <kbd>C-x C-s </kbd>     | Save Current Buffer   |
+| <kbd>C-x C-w </kbd>     | Save Buffer as different file |
+| <kbd>C-x s </kbd>       | Save all buffers      |
+| <kbd>C-x C-f </kbd>     | Open File             |
+
+**Buffers**
+
+|                       |                       |
+|-----------------------|-----------------------|
+| <kbd>C-x b </kbd>     | Select Another Buffer |
+| <kbd>C-x C-b</kbd>    | List all buffers      |
+| <kbd>C-x k </kbd>     | Kill a buffer         |     
+
+**Edit**
+
+Line Edit
+
+|
+|-----------------------|------------------------|
+| <kbd> C-a </kbd>     | Go to start of the line |
+| <kbd> C-e </kbd>     | Go to end of the line.  | 
+| <kbd> C-k </kbd>     | Cut/Delete from cursor current position to the end of the line. |
+
+
+Select, Copy, Cut and Paste
+
+|                        |                      |
+|------------------------|----------------------|
+| <kbd>C - _     </kbd>  | Undo                 |
+| <kbd>C - x u   </kbd>  | Redo                 |
+| <kbd>C - Space </kbd>  | Begin Selection      |
+| <kbd>C - G     </kbd>  | Cancel Selection     |
+| <kbd>C-x h </kbd>      | Select the whole buffer |
+| <kbd>M-w  </kbd>       | Copy |
+| <kbd>C-y  </kbd>       | Paste |
+| <kbd>C-w  </kbd>       | Cut |
+| 
+
+Word Case / Comment and Uncomment
+
+|                         |                      |
+|-------------------------|----------------------|
+| <kbd> M-u </kbd>        | Make word uppercase |
+| <kbd> M-l </kbd>        | Make word lowercase |
+| <kbd> M-c </kbd>        | Make word title (Capitalize only first letter) |
+|
+| <kbd> M-; </kbd>  | Comment/ Uncomment Selected Code |
+
+
+**Windows**
+
+|                        |                      |
+|------------------------|----------------------|
+| <kbd>C-x k</kbd>       | Close                |
+| <kbd>C-x b</kbd>       | Next Window          |
+| <kbd>C-x C-b </kbd>    | Choose buffer Window |
+| <kbd>C-x 1 </kbd>      | Unsplit              |
+| <kbd>C-x 2 </kbd>      | Split Horizontally   |
+| <kbd>C-x 3 </kbd>      | Split Vertically     |
+| <kbd>C-x o </kbd>      | Switch Window        |
+| <kbd>C-x 2 5 </kbd>    | Launch a new frame (separated window) |
+
+
+**Commands**
+
+|                    |                 | 
+|--------------------|-----------------|
+| <kbd> M - x </kbd> | Enter a command |
+| <kbd> C - g </kbd> | Cancel command input |
+| <kbd> M - x </kbd> eval-expression | Eval a lisp expression in current buffer |
+| <kbd> M -x </kbd> ielm | Enter Emacs Interactive elisp shell |
+| <kbd> M -x </kbd> eshell | Enter Emacs Shell Written in Elisp |
+| <kbd> M -x </kbd> shell | Run a shell |
+
+
+**Information**
+
+|                    |                      |
+|--------------------|----------------------|
+| <kbd> C-h f </kbd> | Describe function    |
+| <kbd> C-h v </kbd> | Describe variable    |
+| <kbd> C-h m </kbd> | Describe mode        |
+| <kbd> C-h s </kbd> | Describe syntax      |
+| <kbd> C-h b </kbd> | Describe key bindings for current buffer |
+| <kbd> C-h a </kbd> | Command Apropos |
+
 
 ## Command Line Options
 
 Start emacs ignoring the ~/.emacs.d/init.el or ~/.emacs configuration file.
 
 ```
+
 $ emacs --no-init-file
 
 or
@@ -108,7 +216,7 @@ Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
 $ emacs  --debug-init
 ```
 
-To keep multiple confiuration files see: [Emacs Bootstrap](https://github.com/caiorss/Emacs-Bootstrap)
+To keep multiple configurations files see: [Emacs Bootstrap](https://github.com/caiorss/Emacs-Bootstrap)
 
 Show Emacs version
 
@@ -120,18 +228,18 @@ $ emacs --version
 
 ### Ielm - Elisp shell
 
-Keys
+This section will use the Emacs interactive elisp shell IELM that can be accessed by typing **M-x ielm**. You can also use the scratch buffer to test Emacs commands, however the it is easier to use IELM.
 
-```
-M - Meta (Alt)
-C - Ctrl 
-```
 
-Emacs Elisp: Shell Ieml
+### Emacs Terminology
 
-```
-M-x ielm
-```
+| Emacs Terminology | Description |
+|-------------------|-------------|
+| Point| Cursor position |
+| Buffer | Place where the user edit something. Not all buffers are bound to a file. |
+| Region | Selected area/ text |
+| Frame  | The current window of emacs |
+| Windows | Each frame can be split in sections that Emacs documentation calls windows |
 
 ### Basic Syntax
 
