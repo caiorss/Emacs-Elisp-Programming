@@ -3158,6 +3158,11 @@ M-x open-file-manager
   "Open buffer directory in file manager (Linux Only)"
   (interactive)
   (call-process "pcmanfm"))
+;; or on Mac
+(defun open-file-manager ()
+  "Open buffer directory in file manager (Mac Only)"
+  (interactive)
+  (call-process "open" nil nil nil "."))
 ```  
 
 ### Open a terminal Emulator in the directory of Current Buffer
@@ -3180,6 +3185,23 @@ Code:
                 nil
                 (format "--working-directory='%s'"
                         (file-name-directory (buffer-file-name)))))
+;; or on Mac
+(defun open-terminal ()
+  "Open terminal in file directory"
+  (interactive)
+  (let ((cmd (format "cd %s" default-directory)))
+    (do-applescript
+     (format
+      "
+  tell application \"iTerm\"
+       activate
+       set _session to current session of current terminal
+       tell _session
+            set command to get the clipboard
+            write text \"%s\"
+       end tell
+  end tell
+  " cmd))))
 ```
 
 ### Eval String in Clipboard
