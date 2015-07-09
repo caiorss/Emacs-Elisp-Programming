@@ -75,8 +75,7 @@
 
 # Emacs - Elisp Programming and Customization
 
-
-Emacs is an scriptable text editor written in the lisp dialect: Elisp.
+Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own lisp dialect.
 
 * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
 * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
@@ -119,14 +118,23 @@ Emacs is an scriptable text editor written in the lisp dialect: Elisp.
 
 **Edit**
 
-Line Edit
+Navigation
 
 |
 |-----------------------|------------------------|
 | <kbd> C-a </kbd>     | Go to start of the line |
 | <kbd> C-e </kbd>     | Go to end of the line.  | 
 | <kbd> C-k </kbd>     | Cut/Delete from cursor current position to the end of the line. |
+| <kbd> M-< </kbd>     | Move to top of buffer   |
+| <kbd> M-> </kbd>     | Move to Bottom of buffer |
 
+Search
+
+|                      |                      |
+|----------------------|----------------------|
+| <kbd>C-s</kbd>       | Forward Search  |
+| <kbd>C-r</kbd>       | Backward Search |
+| <kbd>M-%</kbd>       | Replace |
 
 Select, Copy, Cut and Paste
 
@@ -1261,7 +1269,7 @@ ELISP> (when (> x 7)
        (split-window-horizontally)
       ))
       
-#<window 8 on *ielm*>
+ #<window 8 on *ielm*>
 ELISP> 
     
 
@@ -2250,7 +2258,190 @@ ELISP>
 * [Creating New Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html)
 
 
-### Windows Functions
+### Window Functions
+
+#### Basic Window Functions
+
+* Original Window before be changed.
+
+![](/images/window_start.png)
+
+* Split Window Horizontally
+
+```elisp
+ELISP> (split-window-horizontally)
+#<window 6 on *ielm*>
+```
+
+![](images/window_horizontally.png)
+
+* Delete Other Windows
+
+```elisp
+ELISP> (delete-other-windows)
+nil
+ELISP> 
+```
+
+![](images/window_delete.png)
+
+* Split Window Vertically
+
+```elisp
+ELISP> (split-window-vertically)
+#<window 10 on *ielm*>
+ELISP> 
+```
+![](images/window_vertically.png)
+
+* Switch to Buffer on other window.
+
+```elisp
+ELISP> (switch-to-buffer-other-window "init.el")
+#<buffer init.el>
+ELISP> 
+```
+
+![](images/window_switch_to_buffer.png)
+
+
+* Delete Current Window
+
+```elisp
+ELISP> (split-window-vertically)
+#<window 18 on *ielm*>
+
+ELISP> (switch-to-buffer-other-window "init.el")
+#<buffer init.el>
+```
+
+![](images/window_delete_this0.png)
+
+```elisp
+ELISP> (delete-window)
+nil
+ELISP> 
+```
+
+![](images/window_delete_this1.png)
+
+
+* Launch a new frame
+
+```elisp
+ELISP> (make-frame)
+#<frame emacs@tuxhorse 0x9651518>
+ELISP> 
+```
+
+![](images/window_make_frame.png)
+
+```elisp
+;;; List Frames:
+
+ELISP> (frame-list)
+(#<frame /home/tux/.emacs.d/init.el 0x95fe518> #<frame *ielm* 0x9651518>)
+
+ELISP> 
+
+;; Close the new frame
+;;
+ELISP> (delete-frame)
+nil
+ELISP> 
+```
+
+#### Manipulate Buffer in Another Window
+
+Description: Split window vertically, create a new buffer not associated to a file named dummy, and switch
+to this buffer on the second window and set the current buffer to dummy.
+
+```elisp
+ELISP> (split-window-vertically)
+#<window 22 on *ielm*>
+
+ELISP> (setq dummy-buffer (get-buffer-create "dummy"))
+#<buffer dummy>
+
+ELISP> (switch-to-buffer-other-window dummy-buffer)
+#<buffer dummy>
+
+ELISP> (set-buffer dummy-buffer)
+#<buffer dummy>
+ELISP>  
+```
+
+![](images/window_manipulate_buffer1.png)
+
+Description: Insert some text on the buffer dummy.
+
+```elisp
+ELISP> (insert "Testing Emacs GUI capabilities")
+nil
+ELISP> 
+```
+
+![](images/window_manipulate_buffer2.png)
+
+Description: Redirect a shell command to the dummy buffer.
+
+```elisp
+ELISP> (print (shell-command-to-string "lsusb") dummy-buffer)
+;; 
+;; Or it could be:
+;;
+;;  (insert (shell-command-to-string "lsusb"))
+
+```
+
+![](images/window_manipulate_buffer3.png)
+
+Description: Erase Dummy buffer:
+
+```elisp
+ELISP> (erase-buffer)
+nil
+ELISP> 
+```
+
+![](images/window_manipulate_buffer4.png)
+
+
+* Change Buffer Safely:
+
+```elisp
+ELISP> (with-current-buffer dummy-buffer
+         (insert (shell-command-to-string "uname -a")))
+nil
+ELISP> 
+```
+
+![](images/window_manipulate_buffer5.png)
+
+* Other Window Operations
+
+```elisp
+
+;; List all Opened windows
+;;
+ELISP> (window-list)
+(#<window 18 on *ielm*> #<window 22 on dummy> #<window 12 on  *Minibuf-1*>)
+
+;; List the buffer of each window
+;;
+ELISP> (mapcar 'window-buffer (window-list))
+(#<buffer *ielm*> #<buffer dummy> #<buffer  *Minibuf-1*>)
+
+;; List the buffer name of each window
+;;
+ELISP> (mapcar (lambda (w)(buffer-name (window-buffer w))) (window-list))
+("*ielm*" "dummy")
+
+ELISP
+```
+
+
+* Not Compiled Yet.
 
 ```
 balance-windows
@@ -3162,7 +3353,7 @@ Copy and paste the code below to the scratch buffer and enter <kbd>M-x eval-buff
 ;; hard to debug and vulnerable to code injection on Web Apps, so a better
 ;; way to write it is to use Elisp macros.
 ;;
-;; @TODO: Change eval-string for a Elisp macro.
+;; @TODO: Change eval-string to an Elisp macro.
 ;;
 (eval-string (make-color-menu-code))
 
