@@ -729,14 +729,14 @@ ELISP>
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-ELISP> (mapcar (lambda (cell)( car cell)) dict)
+ELISP> (mapcar #'car dict)
 (pine oak maple)
 
 ;; Get all values
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-ELISP> (mapcar (lambda (cell)(cdr cell)) dict)
+ELISP> (mapcar #'cdr dict)
 (cones acorns seeds)
 
 ```
@@ -898,6 +898,8 @@ ELISP> (mapcar (lambda (x) (
 
 ELISP> 
 
+ELISP> (defun get-value (alist key) (cdr (assoc key alist)))
+get-value
 ELISP> (get-value language-list "scala")
 ((:command . "scala")
  (:cmdopt . "-Dfile.encoding=UTF-8")
@@ -1630,19 +1632,19 @@ ELISP> accounts
  [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
  [cl-struct-account 8723 "John Oliver" 9823])
 
-ELISP> (mapcar (lambda (acc) (account-id acc)) accounts)
+ELISP> (mapcar #'account-id accounts)
 (34423 1023 92323 8723)
 
 ELISP> 
 
 ELISP> 
-ELISP> (mapcar (lambda (acc) (account-name acc)) accounts)
+ELISP> (mapcar #'account-name accounts)
 ("O' Neil" "John Edwards" "Mr. Dummy" "John Oliver")
 
 ELISP> 
 
 
-ELISP> (mapcar (lambda (acc) (account-balance acc)) accounts)
+ELISP> (mapcar #'account-balance accounts)
 (23.2323 1002323.23 2323241.2323 9823)
 
 ELISP> 
@@ -1684,7 +1686,7 @@ ELISP>
 
 ;; Name of all buffers
 ;;
-ELISP> (mapcar (lambda (b)(buffer-name b)) (buffer-list))
+ELISP> (mapcar #'buffer-name (buffer-list))
 ("*ielm*" "Emacs.md" "*Help*" " *Minibuf-1*" "*shell*" "init.el" "*markdown-output*"
 "*Popup Shell*" "dummy.el" " *Minibuf-0*" " *code-conversion-work*" "
 *Echo Area 0*" " *Echo Area 1*" " *code-converting-work*" "pad" "*scratch*"
@@ -1697,7 +1699,7 @@ ELISP> (mapcar (lambda (b)(buffer-name b)) (buffer-list))
 ```elisp
 ;;
 ;;
-ELISP> (mapcar (lambda (b)(buffer-file-name b)) (buffer-list))
+ELISP> (mapcar #'buffer-file-name (buffer-list))
 (nil "/home/tux/.emacs.d/Emacs.md" nil nil nil
 "/home/tux/.emacs.d/init.el" nil nil
 "/home/tux/tmp/dummy.el"
