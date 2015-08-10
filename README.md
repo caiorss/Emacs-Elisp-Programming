@@ -508,9 +508,8 @@ ELISP>
 
 
 ;; Membership test
-;; mem returns null if the element is not member of the list
+;; member returns null if the element is not member of the list
 ;;
-ELISP> (member 2 '(0 1 2 3 4 5))
 ELISP> (member 2 '(0 1 2 3 4 5))
 (2 3 4 5)
 
