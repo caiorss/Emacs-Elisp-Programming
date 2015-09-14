@@ -525,9 +525,8 @@ ELISP>
 
 
 ;; Membership test
-;; mem returns null if the element is not member of the list
+;; member returns null if the element is not member of the list
 ;;
-ELISP> (member 2 '(0 1 2 3 4 5))
 ELISP> (member 2 '(0 1 2 3 4 5))
 (2 3 4 5)
 
@@ -535,12 +534,21 @@ ELISP> (member 10 '(0 1 2 3 4 5))
 nil
 ELISP> 
 
-;; Postion of list element
+;; Position of list element (prior to emacs 24.4)
 ;;
 ELISP> (position 7 '(5 6 7 8))
 2 (#o2, #x2, ?\C-b)
 
 ELISP> (position 17 '(5 6 7 8))
+nil
+ELISP> 
+
+;; Position of list element (emacs 24.4 or later)
+;;
+ELISP> (cl-position 7 '(5 6 7 8))
+2 (#o2, #x2, ?\C-b)
+
+ELISP> (cl-position 17 '(5 6 7 8))
 nil
 ELISP> 
 
@@ -737,14 +745,14 @@ ELISP>
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-ELISP> (mapcar (lambda (cell)( car cell)) dict)
+ELISP> (mapcar #'car dict)
 (pine oak maple)
 
 ;; Get all values
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-ELISP> (mapcar (lambda (cell)(cdr cell)) dict)
+ELISP> (mapcar #'cdr dict)
 (cones acorns seeds)
 
 ```
@@ -906,6 +914,8 @@ ELISP> (mapcar (lambda (x) (
 
 ELISP> 
 
+ELISP> (defun get-value (alist key) (cdr (assoc key alist)))
+get-value
 ELISP> (get-value language-list "scala")
 ((:command . "scala")
  (:cmdopt . "-Dfile.encoding=UTF-8")
@@ -1939,19 +1949,19 @@ ELISP> accounts
  [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
  [cl-struct-account 8723 "John Oliver" 9823])
 
-ELISP> (mapcar (lambda (acc) (account-id acc)) accounts)
+ELISP> (mapcar #'account-id accounts)
 (34423 1023 92323 8723)
 
 ELISP> 
 
 ELISP> 
-ELISP> (mapcar (lambda (acc) (account-name acc)) accounts)
+ELISP> (mapcar #'account-name accounts)
 ("O' Neil" "John Edwards" "Mr. Dummy" "John Oliver")
 
 ELISP> 
 
 
-ELISP> (mapcar (lambda (acc) (account-balance acc)) accounts)
+ELISP> (mapcar #'account-balance accounts)
 (23.2323 1002323.23 2323241.2323 9823)
 
 ELISP> 
@@ -1993,7 +2003,7 @@ ELISP>
 
 ;; Name of all buffers
 ;;
-ELISP> (mapcar (lambda (b)(buffer-name b)) (buffer-list))
+ELISP> (mapcar #'buffer-name (buffer-list))
 ("*ielm*" "Emacs.md" "*Help*" " *Minibuf-1*" "*shell*" "init.el" "*markdown-output*"
 "*Popup Shell*" "dummy.el" " *Minibuf-0*" " *code-conversion-work*" "
 *Echo Area 0*" " *Echo Area 1*" " *code-converting-work*" "pad" "*scratch*"
@@ -2006,7 +2016,7 @@ ELISP> (mapcar (lambda (b)(buffer-name b)) (buffer-list))
 ```elisp
 ;;
 ;;
-ELISP> (mapcar (lambda (b)(buffer-file-name b)) (buffer-list))
+ELISP> (mapcar #'buffer-file-name (buffer-list))
 (nil "/home/tux/.emacs.d/Emacs.md" nil nil nil
 "/home/tux/.emacs.d/init.el" nil nil
 "/home/tux/tmp/dummy.el"
@@ -3476,6 +3486,11 @@ M-x open-file-manager
   "Open buffer directory in file manager (Linux Only)"
   (interactive)
   (call-process "pcmanfm"))
+;; or on Mac
+(defun open-file-manager ()
+  "Open buffer directory in file manager (Mac Only)"
+  (interactive)
+  (call-process "open" nil nil nil "."))
 ```  
 
 ### Open a terminal Emulator in the directory of Current Buffer
@@ -3498,6 +3513,23 @@ Code:
                 nil
                 (format "--working-directory='%s'"
                         (file-name-directory (buffer-file-name)))))
+;; or on Mac
+(defun open-terminal ()
+  "Open terminal in file directory"
+  (interactive)
+  (let ((cmd (format "cd %s" default-directory)))
+    (do-applescript
+     (format
+      "
+  tell application \"iTerm\"
+       activate
+       set _session to current session of current terminal
+       tell _session
+            set command to get the clipboard
+            write text \"%s\"
+       end tell
+  end tell
+  " cmd))))
 ```
 
 ### Eval String in Clipboard
