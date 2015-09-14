@@ -24,6 +24,9 @@
       - [Anonymous functions/ Lambda functions](#anonymous-functions-lambda-functions)
       - [Function Composition](#function-composition)
       - [Interactive Functions](#interactive-functions)
+    - [Macros and Metaprogramming](#macros-and-metaprogramming)
+      - [Quasiquote](#quasiquote)
+      - [Macros](#macros)
     - [Structures](#structures)
     - [Bufffers](#bufffers)
       - [Buffer Attributes](#buffer-attributes)
@@ -77,7 +80,11 @@
 
 # Emacs - Elisp Programming and Customization
 
-Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own lisp dialect.
+Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own lisp dialect that is a subset of and old version of common lisp. An excellent book about common lisp that is also useful for Elisp and Scheme is [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html)
+
+)
+
+See: [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
 
 * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
 * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
@@ -187,6 +194,10 @@ Word Case / Comment and Uncomment
 | <kbd> M -x </kbd> ielm | Enter Emacs Interactive elisp shell |
 | <kbd> M -x </kbd> eshell | Enter Emacs Shell Written in Elisp |
 | <kbd> M -x </kbd> shell | Run a shell |
+| <kbd> M -! </kbd> shell | Run a single shell command like: ls, pwd, make ... |
+| <kbd> M-x eval-region </kbd> shell | Evaluate selected region as elisp code |
+| <kbd> M-x eval-buffer </kbd> shell | Evaluate current buffer as elips code |
+| <kbd> M-x goto-char </kbd> | Got a character position |
 
 
 **Information**
@@ -250,12 +261,18 @@ This section will use the Emacs interactive elisp shell IELM that can be accesse
 | Region | Selected area/ text |
 | Frame  | The current window of emacs |
 | Windows | Each frame can be split in sections that Emacs documentation calls windows |
+| Fill | Word Wrap |
+| Yank | Paste |
+| Kill | Cut |
+| Kill Ring | Clipboard |
+| Mode Line | Status Bar |
+| Font Lock | Syntax Coloring |
 
 ### Basic Syntax
 
 #### Basic Operations
 
-Arithmetic 
+**Arithmetic**
 
 ```elisp
 ELISP> (+ 20 30)
@@ -1521,6 +1538,307 @@ Execute the function
 ```
 M-x some-interactive-function>
 ```
+
+### Macros and Metaprogramming
+
+Macros are useful to create new lisp special forms like if and when, create new control structures, domain specific languages and redefine syntax. As elisp is a subset of common lisp, it uses the same syntax. 
+
+
+#### Quasiquote
+
+Quasiquote is useful to create s-expression templates, data structure templates and lisp macros.
+
+```elisp
+
+> (setq a 10)
+10 (#o12, #xa, ?\C-j)
+
+> (setq b 20)
+20 (#o24, #x14, ?\C-t)
+
+> (setq c 'my-symbol)
+my-symbol
+
+> (setq d "a string")
+"a string"
+
+
+;;;; List of Symbols
+> '(a b c d)
+(a b c d)
+
+> (list 'a 'b 'c 'd )
+(a b c d)
+
+;;;; List of numbers
+
+> '(1 2.232 3523 23)
+(1 2.232 3523 23)
+
+> (list 1 2.232 3523 23)
+(1 2.232 3523 23)
+
+
+;;;; List of symbol and numbers
+
+> '(1 2.232 3523 23 a b c d)
+(1 2.232 3523 23 a b c d)
+
+> (list 1 2.232 3523 23 'a 'b 'c 'd)
+(1 2.232 3523 23 a b c d)
+
+> (list 1 2.232 3523 23 a b c d)
+(1 2.232 3523 23 10 20 my-symbol "a string")
+
+;;;; List with the variables a b c d
+> (list a b c d)
+(10 20 my-symbol "a string")
+
+;;;;  List with variables and symbols
+> (list 'a a 'b b 'c c 'd d)
+(a 10 b 20 c my-symbol d "a string")
+
+;;;; Asssociaiton List
+> (list (cons 'a  a) (cons 'b b) (cons 'c c) (cons 'd  d))
+((a . 10)
+ (b . 20)
+ (c . my-symbol)
+ (d . "a string"))
+ 
+ 
+;;;; Quasiquote 
+
+> `(the product of 3 and 4 is ,(* 3 4))
+(the product of 3 and 4 is 12)
+
+> `("the product of 3 and 4 is" ,(* 3 4))
+("the product of 3 and 4 is" 12)
+
+> `("the value of (exp 3) is " ,(exp 3) "the value of (sqrt 100) is" ,(sqrt 100))
+("the value of (exp 3) is " 20.085536923187668 "the value of (sqrt 100) is" 10.0)
+ 
+> `(a ,a b ,b c ,c d ,d)
+(a 10 b 20 c my-symbol d "a string")
+
+> `((a . ,a) (b . ,b) (c . ,c) (d . ,d))
+((a . 10)
+ (b . 20)
+ (c . my-symbol)
+ (d . "a string"))
+ 
+> (setq xs '(sym1 sym2 sym3))
+(sym1 sym2 sym3)
+
+> xs
+(sym1 sym2 sym3)
+
+> `(xs ,xs)
+(xs
+ (sym1 sym2 sym3))
+ 
+> `(xs ,@xs)
+(xs sym1 sym2 sym3)
+
+> `(if (< ,a ,b) ,(+ a 4) ,d)
+(if
+    (< 10 20)
+    14 "a string")
+    
+> (eval `(if (< ,a ,b) ,(+ a 4) ,d))
+14 (#o16, #xe, ?\C-n)
+>     
+
+> (eval `(if (> ,a ,b) ,(+ a 4) ,d))
+"a string"
+
+;;------------------
+
+> (setq xlist '(1 2 3 4))
+(1 2 3 4)
+
+> (setq ylist '(a b c d e))
+(a b c d e)
+
+> `(xs ,xlist ys ,ylist)
+(xs
+ (1 2 3 4)
+ ys
+ (a b c d e))
+
+> `(xs ,@xlist ys ,@ylist)
+(xs 1 2 3 4 ys a b c d e)    
+```
+
+#### Macros
+
+**Redefine lambda syntax to λ**
+
+```elisp
+
+(defmacro λ (args body)
+ `(lambda ,args ,body))
+
+ELISP> (λ (x) (+ x 3))
+(lambda
+  (x)
+  (+ x 3))
+
+ELISP> (mapcar (λ (x) (+ x 3)) '(1 2 3 4 5 6))
+(4 5 6 7 8 9)
+```
+
+**Set variable to nil**
+
+```elisp
+(defmacro nil! (var)
+  `(setq ,var nil))
+
+
+ELISP> (setq x 10)
+10 (#o12, #xa, ?\C-j)
+ELISP> x
+10 (#o12, #xa, ?\C-j)
+ELISP> 
+
+ELISP> (nil! x)
+nil
+ELISP> x
+nil
+ELISP> 
+
+ELISP> (nil! z)
+nil
+ELISP> z
+nil
+ELISP> 
+```
+
+**Create Clojure def, defn and fn special forms**
+
+* [Special form - fn](https://clojuredocs.org/clojure.core/fn)
+* [Special form - def](https://clojuredocs.org/clojure.core/def)
+* [Special form - defn](https://clojuredocs.org/clojure.core/defn)
+
+```elisp
+(defmacro fn (args body)
+ `(lambda ,args ,body))
+
+(defmacro def (name value)
+   `(setq ,name ,value))
+
+(defmacro defn (name args body)
+   `(defun ,name ,args ,body))
+ 
+
+ELISP> (fn (x) (* x x))
+(lambda
+  (x)
+  (* x x))
+
+ELISP> (mapcar (fn (x) (* x x)) '(1 2 3 4 5))
+(1 4 9 16 25)
+
+ELISP> 
+
+
+
+ELISP> (def x 1000)
+1000 (#o1750, #x3e8, ?Ϩ)
+ELISP> x
+1000 (#o1750, #x3e8, ?Ϩ)
+ELISP> 
+
+ELISP> (defn f (x y z) (+ (* 3 x) (* -4 y) (* 5 z)))
+f
+ELISP> (f 4 5 6)
+22 (#o26, #x16, ?\C-v)
+ELISP>
+
+```
+
+**Create Scheme Syntax define**
+
+```elisp
+(defmacro define (args body)
+ (if (listp args)
+     `(defun ,(car args) ,(cdr args) ,body)
+     `(setq  ,args ,body)))
+define
+ELISP> 
+ELISP> (define x 50)
+50 (#o62, #x32, ?2)
+ELISP> x
+50 (#o62, #x32, ?2)
+ELISP> 
+ELISP> (define (f x y) (+ (* 3 x) (* -4 y)))
+f
+ELISP> (f 5 6)
+-9 (#o7777777767, #x3ffffff7)
+ELISP> 
+```
+
+**Rebind Elisp functions**
+
+Bind new names to existing elisp functions in order to create user friendly identifiers, for example, bind the symbol map to the function mapcar.
+
+```elisp
+
+(defmacro rebindfun (new-name old-name)
+   `(setf (symbol-function ,new-name) ,old-name))
+
+ELISP> (rebindfun 'map #'mapcar)
+mapcar
+ELISP> 
+
+ELISP> (map (lambda (x) (+ x 5)) '(1 2 3 4 5 6 7 8))
+(6 7 8 9 10 11 12 13)
+
+ELISP> (rebindfun 'filter #'remove-if-not)
+remove-if-not
+ELISP> 
+
+ELISP> (filter (lambda (x) (< x  10)) '(1 20 30 4 6 89 3 2 9 100))
+(1 4 6 3 2 9)
+
+ELISP> (filter 'evenp  '(1 2 3 4 5 6 7 8))
+(2 4 6 8)
+
+ELISP> (filter 'oddp  '(1 2 3 4 5 6 7 8))
+(1 3 5 7
+
+;;; Commmon Lisp Way
+
+ELISP> (filter #'evenp  '(1 2 3 4 5 6 7 8))
+(2 4 6 8)
+
+ELISP> (filter #'oddp  '(1 2 3 4 5 6 7 8))
+(1 3 5 7)
+```
+
+**Convert Infix Operator to prefix operator**
+
+```elisp
+(defmacro $ (a op b)
+  `(,op ,a ,b))  
+
+ELISP> 
+ELISP> ($ 1 < 10)
+t
+ELISP> ($ 1 > 10)
+nil
+ELISP> 
+
+ELISP> (macroexpand '($ 1 > 10))
+(> 1 10)
+
+ELISP> (if ($ 4 < 10) "Less than 10" "Greater than 10")
+"Less than 10"
+ELISP> 
+ELISP> (if ($ 1444 < 10) "Less than 10" "Greater than 10")
+"Greater than 10"
+ELISP> 
+```
+
 
 ### Structures
 
@@ -3320,6 +3638,7 @@ M-x load-session ;; All previous files in the session
 
 ![](images/colortheme_menu.png)
 
+**Using Eval**
 
 Copy and paste the code below to the scratch buffer and enter <kbd>M-x eval-buffer</kbd>. This code can also be put in ~/emacs.d/init.el, in the config file.
 
@@ -3359,4 +3678,134 @@ Copy and paste the code below to the scratch buffer and enter <kbd>M-x eval-buff
 ;;
 (eval-string (make-color-menu-code))
 
+```
+
+**Using Macros**
+
+Developement:
+
+```elisp
+ELISP> (custom-available-themes)
+(cyberpunk adwaita deeper-blue dichromacy leuven light-blue manoj-dark misterioso tango-dark tango tsdh-dark tsdh-light wheatgrass whiteboard wombat)
+
+ELISP> (mapcar
+        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
+        (custom-available-themes)
+    )
+(["adwaita"
+  (load-theme 'adwaita)]
+ ["deeper-blue"
+  (load-theme 'deeper-blue)]
+ ["dichromacy"
+  (load-theme 'dichromacy)]
+ ["leuven"
+  (load-theme 'leuven)]
+ ["light-blue"
+  (load-theme 'light-blue)]
+ ["manoj-dark"
+  (load-theme 'manoj-dark)]
+ ["misterioso"
+  (load-theme 'misterioso)]
+ ["tango-dark"
+  (load-theme 'tango-dark)]
+  ...
+
+ELISP>  (defun make-menu-rows ()
+          (mapcar
+        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
+        (custom-available-themes)))
+make-menu-rows
+ELISP> 
+ELISP> (make-menu-rows)
+(["adwaita"
+  (load-theme 'adwaita)]
+ ["deeper-blue"
+  (load-theme 'deeper-blue)]
+ ["dichromacy"
+  (load-theme 'dichromacy)]
+ ["leuven"
+  (load-theme 'leuven)]
+  ...
+
+
+ELISP> `(easy-menu-define djcb-menu global-map "Color Themes"
+          '("Color Themes"
+           ,@(make-menu-rows)))
+(easy-menu-define djcb-menu global-map "Color Themes"
+  '("Color Themes"
+    ["adwaita"
+     (load-theme 'adwaita)]
+    ["deeper-blue"
+     (load-theme 'deeper-blue)]
+    ["dichromacy"
+     (load-theme 'dichromacy)]
+    ["leuven"
+     (load-theme 'leuven)]
+    ["light-blue"
+     (load-theme 'light-blue)]
+     ...
+     
+;;; Now execute the generated code, the menu will pop up.
+;;;      
+   
+ELISP> (eval `(easy-menu-define djcb-menu global-map "Color Themes"
+          '("Color Themes"
+           ,@(make-menu-rows))))
+nil        
+    
+```
+
+Final code
+
+```elisp
+(defun make-menu-rows ()
+          (mapcar
+        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
+        (custom-available-themes)))
+
+     
+(defmacro make-color-menu ()
+  `(easy-menu-define djcb-menu global-map "Color Themes"
+     '("Color Themes"
+       ,@(make-menu-rows))))
+
+(make-color-menu)
+
+;;;;; Or copy and paste the following  block on IELM shell
+
+(progn
+    (defun make-menu-rows ()
+              (mapcar
+            (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
+            (custom-available-themes)))
+
+         
+    (defmacro make-color-menu ()
+      `(easy-menu-define djcb-menu global-map "Color Themes"
+         '("Color Themes"
+           ,@(make-menu-rows))))
+
+    (make-color-menu)
+)   
+       
+
+;;;; Testing the macro expansion
+
+ELISP> (macroexpand '(make-color-menu))
+(progn
+  (defvar djcb-menu nil "Color Themes")
+  (easy-menu-do-define 'djcb-menu global-map "Color Themes"
+               '("Color Themes"
+             ["adwaita"
+              (load-theme 'adwaita)]
+             ["deeper-blue"
+              (load-theme 'deeper-blue)]
+             ["dichromacy"
+              (load-theme 'dichromacy)]
+             ["leuven"
+              (load-theme 'leuven)]
+             ["light-blue"
+              (load-theme 'light-blue)]
+            ...
+       
 ```
