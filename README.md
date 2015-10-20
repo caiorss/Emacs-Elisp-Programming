@@ -382,7 +382,7 @@ ELISP>
 ;;; Define a variable
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;; Set is not used very much the 
+;;;; Set is not used very much
 ;;
 ELISP> (set 'avar "hello world")
 "hello world"
@@ -487,7 +487,7 @@ See also: http://www.fincher.org/tips/Languages/Emacs.shtml
 
 ;; Defining a List
 ;; 
-;; A emacs list can contain elements of almost any type.
+;; An emacs list can contain elements of almost any type.
 ;;
 ELISP> '( "a" 2323 "b" 21.2323 "hello" "emacs"   nil () (34 134) '(+ 2 3 5))
 ("a" 2323 "b" 21.2323 "hello" "emacs" nil nil
@@ -675,7 +675,7 @@ ELISP> (number-sequence 9 4 -1)
 (9 8 7 6 5 4)
 
 
-;;Modify list variables.
+;; Modify list variables.
 ;;
 ELISP> alist
 (a b c d e)
@@ -685,6 +685,9 @@ ELISP> (push 'f alist)
 
 ELISP> alist
 (f a b c d e)
+
+ELISP> (pop alist)
+f
 
 ELISP> alist
 (a b c d e)
