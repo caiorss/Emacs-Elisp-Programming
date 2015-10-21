@@ -12,8 +12,13 @@
       - [Basic Operations](#basic-operations)
       - [Defining Variables](#defining-variables)
       - [Defining Functions](#defining-functions)
+        - [Define Simple Function](#define-simple-function)
+        - [Anonymous Functions / Lambda Functions](#anonymous-functions--lambda-functions)
+        - [Passing Functions as Arguments](#passing-functions-as-arguments)
+        - [Closure](#closure)
       - [List Operations](#list-operations)
       - [Association Lists](#association-lists)
+      - [Property Lists](#property-lists)
       - [Strings](#strings)
       - [Eval](#eval)
       - [Control Structures](#control-structures)
@@ -24,6 +29,7 @@
       - [Anonymous functions/ Lambda functions](#anonymous-functions-lambda-functions)
       - [Function Composition](#function-composition)
       - [Interactive Functions](#interactive-functions)
+      - [List Recursive Functions](#list-recursive-functions)
     - [Macros and Metaprogramming](#macros-and-metaprogramming)
       - [Quasiquote](#quasiquote)
       - [Macros](#macros)
@@ -47,21 +53,17 @@
   - [Discoverability / Get Documentation](#discoverability--get-documentation)
     - [Describe](#describe)
   - [Bytecodes](#bytecodes)
-  - [Documentation](#documentation)
-    - [References](#references)
-      - [Manual](#manual)
-      - [Tutorials](#tutorials)
-      - [Wikis](#wikis)
-      - [Issues](#issues)
-    - [Developement Environments for Emacs](#developement-environments-for-emacs)
-    - [Selected Dot Emacs](#selected-dot-emacs)
-    - [Space Emacs Default Config](#space-emacs-default-config)
-    - [Selected Codes](#selected-codes)
-    - [Screencasts](#screencasts)
   - [Customization](#customization)
+    - [Install Packages](#install-packages)
+      - [Install an Emacs package from repository:](#install-an-emacs-package-from-repository)
+      - [Install a Single Emacs file *.el](#install-a-single-emacs-file-el)
     - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
     - [Themes](#themes)
     - [Misc](#misc)
+    - [Shortcuts](#shortcuts)
+      - [Define Global Key-bindings](#define-global-key-bindings)
+      - [Define Mode Specific Key-bindings](#define-mode-specific-key-bindings)
+      - [Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)](#enable-ctrlv--ctrlc-shortcuts-cua-mode)
     - [Quiet Startup](#quiet-startup)
   - [Solutions](#solutions)
     - [Quick edit and reload Emac Configuration File.](#quick-edit-and-reload-emac-configuration-file)
@@ -75,6 +77,18 @@
     - [Eval String in Clipboard](#eval-string-in-clipboard)
     - [Save and Reload Current Session](#save-and-reload-current-session)
     - [Create a menu with all color themes available](#create-a-menu-with-all-color-themes-available)
+  - [Resources](#resources)
+    - [References](#references)
+      - [Manual](#manual)
+      - [Tutorials](#tutorials)
+      - [Wikis](#wikis)
+      - [Issues](#issues)
+    - [Developement Environments for Emacs](#developement-environments-for-emacs)
+    - [Selected Dot Emacs](#selected-dot-emacs)
+    - [Space Emacs Default Config](#space-emacs-default-config)
+    - [Selected Codes](#selected-codes)
+    - [Screencasts](#screencasts)
+    - [Limitations](#limitations)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -97,6 +111,8 @@ See: [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyp
 
 ## Default Keybindings
 
+The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typing: M-x cua-mode, emacs also supports the Vim keybindings by installing the evil package.
+
 
 **Key Notation**
 
@@ -116,6 +132,7 @@ See: [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyp
 | <kbd>C-x C-w </kbd>     | Save Buffer as different file |
 | <kbd>C-x s </kbd>       | Save all buffers      |
 | <kbd>C-x C-f </kbd>     | Open File             |
+| <kbd>C-x C-C </kbd>     | Close Emacs           |
 
 **Buffers**
 
@@ -125,9 +142,8 @@ See: [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyp
 | <kbd>C-x C-b</kbd>    | List all buffers      |
 | <kbd>C-x k </kbd>     | Kill a buffer         |     
 
-**Edit**
+**Navigation**
 
-Navigation
 
 |
 |-----------------------|------------------------|
@@ -136,8 +152,15 @@ Navigation
 | <kbd> C-k </kbd>     | Cut/Delete from cursor current position to the end of the line. |
 | <kbd> M-< </kbd>     | Move to top of buffer   |
 | <kbd> M-> </kbd>     | Move to Bottom of buffer |
+| <kbd> M-f </kbd>     | Move forward one word |
+| <kbd> M-b </kbd>     | Move backward one word |
+| <kbd> M-[left key] </kbd>     | Move backward one word |
+| <kbd> M-[right key] </kbd>     | Move forward one word |
+| <kbd> Mg-g <line-num> </kbd> | Go to line number |
+| <kbd> Mg-c <cursor-pos> </kbd> | Go to character position |
 
-Search
+
+**Search**
 
 |                      |                      |
 |----------------------|----------------------|
@@ -145,7 +168,7 @@ Search
 | <kbd>C-r</kbd>       | Backward Search |
 | <kbd>M-%</kbd>       | Replace |
 
-Select, Copy, Cut and Paste
+**Select, Copy, Cut and Paste**
 
 |                        |                      |
 |------------------------|----------------------|
@@ -159,7 +182,7 @@ Select, Copy, Cut and Paste
 | <kbd>C-w  </kbd>       | Cut |
 | 
 
-Word Case / Comment and Uncomment
+**Word Case / Comment and Uncomment**
 
 |                         |                      |
 |-------------------------|----------------------|
@@ -439,6 +462,15 @@ ELISP>
 #### Defining Functions
 
 
+##### Define Simple Function
+
+Syntax:
+
+```
+(defun <function name> (<parameters>) (<body>))
+```
+
+
 ```elisp
 ELISP> (defun afunction (a b c) (+ a b c))
 afunction
@@ -478,6 +510,210 @@ ELISP> (factorial 5)
 120 (#o170, #x78, ?x)
 ELISP
 ```
+
+##### Anonymous Functions / Lambda Functions
+
+Syntax:
+
+```
+(lambda (<parameters>) (<body>))
+```
+
+```elisp 
+ELISP> (lambda (x) (+ x 3))
+(lambda
+  (x)
+  (+ x 3))
+
+;;; Applying Lambda Functions
+;;
+
+ELISP> ((lambda (x) (+ x 3)) 4)
+7 (#o7, #x7, ?\C-g)
+ELISP> (funcall (lambda (x) (+ x 3)) 4)
+7 (#o7, #x7, ?\C-g)
+ELISP> 
+
+;;; Storing Lambda Function in Variable
+;;
+;;
+
+ELISP> (defvar add3 (lambda (x) (+ x 3)))
+add3
+
+
+ELISP> add3
+(lambda
+  (x)
+  (+ x 3))
+
+ELISP> (funcall add3 10)
+13 (#o15, #xd, ?\C-m)
+
+ELISP> (add3 10)
+*** Eval error ***  Symbol's function definition is void: add3
+
+ELISP> (funcall #'add3 10)
+*** Eval error ***  Symbol's function definition is void: add3
+ELISP> 
+
+;;; Passing Lambda Function to functions
+;;
+ELISP> (mapcar (lambda (x) (+ x 3))  '(1 2 3 4 5))
+(4 5 6 7 8)
+```
+
+##### Passing Functions as Arguments
+
+Functions must be passed with 
+
+```
+    (caller-function #'<function-1> #'<function-1> arg1 arg2 ...)
+```
+
+Inside the caller function the argument functions must be called using funcall:
+
+```
+    (funcall function-1 arg1 arg2 ...)
+```
+
+Example:
+
+```elisp 
+ELISP> (mapcar log '(1 10 100 1000))
+*** Eval error ***  Symbol's value as variable is void: log
+
+
+ELISP> (mapcar #'log10 '(1 10 100 1000))
+(0.0 1.0 2.0 3.0)
+
+(defun sum-fun (f1 f2 x)
+  (+ (funcall f1 x) (funcall f2 x)))
+
+ELISP> (sum-fun #'log #'exp 3)
+21.18414921185578
+ELISP> 
+
+ELISP> (+ (log 3) (exp 3))
+21.18414921185578
+ELISP> 
+
+ELISP> (sum-fun (lambda (x) (* 3 x))
+        (lambda (x) (* 4 x))
+        5)
+35 (#o43, #x23, ?#)
+ELISP> 
+
+ELISP> (defun 1+ (x) (+ 1 x))
+1+
+ELISP> (defun 3+ (x) (* 3 x))
+3+
+
+ELISP> (sum-fun #'1+  #'3* 4)
+17 (#o21, #x11, ?\C-q)
+ELISP> 
+
+ELISP> (sum-fun #'1+  (lambda (x) (* 3 x)) 4)
+17 (#o21, #x11, ?\C-q)
+ELISP> 
+
+
+
+```
+
+##### Closure 
+
+Emacs lisp dialect doesn't have closure by default, so the code below won't work like in Scheme and Common Lisp:
+
+See also:
+
+* [Emacs Wiki - LexicalBinding](http://www.emacswiki.org/emacs/LexicalBinding)
+* [Emacs Wiki - DynamicBinding Vs LexicalBinding](http://emacswiki.org/emacs/DynamicBindingVsLexicalBinding)
+* [Emacs Lisp Readable Closures](http://nullprogram.com/blog/2013/12/30/)
+* [Emacs Lisp: Closures Exposed ](http://jamesporter.me/2013/06/14/emacs-lisp-closures-exposed.html)
+* [lexical scoping and dynamic scoping in Emacs Lisp](http://technical-dresese.blogspot.com.br/2011/04/brief-demonstration-of-emacs-new.html)
+
+```elisp 
+(defun make-adder (x)
+  (lambda (y) (+ x y)))
+
+
+ELISP> 
+ELISP> (make-adder 3)
+(lambda
+  (y)
+  (+ x y))
+
+ELISP> ((make-adder 3) 4)
+*** Eval error ***  Invalid function: (make-adder 3)
+ELISP> (funcall (make-adder 3) 4)
+*** Eval error ***  Symbol's value as variable is void: x
+ELISP> (map (make-adder 3) '(1 2 3 4 5))
+*** Eval error ***  Symbol's value as variable is void: x
+ELISP> 
+
+```
+
+Now the code with closure enabled:
+
+```elisp 
+(setq lexical-binding t)
+
+(defun make-adder (x)
+  (lambda (y) (+ x y)))
+
+ELISP> (make-adder 3)
+(closure
+ ((x . 3)
+  t)
+ (y)
+ (+ x y))
+
+ELISP> ((make-adder 3) 4)
+*** Eval error ***  Invalid function: (make-adder 3)
+ELISP> 
+
+ELISP> (funcall (make-adder 3) 4)
+7 (#o7, #x7, ?\C-g)
+ELISP> 
+
+ELISP> (mapcar (make-adder 3) '(1 2 3 4 5))
+(4 5 6 7 8)
+
+
+;;;; Sometimes is better to create macro rather than a higher order function
+
+
+(defmacro make-sum-fun (f1 f2)
+  `(lambda (x) (+ (,f1 x) (,f2 x))))
+  
+ELISP> 
+ELISP> (funcall (make-sum-fun sin cos) 3)
+-0.8488724885405782
+ELISP> 
+ELISP> (make-sum-fun sin cos)
+(closure
+ (t)
+ (x)
+ (+
+  (sin x)
+  (cos x)))
+
+ELISP> (map (make-sum-fun sin cos) '(1 2 3 4 5))
+(1.3817732906760363 0.4931505902785393 -0.8488724885405782 -1.4104461161715403 -0.6752620891999122)
+
+
+```
+
+
+To enable closures put the expression below the ~/.emacs.d/init.el file.
+
+```elisp 
+(setq lexical-binding t)
+```
+
+
+
 #### List Operations
 
 See also: http://www.fincher.org/tips/Languages/Emacs.shtml
@@ -697,7 +933,9 @@ ELISP> alist
 ELISP> 
 ```
 
-#### Association Lists
+#### Association Lists and Property Lists 
+
+##### Association List / Alist
 
 Reference: [Emacs Manual / Association Lists](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_89.html)
 
@@ -941,6 +1179,84 @@ ELISP>
 
 ELISP> (get-key-value language-list "scala" ':command)
 "scala"
+ELISP> 
+```
+
+##### Property Lists 
+
+
+```elisp 
+    ELISP> (defvar plst (list :buffer (current-buffer) :line 10 :pos 2000))
+    plst
+
+    ELISP> 
+    ELISP> (plist-get plst :line)
+    10 (#o12, #xa, ?\C-j)
+
+    ELISP> (plist-get plst :pos)
+    2000 (#o3720, #x7d0, ?ߐ)
+
+    ELISP> (plist-get plst :buffer)
+    #<buffer *ielm*>
+    ELISP> 
+
+    ELISP> 
+    ELISP> (plist-get plst :buffdfds)
+    nil
+    ELISP> 
+
+    ELISP> (plist-member plst :buffer)
+    (:buffer #<buffer *ielm*> :line 10 :pos 2000)
+
+    ELISP> (plist-member plst :bufferasd)
+    nil
+    ELISP> 
+
+    ELISP> (plist-put plst :winconf (current-window-configuration))
+    (:buffer #<buffer *ielm*> :line 10 :pos 2000 :winconf #<window-configuration>)
+
+    ELISP> plst
+    (:buffer #<buffer *ielm*> :line 10 :pos 2000 :winconf #<window-configuration>)
+
+    ELISP> 
+```
+
+##### Converting Alists to Plists and vice-versa
+
+```elisp 
+;; Alist to plist 
+(defun plist->alist (plist)
+  (if (null plist)
+      '()      
+      (cons
+       (list (car plist) (cadr plist))
+       (plist->alist (cddr plist)))))
+
+ELISP> (plist->alist (list :x 10 :y 20 :name "point"))
+((:x 10)
+ (:y 20)
+ (:name "point"))
+
+;;; Convert association list to plist      
+(defun alist->plist (assocl)
+  (if (null assocl)
+      '()
+    (let
+    ((hd (car assocl))
+     (tl (cdr assocl)))
+      (cons (car hd)
+        (cons (cadr hd)
+          (alist->plist tl))))))
+
+
+ELISP> (setq al (plist->alist (list :x 10 :y 20 :name "point")))
+((:x 10)
+ (:y 20)
+ (:name "point"))
+
+ELISP> (alist->plist al)
+(:x 10 :y 20 :name "point")
+
 ELISP> 
 ```
 
@@ -1548,6 +1864,348 @@ Execute the function
 ```
 M-x some-interactive-function>
 ```
+
+#### List Recursive Functions
+
+**Map**
+
+```elisp 
+(defun map (fun xs)
+  (if (null xs)
+      '()
+    (cons (funcall fun (car xs))
+      (map fun (cdr xs)))))
+
+ELISP> (map #'buffer-name (buffer-list))
+("*ielm*" "*scratch*" " *Minibuf-1*" "*Backtrace*" "*eshell*" "sclj.import.scm" "*Messages*" "*GNU Emacs*" " *Minibuf-0*" " *code-conversion-work*" " *Echo Area 0*" " *Echo Area 1*" "*Shell Command Output*" "*Completions*")
+
+ELISP> 
+
+
+```
+
+**Filter**
+
+```elisp 
+
+(defun filter (fun xs)
+  (if (null xs)
+      '()
+    (let ((hd (car xs))
+      (tl (cdr xs)))
+      (if (funcall fun hd)
+      (cons hd (filter fun tl))
+    (filter fun tl)))))
+
+(defun odd? (x) (zerop (% x 2)))
+
+ELISP> (filter #'odd? '(1 2 3 4 5 6))
+(2 4 6)
+
+```
+
+**Take**
+
+```elisp 
+(defun take (n xs)
+  (if (or (null xs) (zerop n))
+      '()
+    (cons (car xs)
+      (take (- n 1) (cdr xs)))))
+      
+
+ELISP> (take 5 '(a b c d e f g h i j))
+(a b c d e)
+
+ELISP> (take 10 '(a b c d e f g h i j))
+(a b c d e f g h i j)
+
+ELISP> (take 200 '(a b c d e f g h i j))
+(a b c d e f g h i j)
+
+ELISP> (take 0 '(a b c d e f g h i j))
+nil
+ELISP> (take 10 '())
+nil
+ELISP> 
+```
+
+**Drop**
+
+```elisp 
+(defun drop (n xs)
+  (if (or (null xs) (zerop n))
+      xs
+      (drop (- n 1)  (cdr xs))))
+
+ELISP> (drop 3 '(a b c d e f g h i j))
+(d e f g h i j)
+
+ELISP> (drop 4 '(a b c d e f g h i j))
+(e f g h i j)
+
+ELISP> (drop 25 '(a b c d e f g h i j))
+nil
+ELISP> 
+```
+
+
+
+
+**Map-apply**
+
+Apply a function to a list of arguments
+
+```elisp 
+(defun map-apply (fun xss)
+  (mapcar (lambda (xs) (apply fun xs)) xss))
+
+ELISP> (map-apply #'fxyz '((1 2 3) (3 4 5) (2 3 1)))
+(17 35 20)
+
+ELISP> (fxyz 1 2 3)
+17
+ELISP> (fxyz 3 4 5)
+35
+ELISP> (fxyz 2 3 1)
+20
+ELISP> 
+```
+
+**Zip**
+
+```elisp 
+(defun zip (&rest xss)
+    (if (null (car xss))
+    '()
+      (cons
+       (mapcar #'car xss)
+       (apply #'zip (mapcar #'cdr xss)))))
+       
+ELISP> (zip (list 1 2 3 4) '(a b c d) '(x y z w))
+((1 a x)
+ (2 b y)
+ (3 c z)
+ (4 d w))
+    
+
+```
+
+**Zipwith**
+
+```elisp 
+(defun zipwith (f &rest xss)
+  (map-apply f (apply #'zip xss)))
+
+ELISP> (zipwith #'f '(1 2 3) '(4 5 6) '(3 6 8))
+(23 40 53)
+
+ELISP> (f 1 4 3)
+23 (#o27, #x17, ?\C-w)
+
+ELISP> (f 2 5 6)
+40 (#o50, #x28, ?\()
+
+ELISP> (f 3 6 8)
+53 (#o65, #x35, ?5)
+ELISP>
+```
+
+**Map Pairs**
+
+```elisp 
+
+(defun map-pair (func xs)
+  (mapcar (lambda (x) (cons x (funcall func x))) xs))
+
+ELISP> (map-pair #'1+ '(1 2 3 4))
+((1 . 2)
+ (2 . 3)
+ (3 . 4)
+ (4 . 5))
+
+ELISP> (map-pair #'log10 '(1 10 100 1000 10000))
+((1 . 0.0)
+ (10 . 1.0)
+ (100 . 2.0)
+ (1000 . 3.0)
+ (10000 . 4.0))
+
+(defun buffer-mode (buffer-or-string)
+  "Returns the major mode associated with a buffer."
+  (with-current-buffer buffer-or-string
+    major-mode))
+
+ELISP> (map-pair #'buffer-mode (buffer-list))
+((#<buffer *ielm*> . inferior-emacs-lisp-mode)
+ (#<buffer *scratch*> . lisp-interaction-mode)
+ (#<buffer *Backtrace*> . debugger-mode)
+ (#<buffer *GNU Emacs*> . fundamental-mode)
+ (#<buffer  *Minibuf-1*> . minibuffer-inactive-mode)
+ (#<buffer  *Minibuf-0*> . minibuffer-inactive-mode)
+ (#<buffer *Messages*> . messages-buffer-mode)
+
+```
+
+**Map pairs xy**
+
+```elisp 
+(defun map-xypair (func-x func-y xs)
+  (mapcar
+   (lambda (x)
+     (cons (funcall func-x x) (funcall func-y x)))
+   xs))
+   
+ELISP> (map-xypair #'buffer-name #'buffer-mode (buffer-list))
+(("*ielm*" . inferior-emacs-lisp-mode)
+ ("*scratch*" . lisp-interaction-mode)
+ ("*Backtrace*" . debugger-mode)
+ ("*GNU Emacs*" . fundamental-mode)
+ (" *Minibuf-1*" . minibuffer-inactive-mode)
+ (" *Minibuf-0*" . minibuffer-inactive-mode)
+ ("*Messages*" . messages-buffer-mode)
+ (" *code-conversion-work*" . fundamental-mode)
+ (" *Echo Area 0*" . fundamental-mode)
+ (" *Echo Area 1*" . fundamental-mode)
+ (" *http www.httpbin.org:80*" . fundamental-mode)
+ (" *http www.httpbin.org:80*-820734" . fundamental-mode)
+ (" *http www.httpbin.org:80*-914099" . fundamental-mode)
+ (" *http www.httpbin.org:80*-945998" . fundamental-mode)
+ ("*Help*" . help-mode)
+ ("*Completions*" . completion-list-mode))
+```
+
+**Juxt**
+
+Apply a list of functions to a single argument.
+
+```elisp
+(defmacro juxt (&rest xs_f)
+  `(lambda (x)
+     (list ,@(mapcar (lambda (f) `(funcall ,f x)) xs_f))))
+     
+     ELISP> (juxt #'buffer-name #'buffer-mode)
+
+ELISP> (juxt #'buffer-name #'buffer-mode)
+(lambda
+  (x)
+  (list
+   ((funcall #'buffer-name x)
+    (funcall #'buffer-mode x))))
+
+
+ELISP> (funcall (juxt #'buffer-file-name  #'buffer-name #'buffer-mode) (current-buffer))
+(nil "*ielm*" inferior-emacs-lisp-mode)
+
+ELISP> (mapcar (juxt #'buffer-name #'buffer-file-name #'buffer-mode) (buffer-list))
+(("*ielm*" nil inferior-emacs-lisp-mode)
+ ("*scratch*" nil lisp-interaction-mode)
+ ("passgen.py" "/home/tux/bin/passgen.py" python-mode)
+ (".bashrc" "/home/tux/.bashrc" sh-mode)
+ (" *Minibuf-1*" nil minibuffer-inactive-mode)
+ ("init.el" "/home/tux/.emacs.d/init.el" emacs-lisp-mode)
+ ("*Backtrace*" nil debugger-mode)
+ ("*GNU Emacs*" nil fundamental-mode)
+ (" *Minibuf-0*" nil minibuffer-inactive-mode)
+ ("*Messages*" nil messages-buffer-mode)
+ (" *code-conversion-work*" nil fundamental-mode)
+ (" *Echo Area 0*" nil fundamental-mode)
+ (" *Echo Area 1*" nil fundamental-mode)
+ (" *http www.httpbin.org:80*" nil fundamental-mode)
+ (" *http www.httpbin.org:80*-820734" nil fundamental-mode)
+ (" *http www.httpbin.org:80*-914099" nil fundamental-mode)
+ (" *http www.httpbin.org:80*-945998" nil fundamental-mode)
+ ("*Help*" nil help-mode)
+ ("*Completions*" nil completion-list-mode))
+```
+
+
+
+
+**Map Juxt**
+
+Map a list of functions to a list:
+
+```elisp 
+
+(defmacro map-juxt (xs_f xs)
+  `(mapcar (juxt ,@xs_f) ,xs))
+
+
+ELISP> (map-juxt (#'buffer-name #'buffer-file-name #'buffer-mode) (buffer-list))
+(("*ielm*" nil inferior-emacs-lisp-mode)
+ ("*scratch*" nil lisp-interaction-mode)
+ ("passgen.py" "/home/tux/bin/passgen.py" python-mode)
+ (".bashrc" "/home/tux/.bashrc" sh-mode)
+ (" *Minibuf-1*" nil minibuffer-inactive-mode)
+ ("init.el" "/home/tux/.emacs.d/init.el" emacs-lisp-mode)
+ ("*Backtrace*" nil debugger-mode)
+ ("*GNU Emacs*" nil fundamental-mode)
+ (" *Minibuf-0*" nil minibuffer-inactive-mode)
+ ("*Messages*" nil messages-buffer-mode)
+ ...
+ 
+```
+
+**Lambda Function Macro**
+
+
+```elisp 
+
+(defmacro $f (f &rest params)
+  `(lambda ($) (,f ,@params)))
+
+
+ELISP> ($f - 10 $)
+(lambda
+  ($)
+  (- 10 $))
+
+ELISP> ($f * (+ 3 $) 5)
+(lambda
+  ($)
+  (*
+   (+ 3 $)
+   5))
+
+ELISP> (funcall ($f * (+ 3 $) 5) 10)
+65 (#o101, #x41, ?A)
+ELISP> (mapcar  ($f * (+ 3 $) 5) '(1 2 3 4 5))
+(20 25 30 35 40)
+
+ELISP> 
+ELISP> (mapcar  ($f list (1+ $) (1- $) (log10 $)) '(1 10 100 1000))
+((2 0 0.0)
+ (11 9 1.0)
+ (101 99 2.0)
+ (1001 999 3.0))
+
+```
+
+**Partial Applicatio**
+
+```elisp 
+(defmacro $c (f  &rest params)
+ `(lambda (__x) (,f ,@params __x)))
+
+ELISP> (defun f (x y z) (+ (* 3 x) (* 2 y) (* 4 z)))
+f
+ELISP> (f 1 2 3)
+19 (#o23, #x13, ?\C-s)
+ELISP> ($c f 1 2)
+(lambda
+  (__x)
+  (f 1 2 __x))
+
+ELISP> (mapcar ($c f 1 2) '(1 2 3 4 5))
+(11 15 19 23 27)
+
+ELISP> (mapcar ($c + 1 2) '(1 2 3 4 5))
+(4 5 6 7 8)
+
+ELISP> 
+```
+
 
 ### Macros and Metaprogramming
 
@@ -2599,8 +3257,8 @@ ELISP>
 * Split Window Horizontally
 
 ```elisp
-ELISP> (split-window-horizontally)
-#<window 6 on *ielm*>
+    ELISP> (split-window-horizontally)
+    #<window 6 on *ielm*>
 ```
 
 ![](images/window_horizontally.png)
@@ -2608,9 +3266,9 @@ ELISP> (split-window-horizontally)
 * Delete Other Windows
 
 ```elisp
-ELISP> (delete-other-windows)
-nil
-ELISP> 
+    ELISP> (delete-other-windows)
+    nil
+    ELISP> 
 ```
 
 ![](images/window_delete.png)
@@ -2618,18 +3276,18 @@ ELISP>
 * Split Window Vertically
 
 ```elisp
-ELISP> (split-window-vertically)
-#<window 10 on *ielm*>
-ELISP> 
+    ELISP> (split-window-vertically)
+    #<window 10 on *ielm*>
+    ELISP> 
 ```
 ![](images/window_vertically.png)
 
 * Switch to Buffer on other window.
 
 ```elisp
-ELISP> (switch-to-buffer-other-window "init.el")
-#<buffer init.el>
-ELISP> 
+    ELISP> (switch-to-buffer-other-window "init.el")
+    #<buffer init.el>
+    ELISP> 
 ```
 
 ![](images/window_switch_to_buffer.png)
@@ -2638,11 +3296,11 @@ ELISP>
 * Delete Current Window
 
 ```elisp
-ELISP> (split-window-vertically)
-#<window 18 on *ielm*>
+    ELISP> (split-window-vertically)
+    #<window 18 on *ielm*>
 
-ELISP> (switch-to-buffer-other-window "init.el")
-#<buffer init.el>
+    ELISP> (switch-to-buffer-other-window "init.el")
+    #<buffer init.el>
 ```
 
 ![](images/window_delete_this0.png)
@@ -2659,9 +3317,9 @@ ELISP>
 * Launch a new frame
 
 ```elisp
-ELISP> (make-frame)
-#<frame emacs@tuxhorse 0x9651518>
-ELISP> 
+    ELISP> (make-frame)
+    #<frame emacs@tuxhorse 0x9651518>
+    ELISP> 
 ```
 
 ![](images/window_make_frame.png)
@@ -2687,18 +3345,18 @@ Description: Split window vertically, create a new buffer not associated to a fi
 to this buffer on the second window and set the current buffer to dummy.
 
 ```elisp
-ELISP> (split-window-vertically)
-#<window 22 on *ielm*>
+    ELISP> (split-window-vertically)
+    #<window 22 on *ielm*>
 
-ELISP> (setq dummy-buffer (get-buffer-create "dummy"))
-#<buffer dummy>
+    ELISP> (setq dummy-buffer (get-buffer-create "dummy"))
+    #<buffer dummy>
 
-ELISP> (switch-to-buffer-other-window dummy-buffer)
-#<buffer dummy>
+    ELISP> (switch-to-buffer-other-window dummy-buffer)
+    #<buffer dummy>
 
-ELISP> (set-buffer dummy-buffer)
-#<buffer dummy>
-ELISP>  
+    ELISP> (set-buffer dummy-buffer)
+    #<buffer dummy>
+    ELISP>  
 ```
 
 ![](images/window_manipulate_buffer1.png)
@@ -2954,135 +3612,45 @@ Forth Compiler to Emacs Bytecodes
 * https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth
 
 
-## Documentation
 
-### References
-
-#### Manual
-
-* [GNU Emacs Lisp Reference Manual](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents)
-
-* http://blog.gnumonk.com/2012/07/effective-emacs-part1.html
-
-#### Tutorials
-
-* [Rosetta Code/ Category:Emacs Lisp](http://rosettacode.org/wiki/Category:Emacs_Lisp)
-
-* [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs](http://emacslife.com/how-to-read-emacs-lisp.html)
-
-* [Read Lisp, Tweak Emacs [Beginner 1/4]: How to try Emacs Lisp](http://sachachua.com/blog/series/read-lisp-tweak-emacs/)
-
-* [Elisp Cookbook](http://emacswiki.org/emacs/ElispCookbook)
-* [ErgoEmacs](http://ergoemacs.org/)
-* [Essential Elisp Libraries - Functional Programmin in Elisp](http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/)
-
-
-#### Wikis
-
-* [Emacs / Arch Wiki](https://wiki.archlinux.org/index.php/Emacs)
-
-* [Emacs Lisp for Perl Programmers](http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html)
-
-* [Hyperglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
-
-**Github**
-
-* [Learn Elisp the Hard Way](https://github.com/hypernumbers/learn_elisp_the_hard_way)
-
-**Lexical Scope**
-
-* [On elisp and programming in general](http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html)
-
-
-#### Issues
-
-* [Emacs on Windows / Cygwin](http://www.khngai.com/emacs/cygwin.php)
-
-### Developement Environments for Emacs
-
-**Python**
-
-* [Python Settings](http://wikemacs.org/wiki/Python)
-
-* [Setting up Emacs to Support both Python 2 and Python 3](http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/)
-
-* [Pyenv Mode](https://github.com/proofit404/pyenv-mode)
-
-**Javascript**
-
-* [Java Script](http://wikemacs.org/wiki/JavaScript)
-
-**C / C++**
-
-* [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html)
-* [C make IDE](https://github.com/atilaneves/cmake-ide)
-
-**Ocaml**
-
-* [Ocaml](http://wikemacs.org/wiki/OCaml)
-
-**Haskell**
-
-* [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)
-
-
-**Non Categorized**
-
-* [Loacal Variables](http://emacswiki.org/emacs/LocalVariables)
-
-* [Project Interaction Library for Emacs](https://github.com/joelmccracken/projectile)
-
-* [The Emacs Widget Library](http://www.gnu.org/software/emacs/manual/html_node/widget/index.html)
-
-* [InteractivelyDoThings](http://www.emacswiki.org/emacs/InteractivelyDoThings)
-
-### Selected Dot Emacs
-
-* [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
-
-* [Howard Abrams dot emacs](https://github.com/howardabrams/dot-files/blob/master/emacs.org)
-
-* http://uce.uniovi.es/tips/Emacs/mydotemacs.html
-
-* http://www.dgp.toronto.edu/~ghali/emacs.html
-
-* http://whattheemacsd.com/
-
-* https://snarfed.org/dotfiles/.emacs
-
-* http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el
-
-
-### Space Emacs Default Config
-
-From the documentation:
-
-Spacemacs is first intended to be used by Vim users who want to go to the next level by using Emacs. It is also a good fit for people wanting to lower the risk of RSI induced by the default Emacs key bindings (this is an assumption, there is no official studies to prove this).
-
-
-* https://github.com/syl20bnr/spacemacs
-
-### Selected Codes
-
-* http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el
-
-* http://repo.or.cz/w/emacs.git/blob_plain/emacs-24:/lisp/progmodes/python.el
-
-* http://emacswiki.org/emacs/file-template.el
-
-* http://aperiodic.net/phil/configs/elisp/ledger.el
-
-Large Collection of Codes to Emacs
-
-* http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html
-
-### Screencasts
-
-* [What You Can Learn From ido.el](https://vimeo.com/1013263)
 
 ## Customization
 
 See also: http://www.aaronbedra.com/emacs.d/
+
+
+### Install Packages
+
+#### Install an Emacs package from repository:
+
+To show the package lists type:
+
+```
+M-x list-packages
+```
+
+To install a single package
+
+```
+M-x package-install <package-name>
+M-x package-install org-mode
+M-x package-install evil
+```
+
+#### Install a Single Emacs file *.el
+
+```elisp 
+;;; Create the directory ~/.emacs.d/private
+;;; mkdir -p ~/.emacs.d/private
+;;;
+(add-to-list 'load-path "~/.emacs.d/private")
+
+(load-file "file.el")
+
+;;; Or if it is a single package
+
+(require 'package")
+```
 
 ### Hide / Show Emacs Widgets
 
@@ -3255,6 +3823,166 @@ t
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ```
 
+### Shortcuts
+
+#### Define Global Key-bindings 
+
+**Launch a Terminal**
+
+C-c M-p will launch a terminal lxterminal (That is only available for Linux, although it can be tweaked for another terminal emulator or OS) in the current file directory. 
+
+```elisp 
+(global-set-key (kbd "C-c M-p")
+        (lambda ()
+          (interactive)
+          (shell-command "lxterminal")))
+
+```
+
+or
+
+```elisp
+;;; This function can be called by typing M-x launch-terminal in any buffer.
+;;; 
+(defun launch-terminal ()
+  (interactive)
+  (shell-command "lxterminal"))
+
+(global-set-key (kbd "C-c M-r") #'launch-terminal)
+```
+
+It can be simplified by defining a macro $li (lambda - interactive for short):
+
+```elisp 
+
+    (defmacro $li (func &rest args)
+      `(lambda ()
+         (interactive)
+         (,func  ,@args)))
+
+    (global-set-key (kbd "C-c M-w")
+            ($li shell-command "lxterminal"))
+
+    ;; When this macro is "inject" in a s-expression it transforms it into a
+    ;; lambda, anonymous function
+    ;;
+    ELISP> (macroexpand '($li shell-command "lxterminal"))
+    #'(lambda nil
+        (interactive)
+        (shell-command "lxterminal"))
+
+
+;;; Call a function directly like in Scheme does not work in Emacs and Common Lisp
+;;    
+    ELISP> (($li shell-command "lxterminal"))
+    *** Eval error ***  Invalid function: ($li shell-command "lxterminal")
+
+;;; Now it works
+;;
+    ELISP> (funcall ($li shell-command "lxterminal"))
+    0 (#o0, #x0, ?\C-@)
+    ELISP>     
+```
+
+**Insert Current Date**
+
+It will insert the current date in the format: 2015-10-20 at the current cursor position.
+
+```elisp 
+(global-set-key (kbd "C-c M-r")
+    ($li insert (format-time-string "%Y-%m-%d")))
+    
+;;; Or
+
+(global-set-key (kbd "C-c M-r")
+    (lambda ()
+        (interactive)
+        (insert (format-time-string "%Y-%m-%d"))))        
+```
+
+**Open Eshell and Ielm**
+
+```elisp
+;;; Type C-c M-i (Ctrl+C Alt+e) to open eshell:
+(global-set-key (kbd "C-c M-e") #'eshell)
+
+;;; Type C-c M-e to open Ielm (Emacs Lisp Shell)
+(global-set-key (kbd "C-c M-e") #'ielm)
+
+```
+
+**Self close parenthesis**
+
+```elisp 
+
+(defun close-paren ()
+    (interactive)
+    (insert "()")               ;; Advance current char + 2
+    (goto-char (1- (point))))   ;; (current-char position) + 2- 1
+
+(global-set-key (kbd "(") #'close-paren)
+
+```
+
+**Save and Go to bookmark**
+
+```
+(defvar bookmark-pos nil)
+
+(defun save-bookmark-pos ()
+  (interactive)
+  (progn
+    (setq bookmark-pos
+      (cons (point) (current-buffer))))
+    (message "Bookmark saved"))
+
+(defun go-to-bookmark ()
+    (interactive)
+    (progn
+      (switch-to-buffer (cdr bookmark-pos))
+      (goto-char (car bookmark-pos))
+      (message "Switch to bookmark")
+    ));
+
+(global-set-key (kbd "C-c M-p") #'save-bookmark-pos)
+(global-set-key (kbd "C-c M-k") #'go-to-bookmark)
+```
+
+**Open a Emacs Lisp developement window**
+
+It will open a Emacs developement window whatever the current frames opened. It will split the curent frame (window) verically and swithc to scratch buffer in the left and the emacs shell in the right side.
+
+```elisp
+(global-set-key (kbd "C-c M-w")
+    ($li progn
+       (delete-other-windows)
+       (split-window-horizontally)
+       (switch-to-buffer "*scratch*")
+       (switch-to-buffer-other-window "*ielm*")
+       (ielm)
+       (other-window 1)
+       ))
+```
+
+By typing C-c M-w the frame settings will be:
+
+![](images/develop_window.png)
+
+#### Define Mode Specific Key-bindings
+
+#### Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)
+
+The popular key-bindings Ctrl+V (cut), Ctrl+C (copy), Ctrl+X (paste) can be enable by typing:
+
+```
+A-x cua-mode 
+```
+
+or by entering the command below in the shell IELM or by putting it in the configuration file ~/emacs.d/init.el
+
+```
+(cua-mode)
+```
 
 ### Quiet Startup
 
@@ -3841,3 +4569,136 @@ ELISP> (macroexpand '(make-color-menu))
             ...
        
 ```
+
+
+## Resources
+
+### References
+
+#### Manual
+
+* [GNU Emacs Lisp Reference Manual](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents)
+
+* http://blog.gnumonk.com/2012/07/effective-emacs-part1.html
+
+#### Tutorials
+
+* [Rosetta Code/ Category:Emacs Lisp](http://rosettacode.org/wiki/Category:Emacs_Lisp)
+
+* [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs](http://emacslife.com/how-to-read-emacs-lisp.html)
+
+* [Read Lisp, Tweak Emacs [Beginner 1/4]: How to try Emacs Lisp](http://sachachua.com/blog/series/read-lisp-tweak-emacs/)
+
+* [Elisp Cookbook](http://emacswiki.org/emacs/ElispCookbook)
+* [ErgoEmacs](http://ergoemacs.org/)
+* [Essential Elisp Libraries - Functional Programmin in Elisp](http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/)
+
+
+#### Wikis
+
+* [Emacs / Arch Wiki](https://wiki.archlinux.org/index.php/Emacs)
+
+* [Emacs Lisp for Perl Programmers](http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html)
+
+* [Hyperglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
+
+**Github**
+
+* [Learn Elisp the Hard Way](https://github.com/hypernumbers/learn_elisp_the_hard_way)
+
+**Lexical Scope**
+
+* [On elisp and programming in general](http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html)
+
+
+#### Issues
+
+* [Emacs on Windows / Cygwin](http://www.khngai.com/emacs/cygwin.php)
+
+### Developement Environments for Emacs
+
+**Python**
+
+* [Python Settings](http://wikemacs.org/wiki/Python)
+
+* [Setting up Emacs to Support both Python 2 and Python 3](http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/)
+
+* [Pyenv Mode](https://github.com/proofit404/pyenv-mode)
+
+**Javascript**
+
+* [Java Script](http://wikemacs.org/wiki/JavaScript)
+
+**C / C++**
+
+* [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html)
+* [C make IDE](https://github.com/atilaneves/cmake-ide)
+
+**Ocaml**
+
+* [Ocaml](http://wikemacs.org/wiki/OCaml)
+
+**Haskell**
+
+* [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)
+
+
+**Non Categorized**
+
+* [Loacal Variables](http://emacswiki.org/emacs/LocalVariables)
+
+* [Project Interaction Library for Emacs](https://github.com/joelmccracken/projectile)
+
+* [The Emacs Widget Library](http://www.gnu.org/software/emacs/manual/html_node/widget/index.html)
+
+* [InteractivelyDoThings](http://www.emacswiki.org/emacs/InteractivelyDoThings)
+
+### Selected Dot Emacs
+
+* [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
+
+* [Howard Abrams dot emacs](https://github.com/howardabrams/dot-files/blob/master/emacs.org)
+
+* http://uce.uniovi.es/tips/Emacs/mydotemacs.html
+
+* http://www.dgp.toronto.edu/~ghali/emacs.html
+
+* http://whattheemacsd.com/
+
+* https://snarfed.org/dotfiles/.emacs
+
+* http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el
+
+
+### Space Emacs Default Config
+
+From the documentation:
+
+Spacemacs is first intended to be used by Vim users who want to go to the next level by using Emacs. It is also a good fit for people wanting to lower the risk of RSI induced by the default Emacs key bindings (this is an assumption, there is no official studies to prove this).
+
+
+* https://github.com/syl20bnr/spacemacs
+
+### Selected Codes
+
+* http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el
+
+* http://repo.or.cz/w/emacs.git/blob_plain/emacs-24:/lisp/progmodes/python.el
+
+* http://emacswiki.org/emacs/file-template.el
+
+* http://aperiodic.net/phil/configs/elisp/ledger.el
+
+Large Collection of Codes to Emacs
+
+* http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html
+
+### Screencasts
+
+* [What You Can Learn From ido.el](https://vimeo.com/1013263)
+
+### Limitations
+
+* [EmacsLispLimitations](http://www.emacswiki.org/emacs/EmacsLispLimitations)
+* [Why isn't more of CommonLisp in GNU Emacs?](http://www.emacswiki.org/emacs/CommonLisp)
+* [WhyDoesElispSuck](http://www.emacswiki.org/emacs/WhyDoesElispSuck)
