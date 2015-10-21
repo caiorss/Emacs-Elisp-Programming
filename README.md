@@ -145,7 +145,7 @@ The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typin
 **Navigation**
 
 
-|
+|                       |                        |
 |-----------------------|------------------------|
 | <kbd> C-a </kbd>     | Go to start of the line |
 | <kbd> C-e </kbd>     | Go to end of the line.  | 
