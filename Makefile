@@ -14,5 +14,5 @@ copy:
 	~/.emacs.d/  dotemacs/
 
 html:
-	grip README.md --gfm --export ./RAEDME.html
+	grip README.md --gfm --export ./README.html
 
