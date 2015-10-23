@@ -35,8 +35,77 @@
     - [Macros and Metaprogramming](#macros-and-metaprogramming)
       - [Quasiquote](#quasiquote)
       - [Macros](#macros)
+    - [Structures](#structures)
+    - [Bufffers](#bufffers)
+      - [Buffer Attributes](#buffer-attributes)
+      - [Buffer Mode](#buffer-mode)
+      - [Get Buffer Contents / Selection / Line](#get-buffer-contents--selection--line)
+      - [Search and Replace in the entire Buffer](#search-and-replace-in-the-entire-buffer)
+    - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
+      - [Directory and Path](#directory-and-path)
+      - [Date and Time](#date-and-time)
+      - [Call External Commands or Apps](#call-external-commands-or-apps)
+      - [Environment Variables](#environment-variables)
+      - [Process Management](#process-management)
+      - [File Name Components](#file-name-components)
+      - [Read / Write file to a string](#read--write-file-to-a-string)
+    - [Window Functions](#window-functions)
+      - [Basic Window Functions](#basic-window-functions)
+      - [Manipulate Buffer in Another Window](#manipulate-buffer-in-another-window)
+    - [Special Variables](#special-variables)
+  - [Discoverability / Get Documentation](#discoverability--get-documentation)
+    - [Describe](#describe)
+  - [Bytecodes](#bytecodes)
+  - [Customization](#customization)
+    - [Install Packages](#install-packages)
+      - [Install an Emacs package from repository:](#install-an-emacs-package-from-repository)
+      - [Install a Single Emacs file *.el](#install-a-single-emacs-file-el)
+    - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
+    - [Themes](#themes)
+    - [Misc](#misc)
+    - [Shortcuts](#shortcuts)
+      - [Define Global Key-bindings](#define-global-key-bindings)
+      - [Define Mode Specific Key-bindings](#define-mode-specific-key-bindings)
+      - [Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)](#enable-ctrlv--ctrlc-shortcuts-cua-mode)
+    - [Quiet Startup](#quiet-startup)
+  - [Solutions](#solutions)
+    - [Quick edit and reload Emac Configuration File.](#quick-edit-and-reload-emac-configuration-file)
+    - [Refresh/ Reload File](#refresh-reload-file)
+    - [Creating Quick Access Menu](#creating-quick-access-menu)
+    - [Extract Function Documentation](#extract-function-documentation)
+    - [Edit File as Root](#edit-file-as-root)
+    - [Open Current Buffer Directory](#open-current-buffer-directory)
+    - [Open Current Buffer Directory in File Manager](#open-current-buffer-directory-in-file-manager)
+    - [Open a terminal Emulator in the directory of Current Buffer](#open-a-terminal-emulator-in-the-directory-of-current-buffer)
+    - [Eval String in Clipboard](#eval-string-in-clipboard)
+    - [Save and Reload Current Session](#save-and-reload-current-session)
+    - [Create a menu with all color themes available](#create-a-menu-with-all-color-themes-available)
+  - [Resources](#resources)
+    - [References](#references)
+      - [Manual](#manual)
+      - [Tutorials](#tutorials)
+      - [Wikis](#wikis)
+      - [Issues](#issues)
+    - [Developement Environments for Emacs](#developement-environments-for-emacs)
+      - [Python](#python)
+      - [Javascript](#javascript)
+      - [C / C++](#c--c)
+      - [Ocaml](#ocaml)
+      - [Haskell](#haskell)
+      - [Lisp**](#lisp)
+    - [Selected Dot Emacs](#selected-dot-emacs)
+    - [Space Emacs Default Config](#space-emacs-default-config)
+    - [Selected Codes](#selected-codes)
+    - [Screencasts](#screencasts)
+    - [Limitations](#limitations)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<!--
+    #Emacs #lisp #elisp #customization #editor #programming 
+-->
+
+
 
 # Emacs - Elisp Programming and Customization
 
@@ -2577,7 +2646,7 @@ See:  [(->> x & forms)](https://clojuredocs.org/clojure.core/-%3E%3E)
     
 ;; Macro expansion
 ;;;(- 16 (+ 10 20 (/ 20 5)))
-```
+
 
 ELISP> (-->
     5
