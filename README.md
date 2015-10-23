@@ -17,8 +17,10 @@
         - [Passing Functions as Arguments](#passing-functions-as-arguments)
         - [Closure](#closure)
       - [List Operations](#list-operations)
-      - [Association Lists](#association-lists)
-      - [Property Lists](#property-lists)
+      - [Association Lists and Property Lists](#association-lists-and-property-lists)
+        - [Association List / Alist](#association-list--alist)
+        - [Property Lists](#property-lists)
+        - [Converting Alists to Plists and vice-versa](#converting-alists-to-plists-and-vice-versa)
       - [Strings](#strings)
       - [Eval](#eval)
       - [Control Structures](#control-structures)
@@ -33,62 +35,6 @@
     - [Macros and Metaprogramming](#macros-and-metaprogramming)
       - [Quasiquote](#quasiquote)
       - [Macros](#macros)
-    - [Structures](#structures)
-    - [Bufffers](#bufffers)
-      - [Buffer Attributes](#buffer-attributes)
-      - [Buffer Mode](#buffer-mode)
-      - [Get Buffer Contents / Selection / Line](#get-buffer-contents--selection--line)
-    - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
-      - [Directory and Path](#directory-and-path)
-      - [Date and Time](#date-and-time)
-      - [Call External Commands or Apps](#call-external-commands-or-apps)
-      - [Environment Variables](#environment-variables)
-      - [Process Management](#process-management)
-      - [File Name Components](#file-name-components)
-      - [Read / Write file to a string](#read--write-file-to-a-string)
-    - [Window Functions](#window-functions)
-      - [Basic Window Functions](#basic-window-functions)
-      - [Manipulate Buffer in Another Window](#manipulate-buffer-in-another-window)
-    - [Special Variables](#special-variables)
-  - [Discoverability / Get Documentation](#discoverability--get-documentation)
-    - [Describe](#describe)
-  - [Bytecodes](#bytecodes)
-  - [Customization](#customization)
-    - [Install Packages](#install-packages)
-      - [Install an Emacs package from repository:](#install-an-emacs-package-from-repository)
-      - [Install a Single Emacs file *.el](#install-a-single-emacs-file-el)
-    - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
-    - [Themes](#themes)
-    - [Misc](#misc)
-    - [Shortcuts](#shortcuts)
-      - [Define Global Key-bindings](#define-global-key-bindings)
-      - [Define Mode Specific Key-bindings](#define-mode-specific-key-bindings)
-      - [Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)](#enable-ctrlv--ctrlc-shortcuts-cua-mode)
-    - [Quiet Startup](#quiet-startup)
-  - [Solutions](#solutions)
-    - [Quick edit and reload Emac Configuration File.](#quick-edit-and-reload-emac-configuration-file)
-    - [Refresh/ Reload File](#refresh-reload-file)
-    - [Creating Quick Access Menu](#creating-quick-access-menu)
-    - [Extract Function Documentation](#extract-function-documentation)
-    - [Edit File as Root](#edit-file-as-root)
-    - [Open Current Buffer Directory](#open-current-buffer-directory)
-    - [Open Current Buffer Directory in File Manager](#open-current-buffer-directory-in-file-manager)
-    - [Open a terminal Emulator in the directory of Current Buffer](#open-a-terminal-emulator-in-the-directory-of-current-buffer)
-    - [Eval String in Clipboard](#eval-string-in-clipboard)
-    - [Save and Reload Current Session](#save-and-reload-current-session)
-    - [Create a menu with all color themes available](#create-a-menu-with-all-color-themes-available)
-  - [Resources](#resources)
-    - [References](#references)
-      - [Manual](#manual)
-      - [Tutorials](#tutorials)
-      - [Wikis](#wikis)
-      - [Issues](#issues)
-    - [Developement Environments for Emacs](#developement-environments-for-emacs)
-    - [Selected Dot Emacs](#selected-dot-emacs)
-    - [Space Emacs Default Config](#space-emacs-default-config)
-    - [Selected Codes](#selected-codes)
-    - [Screencasts](#screencasts)
-    - [Limitations](#limitations)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -96,9 +42,21 @@
 
 Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own lisp dialect that is a subset of and old version of common lisp. An excellent book about common lisp that is also useful for Elisp and Scheme is [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html)
 
-)
+**See also**: 
 
-See: [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
+* [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
+
+* [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua](http://emacslife.com/how-to-read-emacs-lisp.html)
+
+* [Xah Emacs Tutorial](http://ergoemacs.org/emacs/emacs.html)
+
+* [A quick guide to Emacs Lisp programming](https://github.com/chrisdone/elisp-guide#manipulating-the-buffer)
+
+* [Learn Emacs Lisp in 15 minutes](http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html)
+
+* [Emergency Elisp](http://steve-yegge.blogspot.it/2008/01/emergency-elisp.html)
+
+* [Emacs Lisp Cookbook](http://wikemacs.org/wiki/Emacs_Lisp_Cookbook)
 
 * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
 * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
@@ -167,6 +125,22 @@ The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typin
 | <kbd>C-s</kbd>       | Forward Search  |
 | <kbd>C-r</kbd>       | Backward Search |
 | <kbd>M-%</kbd>       | Replace |
+| <kbd>C-s</kbd>       | Jump to next occurrence |
+| <kbd>C-r</kbd>       | Jump to previour occurrence |
+| <kbd>C-g</kbd>       | Exit search |
+| <kbd>A-s .</kbd>     | Find Symbol under cursor |
+| <kbd>A-s w</kbd>     | Find Symbol under cursor, match symbols with underscore, dot, hyphen .. |
+| <kbd>A-s o</kbd>     | List all matching lines |
+
+**Highlight**
+
+|                          |                             |
+|--------------------------|-----------------------------|
+| <kbd> A-s-h-.</kbd>      | Highlight symbol under cursor |
+| <kbd> A-s-h-p</kbd>      | Highlight phrase |
+| <kbd> A-s-h-r</kbd>      | Highlight regex |
+| <kbd> A-s-h-l</kbd>      | Highlight lines matching a regex |
+| <kbd> A-s-h-u</kbd>      | Unhighlight regex |
 
 **Select, Copy, Cut and Paste**
 
@@ -1251,6 +1225,13 @@ ELISP> (plist->alist (list :x 10 :y 20 :name "point"))
         (cons (cadr hd)
           (alist->plist tl))))))
 
+;; Separates a property list into two lists of keys and values.
+;;
+(defun plist->kv (plist)
+  (let ((alist (plist->alist plist)))
+    (cons
+     (mapcar #'car alist)
+     (mapcar #'cdr alist))))
 
 ELISP> (setq al (plist->alist (list :x 10 :y 20 :name "point")))
 ((:x 10)
@@ -1261,6 +1242,32 @@ ELISP> (alist->plist al)
 (:x 10 :y 20 :name "point")
 
 ELISP> 
+
+(setq keylist     
+    '("M-i"  'previous-line
+      "M-j"  'backward-char
+      "M-k"  'next-line
+      "M-l"  'forward-char))
+      
+
+ELISP> (setq kv (plist->kv keylist))
+(("M-i" "M-j" "M-k" "M-l")
+ ('previous-line)
+ ('backward-char)
+ ('next-line)
+ ('forward-char))
+
+ELISP> (car kv)
+("M-i" "M-j" "M-k" "M-l")
+
+ELISP> (cdr kv)
+(('previous-line)
+ ('backward-char)
+ ('next-line)
+ ('forward-char))
+
+ELISP> 
+      
 ```
 
 #### Strings
@@ -2014,6 +2021,52 @@ ELISP> (f 3 6 8)
 ELISP>
 ```
 
+**Foldr**
+
+See: [Fold - Higher Order Function](https://en.wikipedia.org/wiki/Fold_%28higher-order_function%29)
+
+```elisp 
+ ;;           f :: x -> acc -> acc
+ ;; foldr :: (a -> b -> b) -> b -> [a] -> b
+ ;; foldr :: (x -> acc -> acc) -> acc -> [x] -> acc
+ ;; foldr f z []     = z
+ ;; foldr f z (x:xs) = f x (foldr f z xs)
+ ;;
+ ;;  x = (car xss) , xs = (cdr xss)
+(defun foldr (f acc xss)
+  (if (null xss)                        
+       ;; foldr f z []     = z
+      acc
+       ;; foldr f z (x:xs) = f x (foldr f z xs)
+    (funcall f (car xss)
+         (foldr f acc (cdr xss)))))
+
+ELISP> (foldr (lambda (a b) (+ (* 10 b) a)) 0 '(1 2 3 4 5))
+54321 (#o152061, #xd431, ?퐱)
+ELISP> 
+
+ELISP> (foldr #'+ 0 '(1 2 3 4 5))
+15 (#o17, #xf, ?\C-o)
+ELISP>         
+
+```
+
+**Foldl**
+
+```elisp 
+;; foldl :: (b -> a -> b) -> b -> [a] -> b
+;; foldl f z []     = z
+;; foldl f z (x:xs) = foldl f (f z x) xs
+(defun foldl (f acc xss)
+  (if (null xss)
+      acc
+      (foldl f (funcall f acc (car xss)) (cdr xss))))
+      
+ELISP> (foldl (lambda (a b) (+ (* 10 a) b)) 0 '(1 2 3 4 5))
+12345 (#o30071, #x3039)
+ELISP> 
+```
+
 **Map Pairs**
 
 ```elisp 
@@ -2427,6 +2480,167 @@ ELISP>
 
 ```
 
+**Clojure - Thread-First Macro**
+
+See also: 
+
+* [Clojure Docs (-> x & forms)](https://clojuredocs.org/clojure.core/-%3E)
+* [The ~> Threading Macro](http://www.greghendershott.com/2013/05/the-threading-macro.html)
+
+
+```elisp 
+(defun foldl (f acc xss)
+  (if (null xss)
+      acc
+      (foldl f (funcall f acc (car xss)) (cdr xss))))
+      
+(defun pass-result (x sexp)
+  (if (listp sexp)
+      `(,(car sexp) ,x ,@(cdr sexp))
+      `(,sexp ,x)))
+
+(defmacro -> (x &rest exprs)
+  (foldl #'pass-result x exprs))
+
+;; The expression below is expanded to:
+;;
+(->
+    5
+    exp
+    (/ 20)
+    (+ 10 20)
+    (- 3)
+    log10)
+
+ELISP> (macroexpand
+    '(->
+    5
+    exp
+    (/ 20)
+    (+ 10 20)
+    (- 3)
+    log10))
+
+(log10
+ (-
+  (+
+   (/
+    (exp 5)
+    20)
+   10 20)
+  3))
+
+Or
+
+(log10 (- (+ (/ (exp 5) 20) 10 20) 3))
+
+;;; How does the macro work ?
+
+ELISP> (pass-result 5 'exp)
+(exp 5)
+
+ELISP> (pass-result (pass-result 5 'exp) '(/ 20))
+(/
+ (exp 5)
+ 20)
+
+ELISP> (pass-result (pass-result (pass-result 5 'exp) '(/ 20)) '(+ 10 20))
+(+
+ (/
+  (exp 5)
+  20)
+ 10 20)
+
+ELISP> 
+
+```
+
+**Clojure - Thread-Last Macro**
+
+See:  [(->> x & forms)](https://clojuredocs.org/clojure.core/-%3E%3E)
+
+```elisp 
+(defun pass-result-last (x sexp)
+  (if (listp sexp)
+    `(,(car sexp) ,@(cdr sexp) ,x)
+    `(,sexp ,x)))
+
+(defmacro --> (x &rest exprs)
+  (foldl #'pass-result-last x exprs))
+
+
+(-->
+    5
+    (/ 20)
+    (+ 10 20)
+    (- 16))
+    
+;; Macro expansion
+;;;(- 16 (+ 10 20 (/ 20 5)))
+```
+
+ELISP> (-->
+    5
+    (/ 20)
+    (+ 10 20)
+    (- 16))
+-18 (#o7777777756, #x3fffffee)
+ELISP
+```
+
+
+**Thread-Substitute Macro**
+
+```elisp 
+
+(defun replace (targ subst lst)
+  (if (null lst)
+      '()
+    (let ((hd (car lst))
+      (tl (cdr lst)))
+      (if (equal targ hd)
+      (cons subst (replace targ subst tl))      
+    (cons (if (listp hd) (replace targ subst hd) hd)
+          (replace targ subst tl))))))
+
+(defun pass-result-subst (x sexp)
+  (if (listp sexp)
+     (replace '$ x sexp)
+    `(,sexp ,x)))
+
+(defmacro $-> (x &rest exprs)
+  (foldl #'pass-result-subst x exprs))
+
+
+;;------------------------------------;;
+
+ELISP> (replace '$ 10 '(20 + $ * ( 3 + $ + 5 * (sqrt ($ - 5)))))
+(20 + 10 *
+    (3 + 10 + 5 *
+       (sqrt
+    (10 - 5))))
+
+ELISP> (macroexpand
+  '($->
+    500
+    (/ $ 20 )    
+    (- 40 $)
+    sqrt))
+(sqrt
+ (- 40
+    (/ 500 20)))
+
+ELISP> 
+  ($->
+    500
+    (/ $ 20 )    
+    (- 40 $)
+    sqrt)
+3.872983346207417
+ELISP> 
+
+```
+
 **Create Scheme Syntax define**
 
 ```elisp
@@ -2447,6 +2661,8 @@ ELISP> (f 5 6)
 -9 (#o7777777767, #x3ffffff7)
 ELISP> 
 ```
+
+
 
 **Rebind Elisp functions**
 
@@ -2922,6 +3138,29 @@ To test it: M-x eval-expression and enter (get-current-line)
    (replace-regexp-in-string "[\n|\s\t]+$" "" (thing-at-point 'line t))
 )
 ```
+
+#### Search and Replace in the entire Buffer  
+
+Source: [How to search and replace in the entire buffer?](http://emacs.stackexchange.com/questions/249/how-to-search-and-replace-in-the-entire-buffer)
+
+Usage: A-x replace-regexp-entire-buffer
+
+```elisp 
+
+(defun replace-regexp-entire-buffer (pattern replacement)
+  "Perform regular-expression replacement throughout buffer."
+  (interactive
+   (let ((args (query-replace-read-args "Replace" t)))
+     (setcdr (cdr args) nil)    ; remove third value returned from query---args
+     args))
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward pattern nil t)
+      (replace-match replacement))))
+      
+```
+
+
 
 ### Files and Directories and OS Interface
 
@@ -3971,6 +4210,98 @@ By typing C-c M-w the frame settings will be:
 
 ![](images/develop_window.png)
 
+
+**Open URL at Cursor**
+
+Put the cursor at beggining of an URL and type C-c M-u (Ctrl-c + Alt-u) to open the URL in the web browser.
+
+```elisp 
+(defun url-at-point ()
+  (interactive)
+  (browse-url (thing-at-point 'url)))
+
+(global-set-key (kbd "C-c M-u") #'url-at-point)
+```
+
+**Open File at Cursor**
+
+```elisp 
+(defun open-file-at-point ()
+  (interactive)
+  (find-file (thing-at-point 'filename)))
+
+(global-set-key (kbd "C-c M-f") #'open-file-at-point)
+```
+
+**Macro to define many keys in a single block**
+
+```elisp 
+
+(defun map-apply (fun xss)
+  (mapcar (lambda (xs) (apply fun xs)) xss))
+  
+;; Convert Property List to association list 
+;;
+(defun plist->alist (plist)
+  (if (null plist)
+      '()      
+      (cons
+       (list (car plist) (cadr plist))
+       (plist->alist (cddr plist)))))
+    
+
+;; Set may keys at same time. A macro in Clojure-style
+;; with minimum amount of parenthesis as possible.
+;;
+(defmacro set-gl-keys (&rest keylist)
+  `(progn
+     ,@(map-apply (lambda (key fun)
+            `(global-set-key (kbd ,key) ,fun))
+          (plist->alist keylist))))
+
+(set-gl-keys
+      "M-i"  #'previous-line
+      "M-j"  #'backward-char
+      "M-k"  #'next-line
+      "M-l"  #'forward-char)
+      
+      
+ELISP> (macroexpand '(set-gl-keys
+      "M-i"  #'previous-line
+      "M-j"  #'backward-char
+      "M-k"  #'next-line
+      "M-l"  #'forward-char))
+(progn
+  (global-set-key
+   (kbd "M-i")
+   #'previous-line)
+  (global-set-key
+   (kbd "M-j")
+   #'backward-char)
+  (global-set-key
+   (kbd "M-k")
+   #'next-line)
+  (global-set-key
+   (kbd "M-l")
+   #'forward-char))
+
+```
+
+**Find Next/Prior Error in Compilation**
+
+```elisp 
+(global-set-key (kbd "<M-left>") 'previous-error) 
+(global-set-key (kbd "<M-right>")  'next-error)
+```
+
+**Define alternative Keybinding for A-x**
+
+F8 will do the same thing as A-x <command>.
+
+```elisp 
+(global-set-key (kbd "<f8>")  'execute-extended-command)
+```
+
 #### Define Mode Specific Key-bindings
 
 #### Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)
@@ -4574,6 +4905,8 @@ ELISP> (macroexpand '(make-color-menu))
 ```
 
 
+
+
 ## Resources
 
 ### References
@@ -4620,7 +4953,7 @@ ELISP> (macroexpand '(make-color-menu))
 
 ### Developement Environments for Emacs
 
-**Python**
+#### Python
 
 * [Python Settings](http://wikemacs.org/wiki/Python)
 
@@ -4628,22 +4961,28 @@ ELISP> (macroexpand '(make-color-menu))
 
 * [Pyenv Mode](https://github.com/proofit404/pyenv-mode)
 
-**Javascript**
+#### Javascript
 
 * [Java Script](http://wikemacs.org/wiki/JavaScript)
 
-**C / C++**
+#### C / C++
 
 * [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html)
 * [C make IDE](https://github.com/atilaneves/cmake-ide)
 
-**Ocaml**
+#### Ocaml
 
 * [Ocaml](http://wikemacs.org/wiki/OCaml)
 
-**Haskell**
+#### Haskell
 
 * [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)
+
+
+#### Lisp**
+
+* [Paredit-mode](http://wikemacs.org/wiki/Paredit-mode)
+
 
 
 **Non Categorized**
