@@ -3,7 +3,7 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Emacs - Elisp Programming and Customization](#emacs---elisp-programming-and-customization)
-  - [Default Keybindings](#default-keybindings)
+  - [Default Key Bindings](#default-key-bindings)
   - [Command Line Options](#command-line-options)
   - [Elisp](#elisp)
     - [Ielm - Elisp shell](#ielm---elisp-shell)
@@ -52,6 +52,7 @@
     - [Window Functions](#window-functions)
       - [Basic Window Functions](#basic-window-functions)
       - [Manipulate Buffer in Another Window](#manipulate-buffer-in-another-window)
+      - [Window Configuration](#window-configuration)
     - [Special Variables](#special-variables)
   - [Discoverability / Get Documentation](#discoverability--get-documentation)
     - [Describe](#describe)
@@ -80,6 +81,9 @@
     - [Eval String in Clipboard](#eval-string-in-clipboard)
     - [Save and Reload Current Session](#save-and-reload-current-session)
     - [Create a menu with all color themes available](#create-a-menu-with-all-color-themes-available)
+    - [Better Menu Syntax](#better-menu-syntax)
+    - [Save and Restore Current Window Configuration](#save-and-restore-current-window-configuration)
+    - [Http and Post Request](#http-and-post-request)
   - [Resources](#resources)
     - [References](#references)
       - [Manual](#manual)
@@ -92,7 +96,7 @@
       - [C / C++](#c--c)
       - [Ocaml](#ocaml)
       - [Haskell](#haskell)
-      - [Lisp**](#lisp)
+      - [Lisp](#lisp)
     - [Selected Dot Emacs](#selected-dot-emacs)
     - [Space Emacs Default Config](#space-emacs-default-config)
     - [Selected Codes](#selected-codes)
@@ -105,13 +109,17 @@
     #Emacs #lisp #elisp #customization #editor #programming 
 -->
 
-
-
 # Emacs - Elisp Programming and Customization
 
-Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own lisp dialect that is a subset of and old version of common lisp. An excellent book about common lisp that is also useful for Elisp and Scheme is [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html)
+Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own lisp dialect that is a subset of and old version of common lisp. An excellent book about Common Lisp that is also useful for Elisp and Scheme is available at [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html)
 
-**See also**: 
+
+**Repository Link**  
+
+* [Github Link](https://github.com/caiorss/Emacs-Elisp-Programming)
+* Short Link: http://tinyurl.com/emacsinabox
+
+**Selected Emacs Tutorials**: 
 
 * [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
 
@@ -127,6 +135,10 @@ Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own
 
 * [Emacs Lisp Cookbook](http://wikemacs.org/wiki/Emacs_Lisp_Cookbook)
 
+* [Quick Started](https://github.com/doitian/emacs.d)
+
+* [Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.](https://github.com/emacs-tw/awesome-emacs)
+
 * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
 * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
 
@@ -136,10 +148,11 @@ Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own
 ~/.emacs.d/init.el
 ```
 
-## Default Keybindings
+## Default Key Bindings
 
 The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typing: M-x cua-mode, emacs also supports the Vim keybindings by installing the evil package.
 
+See also: [GNU Emacs Key Bindings  Reference Card](https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf)
 
 **Key Notation**
 
@@ -243,6 +256,7 @@ The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typin
 | <kbd>C-x k</kbd>       | Close                |
 | <kbd>C-x b</kbd>       | Next Window          |
 | <kbd>C-x C-b </kbd>    | Choose buffer Window |
+| <kbd>C-x 0 </kbd>      | Delete Current Window |  
 | <kbd>C-x 1 </kbd>      | Unsplit              |
 | <kbd>C-x 2 </kbd>      | Split Horizontally   |
 | <kbd>C-x 3 </kbd>      | Split Vertically     |
@@ -276,6 +290,42 @@ The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typin
 | <kbd> C-h s </kbd> | Describe syntax      |
 | <kbd> C-h b </kbd> | Describe key bindings for current buffer |
 | <kbd> C-h a </kbd> | Command Apropos |
+
+**General Programming**
+
+|                   |                                  | 
+|-------------------|----------------------------------|
+| <kbd> M-; </kbd>  | Comment/ Uncomment Selected Code |
+| <kbd> M-/ </kbd>  | Autocomplete word                |
+| <kbd> M-x goto-char </kbd> | Got a character position |
+| <kbd> Mg-g <line-num> </kbd> | Go to line number |
+| <kbd> Mg-c <cursor-pos> </kbd> | Go to character position |
+| <kbd> C-x C - (minus) </kbd> | Decrease font size |
+| <kbd> C-x C + (plus)  </kbd> | Increase font size |
+| <kbd> C-x r m         </kbd> | Make bookmark  |
+| <kbd> C-x r b </kbd> |  Jump to bookmarks |
+
+**Lisp** 
+
+Useful lisp key bindings to edit and navigate lisp dialects codes.
+
+|                       |                          |
+|-----------------------|--------------------------|
+| <kbd> C-x C-e </kbd>  | Evaluates last s-expression under cursor |
+|
+| <kbd> C-M-n </kbd>    | Move forward over a parenthetical group |
+| <kbd> C-M-p </kbd>    | Move backward over a parenthetical group |
+| <kbd> C-M-f </kbd>    | Move forward over a balanced expression |
+| <kbd> C-M-b </kbd>    | Move backward over a balanced expression |
+| <kbd> C-M-k </kbd>    | Delete s-expression under cursor |
+|
+| <kbd> M-( </kbd>      | Wrap selection in parentheses |
+| <kbd> M-[ </kbd>      | Wrap selection in square brackets |
+| <kbd> M-{ </kbd>      | Wrap selection in curly brackets |
+|
+| <kbd> C-M-a </kbd>    | Move to the beggining of current function |
+| <kbd> C-M-e </kbd>    | Move to the end f current function |
+
 
 
 ## Command Line Options
@@ -2710,6 +2760,49 @@ ELISP>
 
 ```
 
+
+**Clojure Let**
+
+```elisp 
+
+
+(defmacro letc (bindings &rest body)
+  `(let*
+       ,(plist->alist bindings)
+     ,@body))
+     
+ELISP> 
+        (letc
+         (
+          a 10
+          b (+ a 3)
+          c (+ a b)
+          )
+         (list a b c))
+(10 13 23)
+
+ELISP>    
+
+ELISP> (macroexpand 
+        '(letc
+         (
+          a 10
+          b (+ a 3)
+          c (+ a b)
+          )
+         (list a b c)))
+(let*
+    ((a 10)
+     (b
+      (+ a 3))
+     (c
+      (+ a b)))
+  (list a b c))
+
+ELISP>   
+```
+
+
 **Create Scheme Syntax define**
 
 ```elisp
@@ -3736,8 +3829,44 @@ ELISP> (mapcar 'window-buffer (window-list))
 ELISP> (mapcar (lambda (w)(buffer-name (window-buffer w))) (window-list))
 ("*ielm*" "dummy")
 
-ELISP
 ```
+
+#### Window Configuration
+
+The function current-window-configuration returns the current  emacs window configuration. 
+
+```elisp 
+    ELISP> (current-window-configuration)
+    #<window-configuration>
+```
+Save the current window configuration to variable w
+
+```elisp 
+    ELISP> (setq w (current-window-configuration))
+    #<window-configuration>
+    ELISP> w
+    #<window-configuration>
+    ELISP> 
+```
+
+![](images/window_configuration1.png)
+
+Change the Window configuration and buffers:
+
+![](images/window_configuration2.png)
+
+Restore the window configuration.
+
+```elisp 
+;; Change the windows, buffers and then restore the the current window.
+;;
+    ELISP> 
+    ELISP> (set-window-configuration w)
+    t
+    ELISP> 
+```
+
+![](images/window_configuration3.png)
 
 
 * Not Compiled Yet.
@@ -3749,9 +3878,6 @@ delete-window
 delete-windows-on
 display-buffer
 shrink-window-if-larger-than-buffer
-split-window
-split-window-horizontally
-split-window-vertically
 switch-to-buffer
 switch-to-buffer-other-window
 other-window
@@ -3814,6 +3940,8 @@ ELISP> window-system
 x
 ELISP> 
 
+;;; Stores the operating system type
+;;
 ELISP> system-type
 gnu/linux
 ELISP> 
@@ -3833,15 +3961,19 @@ ELISP> user-full-name
 ELISP> user-mail-address
 "tux@tuxhorse"
 
+;; Emacs Configuration File which is loaded at Emacs startup.
+;;
 ELISP> user-init-file
 "/home/tux/.emacs.d/init.el"
 ELISP> 
 
-
+;; Directory where is the user configuration file, this path also works
+;; for Windows
+;;
 ELISP> user-emacs-directory
 "~/.emacs.d/"
 
-ELISP> 
+
 ELISP> exec-directory
 "/usr/lib/emacs/24.4/i686-linux-gnu/"
 ELISP> 
@@ -4973,7 +5105,183 @@ ELISP> (macroexpand '(make-color-menu))
        
 ```
 
+### Better Menu Syntax
 
+This macro defines a more readable menu syntax.
+
+```elisp 
+(defun map-apply (fun xss)
+  (mapcar (lambda (xs) (apply fun xs)) xss))
+  
+(defun plist->alist (plist)
+  (if (null plist)
+      '()      
+      (cons
+       (list (car plist) (cadr plist))
+       (plist->alist (cddr plist)))))  
+
+
+(defmacro define-global-menu (menu-name &rest label-actions-plist)
+  `(easy-menu-define djcb-menu global-map ,menu-name
+     (quote (,menu-name
+      ,@(map-apply #'vector
+           (plist->alist label-actions-plist))))))
+           
+;;;; Example 
+
+  (define-global-menu  "Color Themes"
+    "Adwaita"       (load-theme 'adwaita)
+    "Deeper-blue"   (load-theme 'deeper-blue)
+    "Dichromacy"    (load-theme 'dichromacy)
+    "Leuven"        (load-theme 'leuven)
+    "light-blue"    (load-theme 'light-blue)
+    )
+    
+;;; It expands to:             
+
+ELISP> (macroexpand
+'(define-global-menu  "Color Themes"
+    "Adwaita"       (load-theme 'adwaita)
+    "Deeper-blue"   (load-theme 'deeper-blue)
+    "Dichromacy"    (load-theme 'dichromacy)
+    "Leuven"        (load-theme 'leuven)
+    "light-blue"    (load-theme 'light-blue)
+    ))
+(progn
+  (defvar djcb-menu nil "Color Themes")
+  (easy-menu-do-define 'djcb-menu global-map "Color Themes"
+               '("Color Themes"
+             ["Adwaita"
+              (load-theme 'adwaita)]
+             ["Deeper-blue"
+              (load-theme 'deeper-blue)]
+             ["Dichromacy"
+              (load-theme 'dichromacy)]
+             ["Leuven"
+              (load-theme 'leuven)]
+             ["light-blue"
+              (load-theme 'light-blue)])))
+
+```
+
+### Save and Restore Current Window Configuration
+
+Press <F7> to save the curren window configuration and <F8> to restore. The functions can also be executed with A-x save-view or A-x restore-view.
+
+```elisp 
+(defun save-view ()
+  "Save current window configuration"
+  (interactive)
+  (setq winconf  (current-window-configuration))
+  (message "View Saved - Press to restore"))
+
+(defun restore-view ()
+  "Restore saved window configuration"
+  (interactive)
+  (set-window-configuration winconf)
+  (message "View loaded"))
+
+(global-set-key (kbd "<f7>")  #'save-view)
+(global-set-key (kbd "<f8>")  #'restore-view)
+
+```
+
+### Http and Post Request
+
+[Source](http://qiita.com/sanryuu/items/eed79c7b99616e769e67)
+
+```elisp
+(defun url-http-post (url args)
+  "Send ARGS to URL as a POST request."
+  (let (
+        (response-string nil)
+        (url-request-method "POST")
+        (url-request-extra-headers
+         '(("Content-Type" . "application/x-www-form-urlencoded")))
+        (url-request-data
+         (mapconcat (lambda (arg)
+                      (concat (url-hexify-string (car arg))
+                              "="
+                              (url-hexify-string (cdr arg))))
+                    args
+                    "&")))
+    (switch-to-buffer
+     (url-retrieve-synchronously url))
+    (goto-char (point-min))
+    (re-search-forward "\n\n")
+    (setq response-string
+          (buffer-substring-no-properties (point) (point-max)))
+    (kill-buffer (current-buffer))
+    response-string))
+    
+(defun url-http-get (url args)
+  "Send ARGS to URL as a GET request."
+  (let (
+        (response-string nil)
+        (url-request-method "GET")
+        (url-request-data
+         (mapconcat (lambda (arg)
+                      (concat (url-hexify-string (car arg))
+                              "="
+                              (url-hexify-string (cdr arg))))
+                    args
+                    "&")))
+    (switch-to-buffer
+     (url-retrieve-synchronously
+      (concat url "?" url-request-data)))
+    (goto-char (point-min))
+    (re-search-forward "\n\n")
+    (setq response-string
+          (buffer-substring-no-properties
+           (point) (point-max)))
+    (kill-buffer (current-buffer))
+    response-string))
+
+
+ELISP> (princ (url-http-get "http://httpbin.org/get" nil))
+{
+  "args": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "gzip", 
+    "Content-Length": "0", 
+    "Extension": "Security/Digest Security/SSL", 
+    "Host": "httpbin.org", 
+    "Mime-Version": "1.0", 
+    "User-Agent": "URL/Emacs"
+  }, 
+  "origin": "167.103.159.147", 
+  "url": "http://httpbin.org/get"
+}
+
+
+ELISP> (princ (url-http-post "http://httpbin.org/post" '(("use" . "dummy")  ("pass" . "something else") ("code" . "pxyz0011213"))))
+{
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "code": "pxyz0011213", 
+    "pass": "something else", 
+    "use": "dummy"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "gzip", 
+    "Content-Length": "48", 
+    "Content-Type": "application/x-www-form-urlencoded", 
+    "Extension": "Security/Digest Security/SSL", 
+    "Host": "httpbin.org", 
+    "Mime-Version": "1.0", 
+    "User-Agent": "URL/Emacs"
+  }, 
+  "json": null, 
+  "origin": "167.103.159.147", 
+  "url": "http://httpbin.org/post"
+}
+
+
+```
 
 
 ## Resources
@@ -5030,9 +5338,15 @@ ELISP> (macroexpand '(make-color-menu))
 
 * [Pyenv Mode](https://github.com/proofit404/pyenv-mode)
 
+* [Running Python and R inside Emacs by John D. Cook](http://www.johndcook.com/blog/2012/02/09/python-org-mode/)
+
 #### Javascript
 
 * [Java Script](http://wikemacs.org/wiki/JavaScript)
+
+Swank-js provides SLIME REPL and other development tools for in-browser JavaScript and Node.JS. It consists of SWANK backend and accompanying SLIME contrib
+
+* [Swank backend for Node.JS and in-browser JavaScript](https://github.com/swank-js/swank-js)
 
 #### C / C++
 
@@ -5048,10 +5362,70 @@ ELISP> (macroexpand '(make-color-menu))
 * [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)
 
 
-#### Lisp**
+#### Lisp
+
+**All Lisp Dialects**
 
 * [Paredit-mode](http://wikemacs.org/wiki/Paredit-mode)
+* [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters)
 
+* [Emacs Wiki - NavigatingParentheses](http://www.emacswiki.org/emacs/NavigatingParentheses)
+
+```elisp 
+;; Turn on paren match highlighting
+(show-paren-mode 1) 
+
+;; Highlight entire s-expression under cursor
+(setq show-paren-style 'expression) 
+
+```
+
+**Common Lisp**
+
+* [SLIME: The Superior Lisp Interaction Mode for Emacs](https://common-lisp.net/project/slime/)
+
+* [Evaluating Elisp in Emacs By Mickey Petersen](https://www.masteringemacs.org/article/evaluating-elisp-emacs)
+
+* [Common Lisp/First steps/Installation](https://en.wikibooks.org/wiki/Common_Lisp/First_steps/Installation)
+
+Collection of information about using SLIME - a proto-manual.
+
+* [SLIME-HOWTO](http://www.cliki.net/slime-howto)
+
+Set Lisp Interpreter
+
+```
+(setq inferior-lisp-program "clisp")
+```
+
+**Scheme**
+
+The variable scheme-program-name controls which Scheme implementation Emacs will run.
+
+```elisp 
+;; Racket Lang (Scheme Derivated)
+(setq scheme-program-name  "racket")
+
+;; Racket Lang (Scheme Derivated)
+(setq scheme-program-name  "racket")
+
+;; Chicken Scheme 
+(setq scheme-program-name "csi")
+(setq scheme-program-name "/opt/bin/csi")
+
+```
+
+The function <kbd>M-x run-scheme</kbd> will run the selected scheme program.
+
+* [Emacs Wiki - Scheme](http://emacswiki.org/emacs/Scheme)
+* [Geiser](http://www.nongnu.org/geiser/)
+* [A Tutorial For Using Emacs with Scheme](http://community.schemewiki.org/?emacs-tutorial)
+* [Support for the Scheme programming language](http://alexott.net/en/writings/emacs-devenv/EmacsScheme.html)
+* [Setup lisp programming environment](https://mayukhmukherjee.wordpress.com/2014/01/03/setup-lisp/)
+
+**Clojure**
+
+* [CIDER is a Clojure IDE and REPL for Emacs](http://pythonhackers.com/p/clojure-emacs/cider)
 
 
 **Non Categorized**
