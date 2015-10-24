@@ -355,8 +355,8 @@ Useful lisp key bindings to edit and navigate Lisp code.
 |---------------------------|----------------------------|
 | <kbd> M-x ielm            | Run Emacs Lisp Interpreter |
 | <kbd> C-c C-b </kbd>  | (IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell. |
-| <kbd> C-<up> </kbd>   | (All Shells) Get the next input in the history |
-| <kbd> C-<down> </kbd>   | (All Shells) Get the previous input in the history |
+| <kbd> C-[up] </kbd>   | (All Shells) Get the next input in the history |
+| <kbd> C-[down] </kbd>   | (All Shells) Get the previous input in the history |
 | <kbd> M-p </kbd>      | (All Shells) Get the previous input in the history  |
 | <kbd> M-n </kbd>      | (All Shells) Get the next input in the history |
 
@@ -2961,6 +2961,32 @@ ELISP> (if ($ 1444 < 10) "Less than 10" "Greater than 10")
 ELISP> 
 ```
 
+**Debug Injection Macro**
+
+The function print can be replaced by message to display the debug message in the minibuffer. It is useful to debug callbacks.
+
+```elisp 
+(defmacro $debug (func &rest params)
+  `(let
+      ((__r (,func ,@params)))
+       (progn
+     (print (format "%s = %s"
+      (quote (,func ,@params))
+       __r))
+     __r)))
+
+;;; Usage:
+
+ELISP> ($debug + 10 ($debug * 10 30))
+
+"(* 10 30) = 300"
+
+"(+ 10 ($debug * 10 30)) = 310"
+
+310 (#o466, #x136, ?Ķ)
+ELISP> 
+
+```
 
 ### Structures
 
@@ -5553,12 +5579,14 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 #### Lisp
 
-**All Lisp Dialects**
+##### All Lisp Dialects
 
+* [The Animated Guide to Paredit](http://danmidwood.com/content/2014/11/21/animated-paredit.html)
 * [Paredit-mode](http://wikemacs.org/wiki/Paredit-mode)
 * [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters)
 
 * [Emacs Wiki - NavigatingParentheses](http://www.emacswiki.org/emacs/NavigatingParentheses)
+* [automatic pairing of brackets and quotes](http://emacs-fu.blogspot.com.br/2010/06/automatic-pairing-of-brackets-and.html)
 
 ```elisp 
 ;; Turn on paren match highlighting
@@ -5570,7 +5598,7 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 ```
 
-**Common Lisp**
+#### Common Lisp
 
 * [SLIME: The Superior Lisp Interaction Mode for Emacs](https://common-lisp.net/project/slime/)
 
@@ -5590,7 +5618,7 @@ Set Lisp Interpreter
 (setq inferior-lisp-program "clisp")
 ```
 
-**Scheme**
+#### Scheme
 
 The variable scheme-program-name controls which Scheme implementation Emacs will run.
 
@@ -5621,13 +5649,15 @@ The function <kbd>M-x run-scheme</kbd> will run the selected scheme program.
 
 * [A Little Elisp to Make Emacs and Racket Play Nicer](http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html)
 
-**Clojure**
+#### Clojure
 
 * [CIDER is a Clojure IDE and REPL for Emacs](http://pythonhackers.com/p/clojure-emacs/cider)
 
 * [Practical Starter Tips for Clojure](http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html)
 
 * [How to Use Emacs, an Excellent Clojure Editor](http://www.braveclojure.com/basic-emacs/)
+
+* [Emacs Customization for Clojure](http://eigenhombre.com/clojure/2014/07/05/emacs-customization-for-clojure/)
 
 **Non Categorized**
 
@@ -5698,8 +5728,9 @@ Paper aobut Emacs architecture:
 * [Distel: Distributed Emacs for Erlang](http://www.erlang.org/euc/02/distel.ps)
 * [Distel emacs - erlang IDE - Github Repository](http://massemanet.github.io/distel/)
 
-* [Emacs Lisp in Edwin Scheme - A.I Memo No. TR-1451 - MASSACHUSETTS INSTITUTE OF TECHNOLOGY - Artificial Inteligency Laboratory by Mattew Birkholz](ftp://publications.ai.mit.edu/ai-publications/pdf/AITR-1451.pdf)
+* [Emacs Lisp in Edwin Scheme  AI Memo No. TR-1451 - MIT by Mattew Birkholz](ftp://publications.ai.mit.edu/ai-publications/pdf/AITR-1451.pdf)
 
 * [A modular configuration for Emacs](http://aliquote.org/memos/2014/08/04/a-modular-configuration-for-emacs)
 
 * [Modernization of Emacs (Simple Changes Emacs Should Adopt)](http://ergoemacs.org/emacs/modernization.html)
+
