@@ -351,6 +351,8 @@ Useful lisp key bindings to edit and navigate Lisp code.
 
 * IELM - Emacs Lisp Interpreter
 
+|                           |                            |
+|---------------------------|----------------------------|
 | <kbd> M-x ielm            | Run Emacs Lisp Interpreter |
 | <kbd> C-c C-b </kbd>  | (IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell. |
 | <kbd> C-<up> </kbd>   | (All Shells) Get the next input in the history |
