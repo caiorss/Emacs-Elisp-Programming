@@ -3,11 +3,12 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Emacs - Elisp Programming and Customization](#emacs---elisp-programming-and-customization)
-  - [Default Key Bindings](#default-key-bindings)
+  - [Default Key Bindings and Useful Commands](#default-key-bindings-and-useful-commands)
   - [Command Line Options](#command-line-options)
   - [Elisp](#elisp)
     - [Ielm - Elisp shell](#ielm---elisp-shell)
     - [Emacs Terminology](#emacs-terminology)
+    - [Emacs API](#emacs-api)
     - [Basic Syntax](#basic-syntax)
       - [Basic Operations](#basic-operations)
       - [Defining Variables](#defining-variables)
@@ -54,8 +55,14 @@
       - [Manipulate Buffer in Another Window](#manipulate-buffer-in-another-window)
       - [Window Configuration](#window-configuration)
     - [Special Variables](#special-variables)
+    - [Emacs Modes](#emacs-modes)
+      - [Major Mode](#major-mode)
+      - [Minor Modes](#minor-modes)
+      - [Modes Customization](#modes-customization)
+      - [Mode Hooks](#mode-hooks)
   - [Discoverability / Get Documentation](#discoverability--get-documentation)
     - [Describe](#describe)
+  - [Network API](#network-api)
   - [Bytecodes](#bytecodes)
   - [Customization](#customization)
     - [Install Packages](#install-packages)
@@ -64,7 +71,8 @@
     - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
     - [Themes](#themes)
     - [Misc](#misc)
-    - [Shortcuts](#shortcuts)
+    - [Key Bindings](#key-bindings)
+      - [Smart window switch](#smart-window-switch)
       - [Define Global Key-bindings](#define-global-key-bindings)
       - [Define Mode Specific Key-bindings](#define-mode-specific-key-bindings)
       - [Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)](#enable-ctrlv--ctrlc-shortcuts-cua-mode)
@@ -102,6 +110,7 @@
     - [Selected Codes](#selected-codes)
     - [Screencasts](#screencasts)
     - [Limitations](#limitations)
+    - [Technical Notes](#technical-notes)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -137,7 +146,13 @@ Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own
 
 * [Quick Started](https://github.com/doitian/emacs.d)
 
+* [Emacs - Arch Linux Wiki](https://wiki.archlinux.org/index.php/Emacs)
+
 * [Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.](https://github.com/emacs-tw/awesome-emacs)
+
+* [Emacs Tiny Tools](http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html)
+
+* [Mastering Emacs mastering the world’s best text editor](https://www.masteringemacs.org/)
 
 * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
 * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
@@ -148,7 +163,7 @@ Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own
 ~/.emacs.d/init.el
 ```
 
-## Default Key Bindings
+## Default Key Bindings and Useful Commands
 
 The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typing: M-x cua-mode, emacs also supports the Vim keybindings by installing the evil package.
 
@@ -181,6 +196,8 @@ See also: [GNU Emacs Key Bindings  Reference Card](https://www.gnu.org/software/
 | <kbd>C-x b </kbd>     | Select Another Buffer |
 | <kbd>C-x C-b</kbd>    | List all buffers      |
 | <kbd>C-x k </kbd>     | Kill a buffer         |     
+| <kbd>C-x <right arrow> </kbd>     | Move to next buffer |     
+| <kbd>C-x <left arrow> </kbd>     | Move to previous buffer |     
 
 **Navigation**
 
@@ -198,6 +215,15 @@ See also: [GNU Emacs Key Bindings  Reference Card](https://www.gnu.org/software/
 | <kbd> M-[right key] </kbd>     | Move forward one word |
 | <kbd> Mg-g <line-num> </kbd> | Go to line number |
 | <kbd> Mg-c <cursor-pos> </kbd> | Go to character position |
+
+
+**Bookmarks**
+
+|                            |                                         |
+|----------------------------|-----------------------------------------|
+| <kbd> C-x r m  </kbd>      | Add current buffer to bookmarks.        |  
+| <kbd> C-x r b  </kbd>      | Open a buffer from bookmarks.           |
+| <kbd> C-x r l  </kbd>      | List bookmarks.                         | 
 
 
 **Search**
@@ -307,21 +333,49 @@ See also: [GNU Emacs Key Bindings  Reference Card](https://www.gnu.org/software/
 
 **Lisp** 
 
-Useful lisp key bindings to edit and navigate lisp dialects codes.
+Useful lisp key bindings to edit and navigate Lisp code.
 
-|                       |                          |
+
+* Lisp Evaluation  (Emacs Lisp)      
+
+|                       |                         |
 |-----------------------|--------------------------|
-| <kbd> C-x C-e </kbd>  | Evaluates last s-expression under cursor |
 |
+| <kbd> C-x C-e </kbd>  | Evaluate last s-expression under cursor |
+| <kbd> C-j </kbd>      | Evaluate last s-expression under cursor and print. |
+| <kbd> C-u M-: </kbd>  | Evaluate S-expression in minibuffer and insert result in minibuffer |
+| <kbd> M-: </kbd>      | Execute S-expression in minibuffer. |
+| <kbd> M-x eval-defun  | Evaluates the outermost S-expression, regardless of cursor position within the s-exp. |
+| <kbd> M-x eval-buffer</kbd> | Eval the whole buffer  |
+| <kbd> M-x eval-region</kbd> | Eval the selected text |
+
+* IELM - Emacs Lisp Interpreter
+
+| <kbd> M-x ielm            | Run Emacs Lisp Interpreter |
+| <kbd> C-c C-b </kbd>  | (IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell. |
+| <kbd> C-<up> </kbd>   | (All Shells) Get the next input in the history |
+| <kbd> C-<down> </kbd>   | (All Shells) Get the previous input in the history |
+| <kbd> M-p </kbd>      | (All Shells) Get the previous input in the history  |
+| <kbd> M-n </kbd>      | (All Shells) Get the next input in the history |
+
+* Delimiter Wrapping 
+
+|                       |                         |
+|-----------------------|--------------------------|
+| <kbd> M-( </kbd>      | Wrap selection in parentheses |
+| <kbd> M-[ </kbd>      | Wrap selection in square brackets |
+| <kbd> M-{ </kbd>      | Wrap selection in curly brackets |
+|
+
+* S-expression Navigation 
+
+|                       |                         |
+|-----------------------|--------------------------|
 | <kbd> C-M-n </kbd>    | Move forward over a parenthetical group |
 | <kbd> C-M-p </kbd>    | Move backward over a parenthetical group |
 | <kbd> C-M-f </kbd>    | Move forward over a balanced expression |
 | <kbd> C-M-b </kbd>    | Move backward over a balanced expression |
 | <kbd> C-M-k </kbd>    | Delete s-expression under cursor |
-|
-| <kbd> M-( </kbd>      | Wrap selection in parentheses |
-| <kbd> M-[ </kbd>      | Wrap selection in square brackets |
-| <kbd> M-{ </kbd>      | Wrap selection in curly brackets |
 |
 | <kbd> C-M-a </kbd>    | Move to the beggining of current function |
 | <kbd> C-M-e </kbd>    | Move to the end f current function |
@@ -383,6 +437,23 @@ This section will use the Emacs interactive elisp shell IELM that can be accesse
 | Kill Ring | Clipboard |
 | Mode Line | Status Bar |
 | Font Lock | Syntax Coloring |
+
+
+![](images/Emacs_terminology.png)
+
+### Emacs API 
+
+Emacs API Objects
+
+* Buffer 
+* Modes 
+* Mode Hooks
+* Window
+* Frame 
+* Process
+* Network Process       
+* Point                 
+
 
 ### Basic Syntax
 
@@ -3979,6 +4050,81 @@ ELISP> exec-directory
 ELISP> 
 ```
 
+### Emacs Modes 
+
+#### Major Mode
+
+|  Mode                |   Description              |  File Extension     |
+|----------------------|----------------------------|---------------------|
+| text-mode            | Any file which extension is not associated to a mode |  |
+| shell-script-mode    | Shell Script               | *.sh                |
+| conf-mode            | Configuration File         |                     |
+| yaml-mode            | Mode for yaml files        |                     |
+| markdown-mode        | Mode for *.md files        | *.md, *.mdown       |
+
+Languages
+
+|  Mode               |   Description              |  File Extension     |
+|---------------------|----------------------------|---------------------|
+| ruby-mode           | Mode for ruby language     | *.rb                |
+| js-mode             | Javascript                 | *.js                |
+| python-mode         | Python                     | *.py                |
+
+Lisp Dialects
+
+|  Mode               |   Description              |  File Extension     |
+|---------------------|----------------------------|---------------------|
+| lisp-mode           | Mode for Common Lisp       | *.lisp              |
+| emacs-lisp-mode     | Mode for Emacs Lisp        | *.el                |
+| schem-mode          | Mode for Scheme            | *.smc, *.ss         |
+| clojure-mode        | Mode for Clojure Language  | *.clj               |
+
+#### Minor Modes
+
+Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
+
+| Mode                              |   Description             | Mode Hook                |
+|-----------------------------------|---------------------------|--------------------------|
+| inferior-emacs-lisp-mode          |  Emacs Lisp Interpreter (shell) - IELM  | ielm-mode-hook           |
+| eshell-mode                       |  Eshell Mode              | eshell-mode-hook |
+| lisp-interaction-mode             |  Mode of scratch buffer   |   |
+| inferior-lisp                     |  Lisp Subprocess          |   |
+| inferior-ess-mode                 |  R language subprocess    |   |
+
+
+|                       |                          |
+|-----------------------|--------------------------|
+| [eldoc-mode](http://emacswiki.org/emacs/ElDoc)        |  Minor mode which shows ,in the echo area, the argument list of the function call current function |
+
+#### Modes Customization
+
+* [Minor Mode  - Emacs Wiki](http://www.emacswiki.org/emacs/MinorMode)
+
+**IELM**
+
+* [IELM source code - ielm.el](http://web.mit.edu/Emacs/source/emacs/lisp/ielm.el)
+
+* [Start Command or Switch to Its Buffer](http://emacsredux.com/blog/2013/04/29/start-command-or-switch-to-its-buffer/)
+* [Evaluating Elisp in Emacs By Mickey Petersen](https://www.masteringemacs.org/article/evaluating-elisp-emacs)
+* [IELM used SUBSTITUTE! - emacshorrors.com](http://emacshorrors.com/posts/ielm-used-substitute.html)
+* [Emacs ParEdit and IELM](http://nullprogram.com/blog/2010/06/10/)
+
+**ELDOC**
+
+* [Emacs Wiki](http://emacswiki.org/emacs/ElDoc)
+
+```elisp 
+     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+     (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+     (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+```
+
+
+#### Mode Hooks 
+
+* http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html
+
+
 ## Discoverability / Get Documentation
 
 
@@ -4042,6 +4188,35 @@ or
 
 C-h v
 ```
+
+## Network API
+
+
+**Links to Inquiry**
+
+* [Network API in elisp](http://zpcat.blogspot.com.br/2012/12/network-programming-in-elisp.html)
+
+* [Simple tcp client examples in emacs elisp?](http://www.webr2.com/simple-tcp-client-examples-in-emacs-elisp/)
+
+* http://blog.nyaon.catfood.jp/?month=200911
+
+* [Emacs Manual - Network Connections](http://www.gnu.org/software/emacs/manual/html_node/elisp/Network.html)
+
+* [Testing Availability of Network Features](http://www.gnu.org/software/emacs/manual/html_node/elisp/Network-Feature-Testing.html)
+
+* [Simple Emacs EchoServer / Emacs Wiki](http://www.emacswiki.org/emacs/EmacsEchoServer)
+
+* [How do I use an already running Emacs from another window?](https://www.gnu.org/software/emacs/manual/html_node/efaq/Using-an-already-running-Emacs-process.html)
+
+* http://web.mit.edu/Emacs/source/emacs/lisp/server.el
+
+**Proof of Concept**
+
+Emacs tools and codes that can be useful as implementation references and proof of concepts about Emacs integration.
+
+* https://github.com/clojure/tools.nrepl
+
+* [D-Bus integration in Emacs](https://www.gnu.org/software/emacs/manual/html_mono/dbus.html)
 
 ## Bytecodes
 
@@ -4266,7 +4441,17 @@ t
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ```
 
-### Shortcuts
+### Key Bindings
+
+#### Smart window switch
+
+The traditional window switch with C-x o can be cumbersome to use in the long run. The windmove commands provide a more convenient way to do this. All you have to do is to hold down Shift while pointing at a window with the arrow keys. [Source](https://wiki.archlinux.org/index.php/Emacs#Modes)
+
+```elisp 
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
+```
 
 #### Define Global Key-bindings 
 
@@ -5328,6 +5513,8 @@ ELISP> (princ (url-http-post "http://httpbin.org/post" '(("use" . "dummy")  ("pa
 
 * [Emacs on Windows / Cygwin](http://www.khngai.com/emacs/cygwin.php)
 
+* [10 Tips for Powerful Emacs on Windows](http://gregorygrubbs.com/emacs/10-tips-emacs-windows/)
+
 ### Developement Environments for Emacs
 
 #### Python
@@ -5360,7 +5547,7 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 #### Haskell
 
 * [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)
-
+* [Emacs/Inferior Haskell processes](https://wiki.haskell.org/Emacs/Inferior_Haskell_processes)
 
 #### Lisp
 
@@ -5374,6 +5561,7 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 ```elisp 
 ;; Turn on paren match highlighting
 (show-paren-mode 1) 
+(setq show-paren-delay 0)
 
 ;; Highlight entire s-expression under cursor
 (setq show-paren-style 'expression) 
@@ -5387,6 +5575,8 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 * [Evaluating Elisp in Emacs By Mickey Petersen](https://www.masteringemacs.org/article/evaluating-elisp-emacs)
 
 * [Common Lisp/First steps/Installation](https://en.wikibooks.org/wiki/Common_Lisp/First_steps/Installation)
+
+* [The Common Lisp Cookbook - Using Emacs as a Lisp IDE](http://cl-cookbook.sourceforge.net/emacs-ide.html)
 
 Collection of information about using SLIME - a proto-manual.
 
@@ -5418,15 +5608,24 @@ The variable scheme-program-name controls which Scheme implementation Emacs will
 The function <kbd>M-x run-scheme</kbd> will run the selected scheme program.
 
 * [Emacs Wiki - Scheme](http://emacswiki.org/emacs/Scheme)
+
 * [Geiser](http://www.nongnu.org/geiser/)
+
 * [A Tutorial For Using Emacs with Scheme](http://community.schemewiki.org/?emacs-tutorial)
+
 * [Support for the Scheme programming language](http://alexott.net/en/writings/emacs-devenv/EmacsScheme.html)
+
 * [Setup lisp programming environment](https://mayukhmukherjee.wordpress.com/2014/01/03/setup-lisp/)
+
+* [A Little Elisp to Make Emacs and Racket Play Nicer](http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html)
 
 **Clojure**
 
 * [CIDER is a Clojure IDE and REPL for Emacs](http://pythonhackers.com/p/clojure-emacs/cider)
 
+* [Practical Starter Tips for Clojure](http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html)
+
+* [How to Use Emacs, an Excellent Clojure Editor](http://www.braveclojure.com/basic-emacs/)
 
 **Non Categorized**
 
@@ -5487,3 +5686,18 @@ Large Collection of Codes to Emacs
 * [EmacsLispLimitations](http://www.emacswiki.org/emacs/EmacsLispLimitations)
 * [Why isn't more of CommonLisp in GNU Emacs?](http://www.emacswiki.org/emacs/CommonLisp)
 * [WhyDoesElispSuck](http://www.emacswiki.org/emacs/WhyDoesElispSuck)
+
+### Technical Notes
+
+Paper aobut Emacs architecture:
+
+* [EMACS: The Extensible, Customizable Display Editor by Richard Stallman](https://www.gnu.org/software/emacs/emacs-paper.html)
+
+* [Distel: Distributed Emacs for Erlang](http://www.erlang.org/euc/02/distel.ps)
+* [Distel emacs - erlang IDE - Github Repository](http://massemanet.github.io/distel/)
+
+* [Emacs Lisp in Edwin Scheme - A.I Memo No. TR-1451 - MASSACHUSETTS INSTITUTE OF TECHNOLOGY - Artificial Inteligency Laboratory by Mattew Birkholz](ftp://publications.ai.mit.edu/ai-publications/pdf/AITR-1451.pdf)
+
+* [A modular configuration for Emacs](http://aliquote.org/memos/2014/08/04/a-modular-configuration-for-emacs)
+
+* [Modernization of Emacs (Simple Changes Emacs Should Adopt)](http://ergoemacs.org/emacs/modernization.html)
