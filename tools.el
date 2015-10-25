@@ -914,6 +914,13 @@
   "M-<f9>"   #'restore-view
   "C-d"      #'delete-word
 
+  ;; using the meta key to jump between windows
+  "M-0"     #'delete-window
+  "M-1"     #'delete-other-windows
+  "M-2"     #'split-window-vertically
+  "M-3"     #'split-window-horizontally
+  "M-o"     #'other-window
+
   ;; Join Lines
   "M-j"      (lambda () (interactive) (joinr-line -1))
   )
@@ -975,7 +982,7 @@
     "C-j"     #'eval-print-last-sexp
     "M-m"     #'macro-expand-at-point
     "C-M-j"   #'eval-selection
-    "C-c C-y"  #'copy-sexp-at-point
+    "C-c C-y" #'copy-sexp-at-point
     )
 
 
