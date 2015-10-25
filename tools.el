@@ -1,12 +1,44 @@
 ;;
+;; Autor: Caio Rodrigues
+;; URL:   http://tinyurl.com/emacsinabox
+;;
+;;
 ;; Emacs Toolbox
 ;;
 ;; Useful Macros and Functions for Emacs - Elisp
 ;;
+;; 
 ;;
 ;;--------------------------------------------------------
 
 
+(defun string/starts-with (s begins)
+  "Return non-nil if string S starts with BEGINS."
+  (cond ((>= (length s) (length begins))
+         (string-equal (substring s 0 (length begins)) begins))
+        (t nil)))
+
+(defun string/starts-with (string prefix)
+  "Return t if STRING starts with prefix."
+  (and (string-match (rx-to-string `(: bos ,prefix) t)
+                     string)
+       t))
+
+(defun string/join (glue-char  string-list)
+  "
+  Example:
+
+     ELISP> (string/join \",\" '(\"10.23\" \"Emacs\" \"Lisp\" \"Rocks\"))
+     \"10.23,Emacs,Lisp,Rocks\"
+     ELISP> 
+
+  "
+  (mapconcat 'identity string-list glue-char))
+
+
+(defun string/split (glue-char str)
+  (split-string str glue-char)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -54,6 +86,9 @@
     (progn
       (funcall fun (car xs))
       (for-each fun (cdr xs)))))
+
+(defun for-each-appply (fun xss)
+  (for-each (lambda (xs) (apply fun xs))  xss))
 
 (defun filter (fun xs)
   (if (null xs)
@@ -214,11 +249,16 @@
 ;;;;; Clojure Macros ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+
 (defmacro fn (args body)
  `(lambda ,args ,body))
 
-(defmacro f$  ( &rest body)
+(defmacro $f  ( &rest body)
   `(lambda (%) ,body))
+
+;;; Delay expression 
+(defmacro $fd (func &rest params)
+  (lambda () (,func ,@params)))
 
 (defmacro def (name value)
    `(setq ,name ,value))
@@ -340,6 +380,16 @@
 
 ;;;;;;;;;;;;;;;; Emacs API Wrappers ;;;;;;;;;;;;;;;;;;;;
 
+;;
+;; Symbol Generator
+;;
+(defun make-sym-suffix (sym suffix)
+  (-> sym
+      symbol-name
+      (concat suffix)
+      intern))
+
+
 (defun buffer-content (name) 
     (with-current-buffer name 
       (buffer-substring-no-properties (point-min) (point-max)  )))
@@ -362,16 +412,77 @@
     (while (re-search-forward pattern nil t)
       (replace-match replacement))))
 
+(defun show-doc (function)
+  (princ (documentation function)))
+
+(defun mode/show ()
+  "  Returns all modes associated with files
+    
+     To query the file extesions associated with a mode
+     use: 
+         > (mode/ftypes 'markdown-mode)
+  
+     for example.
+  "
+  (dolist (m (remove-if #'listp
+    (mapcar #'cdr auto-mode-alist))) (print m)))
+
+(defun mode/ftypes (mode)
+  "
+  Get all file extension associated with a mode. 
+  
+  Usage:
+  
+  ELISP> (get-mode-ftypes 'markdown-mode)
+  ((\"\\.md\\'\" . markdown-mode)
+  (\"\\.text\\'\" . markdown-mode)
+  (\"\\.markdown\\'\" . markdown-mode)  
+  
+  "
+  (remove-if-not
+   (lambda (al)
+     (equal (cdr al) mode))
+   auto-mode-alist))
 
 
 ;; Set may keys at same time. A macro in Clojure-style
 ;; with minimum amount of parenthesis as possible.
 ;;
-(defmacro set-gl-keys (&rest keylist)
+(defmacro define-global-keys (&rest keylist)
   `(progn
      ,@(map-apply (lambda (key fun)
             `(global-set-key (kbd ,key) ,fun))
-          (plist->alist keylist))))
+                  (plist->alist keylist))))
+
+;; (add-hook 'emacs-lisp-mode-hook
+;;           (lambda ()
+;;             (progn 
+
+(defmacro add-hooks (hookname &rest functions)
+  `(progn
+    ,@(map (lambda (f) `(add-hook ,hookname ,f))
+           functions)))
+
+
+(defmacro define-mode-keys (modename &rest key-functions-pairs)
+  "
+  Define Key binding for a lisp mode
+
+  Example:
+
+    (define-mode-keys emacs-lisp-mode-map
+     \"C-c C-c\" #'eval-defun
+     \"C-c C-b\" #'eval-buffer
+    )
+  "
+  (let
+      ;;((symname  (make-sym-suffix modename "-map")))
+      ((symname modename))
+   `(progn
+      ,@(map-apply (lambda (key func)
+                     `(define-key ,symname (kbd ,key) ,func))
+                   (plist->alist key-functions-pairs)))))
+
 
 (defmacro define-global-menu (menu-name &rest label-actions-plist)
   "
@@ -400,7 +511,6 @@
          load-path
          (plist-get (dir-list/abs-tags path) :dirs)
          (list path))))
-   
 
 ;;;;;;;;;;;;;; Http Request ;;;;;;;;;;;
 
@@ -474,7 +584,8 @@
 (defun open-file-manager ()
   "Open buffer directory in file manager (Linux Only)"
   (interactive)
-  (call-process "pcmanfm"))
+  (call-process "pcmanfm"))open-file-manager
+
 
 
 
@@ -499,23 +610,70 @@
 
 
 
-(defun dir-list/abs (dirpath)
+(defun dir/list-abs (dirpath)
   " List directory with absolute path"
   (letc
     (abs-dirpath  (expand-file-name dirpath))
     (-->
      (directory-files abs-dirpath)
      (remove-from-list '("." ".."))
-     (map (f$ concat-path abs-dirpath %)))))
+     (map ($f concat-path abs-dirpath %)))))
 
 
-(defun dir-list/abs-tags (dirpath)
+(defun dir/list-abs-tags (dirpath)
   "Returns a plist (:files filelist dirs: dirlist)"
   (letc
    (content  (dir-list/abs dirpath))
    (list
     :files (reject #'file-directory-p content)
     :dirs  (filter #'file-directory-p content))))
+
+
+
+
+
+(defun files-in-below-directory (directory)
+  "List the .el files in DIRECTORY and in its sub-directories."
+  ;; Although the function will be used non-interactively,
+  ;; it will be easier to test if we make it interactive.
+  ;; The directory will have a name such as
+  ;;  "/usr/local/share/emacs/22.1.1/lisp/"
+  (interactive "DDirectory name: ")
+
+  (let (el-files-list
+        (current-directory-list
+         (directory-files-and-attributes directory t)))
+    ;; while we are in the current directory
+    (while current-directory-list
+
+      (cond
+       ;; check to see whether filename ends in `.el'
+       ;; and if so, append its name to a list.
+       ((equal ".el" (substring (car (car current-directory-list)) -3))
+        (setq el-files-list
+              (cons (car (car current-directory-list)) el-files-list)))
+
+       ;; check whether filename is that of a directory
+       ((eq t (car (cdr (car current-directory-list))))
+        ;; decide whether to skip or recurse
+        (if
+            (equal "."
+                   (substring (car (car current-directory-list)) -1))
+            ;; then do nothing since filename is that of
+            ;;   current directory or parent, "." or ".."
+            ()
+
+          ;; else descend into the directory and repeat the process
+          (setq el-files-list
+                (append
+                 (files-in-below-directory
+                  (car (car current-directory-list)))
+                 el-files-list)))))
+      ;; move to the next filename in the list; this also
+      ;; shortens the list so the while loop eventually comes to an end
+      (setq current-directory-list (cdr current-directory-list)))
+    ;; return the filenames
+    el-files-list))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -529,7 +687,7 @@
   (read str))
 
 (defun sexp->str (sexp)
-  (format "%s" sexp))
+  (prin1-to-string sexp))
 
 (defun sexp->file (sexp filename)
   (--> sexp
@@ -549,13 +707,122 @@
        (concat "( " $ " ) ") ;; Wrap parenthesis
        (read $)))
        
-       
+(defun load-url (url)
+  "Load an emacs source code from a URL"
+  (eval (cons 'progn (url->sexps url))))
     
 
 (defun eval-string (str)
   (eval (read str)))
 
+(defun url->filename (url)
+  (-> url
+      (split-string "/")
+      last
+      car))
 
+(defun url-download (url dirpath filename)
+  "
+   Download a file:
+  
+  Usage:
+
+  To download a file from a url to a given directory
+  with a given filename.
+
+  > (url-download url dirpath filename)
+
+  or
+ 
+  To download to the current directory with a 
+  defined filename.
+
+  > (url-download url nil filename)
+
+  or
+ 
+  To download a file to current directory, the file name 
+  will be extracted from the url.
+
+  > (url-download url nil nil) 
+ 
+  "
+  (letc
+   (dir    (if (null dirpath)
+               (current-dir)
+                dirpath)
+           
+   fname   (if (null filename)
+                (url->filename url)
+             filename)
+   
+   fpath    (concat-path dir fname))
+
+  (princ (list dir fname fpath))
+  ($-> url
+      (url-http-get $ nil)
+      (write-file fpath $))))
+
+
+;;
+;; Src: http://web.ics.purdue.edu/~dogbe/static/emacs_config_file.html
+;;
+(defun google ()
+  "Googles a query or region if any"
+  (interactive)
+  (browse-url
+   (concat
+    "http://www.google.com/search?ie=utf-8&oe=utf-8&q="
+    (if mark-active
+        (buffer-substring (region-beginning) (region-end))
+      (read-string "Google: ")))))
+
+(defun decode-url ()
+  "
+   Usage: Select the url and type: A-x decode-url
+   It will print the URL parameters in the buffer, 
+   example:
+
+    When this Url is selected and the user type: A-x decode-url
+
+    http://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCwQFjAA&url=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FEditor_war&ei=k9ktUuz2Kvaj4APCmoGIBw&usg=AFQjCNGrgP7q1TYCPmuQnkgcfMIJKpFHOg&sig2=a6GUXFARKXj6r1JyiNkQ8w&bvm=bv.51773540,d.dmg
+
+  It will be printed in the current buffer:
+
+  sa = t
+  rct = j
+  q = 
+  esrc = s
+  source = web
+  cd = 1
+  cad = rja
+  ved = 0CCwQFjAA
+  url = http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FEditor_war
+  ei = k9ktUuz2Kvaj4APCmoGIBw
+  usg = AFQjCNGrgP7q1TYCPmuQnkgcfMIJKpFHOg
+  sig2 = a6GUXFARKXj6r1JyiNkQ8w
+  bvm = bv.51773540,d.dmg
+
+   
+  "
+  (interactive)
+  (-> (get-selection)
+      get-url-params
+      insert
+      ))
+
+(defun get-url-params (url)
+  "
+  
+  "
+  (interactive)
+  ($->  url
+        (split-string (cadr (split-string $  "?" )) "&")
+        (map ($f split-string % "=") $)
+        (map ($f  string/join " = " %) $)
+        (string/join "\n" $)
+        (concat "\n\n" $)
+        ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      Cursor Functions                     ;;
@@ -602,14 +869,26 @@
   (insert astring)
   (clipboard-kill-region (point-min) (point-max))))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    KEY BINDINGS                     ;;
 ;;-------------------------------------;;
 
+(defun delete-word ()
+    "Delete word next at cursor (point) - can be associated 
+     with a key binb.
+    "
+    (interactive)
+    (let ((beg (point)))
+      (forward-word 1)
+      (delete-region beg (point))))
+
+
+
 ;;
 ;; Set global keys for all modes
 ;;
-(set-gl-keys
+(define-global-keys
   "C-c M-u"  #'url-at-point
   "C-c M-f"  #'open-file-at-point
   "C-c M-r"  #'launch-terminal
@@ -617,9 +896,105 @@
   "C-<f8>"   #'open-file-manager
   "C-<f9>"   #'save-view
   "M-<f9>"   #'restore-view
+  "C-d"      #'delete-word
+
+  ;; Join Lines
+  "M-j"      (lambda () (interactive) (joinr-line -1))
   )
 
 
+;; Delete trailing whitespace before saving a file
+;;
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Emacs Lisp Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 
+(defun copy-sexp-at-point ()
+    "Copy s-expression where is the cursor to clipboard"
+    (interactive)
+    (copy-to-clipboard (thing-at-point 'sexp)))
+
+(defun macro-expand-at-point ()
+    (interactive)
+    (-> (thing-at-point 'sexp)
+        str->sexp
+        macroexpand
+        sexp->str
+        insert
+        ))
+
+(defun eval-selection ()
+  (interactive)
+  ($->
+        (get-selection)
+        (concat "(" $ ")")
+        (progn (print $)  $)
+        read
+        (cons 'progn $)
+        eval))
+
+;; http://emacs.wordpress.com/2007/01/17/eval-and-replace-anywhere/
+(defun eval-and-replace-last-sexp ()
+  "Replace the preceding sexp with its value."
+  (interactive "*")
+  (save-excursion
+    (with-syntax-table emacs-lisp-mode-syntax-table
+      (backward-kill-sexp)))
+  (condition-case nil
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
+    (error (message "Invalid expression")
+           (insert (current-kill 0)))))
+
+
+(define-mode-keys emacs-lisp-mode-map
+    "C-c C-c" #'eval-defun
+    "C-c C-b" #'eval-buffer
+    "C-c C-r" #'eval-and-replace-last-sexp
+    "C-j"     #'eval-print-last-sexp
+    "M-m"     #'macro-expand-at-point
+    "C-M-j"   #'eval-selection
+    "C-c C-y"  #'copy-sexp-at-point    
+    )
+
+
+
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (setq show-paren-style 'expression)
+            (setq show-paren-delay 0)
+             (electric-pair-mode 1)
+             (show-paren-mode 1)
+             (turn-on-auto-fill)
+             (turn-on-eldoc-mode)
+             ))
+
+
+
+;; Disable E-shell banner message
+(setq eshell-banner-message "")
+
+(add-hooks 'eshell-mode-hook
+           (lambda ()
+             (add-to-list 'eshell-visual-commands "ssh")
+             (add-to-list 'eshell-visual-commands "htop")
+             (add-to-list 'eshell-visual-commands "ncmpcpp")
+             (add-to-list 'eshell-visual-commands "tail")
+           ))
+
+
+
+;; (progn
+;;  (load-theme 'wombat)
+;;  (set-face-attribute 'default nil :height 94)
+;;  (set-face-attribute 'fringe nil :background "#2d2d2d")
+;;  (set-face-attribute 'default nil :family "Source Code Pro")
+;;  (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+;;  (set-face-attribute 'font-lock-comment-face nil :weight 'semibold)
+;;  (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")
+;;  )                                      ;

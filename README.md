@@ -23,10 +23,12 @@
         - [Property Lists](#property-lists)
         - [Converting Alists to Plists and vice-versa](#converting-alists-to-plists-and-vice-versa)
       - [Strings](#strings)
+      - [Symbols](#symbols)
       - [Eval](#eval)
       - [Control Structures](#control-structures)
         - [Conditional Statement](#conditional-statement)
         - [Loops](#loops)
+    - [Types Conversion](#types-conversion)
     - [Functional Programming](#functional-programming)
       - [Map and Filter](#map-and-filter)
       - [Anonymous functions/ Lambda functions](#anonymous-functions-lambda-functions)
@@ -58,6 +60,8 @@
     - [Emacs Modes](#emacs-modes)
       - [Major Mode](#major-mode)
       - [Minor Modes](#minor-modes)
+      - [Mode Association with Files](#mode-association-with-files)
+      - [Mode Specific Key Bindings](#mode-specific-key-bindings)
       - [Modes Customization](#modes-customization)
       - [Mode Hooks](#mode-hooks)
   - [Discoverability / Get Documentation](#discoverability--get-documentation)
@@ -105,6 +109,10 @@
       - [Ocaml](#ocaml)
       - [Haskell](#haskell)
       - [Lisp](#lisp)
+      - [All Lisp Dialects](#all-lisp-dialects)
+      - [Common Lisp](#common-lisp)
+      - [Scheme](#scheme)
+      - [Clojure](#clojure)
     - [Selected Dot Emacs](#selected-dot-emacs)
     - [Space Emacs Default Config](#space-emacs-default-config)
     - [Selected Codes](#selected-codes)
@@ -130,11 +138,15 @@ Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own
 
 **Selected Emacs Tutorials**: 
 
+* http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/
+
 * [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
 
 * [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua](http://emacslife.com/how-to-read-emacs-lisp.html)
 
-* [Xah Emacs Tutorial](http://ergoemacs.org/emacs/emacs.html)
+* [Elisp Cookbook - Emacs Wiki](http://emacswiki.org/emacs/ElispCookbook)
+
+* [Xah's Emacs Tutorial - ErgoEmacs](http://ergoemacs.org)
 
 * [A quick guide to Emacs Lisp programming](https://github.com/chrisdone/elisp-guide#manipulating-the-buffer)
 
@@ -154,8 +166,38 @@ Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own
 
 * [Mastering Emacs mastering the world’s best text editor](https://www.masteringemacs.org/)
 
+* [Command and Function Index](http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html)
+
+
+* [From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/)
+
 * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
 * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
+
+* [Introducing Names: practical namespaces for Emacs-Lisp](http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html)
+
+
+* Book: [Programming in Emacs Lisp](http://www.bookshelf.jp/texi/lispintro/emacs-lisp-intro-en.html#SEC_Top)
+
+* http://xahlee.blogspot.com
+
+* http://wikemacs.org/wiki/Emacs_Lisp_Cookbook
+
+* http://emacs-jp.github.io/tips/environment-variable.html
+
+* https://marmalade-repo.org/
+
+* http://technical-dresese.blogspot.com.br/2008/11/why-ive-abandoned-eclipse-for-emacs.html
+
+* http://technical-dresese.blogspot.com.br/2008/08/in-org-mode-abandoning-gtd.html
+
+* http://technical-dresese.blogspot.com.br/2012/12/hooks-local-variables-and-namespaces.html
+
+* http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html
+
+* http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192
+
+* https://github.com/capitaomorte/yasnippet
 
 **Configuration File**
 
@@ -244,11 +286,11 @@ See also: [GNU Emacs Key Bindings  Reference Card](https://www.gnu.org/software/
 
 |                          |                             |
 |--------------------------|-----------------------------|
-| <kbd> A-s-h-.</kbd>      | Highlight symbol under cursor |
-| <kbd> A-s-h-p</kbd>      | Highlight phrase |
-| <kbd> A-s-h-r</kbd>      | Highlight regex |
-| <kbd> A-s-h-l</kbd>      | Highlight lines matching a regex |
-| <kbd> A-s-h-u</kbd>      | Unhighlight regex |
+| <kbd> M-s-h-.</kbd>      | Highlight symbol under cursor |
+| <kbd> M-s-h-p</kbd>      | Highlight phrase |
+| <kbd> M-s-h-r</kbd>      | Highlight regex |
+| <kbd> M-s-h-l</kbd>      | Highlight lines matching a regex |
+| <kbd> M-s-h-u</kbd>      | Unhighlight regex |
 
 **Select, Copy, Cut and Paste**
 
@@ -359,6 +401,7 @@ Useful lisp key bindings to edit and navigate Lisp code.
 | <kbd> C-[down] </kbd>   | (All Shells) Get the previous input in the history |
 | <kbd> M-p </kbd>      | (All Shells) Get the previous input in the history  |
 | <kbd> M-n </kbd>      | (All Shells) Get the next input in the history |
+| <kbd> C-c C-l </kbd>  | Display the shell history in another window |
 
 * Delimiter Wrapping 
 
@@ -440,21 +483,36 @@ This section will use the Emacs interactive elisp shell IELM that can be accesse
 | Mode Line | Status Bar |
 | Font Lock | Syntax Coloring |
 
+See also:
+
+* [11 Concepts The Emacs Newbie Should Master](http://www.blogbyben.com/2011/04/10-concepts-emacs-newbie-should-master.html)
 
 ![](images/Emacs_terminology.png)
 
 ### Emacs API 
 
-Emacs API Objects
+**Emacs API Objects**
 
 * Buffer 
+* Temporary Buffer
 * Modes 
 * Mode Hooks
+* Mode Map     
 * Window
 * Frame 
+* Point        
 * Process
 * Network Process       
-* Point                 
+         
+* [Minibuffers](http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_18.html)         
+         
+**Emacs API Limitations**
+
+* No multi-thread support. However it can handle well subprocesses.
+
+* No directly file access. A file cannot be read directly, it must be read to a buffer and then the buffer read. 
+
+* There is no lexical scope or closures in Emacs Lisp as there is in Common Lisp and Scheme, however macros can be used to solve this limitation.
 
 
 ### Basic Syntax
@@ -882,8 +940,10 @@ To enable closures put the expression below the ~/.emacs.d/init.el file.
 
 #### List Operations
 
-See also: http://www.fincher.org/tips/Languages/Emacs.shtml
+See also: 
 
+* http://www.fincher.org/tips/Languages/Emacs.shtml
+* http://www.emacswiki.org/emacs?search=%22ListModification%22
 
 ```elisp
 
@@ -1573,6 +1633,117 @@ ELISP>
 ```
 
 
+#### Symbols 
+
+
+```elisp 
+
+;;; Convert a string to symbol 
+
+ELISP> (intern "a-symbol")
+a-synmbol
+ELISP> (symbolp (intern "a-symbol"))
+t
+ELISP> 
+
+;;; Convert a symbol to a string 
+
+ELISP> (symbol-name 'symbol)
+"symbol"
+ELISP> 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (setq sym '(1 2 3 4 5))
+(1 2 3 4 5)
+
+ELISP> sym
+(1 2 3 4 5)
+
+;;; Test if variable is defined 
+ELISP> (boundp 'sym)
+t
+ELISP> 
+
+;;; Test if variable sym is a symbol 
+ELISP> (symbolp sym)
+nil
+
+;;; Test if the symbol sym is a symbol
+ELISP> (symbolp 'sym)
+t
+ELISP> 
+
+;; Get symbol as string 
+;;
+ELISP> (symbol-name 'sym)
+"sym"
+
+;; Get value from a symbol 
+;;
+ELISP> (symbol-value 'sym)
+(1 2 3 4 5)
+
+ELISP> (symbol-function 'sym)
+nil
+
+ELISP> (symbol-plist 'sym)
+nil
+
+;;-------------------------;;
+
+ELISP> (defun func (x y) (+ (* 3 x) (* 4 y)))
+func
+
+ELISP> (func 10 2)
+38 (#o46, #x26, ?&)
+ELISP> 
+
+;;; Check if function is defined 
+;;
+ELISP> (fboundp 'func)
+t
+ELISP> (fboundp 'sym)
+nil
+ELISP> 
+
+
+ELISP> (symbol-name 'func)
+"func"
+
+ELISP> (symbol-value 'func)
+*** Eval error ***  Symbol's value as variable is void: func
+ELISP> (symbol-function 'func)
+(lambda
+  (x y)
+  (+
+   (* 3 x)
+   (* 4 y)))
+
+
+
+ELISP> (symbol-plist 'func)
+nil
+ELISP> 
+
+;;; Function Source Code 
+
+ELISP> (symbol-function #'func)
+(lambda
+  (x y)
+  (+
+   (* 3 x)
+   (* 4 y)))
+
+
+;; Test if function is an elisp primitive 
+
+ELISP> (subrp (symbol-function 'goto-char))
+t
+ELISP> 
+
+```
+
 
 #### Eval
 
@@ -1865,6 +2036,174 @@ ELISP> a
 2 (#o2, #x2, ?\C-b)
 ELISP> 
 ```
+
+
+### Types Conversion 
+
+
+**Query Types**
+
+```elisp 
+ELISP> (type-of 1000)
+integer
+
+ELISP> (type-of 1000.3434)
+float
+ELISP> 
+
+ELISP> (type-of "lisp")
+string
+
+ELISP> (type-of '(1 2 3 4 5))
+cons
+ELISP> (type-of (list 'cos 'sin 1 2 3 4 5))
+cons
+ELISP> 
+
+ELISP> (type-of [1 2 3 4])
+vector
+
+ELISP> (type-of 'elisp-mode-map)
+symbol
+ELISP> 
+
+ELISP> (type-of #'cos)
+symbol
+ELISP>
+```
+
+**Test Types**
+
+```elisp 
+
+;; Test if it is a number
+;;-----------------------------------
+
+ELISP> (numberp 1000)
+t
+ELISP> (numberp 10e4)
+t
+ELISP> (numberp '(1 2 3 4))
+nil
+ELISP> (numberp "hello world")
+nil
+ELISP> 
+
+
+;; Test if it is a string 
+;;-----------------------------------
+
+ELISP> (stringp "Emacs")
+t
+ELISP> (stringp '(1 2 3 4))
+nil
+ELISP> 
+
+;; Test if ti is a symbol 
+;;------------------------------------
+ELISP> (symbolp 'emacs)
+t
+ELISP> (symbolp #'emacs)
+t
+ELISP> (symbolp "something")
+nil
+ELISP> (symbolp 10000)
+nil
+ELISP>
+
+
+;; Test if it is a list
+;;-----------------------------------
+
+ELISP> (listp '(1 2 3 4))
+t
+ELISP> (listp [1 2 3 4])
+nil
+ELISP> (listp "hello world")
+nil
+ELISP> 
+
+
+;; Test if it is a vector 
+;;-----------------------------------
+
+ELISP> (vectorp ["Lisp" "Emacs" "Scheme" "Clojure"])
+t
+ELISP> 
+ELISP> (vectorp '(1 2 3))
+nil
+ELISP> (vectorp "lisp")
+nil
+ELISP> 
+
+```
+
+**Number <-> String**
+
+```elisp 
+ELISP> 
+ELISP> (number-to-string 1000)
+"1000"
+
+ELISP> (string-to-number "200")
+200 (#o310, #xc8, ?È)
+ELISP> 
+ELISP> 
+```
+
+**Symbol <-> String**
+
+```elisp 
+ELISP> (symbol-name 'my-symbol)
+"my-symbol"
+
+ELISP> (symbol-name :my-symbol)
+":my-symbol"
+ELISP> 
+```
+
+String to Symbol 
+
+```elisp 
+ELISP> (intern "some-symbol")
+some-symbol
+ 
+```
+
+**S-expression <-> string**
+
+* read : Parse a s-expression.
+
+```elisp 
+    ELISP> 
+    ELISP> (setq raw "(:x 10 :y 20 :z 30 :w \"hello world\")")
+    "(:x 10 :y 20 :z 30 :w \"hello world\")"
+    ELISP> 
+    ELISP> (read raw)
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> (plist-get (read raw) :x)
+    10 (#o12, #xa, ?\C-j)
+    ELISP> (plist-get (read raw) :w)
+    "hello world"
+    ELISP> 
+```
+
+* prin1-to-string  : Serialize a s-expression
+
+```elisp 
+
+    ELISP> (setq sexp '(:x 10 :y 20 :z 30 :w "hello world"))
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> sexp
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> (prin1-to-string sexp)
+    "(:x 10 :y 20 :z 30 :w \"hello world\")"
+    ELISP> 
+```
+
 
 
 ### Functional Programming
@@ -4124,6 +4463,180 @@ Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 |-----------------------|--------------------------|
 | [eldoc-mode](http://emacswiki.org/emacs/ElDoc)        |  Minor mode which shows ,in the echo area, the argument list of the function call current function |
 
+
+#### Mode Association with Files 
+
+The variable auto-mode-alist holds all modes associated with file extension.
+
+* List all modes associated with file extensions.
+
+```elisp 
+ELISP> auto-mode-alist
+(("Dockerfile.*\\'" . dockerfile-mode)
+ ("/\\.gitmodules\\'" . gitconfig-mode)
+ ("/git/config\\'" . gitconfig-mode)
+ ("/\\.git/config\\'" . gitconfig-mode)
+ ("/\\.gitconfig\\'" . gitconfig-mode)
+ ("\\.hsc\\'" . haskell-mode)
+ ("\\.l[gh]s\\'" . literate-haskell-mode)
+ ("\\.[gh]s\\'" . haskell-mode)
+ ("\\.cabal\\'" . haskell-cabal-mode)
+ ("\\.ghci\\'" . ghci-script-mode)
+ ("\\.dump-simpl\\'" . ghc-core-mode)
+ ("\\.hcr\\'" . ghc-core-mode)
+ ...
+  ("\\.ds\\(ss\\)?l\\'" . dsssl-mode)
+ ("\\.js\\'" . javascript-mode)
+ ("\\.json\\'" . javascript-mode)
+ ("\\.[ds]?vh?\\'" . verilog-mode)
+ ("\\.by\\'" . bovine-grammar-mode)
+ ("\\.wy\\'" . wisent-grammar-mode)
+ ("[]>:/\\]\\..*\\(emacs\\|gnus\\|viper\\)\\'" . emacs-lisp-mode)
+ ("\\`\\..*emacs\\'" . emacs-lisp-mode)
+ ("[:/]_emacs\\'" . emacs-lisp-mode))
+ 
+
+ELISP> (dolist (m (remove-if #'listp (mapcar #'cdr auto-mode-alist))) (print m))
+
+dockerfile-mode
+
+gitconfig-mode
+
+...
+
+ghc-core-mode
+
+...
+
+racket-mode
+
+tuareg-mode
+
+clojure-mode
+...
+```
+
+* Query all file extensions associated with a mode.
+
+```elisp 
+ELISP> (remove-if-not
+        (lambda (al)
+          (equal (cdr al) 'markdown-mode)) auto-mode-alist) 
+(("\\.md\\'" . markdown-mode)
+ ("\\.text\\'" . markdown-mode)
+ ("\\.markdown\\'" . markdown-mode))
+
+```
+
+Associate a file pattern with a mode:
+
+```elisp 
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+```
+
+**Lisp Routines to introspect modes**
+
+```elisp 
+(defun show-doc (function)
+  (princ (documentation function)))
+  
+(defun mode/show ()
+  "  Returns all modes associated with files
+    
+     To query the file extesions associated with a mode
+     use: 
+         > (mode/ftypes 'markdown-mode)
+  
+     for example.
+  "
+  (dolist (m (remove-if #'listp
+    (mapcar #'cdr auto-mode-alist))) (print m)))
+
+(defun mode/ftypes (mode)
+  "
+  Get all file extension associated with a mode. 
+  
+  Usage:
+  
+  ELISP> (get-mode-ftypes 'markdown-mode)
+  ((\"\\.md\\'\" . markdown-mode)
+  (\"\\.text\\'\" . markdown-mode)
+  (\"\\.markdown\\'\" . markdown-mode)  
+  
+  "
+  (remove-if-not
+   (lambda (al)
+     (equal (cdr al) mode))
+   auto-mode-alist))
+
+ELISP> (mode/ftypes 'clojure-mode)
+(("\\(?:build\\|profile\\)\\.boot\\'" . clojure-mode)
+ ("\\.\\(clj\\|dtm\\|edn\\)\\'" . clojure-mode))
+
+ELISP> (mode/ftypes 'scheme-mode)
+(("\\.\\(scm\\|stk\\|ss\\|sch\\)\\'" . scheme-mode)
+ ("\\.scm\\.[0-9]*\\'" . scheme-mode)
+ ("\\.oak\\'" . scheme-mode))
+
+ELISP> (show-doc #'mode/ftypes)
+
+  Get all file extension associated with a mode. 
+  
+  Usage:
+  
+  ELISP> (get-mode-ftypes 'markdown-mode)
+  (("\.md\'" . markdown-mode)
+  ("\.text\'" . markdown-mode)
+  ("\.markdown\'" . markdown-mode)  
+  
+```
+
+#### Mode Specific Key Bindings
+
+The function **define-key**  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: ``` A-x describe-key ``` and then type the key bind. 
+
+```elisp 
+;; Every time the user press F5 in a emacs lisp file *.el the minibuffer
+;; will display the message hello world 
+;; 
+ELISP> (define-key emacs-lisp-mode-map (kbd "<f5>") 
+            (lambda () (interactive) (message "Hello world")))
+(lambda nil
+  (interactive)
+  (message "Hello world"))
+
+
+(defun show-message ()
+ (interactive)
+ (message "Hello world"))
+
+ELISP> 
+ELISP> (define-key emacs-lisp-mode-map (kbd "<f5>") #'show-message)
+show-message
+ELISP> 
+
+;;  It will insert the message "Hello world" at the current cursor position
+;; 
+(define-key emacs-lisp-mode-map (kbd "<f5>") 
+   (lambda () (interactive) (insert "Hello world")))
+
+
+;; This Key bind (Ctrl + F5) will insert the absolute path of current 
+;; path of the buffer at current cursor position if the file is a Emacs 
+;; Lisp file *.el
+;;      
+(defun insert-absolute-path ()
+    (interactive)
+    (insert (buffer-file-name (current-buffer))))
+    
+(define-key emacs-lisp-mode-map (kbd "C-<f5>") 
+   #'insert-absolute-path)
+    
+```
+
+
 #### Modes Customization
 
 * [Minor Mode  - Emacs Wiki](http://www.emacswiki.org/emacs/MinorMode)
@@ -4152,6 +4665,120 @@ Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 
 * http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html
 
+The following is a list of hook variables that let you provide functions to be called from within Emacs on suitable occasions. 
+
+http://sunsite.ualberta.ca/Documentation/Gnu/emacs-lisp-ref-21-2.7/html_node/elisp_727.html
+
+
+* after-save-hook
+* find-file-hook
+* emacs-startup-hook
+* kill-emacs-hook
+
+```
+activate-mark-hook
+after-change-functions
+after-init-hook
+after-insert-file-functions
+after-make-frame-functions
+after-revert-hook
+after-save-hook
+apropos-mode-hook
+auto-fill-function
+auto-save-hook
+before-change-functions
+before-init-hook
+before-make-frame-hook
+before-revert-hook
+blink-paren-function
+buffer-access-fontify-functions
+c-mode-hook
+calendar-load-hook
+change-major-mode-hook
+command-history-hook
+command-line-functions
+comment-indent-function
+deactivate-mark-hook
+diary-display-hook
+diary-hook
+dired-mode-hook
+disabled-command-hook
+echo-area-clear-hook
+edit-picture-hook
+electric-buffer-menu-mode-hook
+electric-command-history-hook
+electric-help-mode-hook
+emacs-lisp-mode-hook
+find-file-hooks
+find-file-not-found-hooks
+first-change-hook
+fortran-comment-hook
+fortran-mode-hook
+indent-mim-hook
+initial-calendar-window-hook
+kbd-macro-termination-hook
+kill-buffer-hook
+kill-buffer-query-functions
+kill-emacs-hook
+kill-emacs-query-functions
+LaTeX-mode-hook
+ledit-mode-hook
+lisp-indent-function
+lisp-interaction-mode-hook
+lisp-mode-hook
+list-diary-entries-hook
+local-write-file-hooks
+mail-mode-hook
+mail-setup-hook
+mark-diary-entries-hook
+medit-mode-hook
+menu-bar-update-hook
+minibuffer-setup-hook
+minibuffer-exit-hook
+mouse-position-function
+news-mode-hook
+news-reply-mode-hook
+news-setup-hook
+nongregorian-diary-listing-hook
+nongregorian-diary-marking-hook
+nroff-mode-hook
+outline-mode-hook
+plain-TeX-mode-hook
+post-command-hook
+pre-abbrev-expand-hook
+pre-command-hook
+print-diary-entries-hook
+prolog-mode-hook
+protect-innocence-hook
+redisplay-end-trigger-functions
+rmail-edit-mode-hook
+rmail-mode-hook
+rmail-summary-mode-hook
+scheme-indent-hook
+scheme-mode-hook
+scribe-mode-hook
+shell-mode-hook
+shell-set-directory-error-hook
+suspend-hook
+suspend-resume-hook
+temp-buffer-show-function
+term-setup-hook
+terminal-mode-hook
+terminal-mode-break-hook
+TeX-mode-hook
+text-mode-hook
+today-visible-calendar-hook
+today-invisible-calendar-hook
+vi-mode-hook
+view-hook
+window-configuration-change-hook
+window-scroll-functions
+window-setup-hook
+window-size-change-functions
+write-contents-hooks
+write-file-hooks
+write-region-annotate-functions 
+```
 
 ## Discoverability / Get Documentation
 
@@ -4483,6 +5110,12 @@ The traditional window switch with C-x o can be cumbersome to use in the long ru
 
 #### Define Global Key-bindings 
 
+See also:
+
+* [Mastering Key Bindings in Emacs](https://www.masteringemacs.org/article/mastering-key-bindings-emacs)
+* [KeyBindingDiscussion](http://www.emacswiki.org/emacs/KeyBindingDiscussion)
+* [Emacs: How to Define Keys](http://ergoemacs.org/emacs/keyboard_shortcuts.html)
+
 **Launch a Terminal**
 
 C-c M-p will launch a terminal lxterminal (That is only available for Linux, although it can be tweaked for another terminal emulator or OS) in the current file directory. 
@@ -4714,6 +5347,23 @@ F8 will do the same thing as A-x <command>.
 
 ```elisp 
 (global-set-key (kbd "<f8>")  'execute-extended-command)
+```
+
+**Delete an entire word**
+
+Ctrl-d will delete the entire word under the cursor.
+
+```elisp 
+(defun delete-word ()
+    "Delete word next at cursor (point) - can be associated 
+     with a key binb.
+    "
+    (interactive)
+    (let ((beg (point)))
+      (forward-word 1)
+      (delete-region beg (point))))
+      
+(global-set-key (kbd "C-d")  #'delete-word)      
 ```
 
 #### Define Mode Specific Key-bindings
@@ -5579,7 +6229,7 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 #### Lisp
 
-##### All Lisp Dialects
+#### All Lisp Dialects
 
 * [The Animated Guide to Paredit](http://danmidwood.com/content/2014/11/21/animated-paredit.html)
 * [Paredit-mode](http://wikemacs.org/wiki/Paredit-mode)
@@ -5607,6 +6257,8 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 * [Common Lisp/First steps/Installation](https://en.wikibooks.org/wiki/Common_Lisp/First_steps/Installation)
 
 * [The Common Lisp Cookbook - Using Emacs as a Lisp IDE](http://cl-cookbook.sourceforge.net/emacs-ide.html)
+
+* [Running Allegro Common Lisp From Emacs](https://www.cs.colostate.edu/helpdocs/lispEmacs.html)
 
 Collection of information about using SLIME - a proto-manual.
 
@@ -5704,6 +6356,18 @@ Spacemacs is first intended to be used by Vim users who want to go to the next l
 * http://emacswiki.org/emacs/file-template.el
 
 * http://aperiodic.net/phil/configs/elisp/ledger.el
+
+* http://sachachua.com/notebook/emacs/small-functions.el
+
+* http://web.mit.edu/Emacs/source/emacs/lisp/emacs-lisp/easymenu.el
+
+* http://code.haskell.org/haskellmode-emacs/haskell-mode.el
+
+* http://pastebin.com/h2G9Ua5p
+
+* https://raw.githubusercontent.com/rejeep/f.el/master/f.el
+
+* https://github.com/dimitri/el-get
 
 Large Collection of Codes to Emacs
 
