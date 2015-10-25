@@ -1,124 +1,126 @@
+# Emacs - Elisp Programming and Customization
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Emacs - Elisp Programming and Customization](#emacs---elisp-programming-and-customization)
-  - [Default Key Bindings and Useful Commands](#default-key-bindings-and-useful-commands)
-  - [Command Line Options](#command-line-options)
-  - [Elisp](#elisp)
-    - [Ielm - Elisp shell](#ielm---elisp-shell)
-    - [Emacs Terminology](#emacs-terminology)
-    - [Emacs API](#emacs-api)
-    - [Basic Syntax](#basic-syntax)
-      - [Basic Operations](#basic-operations)
-      - [Defining Variables](#defining-variables)
-      - [Defining Functions](#defining-functions)
-        - [Define Simple Function](#define-simple-function)
-        - [Anonymous Functions / Lambda Functions](#anonymous-functions--lambda-functions)
-        - [Passing Functions as Arguments](#passing-functions-as-arguments)
-        - [Closure](#closure)
-      - [List Operations](#list-operations)
-      - [Association Lists and Property Lists](#association-lists-and-property-lists)
-        - [Association List / Alist](#association-list--alist)
-        - [Property Lists](#property-lists)
-        - [Converting Alists to Plists and vice-versa](#converting-alists-to-plists-and-vice-versa)
-      - [Strings](#strings)
-      - [Symbols](#symbols)
-      - [Eval](#eval)
-      - [Control Structures](#control-structures)
-        - [Conditional Statement](#conditional-statement)
-        - [Loops](#loops)
-    - [Types Conversion](#types-conversion)
-    - [Functional Programming](#functional-programming)
-      - [Map and Filter](#map-and-filter)
-      - [Anonymous functions/ Lambda functions](#anonymous-functions-lambda-functions)
-      - [Function Composition](#function-composition)
-      - [Interactive Functions](#interactive-functions)
-      - [List Recursive Functions](#list-recursive-functions)
-    - [Macros and Metaprogramming](#macros-and-metaprogramming)
-      - [Quasiquote](#quasiquote)
-      - [Macros](#macros)
-    - [Structures](#structures)
-    - [Bufffers](#bufffers)
-      - [Buffer Attributes](#buffer-attributes)
-      - [Buffer Mode](#buffer-mode)
-      - [Get Buffer Contents / Selection / Line](#get-buffer-contents--selection--line)
-      - [Search and Replace in the entire Buffer](#search-and-replace-in-the-entire-buffer)
-    - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
-      - [Directory and Path](#directory-and-path)
-      - [Date and Time](#date-and-time)
-      - [Call External Commands or Apps](#call-external-commands-or-apps)
-      - [Environment Variables](#environment-variables)
-      - [Process Management](#process-management)
-      - [File Name Components](#file-name-components)
-      - [Read / Write file to a string](#read--write-file-to-a-string)
-    - [Window Functions](#window-functions)
-      - [Basic Window Functions](#basic-window-functions)
-      - [Manipulate Buffer in Another Window](#manipulate-buffer-in-another-window)
-      - [Window Configuration](#window-configuration)
-    - [Special Variables](#special-variables)
-    - [Emacs Modes](#emacs-modes)
-      - [Major Mode](#major-mode)
-      - [Minor Modes](#minor-modes)
-      - [Mode Association with Files](#mode-association-with-files)
-      - [Mode Specific Key Bindings](#mode-specific-key-bindings)
-      - [Modes Customization](#modes-customization)
-      - [Mode Hooks](#mode-hooks)
-  - [Discoverability / Get Documentation](#discoverability--get-documentation)
-    - [Describe](#describe)
-  - [Network API](#network-api)
-  - [Bytecodes](#bytecodes)
-  - [Customization](#customization)
-    - [Install Packages](#install-packages)
-      - [Install an Emacs package from repository:](#install-an-emacs-package-from-repository)
-      - [Install a Single Emacs file *.el](#install-a-single-emacs-file-el)
-    - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
-    - [Themes](#themes)
-    - [Misc](#misc)
-    - [Key Bindings](#key-bindings)
-      - [Smart window switch](#smart-window-switch)
-      - [Define Global Key-bindings](#define-global-key-bindings)
-      - [Define Mode Specific Key-bindings](#define-mode-specific-key-bindings)
-      - [Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)](#enable-ctrlv--ctrlc-shortcuts-cua-mode)
-    - [Quiet Startup](#quiet-startup)
-  - [Solutions](#solutions)
-    - [Quick edit and reload Emac Configuration File.](#quick-edit-and-reload-emac-configuration-file)
-    - [Refresh/ Reload File](#refresh-reload-file)
-    - [Creating Quick Access Menu](#creating-quick-access-menu)
-    - [Extract Function Documentation](#extract-function-documentation)
-    - [Edit File as Root](#edit-file-as-root)
-    - [Open Current Buffer Directory](#open-current-buffer-directory)
-    - [Open Current Buffer Directory in File Manager](#open-current-buffer-directory-in-file-manager)
-    - [Open a terminal Emulator in the directory of Current Buffer](#open-a-terminal-emulator-in-the-directory-of-current-buffer)
-    - [Eval String in Clipboard](#eval-string-in-clipboard)
-    - [Save and Reload Current Session](#save-and-reload-current-session)
-    - [Create a menu with all color themes available](#create-a-menu-with-all-color-themes-available)
-    - [Better Menu Syntax](#better-menu-syntax)
-    - [Save and Restore Current Window Configuration](#save-and-restore-current-window-configuration)
-    - [Http and Post Request](#http-and-post-request)
-  - [Resources](#resources)
-    - [References](#references)
-      - [Manual](#manual)
-      - [Tutorials](#tutorials)
-      - [Wikis](#wikis)
-      - [Issues](#issues)
-    - [Developement Environments for Emacs](#developement-environments-for-emacs)
-      - [Python](#python)
-      - [Javascript](#javascript)
-      - [C / C++](#c--c)
-      - [Ocaml](#ocaml)
-      - [Haskell](#haskell)
-      - [Lisp](#lisp)
-      - [All Lisp Dialects](#all-lisp-dialects)
-      - [Common Lisp](#common-lisp)
-      - [Scheme](#scheme)
-      - [Clojure](#clojure)
-    - [Selected Dot Emacs](#selected-dot-emacs)
-    - [Space Emacs Default Config](#space-emacs-default-config)
-    - [Selected Codes](#selected-codes)
-    - [Screencasts](#screencasts)
-    - [Limitations](#limitations)
-    - [Technical Notes](#technical-notes)
+- [Default Key Bindings and Useful Commands](#default-key-bindings-and-useful-commands)
+- [Command Line Options](#command-line-options)
+- [Elisp](#elisp)
+  - [Ielm - Elisp shell](#ielm---elisp-shell)
+  - [Emacs Terminology](#emacs-terminology)
+  - [Emacs API](#emacs-api)
+  - [Basic Syntax](#basic-syntax)
+    - [Basic Operations](#basic-operations)
+    - [Defining Variables](#defining-variables)
+    - [Defining Functions](#defining-functions)
+      - [Define Simple Function](#define-simple-function)
+      - [Anonymous Functions / Lambda Functions](#anonymous-functions--lambda-functions)
+      - [Passing Functions as Arguments](#passing-functions-as-arguments)
+      - [Closure](#closure)
+    - [List Operations](#list-operations)
+    - [Association Lists and Property Lists](#association-lists-and-property-lists)
+      - [Association List / Alist](#association-list--alist)
+      - [Property Lists](#property-lists)
+      - [Converting Alists to Plists and vice-versa](#converting-alists-to-plists-and-vice-versa)
+    - [Strings](#strings)
+    - [Symbols](#symbols)
+    - [Eval](#eval)
+    - [Control Structures](#control-structures)
+      - [Conditional Statement](#conditional-statement)
+      - [Loops](#loops)
+  - [Types Conversion](#types-conversion)
+  - [Functional Programming](#functional-programming)
+    - [Map and Filter](#map-and-filter)
+    - [Anonymous functions/ Lambda functions](#anonymous-functions-lambda-functions)
+    - [Function Composition](#function-composition)
+    - [Interactive Functions](#interactive-functions)
+    - [List Recursive Functions](#list-recursive-functions)
+  - [Macros and Metaprogramming](#macros-and-metaprogramming)
+    - [Quasiquote](#quasiquote)
+    - [Macros](#macros)
+  - [Structures](#structures)
+  - [Bufffers](#bufffers)
+    - [Buffer Attributes](#buffer-attributes)
+    - [Buffer Mode](#buffer-mode)
+    - [Get Buffer Contents / Selection / Line](#get-buffer-contents--selection--line)
+    - [Search and Replace in the entire Buffer](#search-and-replace-in-the-entire-buffer)
+  - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
+    - [Directory and Path](#directory-and-path)
+    - [Date and Time](#date-and-time)
+    - [Call External Commands or Apps](#call-external-commands-or-apps)
+    - [Environment Variables](#environment-variables)
+    - [Process Management](#process-management)
+    - [File Name Components](#file-name-components)
+    - [Read / Write file to a string](#read--write-file-to-a-string)
+  - [Window Functions](#window-functions)
+    - [Basic Window Functions](#basic-window-functions)
+    - [Manipulate Buffer in Another Window](#manipulate-buffer-in-another-window)
+    - [Window Configuration](#window-configuration)
+  - [Special Variables](#special-variables)
+  - [Emacs Modes](#emacs-modes)
+    - [Major Mode](#major-mode)
+    - [Minor Modes](#minor-modes)
+    - [Mode Association with Files](#mode-association-with-files)
+    - [Mode Specific Key Bindings](#mode-specific-key-bindings)
+    - [Modes Customization](#modes-customization)
+    - [Mode Hooks](#mode-hooks)
+- [Discoverability / Get Documentation](#discoverability--get-documentation)
+  - [Describe](#describe)
+- [Network API](#network-api)
+- [Bytecodes](#bytecodes)
+- [Customization](#customization)
+  - [Install Packages](#install-packages)
+    - [Install an Emacs package from repository:](#install-an-emacs-package-from-repository)
+    - [Install a Single Emacs file *.el](#install-a-single-emacs-file-el)
+  - [Hide / Show Emacs Widgets](#hide--show-emacs-widgets)
+  - [Themes](#themes)
+  - [Misc](#misc)
+  - [Key Bindings](#key-bindings)
+    - [Smart window switch](#smart-window-switch)
+    - [Define Global Key-bindings](#define-global-key-bindings)
+    - [Define Mode Specific Key-bindings](#define-mode-specific-key-bindings)
+    - [Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)](#enable-ctrlv--ctrlc-shortcuts-cua-mode)
+  - [Quiet Startup](#quiet-startup)
+- [Solutions](#solutions)
+  - [Quick edit and reload Emac Configuration File.](#quick-edit-and-reload-emac-configuration-file)
+  - [Refresh/ Reload File](#refresh-reload-file)
+  - [Creating Quick Access Menu](#creating-quick-access-menu)
+  - [Extract Function Documentation](#extract-function-documentation)
+  - [Edit File as Root](#edit-file-as-root)
+  - [Open Current Buffer Directory](#open-current-buffer-directory)
+  - [Open Current Buffer Directory in File Manager](#open-current-buffer-directory-in-file-manager)
+  - [Open a terminal Emulator in the directory of Current Buffer](#open-a-terminal-emulator-in-the-directory-of-current-buffer)
+  - [Eval String in Clipboard](#eval-string-in-clipboard)
+  - [Save and Reload Current Session](#save-and-reload-current-session)
+  - [Create a menu with all color themes available](#create-a-menu-with-all-color-themes-available)
+  - [Better Menu Syntax](#better-menu-syntax)
+  - [Save and Restore Current Window Configuration](#save-and-restore-current-window-configuration)
+  - [Http and Post Request](#http-and-post-request)
+- [Resources](#resources)
+  - [References](#references)
+    - [Manual](#manual)
+    - [Tutorials](#tutorials)
+    - [Wikis](#wikis)
+    - [Issues](#issues)
+  - [Developement Environments for Emacs](#developement-environments-for-emacs)
+    - [Python](#python)
+    - [Javascript](#javascript)
+    - [C / C++](#c--c)
+    - [Ocaml](#ocaml)
+    - [Haskell](#haskell)
+    - [Lisp](#lisp)
+    - [All Lisp Dialects](#all-lisp-dialects)
+    - [Common Lisp](#common-lisp)
+    - [Scheme](#scheme)
+    - [Clojure](#clojure)
+  - [Selected Dot Emacs](#selected-dot-emacs)
+  - [Space Emacs Default Config](#space-emacs-default-config)
+  - [Selected Codes](#selected-codes)
+  - [Screencasts](#screencasts)
+  - [Limitations](#limitations)
+  - [Selected Emacs Tutorials](#selected-emacs-tutorials)
+  - [Technical Notes](#technical-notes)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -126,7 +128,7 @@
     #Emacs #lisp #elisp #customization #editor #programming 
 -->
 
-# Emacs - Elisp Programming and Customization
+
 
 Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own lisp dialect that is a subset of and old version of common lisp. An excellent book about Common Lisp that is also useful for Elisp and Scheme is available at [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html)
 
@@ -136,68 +138,7 @@ Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own
 * [Github Link](https://github.com/caiorss/Emacs-Elisp-Programming)
 * Short Link: http://tinyurl.com/emacsinabox
 
-**Selected Emacs Tutorials**: 
 
-* http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/
-
-* [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
-
-* [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua](http://emacslife.com/how-to-read-emacs-lisp.html)
-
-* [Elisp Cookbook - Emacs Wiki](http://emacswiki.org/emacs/ElispCookbook)
-
-* [Xah's Emacs Tutorial - ErgoEmacs](http://ergoemacs.org)
-
-* [A quick guide to Emacs Lisp programming](https://github.com/chrisdone/elisp-guide#manipulating-the-buffer)
-
-* [Learn Emacs Lisp in 15 minutes](http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html)
-
-* [Emergency Elisp](http://steve-yegge.blogspot.it/2008/01/emergency-elisp.html)
-
-* [Emacs Lisp Cookbook](http://wikemacs.org/wiki/Emacs_Lisp_Cookbook)
-
-* [Quick Started](https://github.com/doitian/emacs.d)
-
-* [Emacs - Arch Linux Wiki](https://wiki.archlinux.org/index.php/Emacs)
-
-* [Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.](https://github.com/emacs-tw/awesome-emacs)
-
-* [Emacs Tiny Tools](http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html)
-
-* [Mastering Emacs mastering the world’s best text editor](https://www.masteringemacs.org/)
-
-* [Command and Function Index](http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html)
-
-
-* [From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/)
-
-* http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
-* http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
-
-* [Introducing Names: practical namespaces for Emacs-Lisp](http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html)
-
-
-* Book: [Programming in Emacs Lisp](http://www.bookshelf.jp/texi/lispintro/emacs-lisp-intro-en.html#SEC_Top)
-
-* http://xahlee.blogspot.com
-
-* http://wikemacs.org/wiki/Emacs_Lisp_Cookbook
-
-* http://emacs-jp.github.io/tips/environment-variable.html
-
-* https://marmalade-repo.org/
-
-* http://technical-dresese.blogspot.com.br/2008/11/why-ive-abandoned-eclipse-for-emacs.html
-
-* http://technical-dresese.blogspot.com.br/2008/08/in-org-mode-abandoning-gtd.html
-
-* http://technical-dresese.blogspot.com.br/2012/12/hooks-local-variables-and-namespaces.html
-
-* http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html
-
-* http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192
-
-* https://github.com/capitaomorte/yasnippet
 
 **Configuration File**
 
@@ -6382,6 +6323,74 @@ Large Collection of Codes to Emacs
 * [EmacsLispLimitations](http://www.emacswiki.org/emacs/EmacsLispLimitations)
 * [Why isn't more of CommonLisp in GNU Emacs?](http://www.emacswiki.org/emacs/CommonLisp)
 * [WhyDoesElispSuck](http://www.emacswiki.org/emacs/WhyDoesElispSuck)
+
+
+
+### Selected Emacs Tutorials
+
+* [Comint: Writing your own Command Interpreter
+By Mickey Petersen](https://www.masteringemacs.org/article/comint-writing-command-interpreter)
+
+* http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/
+
+* [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
+
+* [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua](http://emacslife.com/how-to-read-emacs-lisp.html)
+
+* [Elisp Cookbook - Emacs Wiki](http://emacswiki.org/emacs/ElispCookbook)
+
+* [Xah's Emacs Tutorial - ErgoEmacs](http://ergoemacs.org)
+
+* [A quick guide to Emacs Lisp programming](https://github.com/chrisdone/elisp-guide#manipulating-the-buffer)
+
+* [Learn Emacs Lisp in 15 minutes](http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html)
+
+* [Emergency Elisp](http://steve-yegge.blogspot.it/2008/01/emergency-elisp.html)
+
+* [Emacs Lisp Cookbook](http://wikemacs.org/wiki/Emacs_Lisp_Cookbook)
+
+* [Quick Started](https://github.com/doitian/emacs.d)
+
+* [Emacs - Arch Linux Wiki](https://wiki.archlinux.org/index.php/Emacs)
+
+* [Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.](https://github.com/emacs-tw/awesome-emacs)
+
+* [Emacs Tiny Tools](http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html)
+
+* [Mastering Emacs mastering the world’s best text editor](https://www.masteringemacs.org/)
+
+* [Command and Function Index](http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html)
+
+
+* [From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/)
+
+* http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
+* http://www.reallysoft.de/code/emacs/snippets.html#b4ac15 
+
+* [Introducing Names: practical namespaces for Emacs-Lisp](http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html)
+
+
+* Book: [Programming in Emacs Lisp](http://www.bookshelf.jp/texi/lispintro/emacs-lisp-intro-en.html#SEC_Top)
+
+* http://xahlee.blogspot.com
+
+* http://wikemacs.org/wiki/Emacs_Lisp_Cookbook
+
+* http://emacs-jp.github.io/tips/environment-variable.html
+
+* https://marmalade-repo.org/
+
+* http://technical-dresese.blogspot.com.br/2008/11/why-ive-abandoned-eclipse-for-emacs.html
+
+* http://technical-dresese.blogspot.com.br/2008/08/in-org-mode-abandoning-gtd.html
+
+* http://technical-dresese.blogspot.com.br/2012/12/hooks-local-variables-and-namespaces.html
+
+* http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html
+
+* http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192
+
+* https://github.com/capitaomorte/yasnippet
 
 ### Technical Notes
 
