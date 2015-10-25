@@ -7,10 +7,18 @@
 ;;
 ;; Useful Macros and Functions for Emacs - Elisp
 ;;
-;; 
+;;
 ;;
 ;;--------------------------------------------------------
 
+
+(defun unique (list)
+  (let (tmp-list head)
+    (while list
+      (setq head (pop list))
+      (unless (equal head (car list))
+        (push head tmp-list)))
+    (reverse tmp-list)))
 
 (defun string/starts-with (s begins)
   "Return non-nil if string S starts with BEGINS."
@@ -30,7 +38,7 @@
 
      ELISP> (string/join \",\" '(\"10.23\" \"Emacs\" \"Lisp\" \"Rocks\"))
      \"10.23,Emacs,Lisp,Rocks\"
-     ELISP> 
+     ELISP>
 
   "
   (mapconcat 'identity string-list glue-char))
@@ -40,17 +48,22 @@
   (split-string str glue-char)
   )
 
+(defun string/quote (str)
+  (format "\"%s\"" str)
+  )
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Plist to Alist 
+;; Plist to Alist
 (defun plist->alist (plist)
   (if (null plist)
-      '()      
+      '()
       (cons
        (list (car plist) (cadr plist))
        (plist->alist (cddr plist)))))
 
-;;; Convert association list to plist      
+;;; Convert association list to plist
 (defun alist->plist (assocl)
   (if (null assocl)
       '()
@@ -81,32 +94,34 @@
 ;; Scheme for-each function.
 ;;
 (defun for-each (fun xs)
-  (if (null xs)
-      nil
-    (progn
-      (funcall fun (car xs))
-      (for-each fun (cdr xs)))))
+  (dolist (x xs) (funcall fun x)))
+
 
 (defun for-each-appply (fun xss)
   (for-each (lambda (xs) (apply fun xs))  xss))
 
+
+
 (defun filter (fun xs)
-  (if (null xs)
-      '()
-    (let ((hd (car xs))
-          (tl (cdr xs)))
-      (if (funcall fun hd)
-          (cons hd (filter fun tl))
-        (filter fun tl)))))
+  (let ((acc  nil))
+    (dolist (x xs)
+      (if (funcall fun x)
+	  (setq acc (cons x acc))
+	))
+      (reverse acc)
+    ))
+
 
 (defun reject (fun xs)
-  (if (null xs)
-      '()
-    (let ((hd (car xs))
-          (tl (cdr xs)))
-      (if (not (funcall fun hd))
-          (cons hd (reject fun tl))
-        (reject fun tl)))))
+  (let ((acc  nil))
+    (dolist (x xs)
+      (if (not (funcall fun x))
+	  (setq acc (cons x acc))
+	))
+      (reverse acc)
+    ))
+
+
 
 (defun take (n xs)
   (if (or (null xs) (zerop n))
@@ -137,7 +152,7 @@
 
 
 (defun foldr (f acc xss)
-  (if (null xss)                        
+  (if (null xss)
        ;; foldr f z []     = z
       acc
        ;; foldr f z (x:xs) = f x (foldr f z xs)
@@ -157,24 +172,24 @@
   "
   Forward function composition:
 
-  Example: 
-   
+  Example:
+
    ELISP> (fcomp 1+ number-to-string print)
   (lambda
     (__x__)
     (print
       (number-to-string
-       (1+ __x__))))  
+       (1+ __x__))))
 
 
    ELISP> (funcall (fcomp 1+ number-to-string print) 10)
 
-   \"11\"  
+   \"11\"
 
   "
-  `(lambda (__x__) 
+  `(lambda (__x__)
      ,(foldl
-       (lambda (a b) `(,b ,a)) '__x__ funlist))) 
+       (lambda (a b) `(,b ,a)) '__x__ funlist)))
 
 (defun map-pair (func xs)
   "
@@ -193,17 +208,17 @@
 (defun map-xypair (func-x func-y xs)
   "
   Example:
- 
+
    map-xypair fx fy [x0, x1, x2, ... xn]
 
-   Returns: 
+   Returns:
            [(fx x0, fy x0), (fx x1, fy x1), (fx x2, fy x2) ...]
 
    ELISP> (map-xypair #'buffer-name #'buffer-mode (buffer-list))
    ((\"*ielm*\" . inferior-emacs-lisp-mode)
     (\"*scratch*\" . lisp-interaction-mode)
-    (\"*Backtrace*\" . debugger-mode)    
-    ...  
+    (\"*Backtrace*\" . debugger-mode)
+    ...
   "
   (mapcar
    (lambda (x)
@@ -221,7 +236,7 @@
 
 (defun remove-from-list (reject-list xlist)
   "Remove all elements from xlist that are in the reject-list
-  
+
    Example:
 
    ELISP> (remove-from-list '(z y x) '(a b c x y z a x))
@@ -239,7 +254,7 @@
     (let ((hd (car lst))
       (tl (cdr lst)))
       (if (equal targ hd)
-      (cons subst (replace_sym targ subst tl))      
+      (cons subst (replace_sym targ subst tl))
     (cons (if (listp hd) (replace_sym targ subst hd) hd)
           (replace_sym targ subst tl))))))
 
@@ -256,7 +271,7 @@
 (defmacro $f  ( &rest body)
   `(lambda (%) ,body))
 
-;;; Delay expression 
+;;; Delay expression
 (defmacro $fd (func &rest params)
   (lambda () (,func ,@params)))
 
@@ -272,13 +287,13 @@
      ,true-clause))
 
 ;; Invert S-expression logical value
-;; 
+;;
 (defmacro $n (pred &rest args)
   `(not (,pred ,@args)))
 
 (defmacro letc (bindings &rest body)
   "
-   Example: 
+   Example:
 
    (letc
          (
@@ -287,7 +302,7 @@
           c (+ a b)
           )
          (list a b c))
-   
+
     Result: (10 13 23)
   "
   `(let*
@@ -320,7 +335,7 @@
     (+ 10 20)
     (- 3)
     log10)
-  
+
   (log10  (-  (+   (/  (exp 5)   20) 10 20)  3))
   "
   (foldl #'pass-result x exprs))
@@ -333,7 +348,7 @@
       (/ 20)
       (+ 10 20)
       (- 16))
-     
+
    ;; Macro expansion
 
    (- 16 (+ 10 20 (/ 20 5))) = -18
@@ -346,11 +361,11 @@
   "
   ($->
     500
-    (/ $ 20 )    
+    (/ $ 20 )
     (- 40 $)
     sqrt)
-    
-   Expansion: (sqrt  (- 40 (/ 500 20))) 
+
+   Expansion: (sqrt  (- 40 (/ 500 20)))
    Exprected result: 3.872983346207417
   "
   (foldl #'pass-result-subst x exprs))
@@ -365,7 +380,7 @@
     \"(* 10 30) = 300\"
     \"(+ 10 ($debug * 10 30)) = 310\"
 
-    Output: 310 
+    Output: 310
 
    "
   `(let
@@ -390,8 +405,8 @@
       intern))
 
 
-(defun buffer-content (name) 
-    (with-current-buffer name 
+(defun buffer-content (name)
+    (with-current-buffer name
       (buffer-substring-no-properties (point-min) (point-max)  )))
 
 (defun get-selection ()
@@ -417,27 +432,28 @@
 
 (defun mode/show ()
   "  Returns all modes associated with files
-    
+
      To query the file extesions associated with a mode
-     use: 
+     use:
          > (mode/ftypes 'markdown-mode)
-  
+
      for example.
   "
-  (dolist (m (remove-if #'listp
-    (mapcar #'cdr auto-mode-alist))) (print m)))
+  (for-each #'print
+	    (unique (reject #'listp (map #'cdr auto-mode-alist)))))
+
 
 (defun mode/ftypes (mode)
   "
-  Get all file extension associated with a mode. 
-  
+  Get all file extension associated with a mode.
+
   Usage:
-  
+
   ELISP> (get-mode-ftypes 'markdown-mode)
   ((\"\\.md\\'\" . markdown-mode)
   (\"\\.text\\'\" . markdown-mode)
-  (\"\\.markdown\\'\" . markdown-mode)  
-  
+  (\"\\.markdown\\'\" . markdown-mode)
+
   "
   (remove-if-not
    (lambda (al)
@@ -456,7 +472,7 @@
 
 ;; (add-hook 'emacs-lisp-mode-hook
 ;;           (lambda ()
-;;             (progn 
+;;             (progn
 
 (defmacro add-hooks (hookname &rest functions)
   `(progn
@@ -486,8 +502,8 @@
 
 (defmacro define-global-menu (menu-name &rest label-actions-plist)
   "
-  Example: 
- 
+  Example:
+
   (define-global-menu  \"Color Themes\"
     \"Adwaita\"       (load-theme 'adwaita)
     \"Deeper-blue\"   (load-theme 'deeper-blue)
@@ -504,7 +520,7 @@
 
 
 (defun add-repository (path)
-  "Add repository path and its sub directories and 
+  "Add repository path and its sub directories and
    files to the load-path variable."
   (setq load-path
         (append
@@ -579,12 +595,12 @@
 (defun open-init-file ()
     (interactive)
     (find-file user-init-file)
-)  
+)
 
 (defun open-file-manager ()
   "Open buffer directory in file manager (Linux Only)"
   (interactive)
-  (call-process "pcmanfm"))open-file-manager
+  (call-process "pcmanfm"))
 
 
 
@@ -697,20 +713,20 @@
 (defun url->sexp (url)
   "Read multiple S-expression from a URL path"
   ($-> url
-       (url-http-get $ nil)       
+       (url-http-get $ nil)
        (read $)))
 
 (defun url->sexps (url)
   "Read multiple S-expression from a URL path"
   ($-> url
-       (url-http-get $ nil)       
+       (url-http-get $ nil)
        (concat "( " $ " ) ") ;; Wrap parenthesis
        (read $)))
-       
+
 (defun load-url (url)
   "Load an emacs source code from a URL"
   (eval (cons 'progn (url->sexps url))))
-    
+
 
 (defun eval-string (str)
   (eval (read str)))
@@ -724,7 +740,7 @@
 (defun url-download (url dirpath filename)
   "
    Download a file:
-  
+
   Usage:
 
   To download a file from a url to a given directory
@@ -733,29 +749,29 @@
   > (url-download url dirpath filename)
 
   or
- 
-  To download to the current directory with a 
+
+  To download to the current directory with a
   defined filename.
 
   > (url-download url nil filename)
 
   or
- 
-  To download a file to current directory, the file name 
+
+  To download a file to current directory, the file name
   will be extracted from the url.
 
-  > (url-download url nil nil) 
- 
+  > (url-download url nil nil)
+
   "
   (letc
    (dir    (if (null dirpath)
                (current-dir)
                 dirpath)
-           
+
    fname   (if (null filename)
                 (url->filename url)
              filename)
-   
+
    fpath    (concat-path dir fname))
 
   (princ (list dir fname fpath))
@@ -780,7 +796,7 @@
 (defun decode-url ()
   "
    Usage: Select the url and type: A-x decode-url
-   It will print the URL parameters in the buffer, 
+   It will print the URL parameters in the buffer,
    example:
 
     When this Url is selected and the user type: A-x decode-url
@@ -791,7 +807,7 @@
 
   sa = t
   rct = j
-  q = 
+  q =
   esrc = s
   source = web
   cd = 1
@@ -803,7 +819,7 @@
   sig2 = a6GUXFARKXj6r1JyiNkQ8w
   bvm = bv.51773540,d.dmg
 
-   
+
   "
   (interactive)
   (-> (get-selection)
@@ -813,7 +829,7 @@
 
 (defun get-url-params (url)
   "
-  
+
   "
   (interactive)
   ($->  url
@@ -830,7 +846,7 @@
 
 
 ;;; This function can be called by typing M-x launch-terminal in any buffer.
-;;; 
+;;;
 (defun launch-terminal ()
   (interactive)
   (shell-command "lxterminal"))
@@ -875,7 +891,7 @@
 ;;-------------------------------------;;
 
 (defun delete-word ()
-    "Delete word next at cursor (point) - can be associated 
+    "Delete word next at cursor (point) - can be associated
      with a key binb.
     "
     (interactive)
@@ -959,7 +975,7 @@
     "C-j"     #'eval-print-last-sexp
     "M-m"     #'macro-expand-at-point
     "C-M-j"   #'eval-selection
-    "C-c C-y"  #'copy-sexp-at-point    
+    "C-c C-y"  #'copy-sexp-at-point
     )
 
 
@@ -987,6 +1003,7 @@
              (add-to-list 'eshell-visual-commands "tail")
            ))
 
+(cua-mode)
 
 
 ;; (progn
