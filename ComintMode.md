@@ -11,6 +11,8 @@ Goal:
 
 * Find out how to integrate Emacs to Asynchronous process, shells, Repls in a portable and easier to use way. 
 * Create Emacs User Interfaces to external apps.
+* Integrate REPLs to Emacs.
+
 
 ### Clear Comint Buffer
 

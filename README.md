@@ -1,9 +1,11 @@
 # Emacs - Programming and Customization
 
+![](images/emacs_logo.png)
+
 **Repository Link**  
 
 * [Github Link](https://github.com/caiorss/Emacs-Elisp-Programming)
-* Short Link: http://tinyurl.com/emacsinabox [Emacs In A Box]
+* Short Link: http://tinyurl.com/emacsinabox - Mneumonic: **Emacs In A Box**
 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -817,9 +819,9 @@ ELISP>
 
 ```
 
-##### Variadic Function 
+##### Variadic Functions 
 
-Functions of many arguments 
+Functions with many arguments 
 
 ```elisp 
 
@@ -859,7 +861,133 @@ ELISP> (sum-prod 1 1 2 3 4 5)
 
 ```
 
-##### Closure 
+##### Function with optional argument 
+
+```elisp 
+(defun test-optional (a &optional b)
+  (list a b))
+  
+ELISP> (test-optional 10 20)
+(10 20)
+
+ELISP> (test-optional 10 )
+(10 nil)
+
+;--------------------------------;
+
+(defun test-optional2 (a b &optional b c d e)
+  (list :a a :b b :c c :d d :e e))
+
+ELISP> (test-optional2 0 1 2 3 4 5 )
+(:a 0 :b 2 :c 3 :d 4 :e 5)
+
+
+ELISP> (test-optional2 0 1 2 3 4  )
+(:a 0 :b 2 :c 3 :d 4 :e nil)
+
+ELISP> (test-optional2 0 1 2 3   )
+(:a 0 :b 2 :c 3 :d nil :e nil)
+
+ELISP> (test-optional2 0 1 2    )
+(:a 0 :b 2 :c nil :d nil :e nil)
+  
+ELISP> (test-optional2 0 1  )
+(:a 0 :b nil :c nil :d nil :e nil)
+
+ELISP> (test-optional2 0 1)
+(:a 0 :b nil :c nil :d nil :e nil)
+
+;--------------------------------;
+
+(defun test-optional-default-b (a &optional b)
+  (if b
+      (list a b)
+      (list a "b is null")))
+
+ELISP> (test-optional-default-b 1 2)
+(1 2)
+
+ELISP> (test-optional-default-b 1)
+(1 "b is null")
+
+ELISP> (test-optional-default-b 1 nil)
+(1 "b is null")
+  
+```
+
+##### Functions with Property List argument
+
+```elisp 
+(defun make-shell-interface (&rest params)
+  "
+  Create a shell interface.
+ 
+  Possible parameters:
+ 
+    :name      Name of shell
+    :type      ['sh, 'bash, ...]
+    :path      Path to program
+    :buffer    Name of buffer
+    
+  "
+  (let
+       ((name   (plist-get params :name ))
+        (type   (plist-get params :type))
+        (path   (plist-get params :path))
+        (buffer (plist-get params :buffer)))
+    (list
+     (cons 'name buffer)
+     (cons 'type type)
+     (cons 'path path)
+     (cons 'buffer buffer))))
+     
+
+ELISP> (make-shell-interface :name "pylaucher" :path "/usr/bin/python" :type 'sh :buffer "pyshell")
+((name . "pyshell")
+ (type . sh)
+ (path . "/usr/bin/python")
+ (buffer . "pyshell"))
+
+ELISP> (make-shell-interface :name "pylaucher" :path "/usr/bin/python" :type 'sh)
+((name)
+ (type . sh)
+ (path . "/usr/bin/python")
+ (buffer))
+
+ELISP> (make-shell-interface :name "pylaucher" :path "/usr/bin/python" :type 'bash)
+((name)
+ (type . bash)
+ (path . "/usr/bin/python")
+ (buffer))
+
+ELISP> (make-shell-interface :name "pylaucher" :path "/usr/bin/python")
+((name)
+ (type)
+ (path . "/usr/bin/python")
+ (buffer))
+
+ELISP> (make-shell-interface :name "pylaucher" )
+((name)
+ (type)
+ (path)
+ (buffer))
+
+ELISP> (make-shell-interface  )
+((name)
+ (type)
+ (path)
+ (buffer))
+ 
+ELISP> (make-shell-interface :buffer "pyshell"  :path "/usr/bin/python" :type 'sh :name "pylaucher")
+((name . "pyshell")
+ (type . sh)
+ (path . "/usr/bin/python")
+ (buffer . "pyshell"))
+       
+
+```
+
+##### Closures
 
 Emacs lisp dialect doesn't have closure by default, so the code below won't work like in Scheme and Common Lisp:
 
