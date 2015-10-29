@@ -1,3 +1,5 @@
+#+TITLE Emacs in a Box
+
 * Emacs - Programming and Customization
 
 file:images/emacs_logo.png
@@ -21,7 +23,10 @@ Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own
 
 The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typing: M-x cua-mode, emacs also supports the Vim keybindings by installing the evil package.
 
-See also: [[https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf][GNU Emacs Key Bindings  Reference Card]]
+See also: 
+
+    - [[https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf][GNU Emacs Key Bindings  Reference Card]]
+
 *Key Notation*
 
 | Key | Name        |  Modern Keyboard Equivalence   |
@@ -360,7 +365,7 @@ Here some projects that tried to create a "better Emacs", "lisp powered"  editor
 - Deuce - An Emacs like editor implemented under Clojure, it stills a work in progress.
 
 
-***  Basic Syntax
+*  Basic Elisp Syntax
 
 **** Basic Operations
 
@@ -445,7 +450,8 @@ t
 
 Lists
 
-#+END_SRC
+#+BEGIN_SRC elisp
+
 ELISP>
 ELISP> '(10 20 30 40)
 (10 20 30 40)
@@ -532,7 +538,6 @@ ELISP>
 #+END_SRC
 
 **** Defining Functions
-
 
 ***** Define Simple Function
 
@@ -1864,10 +1869,14 @@ emacs-lisp-mode
 
 *Eval Commands in Elisp mode*
 
-* Reference: [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Eval.html][Evaluating Emacs Lisp Expressions]]
+References: 
+    - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Eval.html]
+    - [Evaluating Emacs Lisp Expressions]]
+
 Evaluate the defun containing or after point, and print the value in the echo area (eval-defun).
 
-#+END_SRC
+#+BEGIN_SRC
+
 M-x eval-defun
 
 or
@@ -4584,7 +4593,7 @@ Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 
 The variable auto-mode-alist holds all modes associated with file extension.
 
-* List all modes associated with file extensions.
+    * List all modes associated with file extensions.
 
 #+BEGIN_SRC elisp
 
@@ -4633,7 +4642,7 @@ clojure-mode
 ...
 #+END_SRC
 
-* Query all file extensions associated with a mode.
+    * Query all file extensions associated with a mode.
 
 #+BEGIN_SRC elisp
 
@@ -4903,7 +4912,7 @@ http://sunsite.ualberta.ca/Documentation/Gnu/emacs-lisp-ref-21-2.7/html_node/eli
 
 #+END_SRC
 
-** Discoverability / Get Documentation
+* Discoverability / Get Documentation
 
 
 *Apropos*
@@ -4971,7 +4980,7 @@ or
 C-h v
 #+END_SRC
 
-** Network API
+* Network API
 
 
 *Links to Inquiry*
@@ -4994,18 +5003,9 @@ Emacs tools and codes that can be useful as implementation references and proof 
 
     - [[https://www.gnu.org/software/emacs/manual/html_mono/dbus.html][D-Bus integration in Emacs]]
     
-** Bytecodes
-
-    - http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_15.html
-    - [[http://nullprogram.com/blog/2014/01/04/][Emacs Bytecodes internals]]
-    
-Forth Compiler to Emacs Bytecodes
-
-    - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/forth.el
-    - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth
 
 
-** Customization
+* Customization
 
 See also: http://www.aaronbedra.com/emacs.d/
 
@@ -5170,7 +5170,7 @@ Set identation with spaces instead of tabs with 4 spaces
 
 *Font Size and Type*
 
-=(set-default-font "Inconsolata 14")
+=(set-default-font "Inconsolata 14")=
 
 
 *Character Encoding Default*
@@ -5537,7 +5537,8 @@ From: [[https://news.ycombinator.com/item?id=1654164][Ask HN Emacs Users: What's
 (setq initial-scratch-message nil)
 #+END_SRC
 
-** Solutions
+
+* Solutions
 
 ***  Quick edit and reload Emac Configuration File.
 
@@ -5633,9 +5634,7 @@ file:images/utils_menu2.png
 
 ***  Extract Function Documentation
 
-Source:
-
-* [[http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/][Generate emacs-lisp documentation]]
+Source: [[http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/][Generate emacs-lisp documentation]]
 Primitives:
 
 #+BEGIN_SRC elisp
@@ -6301,7 +6300,7 @@ ELISP> (princ (url-http-post "http://httpbin.org/post" '(("use" . "dummy")  ("pa
 
 
 
-** Resources
+* Resources
 
 ***  References
 
@@ -6556,13 +6555,27 @@ Large Collection of Codes to Emacs
 
 ***  Technical Notes
 
-Paper about Emacs architecture:
+*Emacs architecture:*
 
     * [[https://www.gnu.org/software/emacs/emacs-paper.html][EMACS: The Extensible, Customizable Display Editor by Richard Stallman]]
-Paper about Distel emacs extension for Erlang
+    
+*REPL - Erlang Emacs Extension: Distel*
 
     * [[http://www.erlang.org/euc/02/distel.ps][Distel: Distributed Emacs for Erlang]]    
     * [[http://massemanet.github.io/distel/][Distel emacs - erlang IDE - Github Repository]]
     * [[ftp://publications.ai.mit.edu/ai-publications/pdf/AITR-1451.pdf][Emacs Lisp in Edwin Scheme  AI Memo No. TR-1451 - MIT by Mattew Birkholz]]
+    
+*Key Bindings and Emacs Terminology*
+
     * [[http://aliquote.org/memos/2014/08/04/a-modular-configuration-for-emacs][A modular configuration for Emacs / Ergoemacs]]
     * [[http://ergoemacs.org/emacs/modernization.html][Modernization of Emacs (Simple Changes Emacs Should Adopt)]]
+
+*Emacs Bytecodes*
+
+    - http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_15.html
+    - [[http://nullprogram.com/blog/2014/01/04/][Emacs Bytecodes internals]]
+    
+Forth Compiler to Emacs Bytecodes
+
+    - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/forth.el
+    - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth
