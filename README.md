@@ -6521,6 +6521,16 @@ Large Collection of Codes to Emacs
 
 * [What You Can Learn From ido.el](https://vimeo.com/1013263)
 
+**ORG Mode**
+
+* [Embedding Code Snippets In Org Mode](https://www.youtube.com/watch?v=lsYdK0C2RvQ)
+
+* [Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)](https://www.youtube.com/watch?v=VIuOwIBL-ZU)
+
+* [Org mode is awesome](https://www.youtube.com/watch?v=fgizHHd7nOo)
+
+* [Emacs Org-mode - a system for note-taking and project planning](https://www.youtube.com/watch?v=oJTwQvgfgMM)
+
 ### Limitations
 
 * [EmacsLispLimitations](http://www.emacswiki.org/emacs/EmacsLispLimitations)

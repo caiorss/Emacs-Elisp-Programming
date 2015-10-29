@@ -11,6 +11,10 @@
 ;;
 ;;--------------------------------------------------------
 
+(defmacro constatly (a)
+  `(lambda (b) ,a))
+
+(defun identity (x) x)
 
 (defun unique (list)
   (let (tmp-list head)
@@ -19,6 +23,9 @@
       (unless (equal head (car list))
         (push head tmp-list)))
     (reverse tmp-list)))
+
+(defun string/replace-regexp (pat sub str)
+  (replace-regexp-in-string pat sub str))
 
 (defun string/starts-with (s begins)
   "Return non-nil if string S starts with BEGINS."
@@ -227,7 +234,12 @@
 
 (defmacro juxt (&rest xs_f)
   "
-  ELISP> (funcall (juxt #'buffer-file-name  #'buffer-name #'buffer-mode) (current-buffer))
+  ELISP> (funcall (juxt #'buffer-file-name
+                        #'buffer-name
+                        #'buffer-mode)
+          (current-buffer))
+  Output:
+
   (nil \"*ielm*\" inferior-emacs-lisp-mode)
   "
   `(lambda (x)
@@ -405,17 +417,6 @@
       intern))
 
 
-(defun buffer-content (name)
-    (with-current-buffer name
-      (buffer-substring-no-properties (point-min) (point-max)  )))
-
-(defun get-selection ()
-  "Get the text selected in current buffer as string"
-  (interactive)
-  (buffer-substring-no-properties (region-beginning) (region-end)))
-
-
-
 (defun replace-regexp-entire-buffer (pattern replacement)
   "Perform regular-expression replacement throughout buffer."
   (interactive
@@ -525,7 +526,7 @@
   (setq load-path
         (append
          load-path
-         (plist-get (dir-list/abs-tags path) :dirs)
+         (plist-get (dir/list-abs-tags path) :dirs)
          (list path))))
 
 ;;;;;;;;;;;;;; Http Request ;;;;;;;;;;;
@@ -579,8 +580,7 @@
 ;;;;;;;;;;;;;; Files and Directories  ;;;;;;;;;;;;;;;;;
 
 
-(defun concat-path (base relpath)
-  (concat (file-name-as-directory base) relpath))
+
 
 ;; Usage: M-x reload-init-file
 ;;
@@ -603,26 +603,78 @@
   (call-process "pcmanfm"))
 
 
+;;;;;;;;;;;;;;;;; FILE API ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun file/concat-path (base relpath)
+  (concat (file-name-as-directory base) relpath))
+
+(defun file/emacs-dir (filename)
+  "Returns a file with relative path to user emacs directory,
+   generally ~/.emacs.d
+  "
+  (file/concat-path user-emacs-directory filename))
+
+(defun file/delete (filename)
+  (delete-file filename))
+
+(defun file/copy (filename dest)
+  (copy-file filename dest))
+
+(defun file/path (filename)
+  (file-name-directory filename))
+
+(defun file/abs-path (filename)
+  (file-name-directory
+    (expand-file-name filename)))
+
+(defun file/basename (filename)
+  (file-name-base filename))
+
+(defun file/replace-ext (filename extension)
+  "Change extension of filename
+
+  Example:
+
+   ELISP> (file/replace-ext \"/tmp/tools.el\" \".html\")
+   \"/tmp/tools.html\"
+
+   ELISP> (file/replace-ext \"tools.el\" \".html\")
+   \"tools.html\"
+
+  "
+  (letc
+   (path     (file/path filename)
+    newname  (concat (file/basename filename) extension))
+
+    (if path
+        (file/concat-path path  newname)
+         newname)))
 
 
-(defun read-file (filename)
+
+(defun file/exists (filename)
+  (file-exists-p filename))
+
+(defun file/is_file (filename)
+  (not (file-directory-p filename)))
+
+(defun file/is_dir (filename)
+  (file-directory-p filename))
+
+(defun file/read (filename)
   (interactive "fFind file: ")
   (with-temp-buffer
     (insert-file-contents filename)
     (buffer-substring-no-properties (point-min) (point-max))))
 
-(defun write-file (filename text)
-  (append-to-file text nil filename))
+(defun file/write (filename content)
+  (progn
+   (when (file-exists-p filename) (delete-file filename))
+   (append-to-file content nil filename)))
 
-(defun current-dir ()
-  "Show current directory"
-  (interactive)
-  (nth 1 (split-string (pwd))))
-
-(defun current-file ()
-  "Show Current File"
-  (interactive)
-  (buffer-file-name (current-buffer)))
+;; Append Content to a file
+(defun file/write-append (filename content)
+  (append-to-file content nil filename))
 
 
 
@@ -633,13 +685,13 @@
     (-->
      (directory-files abs-dirpath)
      (remove-from-list '("." ".."))
-     (map ($f concat-path abs-dirpath %)))))
+     (map ($f file/concat-path abs-dirpath %)))))
 
 
 (defun dir/list-abs-tags (dirpath)
   "Returns a plist (:files filelist dirs: dirlist)"
   (letc
-   (content  (dir-list/abs dirpath))
+   (content  (dir/list-abs dirpath))
    (list
     :files (reject #'file-directory-p content)
     :dirs  (filter #'file-directory-p content))))
@@ -692,12 +744,15 @@
     el-files-list))
 
 
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      S expressions                        ;;
 ;;-------------------------------------------;;
 
 (defun file->sexp (filename)
-  (read (read-file filename)))
+  (read (file/read filename)))
 
 (defun str->sexp (str)
   (read str))
@@ -708,7 +763,7 @@
 (defun sexp->file (sexp filename)
   (--> sexp
        sexp->str
-       (write-file filename)))
+       (file/write filename)))
 
 (defun url->sexp (url)
   "Read multiple S-expression from a URL path"
@@ -772,13 +827,112 @@
                 (url->filename url)
              filename)
 
-   fpath    (concat-path dir fname))
+   fpath    (file/concat-path dir fname))
 
   (princ (list dir fname fpath))
   ($-> url
       (url-http-get $ nil)
-      (write-file fpath $))))
+      (file/write fpath $))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; BUFFER Wrappers
+;;
+
+(defun open-as-root (filename)
+  (interactive)
+  (find-file (concat "/sudo:root@localhost:"  filename)))
+
+(defun buffer/get (&optional arg)
+  (if (not arg)
+      (current-buffer)
+    (if (bufferp arg)
+        arg
+      (get-buffer arg))))
+
+(defun buffer/name (&optional arg)
+  (buffer-name (buffer/get arg)))
+
+(defun buffer/text (&optional buffer-or-name)
+  "Returns all the buffer content as string"
+  (with-current-buffer (buffer/get buffer-or-name)
+    (buffer-substring-no-properties (point-min) (point-max))))
+
+(defun buffer/selection ()
+  "Get the text selected by the user in current buffer as string"
+  (interactive)
+  (buffer-substring-no-properties (region-beginning) (region-end)))
+
+(defun buffer/line ()
+  "Return the current line at the cursor position"
+  (interactive)
+  (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+
+(defun buffer/file (&optional buffer-or-name)
+  "Show Current File"
+  (interactive)
+  (buffer-file-name (buffer/get buffer-or-name)))
+
+
+(defun buffer/write-file (filename &optional buffer-or-name)
+  (file/write filename (buffer/text buffer-or-name)))
+
+(defun buffer/erase (buffer-or-name)
+  (with-current-buffer (buffer/get buffer-or-name)
+    (erase-buffer)))
+
+(defun buffer/major-mode (buffer-or-name)
+  (with-current-buffer (buffer/get buffer-or-name)
+    major-mode))
+
+(defun buffer/copy ()
+  "Copy entire buffer content to clipboard"
+  (interactive)
+  (clipboard-kill-ring-save (point-min) (point-max))
+  (message "Copied to clipboard. Ok."))
+
+(defun buffer/copy-path ()
+  (interactive)
+  (copy-to-clipboard (buffer/file)))
+
+
+(defun buffer/edit-as-root ()
+  "Edit current buffer as root"
+  (interactive)
+  (let
+      (
+       ;; Get the current buffer file name
+       (filename (buffer-file-name (current-buffer)))
+       ;; Get the current file name
+       (bufname  (buffer-name (current-buffer)))
+       )
+    (progn
+      (kill-buffer bufname)         ;; Kill current buffer
+      (open-as-root filename))))    ;; Open File as root
+
+(defun buffer/list-files ()
+ "List all buffers bounded to a file"
+  (interactive)
+  ($-> (buffer-list)
+
+       (filter #'buffer-file-name $)
+
+       (mapcar (juxt #'identity
+                     #'buffer-name
+                     #'buffer-file-name) $)
+       ))
+
+(defun buffer/list ()
+  "List the names of all buffers"
+  (interactive)
+  ($-> (buffer-list)
+       (mapcar (juxt #'identity
+                     #'buffer/name
+                     #'buffer/file
+                     #'buffer/major-mode)
+                $)))
+
+(defun buffer/kill (buffer-or-name)
+  (kill-buffer (buffer/get buffer-or-name)))
 
 ;;
 ;; Src: http://web.ics.purdue.edu/~dogbe/static/emacs_config_file.html
@@ -822,7 +976,7 @@
 
   "
   (interactive)
-  (-> (get-selection)
+  (-> (buffer/selection)
       get-url-params
       insert
       ))
@@ -834,8 +988,8 @@
   (interactive)
   ($->  url
         (split-string (cadr (split-string $  "?" )) "&")
-        (map ($f split-string % "=") $)
-        (map ($f  string/join " = " %) $)
+        (mapcar ($f split-string % "=") $)
+        (mapcar ($f  string/join " = " %) $)
         (string/join "\n" $)
         (concat "\n\n" $)
         ))
@@ -936,13 +1090,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-
-(defun copy-sexp-at-point ()
+(defun lisp/copy-sexp-at-point ()
     "Copy s-expression where is the cursor to clipboard"
     (interactive)
     (copy-to-clipboard (thing-at-point 'sexp)))
 
-(defun macro-expand-at-point ()
+(defun elisp/macro-expand-at-point ()
     (interactive)
     (-> (thing-at-point 'sexp)
         str->sexp
@@ -951,10 +1104,10 @@
         insert
         ))
 
-(defun eval-selection ()
+(defun elisp/eval-selection ()
   (interactive)
   ($->
-        (get-selection)
+        (buffer/selection)
         (concat "(" $ ")")
         (progn (print $)  $)
         read
@@ -962,7 +1115,7 @@
         eval))
 
 ;; http://emacs.wordpress.com/2007/01/17/eval-and-replace-anywhere/
-(defun eval-and-replace-last-sexp ()
+(defun elisp/eval-and-replace-last-sexp ()
   "Replace the preceding sexp with its value."
   (interactive "*")
   (save-excursion
@@ -974,51 +1127,90 @@
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
+(defun elisp/function-at-point-exists ()
+  "Test if variable at the cursor is a function"
+  (interactive)
+    (if (functionp (intern (thing-at-point 'filename)))
+        (message "Function exists OK.")
+      (message "Function not found")))
 
-(define-mode-keys emacs-lisp-mode-map
-    "C-c C-c" #'eval-defun
-    "C-c C-b" #'eval-buffer
-    "C-c C-r" #'eval-and-replace-last-sexp
-    "C-j"     #'eval-print-last-sexp
-    "M-m"     #'macro-expand-at-point
-    "C-M-j"   #'eval-selection
-    "C-c C-y" #'copy-sexp-at-point
-    )
+(defun elisp/variable-at-point-exists ()
+  "Test if symbol at cursor is a variable"
+  (interactive)
+    (if (boundp (intern (thing-at-point 'filename)))
+        (message "Variable exists OK.")
+        (message "Variable not found")))
+
+(defun elisp/value-at-point ()
+  "Show the value of variable at point. If it exists."
+  (interactive)
+  (letc (str       (thing-at-point 'filename)
+         sym       (if str (intern str) nil)
+         value     (if sym (symbol-value sym) nil))
+         (print value)))
+
+(defun elisp/find-defuns ()
+  "Find all defun statements in the current buffer"
+    (interactive)
+    (occur "defun"))
+
+(defun elisp/find-macros ()
+  "Find all macros defined in a elisp file"
+  (interactive)
+  (occur "defmacro"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun open-finance ()
+  (interactive)
+  (find-file "~/org/Finance.org"))
+
+(defvar __org-mode-html-buffer "*Org HTML Export*")
+
+(defun org-html (&optional buffer-or-name)
+  (interactive)
+  (with-current-buffer (buffer/get buffer-or-name)
+    (org-html-export-as-html)
+    (buffer/write-file
+     (file/replace-ext (buffer/file buffer-or-name) ".html")
+     __org-mode-html-buffer)
+    (buffer/kill __org-mode-html-buffer)
+    (message "Ok.")
+  ))
 
 
 
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (setq show-paren-style 'expression)
-            (setq show-paren-delay 0)
-             (electric-pair-mode 1)
-             (show-paren-mode 1)
-             (turn-on-auto-fill)
-             (turn-on-eldoc-mode)
-             ))
+;; (define-mode-keys emacs-lisp-mode-map
+;;     "C-c C-c" #'eval-defun
+;;     "C-c C-b" #'eval-buffer
+;;     "C-c C-r" #'eval-and-replace-last-sexp
+;;     "C-j"     #'eval-print-last-sexp
+;;     "M-m"     #'macro-expand-at-point
+;;     "C-M-j"   #'eval-selection
+;;     "C-c C-y" #'copy-sexp-at-point
+;;     )
 
 
 
-;; Disable E-shell banner message
-(setq eshell-banner-message "")
-
-(add-hooks 'eshell-mode-hook
-           (lambda ()
-             (add-to-list 'eshell-visual-commands "ssh")
-             (add-to-list 'eshell-visual-commands "htop")
-             (add-to-list 'eshell-visual-commands "ncmpcpp")
-             (add-to-list 'eshell-visual-commands "tail")
-           ))
-
-(cua-mode)
+;; (add-hook 'emacs-lisp-mode-hook
+;;           (lambda ()
+;;             (setq show-paren-style 'expression)
+;;             (setq show-paren-delay 0)
+;;              (electric-pair-mode 1)
+;;              (show-paren-mode 1)
+;;              (turn-on-auto-fill)
+;;              (turn-on-eldoc-mode)
+;;              ))
 
 
-;; (progn
-;;  (load-theme 'wombat)
-;;  (set-face-attribute 'default nil :height 94)
-;;  (set-face-attribute 'fringe nil :background "#2d2d2d")
-;;  (set-face-attribute 'default nil :family "Source Code Pro")
-;;  (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
-;;  (set-face-attribute 'font-lock-comment-face nil :weight 'semibold)
-;;  (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")
-;;  )                                      ;
+
+;; ;; Disable E-shell banner message
+;; (setq eshell-banner-message "")
+
+;; (add-hooks 'eshell-mode-hook
+;;            (lambda ()
+;;              (add-to-list 'eshell-visual-commands "ssh")
+;;              (add-to-list 'eshell-visual-commands "htop")
+;;              (add-to-list 'eshell-visual-commands "ncmpcpp")
+;;              (add-to-list 'eshell-visual-commands "tail")
+;;            ))
