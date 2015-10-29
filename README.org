@@ -5,7 +5,8 @@ file:images/emacs_logo.png
 *Repository Link*
 
 
-- [[https://github.com/caiorss/Emacs-Elisp-Programming][Github Link]]- Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
+    - [[https://github.com/caiorss/Emacs-Elisp-Programming][Github Link]]
+    - Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
 
 
 Emacs is an scriptable text editor that can be customized in Elisp, an Emacs own lisp dialect that is a subset of and old version of common lisp. An excellent book about Common Lisp that is also useful for Elisp and Scheme is available at [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]]
@@ -537,7 +538,7 @@ ELISP>
 
 Syntax:
 
-#+START_SRC
+#+BEGIN_SRC
 
 (defun <function name> (<parameters>) (<body>))
 #+END_SRC
@@ -2452,9 +2453,7 @@ Interactive functions can be called using: M-x <function>. The user can create c
 
 Execute the function
 
-#+END_SRC
-M-x some-interactive-function>
-#+END_SRC
+=M-x some-interactive-function>=
 
 **** List Recursive Functions
 
@@ -3037,7 +3036,7 @@ ELISP>
 
 *Create Clojure def, defn and fn special forms*
 
- - [[https://clojuredocs.org/clojure.core/fn][Special form - fn]]]
+ - [[https://clojuredocs.org/clojure.core/fn][Special form - fn]]
  - [[https://clojuredocs.org/clojure.core/def][Special form - def]]
  - [[https://clojuredocs.org/clojure.core/defn][Special form - defn]]
 
@@ -4183,7 +4182,8 @@ ELISP> (file-contents "/tmp/hello.txt")
 ELISP>
 #+END_SRC
 
-* [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html][Current Buffer]]* [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html][Creating New Buffer]]
+    * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html][Current Buffer]]
+    * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html][Creating New Buffer]]
 
 ***  Window Functions
 
@@ -4796,110 +4796,110 @@ http://sunsite.ualberta.ca/Documentation/Gnu/emacs-lisp-ref-21-2.7/html_node/eli
     * emacs-startup-hook
     * kill-emacs-hook
 
-#+START_SRC
+#+BEGIN_SRC
 
-activate-mark-hook
-after-change-functions
-after-init-hook
-after-insert-file-functions
-after-make-frame-functions
-after-revert-hook
-after-save-hook
-apropos-mode-hook
-auto-fill-function
-auto-save-hook
-before-change-functions
-before-init-hook
-before-make-frame-hook
-before-revert-hook
-blink-paren-function
-buffer-access-fontify-functions
-c-mode-hook
-calendar-load-hook
-change-major-mode-hook
-command-history-hook
-command-line-functions
-comment-indent-function
-deactivate-mark-hook
-diary-display-hook
-diary-hook
-dired-mode-hook
-disabled-command-hook
-echo-area-clear-hook
-edit-picture-hook
-electric-buffer-menu-mode-hook
-electric-command-history-hook
-electric-help-mode-hook
-emacs-lisp-mode-hook
-find-file-hooks
-find-file-not-found-hooks
-first-change-hook
-fortran-comment-hook
-fortran-mode-hook
-indent-mim-hook
-initial-calendar-window-hook
-kbd-macro-termination-hook
-kill-buffer-hook
-kill-buffer-query-functions
-kill-emacs-hook
-kill-emacs-query-functions
-LaTeX-mode-hook
-ledit-mode-hook
-lisp-indent-function
-lisp-interaction-mode-hook
-lisp-mode-hook
-list-diary-entries-hook
-local-write-file-hooks
-mail-mode-hook
-mail-setup-hook
-mark-diary-entries-hook
-medit-mode-hook
-menu-bar-update-hook
-minibuffer-setup-hook
-minibuffer-exit-hook
-mouse-position-function
-news-mode-hook
-news-reply-mode-hook
-news-setup-hook
-nongregorian-diary-listing-hook
-nongregorian-diary-marking-hook
-nroff-mode-hook
-outline-mode-hook
-plain-TeX-mode-hook
-post-command-hook
-pre-abbrev-expand-hook
-pre-command-hook
-print-diary-entries-hook
-prolog-mode-hook
-protect-innocence-hook
-redisplay-end-trigger-functions
-rmail-edit-mode-hook
-rmail-mode-hook
-rmail-summary-mode-hook
-scheme-indent-hook
-scheme-mode-hook
-scribe-mode-hook
-shell-mode-hook
-shell-set-directory-error-hook
-suspend-hook
-suspend-resume-hook
-temp-buffer-show-function
-term-setup-hook
-terminal-mode-hook
-terminal-mode-break-hook
-TeX-mode-hook
-text-mode-hook
-today-visible-calendar-hook
-today-invisible-calendar-hook
-vi-mode-hook
-view-hook
-window-configuration-change-hook
-window-scroll-functions
-window-setup-hook
-window-size-change-functions
-write-contents-hooks
-write-file-hooks
-write-region-annotate-functions
+    activate-mark-hook
+    after-change-functions
+    after-init-hook
+    after-insert-file-functions
+    after-make-frame-functions
+    after-revert-hook
+    after-save-hook
+    apropos-mode-hook
+    auto-fill-function
+    auto-save-hook
+    before-change-functions
+    before-init-hook
+    before-make-frame-hook
+    before-revert-hook
+    blink-paren-function
+    buffer-access-fontify-functions
+    c-mode-hook
+    calendar-load-hook
+    change-major-mode-hook
+    command-history-hook
+    command-line-functions
+    comment-indent-function
+    deactivate-mark-hook
+    diary-display-hook
+    diary-hook
+    dired-mode-hook
+    disabled-command-hook
+    echo-area-clear-hook
+    edit-picture-hook
+    electric-buffer-menu-mode-hook
+    electric-command-history-hook
+    electric-help-mode-hook
+    emacs-lisp-mode-hook
+    find-file-hooks
+    find-file-not-found-hooks
+    first-change-hook
+    fortran-comment-hook
+    fortran-mode-hook
+    indent-mim-hook
+    initial-calendar-window-hook
+    kbd-macro-termination-hook
+    kill-buffer-hook
+    kill-buffer-query-functions
+    kill-emacs-hook
+    kill-emacs-query-functions
+    LaTeX-mode-hook
+    ledit-mode-hook
+    lisp-indent-function
+    lisp-interaction-mode-hook
+    lisp-mode-hook
+    list-diary-entries-hook
+    local-write-file-hooks
+    mail-mode-hook
+    mail-setup-hook
+    mark-diary-entries-hook
+    medit-mode-hook
+    menu-bar-update-hook
+    minibuffer-setup-hook
+    minibuffer-exit-hook
+    mouse-position-function
+    news-mode-hook
+    news-reply-mode-hook
+    news-setup-hook
+    nongregorian-diary-listing-hook
+    nongregorian-diary-marking-hook
+    nroff-mode-hook
+    outline-mode-hook
+    plain-TeX-mode-hook
+    post-command-hook
+    pre-abbrev-expand-hook
+    pre-command-hook
+    print-diary-entries-hook
+    prolog-mode-hook
+    protect-innocence-hook
+    redisplay-end-trigger-functions
+    rmail-edit-mode-hook
+    rmail-mode-hook
+    rmail-summary-mode-hook
+    scheme-indent-hook
+    scheme-mode-hook
+    scribe-mode-hook
+    shell-mode-hook
+    shell-set-directory-error-hook
+    suspend-hook
+    suspend-resume-hook
+    temp-buffer-show-function
+    term-setup-hook
+    terminal-mode-hook
+    terminal-mode-break-hook
+    TeX-mode-hook
+    text-mode-hook
+    today-visible-calendar-hook
+    today-invisible-calendar-hook
+    vi-mode-hook
+    view-hook
+    window-configuration-change-hook
+    window-scroll-functions
+    window-setup-hook
+    window-size-change-functions
+    write-contents-hooks
+    write-file-hooks
+    write-region-annotate-functions
 
 #+END_SRC
 
@@ -5024,7 +5024,7 @@ M-x list-packages
 
 To install a single package
 
-#+START_SRC
+#+BEGIN_SRC
 
     M-x package-install <package-name>
     M-x package-install org-mode
@@ -5059,7 +5059,7 @@ Hide Menu Bar
 
 Show Menu Bar
 
-#+START_SRC
+#+BEGIN_SRC
 
 (menu-bar-mode 1)
 #+END_SRC
@@ -5068,14 +5068,14 @@ Show Menu Bar
 
 Show Tool Bar
 
-#+START_SRC
+#+BEGIN_SRC
 
 (tool-bar-mode 1)
 #+END_SRC
 
 Hide Tool Bar
 
-#+START_SRC
+#+BEGIN_SRC
 
 (tool-bar-mode 0)
 #+END_SRC
@@ -5085,14 +5085,14 @@ Hide Tool Bar
 
 Show
 
-#+START_SRC
+#+BEGIN_SRC
 
 (scroll-bar-mode 1)
 #+END_SRC
 
 Hide
 
-#+START_SRC
+#+BEGIN_SRC
 
 (scroll-bar-mode -1)
 #+END_SRC
@@ -5101,14 +5101,14 @@ Hide
 
 Load a color theme
 
-#+START_SRC
+#+BEGIN_SRC
 
 (load-theme 'wombat t)
 #+END_SRC
 
 List all available themes
 
-#+START_SRC
+#+BEGIN_SRC elisp
 
     ELISP> (custom-available-themes)
     (cyberpunk adwaita deeper-blue dichromacy leuven light-blue manoj-dark
@@ -5137,23 +5137,19 @@ List all available themes
 
 Enable Blink Cursor
 
-#+BEGIN_SRC elisp
-
-(blink-cursor-mode 1)
-#+END_SRC
+=(blink-cursor-mode 1)=
 
 Stop Blink Cursor
 
-#+BEGIN_SRC elisp
+=(blink-cursor-mode 0)=
 
-(blink-cursor-mode 0)
-#+END_SRC
 
 *Space / Tabs - Identation*
 
 Set identation with spaces instead of tabs with 4 spaces
 
-#+END_SRC
+#+BEGIN_SRC elisp
+
 (setq tab-width 4 indent-tabs-mode nil)
 
 
@@ -5174,13 +5170,13 @@ Set identation with spaces instead of tabs with 4 spaces
 
 *Font Size and Type*
 
-#+END_SRC
-(set-default-font "Inconsolata 14")
-#+END_SRC
+=(set-default-font "Inconsolata 14")
+
 
 *Character Encoding Default*
 
-#+END_SRC
+#+BEGIN_SRC elisp
+
 ;; Character encodings default to utf-8.
 (prefer-coding-system 'utf-8)
 
@@ -5198,40 +5194,35 @@ Set identation with spaces instead of tabs with 4 spaces
 
 Enable
 
-#+END_SRC
-(setq make-backup-files t)
-#+END_SRC
+=(setq make-backup-files t)=
 
 Disable
 
-#+END_SRC
-(setq make-backup-files nil)
-#+END_SRC
+=(setq make-backup-files nil)=
 
 *Type y/n instead of yes and no*
 
-#+END_SRC
-(defalias 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
+=(defalias 'yes-or-no-p 'y-or-n-p)=
 
 *Show Match Parenthesis*
 
-#+END_SRC
+#+BEGIN_SRC
+
 ELISP> (show-paren-mode 1)
 t
 #+END_SRC
 
 *Delete trailing whitespace before saving*
 
-#+END_SRC
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-#+END_SRC
+=(add-hook 'before-save-hook 'delete-trailing-whitespace)=
+
 
 ***  Key Bindings
 
 **** Smart window switch
 
-The traditional window switch with C-x o can be cumbersome to use in the long run. The windmove commands provide a more convenient way to do this. All you have to do is to hold down Shift while pointing at a window with the arrow keys. [[https://wiki.archlinux.org/index.php/Emacs#Modes][Source]]
+The traditional window switch with C-x o can be cumbersome to use in the long run. The windmove commands provide a more convenient way to do this. All you have to do is to hold down Shift while pointing at a window with the arrow keys.  [[https://wiki.archlinux.org/index.php/Emacs#Modes][Source]]
+
 #+BEGIN_SRC elisp
 
 (when (fboundp 'windmove-default-keybindings)
@@ -5243,7 +5234,10 @@ The traditional window switch with C-x o can be cumbersome to use in the long ru
 
 See also:
 
-* [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][Mastering Key Bindings in Emacs]]* [[http://www.emacswiki.org/emacs/KeyBindingDiscussion][KeyBindingDiscussion]]* [[http://ergoemacs.org/emacs/keyboard_shortcuts.html][Emacs: How to Define Keys]]
+    * [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][Mastering Key Bindings in Emacs]]
+    * [[http://www.emacswiki.org/emacs/KeyBindingDiscussion][KeyBindingDiscussion]]
+    * [[http://ergoemacs.org/emacs/keyboard_shortcuts.html][Emacs: How to Define Keys]]
+
 *Launch a Terminal*
 
 C-c M-p will launch a terminal lxterminal (That is only available for Linux, although it can be tweaked for another terminal emulator or OS) in the current file directory.
@@ -5349,7 +5343,8 @@ It will insert the current date in the format: 2015-10-20 at the current cursor 
 
 *Save and Go to bookmark*
 
-#+END_SRC
+#+BEGIN_SRC
+
 (defvar bookmark-pos nil)
 
 (defun save-bookmark-pos ()
