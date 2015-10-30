@@ -4,8 +4,8 @@
 <ul>
 <li><a href="#sec-1">1. Emacs - Programming and Customization</a>
 <ul>
-<li><a href="#sec-1-1">1.1. Default Key Bindings and Useful Commands</a></li>
-<li><a href="#sec-1-2">1.2. Command Line Options</a></li>
+<li><a href="#sec-1-1">1.1. Command Line Options</a></li>
+<li><a href="#sec-1-2">1.2. Default Key Bindings and Useful Commands</a></li>
 </ul>
 </li>
 <li><a href="#sec-2">2. ELISP</a>
@@ -17,91 +17,93 @@
 <li><a href="#sec-2-5">2.5. Association Lists and Property Lists</a></li>
 <li><a href="#sec-2-6">2.6. Strings</a></li>
 <li><a href="#sec-2-7">2.7. Symbols</a></li>
-<li><a href="#sec-2-8">2.8. Eval</a></li>
-<li><a href="#sec-2-9">2.9. Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></a></li>
-<li><a href="#sec-2-10">2.10. Types Conversion</a></li>
+<li><a href="#sec-2-8">2.8. Types Conversion</a></li>
+<li><a href="#sec-2-9">2.9. Eval</a></li>
+<li><a href="#sec-2-10">2.10. Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></a></li>
 <li><a href="#sec-2-11">2.11. Functional Programming</a></li>
-<li><a href="#sec-2-12">2.12. Macros and Metaprogramming&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macro">macro</span>&#xa0;<span class="metaprogramming">metaprogramming</span>&#xa0;<span class="lisp">lisp</span></span></a>
+<li><a href="#sec-2-12">2.12. Structures</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Macros and Metaprogramming&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macro">macro</span>&#xa0;<span class="metaprogramming">metaprogramming</span>&#xa0;<span class="lisp">lisp</span></span></a>
 <ul>
-<li><a href="#sec-2-12-1">2.12.1. Structures</a></li>
+<li><a href="#sec-3-1">3.1. Quasiquote</a></li>
+<li><a href="#sec-3-2">3.2. Macros</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Emacs API</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Emacs Terminology</a></li>
+<li><a href="#sec-4-2">4.2. Emacs API</a></li>
+<li><a href="#sec-4-3">4.3. Bufffers</a></li>
+<li><a href="#sec-4-4">4.4. Files and Directories and OS Interface</a></li>
+<li><a href="#sec-4-5">4.5. Window Functions</a></li>
+<li><a href="#sec-4-6">4.6. Special Variables</a></li>
+<li><a href="#sec-4-7">4.7. Emacs Modes</a></li>
+<li><a href="#sec-4-8">4.8. Network</a></li>
+<li><a href="#sec-4-9">4.9. Discoverability / Get Documentation</a>
+<ul>
+<li><a href="#sec-4-9-1">4.9.1. Describe</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#sec-3">3. Emacs API</a>
+<li><a href="#sec-5">5. Customization</a>
 <ul>
-<li><a href="#sec-3-1">3.1. Emacs Terminology</a></li>
-<li><a href="#sec-3-2">3.2. Emacs API</a></li>
-<li><a href="#sec-3-3">3.3. Bufffers</a></li>
-<li><a href="#sec-3-4">3.4. Files and Directories and OS Interface</a></li>
-<li><a href="#sec-3-5">3.5. Window Functions</a></li>
-<li><a href="#sec-3-6">3.6. Special Variables</a></li>
-<li><a href="#sec-3-7">3.7. Emacs Modes</a></li>
-<li><a href="#sec-3-8">3.8. Network</a></li>
-<li><a href="#sec-3-9">3.9. Discoverability / Get Documentation</a>
-<ul>
-<li><a href="#sec-3-9-1">3.9.1. Describe</a></li>
+<li><a href="#sec-5-1">5.1. Install Packages</a></li>
+<li><a href="#sec-5-2">5.2. Hide / Show Emacs Widgets</a></li>
+<li><a href="#sec-5-3">5.3. Themes</a></li>
+<li><a href="#sec-5-4">5.4. Misc</a></li>
+<li><a href="#sec-5-5">5.5. Key Bindings</a></li>
+<li><a href="#sec-5-6">5.6. Quiet Startup</a></li>
+<li><a href="#sec-5-7">5.7. Set Default Web Browser</a></li>
 </ul>
 </li>
+<li><a href="#sec-6">6. Solutions</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Quick edit and reload Emac Configuration File.</a></li>
+<li><a href="#sec-6-2">6.2. Refresh/ Reload File</a></li>
+<li><a href="#sec-6-3">6.3. Creating Quick Access Menu</a></li>
+<li><a href="#sec-6-4">6.4. Extract Function Documentation</a></li>
+<li><a href="#sec-6-5">6.5. Edit File as Root</a></li>
+<li><a href="#sec-6-6">6.6. Open Current Buffer Directory</a></li>
+<li><a href="#sec-6-7">6.7. Open Current Buffer Directory in File Manager</a></li>
+<li><a href="#sec-6-8">6.8. Open a terminal Emulator in the directory of Current Buffer</a></li>
+<li><a href="#sec-6-9">6.9. Eval String in Clipboard</a></li>
+<li><a href="#sec-6-10">6.10. Save and Reload Current Session</a></li>
+<li><a href="#sec-6-11">6.11. Create a menu with all color themes available</a></li>
+<li><a href="#sec-6-12">6.12. Better Menu Syntax</a></li>
+<li><a href="#sec-6-13">6.13. Save and Restore Current Window Configuration</a></li>
+<li><a href="#sec-6-14">6.14. Http and Post Request</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">4. Customization</a>
+<li><a href="#sec-7">7. Org-Mode</a></li>
+<li><a href="#sec-8">8. Resources</a>
 <ul>
-<li><a href="#sec-4-1">4.1. Install Packages</a></li>
-<li><a href="#sec-4-2">4.2. Hide / Show Emacs Widgets</a></li>
-<li><a href="#sec-4-3">4.3. Themes</a></li>
-<li><a href="#sec-4-4">4.4. Misc</a></li>
-<li><a href="#sec-4-5">4.5. Key Bindings</a></li>
-<li><a href="#sec-4-6">4.6. Quiet Startup</a></li>
-<li><a href="#sec-4-7">4.7. Set Default Web Browser</a></li>
+<li><a href="#sec-8-1">8.1. Documentation</a>
+<ul>
+<li><a href="#sec-8-1-1">8.1.1. Manual</a></li>
+<li><a href="#sec-8-1-2">8.1.2. Tutorials</a></li>
+<li><a href="#sec-8-1-3">8.1.3. Wikis</a></li>
+<li><a href="#sec-8-1-4">8.1.4. Issues</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">5. Solutions</a>
+<li><a href="#sec-8-2">8.2. Developement Environments for Emacs</a>
 <ul>
-<li><a href="#sec-5-1">5.1. Quick edit and reload Emac Configuration File.</a></li>
-<li><a href="#sec-5-2">5.2. Refresh/ Reload File</a></li>
-<li><a href="#sec-5-3">5.3. Creating Quick Access Menu</a></li>
-<li><a href="#sec-5-4">5.4. Extract Function Documentation</a></li>
-<li><a href="#sec-5-5">5.5. Edit File as Root</a></li>
-<li><a href="#sec-5-6">5.6. Open Current Buffer Directory</a></li>
-<li><a href="#sec-5-7">5.7. Open Current Buffer Directory in File Manager</a></li>
-<li><a href="#sec-5-8">5.8. Open a terminal Emulator in the directory of Current Buffer</a></li>
-<li><a href="#sec-5-9">5.9. Eval String in Clipboard</a></li>
-<li><a href="#sec-5-10">5.10. Save and Reload Current Session</a></li>
-<li><a href="#sec-5-11">5.11. Create a menu with all color themes available</a></li>
-<li><a href="#sec-5-12">5.12. Better Menu Syntax</a></li>
-<li><a href="#sec-5-13">5.13. Save and Restore Current Window Configuration</a></li>
-<li><a href="#sec-5-14">5.14. Http and Post Request</a></li>
+<li><a href="#sec-8-2-1">8.2.1. Python</a></li>
+<li><a href="#sec-8-2-2">8.2.2. Javascript</a></li>
+<li><a href="#sec-8-2-3">8.2.3. C / C++</a></li>
+<li><a href="#sec-8-2-4">8.2.4. Ocaml</a></li>
+<li><a href="#sec-8-2-5">8.2.5. Haskell</a></li>
+<li><a href="#sec-8-2-6">8.2.6. Lisp</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">6. Org-Mode</a></li>
-<li><a href="#sec-7">7. Resources</a>
-<ul>
-<li><a href="#sec-7-1">7.1. Documentation</a>
-<ul>
-<li><a href="#sec-7-1-1">7.1.1. Manual</a></li>
-<li><a href="#sec-7-1-2">7.1.2. Tutorials</a></li>
-<li><a href="#sec-7-1-3">7.1.3. Wikis</a></li>
-<li><a href="#sec-7-1-4">7.1.4. Issues</a></li>
-</ul>
-</li>
-<li><a href="#sec-7-2">7.2. Developement Environments for Emacs</a>
-<ul>
-<li><a href="#sec-7-2-1">7.2.1. Python</a></li>
-<li><a href="#sec-7-2-2">7.2.2. Javascript</a></li>
-<li><a href="#sec-7-2-3">7.2.3. C / C++</a></li>
-<li><a href="#sec-7-2-4">7.2.4. Ocaml</a></li>
-<li><a href="#sec-7-2-5">7.2.5. Haskell</a></li>
-<li><a href="#sec-7-2-6">7.2.6. Lisp</a></li>
-</ul>
-</li>
-<li><a href="#sec-7-3">7.3. Selected Dot Emacs</a></li>
-<li><a href="#sec-7-4">7.4. Space Emacs Default Config</a></li>
-<li><a href="#sec-7-5">7.5. Selected Codes</a></li>
-<li><a href="#sec-7-6">7.6. Screencasts</a></li>
-<li><a href="#sec-7-7">7.7. Limitations</a></li>
-<li><a href="#sec-7-8">7.8. Selected Emacs Tutorials</a></li>
-<li><a href="#sec-7-9">7.9. Technical Notes</a></li>
+<li><a href="#sec-8-3">8.3. Selected Dot Emacs</a></li>
+<li><a href="#sec-8-4">8.4. Space Emacs Default Config</a></li>
+<li><a href="#sec-8-5">8.5. Selected Codes</a></li>
+<li><a href="#sec-8-6">8.6. Screencasts</a></li>
+<li><a href="#sec-8-7">8.7. Limitations</a></li>
+<li><a href="#sec-8-8">8.8. Selected Emacs Tutorials</a></li>
+<li><a href="#sec-8-9">8.9. Technical Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -128,15 +130,41 @@ that is also useful for Elisp and Scheme is available at [On Lisp - by Paul Grah
 **Configuration File**
 
 The user configuration file, which is executed when Emacs starts, is stored in the directory
-`~/.emacs.d/init.el` or `~/.emacs`. The first one is best because it
+`~/.emacs.d/init.el` or `~/.emacs`. The first one is better because it
 is in the same directory of all emacs configuration files.
 
 The Emacs scratch buffer can be used to test new features and try
 Emacs codes along with IELM - Emacs Lisp interactive shell.
 
-## Default Key Bindings and Useful Commands<a id="sec-1-1" name="sec-1-1"></a>
+## Command Line Options<a id="sec-1-1" name="sec-1-1"></a>
 
-The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typing: M-x cua-mode, emacs also supports the Vim keybindings by installing the evil package.
+Start emacs ignoring the <file:///home/tux/.emacs.d/init.el> or <file:///home/tux/.emacs> configuration file.
+
+    $ emacs --no-init-file
+
+    or
+
+    $ emacs -q
+
+Start Emacs with a custom configuration file:
+
+    $ emacs -q -l customstart.el
+
+Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
+
+    $ emacs  --debug-init
+
+To keep multiple configurations files see: [Emacs Bootstrap](https://github.com/caiorss/Emacs-Bootstrap)
+Show Emacs version
+
+    $ emacs --version
+
+## Default Key Bindings and Useful Commands<a id="sec-1-2" name="sec-1-2"></a>
+
+The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
+enabled by typing: M-x cua-mode or by inserting =(cua-mode) in emacs
+configuration file, emacs also supports the Vim keybindings by
+installing the evil package `(M-x package-install evil)`.
 
 See also:
 
@@ -590,13 +618,13 @@ See also:
 
 <tr>
 <td class="left">C-y</td>
-<td class="left">Paste</td>
+<td class="left">Paste  (Yank)</td>
 </tr>
 
 
 <tr>
 <td class="left">C-w</td>
-<td class="left">Cut</td>
+<td class="left">Cut    (Wipe out), Delete and copy to clipboard (Kill Ring)</td>
 </tr>
 
 
@@ -912,6 +940,12 @@ See also:
 
 
 <tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
 <td class="left">C-x C - (minus)</td>
 <td class="left">Decrease font size</td>
 </tr>
@@ -924,6 +958,12 @@ See also:
 
 
 <tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
 <td class="left">C-x r m</td>
 <td class="left">Make bookmark</td>
 </tr>
@@ -932,6 +972,42 @@ See also:
 <tr>
 <td class="left">C-x r b</td>
 <td class="left">Jump to bookmarks</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">C-y</td>
+<td class="left">Copy selected text by cursor (Copy region)</td>
+</tr>
+
+
+<tr>
+<td class="left">C-y</td>
+<td class="left">Paste when no text is selected. (Yank)</td>
+</tr>
+
+
+<tr>
+<td class="left">C-k</td>
+<td class="left">Delete current line from cursor position.</td>
+</tr>
+
+
+<tr>
+<td class="left">C-w</td>
+<td class="left">Cut (Wipe Out)</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 </tbody>
 </table>
@@ -1103,8 +1179,10 @@ Useful lisp key bindings to edit and navigate Lisp code.
 <td class="left">Wrap selection in curly brackets</td>
 </tr>
 
-<tbody>
+
 <tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 </tbody>
 </table>
@@ -1156,10 +1234,11 @@ Useful lisp key bindings to edit and navigate Lisp code.
 <td class="left">Delete s-expression under cursor</td>
 </tr>
 
-<tbody>
+
 <tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
-</tbody>
 
 
 <tr>
@@ -1174,29 +1253,6 @@ Useful lisp key bindings to edit and navigate Lisp code.
 </tr>
 </tbody>
 </table>
-
-## Command Line Options<a id="sec-1-2" name="sec-1-2"></a>
-
-Start emacs ignoring the <file:///home/tux/.emacs.d/init.el> or <file:///home/tux/.emacs> configuration file.
-
-    $ emacs --no-init-file
-
-    or
-
-    $ emacs -q
-
-Start Emacs with a custom configuration file:
-
-    $ emacs -q -l customstart.el
-
-Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
-
-    $ emacs  --debug-init
-
-To keep multiple configurations files see: [Emacs Bootstrap](https://github.com/caiorss/Emacs-Bootstrap)
-Show Emacs version
-
-    $ emacs --version
 
 # ELISP<a id="sec-2" name="sec-2"></a>
 
@@ -2512,7 +2568,154 @@ See also:
     t
     ELISP>
 
-## Eval<a id="sec-2-8" name="sec-2-8"></a>
+## Types Conversion<a id="sec-2-8" name="sec-2-8"></a>
+
+**Query Types**
+
+    ELISP> (type-of 1000)
+    integer
+
+    ELISP> (type-of 1000.3434)
+    float
+    ELISP>
+
+    ELISP> (type-of "lisp")
+    string
+
+    ELISP> (type-of '(1 2 3 4 5))
+    cons
+    ELISP> (type-of (list 'cos 'sin 1 2 3 4 5))
+    cons
+    ELISP>
+
+    ELISP> (type-of [1 2 3 4])
+    vector
+
+    ELISP> (type-of 'elisp-mode-map)
+    symbol
+    ELISP>
+
+    ELISP> (type-of #'cos)
+    symbol
+    ELISP>
+
+**Test Types**
+
+    ;; Test if it is a number
+    ;;-----------------------------------
+
+    ELISP> (numberp 1000)
+    t
+    ELISP> (numberp 10e4)
+    t
+    ELISP> (numberp '(1 2 3 4))
+    nil
+    ELISP> (numberp "hello world")
+    nil
+    ELISP>
+
+
+    ;; Test if it is a string
+    ;;-----------------------------------
+
+    ELISP> (stringp "Emacs")
+    t
+    ELISP> (stringp '(1 2 3 4))
+    nil
+    ELISP>
+
+    ;; Test if ti is a symbol
+    ;;------------------------------------
+    ELISP> (symbolp 'emacs)
+    t
+    ELISP> (symbolp #'emacs)
+    t
+    ELISP> (symbolp "something")
+    nil
+    ELISP> (symbolp 10000)
+    nil
+    ELISP>
+
+
+    ;; Test if it is a list
+    ;;-----------------------------------
+
+    ELISP> (listp '(1 2 3 4))
+    t
+    ELISP> (listp [1 2 3 4])
+    nil
+    ELISP> (listp "hello world")
+    nil
+    ELISP>
+
+
+    ;; Test if it is a vector
+    ;;-----------------------------------
+
+    ELISP> (vectorp ["Lisp" "Emacs" "Scheme" "Clojure"])
+    t
+    ELISP>
+    ELISP> (vectorp '(1 2 3))
+    nil
+    ELISP> (vectorp "lisp")
+    nil
+    ELISP>
+
+**Number <-> String**
+
+    ELISP>
+    ELISP> (number-to-string 1000)
+    "1000"
+
+    ELISP> (string-to-number "200")
+    200
+    ELISP>
+    ELISP>
+
+**Symbol <-> String**
+
+    ELISP> (symbol-name 'my-symbol)
+    "my-symbol"
+
+    ELISP> (symbol-name :my-symbol)
+    ":my-symbol"
+    ELISP>
+
+String to Symbol
+
+    ELISP> (intern "some-symbol")
+    some-symbol
+
+**S-expression <-> string**
+
+-   read : Parse a s-expression.
+
+    ELISP>
+    ELISP> (setq raw "(:x 10 :y 20 :z 30 :w \"hello world\")")
+    "(:x 10 :y 20 :z 30 :w \"hello world\")"
+    ELISP>
+    ELISP> (read raw)
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> (plist-get (read raw) :x)
+    10
+    ELISP> (plist-get (read raw) :w)
+    "hello world"
+    ELISP>
+
+-   prin1-to-string  : Serialize a s-expression
+
+    ELISP> (setq sexp '(:x 10 :y 20 :z 30 :w "hello world"))
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> sexp
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> (prin1-to-string sexp)
+    "(:x 10 :y 20 :z 30 :w \"hello world\")"
+    ELISP>
+
+## Eval<a id="sec-2-9" name="sec-2-9"></a>
 
 **Eval Sexp or S-expressions**
 
@@ -2625,7 +2828,7 @@ or
 (load-file "/path/my<sub>lisp</sub><sub>commands</sub>.el")
 \\#+END<sub>SRC</sub>
 
-## Control Structures     :loop:control:iteration:<a id="sec-2-9" name="sec-2-9"></a>
+## Control Structures     :loop:control:iteration:<a id="sec-2-10" name="sec-2-10"></a>
 
 See also:
 
@@ -2743,7 +2946,7 @@ See also:
          #<window 8 on *ielm*>
         ELISP>
 
-    **Case Switch Statement**
+2.  Cond     - Case Switch
 
         ELISP> (setq a 3)       ;; a = 3
         3
@@ -2758,7 +2961,31 @@ See also:
         2
         ELISP>
 
-2.  Loops
+3.  CL-Case  - Case Swithc
+
+        (defun test-cl-case (operation x y)
+          (cl-case operation
+            (:mul (* x y))
+            (:add (+ x y))
+            (:sub (- x y))
+            (:div (/ x y))
+            (otherwise nil)))
+
+        ELISP> (test-cl-case :mul 2 10)
+        20
+
+        ELISP> (test-cl-case :sub 10 2)
+        8
+
+        ELISP> (test-cl-case :add 10 2)
+        12
+        ELISP> (test-cl-case :div 10 2)
+        5
+
+        ELISP> (test-cl-case 'dummy 20 10)
+        nil
+
+4.  Loops
 
     **Dolist**
 
@@ -2945,153 +3172,6 @@ See also:
              (next 1 (+ cur next)))
             ((= 10 n) cur))
         55
-
-## Types Conversion<a id="sec-2-10" name="sec-2-10"></a>
-
-**Query Types**
-
-    ELISP> (type-of 1000)
-    integer
-
-    ELISP> (type-of 1000.3434)
-    float
-    ELISP>
-
-    ELISP> (type-of "lisp")
-    string
-
-    ELISP> (type-of '(1 2 3 4 5))
-    cons
-    ELISP> (type-of (list 'cos 'sin 1 2 3 4 5))
-    cons
-    ELISP>
-
-    ELISP> (type-of [1 2 3 4])
-    vector
-
-    ELISP> (type-of 'elisp-mode-map)
-    symbol
-    ELISP>
-
-    ELISP> (type-of #'cos)
-    symbol
-    ELISP>
-
-**Test Types**
-
-    ;; Test if it is a number
-    ;;-----------------------------------
-
-    ELISP> (numberp 1000)
-    t
-    ELISP> (numberp 10e4)
-    t
-    ELISP> (numberp '(1 2 3 4))
-    nil
-    ELISP> (numberp "hello world")
-    nil
-    ELISP>
-
-
-    ;; Test if it is a string
-    ;;-----------------------------------
-
-    ELISP> (stringp "Emacs")
-    t
-    ELISP> (stringp '(1 2 3 4))
-    nil
-    ELISP>
-
-    ;; Test if ti is a symbol
-    ;;------------------------------------
-    ELISP> (symbolp 'emacs)
-    t
-    ELISP> (symbolp #'emacs)
-    t
-    ELISP> (symbolp "something")
-    nil
-    ELISP> (symbolp 10000)
-    nil
-    ELISP>
-
-
-    ;; Test if it is a list
-    ;;-----------------------------------
-
-    ELISP> (listp '(1 2 3 4))
-    t
-    ELISP> (listp [1 2 3 4])
-    nil
-    ELISP> (listp "hello world")
-    nil
-    ELISP>
-
-
-    ;; Test if it is a vector
-    ;;-----------------------------------
-
-    ELISP> (vectorp ["Lisp" "Emacs" "Scheme" "Clojure"])
-    t
-    ELISP>
-    ELISP> (vectorp '(1 2 3))
-    nil
-    ELISP> (vectorp "lisp")
-    nil
-    ELISP>
-
-**Number <-> String**
-
-    ELISP>
-    ELISP> (number-to-string 1000)
-    "1000"
-
-    ELISP> (string-to-number "200")
-    200
-    ELISP>
-    ELISP>
-
-**Symbol <-> String**
-
-    ELISP> (symbol-name 'my-symbol)
-    "my-symbol"
-
-    ELISP> (symbol-name :my-symbol)
-    ":my-symbol"
-    ELISP>
-
-String to Symbol
-
-    ELISP> (intern "some-symbol")
-    some-symbol
-
-**S-expression <-> string**
-
--   read : Parse a s-expression.
-
-    ELISP>
-    ELISP> (setq raw "(:x 10 :y 20 :z 30 :w \"hello world\")")
-    "(:x 10 :y 20 :z 30 :w \"hello world\")"
-    ELISP>
-    ELISP> (read raw)
-    (:x 10 :y 20 :z 30 :w "hello world")
-
-    ELISP> (plist-get (read raw) :x)
-    10
-    ELISP> (plist-get (read raw) :w)
-    "hello world"
-    ELISP>
-
--   prin1-to-string  : Serialize a s-expression
-
-    ELISP> (setq sexp '(:x 10 :y 20 :z 30 :w "hello world"))
-    (:x 10 :y 20 :z 30 :w "hello world")
-
-    ELISP> sexp
-    (:x 10 :y 20 :z 30 :w "hello world")
-
-    ELISP> (prin1-to-string sexp)
-    "(:x 10 :y 20 :z 30 :w \"hello world\")"
-    ELISP>
 
 ## Functional Programming<a id="sec-2-11" name="sec-2-11"></a>
 
@@ -3614,499 +3694,7 @@ Dash is functional programming library to Emacs with many useful higher order fu
 
         ELISP>
 
-## Macros and Metaprogramming     :macro:metaprogramming:lisp:<a id="sec-2-12" name="sec-2-12"></a>
-
-Macros are useful to create new lisp special forms like if and when, create new control structures, domain specific languages and redefine syntax. As elisp is a subset of common lisp, it uses the same syntax.
-
-1.  Quasiquote
-
-    Quasiquote is useful to create s-expression templates, data structure templates and lisp macros.
-
-        > (setq a 10)
-        10
-
-        > (setq b 20)
-        20
-
-        > (setq c 'my-symbol)
-        my-symbol
-
-        > (setq d "a string")
-        "a string"
-
-
-        ;;;; List of Symbols
-        > '(a b c d)
-        (a b c d)
-
-        > (list 'a 'b 'c 'd )
-        (a b c d)
-
-        ;;;; List of numbers
-
-        > '(1 2.232 3523 23)
-        (1 2.232 3523 23)
-
-        > (list 1 2.232 3523 23)
-        (1 2.232 3523 23)
-
-
-        ;;;; List of symbol and numbers
-
-        > '(1 2.232 3523 23 a b c d)
-        (1 2.232 3523 23 a b c d)
-
-        > (list 1 2.232 3523 23 'a 'b 'c 'd)
-        (1 2.232 3523 23 a b c d)
-
-        > (list 1 2.232 3523 23 a b c d)
-        (1 2.232 3523 23 10 20 my-symbol "a string")
-
-        ;;;; List with the variables a b c d
-        > (list a b c d)
-        (10 20 my-symbol "a string")
-
-        ;;;;  List with variables and symbols
-        > (list 'a a 'b b 'c c 'd d)
-        (a 10 b 20 c my-symbol d "a string")
-
-        ;;;; Asssociaiton List
-        > (list (cons 'a  a) (cons 'b b) (cons 'c c) (cons 'd  d))
-        ((a . 10)
-         (b . 20)
-         (c . my-symbol)
-         (d . "a string"))
-
-
-        ;;;; Quasiquote
-
-        > `(the product of 3 and 4 is ,(* 3 4))
-        (the product of 3 and 4 is 12)
-
-        > `("the product of 3 and 4 is" ,(* 3 4))
-        ("the product of 3 and 4 is" 12)
-
-        > `("the value of (exp 3) is " ,(exp 3) "the value of (sqrt 100) is" ,(sqrt 100))
-        ("the value of (exp 3) is " 20.085536923187668 "the value of (sqrt 100) is" 10.0)
-
-        > `(a ,a b ,b c ,c d ,d)
-        (a 10 b 20 c my-symbol d "a string")
-
-        > `((a . ,a) (b . ,b) (c . ,c) (d . ,d))
-        ((a . 10)
-         (b . 20)
-         (c . my-symbol)
-         (d . "a string"))
-
-        > (setq xs '(sym1 sym2 sym3))
-        (sym1 sym2 sym3)
-
-        > xs
-        (sym1 sym2 sym3)
-
-        > `(xs ,xs)
-        (xs
-         (sym1 sym2 sym3))
-
-        > `(xs ,@xs)
-        (xs sym1 sym2 sym3)
-
-        > `(if (< ,a ,b) ,(+ a 4) ,d)
-        (if
-            (< 10 20)
-            14 "a string")
-
-        > (eval `(if (< ,a ,b) ,(+ a 4) ,d))
-        14
-        >
-
-        > (eval `(if (> ,a ,b) ,(+ a 4) ,d))
-        "a string"
-
-        ;;------------------
-
-        > (setq xlist '(1 2 3 4))
-        (1 2 3 4)
-
-        > (setq ylist '(a b c d e))
-        (a b c d e)
-
-        > `(xs ,xlist ys ,ylist)
-        (xs
-         (1 2 3 4)
-         ys
-         (a b c d e))
-
-        > `(xs ,@xlist ys ,@ylist)
-        (xs 1 2 3 4 ys a b c d e)
-
-2.  Macros
-
-    **Redefine lambda syntax to λ**
-
-        (defmacro λ (args body)
-         `(lambda ,args ,body))
-
-        ELISP> (λ (x) (+ x 3))
-        (lambda
-          (x)
-          (+ x 3))
-
-        ELISP> (mapcar (λ (x) (+ x 3)) '(1 2 3 4 5 6))
-        (4 5 6 7 8 9)
-
-    **Set variable to nil**
-
-        (defmacro nil! (var)
-          `(setq ,var nil))
-
-
-        ELISP> (setq x 10)
-        10
-        ELISP> x
-        10
-        ELISP>
-
-        ELISP> (nil! x)
-        nil
-        ELISP> x
-        nil
-        ELISP>
-
-        ELISP> (nil! z)
-        nil
-        ELISP> z
-        nil
-        ELISP>
-
-    **Create Clojure def, defn and fn special forms**
-
-    -   [Special form - fn](https://clojuredocs.org/clojure.core/fn)
-    -   [Special form - def](https://clojuredocs.org/clojure.core/def)
-    -   [Special form - defn](https://clojuredocs.org/clojure.core/defn)
-
-        (defmacro fn (args body)
-         `(lambda ,args ,body))
-
-        (defmacro def (name value)
-           `(setq ,name ,value))
-
-        (defmacro defn (name args body)
-           `(defun ,name ,args ,body))
-
-
-        ELISP> (fn (x) (* x x))
-        (lambda
-          (x)
-          (* x x))
-
-        ELISP> (mapcar (fn (x) (* x x)) '(1 2 3 4 5))
-        (1 4 9 16 25)
-
-        ELISP>
-
-
-
-        ELISP> (def x 1000)
-        1000
-        ELISP> x
-        1000
-        ELISP>
-
-        ELISP> (defn f (x y z) (+ (* 3 x) (* -4 y) (* 5 z)))
-        f
-        ELISP> (f 4 5 6)
-        22
-        ELISP>
-
-    **Clojure - Thread-First Macro**
-
-    See also:
-
-    -   [Clojure Docs (-> x & forms)](https://clojuredocs.org/clojure.core/-%3E)
-    -   [The ~> Threading Macro](http://www.greghendershott.com/2013/05/the-threading-macro.html)
-
-        (defun foldl (f acc xss)
-          (if (null xss)
-              acc
-              (foldl f (funcall f acc (car xss)) (cdr xss))))
-
-        (defun pass-result (x sexp)
-          (if (listp sexp)
-              `(,(car sexp) ,x ,@(cdr sexp))
-              `(,sexp ,x)))
-
-        (defmacro -> (x &rest exprs)
-          (foldl #'pass-result x exprs))
-
-        ;; The expression below is expanded to:
-        ;;
-        (->
-            5
-            exp
-            (/ 20)
-            (+ 10 20)
-            (- 3)
-            log10)
-
-        ELISP> (macroexpand
-            '(->
-            5
-            exp
-            (/ 20)
-            (+ 10 20)
-            (- 3)
-            log10))
-
-        (log10
-         (-
-          (+
-           (/
-            (exp 5)
-            20)
-           10 20)
-          3))
-
-        Or
-
-        (log10 (- (+ (/ (exp 5) 20) 10 20) 3))
-
-        ;;; How does the macro work ?
-
-        ELISP> (pass-result 5 'exp)
-        (exp 5)
-
-        ELISP> (pass-result (pass-result 5 'exp) '(/ 20))
-        (/
-         (exp 5)
-         20)
-
-        ELISP> (pass-result (pass-result (pass-result 5 'exp) '(/ 20)) '(+ 10 20))
-        (+
-         (/
-          (exp 5)
-          20)
-         10 20)
-
-        ELISP>
-
-    **Clojure - Thread-Last Macro**
-
-    See:  [(->> x & forms)](https://clojuredocs.org/clojure.core/-%3E%3E)
-
-        (defun pass-result-last (x sexp)
-          (if (listp sexp)
-            `(,(car sexp) ,@(cdr sexp) ,x)
-            `(,sexp ,x)))
-
-        (defmacro --> (x &rest exprs)
-          (foldl #'pass-result-last x exprs))
-
-
-        (-->
-            5
-            (/ 20)
-            (+ 10 20)
-            (- 16))
-
-        ;; Macro expansion
-        ;;;(- 16 (+ 10 20 (/ 20 5)))
-
-
-        ELISP> (-->
-            5
-            (/ 20)
-            (+ 10 20)
-            (- 16))
-        -18
-        ELISP
-
-    **Thread-Substitute Macro**
-
-        (defun replace (targ subst lst)
-          (if (null lst)
-              '()
-            (let ((hd (car lst))
-              (tl (cdr lst)))
-              (if (equal targ hd)
-              (cons subst (replace targ subst tl))
-            (cons (if (listp hd) (replace targ subst hd) hd)
-                  (replace targ subst tl))))))
-
-        (defun pass-result-subst (x sexp)
-          (if (listp sexp)
-             (replace '$ x sexp)
-            `(,sexp ,x)))
-
-        (defmacro $-> (x &rest exprs)
-          (foldl #'pass-result-subst x exprs))
-
-
-        ;;------------------------------------;;
-
-        ELISP> (replace '$ 10 '(20 + $ * ( 3 + $ + 5 * (sqrt ($ - 5)))))
-        (20 + 10 *
-            (3 + 10 + 5 *
-               (sqrt
-            (10 - 5))))
-
-        ELISP> (macroexpand
-          '($->
-            500
-            (/ $ 20 )
-            (- 40 $)
-            sqrt))
-        (sqrt
-         (- 40
-            (/ 500 20)))
-
-        ELISP>
-          ($->
-            500
-            (/ $ 20 )
-            (- 40 $)
-            sqrt)
-        3.872983346207417
-        ELISP>
-
-    **Clojure Let**
-
-        (defmacro letc (bindings &rest body)
-          `(let*
-               ,(plist->alist bindings)
-             ,@body))
-
-        ELISP>
-                (letc
-                 (
-                  a 10
-                  b (+ a 3)
-                  c (+ a b)
-                  )
-                 (list a b c))
-        (10 13 23)
-
-        ELISP>
-
-        ELISP> (macroexpand
-                '(letc
-                 (
-                  a 10
-                  b (+ a 3)
-                  c (+ a b)
-                  )
-                 (list a b c)))
-        (let*
-            ((a 10)
-             (b
-              (+ a 3))
-             (c
-              (+ a b)))
-          (list a b c))
-
-        ELISP>
-
-    **Create Scheme Syntax define**
-
-        (defmacro define (args body)
-         (if (listp args)
-             `(defun ,(car args) ,(cdr args) ,body)
-             `(setq  ,args ,body)))
-        define
-        ELISP>
-        ELISP> (define x 50)
-        50
-        ELISP> x
-        50
-        ELISP>
-        ELISP> (define (f x y) (+ (* 3 x) (* -4 y)))
-        f
-        ELISP> (f 5 6)
-        -9
-        ELISP>
-
-    **Rebind Elisp functions**
-
-    Bind new names to existing elisp functions in order to create user friendly identifiers, for example, bind the symbol map to the function mapcar.
-
-        (defmacro rebindfun (new-name old-name)
-           `(setf (symbol-function ,new-name) ,old-name))
-
-        ELISP> (rebindfun 'map #'mapcar)
-        mapcar
-        ELISP>
-
-        ELISP> (map (lambda (x) (+ x 5)) '(1 2 3 4 5 6 7 8))
-        (6 7 8 9 10 11 12 13)
-
-        ELISP> (rebindfun 'filter #'remove-if-not)
-        remove-if-not
-        ELISP>
-
-        ELISP> (filter (lambda (x) (< x  10)) '(1 20 30 4 6 89 3 2 9 100))
-        (1 4 6 3 2 9)
-
-        ELISP> (filter 'evenp  '(1 2 3 4 5 6 7 8))
-        (2 4 6 8)
-
-        ELISP> (filter 'oddp  '(1 2 3 4 5 6 7 8))
-        (1 3 5 7
-
-        ;;; Commmon Lisp Way
-
-        ELISP> (filter #'evenp  '(1 2 3 4 5 6 7 8))
-        (2 4 6 8)
-
-        ELISP> (filter #'oddp  '(1 2 3 4 5 6 7 8))
-        (1 3 5 7)
-
-    **Convert Infix Operator to prefix operator**
-
-        (defmacro $ (a op b)
-          `(,op ,a ,b))
-
-        ELISP>
-        ELISP> ($ 1 < 10)
-        t
-        ELISP> ($ 1 > 10)
-        nil
-        ELISP>
-
-        ELISP> (macroexpand '($ 1 > 10))
-        (> 1 10)
-
-        ELISP> (if ($ 4 < 10) "Less than 10" "Greater than 10")
-        "Less than 10"
-        ELISP>
-        ELISP> (if ($ 1444 < 10) "Less than 10" "Greater than 10")
-        "Greater than 10"
-        ELISP>
-
-    **Debug Injection Macro**
-
-    The function print can be replaced by message to display the debug message in the minibuffer. It is useful to debug callbacks.
-
-        (defmacro $debug (func &rest params)
-          `(let
-              ((__r (,func ,@params)))
-               (progn
-             (print (format "%s = %s"
-              (quote (,func ,@params))
-               __r))
-             __r)))
-
-        ;;; Usage:
-
-        ELISP> ($debug + 10 ($debug * 10 30))
-
-        "(* 10 30) = 300"
-
-        "(+ 10 ($debug * 10 30)) = 310"
-
-        310
-        ELISP>
-
-### Structures<a id="sec-2-12-1" name="sec-2-12-1"></a>
+## Structures<a id="sec-2-12" name="sec-2-12"></a>
 
     ELISP> (defstruct account id name balance)
     account
@@ -4221,9 +3809,498 @@ Macros are useful to create new lisp special forms like if and when, create new 
 
     ELISP>
 
-# Emacs API<a id="sec-3" name="sec-3"></a>
+# Macros and Metaprogramming     :macro:metaprogramming:lisp:<a id="sec-3" name="sec-3"></a>
 
-## Emacs Terminology<a id="sec-3-1" name="sec-3-1"></a>
+Macros are useful to create new lisp special forms like if and when,
+create new control structures, domain specific languages, eliminate
+boilerplate code, automate code  and redefine syntax.
+Elisp macro constructs has the same syntax of Common Lisp.
+
+## Quasiquote<a id="sec-3-1" name="sec-3-1"></a>
+
+Quasiquote is useful to create s-expression templates, data structure templates and lisp macros.
+
+    > (setq a 10)
+    10
+
+    > (setq b 20)
+    20
+
+    > (setq c 'my-symbol)
+    my-symbol
+
+    > (setq d "a string")
+    "a string"
+
+
+    ;;;; List of Symbols
+    > '(a b c d)
+    (a b c d)
+
+    > (list 'a 'b 'c 'd )
+    (a b c d)
+
+    ;;;; List of numbers
+
+    > '(1 2.232 3523 23)
+    (1 2.232 3523 23)
+
+    > (list 1 2.232 3523 23)
+    (1 2.232 3523 23)
+
+
+    ;;;; List of symbol and numbers
+
+    > '(1 2.232 3523 23 a b c d)
+    (1 2.232 3523 23 a b c d)
+
+    > (list 1 2.232 3523 23 'a 'b 'c 'd)
+    (1 2.232 3523 23 a b c d)
+
+    > (list 1 2.232 3523 23 a b c d)
+    (1 2.232 3523 23 10 20 my-symbol "a string")
+
+    ;;;; List with the variables a b c d
+    > (list a b c d)
+    (10 20 my-symbol "a string")
+
+    ;;;;  List with variables and symbols
+    > (list 'a a 'b b 'c c 'd d)
+    (a 10 b 20 c my-symbol d "a string")
+
+    ;;;; Asssociaiton List
+    > (list (cons 'a  a) (cons 'b b) (cons 'c c) (cons 'd  d))
+    ((a . 10)
+     (b . 20)
+     (c . my-symbol)
+     (d . "a string"))
+
+
+    ;;;; Quasiquote
+
+    > `(the product of 3 and 4 is ,(* 3 4))
+    (the product of 3 and 4 is 12)
+
+    > `("the product of 3 and 4 is" ,(* 3 4))
+    ("the product of 3 and 4 is" 12)
+
+    > `("the value of (exp 3) is " ,(exp 3) "the value of (sqrt 100) is" ,(sqrt 100))
+    ("the value of (exp 3) is " 20.085536923187668 "the value of (sqrt 100) is" 10.0)
+
+    > `(a ,a b ,b c ,c d ,d)
+    (a 10 b 20 c my-symbol d "a string")
+
+    > `((a . ,a) (b . ,b) (c . ,c) (d . ,d))
+    ((a . 10)
+     (b . 20)
+     (c . my-symbol)
+     (d . "a string"))
+
+    > (setq xs '(sym1 sym2 sym3))
+    (sym1 sym2 sym3)
+
+    > xs
+    (sym1 sym2 sym3)
+
+    > `(xs ,xs)
+    (xs
+     (sym1 sym2 sym3))
+
+    > `(xs ,@xs)
+    (xs sym1 sym2 sym3)
+
+    > `(if (< ,a ,b) ,(+ a 4) ,d)
+    (if
+        (< 10 20)
+        14 "a string")
+
+    > (eval `(if (< ,a ,b) ,(+ a 4) ,d))
+    14
+    >
+
+    > (eval `(if (> ,a ,b) ,(+ a 4) ,d))
+    "a string"
+
+    ;;------------------
+
+    > (setq xlist '(1 2 3 4))
+    (1 2 3 4)
+
+    > (setq ylist '(a b c d e))
+    (a b c d e)
+
+    > `(xs ,xlist ys ,ylist)
+    (xs
+     (1 2 3 4)
+     ys
+     (a b c d e))
+
+    > `(xs ,@xlist ys ,@ylist)
+    (xs 1 2 3 4 ys a b c d e)
+
+## Macros<a id="sec-3-2" name="sec-3-2"></a>
+
+**Redefine lambda syntax to λ**
+
+    (defmacro λ (args body)
+     `(lambda ,args ,body))
+
+    ELISP> (λ (x) (+ x 3))
+    (lambda
+      (x)
+      (+ x 3))
+    ELISP> (mapcar (λ (x) (+ x 3)) '(1 2 3 4 5 6))
+    (4 5 6 7 8 9)
+
+**Set variable to nil**
+
+    (defmacro nil! (var)
+      `(setq ,var nil))
+
+
+    ELISP> (setq x 10)
+    10
+    ELISP> x
+    10
+    ELISP>
+
+    ELISP> (nil! x)
+    nil
+    ELISP> x
+    nil
+    ELISP>
+
+    ELISP> (nil! z)
+    nil
+    ELISP> z
+    nil
+    ELISP>
+
+**Create Clojure def, defn and fn special forms**
+
+-   [Special form - fn](https://clojuredocs.org/clojure.core/fn)
+-   [Special form - def](https://clojuredocs.org/clojure.core/def)
+-   [Special form - defn](https://clojuredocs.org/clojure.core/defn)
+
+    (defmacro fn (args body)
+     `(lambda ,args ,body))
+
+    (defmacro def (name value)
+       `(setq ,name ,value))
+
+    (defmacro defn (name args body)
+       `(defun ,name ,args ,body))
+
+    ELISP> (fn (x) (* x x))
+    (lambda
+      (x)
+      (* x x))
+
+    ELISP> (mapcar (fn (x) (* x x)) '(1 2 3 4 5))
+    (1 4 9 16 25)
+
+    ELISP> (def x 1000)
+    1000
+    ELISP> x
+    1000
+    ELISP>
+
+    ELISP> (defn f (x y z) (+ (* 3 x) (* -4 y) (* 5 z)))
+    f
+    ELISP> (f 4 5 6)
+    22
+    ELISP>
+
+**Clojure - Thread-First Macro**
+
+See also:
+
+-   [Clojure Docs (-> x & forms)](https://clojuredocs.org/clojure.core/-%3E)
+-   [The ~> Threading Macro](http://www.greghendershott.com/2013/05/the-threading-macro.html)
+
+    (defun foldl (f acc xss)
+      (if (null xss)
+          acc
+          (foldl f (funcall f acc (car xss)) (cdr xss))))
+
+    (defun pass-result (x sexp)
+      (if (listp sexp)
+          `(,(car sexp) ,x ,@(cdr sexp))
+          `(,sexp ,x)))
+
+    (defmacro -> (x &rest exprs)
+      (foldl #'pass-result x exprs))
+
+    ;; The expression below is expanded to:
+    ;;
+    (->
+        5
+        exp
+        (/ 20)
+        (+ 10 20)
+        (- 3)
+        log10)
+
+    ELISP> (macroexpand
+        '(->
+        5
+        exp
+        (/ 20)
+        (+ 10 20)
+        (- 3)
+        log10))
+
+    (log10
+     (-
+      (+
+       (/
+        (exp 5)
+        20)
+       10 20)
+      3))
+
+    Or
+
+    (log10 (- (+ (/ (exp 5) 20) 10 20) 3))
+
+    ;;; How does the macro work ?
+
+    ELISP> (pass-result 5 'exp)
+    (exp 5)
+
+    ELISP> (pass-result (pass-result 5 'exp) '(/ 20))
+    (/
+     (exp 5)
+     20)
+
+    ELISP> (pass-result (pass-result (pass-result 5 'exp) '(/ 20)) '(+ 10 20))
+    (+
+     (/
+      (exp 5)
+      20)
+     10 20)
+
+    ELISP>
+
+**Clojure - Thread-Last Macro**
+
+See:  [(->> x & forms)](https://clojuredocs.org/clojure.core/-%3E%3E)
+
+    (defun pass-result-last (x sexp)
+      (if (listp sexp)
+        `(,(car sexp) ,@(cdr sexp) ,x)
+        `(,sexp ,x)))
+
+    (defmacro --> (x &rest exprs)
+      (foldl #'pass-result-last x exprs))
+
+
+    (-->
+        5
+        (/ 20)
+        (+ 10 20)
+        (- 16))
+
+    ;; Macro expansion
+    ;;;(- 16 (+ 10 20 (/ 20 5)))
+
+
+    ELISP> (-->
+        5
+        (/ 20)
+        (+ 10 20)
+        (- 16))
+    -18
+    ELISP
+
+**Thread-Substitute Macro**
+
+    (defun replace (targ subst lst)
+      (if (null lst)
+          '()
+        (let ((hd (car lst))
+          (tl (cdr lst)))
+          (if (equal targ hd)
+          (cons subst (replace targ subst tl))
+        (cons (if (listp hd) (replace targ subst hd) hd)
+              (replace targ subst tl))))))
+
+    (defun pass-result-subst (x sexp)
+      (if (listp sexp)
+         (replace '$ x sexp)
+        `(,sexp ,x)))
+
+    (defmacro $-> (x &rest exprs)
+      (foldl #'pass-result-subst x exprs))
+
+
+    ;;------------------------------------;;
+
+    ELISP> (replace '$ 10 '(20 + $ * ( 3 + $ + 5 * (sqrt ($ - 5)))))
+    (20 + 10 *
+        (3 + 10 + 5 *
+           (sqrt
+        (10 - 5))))
+
+    ELISP> (macroexpand
+      '($->
+        500
+        (/ $ 20 )
+        (- 40 $)
+        sqrt))
+    (sqrt
+     (- 40
+        (/ 500 20)))
+
+    ELISP>
+      ($->
+        500
+        (/ $ 20 )
+        (- 40 $)
+        sqrt)
+    3.872983346207417
+    ELISP>
+
+**Clojure Let**
+
+    (defmacro letc (bindings &rest body)
+      `(let*
+           ,(plist->alist bindings)
+         ,@body))
+
+    ELISP>
+            (letc
+             (
+              a 10
+              b (+ a 3)
+              c (+ a b)
+              )
+             (list a b c))
+    (10 13 23)
+
+    ELISP>
+
+    ELISP> (macroexpand
+            '(letc
+             (
+              a 10
+              b (+ a 3)
+              c (+ a b)
+              )
+             (list a b c)))
+    (let*
+        ((a 10)
+         (b
+          (+ a 3))
+         (c
+          (+ a b)))
+      (list a b c))
+
+    ELISP>
+
+**Create Scheme Syntax define**
+
+    (defmacro define (args body)
+     (if (listp args)
+         `(defun ,(car args) ,(cdr args) ,body)
+         `(setq  ,args ,body)))
+    define
+    ELISP>
+    ELISP> (define x 50)
+    50
+    ELISP> x
+    50
+    ELISP>
+    ELISP> (define (f x y) (+ (* 3 x) (* -4 y)))
+    f
+    ELISP> (f 5 6)
+    -9
+    ELISP>
+
+**Rebind Elisp functions**
+
+Bind new names to existing elisp functions in order to create user friendly identifiers, for example, bind the symbol map to the function mapcar.
+
+    (defmacro rebindfun (new-name old-name)
+       `(setf (symbol-function ,new-name) ,old-name))
+
+    ELISP> (rebindfun 'map #'mapcar)
+    mapcar
+    ELISP>
+
+    ELISP> (map (lambda (x) (+ x 5)) '(1 2 3 4 5 6 7 8))
+    (6 7 8 9 10 11 12 13)
+
+    ELISP> (rebindfun 'filter #'remove-if-not)
+    remove-if-not
+    ELISP>
+
+    ELISP> (filter (lambda (x) (< x  10)) '(1 20 30 4 6 89 3 2 9 100))
+    (1 4 6 3 2 9)
+
+    ELISP> (filter 'evenp  '(1 2 3 4 5 6 7 8))
+    (2 4 6 8)
+
+    ELISP> (filter 'oddp  '(1 2 3 4 5 6 7 8))
+    (1 3 5 7
+
+    ;;; Commmon Lisp Way
+
+    ELISP> (filter #'evenp  '(1 2 3 4 5 6 7 8))
+    (2 4 6 8)
+
+    ELISP> (filter #'oddp  '(1 2 3 4 5 6 7 8))
+    (1 3 5 7)
+
+**Convert Infix Operator to prefix operator**
+
+    (defmacro $ (a op b)
+      `(,op ,a ,b))
+
+    ELISP>
+    ELISP> ($ 1 < 10)
+    t
+    ELISP> ($ 1 > 10)
+    nil
+    ELISP>
+
+    ELISP> (macroexpand '($ 1 > 10))
+    (> 1 10)
+
+    ELISP> (if ($ 4 < 10) "Less than 10" "Greater than 10")
+    "Less than 10"
+    ELISP>
+    ELISP> (if ($ 1444 < 10) "Less than 10" "Greater than 10")
+    "Greater than 10"
+    ELISP>
+
+**Debug Injection Macro**
+
+The function print can be replaced by message to display the debug message in the minibuffer. It is useful to debug callbacks.
+
+    (defmacro $debug (func &rest params)
+      `(let
+          ((__r (,func ,@params)))
+           (progn
+         (print (format "%s = %s"
+          (quote (,func ,@params))
+           __r))
+         __r)))
+
+    ;;; Usage:
+
+    ELISP> ($debug + 10 ($debug * 10 30))
+
+    "(* 10 30) = 300"
+
+    "(+ 10 ($debug * 10 30)) = 310"
+
+    310
+    ELISP>
+
+# Emacs API<a id="sec-4" name="sec-4"></a>
+
+## Emacs Terminology<a id="sec-4-1" name="sec-4-1"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -4314,7 +4391,7 @@ See also:
 
 ![img](images/Emacs_terminology.png)
 
-## Emacs API<a id="sec-3-2" name="sec-3-2"></a>
+## Emacs API<a id="sec-4-2" name="sec-4-2"></a>
 
 **Emacs API Objects**
 
@@ -4371,7 +4448,7 @@ Here some projects that tried to create a "better Emacs", "lisp powered"  editor
 Emacs has more than 35 years of active development and no editor can
 beat it.
 
-## Bufffers<a id="sec-3-3" name="sec-3-3"></a>
+## Bufffers<a id="sec-4-3" name="sec-4-3"></a>
 
 1.  Buffer Attributes
 
@@ -4639,7 +4716,7 @@ beat it.
             (while (re-search-forward pattern nil t)
               (replace-match replacement))))
 
-## Files and Directories and OS Interface<a id="sec-3-4" name="sec-3-4"></a>
+## Files and Directories and OS Interface<a id="sec-4-4" name="sec-4-4"></a>
 
 [Files](http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html)
 
@@ -4940,7 +5017,7 @@ beat it.
     -   [Current Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html)
     -   [Creating New Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html)
 
-## Window Functions<a id="sec-3-5" name="sec-3-5"></a>
+## Window Functions<a id="sec-4-5" name="sec-4-5"></a>
 
 1.  Basic Window Functions
 
@@ -5170,7 +5247,7 @@ beat it.
     -   <http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_441.html>
     -   <http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html>
 
-## Special Variables<a id="sec-3-6" name="sec-3-6"></a>
+## Special Variables<a id="sec-4-6" name="sec-4-6"></a>
 
     ELISP> emacs-major-version
     24
@@ -5225,7 +5302,7 @@ beat it.
     "/usr/lib/emacs/24.4/i686-linux-gnu/"
     ELISP>
 
-## Emacs Modes<a id="sec-3-7" name="sec-3-7"></a>
+## Emacs Modes<a id="sec-4-7" name="sec-4-7"></a>
 
 1.  Major Mode
 
@@ -5756,7 +5833,7 @@ beat it.
         write-file-hooks
         write-region-annotate-functions
 
-## Network<a id="sec-3-8" name="sec-3-8"></a>
+## Network<a id="sec-4-8" name="sec-4-8"></a>
 
 **Links to Inquiry**
 
@@ -5778,7 +5855,7 @@ Emacs tools and codes that can be useful as implementation references and proof 
 
 -   [D-Bus integration in Emacs](https://www.gnu.org/software/emacs/manual/html_mono/dbus.html)
 
-## Discoverability / Get Documentation<a id="sec-3-9" name="sec-3-9"></a>
+## Discoverability / Get Documentation<a id="sec-4-9" name="sec-4-9"></a>
 
 **Apropos**
 
@@ -5794,7 +5871,7 @@ Apropos Commands
     apropos-variable
     apropos-value
 
-### Describe<a id="sec-3-9-1" name="sec-3-9-1"></a>
+### Describe<a id="sec-4-9-1" name="sec-4-9-1"></a>
 
 See also:
 
@@ -5828,11 +5905,11 @@ This calls the command describe-variable. Type the name of a variable at the pro
 
     C-h v
 
-# Customization<a id="sec-4" name="sec-4"></a>
+# Customization<a id="sec-5" name="sec-5"></a>
 
 See also: <http://www.aaronbedra.com/emacs.d/>
 
-## Install Packages<a id="sec-4-1" name="sec-4-1"></a>
+## Install Packages<a id="sec-5-1" name="sec-5-1"></a>
 
 1.  Install an Emacs package from repository:
 
@@ -5859,7 +5936,7 @@ See also: <http://www.aaronbedra.com/emacs.d/>
 
         (require 'package")
 
-## Hide / Show Emacs Widgets<a id="sec-4-2" name="sec-4-2"></a>
+## Hide / Show Emacs Widgets<a id="sec-5-2" name="sec-5-2"></a>
 
 **Hide / Show Menu bar**
 
@@ -5891,7 +5968,7 @@ Hide
 
     (scroll-bar-mode -1)
 
-## Themes<a id="sec-4-3" name="sec-4-3"></a>
+## Themes<a id="sec-5-3" name="sec-5-3"></a>
 
 Load a color theme
 
@@ -5919,7 +5996,7 @@ or
     M-x color-theme-print
 \\#+END<sub>SRC</sub>
 
-## Misc<a id="sec-4-4" name="sec-4-4"></a>
+## Misc<a id="sec-5-4" name="sec-5-4"></a>
 
 **Disable/Enable Blink Cursor**
 
@@ -5991,7 +6068,7 @@ Disable
 
 `(add-hook 'before-save-hook 'delete-trailing-whitespace)`
 
-## Key Bindings<a id="sec-4-5" name="sec-4-5"></a>
+## Key Bindings<a id="sec-5-5" name="sec-5-5"></a>
 
 1.  Smart window switch
 
@@ -6238,7 +6315,7 @@ Disable
     (cua-mode)
     \\#+END<sub>SRC</sub>
 
-## Quiet Startup<a id="sec-4-6" name="sec-4-6"></a>
+## Quiet Startup<a id="sec-5-6" name="sec-5-6"></a>
 
 From: [Ask HN Emacs Users: What's in your .emacs file?](https://news.ycombinator.com/item?id=1654164)
 
@@ -6255,7 +6332,7 @@ From: [Ask HN Emacs Users: What's in your .emacs file?](https://news.ycombinator
     ;; Don't insert instructions in the *scratch* buffer
     (setq initial-scratch-message nil)
 
-## Set Default Web Browser<a id="sec-4-7" name="sec-4-7"></a>
+## Set Default Web Browser<a id="sec-5-7" name="sec-5-7"></a>
 
 Set the default web browsr used by (browse-url <url>) function and by org-mode.
 
@@ -6263,9 +6340,9 @@ Set the default web browsr used by (browse-url <url>) function and by org-mode.
     (setq browse-url-browser-function 'browse-url-generic
           browse-url-generic-program "chromium-browser")
 
-# Solutions<a id="sec-5" name="sec-5"></a>
+# Solutions<a id="sec-6" name="sec-6"></a>
 
-## Quick edit and reload Emac Configuration File.<a id="sec-5-1" name="sec-5-1"></a>
+## Quick edit and reload Emac Configuration File.<a id="sec-6-1" name="sec-6-1"></a>
 
 It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
@@ -6285,7 +6362,7 @@ It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. 
         (find-file user-init-file)
     )
 
-## Refresh/ Reload File<a id="sec-5-2" name="sec-5-2"></a>
+## Refresh/ Reload File<a id="sec-6-2" name="sec-6-2"></a>
 
 Source: <http://www.emacswiki.org/emacs-en/download/misc-cmds.el>
 
@@ -6300,7 +6377,7 @@ Usage:
 M-x refresh
 \\#+END<sub>SRC</sub>
 
-## Creating Quick Access Menu<a id="sec-5-3" name="sec-5-3"></a>
+## Creating Quick Access Menu<a id="sec-6-3" name="sec-6-3"></a>
 
 ![img](images/utils_menu1.png)
 
@@ -6341,7 +6418,7 @@ M-x refresh
 
      )) ;; End of Custom Menu
 
-## Extract Function Documentation<a id="sec-5-4" name="sec-5-4"></a>
+## Extract Function Documentation<a id="sec-6-4" name="sec-6-4"></a>
 
 Source: [Generate emacs-lisp documentation](http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/)
 Primitives:
@@ -6400,7 +6477,7 @@ Final Code
 "
 \\#+END<sub>SRC</sub>
 
-## Edit File as Root<a id="sec-5-5" name="sec-5-5"></a>
+## Edit File as Root<a id="sec-6-5" name="sec-6-5"></a>
 
     (defun open-as-root (filename)
       (interactive)
@@ -6430,7 +6507,7 @@ Final Code
       (kill-buffer bufname)         ;; Kill current buffer
       (open-as-root filename))))    ;; Open File as root
 
-## Open Current Buffer Directory<a id="sec-5-6" name="sec-5-6"></a>
+## Open Current Buffer Directory<a id="sec-6-6" name="sec-6-6"></a>
 
 M-x open-dir
 
@@ -6439,7 +6516,7 @@ M-x open-dir
       (interactive)
       (find-file (file-name-directory (buffer-file-name))))
 
-## Open Current Buffer Directory in File Manager<a id="sec-5-7" name="sec-5-7"></a>
+## Open Current Buffer Directory in File Manager<a id="sec-6-7" name="sec-6-7"></a>
 
 M-x open-file-manager
 
@@ -6453,7 +6530,7 @@ M-x open-file-manager
       (interactive)
       (call-process "open" nil nil nil "."))
 
-## Open a terminal Emulator in the directory of Current Buffer<a id="sec-5-8" name="sec-5-8"></a>
+## Open a terminal Emulator in the directory of Current Buffer<a id="sec-6-8" name="sec-6-8"></a>
 
 Despite Emacs can run a shell like python, bash, zsh, it cannot run ncurses based applications. In these cases is necessary to launch an external terminal. This command can be added to the menu in the section: Creating Quick Access Menu (See section )
 Usage:
@@ -6489,7 +6566,7 @@ Code:
       end tell
       " cmd))))
 
-## Eval String in Clipboard<a id="sec-5-9" name="sec-5-9"></a>
+## Eval String in Clipboard<a id="sec-6-9" name="sec-6-9"></a>
 
 It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
 
@@ -6508,7 +6585,7 @@ It only works on Linux and requires Xclip to be installed, but with a few change
     "Loading my copypaste file..."
     ELISP>
 
-## Save and Reload Current Session<a id="sec-5-10" name="sec-5-10"></a>
+## Save and Reload Current Session<a id="sec-6-10" name="sec-6-10"></a>
 
 Interactive Developement
 
@@ -6611,7 +6688,7 @@ M-x load-session ;; All previous files in the session
                  ;; saved will be opened
 \\#+END<sub>SRC</sub>
 
-## Create a menu with all color themes available<a id="sec-5-11" name="sec-5-11"></a>
+## Create a menu with all color themes available<a id="sec-6-11" name="sec-6-11"></a>
 
 ![img](images/colortheme_menu.png)
 
@@ -6778,7 +6855,7 @@ Final code
                   (load-theme 'light-blue)]
                 ...
 
-## Better Menu Syntax<a id="sec-5-12" name="sec-5-12"></a>
+## Better Menu Syntax<a id="sec-6-12" name="sec-6-12"></a>
 
 This macro defines a more readable menu syntax.
 
@@ -6834,7 +6911,7 @@ This macro defines a more readable menu syntax.
                  ["light-blue"
                   (load-theme 'light-blue)])))
 
-## Save and Restore Current Window Configuration<a id="sec-5-13" name="sec-5-13"></a>
+## Save and Restore Current Window Configuration<a id="sec-6-13" name="sec-6-13"></a>
 
 Press <F7> to save the curren window configuration and <F8> to restore. The functions can also be executed with A-x save-view or A-x restore-view.
 
@@ -6853,7 +6930,7 @@ Press <F7> to save the curren window configuration and <F8> to restore. The func
     (global-set-key (kbd "<f7>")  #'save-view)
     (global-set-key (kbd "<f8>")  #'restore-view)
 
-## Http and Post Request<a id="sec-5-14" name="sec-5-14"></a>
+## Http and Post Request<a id="sec-6-14" name="sec-6-14"></a>
 
 [Source](http://qiita.com/sanryuu/items/eed79c7b99616e769e67)
 
@@ -6946,7 +7023,7 @@ Press <F7> to save the curren window configuration and <F8> to restore. The func
       "url": "http://httpbin.org/post"
     }
 
-# Org-Mode<a id="sec-6" name="sec-6"></a>
+# Org-Mode<a id="sec-7" name="sec-7"></a>
 
 Org-Mode is a mode built-in to Emacs that allows to store structured
 data, information in text format - org-mode markdown that can be
@@ -6994,6 +7071,8 @@ Hacking and Tweaking:
 
 -   [Org-mode Frequently Asked Questions](http://orgmode.org/worg/org-faq.html)
 
+-   [My org-protocol setup, part 1.](http://oremacs.com/2015/01/07/org-protocol-1/)
+
 Cases:
 
 -   [What we are using org-mode for](http://kitchingroup.cheme.cmu.edu/blog/2014/08/08/What-we-are-using-org-mode-for/)
@@ -7004,22 +7083,24 @@ Literate Programming:
 
 **Videos**
 
--   [Embedding Code Snippets In Org Mode](https://www.youtube.com/watch?v=lsYdK0C2RvQ)
--   [Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)](https://www.youtube.com/watch?v=VIuOwIBL-ZU)
--   [Org mode is awesome](https://www.youtube.com/watch?v=fgizHHd7nOo)
--   [Emacs Org-mode - a system for note-taking and project planning](https://www.youtube.com/watch?v=oJTwQvgfgMM)
--   [Hack-Emacs an Overview of Org-Mode](https://youtu.be/6W82EdwQhxU)
+-   Emacs Org-Mode - A system for note-taking and project planning -
+    Talk given by Carsten Dominik.
+    -   [Embedding Code Snippets In Org Mode](https://www.youtube.com/watch?v=lsYdK0C2RvQ)
+    -   [Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)](https://www.youtube.com/watch?v=VIuOwIBL-ZU)
+    -   [Org mode is awesome](https://www.youtube.com/watch?v=fgizHHd7nOo)
+    -   [Emacs Org-mode - a system for note-taking and project planning](https://www.youtube.com/watch?v=oJTwQvgfgMM)
+    -   [Hack-Emacs an Overview of Org-Mode](https://youtu.be/6W82EdwQhxU)
 
-# Resources<a id="sec-7" name="sec-7"></a>
+# Resources<a id="sec-8" name="sec-8"></a>
 
-## Documentation<a id="sec-7-1" name="sec-7-1"></a>
+## Documentation<a id="sec-8-1" name="sec-8-1"></a>
 
-### Manual<a id="sec-7-1-1" name="sec-7-1-1"></a>
+### Manual<a id="sec-8-1-1" name="sec-8-1-1"></a>
 
 -   [GNU Emacs Lisp Reference Manual](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents)
 -   <http://blog.gnumonk.com/2012/07/effective-emacs-part1.html>
 
-### Tutorials<a id="sec-7-1-2" name="sec-7-1-2"></a>
+### Tutorials<a id="sec-8-1-2" name="sec-8-1-2"></a>
 
 -   [Rosetta Code/ Category:Emacs Lisp](http://rosettacode.org/wiki/Category:Emacs_Lisp)
 -   [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs](http://emacslife.com/how-to-read-emacs-lisp.html)
@@ -7027,7 +7108,7 @@ Literate Programming:
 -   [Elisp Cookbook](http://emacswiki.org/emacs/ElispCookbook)\* [ErgoEmacs](http://ergoemacs.org/)
 -   [Essential Elisp Libraries - Functional Programmin in Elisp](http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/)
 
-### Wikis<a id="sec-7-1-3" name="sec-7-1-3"></a>
+### Wikis<a id="sec-8-1-3" name="sec-8-1-3"></a>
 
 -   [Emacs / Arch Wiki](https://wiki.archlinux.org/index.php/Emacs)
 -   [Emacs Lisp for Perl Programmers](http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html)
@@ -7041,21 +7122,21 @@ Literate Programming:
 
 -   [On elisp and programming in general](http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html)
 
-### Issues<a id="sec-7-1-4" name="sec-7-1-4"></a>
+### Issues<a id="sec-8-1-4" name="sec-8-1-4"></a>
 
 -   [Emacs on Windows / Cygwin](http://www.khngai.com/emacs/cygwin.php)
 -   [10 Tips for Powerful Emacs on Windows](http://gregorygrubbs.com/emacs/10-tips-emacs-windows/)
 
-## Developement Environments for Emacs<a id="sec-7-2" name="sec-7-2"></a>
+## Developement Environments for Emacs<a id="sec-8-2" name="sec-8-2"></a>
 
-### Python<a id="sec-7-2-1" name="sec-7-2-1"></a>
+### Python<a id="sec-8-2-1" name="sec-8-2-1"></a>
 
 -   [Python Settings](http://wikemacs.org/wiki/Python)
 -   [Setting up Emacs to Support both Python 2 and Python 3](http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/)
 -   [Pyenv Mode](https://github.com/proofit404/pyenv-mode)
 -   [Running Python and R inside Emacs by John D. Cook](http://www.johndcook.com/blog/2012/02/09/python-org-mode/)
 
-### Javascript<a id="sec-7-2-2" name="sec-7-2-2"></a>
+### Javascript<a id="sec-8-2-2" name="sec-8-2-2"></a>
 
 -   [Java Script](http://wikemacs.org/wiki/JavaScript)
 
@@ -7063,19 +7144,19 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 -   [Swank backend for Node.JS and in-browser JavaScript](https://github.com/swank-js/swank-js)
 
-### C / C++<a id="sec-7-2-3" name="sec-7-2-3"></a>
+### C / C++<a id="sec-8-2-3" name="sec-8-2-3"></a>
 
 -   [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html)\* [C make IDE](https://github.com/atilaneves/cmake-ide)
 
-### Ocaml<a id="sec-7-2-4" name="sec-7-2-4"></a>
+### Ocaml<a id="sec-8-2-4" name="sec-8-2-4"></a>
 
 -   [Ocaml](http://wikemacs.org/wiki/OCaml)
 
-### Haskell<a id="sec-7-2-5" name="sec-7-2-5"></a>
+### Haskell<a id="sec-8-2-5" name="sec-8-2-5"></a>
 
 -   [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)\* [Emacs/Inferior Haskell processes](https://wiki.haskell.org/Emacs/Inferior_Haskell_processes)
 
-### Lisp<a id="sec-7-2-6" name="sec-7-2-6"></a>
+### Lisp<a id="sec-8-2-6" name="sec-8-2-6"></a>
 
 1.  All Lisp Dialects
 
@@ -7139,12 +7220,12 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
     **Non Categorized**
 
-    -   [Loacal Variables](http://emacswiki.org/emacs/LocalVariables)
+    -   [Local Variables](http://emacswiki.org/emacs/LocalVariables)
     -   [Project Interaction Library for Emacs](https://github.com/joelmccracken/projectile)
     -   [The Emacs Widget Library](http://www.gnu.org/software/emacs/manual/html_node/widget/index.html)
     -   [InteractivelyDoThings](http://www.emacswiki.org/emacs/InteractivelyDoThings)
 
-## Selected Dot Emacs<a id="sec-7-3" name="sec-7-3"></a>
+## Selected Dot Emacs<a id="sec-8-3" name="sec-8-3"></a>
 
 -   [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
 -   [Howard Abrams dot emacs](https://github.com/howardabrams/dot-files/blob/master/emacs.org)
@@ -7158,7 +7239,7 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 -   <http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el>
 
-## Space Emacs Default Config<a id="sec-7-4" name="sec-7-4"></a>
+## Space Emacs Default Config<a id="sec-8-4" name="sec-8-4"></a>
 
 From the documentation:
 
@@ -7166,7 +7247,7 @@ Spacemacs is first intended to be used by Vim users who want to go to the next l
 
 <https://github.com/syl20bnr/spacemacs>
 
-## Selected Codes<a id="sec-7-5" name="sec-7-5"></a>
+## Selected Codes<a id="sec-8-5" name="sec-8-5"></a>
 
 -   <http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el>
 
@@ -7192,15 +7273,15 @@ Large Collection of Codes to Emacs
 
 -   <http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html>
 
-## Screencasts<a id="sec-7-6" name="sec-7-6"></a>
+## Screencasts<a id="sec-8-6" name="sec-8-6"></a>
 
 -   [What You Can Learn From ido.el](https://vimeo.com/1013263)
 
-## Limitations<a id="sec-7-7" name="sec-7-7"></a>
+## Limitations<a id="sec-8-7" name="sec-8-7"></a>
 
 -   [EmacsLispLimitations](http://www.emacswiki.org/emacs/EmacsLispLimitations)    \* [Why isn't more of CommonLisp in GNU Emacs?](http://www.emacswiki.org/emacs/CommonLisp)    \* [WhyDoesElispSuck](http://www.emacswiki.org/emacs/WhyDoesElispSuck)
 
-## Selected Emacs Tutorials<a id="sec-7-8" name="sec-7-8"></a>
+## Selected Emacs Tutorials<a id="sec-8-8" name="sec-8-8"></a>
 
 -   [Comint: Writing your own Command Interpreter
 
@@ -7250,7 +7331,7 @@ By Mickey Petersen](<https://www.masteringemacs.org/article/comint-writing-comma
 
 -   <https://github.com/capitaomorte/yasnippet>
 
-## Technical Notes<a id="sec-7-9" name="sec-7-9"></a>
+## Technical Notes<a id="sec-8-9" name="sec-8-9"></a>
 
 **Emacs architecture:**
 

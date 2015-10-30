@@ -19,15 +19,56 @@ that is also useful for Elisp and Scheme is available at [[http://unintelligible
 *Configuration File*
 
 The user configuration file, which is executed when Emacs starts, is stored in the directory
-=~/.emacs.d/init.el= or =~/.emacs=. The first one is best because it
+=~/.emacs.d/init.el= or =~/.emacs=. The first one is better because it
 is in the same directory of all emacs configuration files.
 
 The Emacs scratch buffer can be used to test new features and try
 Emacs codes along with IELM - Emacs Lisp interactive shell.
 
+** Command Line Options
+
+Start emacs ignoring the file:~/.emacs.d/init.el or file:~/.emacs configuration file.
+
+#+BEGIN_SRC sh
+
+$ emacs --no-init-file
+
+or
+
+$ emacs -q
+
+#+END_SRC
+
+Start Emacs with a custom configuration file:
+
+#+BEGIN_SRC sh
+
+$ emacs -q -l customstart.el
+#+END_SRC
+
+Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
+
+#+BEGIN_SRC sh
+
+$ emacs  --debug-init
+
+#+END_SRC
+
+To keep multiple configurations files see: [[https://github.com/caiorss/Emacs-Bootstrap][Emacs Bootstrap]]
+Show Emacs version
+
+#+BEGIN_SRC sh
+
+$ emacs --version
+
+#+END_SRC
+
 ** Default Key Bindings and Useful Commands
 
-The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be enabled by typing: M-x cua-mode, emacs also supports the Vim keybindings by installing the evil package.
+The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
+enabled by typing: M-x cua-mode or by inserting =(cua-mode) in emacs
+configuration file, emacs also supports the Vim keybindings by
+installing the evil package =(M-x package-install evil)=.
 
 See also:
 
@@ -116,17 +157,17 @@ See also:
 
 *Select, Copy, Cut and Paste*
 
-|           |                         |
-|-----------+-------------------------|
-| C - _     | Undo                    |
-| C - x u   | Redo                    |
-| C - Space | Begin Selection         |
-| C - G     | Cancel Selection        |
-| C-x h     | Select the whole buffer |
-| M-w       | Copy                    |
-| C-y       | Paste                   |
-| C-w       | Cut                     |
-|           |                         |
+|           |                                                             |
+|-----------+-------------------------------------------------------------|
+| C - _     | Undo                                                        |
+| C - x u   | Redo                                                        |
+| C - Space | Begin Selection                                             |
+| C - G     | Cancel Selection                                            |
+| C-x h     | Select the whole buffer                                     |
+| M-w       | Copy                                                        |
+| C-y       | Paste  (Yank)                                               |
+| C-w       | Cut    (Wipe out), Delete and copy to clipboard (Kill Ring) |
+|           |                                                             |
 
 *Word Case / Comment and Uncomment*
 
@@ -183,17 +224,26 @@ See also:
 
 *General Programming*
 
-|                   |                                  |
-|-------------------+----------------------------------|
-| M-;               | Comment/ Uncomment Selected Code |
-| M-/               | Autocomplete word                |
-| M-x goto-char     | Got a character position         |
-| Mg-g <line-num>   | Go to line number                |
-| Mg-c <cursor-pos> | Go to character position         |
-| C-x C - (minus)   | Decrease font size               |
-| C-x C + (plus)    | Increase font size               |
-| C-x r m           | Make bookmark                    |
-| C-x r b           | Jump to bookmarks                |
+|                   |                                            |
+|-------------------+--------------------------------------------|
+| M-;               | Comment/ Uncomment Selected Code           |
+| M-/               | Autocomplete word                          |
+| M-x goto-char     | Got a character position                   |
+| Mg-g <line-num>   | Go to line number                          |
+| Mg-c <cursor-pos> | Go to character position                   |
+|                   |                                            |
+| C-x C - (minus)   | Decrease font size                         |
+| C-x C + (plus)    | Increase font size                         |
+|                   |                                            |
+| C-x r m           | Make bookmark                              |
+| C-x r b           | Jump to bookmarks                          |
+|                   |                                            |
+| C-y               | Copy selected text by cursor (Copy region) |
+| C-y               | Paste when no text is selected. (Yank)     |
+| C-k               | Delete current line from cursor position.  |
+| C-w               | Cut (Wipe Out)                             |
+|                   |                                            |
+
 
 *Lisp*
 
@@ -215,82 +265,43 @@ Useful lisp key bindings to edit and navigate Lisp code.
 
 *IELM - Emacs Lisp Interpreter*
 
-|                           |                            |
-|---------------------------|----------------------------|
-|  M-x ielm            | Run Emacs Lisp Interpreter |
-|  C-c C-b   | (IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell. |
-|  C-[up]    | (All Shells) Get the next input in the history |
-|  C-[down]    | (All Shells) Get the previous input in the history |
-|  M-p       | (All Shells) Get the previous input in the history  |
-|  M-n       | (All Shells) Get the next input in the history |
-|  C-c C-l   | Display the shell history in another window |
+|          |                                                                                              |
+|----------+----------------------------------------------------------------------------------------------|
+| M-x ielm | Run Emacs Lisp Interpreter                                                                   |
+| C-c C-b  | (IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell. |
+| C-[up]   | (All Shells) Get the next input in the history                                               |
+| C-[down] | (All Shells) Get the previous input in the history                                           |
+| M-p      | (All Shells) Get the previous input in the history                                           |
+| M-n      | (All Shells) Get the next input in the history                                               |
+| C-c C-l  | Display the shell history in another window                                                  |
 
 *Delimiter Wrapping*
 
-|                       |                         |
-|-----------------------|--------------------------|
-|  M-(       | Wrap selection in parentheses |
-|  M-[       | Wrap selection in square brackets |
-|  M-{       | Wrap selection in curly brackets |
-|
+|     |                                   |
+|-----+-----------------------------------|
+| M-( | Wrap selection in parentheses     |
+| M-[ | Wrap selection in square brackets |
+| M-{ | Wrap selection in curly brackets  |
+|     |                                   |
 
 *S-expression Navigation*
 
-|                       |                         |
-|-----------------------|--------------------------|
-|  C-M-n     | Move forward over a parenthetical group |
-|  C-M-p     | Move backward over a parenthetical group |
-|  C-M-f     | Move forward over a balanced expression |
-|  C-M-b     | Move backward over a balanced expression |
-|  C-M-k     | Delete s-expression under cursor |
-|
-|  C-M-a     | Move to the beggining of current function |
-|  C-M-e     | Move to the end f current function |
-
-** Command Line Options
-
-Start emacs ignoring the file:~/.emacs.d/init.el or file:~/.emacs configuration file.
-
-#+BEGIN_SRC sh
-
-$ emacs --no-init-file
-
-or
-
-$ emacs -q
-
-#+END_SRC
-
-Start Emacs with a custom configuration file:
-
-#+BEGIN_SRC sh
-
-$ emacs -q -l customstart.el
-#+END_SRC
-
-Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
-
-#+BEGIN_SRC sh
-
-$ emacs  --debug-init
-
-#+END_SRC
-
-To keep multiple configurations files see: [[https://github.com/caiorss/Emacs-Bootstrap][Emacs Bootstrap]]
-Show Emacs version
-
-#+BEGIN_SRC sh
-
-$ emacs --version
-
-#+END_SRC
+|       |                                           |
+|-------+-------------------------------------------|
+| C-M-n | Move forward over a parenthetical group   |
+| C-M-p | Move backward over a parenthetical group  |
+| C-M-f | Move forward over a balanced expression   |
+| C-M-b | Move backward over a balanced expression  |
+| C-M-k | Delete s-expression under cursor          |
+|       |                                           |
+| C-M-a | Move to the beggining of current function |
+| C-M-e | Move to the end f current function        |
 
 * ELISP
 
 This section will use the Emacs interactive elisp shell IELM that can
 be accessed by typing *M-x ielm*. You can also use the scratch buffer
 to test Emacs features and elisp codes.
-
 
 ** Basic Operations
 
@@ -1704,6 +1715,178 @@ t
 ELISP>
 
 #+END_SRC
+** Types Conversion
+
+
+*Query Types*
+
+#+BEGIN_SRC elisp
+
+ELISP> (type-of 1000)
+integer
+
+ELISP> (type-of 1000.3434)
+float
+ELISP>
+
+ELISP> (type-of "lisp")
+string
+
+ELISP> (type-of '(1 2 3 4 5))
+cons
+ELISP> (type-of (list 'cos 'sin 1 2 3 4 5))
+cons
+ELISP>
+
+ELISP> (type-of [1 2 3 4])
+vector
+
+ELISP> (type-of 'elisp-mode-map)
+symbol
+ELISP>
+
+ELISP> (type-of #'cos)
+symbol
+ELISP>
+#+END_SRC
+
+*Test Types*
+
+#+BEGIN_SRC elisp
+
+
+;; Test if it is a number
+;;-----------------------------------
+
+ELISP> (numberp 1000)
+t
+ELISP> (numberp 10e4)
+t
+ELISP> (numberp '(1 2 3 4))
+nil
+ELISP> (numberp "hello world")
+nil
+ELISP>
+
+
+;; Test if it is a string
+;;-----------------------------------
+
+ELISP> (stringp "Emacs")
+t
+ELISP> (stringp '(1 2 3 4))
+nil
+ELISP>
+
+;; Test if ti is a symbol
+;;------------------------------------
+ELISP> (symbolp 'emacs)
+t
+ELISP> (symbolp #'emacs)
+t
+ELISP> (symbolp "something")
+nil
+ELISP> (symbolp 10000)
+nil
+ELISP>
+
+
+;; Test if it is a list
+;;-----------------------------------
+
+ELISP> (listp '(1 2 3 4))
+t
+ELISP> (listp [1 2 3 4])
+nil
+ELISP> (listp "hello world")
+nil
+ELISP>
+
+
+;; Test if it is a vector
+;;-----------------------------------
+
+ELISP> (vectorp ["Lisp" "Emacs" "Scheme" "Clojure"])
+t
+ELISP>
+ELISP> (vectorp '(1 2 3))
+nil
+ELISP> (vectorp "lisp")
+nil
+ELISP>
+
+#+END_SRC
+
+*Number <-> String*
+
+#+BEGIN_SRC elisp
+
+ELISP>
+ELISP> (number-to-string 1000)
+"1000"
+
+ELISP> (string-to-number "200")
+200
+ELISP>
+ELISP>
+#+END_SRC
+
+*Symbol <-> String*
+
+#+BEGIN_SRC elisp
+
+ELISP> (symbol-name 'my-symbol)
+"my-symbol"
+
+ELISP> (symbol-name :my-symbol)
+":my-symbol"
+ELISP>
+#+END_SRC
+
+String to Symbol
+
+#+BEGIN_SRC elisp
+
+ELISP> (intern "some-symbol")
+some-symbol
+
+#+END_SRC
+
+*S-expression <-> string*
+
+    * read : Parse a s-expression.
+
+#+BEGIN_SRC elisp
+
+    ELISP>
+    ELISP> (setq raw "(:x 10 :y 20 :z 30 :w \"hello world\")")
+    "(:x 10 :y 20 :z 30 :w \"hello world\")"
+    ELISP>
+    ELISP> (read raw)
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> (plist-get (read raw) :x)
+    10
+    ELISP> (plist-get (read raw) :w)
+    "hello world"
+    ELISP>
+#+END_SRC
+
+    * prin1-to-string  : Serialize a s-expression
+
+#+BEGIN_SRC elisp
+
+
+    ELISP> (setq sexp '(:x 10 :y 20 :z 30 :w "hello world"))
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> sexp
+    (:x 10 :y 20 :z 30 :w "hello world")
+
+    ELISP> (prin1-to-string sexp)
+    "(:x 10 :y 20 :z 30 :w \"hello world\")"
+    ELISP>
+#+END_SRC
 
 ** Eval
 
@@ -1966,7 +2149,7 @@ ELISP>
 
 #+END_SRC
 
-*Case Switch Statement*
+***** Cond     - Case Switch
 
 #+BEGIN_SRC elisp
 
@@ -1984,6 +2167,33 @@ ELISP> (cond
 ELISP>
 #+END_SRC
 
+
+***** CL-Case  - Case Swithc
+
+#+BEGIN_SRC elisp
+(defun test-cl-case (operation x y)
+  (cl-case operation
+    (:mul (* x y))
+    (:add (+ x y))
+    (:sub (- x y))
+    (:div (/ x y))
+    (otherwise nil)))
+
+ELISP> (test-cl-case :mul 2 10)
+20
+
+ELISP> (test-cl-case :sub 10 2)
+8
+
+ELISP> (test-cl-case :add 10 2)
+12
+ELISP> (test-cl-case :div 10 2)
+5
+
+ELISP> (test-cl-case 'dummy 20 10)
+nil
+
+#+END_SRC
 
 ***** Loops
 
@@ -2200,180 +2410,6 @@ nil
 
 
 #+END_SRC
-
-** Types Conversion
-
-
-*Query Types*
-
-#+BEGIN_SRC elisp
-
-ELISP> (type-of 1000)
-integer
-
-ELISP> (type-of 1000.3434)
-float
-ELISP>
-
-ELISP> (type-of "lisp")
-string
-
-ELISP> (type-of '(1 2 3 4 5))
-cons
-ELISP> (type-of (list 'cos 'sin 1 2 3 4 5))
-cons
-ELISP>
-
-ELISP> (type-of [1 2 3 4])
-vector
-
-ELISP> (type-of 'elisp-mode-map)
-symbol
-ELISP>
-
-ELISP> (type-of #'cos)
-symbol
-ELISP>
-#+END_SRC
-
-*Test Types*
-
-#+BEGIN_SRC elisp
-
-
-;; Test if it is a number
-;;-----------------------------------
-
-ELISP> (numberp 1000)
-t
-ELISP> (numberp 10e4)
-t
-ELISP> (numberp '(1 2 3 4))
-nil
-ELISP> (numberp "hello world")
-nil
-ELISP>
-
-
-;; Test if it is a string
-;;-----------------------------------
-
-ELISP> (stringp "Emacs")
-t
-ELISP> (stringp '(1 2 3 4))
-nil
-ELISP>
-
-;; Test if ti is a symbol
-;;------------------------------------
-ELISP> (symbolp 'emacs)
-t
-ELISP> (symbolp #'emacs)
-t
-ELISP> (symbolp "something")
-nil
-ELISP> (symbolp 10000)
-nil
-ELISP>
-
-
-;; Test if it is a list
-;;-----------------------------------
-
-ELISP> (listp '(1 2 3 4))
-t
-ELISP> (listp [1 2 3 4])
-nil
-ELISP> (listp "hello world")
-nil
-ELISP>
-
-
-;; Test if it is a vector
-;;-----------------------------------
-
-ELISP> (vectorp ["Lisp" "Emacs" "Scheme" "Clojure"])
-t
-ELISP>
-ELISP> (vectorp '(1 2 3))
-nil
-ELISP> (vectorp "lisp")
-nil
-ELISP>
-
-#+END_SRC
-
-*Number <-> String*
-
-#+BEGIN_SRC elisp
-
-ELISP>
-ELISP> (number-to-string 1000)
-"1000"
-
-ELISP> (string-to-number "200")
-200
-ELISP>
-ELISP>
-#+END_SRC
-
-*Symbol <-> String*
-
-#+BEGIN_SRC elisp
-
-ELISP> (symbol-name 'my-symbol)
-"my-symbol"
-
-ELISP> (symbol-name :my-symbol)
-":my-symbol"
-ELISP>
-#+END_SRC
-
-String to Symbol
-
-#+BEGIN_SRC elisp
-
-ELISP> (intern "some-symbol")
-some-symbol
-
-#+END_SRC
-
-*S-expression <-> string*
-
-    * read : Parse a s-expression.
-
-#+BEGIN_SRC elisp
-
-    ELISP>
-    ELISP> (setq raw "(:x 10 :y 20 :z 30 :w \"hello world\")")
-    "(:x 10 :y 20 :z 30 :w \"hello world\")"
-    ELISP>
-    ELISP> (read raw)
-    (:x 10 :y 20 :z 30 :w "hello world")
-
-    ELISP> (plist-get (read raw) :x)
-    10
-    ELISP> (plist-get (read raw) :w)
-    "hello world"
-    ELISP>
-#+END_SRC
-
-    * prin1-to-string  : Serialize a s-expression
-
-#+BEGIN_SRC elisp
-
-
-    ELISP> (setq sexp '(:x 10 :y 20 :z 30 :w "hello world"))
-    (:x 10 :y 20 :z 30 :w "hello world")
-
-    ELISP> sexp
-    (:x 10 :y 20 :z 30 :w "hello world")
-
-    ELISP> (prin1-to-string sexp)
-    "(:x 10 :y 20 :z 30 :w \"hello world\")"
-    ELISP>
-#+END_SRC
-
 ** Functional Programming
 
 See also: [[https://github.com/magnars/dash.el][Dash Library Github repository]]
@@ -2975,13 +3011,132 @@ ELISP> (mapcar ($c + 1 2) '(1 2 3 4 5))
 
 ELISP>
 #+END_SRC
+** Structures
 
-** Macros and Metaprogramming                  :macro:metaprogramming:lisp:
+#+BEGIN_SRC elisp
 
-Macros are useful to create new lisp special forms like if and when, create new control structures, domain specific languages and redefine syntax. As elisp is a subset of common lisp, it uses the same syntax.
+ELISP> (defstruct account id name balance)
+account
+ELISP> (make-account :id 3434 :name "John" :balance 1000.34)
+[cl-struct-account 3434 "John" 1000.34]
+
+ELISP> (setq user1 (make-account :id 3434 :name "John" :balance 1000.34))
+[cl-struct-account 3434 "John" 1000.34]
+
+ELISP> (account-name user1)
+"John"
+
+ELISP> (account-id user1)
+3434
+
+ELISP> (account-balance user1)
+1000.34
+
+;; Test if input is an account object
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ELISP> (account-p user1)
+t
+ELISP>
+
+;; Change Field
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (defun withdraw (accc amount)
+         (setf (account-balance acc) (- (account-balance acc) amount)))
+withdraw
+
+ELISP> (withdraw user1 300)
+700.34
+ELISP> user1
+[cl-struct-account 3434 "John" 700.34]
+
+ELISP> (withdraw user1 500)
+200.34000000000003
+ELISP> user1
+[cl-struct-account 3434 "John" 200.34000000000003]
+
+ELISP>
+
+;; Build structure from a list of parameters
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (defun build-account (id name balance)
+          (make-account :id id :name name  :balance balance))
+build-account
+
+ELISP> (build-account 3434 "O' Neil" 35434.23)
+[cl-struct-account 3434 "O' Neil" 35434.23]
+
+ELISP> (apply 'build-account '(3434 "O' Neil" 35434.23))
+[cl-struct-account 3434 "O' Neil" 35434.23]
+
+ELISP>
+
+ELISP> (mapcar (lambda (params) (apply 'build-account params))
+               '(
+                 (34423 "O' Neil" 23.2323)
+                 (1023  "John Edwards" 1002323.23)
+                 (92323 "Mr. Dummy"  2323241.2323)
+                 (8723  "John Oliver" 9823)
+               ))
+([cl-struct-account 34423 "O' Neil" 23.2323]
+ [cl-struct-account 1023 "John Edwards" 1002323.23]
+ [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
+ [cl-struct-account 8723 "John Oliver" 9823])
+
+ELISP>
+
+ELISP> (defun build-accounts-from-list (list-of-params)
+          (mapcar (lambda (params) (apply 'build-account params)) list-of-params))
+build-accounts-from-list
+ELISP>
+
+ELISP> (setq accounts (build-accounts-from-list
+              '(
+                 (34423 "O' Neil" 23.2323)
+                 (1023  "John Edwards" 1002323.23)
+                 (92323 "Mr. Dummy"  2323241.2323)
+                 (8723  "John Oliver" 9823)
+               )))
+([cl-struct-account 34423 "O' Neil" 23.2323]
+ [cl-struct-account 1023 "John Edwards" 1002323.23]
+ [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
+ [cl-struct-account 8723 "John Oliver" 9823])
+
+ELISP> accounts
+([cl-struct-account 34423 "O' Neil" 23.2323]
+ [cl-struct-account 1023 "John Edwards" 1002323.23]
+ [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
+ [cl-struct-account 8723 "John Oliver" 9823])
+
+ELISP> (mapcar #'account-id accounts)
+(34423 1023 92323 8723)
+
+ELISP>
+
+ELISP>
+ELISP> (mapcar #'account-name accounts)
+("O' Neil" "John Edwards" "Mr. Dummy" "John Oliver")
+
+ELISP>
 
 
-**** Quasiquote
+ELISP> (mapcar #'account-balance accounts)
+(23.2323 1002323.23 2323241.2323 9823)
+
+ELISP>
+
+#+END_SRC
+
+* Macros and Metaprogramming                  :macro:metaprogramming:lisp:
+
+Macros are useful to create new lisp special forms like if and when,
+create new control structures, domain specific languages, eliminate
+boilerplate code, automate code  and redefine syntax.
+Elisp macro constructs has the same syntax of Common Lisp.
+** Quasiquote
 
 Quasiquote is useful to create s-expression templates, data structure templates and lisp macros.
 
@@ -3107,12 +3262,11 @@ my-symbol
 (xs 1 2 3 4 ys a b c d e)
 #+END_SRC
 
-**** Macros
+** Macros
 
 *Redefine lambda syntax to λ*
 
 #+BEGIN_SRC elisp
-
 
 (defmacro λ (args body)
  `(lambda ,args ,body))
@@ -3121,7 +3275,6 @@ ELISP> (λ (x) (+ x 3))
 (lambda
   (x)
   (+ x 3))
-
 ELISP> (mapcar (λ (x) (+ x 3)) '(1 2 3 4 5 6))
 (4 5 6 7 8 9)
 #+END_SRC
@@ -3170,7 +3323,6 @@ ELISP>
 (defmacro defn (name args body)
    `(defun ,name ,args ,body))
 
-
 ELISP> (fn (x) (* x x))
 (lambda
   (x)
@@ -3178,10 +3330,6 @@ ELISP> (fn (x) (* x x))
 
 ELISP> (mapcar (fn (x) (* x x)) '(1 2 3 4 5))
 (1 4 9 16 25)
-
-ELISP>
-
-
 
 ELISP> (def x 1000)
 1000
@@ -3403,7 +3551,6 @@ ELISP> (macroexpand
 ELISP>
 #+END_SRC
 
-
 *Create Scheme Syntax define*
 
 #+BEGIN_SRC elisp
@@ -3426,14 +3573,11 @@ ELISP> (f 5 6)
 ELISP>
 #+END_SRC
 
-
-
 *Rebind Elisp functions*
 
 Bind new names to existing elisp functions in order to create user friendly identifiers, for example, bind the symbol map to the function mapcar.
 
 #+BEGIN_SRC elisp
-
 
 (defmacro rebindfun (new-name old-name)
    `(setf (symbol-function ,new-name) ,old-name))
@@ -3516,125 +3660,6 @@ ELISP> ($debug + 10 ($debug * 10 30))
 "(+ 10 ($debug * 10 30)) = 310"
 
 310
-ELISP>
-
-#+END_SRC
-
-***  Structures
-
-#+BEGIN_SRC elisp
-
-ELISP> (defstruct account id name balance)
-account
-ELISP> (make-account :id 3434 :name "John" :balance 1000.34)
-[cl-struct-account 3434 "John" 1000.34]
-
-ELISP> (setq user1 (make-account :id 3434 :name "John" :balance 1000.34))
-[cl-struct-account 3434 "John" 1000.34]
-
-ELISP> (account-name user1)
-"John"
-
-ELISP> (account-id user1)
-3434
-
-ELISP> (account-balance user1)
-1000.34
-
-;; Test if input is an account object
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-ELISP> (account-p user1)
-t
-ELISP>
-
-;; Change Field
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-ELISP> (defun withdraw (accc amount)
-         (setf (account-balance acc) (- (account-balance acc) amount)))
-withdraw
-
-ELISP> (withdraw user1 300)
-700.34
-ELISP> user1
-[cl-struct-account 3434 "John" 700.34]
-
-ELISP> (withdraw user1 500)
-200.34000000000003
-ELISP> user1
-[cl-struct-account 3434 "John" 200.34000000000003]
-
-ELISP>
-
-;; Build structure from a list of parameters
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-ELISP> (defun build-account (id name balance)
-          (make-account :id id :name name  :balance balance))
-build-account
-
-ELISP> (build-account 3434 "O' Neil" 35434.23)
-[cl-struct-account 3434 "O' Neil" 35434.23]
-
-ELISP> (apply 'build-account '(3434 "O' Neil" 35434.23))
-[cl-struct-account 3434 "O' Neil" 35434.23]
-
-ELISP>
-
-ELISP> (mapcar (lambda (params) (apply 'build-account params))
-               '(
-                 (34423 "O' Neil" 23.2323)
-                 (1023  "John Edwards" 1002323.23)
-                 (92323 "Mr. Dummy"  2323241.2323)
-                 (8723  "John Oliver" 9823)
-               ))
-([cl-struct-account 34423 "O' Neil" 23.2323]
- [cl-struct-account 1023 "John Edwards" 1002323.23]
- [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
- [cl-struct-account 8723 "John Oliver" 9823])
-
-ELISP>
-
-ELISP> (defun build-accounts-from-list (list-of-params)
-          (mapcar (lambda (params) (apply 'build-account params)) list-of-params))
-build-accounts-from-list
-ELISP>
-
-ELISP> (setq accounts (build-accounts-from-list
-              '(
-                 (34423 "O' Neil" 23.2323)
-                 (1023  "John Edwards" 1002323.23)
-                 (92323 "Mr. Dummy"  2323241.2323)
-                 (8723  "John Oliver" 9823)
-               )))
-([cl-struct-account 34423 "O' Neil" 23.2323]
- [cl-struct-account 1023 "John Edwards" 1002323.23]
- [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
- [cl-struct-account 8723 "John Oliver" 9823])
-
-ELISP> accounts
-([cl-struct-account 34423 "O' Neil" 23.2323]
- [cl-struct-account 1023 "John Edwards" 1002323.23]
- [cl-struct-account 92323 "Mr. Dummy" 2323241.2323]
- [cl-struct-account 8723 "John Oliver" 9823])
-
-ELISP> (mapcar #'account-id accounts)
-(34423 1023 92323 8723)
-
-ELISP>
-
-ELISP>
-ELISP> (mapcar #'account-name accounts)
-("O' Neil" "John Edwards" "Mr. Dummy" "John Oliver")
-
-ELISP>
-
-
-ELISP> (mapcar #'account-balance accounts)
-(23.2323 1002323.23 2323241.2323 9823)
-
 ELISP>
 
 #+END_SRC
@@ -5821,7 +5846,6 @@ file:images/utils_menu2.png
 
 #+END_SRC
 
-
 **  Extract Function Documentation
 
 Source: [[http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/][Generate emacs-lisp documentation]]
@@ -6536,6 +6560,10 @@ Hacking and Tweaking:
 
    * [[http://orgmode.org/worg/org-faq.html][Org-mode Frequently Asked Questions]]
 
+   * [[http://oremacs.com/2015/01/07/org-protocol-1/][My org-protocol setup, part 1.]]
+
+
+
 Cases:
 
     * [[http://kitchingroup.cheme.cmu.edu/blog/2014/08/08/What-we-are-using-org-mode-for/][What we are using org-mode for]]
@@ -6545,6 +6573,9 @@ Literate Programming:
    * [[http://blogs.neuwirth.priv.at/software/2012/03/28/r-and-emacs-with-org-mode/][R and Emacs with org mode]]
 
 *Videos*
+
+   * [[(info "(emacs) Misc Help")][Emacs Org-Mode - A system for note-taking and project planning]] -
+     Talk given by Carsten Dominik.
 
     * [[https://www.youtube.com/watch?v=lsYdK0C2RvQ][Embedding Code Snippets In Org Mode]]
     * [[https://www.youtube.com/watch?v=VIuOwIBL-ZU][Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)]]
@@ -6686,9 +6717,11 @@ The function M-x run-scheme will run the selected scheme program.
     * [[http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html][Practical Starter Tips for Clojure]]
     * [[http://www.braveclojure.com/basic-emacs/][How to Use Emacs, an Excellent Clojure Editor]]
     * [[http://eigenhombre.com/clojure/2014/07/05/emacs-customization-for-clojure/][Emacs Customization for Clojure]]
+
+
 *Non Categorized*
 
-    * [[http://emacswiki.org/emacs/LocalVariables][Loacal Variables]]
+    * [[http://emacswiki.org/emacs/LocalVariables][Local Variables]]
     * [[https://github.com/joelmccracken/projectile][Project Interaction Library for Emacs]]
     * [[http://www.gnu.org/software/emacs/manual/html_node/widget/index.html][The Emacs Widget Library]]
     * [[http://www.emacswiki.org/emacs/InteractivelyDoThings][InteractivelyDoThings]]
