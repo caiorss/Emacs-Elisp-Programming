@@ -55,9 +55,30 @@
   (split-string str glue-char)
   )
 
+(defun string/chop-suffix (suffix s)
+  "Remove a string suffix
+
+  Example:
+  > (string/chop-suffix \".html\" \"filename.html\")
+  \"filename\"
+   "
+  (let ((pos (- (length suffix))))
+    (if (and (>= (length s) (length suffix))
+             (string= suffix (substring s pos)))
+        (substring s 0 pos)
+      s)))
+
+
 (defun string/quote (str)
   (format "\"%s\"" str)
   )
+
+(defun string/escape (str)
+  (replace-regexp-in-string "\"" "\\\\\"" str))
+
+(defun string/unescape (str)
+   (replace-regexp-in-string  "\\\\\"" "\"" str))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -892,7 +913,7 @@
 
 (defun buffer/copy-path ()
   (interactive)
-  (copy-to-clipboard (buffer/file)))
+  (clipboard/copy (buffer/file)))
 
 
 (defun buffer/edit-as-root ()
@@ -933,6 +954,45 @@
 
 (defun buffer/kill (buffer-or-name)
   (kill-buffer (buffer/get buffer-or-name)))
+
+
+(defun region/escape ()
+  "
+  Escape a region, select the text and type
+  M-x region/escape. It is useful to insert
+  example int the function docstring.
+
+  "
+  (interactive)
+  (save-excursion
+    (letc
+     (
+      rmin      (region-beginning)
+      rmax      (region-end)
+      content   (buffer-substring-no-properties rmin rmax))
+
+     (delete-region rmin rmax)
+     (insert (string/escape content)))))
+
+
+(defun region/unescape ()
+  "
+  Unescape a region, select the text and type
+  M-x region/unescape. It is useful to insert
+  example int the function docstring.
+
+  "
+  (interactive)
+  (save-excursion
+    (letc
+     (
+      rmin      (region-beginning)
+      rmax      (region-end)
+      content   (buffer-substring-no-properties rmin rmax))
+
+     (delete-region rmin rmax)
+     (insert (string/unescape content)))))
+
 
 ;;
 ;; Src: http://web.ics.purdue.edu/~dogbe/static/emacs_config_file.html
@@ -1034,11 +1094,17 @@
 
 ;;; Copy String to Clipboard
 
-(defun copy-to-clipboard (astring)
+(defun clipboard/copy (astring)
+  "Copy a string to clipboard"
  (with-temp-buffer
   (insert astring)
   (clipboard-kill-region (point-min) (point-max))))
 
+(defun clipboard/paste ()
+  "Return the content of clipboard as string"
+  (with-temp-buffer
+    (clipboard-yank)
+    (buffer-substring-no-properties (point-min) (point-max))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    KEY BINDINGS                     ;;
@@ -1093,7 +1159,7 @@
 (defun lisp/copy-sexp-at-point ()
     "Copy s-expression where is the cursor to clipboard"
     (interactive)
-    (copy-to-clipboard (thing-at-point 'sexp)))
+    (clipboard/copy (thing-at-point 'sexp)))
 
 (defun elisp/macro-expand-at-point ()
     (interactive)
@@ -1161,9 +1227,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun open-finance ()
-  (interactive)
-  (find-file "~/org/Finance.org"))
 
 (defvar __org-mode-html-buffer "*Org HTML Export*")
 
@@ -1178,6 +1241,55 @@
     (message "Ok.")
   ))
 
+(defun org-download-to-buffer  (&optional url_)
+  (interactive)
+  "
+  Dowload an org file document to a temporary buffer in
+  mode org-mode.
+
+  Example:
+
+  (org-download-to-buffer
+ \"https://raw.githubusercontent.com/erikriverson/org-mode-R-tutorial/master/org-mode-R-tutorial.org\")
+
+  Or M-x org-download-to-buffer
+
+  "
+  (letc
+   (
+    temp    (get-buffer-create "org-view")
+    url     (if url_
+                url_
+                (read-string "url :"))
+
+    content (url-http-get url nil)
+    )
+
+   (switch-to-buffer temp)
+   (erase-buffer)
+   (save-excursion
+     (org-mode)
+     (insert content))))
+
+
+(defun create-link-from-url (url)
+  (format "[[%s][%s]]"
+          url
+        (replace-regexp-in-string ".asp" ""
+        (replace-regexp-in-string ".asp" ""
+        (replace-regexp-in-string ".html" ""
+        (replace-regexp-in-string ".htm" ""
+        (replace-regexp-in-string "%20" " "
+        (replace-regexp-in-string "[_|-]" " "
+       (car (last (string/split "/" url)))))))))))
+
+
+(defun org/paste-url-link ()
+  "Paste URL in Org-mode"
+  (interactive)
+  (save-excursion
+    (insert
+     (create-link-from-url (clipboard/get)))))
 
 
 ;; (define-mode-keys emacs-lisp-mode-map

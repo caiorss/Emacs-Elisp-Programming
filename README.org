@@ -224,25 +224,29 @@ See also:
 
 *General Programming*
 
-|                   |                                            |
-|-------------------+--------------------------------------------|
-| M-;               | Comment/ Uncomment Selected Code           |
-| M-/               | Autocomplete word                          |
-| M-x goto-char     | Got a character position                   |
-| Mg-g <line-num>   | Go to line number                          |
-| Mg-c <cursor-pos> | Go to character position                   |
-|                   |                                            |
-| C-x C - (minus)   | Decrease font size                         |
-| C-x C + (plus)    | Increase font size                         |
-|                   |                                            |
-| C-x r m           | Make bookmark                              |
-| C-x r b           | Jump to bookmarks                          |
-|                   |                                            |
-| C-y               | Copy selected text by cursor (Copy region) |
-| C-y               | Paste when no text is selected. (Yank)     |
-| C-k               | Delete current line from cursor position.  |
-| C-w               | Cut (Wipe Out)                             |
-|                   |                                            |
+|                   |                                                |
+|-------------------+------------------------------------------------|
+| M-x find-file     | Open a new file or a existing file.            |
+| M-;               | Comment/ Uncomment Selected Code               |
+| M-/               | Autocomplete word (Equivalent to VIM Ctrl + p) |
+| M-x goto-char     | Got a character position                       |
+| Mg-g <line-num>   | Go to line number                              |
+| Mg-c <cursor-pos> | Go to character position                       |
+|                   |                                                |
+|-------------------+------------------------------------------------|
+| C-x C - (minus)   | Decrease font size                             |
+| C-x C + (plus)    | Increase font size                             |
+|                   |                                                |
+|-------------------+------------------------------------------------|
+| C-x r m           | Make bookmark                                  |
+| C-x r b           | Jump to bookmarks                              |
+|                   |                                                |
+|-------------------+------------------------------------------------|
+| C-y               | Copy selected text by cursor (Copy region)     |
+| C-y               | Paste when no text is selected. (Yank)         |
+| C-k               | Delete current line from cursor position.      |
+| C-w               | Cut (Wipe Out)                                 |
+|                   |                                                |
 
 
 *Lisp*
@@ -5013,118 +5017,6 @@ The following is a list of hook variables that let you provide functions to be c
 http://sunsite.ualberta.ca/Documentation/Gnu/emacs-lisp-ref-21-2.7/html_node/elisp_727.html
 
 
-    * after-save-hook
-    * find-file-hook
-    * emacs-startup-hook
-    * kill-emacs-hook
-
-#+BEGIN_SRC text
-
-    activate-mark-hook
-    after-change-functions
-    after-init-hook
-    after-insert-file-functions
-    after-make-frame-functions
-    after-revert-hook
-    after-save-hook
-    apropos-mode-hook
-    auto-fill-function
-    auto-save-hook
-    before-change-functions
-    before-init-hook
-    before-make-frame-hook
-    before-revert-hook
-    blink-paren-function
-    buffer-access-fontify-functions
-    c-mode-hook
-    calendar-load-hook
-    change-major-mode-hook
-    command-history-hook
-    command-line-functions
-    comment-indent-function
-    deactivate-mark-hook
-    diary-display-hook
-    diary-hook
-    dired-mode-hook
-    disabled-command-hook
-    echo-area-clear-hook
-    edit-picture-hook
-    electric-buffer-menu-mode-hook
-    electric-command-history-hook
-    electric-help-mode-hook
-    emacs-lisp-mode-hook
-    find-file-hooks
-    find-file-not-found-hooks
-    first-change-hook
-    fortran-comment-hook
-    fortran-mode-hook
-    indent-mim-hook
-    initial-calendar-window-hook
-    kbd-macro-termination-hook
-    kill-buffer-hook
-    kill-buffer-query-functions
-    kill-emacs-hook
-    kill-emacs-query-functions
-    LaTeX-mode-hook
-    ledit-mode-hook
-    lisp-indent-function
-    lisp-interaction-mode-hook
-    lisp-mode-hook
-    list-diary-entries-hook
-    local-write-file-hooks
-    mail-mode-hook
-    mail-setup-hook
-    mark-diary-entries-hook
-    medit-mode-hook
-    menu-bar-update-hook
-    minibuffer-setup-hook
-    minibuffer-exit-hook
-    mouse-position-function
-    news-mode-hook
-    news-reply-mode-hook
-    news-setup-hook
-    nongregorian-diary-listing-hook
-    nongregorian-diary-marking-hook
-    nroff-mode-hook
-    outline-mode-hook
-    plain-TeX-mode-hook
-    post-command-hook
-    pre-abbrev-expand-hook
-    pre-command-hook
-    print-diary-entries-hook
-    prolog-mode-hook
-    protect-innocence-hook
-    redisplay-end-trigger-functions
-    rmail-edit-mode-hook
-    rmail-mode-hook
-    rmail-summary-mode-hook
-    scheme-indent-hook
-    scheme-mode-hook
-    scribe-mode-hook
-    shell-mode-hook
-    shell-set-directory-error-hook
-    suspend-hook
-    suspend-resume-hook
-    temp-buffer-show-function
-    term-setup-hook
-    terminal-mode-hook
-    terminal-mode-break-hook
-    TeX-mode-hook
-    text-mode-hook
-    today-visible-calendar-hook
-    today-invisible-calendar-hook
-    vi-mode-hook
-    view-hook
-    window-configuration-change-hook
-    window-scroll-functions
-    window-setup-hook
-    window-size-change-functions
-    write-contents-hooks
-    write-file-hooks
-    write-region-annotate-functions
-
-#+END_SRC
-
 **  Network
 
 *Links to Inquiry*
@@ -6543,11 +6435,14 @@ Manual:
 
     * [[http://orgmode.org/org.html][The Org Manual orgmode.org]]
     * [[https://www.gnu.org/software/emacs/manual/html_node/org/][Org Mode Manual]]
+    * [[http://orgmode.org/worg/org-glossary.html][Org Glossary: An Explanation of Basic Org-Mode Concepts]]
 
-Reference Cards:
+Reference Cards and Cheat Sheets:
 
     * [[http://orgmode.org/orgguide.pdf][The Compact Org-Mode Guide]]
     * [[https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf][Org-Mode Reference Card]]
+
+    * [[https://gist.github.com/wdkrnls/1990839][Markup Cheat sheet for Org-mode]]
 
 Books:
 
@@ -6562,15 +6457,27 @@ Hacking and Tweaking:
 
    * [[http://oremacs.com/2015/01/07/org-protocol-1/][My org-protocol setup, part 1.]]
 
+   * [[http://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line][Batch export of org-mode files from the command line]]
 
+   * [[http://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-5][Org ad hoc code, quick hacks and workarounds]]
 
 Cases:
 
     * [[http://kitchingroup.cheme.cmu.edu/blog/2014/08/08/What-we-are-using-org-mode-for/][What we are using org-mode for]]
+    * [[http://juanreyero.com/article/emacs/org-teams.html][Org-mode tricks for team management]]
 
 Literate Programming:
 
+   * [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Literate DevOps - www.howardism.org]]
+   * [[http://stackoverflow.com/questions/18598870/emacs-org-mode-executing-simple-python-code][Emacs Org Mode: Executing simple python code]]
    * [[http://blogs.neuwirth.priv.at/software/2012/03/28/r-and-emacs-with-org-mode/][R and Emacs with org mode]]
+   * [[https://github.com/erikriverson/org-mode-R-tutorial/blob/master/org-mode-R-tutorial.org][Org-mode and R: An Introduction Introduction]]
+   * [[http://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]]
+   * [[http://orgmode.org/manual/Results-of-evaluation.html][Results of evaluation / Org-Mode Manual]]
+
+Non Categorized:
+
+   * [[http://www.totherme.org/configs/org-stuff.html][Gareth's Org-Mode Config]]
 
 *Videos*
 
@@ -6717,7 +6624,7 @@ The function M-x run-scheme will run the selected scheme program.
     * [[http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html][Practical Starter Tips for Clojure]]
     * [[http://www.braveclojure.com/basic-emacs/][How to Use Emacs, an Excellent Clojure Editor]]
     * [[http://eigenhombre.com/clojure/2014/07/05/emacs-customization-for-clojure/][Emacs Customization for Clojure]]
-
+    * [[http://jr0cket.co.uk/2015/01/getting-started-with-cider-repl-for-clojure-on-emacs-live.html][Getting Started With Cider Repl for Clojure on Emacs Live]]
 
 *Non Categorized*
 
