@@ -856,7 +856,8 @@
       (file/write fpath $))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; BUFFER Wrappers
+;; @SECTION: Buffer Utils. Useful Functions to manipulate buffers.
+;;
 ;;
 
 (defun open-as-root (filename)
@@ -878,7 +879,7 @@
   (with-current-buffer (buffer/get buffer-or-name)
     (buffer-substring-no-properties (point-min) (point-max))))
 
-(defun buffer/selection ()
+(defun buffer/region ()
   "Get the text selected by the user in current buffer as string"
   (interactive)
   (buffer-substring-no-properties (region-beginning) (region-end)))
@@ -887,6 +888,8 @@
   "Return the current line at the cursor position"
   (interactive)
   (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+
+(defalias 'buffer/at-point 'thing-at-point)
 
 (defun buffer/file (&optional buffer-or-name)
   "Show Current File"
@@ -897,11 +900,11 @@
 (defun buffer/write-file (filename &optional buffer-or-name)
   (file/write filename (buffer/text buffer-or-name)))
 
-(defun buffer/erase (buffer-or-name)
+(defun buffer/erase (&optional buffer-or-name)
   (with-current-buffer (buffer/get buffer-or-name)
     (erase-buffer)))
 
-(defun buffer/major-mode (buffer-or-name)
+(defun buffer/major-mode (&optional buffer-or-name)
   (with-current-buffer (buffer/get buffer-or-name)
     major-mode))
 
@@ -915,6 +918,13 @@
   (interactive)
   (clipboard/copy (buffer/file)))
 
+(defun buffer/insert-path ()
+  "Insert the path of current buffer file at point."
+  (interactive)
+  (insert (buffer/file))
+  )
+
+;; (buffer/major-mode "*Occur*")
 
 (defun buffer/edit-as-root ()
   "Edit current buffer as root"
@@ -955,6 +965,76 @@
 (defun buffer/kill (buffer-or-name)
   (kill-buffer (buffer/get buffer-or-name)))
 
+
+(defun buffer/delete-line ()
+  "Delete line at cursor position in current buffer"
+  (interactive)
+  (delete-region (line-beginning-position)
+                 (line-end-position))
+  )
+
+(defun buffer/delete-region ()
+  "Delete region (selection) in current buffer"
+  (interactive)
+  (delete-region (region-beginning)
+                 (region-end))
+  )
+
+(defun buffer/replace-line (line-transf)
+  "
+  Replace the current line by appliying the
+  line-trasf, Line Transformation Function
+  to current line.
+  "
+  (save-excursion
+    (let
+      ((line (buffer/line)))
+      (progn
+        (buffer/delete-line)
+        (insert (funcall line-transf line))
+        ))))
+
+(defun buffer/replace-line (region-transf)
+  "
+  Replace the current region by appliying the
+  region-trasf  - region transformation function
+  to current line.
+  "
+  (save-excursion
+    (let
+      ((region (buffer/region)))
+
+      (progn
+        (buffer/delete-region)
+        (insert (funcall region-transf region))
+        ))))
+
+
+
+(defun buffer/delete-at-point  (thing)
+  (let*
+      ((bounds (bounds-of-thing-at-point thing))
+       (pmin   (car bounds))
+       (pmax   (cdr bounds))
+       )
+
+    (when (and pmin pmax)
+      (delete-region pmin pmax))
+    ))
+
+(defun buffer/replace-at-point (thing transf-func)
+       (let
+           ((content (buffer/at-point thing)))
+
+         (save-excursion
+             (buffer/delete-at-point thing)
+             (insert (funcall transf-func content)))))
+
+                                        ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;  @SECTION: Regions.
+;;
 
 (defun region/escape ()
   "
@@ -1036,7 +1116,7 @@
 
   "
   (interactive)
-  (-> (buffer/selection)
+  (-> (buffer/region)
       get-url-params
       insert
       ))
@@ -1055,15 +1135,8 @@
         ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;      Cursor Functions                     ;;
-;;-------------------------------------------;;
+;;   @SECTION:   Cursor Functions                     ;;
 
-
-;;; This function can be called by typing M-x launch-terminal in any buffer.
-;;;
-(defun launch-terminal ()
-  (interactive)
-  (shell-command "lxterminal"))
 
 (defun url-at-point ()
   (interactive)
@@ -1106,79 +1179,17 @@
     (clipboard-yank)
     (buffer-substring-no-properties (point-min) (point-max))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;    KEY BINDINGS                     ;;
-;;-------------------------------------;;
 
-(defun delete-word ()
-    "Delete word next at cursor (point) - can be associated
-     with a key binb.
-    "
-    (interactive)
-    (let ((beg (point)))
-      (forward-word 1)
-      (delete-region beg (point))))
-
-
-
-;;
-;; Set global keys for all modes
-;;
-(define-global-keys
-  "C-c M-u"  #'url-at-point
-  "C-c M-f"  #'open-file-at-point
-  "C-c M-r"  #'launch-terminal
-  "<f8>"     #'execute-extended-command  ;; Same as A-x
-  "C-<f8>"   #'open-file-manager
-  "C-<f9>"   #'save-view
-  "M-<f9>"   #'restore-view
-  "C-d"      #'delete-word
-
-  ;; using the meta key to jump between windows
-  "M-0"     #'delete-window
-  "M-1"     #'delete-other-windows
-  "M-2"     #'split-window-vertically
-  "M-3"     #'split-window-horizontally
-  "M-o"     #'other-window
-
-  ;; Join Lines
-  "M-j"      (lambda () (interactive) (joinr-line -1))
-  )
-
-
-;; Delete trailing whitespace before saving a file
-;;
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  Emacs Lisp Mode
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(defun lisp/copy-sexp-at-point ()
-    "Copy s-expression where is the cursor to clipboard"
-    (interactive)
-    (clipboard/copy (thing-at-point 'sexp)))
-
-(defun elisp/macro-expand-at-point ()
-    (interactive)
-    (-> (thing-at-point 'sexp)
-        str->sexp
-        macroexpand
-        sexp->str
-        insert
-        ))
 
 (defun elisp/eval-selection ()
   (interactive)
   ($->
-        (buffer/selection)
-        (concat "(" $ ")")
-        (progn (print $)  $)
-        read
-        (cons 'progn $)
-        eval))
+   (buffer/region)
+   (concat "(" $ ")")
+   (progn (print $)  $)
+   read
+   (cons 'progn $)
+   eval))
 
 ;; http://emacs.wordpress.com/2007/01/17/eval-and-replace-anywhere/
 (defun elisp/eval-and-replace-last-sexp ()
@@ -1225,8 +1236,10 @@
   (interactive)
   (occur "defmacro"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  @SECTION: Org Mode Tools
+;;
 
 (defvar __org-mode-html-buffer "*Org HTML Export*")
 
@@ -1272,24 +1285,36 @@
      (insert content))))
 
 
-(defun create-link-from-url (url)
+(defun org-tools/create-link-from-url (url)
   (format "[[%s][%s]]"
           url
+
+       (capitalize
         (replace-regexp-in-string ".asp" ""
         (replace-regexp-in-string ".asp" ""
         (replace-regexp-in-string ".html" ""
         (replace-regexp-in-string ".htm" ""
         (replace-regexp-in-string "%20" " "
         (replace-regexp-in-string "[_|-]" " "
-       (car (last (string/split "/" url)))))))))))
+        (car (last (string/split "/"
+           (replace-regexp-in-string "/$" "" url)
+        ))))))))))))
 
 
-(defun org/paste-url-link ()
+(defun org-tools/paste-url-link ()
   "Paste URL in Org-mode"
   (interactive)
   (save-excursion
     (insert
-     (create-link-from-url (clipboard/get)))))
+     (org-tools/create-link-from-url (clipboard/get)))))
+
+
+(defun org/replace-url-for-link ()
+  (interactive)
+  (buffer/replace-at-point
+   'url
+   #'org-tools/create-link-from-url))
+
 
 
 ;; (define-mode-keys emacs-lisp-mode-map

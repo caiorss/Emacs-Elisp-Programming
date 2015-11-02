@@ -7,6 +7,7 @@
     - [Keybindings for Lisp programming](#keybindings-for-lisp-programming)
     - [Ubiquitous Emacs Key Bindings](#ubiquitous-emacs-key-bindings)
 - [ELISP](#elisp)
+  - [Using the Scratch Buffer and Interpreter](#using-the-scratch-buffer-and-interpreter)
   - [Basic Operations](#basic-operations)
   - [Defining Variables](#defining-variables)
   - [Defining Functions](#defining-functions)
@@ -77,12 +78,14 @@
     - [Emacs Documentation](#emacs-documentation)
     - [Introduction to Elisp](#introduction-to-elisp)
     - [Tips and Tricks](#tips-and-tricks)
+    - [Packages](#packages)
+    - [Cases](#cases)
     - [Non Categorized](#non-categorized)
   - [Books](#books)
   - [Community](#community)
     - [Channels](#channels)
   - [Blogs](#blogs)
-  - [Screencasts](#screencasts)
+  - [Videos and Screencasts](#videos-and-screencasts)
   - [Technical Notes](#technical-notes)
 
 
@@ -1481,7 +1484,32 @@ This section will use the Emacs interactive elisp shell IELM that can
 be accessed by typing **M-x ielm**. You can also use the scratch buffer
 to test Emacs features and elisp codes.
 
-## Basic Operations<a id="sec-2-1" name="sec-2-1"></a>
+## Using the Scratch Buffer and Interpreter<a id="sec-2-1" name="sec-2-1"></a>
+
+The scratch buffer is useful to evaluate Emacs lisp commands, test new
+features and test new Emacs configurations and dot emacs without need
+to reload Emacs.
+
+![img](images/scratch_buffer_usage_1.png)
+
+C-x C-e at the end of s-expression displays the result of evaluation
+in the minibuffer.
+
+![img](images/scratch_buffer_usage_2.png)
+
+C-j  at the end of s-expression prints the result in the scratch
+buffer.
+
+![img](images/scratch_buffer_usage_3.png)
+
+The scratch buffer can be used with the interpreter IELM, to open the
+interpreter type: C-x-3, put the cursor on the other window and type
+M-x ielm. By this way it is possible to evaluate expressions in the
+scratch buffer and test it in the shell.
+
+![img](images/scratch_buffer_usage_4.png)
+
+## Basic Operations<a id="sec-2-2" name="sec-2-2"></a>
 
 **Arithmetic**
 
@@ -1573,7 +1601,7 @@ ELISP> '(10 203 40 "hello" () ("empty" 65))
 ELISP>
 ```
 
-## Defining Variables<a id="sec-2-2" name="sec-2-2"></a>
+## Defining Variables<a id="sec-2-3" name="sec-2-3"></a>
 
 ```lisp
 ;;; Constants
@@ -1643,7 +1671,7 @@ ELISP> y
 ELISP>
 ```
 
-## Defining Functions<a id="sec-2-3" name="sec-2-3"></a>
+## Defining Functions<a id="sec-2-4" name="sec-2-4"></a>
 
 1.  Define Simple Function
 
@@ -2050,7 +2078,7 @@ ELISP>
     (setq lexical-binding t)
     ```
 
-## List Operations<a id="sec-2-4" name="sec-2-4"></a>
+## List Operations<a id="sec-2-5" name="sec-2-5"></a>
 
 See also:
 
@@ -2273,7 +2301,7 @@ ELISP> alist
 ELISP>
 ```
 
-## Association Lists and Property Lists<a id="sec-2-5" name="sec-2-5"></a>
+## Association Lists and Property Lists<a id="sec-2-6" name="sec-2-6"></a>
 
 1.  Association List / Alist
 
@@ -2628,7 +2656,7 @@ ELISP>
     ELISP>
     ```
 
-## Strings<a id="sec-2-6" name="sec-2-6"></a>
+## Strings<a id="sec-2-7" name="sec-2-7"></a>
 
 ```lisp
 ;; Split String
@@ -2733,7 +2761,7 @@ ELISP> (read-from-string
 ELISP>
 ```
 
-## Symbols<a id="sec-2-7" name="sec-2-7"></a>
+## Symbols<a id="sec-2-8" name="sec-2-8"></a>
 
 ```lisp
 ;;; Convert a string to symbol
@@ -2841,7 +2869,7 @@ t
 ELISP>
 ```
 
-## Types Conversion<a id="sec-2-8" name="sec-2-8"></a>
+## Types Conversion<a id="sec-2-9" name="sec-2-9"></a>
 
 **Query Types**
 
@@ -3002,7 +3030,7 @@ some-symbol
     ELISP>
 ```
 
-## Eval<a id="sec-2-9" name="sec-2-9"></a>
+## Eval<a id="sec-2-10" name="sec-2-10"></a>
 
 **Eval Sexp or S-expressions**
 
@@ -3127,7 +3155,7 @@ or
 (load-file "/path/my<sub>lisp</sub><sub>commands</sub>.el")
 \\#+END<sub>SRC</sub>
 
-## Control Structures     :loop:control:iteration:<a id="sec-2-10" name="sec-2-10"></a>
+## Control Structures     :loop:control:iteration:<a id="sec-2-11" name="sec-2-11"></a>
 
 See also:
 
@@ -3494,7 +3522,7 @@ See also:
     55
     ```
 
-## Functional Programming<a id="sec-2-11" name="sec-2-11"></a>
+## Functional Programming<a id="sec-2-12" name="sec-2-12"></a>
 
 See also: [Dash Library Github repository](https://github.com/magnars/dash.el)
 Dash is functional programming library to Emacs with many useful higher order functions.
@@ -4055,7 +4083,7 @@ Dash is functional programming library to Emacs with many useful higher order fu
     ELISP>
     ```
 
-## Structures<a id="sec-2-12" name="sec-2-12"></a>
+## Structures<a id="sec-2-13" name="sec-2-13"></a>
 
 ```lisp
 ELISP> (defstruct account id name balance)
@@ -7532,6 +7560,16 @@ Features:
     -   Wiki
     -   Markdown
 
+Example: this document is now written in org-mode and the exported to
+html and github flavoured markdown:
+
+![img](images/document_in_org_mode1.png)
+
+It also supports inline code blocks that can be evaluated and the
+result printed in the document or displayed in the minibuffer.
+
+![img](images/document_in_org_mode2.png)
+
 **Refereces**
 
 Manual:
@@ -7803,32 +7841,30 @@ Large Collection of Codes to Emacs
 -   [Emacs - Arch Linux Wiki](https://wiki.archlinux.org/index.php/Emacs)
 -   [Emacs Tiny Tools](http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html)
 -   [Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.](https://github.com/emacs-tw/awesome-emacs)
+-   [Setting Environment Variables](https://translate.google.ca/translate?sl=auto&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=http%3A%2F%2Femacs-jp.github.io%2Ftips%2Fenvironment-variable.html&edit-text=&act=url)
 
-### Non Categorized<a id="sec-8-6-4" name="sec-8-6-4"></a>
-
--   <http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/>
-
--   [From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/)
--   <http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el>
--   <http://www.reallysoft.de/code/emacs/snippets.html#b4ac15>
+-   [3 Interactive Functions That Work On Regions](http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/)
 
 -   [Introducing Names: practical namespaces for Emacs-Lisp](http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html)
 
--   <http://emacs-jp.github.io/tips/environment-variable.html>
+### Packages<a id="sec-8-6-4" name="sec-8-6-4"></a>
 
+-   [Yasnippet](https://github.com/capitaomorte/yasnippet)
+
+### Cases<a id="sec-8-6-5" name="sec-8-6-5"></a>
+
+-   [From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/)
+-   [Why Ive Abandoned Eclipse For Emacs](http://technical-dresese.blogspot.com/2008/11/why-ive-abandoned-eclipse-for-emacs.html)
+-   [In Org Mode Abandoning Gtd](http://technical-dresese.blogspot.com/2008/08/in-org-mode-abandoning-gtd.html)
+-   [Running Lisp In Productionl](http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html)
+
+### Non Categorized<a id="sec-8-6-6" name="sec-8-6-6"></a>
+
+-   <http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el>
+-   <http://www.reallysoft.de/code/emacs/snippets.html#b4ac15>
 -   <https://marmalade-repo.org/>
-
--   <http://technical-dresese.blogspot.com.br/2008/11/why-ive-abandoned-eclipse-for-emacs.html>
-
--   <http://technical-dresese.blogspot.com.br/2008/08/in-org-mode-abandoning-gtd.html>
-
--   <http://technical-dresese.blogspot.com.br/2012/12/hooks-local-variables-and-namespaces.html>
-
--   <http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html>
-
+-   [Hooks Local Variables And Namespacesl](http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html)
 -   <http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192>
-
--   <https://github.com/capitaomorte/yasnippet>
 
 ## Books<a id="sec-8-7" name="sec-8-7"></a>
 
@@ -7873,7 +7909,7 @@ also available at:
 -   [nic.ferrier.me.uk - what hacking is](http://nic.ferrier.me.uk/)
 -   <http://xahlee.blogspot.com>
 
-## Screencasts<a id="sec-8-10" name="sec-8-10"></a>
+## Videos and Screencasts<a id="sec-8-10" name="sec-8-10"></a>
 
 Useful screencasts to help learn Emacs faster.
 
@@ -7951,6 +7987,9 @@ macroexpand and how it helps with debugging.
 
 **Development Environment**
 
+-   [Emacs Tutorial: Yasnippet](https://www.youtube.com/watch?v=-4O-ZYjQxks)
+-   [Using Yasnippet in Emacs to write faster Scala code](https://www.youtube.com/watch?v=FLpJR-0hL3I)
+
 -   [Installing Common Lisp, Emacs, Slime & Quicklisp](https://www.youtube.com/watch?v=VnWVu8VVDbI)
 
     This video will show you how to set up a decent common lisp
@@ -7963,6 +8002,15 @@ macroexpand and how it helps with debugging.
 -   [Emacs - Magit Basics](https://www.youtube.com/watch?v=zobx3T7hGNA)  (Git integration to Emacs)
 
 This Screencast shows basic features of the Magit like this git commands.
+
+-   [CppCon 2015: Atila Neves "Emacs as a C++ IDE"](https://www.youtube.com/watch?v=5FQwQ0QWBTU)
+
+-   [Searching the Web with engine-mode](https://www.youtube.com/watch?v=MBhJBMYfWUo)
+
+**Org-mode**
+
+-   [How I Use org-capture and Stuff](https://www.youtube.com/watch?v=KdcXu_RdKI0)
+        Org-capture is a great way to take notes and plan in Emacs. Capture templates provide a flexible way to extend org-capture and personalize the way you record various bits of information.
 
 **Non Categorized**
 
