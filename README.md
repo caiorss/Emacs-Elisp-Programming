@@ -1,6 +1,11 @@
 - [Emacs - Programming and Customization](#emacs---programming-and-customization)
   - [Command Line Options](#command-line-options)
   - [Default Key Bindings and Useful Commands](#default-key-bindings-and-useful-commands)
+    - [Key Notation](#key-notation)
+    - [Key Bindings by Task](#key-bindings-by-task)
+    - [Selected Key Bindings for Programming\*](#selected-key-bindings-for-programming\*)
+    - [Keybindings for Lisp programming](#keybindings-for-lisp-programming)
+    - [Ubiquitous Emacs Key Bindings](#ubiquitous-emacs-key-bindings)
 - [ELISP](#elisp)
   - [Basic Operations](#basic-operations)
   - [Defining Variables](#defining-variables)
@@ -58,6 +63,7 @@
     - [Tutorials](#tutorials)
     - [Wikis](#wikis)
     - [Issues](#issues)
+  - [Selected Dot Emacs](#selected-dot-emacs)
   - [Developement Environments for Emacs](#developement-environments-for-emacs)
     - [Python](#python)
     - [Javascript](#javascript)
@@ -65,13 +71,20 @@
     - [Ocaml](#ocaml)
     - [Haskell](#haskell)
     - [Lisp](#lisp)
-  - [Selected Dot Emacs](#selected-dot-emacs)
   - [Space Emacs Default Config](#space-emacs-default-config)
   - [Selected Codes](#selected-codes)
-  - [Screencasts](#screencasts)
-  - [Limitations](#limitations)
   - [Selected Emacs Tutorials](#selected-emacs-tutorials)
+    - [Emacs Documentation](#emacs-documentation)
+    - [Introduction to Elisp](#introduction-to-elisp)
+    - [Tips and Tricks](#tips-and-tricks)
+    - [Non Categorized](#non-categorized)
+  - [Books](#books)
+  - [Community](#community)
+    - [Channels](#channels)
+  - [Blogs](#blogs)
+  - [Screencasts](#screencasts)
   - [Technical Notes](#technical-notes)
+
 
 # Emacs - Programming and Customization<a id="sec-1" name="sec-1"></a>
 
@@ -80,15 +93,22 @@
 **Repository Link**
 
 -   [Github Link](https://github.com/caiorss/Emacs-Elisp-Programming)
+
 -   Short Link: <http://tinyurl.com/emacsinabox> - Mneumonic: **Emacs In A Box**
 
-Emacs doesn't need presentation. It is a scriptable and fully
+Emacs doesn't need introduction. It is a scriptable and fully
 programmable text editor that can be customized in Elisp,
 an Emacs own lisp dialect that is based on [MacLisp](https://en.wikipedia.org/wiki/Maclisp), one of oldest lisp
 dialects, older than Common Lisp and Scheme, it was written in  1976
 by the legendary [Richard Stallman](https://en.wikipedia.org/wiki/Richard_Stallman). Despite many incopatibilities with
 Common Lisp it has many constructs similar to it. An excellent book about Common Lisp
 that is also useful for Elisp and Scheme is available at [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html).
+
+Note:
+
+-   It is a work in progress.
+-   You can see this document inside Emacs
+    since it was converted to org-mode, see [README.org](README.md).
 
 **Configuration File**
 
@@ -141,7 +161,7 @@ See also:
 
 -   [GNU Emacs Key Bindings  Reference Card](https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf)
 
-**Key Notation**
+### Key Notation<a id="sec-1-2-1" name="sec-1-2-1"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -191,678 +211,680 @@ See also:
 </tbody>
 </table>
 
-**File**
+### Key Bindings by Task<a id="sec-1-2-2" name="sec-1-2-2"></a>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+1.  File
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">C-x C-s</td>
-<td class="left">Save Current Buffer</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">C-x C-s</td>
+    <td class="left">Save Current Buffer</td>
+    </tr>
 
-<tr>
-<td class="left">C-x C-w</td>
-<td class="left">Save Buffer as different file</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x C-w</td>
+    <td class="left">Save Buffer as different file</td>
+    </tr>
 
-<tr>
-<td class="left">C-x s</td>
-<td class="left">Save all buffers</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x s</td>
+    <td class="left">Save all buffers</td>
+    </tr>
 
-<tr>
-<td class="left">C-x C-f</td>
-<td class="left">Open File</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x C-f</td>
+    <td class="left">Open File</td>
+    </tr>
 
-<tr>
-<td class="left">C-x C-C</td>
-<td class="left">Close Emacs</td>
-</tr>
-</tbody>
-</table>
 
-**Buffers**
+    <tr>
+    <td class="left">C-x C-C</td>
+    <td class="left">Close Emacs</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+2.  Buffers
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">C-x b</td>
-<td class="left">Select Another Buffer</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">C-x b</td>
+    <td class="left">Select Another Buffer</td>
+    </tr>
 
-<tr>
-<td class="left">C-x C-b</td>
-<td class="left">List all buffers</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x C-b</td>
+    <td class="left">List all buffers</td>
+    </tr>
 
-<tr>
-<td class="left">C-x k</td>
-<td class="left">Kill a buffer</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x k</td>
+    <td class="left">Kill a buffer</td>
+    </tr>
 
-<tr>
-<td class="left">C-x <right arrow></td>
-<td class="left">Move to next buffer</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x <right arrow></td>
+    <td class="left">Move to next buffer</td>
+    </tr>
 
-<tr>
-<td class="left">C-x <left arrow></td>
-<td class="left">Move to previous buffer</td>
-</tr>
-</tbody>
-</table>
 
-**Navigation**
+    <tr>
+    <td class="left">C-x <left arrow></td>
+    <td class="left">Move to previous buffer</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+3.  Navigation
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">C-a</td>
-<td class="left">Go to start of the line</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">C-a</td>
+    <td class="left">Go to start of the line</td>
+    </tr>
 
-<tr>
-<td class="left">C-e</td>
-<td class="left">Go to end of the line.</td>
-</tr>
 
+    <tr>
+    <td class="left">C-e</td>
+    <td class="left">Go to end of the line.</td>
+    </tr>
 
-<tr>
-<td class="left">C-k</td>
-<td class="left">Cut/Delete from cursor current position to the end of the line.</td>
-</tr>
 
+    <tr>
+    <td class="left">C-k</td>
+    <td class="left">Cut/Delete from cursor current position to the end of the line.</td>
+    </tr>
 
-<tr>
-<td class="left">M-<</td>
-<td class="left">Move to top of buffer</td>
-</tr>
 
+    <tr>
+    <td class="left">M-<</td>
+    <td class="left">Move to top of buffer</td>
+    </tr>
 
-<tr>
-<td class="left">M-></td>
-<td class="left">Move to Bottom of buffer</td>
-</tr>
 
+    <tr>
+    <td class="left">M-></td>
+    <td class="left">Move to Bottom of buffer</td>
+    </tr>
 
-<tr>
-<td class="left">M-f</td>
-<td class="left">Move forward one word</td>
-</tr>
 
+    <tr>
+    <td class="left">M-f</td>
+    <td class="left">Move forward one word</td>
+    </tr>
 
-<tr>
-<td class="left">M-b</td>
-<td class="left">Move backward one word</td>
-</tr>
 
+    <tr>
+    <td class="left">M-b</td>
+    <td class="left">Move backward one word</td>
+    </tr>
 
-<tr>
-<td class="left">M-[left key]</td>
-<td class="left">Move backward one word</td>
-</tr>
 
+    <tr>
+    <td class="left">M-[left key]</td>
+    <td class="left">Move backward one word</td>
+    </tr>
 
-<tr>
-<td class="left">M-[right key]</td>
-<td class="left">Move forward one word</td>
-</tr>
 
+    <tr>
+    <td class="left">M-[right key]</td>
+    <td class="left">Move forward one word</td>
+    </tr>
 
-<tr>
-<td class="left">Mg-g <line-num></td>
-<td class="left">Go to line number</td>
-</tr>
 
+    <tr>
+    <td class="left">Mg-g <line-num></td>
+    <td class="left">Go to line number</td>
+    </tr>
 
-<tr>
-<td class="left">Mg-c <cursor-pos></td>
-<td class="left">Go to character position</td>
-</tr>
-</tbody>
-</table>
 
-**Bookmarks**
+    <tr>
+    <td class="left">Mg-c <cursor-pos></td>
+    <td class="left">Go to character position</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+4.  Bookmarks
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">C-x r m</td>
-<td class="left">Add current buffer to bookmarks.</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">C-x r m</td>
+    <td class="left">Add current buffer to bookmarks.</td>
+    </tr>
 
-<tr>
-<td class="left">C-x r b</td>
-<td class="left">Open a buffer from bookmarks.</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x r b</td>
+    <td class="left">Open a buffer from bookmarks.</td>
+    </tr>
 
-<tr>
-<td class="left">C-x r l</td>
-<td class="left">List bookmarks.</td>
-</tr>
-</tbody>
-</table>
 
-**Search**
+    <tr>
+    <td class="left">C-x r l</td>
+    <td class="left">List bookmarks.</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+5.  Search
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">C-s</td>
-<td class="left">Forward Search</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">C-s</td>
+    <td class="left">Forward Search</td>
+    </tr>
 
-<tr>
-<td class="left">C-r</td>
-<td class="left">Backward Search</td>
-</tr>
 
+    <tr>
+    <td class="left">C-r</td>
+    <td class="left">Backward Search</td>
+    </tr>
 
-<tr>
-<td class="left">M-%</td>
-<td class="left">Replace</td>
-</tr>
 
+    <tr>
+    <td class="left">M-%</td>
+    <td class="left">Replace</td>
+    </tr>
 
-<tr>
-<td class="left">C-s</td>
-<td class="left">Jump to next occurrence</td>
-</tr>
 
+    <tr>
+    <td class="left">C-s</td>
+    <td class="left">Jump to next occurrence</td>
+    </tr>
 
-<tr>
-<td class="left">C-r</td>
-<td class="left">Jump to previour occurrence</td>
-</tr>
 
+    <tr>
+    <td class="left">C-r</td>
+    <td class="left">Jump to previour occurrence</td>
+    </tr>
 
-<tr>
-<td class="left">C-g</td>
-<td class="left">Exit search</td>
-</tr>
 
+    <tr>
+    <td class="left">C-g</td>
+    <td class="left">Exit search</td>
+    </tr>
 
-<tr>
-<td class="left">A-s .</td>
-<td class="left">Find Symbol under cursor</td>
-</tr>
 
+    <tr>
+    <td class="left">A-s .</td>
+    <td class="left">Find Symbol under cursor</td>
+    </tr>
 
-<tr>
-<td class="left">A-s w</td>
-<td class="left">Find Symbol under cursor, match symbols with underscore, dot, hyphen ..</td>
-</tr>
 
+    <tr>
+    <td class="left">A-s w</td>
+    <td class="left">Find Symbol under cursor, match symbols with underscore, dot, hyphen ..</td>
+    </tr>
 
-<tr>
-<td class="left">A-s o</td>
-<td class="left">List all matching lines</td>
-</tr>
-</tbody>
-</table>
 
-**Highlight**
+    <tr>
+    <td class="left">A-s o</td>
+    <td class="left">List all matching lines</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+6.  Highlight
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">M-s-h-.</td>
-<td class="left">Highlight symbol under cursor</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">M-s-h-.</td>
+    <td class="left">Highlight symbol under cursor</td>
+    </tr>
 
-<tr>
-<td class="left">M-s-h-p</td>
-<td class="left">Highlight phrase</td>
-</tr>
 
+    <tr>
+    <td class="left">M-s-h-p</td>
+    <td class="left">Highlight phrase</td>
+    </tr>
 
-<tr>
-<td class="left">M-s-h-r</td>
-<td class="left">Highlight regex</td>
-</tr>
 
+    <tr>
+    <td class="left">M-s-h-r</td>
+    <td class="left">Highlight regex</td>
+    </tr>
 
-<tr>
-<td class="left">M-s-h-l</td>
-<td class="left">Highlight lines matching a regex</td>
-</tr>
 
+    <tr>
+    <td class="left">M-s-h-l</td>
+    <td class="left">Highlight lines matching a regex</td>
+    </tr>
 
-<tr>
-<td class="left">M-s-h-u</td>
-<td class="left">Unhighlight regex</td>
-</tr>
-</tbody>
-</table>
 
-**Select, Copy, Cut and Paste**
+    <tr>
+    <td class="left">M-s-h-u</td>
+    <td class="left">Unhighlight regex</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+7.  Select, Copy, Cut and Paste
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">C - \_</td>
-<td class="left">Undo</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">C - \_</td>
+    <td class="left">Undo</td>
+    </tr>
 
-<tr>
-<td class="left">C - x u</td>
-<td class="left">Redo</td>
-</tr>
 
+    <tr>
+    <td class="left">C - x u</td>
+    <td class="left">Redo</td>
+    </tr>
 
-<tr>
-<td class="left">C - Space</td>
-<td class="left">Begin Selection</td>
-</tr>
 
+    <tr>
+    <td class="left">C - Space</td>
+    <td class="left">Begin Selection</td>
+    </tr>
 
-<tr>
-<td class="left">C - G</td>
-<td class="left">Cancel Selection</td>
-</tr>
 
+    <tr>
+    <td class="left">C - G</td>
+    <td class="left">Cancel Selection</td>
+    </tr>
 
-<tr>
-<td class="left">C-x h</td>
-<td class="left">Select the whole buffer</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x h</td>
+    <td class="left">Select the whole buffer</td>
+    </tr>
 
-<tr>
-<td class="left">M-w</td>
-<td class="left">Copy</td>
-</tr>
 
+    <tr>
+    <td class="left">M-w</td>
+    <td class="left">Copy</td>
+    </tr>
 
-<tr>
-<td class="left">C-y</td>
-<td class="left">Paste  (Yank)</td>
-</tr>
 
+    <tr>
+    <td class="left">C-y</td>
+    <td class="left">Paste  (Yank)</td>
+    </tr>
 
-<tr>
-<td class="left">C-w</td>
-<td class="left">Cut    (Wipe out), Delete and copy to clipboard (Kill Ring)</td>
-</tr>
 
+    <tr>
+    <td class="left">C-w</td>
+    <td class="left">Cut    (Wipe out), Delete and copy to clipboard (Kill Ring)</td>
+    </tr>
 
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
 
-**Word Case / Comment and Uncomment**
+    <tr>
+    <td class="left">&#xa0;</td>
+    <td class="left">&#xa0;</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+8.  Word Case / Comment and Uncomment
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">M-u</td>
-<td class="left">Make word uppercase</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">M-u</td>
+    <td class="left">Make word uppercase</td>
+    </tr>
 
-<tr>
-<td class="left">M-l</td>
-<td class="left">Make word lowercase</td>
-</tr>
 
+    <tr>
+    <td class="left">M-l</td>
+    <td class="left">Make word lowercase</td>
+    </tr>
 
-<tr>
-<td class="left">M-c</td>
-<td class="left">Make word title (Capitalize only first letter)</td>
-</tr>
 
+    <tr>
+    <td class="left">M-c</td>
+    <td class="left">Make word title (Capitalize only first letter)</td>
+    </tr>
 
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
 
+    <tr>
+    <td class="left">&#xa0;</td>
+    <td class="left">&#xa0;</td>
+    </tr>
 
-<tr>
-<td class="left">M-;</td>
-<td class="left">Comment/ Uncomment Selected Code</td>
-</tr>
-</tbody>
-</table>
 
-**Windows**
+    <tr>
+    <td class="left">M-;</td>
+    <td class="left">Comment/ Uncomment Selected Code</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+9.  Windows
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">C-x k</td>
-<td class="left">Close</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">C-x k</td>
+    <td class="left">Close</td>
+    </tr>
 
-<tr>
-<td class="left">C-x b</td>
-<td class="left">Next Window</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x b</td>
+    <td class="left">Next Window</td>
+    </tr>
 
-<tr>
-<td class="left">C-x C-b</td>
-<td class="left">Choose buffer Window</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x C-b</td>
+    <td class="left">Choose buffer Window</td>
+    </tr>
 
-<tr>
-<td class="left">C-x 0</td>
-<td class="left">Delete Current Window</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x 0</td>
+    <td class="left">Delete Current Window</td>
+    </tr>
 
-<tr>
-<td class="left">C-x 1</td>
-<td class="left">Unsplit</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x 1</td>
+    <td class="left">Unsplit</td>
+    </tr>
 
-<tr>
-<td class="left">C-x 2</td>
-<td class="left">Split Horizontally</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x 2</td>
+    <td class="left">Split Horizontally</td>
+    </tr>
 
-<tr>
-<td class="left">C-x 3</td>
-<td class="left">Split Vertically</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x 3</td>
+    <td class="left">Split Vertically</td>
+    </tr>
 
-<tr>
-<td class="left">C-x o</td>
-<td class="left">Switch Window</td>
-</tr>
 
+    <tr>
+    <td class="left">C-x o</td>
+    <td class="left">Switch Window</td>
+    </tr>
 
-<tr>
-<td class="left">C-x 2 5</td>
-<td class="left">Launch a new frame (separated window)</td>
-</tr>
-</tbody>
-</table>
 
-**Commands**
+    <tr>
+    <td class="left">C-x 2 5</td>
+    <td class="left">Launch a new frame (separated window)</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+10. Commands
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">M - x</td>
-<td class="left">Enter a command</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">M - x</td>
+    <td class="left">Enter a command</td>
+    </tr>
 
-<tr>
-<td class="left">C - g</td>
-<td class="left">Cancel command input</td>
-</tr>
 
+    <tr>
+    <td class="left">C - g</td>
+    <td class="left">Cancel command input</td>
+    </tr>
 
-<tr>
-<td class="left">M - x  eval-expression</td>
-<td class="left">Eval a lisp expression in current buffer</td>
-</tr>
 
+    <tr>
+    <td class="left">M - x  eval-expression</td>
+    <td class="left">Eval a lisp expression in current buffer</td>
+    </tr>
 
-<tr>
-<td class="left">M -x  ielm</td>
-<td class="left">Enter Emacs Interactive elisp shell</td>
-</tr>
 
+    <tr>
+    <td class="left">M -x  ielm</td>
+    <td class="left">Enter Emacs Interactive elisp shell</td>
+    </tr>
 
-<tr>
-<td class="left">M -x  eshell</td>
-<td class="left">Enter Emacs Shell Written in Elisp</td>
-</tr>
 
+    <tr>
+    <td class="left">M -x  eshell</td>
+    <td class="left">Enter Emacs Shell Written in Elisp</td>
+    </tr>
 
-<tr>
-<td class="left">M -x  shell</td>
-<td class="left">Run a shell</td>
-</tr>
 
+    <tr>
+    <td class="left">M -x  shell</td>
+    <td class="left">Run a shell</td>
+    </tr>
 
-<tr>
-<td class="left">M -!  shell</td>
-<td class="left">Run a single shell command like: ls, pwd, make &#x2026;</td>
-</tr>
 
+    <tr>
+    <td class="left">M -!  shell</td>
+    <td class="left">Run a single shell command like: ls, pwd, make &#x2026;</td>
+    </tr>
 
-<tr>
-<td class="left">M-x eval-region  shell</td>
-<td class="left">Evaluate selected region as elisp code</td>
-</tr>
 
+    <tr>
+    <td class="left">M-x eval-region  shell</td>
+    <td class="left">Evaluate selected region as elisp code</td>
+    </tr>
 
-<tr>
-<td class="left">M-x eval-buffer  shell</td>
-<td class="left">Evaluate current buffer as elips code</td>
-</tr>
 
+    <tr>
+    <td class="left">M-x eval-buffer  shell</td>
+    <td class="left">Evaluate current buffer as elips code</td>
+    </tr>
 
-<tr>
-<td class="left">M-x goto-char</td>
-<td class="left">Got a character position</td>
-</tr>
-</tbody>
-</table>
 
-**Information**
+    <tr>
+    <td class="left">M-x goto-char</td>
+    <td class="left">Got a character position</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+11. Information
 
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<colgroup>
-<col  class="left" />
 
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">&#xa0;</th>
-<th scope="col" class="left">&#xa0;</th>
-</tr>
-</thead>
+    <colgroup>
+    <col  class="left" />
 
-<tbody>
-<tr>
-<td class="left">C-h f</td>
-<td class="left">Describe function</td>
-</tr>
+    <col  class="left" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th scope="col" class="left">&#xa0;</th>
+    <th scope="col" class="left">&#xa0;</th>
+    </tr>
+    </thead>
 
+    <tbody>
+    <tr>
+    <td class="left">C-h f</td>
+    <td class="left">Describe function</td>
+    </tr>
 
-<tr>
-<td class="left">C-h v</td>
-<td class="left">Describe variable</td>
-</tr>
 
+    <tr>
+    <td class="left">C-h v</td>
+    <td class="left">Describe variable</td>
+    </tr>
 
-<tr>
-<td class="left">C-h m</td>
-<td class="left">Describe mode</td>
-</tr>
 
+    <tr>
+    <td class="left">C-h m</td>
+    <td class="left">Describe mode</td>
+    </tr>
 
-<tr>
-<td class="left">C-h s</td>
-<td class="left">Describe syntax</td>
-</tr>
 
+    <tr>
+    <td class="left">C-h s</td>
+    <td class="left">Describe syntax</td>
+    </tr>
 
-<tr>
-<td class="left">C-h b</td>
-<td class="left">Describe key bindings for current buffer</td>
-</tr>
 
+    <tr>
+    <td class="left">C-h b</td>
+    <td class="left">Describe key bindings for current buffer</td>
+    </tr>
 
-<tr>
-<td class="left">C-h a</td>
-<td class="left">Command Apropos</td>
-</tr>
-</tbody>
-</table>
 
-**General Programming**
+    <tr>
+    <td class="left">C-h a</td>
+    <td class="left">Command Apropos</td>
+    </tr>
+    </tbody>
+    </table>
+
+### Selected Key Bindings for Programming\*<a id="sec-1-2-3" name="sec-1-2-3"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -992,7 +1014,7 @@ See also:
 </tbody>
 </table>
 
-**Lisp**
+### Keybindings for Lisp programming<a id="sec-1-2-4" name="sec-1-2-4"></a>
 
 Useful lisp key bindings to edit and navigate Lisp code.
 
@@ -1233,6 +1255,225 @@ Useful lisp key bindings to edit and navigate Lisp code.
 </tr>
 </tbody>
 </table>
+
+### Ubiquitous Emacs Key Bindings<a id="sec-1-2-5" name="sec-1-2-5"></a>
+
+Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in Unix apps like Bash, Sh and
+all shells that uses the GNU readline library.
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Emacs</th>
+<th scope="col" class="left">Bash Shell</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td class="left">C-a</td>
+<td class="left">Move the cursor to the beggining of line</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">C-e</td>
+<td class="left">Move the cursor to the end of line</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">C-n</td>
+<td class="left">Move the cursor to the next line  (downward)</td>
+<td class="left">Show next command in the history.</td>
+</tr>
+
+
+<tr>
+<td class="left">C-p</td>
+<td class="left">Move the cursor to the previous line (upward)</td>
+<td class="left">Show the previou command in the history.</td>
+</tr>
+
+
+<tr>
+<td class="left">C-j</td>
+<td class="left">New line character (same as Return)</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">A-b</td>
+<td class="left">Move the cursor backward one word</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">A-f</td>
+<td class="left">Move the cursor forward one word</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">A-t</td>
+<td class="left">Swap current word with previous</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">A-d</td>
+<td class="left">Delete the next word</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">C-k</td>
+<td class="left">Delete the remaining of line from current cursor position</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">C-y</td>
+<td class="left">Paste the deleted line with (C-k) or copied line (Yank)</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">A-w</td>
+<td class="left">Copy the slected text</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">C-r</td>
+<td class="left">Search forward for a string</td>
+<td class="left">Search for previous command</td>
+</tr>
+
+
+<tr>
+<td class="left">C-s</td>
+<td class="left">Search backward for a string</td>
+<td class="left">No implemented.</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">c-l</td>
+<td class="left">Redraws the screen with the cursor in the middle.</td>
+<td class="left">Clear the screen.</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">C-\_</td>
+<td class="left">Undo</td>
+<td class="left">same</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+See also:
+
+-   [Bash Emacs Editing Mode Cheat Sheet](http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/)
+-   [Confusing behavior of emacs-style keybindings in bash](http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash)
 
 # ELISP<a id="sec-2" name="sec-2"></a>
 
@@ -4594,6 +4835,12 @@ Here some projects that tried to create a "better Emacs", "lisp powered"  editor
 Emacs has more than 35 years of active development and no editor can
 beat it.
 
+See also, from Emacs Wiki:
+
+-   [Emacs Lisp Limitations](http://www.emacswiki.org/emacs/EmacsLispLimitations)
+-   [Why isn't more of CommonLisp in GNU Emacs?](http://www.emacswiki.org/emacs/CommonLisp)
+-   [Why Does ElispSuck](http://www.emacswiki.org/emacs/WhyDoesElispSuck)
+
 ## Bufffers<a id="sec-4-3" name="sec-4-3"></a>
 
 1.  Buffer Attributes
@@ -6129,7 +6376,7 @@ Hide
 
 Load a color theme
 
-```
+```lisp
 (load-theme 'wombat t)
 ```
 
@@ -6144,18 +6391,17 @@ List all available themes
     or
 
     M-x custom-available-themes
-```
 
-Print Color Theme Info (elisp code)
 
-\#+END<sub>SRC</sub>
-ELISP> (color-theme-print)
-"Pretty printing current color theme function&#x2026; done"
+    Print Color Theme Info (elisp code)
 
-or
+    ELISP> (color-theme-print)
+    "Pretty printing current color theme function... done"
+
+    or
 
     M-x color-theme-print
-\\#+END<sub>SRC</sub>
+```
 
 ## Misc<a id="sec-5-4" name="sec-5-4"></a>
 
@@ -6502,15 +6748,15 @@ t
 
     The popular key-bindings Ctrl+V (cut), Ctrl+C (copy), Ctrl+X (paste) can be enable by typing:
 
-    \#+END<sub>SRC</sub>
+    ```text
     A-x cua-mode
-    \\#+END<sub>SRC</sub>
+    ```
 
     or by entering the command below in the shell IELM or by putting it in the configuration file ~/emacs.d/init.el
 
-    \#+END<sub>SRC</sub>
+    ```text
     (cua-mode)
-    \\#+END<sub>SRC</sub>
+    ```
 
 ## Quiet Startup<a id="sec-5-6" name="sec-5-6"></a>
 
@@ -6672,10 +6918,9 @@ Final Code
 
     #+BEGIN_SRC emacs-lisp
     %S
-```
 
     " function-symbol args doc code)))) ;; End of fun2org
-\\#+END<sub>SRC</sub>
+```
 
 ```lisp
 ELISP> (fun2org 'sample-function)
@@ -6754,9 +6999,9 @@ M-x open-file-manager
 Despite Emacs can run a shell like python, bash, zsh, it cannot run ncurses based applications. In these cases is necessary to launch an external terminal. This command can be added to the menu in the section: Creating Quick Access Menu (See section )
 Usage:
 
-\#+END<sub>SRC</sub>
+```text
 M-x open-terminal
-\\#+END<sub>SRC</sub>
+```
 
 Code:
 
@@ -6902,18 +7147,18 @@ File: sessions.el
 
 To save all bufffers with files:
 
-\#+END<sub>SRC</sub>
+```
 M-x load-file ;; Enter session.el
 M-x save-session
-\\#+END<sub>SRC</sub>
+```
 
-Close Emacs and
+To reload the files save in the seesion enter:
 
-\#+END<sub>SRC</sub>
+```
 M-x load-file    ;; Enter session.el
 M-x load-session ;; All previous files in the session
                  ;; saved will be opened
-\\#+END<sub>SRC</sub>
+```
 
 ## Create a menu with all color themes available<a id="sec-6-11" name="sec-6-11"></a>
 
@@ -7383,16 +7628,30 @@ Non Categorized:
 -   [Emacs on Windows / Cygwin](http://www.khngai.com/emacs/cygwin.php)
 -   [10 Tips for Powerful Emacs on Windows](http://gregorygrubbs.com/emacs/10-tips-emacs-windows/)
 
-## Developement Environments for Emacs<a id="sec-8-2" name="sec-8-2"></a>
+## Selected Dot Emacs<a id="sec-8-2" name="sec-8-2"></a>
 
-### Python<a id="sec-8-2-1" name="sec-8-2-1"></a>
+-   [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
+-   [Howard Abrams dot emacs](https://github.com/howardabrams/dot-files/blob/master/emacs.org)
+-   <http://uce.uniovi.es/tips/Emacs/mydotemacs.html>
+
+-   <http://www.dgp.toronto.edu/~ghali/emacs.html>
+
+-   <http://whattheemacsd.com/>
+
+-   <https://snarfed.org/dotfiles/.emacs>
+
+-   <http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el>
+
+## Developement Environments for Emacs<a id="sec-8-3" name="sec-8-3"></a>
+
+### Python<a id="sec-8-3-1" name="sec-8-3-1"></a>
 
 -   [Python Settings](http://wikemacs.org/wiki/Python)
 -   [Setting up Emacs to Support both Python 2 and Python 3](http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/)
 -   [Pyenv Mode](https://github.com/proofit404/pyenv-mode)
 -   [Running Python and R inside Emacs by John D. Cook](http://www.johndcook.com/blog/2012/02/09/python-org-mode/)
 
-### Javascript<a id="sec-8-2-2" name="sec-8-2-2"></a>
+### Javascript<a id="sec-8-3-2" name="sec-8-3-2"></a>
 
 -   [Java Script](http://wikemacs.org/wiki/JavaScript)
 
@@ -7400,19 +7659,19 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 -   [Swank backend for Node.JS and in-browser JavaScript](https://github.com/swank-js/swank-js)
 
-### C / C++<a id="sec-8-2-3" name="sec-8-2-3"></a>
+### C / C++<a id="sec-8-3-3" name="sec-8-3-3"></a>
 
 -   [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html)\* [C make IDE](https://github.com/atilaneves/cmake-ide)
 
-### Ocaml<a id="sec-8-2-4" name="sec-8-2-4"></a>
+### Ocaml<a id="sec-8-3-4" name="sec-8-3-4"></a>
 
 -   [Ocaml](http://wikemacs.org/wiki/OCaml)
 
-### Haskell<a id="sec-8-2-5" name="sec-8-2-5"></a>
+### Haskell<a id="sec-8-3-5" name="sec-8-3-5"></a>
 
 -   [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)\* [Emacs/Inferior Haskell processes](https://wiki.haskell.org/Emacs/Inferior_Haskell_processes)
 
-### Lisp<a id="sec-8-2-6" name="sec-8-2-6"></a>
+### Lisp<a id="sec-8-3-6" name="sec-8-3-6"></a>
 
 1.  All Lisp Dialects
 
@@ -7488,20 +7747,6 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
     -   [The Emacs Widget Library](http://www.gnu.org/software/emacs/manual/html_node/widget/index.html)
     -   [InteractivelyDoThings](http://www.emacswiki.org/emacs/InteractivelyDoThings)
 
-## Selected Dot Emacs<a id="sec-8-3" name="sec-8-3"></a>
-
--   [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
--   [Howard Abrams dot emacs](https://github.com/howardabrams/dot-files/blob/master/emacs.org)
--   <http://uce.uniovi.es/tips/Emacs/mydotemacs.html>
-
--   <http://www.dgp.toronto.edu/~ghali/emacs.html>
-
--   <http://whattheemacsd.com/>
-
--   <https://snarfed.org/dotfiles/.emacs>
-
--   <http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el>
-
 ## Space Emacs Default Config<a id="sec-8-4" name="sec-8-4"></a>
 
 From the documentation:
@@ -7536,47 +7781,38 @@ Large Collection of Codes to Emacs
 
 -   <http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html>
 
-## Screencasts<a id="sec-8-6" name="sec-8-6"></a>
+## Selected Emacs Tutorials<a id="sec-8-6" name="sec-8-6"></a>
 
--   [What You Can Learn From ido.el](https://vimeo.com/1013263)
+### Emacs Documentation<a id="sec-8-6-1" name="sec-8-6-1"></a>
 
-## Limitations<a id="sec-8-7" name="sec-8-7"></a>
+-   [Command and Function Index](http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html)
 
--   [EmacsLispLimitations](http://www.emacswiki.org/emacs/EmacsLispLimitations)    \* [Why isn't more of CommonLisp in GNU Emacs?](http://www.emacswiki.org/emacs/CommonLisp)    \* [WhyDoesElispSuck](http://www.emacswiki.org/emacs/WhyDoesElispSuck)
+### Introduction to Elisp<a id="sec-8-6-2" name="sec-8-6-2"></a>
 
-## Selected Emacs Tutorials<a id="sec-8-8" name="sec-8-8"></a>
-
--   [Comint: Writing your own Command Interpreter
-
-By Mickey Petersen](<https://www.masteringemacs.org/article/comint-writing-command-interpreter>)
-
--   <http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/>
-
--   [Hyperpolyglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp](http://hyperpolyglot.org/lisp)
 -   [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua](http://emacslife.com/how-to-read-emacs-lisp.html)
--   [Elisp Cookbook - Emacs Wiki](http://emacswiki.org/emacs/ElispCookbook)
--   [Xah's Emacs Tutorial - ErgoEmacs](http://ergoemacs.org)
 -   [A quick guide to Emacs Lisp programming](https://github.com/chrisdone/elisp-guide#manipulating-the-buffer)
 -   [Learn Emacs Lisp in 15 minutes](http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html)
 -   [Emergency Elisp](http://steve-yegge.blogspot.it/2008/01/emergency-elisp.html)
 -   [Emacs Lisp Cookbook](http://wikemacs.org/wiki/Emacs_Lisp_Cookbook)
 -   [Quick Started](https://github.com/doitian/emacs.d)
--   [Emacs - Arch Linux Wiki](https://wiki.archlinux.org/index.php/Emacs)
--   [Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.](https://github.com/emacs-tw/awesome-emacs)
--   [Emacs Tiny Tools](http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html)
+-   [Xah's Emacs Tutorial - ErgoEmacs](http://ergoemacs.org)
 -   [Mastering Emacs mastering the world’s best text editor](https://www.masteringemacs.org/)
--   [Command and Function Index](http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html)
+
+### Tips and Tricks<a id="sec-8-6-3" name="sec-8-6-3"></a>
+
+-   [Emacs - Arch Linux Wiki](https://wiki.archlinux.org/index.php/Emacs)
+-   [Emacs Tiny Tools](http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html)
+-   [Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.](https://github.com/emacs-tw/awesome-emacs)
+
+### Non Categorized<a id="sec-8-6-4" name="sec-8-6-4"></a>
+
+-   <http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/>
 
 -   [From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/)
 -   <http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el>
 -   <http://www.reallysoft.de/code/emacs/snippets.html#b4ac15>
 
 -   [Introducing Names: practical namespaces for Emacs-Lisp](http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html)
-
--   Book: [Programming in Emacs Lisp](http://www.bookshelf.jp/texi/lispintro/emacs-lisp-intro-en.html#SEC_Top)
--   <http://xahlee.blogspot.com>
-
--   <http://wikemacs.org/wiki/Emacs_Lisp_Cookbook>
 
 -   <http://emacs-jp.github.io/tips/environment-variable.html>
 
@@ -7594,7 +7830,164 @@ By Mickey Petersen](<https://www.masteringemacs.org/article/comint-writing-comma
 
 -   <https://github.com/capitaomorte/yasnippet>
 
-## Technical Notes<a id="sec-8-9" name="sec-8-9"></a>
+## Books<a id="sec-8-7" name="sec-8-7"></a>
+
+-   [An Introduction to Programming in Emacs Lisp](https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf) by Robert J. Chassell
+
+-   [Elisp Cookbook - Emacs Wiki](http://emacswiki.org/emacs/ElispCookbook)
+-   <http://wikemacs.org/wiki/Emacs_Lisp_Cookbook>
+-   [Programming in Emacs Lisp](http://www.bookshelf.jp/texi/lispintro/emacs-lisp-intro-en.html#SEC_Top)
+-   [GNU Emacs Manual](http://www.bookshelf.jp/texi/emacs/emacs-en_toc.html#SEC_Contents)
+
+-   [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html) (Common Lisp)
+
+## Community<a id="sec-8-8" name="sec-8-8"></a>
+
+### Channels<a id="sec-8-8-1" name="sec-8-8-1"></a>
+
+**Usenet**
+
+-   <comp.emacs>
+-   <gnu.emacs.help>
+
+also available at:
+
+-   <https://groups.google.com/forum/#!forum/comp.emacs>
+-   <https://groups.google.com/forum/#!forum/gnu.emacs.help>
+
+**IRC**
+
+<http://www.emacswiki.org/emacs/InternetRelayChat>
+
+**Reddit**
+
+<http://reddit.com/r/emacs>
+
+**Stack Overflow**
+
+<http://stackoverflow.com/questions/tagged/emacs>
+
+## Blogs<a id="sec-8-9" name="sec-8-9"></a>
+
+-   [Endless Parentheses · Concise ramblings on Emacs productivity.](http://endlessparentheses.com/archive.html)
+-   [nic.ferrier.me.uk - what hacking is](http://nic.ferrier.me.uk/)
+-   <http://xahlee.blogspot.com>
+
+## Screencasts<a id="sec-8-10" name="sec-8-10"></a>
+
+Useful screencasts to help learn Emacs faster.
+
+**Basic Emacs**
+
+-   [Hack Emacs - Working with Buffers](https://www.youtube.com/watch?v=YAIZvpSOlAs)
+
+-   [Hack Emacs - Working with Windows and Frames](https://www.youtube.com/watch?v=aIMECr7K35Q)
+
+-   [Hack Emacs - The Mark and the Point](https://www.youtube.com/watch?v=9anwyep2CR0)
+
+-   [Hack Emacs - Using Initialization Files](https://www.youtube.com/watch?v=BTBAOOLM_tE)
+
+-   [Hack Emacs - Loading Mechanisms](https://www.youtube.com/watch?v=VmITzI-POv0)
+
+In this episode, we look at four loading mechanisms for elisp: load, require, autoload and idle-require. User requested.
+
+-   [Hack Emacs - Using the Customization System](https://www.youtube.com/watch?v=IvihNaXANW0)
+
+We explore the 'customize' system for customizing Emacs' behavior. The first of three parts covering the essential ways of changing Emacs' behavior at startup.
+
+**Elisp**
+
+-   [Buffer basics - Emacs Bites](https://www.youtube.com/watch?v=qajLhM0aseM)
+
+    The basics of working with buffers in Emacs Lisp. Buffers are a
+    central concept in Emacs of course and one of the main reasons
+    it's useul. They are a versatile tool, you can use them for text
+    to be edited but you can also use them for presenting user
+    interfaces,   like Emacs' mail modes do.
+
+-   [An Introduction to Emacs Lisp](https://www.youtube.com/watch?v=2z-YBsd5snY&list=PLakpda32F-ThIaulLS8yNN6I4U3Q8Yic_)
+
+    Emacs can be thought of as a big Lisp interpreter, so you can't
+    master Emacs without learning some Emacs Lisp. We'll be introducing
+    Emacs  Lisp by describing its simple syntax, demonstrating a few
+    Lisp functions for manipulating buffers, regions, and strings,
+    writing a few utility functions, and binding those functions to
+     custom keys. By the end of the talk, you should able to do the same.
+
+-   [Emacs Bites - the Crash Course](https://www.youtube.com/watch?v=51mesucWxaM)
+
+    Very basic intro to programming Emacs covering basic setq, let and
+    defun for global variables, local variables and functions.
+
+-   [Dynamic vs lexical scope](https://www.youtube.com/watch?v=-Woj10ARLWw)
+
+A small screencast to llustrate lexical and dynamic scope in Emacs
+with a very simple example.
+
+-   [Hack Emacs - Working in the REPL](https://www.youtube.com/watch?v=35EcPapMqOU&list=PLakpda32F-ThKQZ3XeYOfDa7ZtwEaK0j_&index=43)
+    In this episode I discuss how programming in Emacs is different than an IDE, and show a couple of short examples of how you can program in a REPL in Emacs Lisp and Scheme.
+    I didn't cover quite as much as I hoped, so I might do a more technical in-depth episode on REPL usage.
+
+**Development**
+
+-   [2015-04-08 Emacs Lisp Development Tips with John Wiegley](https://www.youtube.com/watch?v=QRBcm6jFJ3Q)
+
+-   [Advanced scratch - Emacs Bites](https://www.youtube.com/watch?v=Q-bmvMWqWmY)
+
+A more in depth look at shell tricks we can use to start
+a scratch emacs for testing packages and deployment and anything
+else you need a clean emacs for.
+
+**Debugging:**
+
+-   [Debugging basics by Nic Ferrier](https://www.youtube.com/watch?v=odkYXXYOxpo)
+
+Edebug, instrumenting and stepping and breakpoints. Also
+macroexpand and how it helps with debugging.
+
+**IDO Mode:**
+
+-   [What You Can Learn From ido.el](https://vimeo.com/1013263)
+
+**Development Environment**
+
+-   [Installing Common Lisp, Emacs, Slime & Quicklisp](https://www.youtube.com/watch?v=VnWVu8VVDbI)
+
+    This video will show you how to set up a decent common lisp
+    development environment. This video is not going into great
+    detail of how everything works just yet but will get you a working
+     environment so you can start exploring the tools available to you.
+
+(It also shows how to setup Emacs on Windows)
+
+-   [Emacs - Magit Basics](https://www.youtube.com/watch?v=zobx3T7hGNA)  (Git integration to Emacs)
+
+This Screencast shows basic features of the Magit like this git commands.
+
+**Non Categorized**
+
+-   [Emacs Lisp Development - John Wiegley - Emacs Conference 2013](https://www.youtube.com/watch?v=QFClYrhV1z4)
+
+-   [Turtle Graphics with Emacs Lisp](https://www.youtube.com/watch?v=zzbEjmlIET0)
+
+Ray Puzio shows us his implementation of turtle graphics in emacs
+and takes us under the shell to see how it works. Turtle graphics
+are a way of  drawing pictures in which one provides a series of
+directions such as "move forward" or "turn left" to steer the pen.
+(The name comes from the fact that the original implementation
+involved  a robotic turtle as an output device controlled by the
+computer.) In addition to providing a useful and entertaining
+program, this talk also discusses techniques of pbm graphics and
+the use of a buffer for drawing which are of general use when
+doing graphics in emacs.
+
+-   [Writing A Spotify Client in 16 Minutes](https://www.youtube.com/watch?v=XjKtkEMUYGc)
+       You can write a Spotify client in no time at all, using Emacs. With
+    a bit of research and the marvellous Helm front end, it's actually
+    surprisingly easy to assemble. (Much faster than editing a
+    screencast about it!)
+
+## Technical Notes<a id="sec-8-11" name="sec-8-11"></a>
 
 **Emacs architecture:**
 
