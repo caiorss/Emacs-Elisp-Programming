@@ -28,9 +28,9 @@ case "$1" in
     -gui)
         if [ -z "$2"] ;
         then
-             emacsclient -a "" -c
+             emacsclient -a "" -c &
         else
-             emacsclient -a "" -c "$2"
+             emacsclient -a "" -c "$2" &
         fi
              ;;
         

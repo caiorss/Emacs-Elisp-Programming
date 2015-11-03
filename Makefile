@@ -19,8 +19,12 @@ html:
 
 # Github Flavoured Markdown.
 md:
-	emacs REAMDE.org --batch -f org-gfm-export-to-markdown --kill
+	emacs README.org --batch -f org-gfm-export-to-markdown --kill
 	# emacs README.org --batch -f org-md-export-to-markdown --kil
 
 html_md: md
-	grip README.md --gfm --export ./RAEDME.html
+	grip README.md --gfm --export ./README.html
+
+clean:
+	rm -rf *.html *.elc
+

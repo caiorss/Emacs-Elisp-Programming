@@ -6581,6 +6581,7 @@ Non Categorized:
     * [[https://www.youtube.com/watch?v=oJTwQvgfgMM][Emacs Org-mode - a system for note-taking and project planning]]
     * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
 
+
 * Resources
 
 ** Documentation
@@ -6736,40 +6737,22 @@ The function M-x run-scheme will run the selected scheme program.
     * [[https://github.com/joelmccracken/projectile][Project Interaction Library for Emacs]]
     * [[http://www.gnu.org/software/emacs/manual/html_node/widget/index.html][The Emacs Widget Library]]
     * [[http://www.emacswiki.org/emacs/InteractivelyDoThings][InteractivelyDoThings]]
-** Space Emacs Default Config
+** Emacs Starter Kits
+
+*Space Emacs*
 
 From the documentation:
 
 Spacemacs is first intended to be used by Vim users who want to go to the next level by using Emacs. It is also a good fit for people wanting to lower the risk of RSI induced by the default Emacs key bindings (this is an assumption, there is no official studies to prove this).
 
 
-    https://github.com/syl20bnr/spacemacs
+[[https://github.com/syl20bnr/spacemacs][Link Github]]
 
-** Selected Codes
+*Emacs Leuven*
 
-    * http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el
+Emacs configuration file with many packages already enabled and a more pleasant set of defaults.
 
-    * http://repo.or.cz/w/emacs.git/blob_plain/emacs-24:/lisp/progmodes/python.el
-
-    * http://emacswiki.org/emacs/file-template.el
-
-    * http://aperiodic.net/phil/configs/elisp/ledger.el
-
-    * http://sachachua.com/notebook/emacs/small-functions.el
-
-    * http://web.mit.edu/Emacs/source/emacs/lisp/emacs-lisp/easymenu.el
-
-    * http://code.haskell.org/haskellmode-emacs/haskell-mode.el
-
-    * http://pastebin.com/h2G9Ua5p
-
-    * https://raw.githubusercontent.com/rejeep/f.el/master/f.el
-
-    * https://github.com/dimitri/el-get
-
-Large Collection of Codes to Emacs
-
-    * http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html
+[[https://github.com/fniessen/emacs-leuven][Link Github]]
 
 ** Selected Emacs Tutorials
 
@@ -6819,9 +6802,6 @@ Large Collection of Codes to Emacs
     * https://marmalade-repo.org/
     * [[http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html][Hooks Local Variables And Namespacesl]]
     * http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192
-
-
-
 ** Books
 
     - [[https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf][An Introduction to Programming in Emacs Lisp]] by Robert J. Chassell
@@ -6859,13 +6839,11 @@ http://reddit.com/r/emacs
 *Stack Overflow*
 
 http://stackoverflow.com/questions/tagged/emacs
-
 ** Blogs
 
   - [[http://endlessparentheses.com/archive.html][Endless Parentheses · Concise ramblings on Emacs productivity.]]
   - [[http://nic.ferrier.me.uk/][nic.ferrier.me.uk - what hacking is]]
   - http://xahlee.blogspot.com
-
 
 
 ** Videos and Screencasts
@@ -6996,7 +6974,6 @@ Useful screencasts to help learn Emacs faster.
     surprisingly easy to assemble. (Much faster than editing a
     screencast about it!)
 
-
 **  Technical Notes
 
 *Emacs architecture:*
@@ -7023,3 +7000,30 @@ Forth Compiler to Emacs Bytecodes
 
     - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/forth.el
     - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth
+
+
+** Selected Codes
+
+    * http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el
+
+    * http://repo.or.cz/w/emacs.git/blob_plain/emacs-24:/lisp/progmodes/python.el
+
+    * http://emacswiki.org/emacs/file-template.el
+
+    * http://aperiodic.net/phil/configs/elisp/ledger.el
+
+    * http://sachachua.com/notebook/emacs/small-functions.el
+
+    * http://web.mit.edu/Emacs/source/emacs/lisp/emacs-lisp/easymenu.el
+
+    * http://code.haskell.org/haskellmode-emacs/haskell-mode.el
+
+    * http://pastebin.com/h2G9Ua5p
+
+    * https://raw.githubusercontent.com/rejeep/f.el/master/f.el
+
+    * https://github.com/dimitri/el-get
+
+Large Collection of Codes to Emacs
+
+    * http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html
