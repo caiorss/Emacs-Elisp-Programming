@@ -72,7 +72,7 @@
     - [Ocaml](#ocaml)
     - [Haskell](#haskell)
     - [Lisp](#lisp)
-  - [Space Emacs Default Config](#space-emacs-default-config)
+  - [Spacemacs Default Config](#spacemacs-default-config)
   - [Selected Codes](#selected-codes)
   - [Selected Emacs Tutorials](#selected-emacs-tutorials)
     - [Emacs Documentation](#emacs-documentation)
@@ -7785,11 +7785,11 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
     -   [The Emacs Widget Library](http://www.gnu.org/software/emacs/manual/html_node/widget/index.html)
     -   [InteractivelyDoThings](http://www.emacswiki.org/emacs/InteractivelyDoThings)
 
-## Space Emacs Default Config<a id="sec-8-4" name="sec-8-4"></a>
+## Spacemacs Default Config<a id="sec-8-4" name="sec-8-4"></a>
 
 From the documentation:
 
-Spacemacs is first intended to be used by Vim users who want to go to the next level by using Emacs. It is also a good fit for people wanting to lower the risk of RSI induced by the default Emacs key bindings (this is an assumption, there is no official studies to prove this).
+Spacemacs is a new way to experience Emacs -- a sophisticated and polished set-up focused on ergonomics, mnemonics and consistency. It can be used naturally by both Emacs and Vim users -- you can even mix the two editing styles. Switching easily between input styles makes Spacemacs a great tool for pair-programming.
 
 <https://github.com/syl20bnr/spacemacs>
 
