@@ -93,6 +93,7 @@
   - [Selected Codes](#selected-codes)
 
 
+
 # Emacs - Programming and Customization<a id="sec-1" name="sec-1"></a>
 
 ![img](images/emacs_logo.png)
@@ -100,8 +101,8 @@
 **Repository Link**
 
 -   [Github Link](https://github.com/caiorss/Emacs-Elisp-Programming)
-
 -   Short Link: <http://tinyurl.com/emacsinabox> - Mneumonic: **Emacs In A Box**
+-   [HTML Version - github.io](http://caiorss.github.io/Emacs-Elisp-Programming)
 
 Emacs doesn't need presetation. It is a scriptable and fully programmable text editor that can be customized in Elisp,
 an Emacs own lisp dialect that is based on [MacLisp](https://en.wikipedia.org/wiki/Maclisp), one of oldest lisp dialects, older than Common Lisp and Scheme, it was written in  1976
