@@ -5,39 +5,139 @@
 ;;
 ;; Emacs Toolbox
 ;;
-;; Useful Macros and Functions for Emacs - Elisp
+;; This toolbox provides many reusable functions without global state
+;; to manipulate Emacs objects like buffers, windows, frames ... 
+;;
+;; It also provides many reusable macros to make Emacs programming easier.
 ;;
 ;;
-;;
-;;--------------------------------------------------------
+;;-----------------------------------------------------------------
 
-(defmacro constatly (a)
+;; Load Common Lisp Emulation Library 
+(require 'cl)
+
+(defun repeat (n obj)
+  "Repeate any object n times, example:
+ 
+  > (repeat 3 'x)
+  (x x x)
+  " 
+  (loop for i from 1 to n collecting obj))
+
+(defmacro constantly (a)
   `(lambda (b) ,a))
 
-(defun identity (x) x)
+;; identity - builtin function to Emacs
 
-(defun unique (list)
-  (let (tmp-list head)
-    (while list
-      (setq head (pop list))
-      (unless (equal head (car list))
-        (push head tmp-list)))
-    (reverse tmp-list)))
+
+(defun unique (xs)
+  "Remove repeated elements from list xs
+ 
+  Example:
+  
+  > (unique '(x y a b 21 21 10 21 x y a ))
+  (x y a b 21 10)
+  "
+  (let
+    ((result nil))   
+
+    (dolist (x xs)
+      (if (not (member x result))
+          (push x result)         
+        ))
+    (reverse result)
+    ))
+
+
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ ;; String Functions          ;;
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
+
+(defalias 'string/concat #'concat)
+(defalias 'string/equal  #'string-equal)
 
 (defun string/replace-regexp (pat sub str)
-  (replace-regexp-in-string pat sub str))
+  (replace-regexp-in-string pat sub str t))
 
-(defun string/starts-with (s begins)
-  "Return non-nil if string S starts with BEGINS."
-  (cond ((>= (length s) (length begins))
-         (string-equal (substring s 0 (length begins)) begins))
-        (t nil)))
+
+(defun string/replace-seq  (list-of-patterns replacement str)
+  "
+  Example:
+
+   > (string/replace-seq 
+           '(\"a\" \"b\" \"<html>\") \"-\" \"The a b c yy <html> \"  )
+
+   Output:
+		\"The - - c yy - \"		
+  "
+  (foldl
+   (lambda (acc x)
+     (string/replace-regexp x replacement acc)
+     ) 
+   str
+   list-of-patterns
+   ))
+
+
+(defun string/replace-pairs  (patterns-pairs str)
+  "
+  Example:
+
+	>	(string/replace-pairs		
+		 '(		
+		   (\"lang\"     .  \"Lisp\")		
+		   (\"xxy\"      .  \"Hacker\")		
+		   (\"name\"     . \"John\")		
+		   )		
+		
+		 \"The lang xxy name\"		
+		 )		
+   
+   Output:
+
+	\"The Lisp Hacker John\"			
+  "
+  (foldl
+   (lambda (acc x)
+     (string/replace-regexp (car x) (cdr x) acc)
+     ) 
+   str
+   patterns-pairs
+   ))
+
+
+(defun string/find-all (regexp str &optional start-pos)
+  "Example:
+ 
+  ELISP> (string-find-all \"{\\\\(.+?\\\\)}\" 
+              \"The name of file is {NAME} and its location is {PATH}/{NAME}\")
+   (\"NAME\" \"PATH\" \"NAME\")
+
+  "
+  (cl-loop for match-pos = (string-match regexp str start-pos)
+           while match-pos
+           collect (match-string 1 str)
+           do (setf start-pos (1+ match-pos))))
+
+(defun string/ends-with (string suffix)
+  "Return t if STRING ends with SUFFIX."
+  (and (string-match (rx-to-string `(: ,suffix eos) t)
+                     string)
+       t))
 
 (defun string/starts-with (string prefix)
   "Return t if STRING starts with prefix."
   (and (string-match (rx-to-string `(: bos ,prefix) t)
                      string)
        t))
+
+(defun string/reverse (str)
+  "Reverse the str where str is a string"
+  (apply #'string 
+	     (reverse 
+	      (string-to-list str))))
+
 
 (defun string/join (glue-char  string-list)
   "
@@ -51,8 +151,16 @@
   (mapconcat 'identity string-list glue-char))
 
 
-(defun string/split (glue-char str)
-  (split-string str glue-char)
+(defun string/split (sep str)
+  "
+  Split string with separtor
+  
+  Example:
+
+  > (string/split \",\" \"232,1000,400,545\")
+
+  "
+  (split-string str sep)
   )
 
 (defun string/chop-suffix (suffix s)
@@ -80,6 +188,79 @@
    (replace-regexp-in-string  "\\\\\"" "\"" str))
 
 
+(defun string/template (str &optional plist)
+  "
+  Evaluate string template
+
+  Example:
+
+  >> (string/template
+   \"My name is {:NAME} {:SURNAME} 
+   
+   The sum of 1 2 3 4 5 is <% (+ 1 2 3 4 5 ) %> 
+   \"
+   '(:NAME \"Abraham\" :SURNAME \"Lincol\"))
+
+ Output:
+
+  \"My name is Abraham Lincol 
+   
+   The sum of 1 2 3 4 5 is 15 
+   \"
+  "
+  (letc
+   (
+    keys    (map #'intern-soft
+                 (unique (string/find-all  "{\\(.+?\\)}" str )))
+            result  str              
+    )
+
+   (dolist (k keys)
+     (setq result
+           (replace-regexp-in-string
+            (format "\{%s\}" (symbol-name k))
+            (plist-get plist k) result t)))
+
+
+   ;; Evaluates everything between <% %> tags and replace with the result of
+   ;; evaluation
+   ;;
+   (foldl 
+    (fn (s x) (string/replace-regexp
+               (regexp-quote (car x))
+               (string/replace-regexp "\"" ""
+                   (sexp->str (cdr x)))    ;; Convert anything to string
+               s))
+    result     
+    (map-pair
+     (fcomp
+      ($f string/replace-regexp "<%" "" %)  ;; Remove <%
+      ($f string/replace-regexp "%>" "" %)  ;; Remove %>
+      #'eval-string
+      )
+     (string/find-all "\\(<%.+?%>\\)" result)))
+
+   ))
+
+(defun string/trim-all (str)
+  "
+  Eliminates all white spaces (tabs and spaces)
+  from the beggining, end and from the beggining of each 
+  line from a string.
+
+  "
+    (string/replace-pairs
+     '(
+       ;; Eliminates all white spaces from the top
+       ("\n[\t|\s]+" . "\n")
+       
+       ;; Eliminates all white spaces from the
+       ;; beggining of each line
+       ("^[\t|\s\n]+" . "")
+       
+       ;; Eliminates all white spaces from the bottom
+       ("[\n\t\s]+$" . ""))    
+     str))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -106,17 +287,25 @@
 ;; Separates a property list into two lists of keys and values.
 ;;
 (defun plist->kv (plist)
+  "
+  Example:
+
+		> (plist->kv 
+           '(:x 10 :y 20 :desc-x \"Point x\" :desc-y \"Point y\"))		
+    
+       Output:
+		((:x :y :desc-x :desc-y)		
+		 (10 20 \"Point x\" \"Point y\"))			
+  "
   (let ((alist (plist->alist plist)))
-    (cons
+    (list
      (mapcar #'car alist)
-     (mapcar #'cdr alist))))
+     (mapcar #'cadr alist))))
 
 
-(defun map (fun xs)
-  (if (null xs)
-      '()
-    (cons (funcall fun (car xs))
-          (map fun (cdr xs)))))
+(defalias 'map 'mapcar)
+(defalias 'filter 'remove-if-not)
+(defalias 'reject 'remove-if)
 
 ;;
 ;; Scheme for-each function.
@@ -127,28 +316,6 @@
 
 (defun for-each-appply (fun xss)
   (for-each (lambda (xs) (apply fun xs))  xss))
-
-
-
-(defun filter (fun xs)
-  (let ((acc  nil))
-    (dolist (x xs)
-      (if (funcall fun x)
-	  (setq acc (cons x acc))
-	))
-      (reverse acc)
-    ))
-
-
-(defun reject (fun xs)
-  (let ((acc  nil))
-    (dolist (x xs)
-      (if (not (funcall fun x))
-	  (setq acc (cons x acc))
-	))
-      (reverse acc)
-    ))
-
 
 
 (defun take (n xs)
@@ -178,7 +345,7 @@
 (defun zipwith (f &rest xss)
   (map-apply f (apply #'zip xss)))
 
-
+;;; f :: x -> acc -> acc
 (defun foldr (f acc xss)
   (if (null xss)
        ;; foldr f z []     = z
@@ -192,6 +359,10 @@
   (if (null xss)
       acc
     (foldl f (funcall f acc (car xss)) (cdr xss))))
+
+(defun bind-nil (f x)
+  (if x (funcall f x) nil))
+  
 
 ;;
 ;; Function Composition Macro
@@ -215,9 +386,15 @@
    \"11\"
 
   "
-  `(lambda (__x__)
-     ,(foldl
-       (lambda (a b) `(,b ,a)) '__x__ funlist)))
+  (let ((sym-var (gensym)))
+  
+    `(lambda (,sym-var)
+       ,(foldl
+         (lambda (a b) `(bind-nil ,b ,a))
+         sym-var
+         funlist))))
+        
+
 
 (defun map-pair (func xs)
   "
@@ -626,6 +803,29 @@
 
 ;;;;;;;;;;;;;;;;; FILE API ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defalias 'file/extension         'file-name-extension)
+(defalias 'file/extension-sans    'file-name-sans-extension)
+(defalias 'file/path-expand       'expand-file-name)
+(defalias 'file/filename          'file-name-nondirectory)
+(defalias 'file/path-relative     'file-relative-name)
+(defalias 'file/rename            'rename-file)
+(defalias 'file/delete            'delete-file)
+(defalias 'file/copy              'copy-file)
+
+(defun file/has-extension (filename ext)
+  (string-equal ext (file/extension filename))
+  )
+
+;; 
+;; Open a file and return a buffer
+(defalias 'file/open              'find-file-noselect)
+
+;; Close file. kill the buffer bounded to the file.
+;;
+(defun file/close (filename)
+  (bind-nil #'kill-buffer (get-file-buffer filename))
+  )
+
 (defun file/concat-path (base relpath)
   (concat (file-name-as-directory base) relpath))
 
@@ -697,6 +897,14 @@
 (defun file/write-append (filename content)
   (append-to-file content nil filename))
 
+(defun file/dir-list (dirpath)
+  " List directory with absolute path"
+  (letc
+    (abs-dirpath  (expand-file-name dirpath))
+    (-->
+     (directory-files abs-dirpath)
+     (remove-from-list '("." ".."))
+     (map ($f file/concat-path abs-dirpath %)))))
 
 
 (defun dir/list-abs (dirpath)
@@ -805,6 +1013,7 @@
 
 
 (defun eval-string (str)
+  "Evaluate a string containing a emacs-lisp code"
   (eval (read str)))
 
 (defun url->filename (url)
@@ -864,6 +1073,11 @@
   (interactive)
   (find-file (concat "/sudo:root@localhost:"  filename)))
 
+(defalias 'buffer/at-point 'thing-at-point)
+(defalias 'buffer/switch   'switch-to-buffer)
+(defalias 'buffer/set      'buffer-set)
+(defalias 'buffer/current  'current-buffer)
+
 (defun buffer/get (&optional arg)
   (if (not arg)
       (current-buffer)
@@ -871,8 +1085,62 @@
         arg
       (get-buffer arg))))
 
+(defun buffer/insert (buf text)
+  "Insert a text in a buffer, buf is a buffer object or text
+   if buf is nill it will insert the text in current buffer
+  "
+  (with-current-buffer (buffer/get buf)
+    (insert text)))
+
+
+(defun buffer/scratch ()
+  (interactive)
+  "Create an scratch buffer in Emascs 
+   Lisp mode and Switch to it, or if the buffer 
+    exists, only switch to it.
+
+  Usage M-x buffer/scratch
+  "
+  (let ((buf (get-buffer-create "*scratch*")))
+    (switch-to-buffer buf)
+    (emacs-lisp-mode)))
+
+
 (defun buffer/name (&optional arg)
   (buffer-name (buffer/get arg)))
+
+(defun buffer/file (&optional buffer-or-name)
+  "Return name of file bounded to buffer"
+  (interactive)
+  (buffer-file-name (buffer/get buffer-or-name)))
+
+(defun buffer/dir (&optional buffer-or-name)
+  "Return name of file bounded to buffer"
+  (interactive)
+  (bind-nil #'buffer-file-name
+            (buffer/get buffer-or-name)))
+
+
+(defun buffer/save (&optional buf)
+  (with-current-buffer (buffer/get buf)
+    (save-buffer (buffer/get buf)))
+  )
+
+(defun buffer/save-kill (&optional buf)
+  "Save a buffer and then delete it, if no argument is given,
+   it will happen to current buffer"
+  
+  (with-current-buffer (buffer/get buf)
+    (save-buffer)
+    (kill-buffer)))
+
+(defun buffer/close-all ()
+  "Save and close all files and close all directories (dired-mode)"
+  (interactive)
+  (progn
+    (mapc (fcomp car buffer/save-kill) (buffer/list-files))
+    (buffer/save-kill-mode 'dired-mode)))
+  
 
 (defun buffer/text (&optional buffer-or-name)
   "Returns all the buffer content as string"
@@ -889,18 +1157,13 @@
   (interactive)
   (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
 
-(defalias 'buffer/at-point 'thing-at-point)
-
-(defun buffer/file (&optional buffer-or-name)
-  "Show Current File"
-  (interactive)
-  (buffer-file-name (buffer/get buffer-or-name)))
 
 
 (defun buffer/write-file (filename &optional buffer-or-name)
   (file/write filename (buffer/text buffer-or-name)))
 
 (defun buffer/erase (&optional buffer-or-name)
+  (interactive)
   (with-current-buffer (buffer/get buffer-or-name)
     (erase-buffer)))
 
@@ -915,13 +1178,20 @@
   (message "Copied to clipboard. Ok."))
 
 (defun buffer/copy-path ()
+  "Copy buffer file path to clipboard (kill-ring)"
   (interactive)
   (clipboard/copy (buffer/file)))
 
-(defun buffer/insert-path ()
+(defun buffer/insert-file-path ()
   "Insert the path of current buffer file at point."
   (interactive)
   (insert (buffer/file))
+  )
+
+(defun buffer/insert-dir-path ()
+  "Insert the path of current buffer directory at point"
+  (interactive)
+  (insert (file/path (buffer/file)))
   )
 
 ;; (buffer/major-mode "*Occur*")
@@ -960,10 +1230,84 @@
                      #'buffer/name
                      #'buffer/file
                      #'buffer/major-mode)
-                $)))
+               $)))
 
-(defun buffer/kill (buffer-or-name)
+(defun buffer/open-dir ()
+  "Open the directory of current buffer."
+  (interactive)
+  (find-file (file/path (buffer/file)))
+  )
+
+(defun buffer/rename-file ()
+  "
+  Prompt the user for a new file name to the current buffer file.
+  Usage: M-x buffer/rename-file
+  "
+  (interactive)
+  (let (
+        (current-name (buffer-file-name))
+        (new-name    (read-string "Enter new file name: "))        
+        )        
+    (rename-file current-name new-name 1)
+    (kill-buffer (current-buffer))
+    (find-file new-name)
+    (message (format "Buffer file name changed from %s to %s" current-name new-name))
+    ))
+
+
+(defun buffer/kill (&optional buffer-or-name)
+  (interactive)
   (kill-buffer (buffer/get buffer-or-name)))
+
+(defun buffer/save-kill-mode (mode)
+   "Kill all buffer with the same major mode, 
+    and save them all"
+
+   (map (fcomp car buffer/save-kill)
+        (filter (lambda (a) (equal mode (cdr a)))
+               (map-pair #'buffer/major-mode (buffer-list)))))
+
+
+(defun buffer/attributes (&optional buffer-or-name)
+  (interactive)
+  (let
+      ((buf (buffer/get buffer-or-name)))
+
+    (list
+     :name (buffer/name buf)
+     :file (buffer/file buf)
+     :dir  (buffer/dir  buf)
+     :mode (buffer/major-mode buf)
+     :buffer buf
+     :window-list (get-buffer-window-list buf)
+     )))
+
+(defun buffer/list-all-attrs  ()
+  (map #'buffer/attributes (buffer-list)))
+
+(defun buffer/make-scratch  (&optional mode_)
+  "Create a scratch buffer in any mode not bounded to a file. 
+  It is useful to interact with a repl without create 
+   new files.
+
+  Example:
+
+  > (buffer/make-scratch 'python-mode) 
+
+  it will create the buffer  *scratch-python-mode*
+  "
+  (interactive)
+  (let* ((mode           (if mode_ mode_ (read (read-string "Scratch buffer mode :"))))
+         (buffer-name    (concat "*scratch-" (symbol-name mode) "*"))
+         (buffer         (get-buffer-create buffer-name)))
+    (with-current-buffer buffer
+      (funcall mode))
+    (if mode_
+        ;; Called in non interactive mode return the buffer object
+        buffer
+      ;; Called in interactive mode M-x buffer/make-scratch
+      ;; switch to buffer
+        (switch-to-buffer buffer))))
 
 
 (defun buffer/delete-line ()
@@ -1030,6 +1374,23 @@
              (buffer/delete-at-point thing)
              (insert (funcall transf-func content)))))
 
+
+(defun buffer/replace-region (transf)
+  "
+  Apply the function transf to the selected text in current buffer
+  and applies the function transf to the selected text and then 
+  replaces it by the result of function application.
+  "
+  (interactive)
+  (save-excursion
+    (letc
+     (
+      rmin      (region-beginning)
+      rmax      (region-end)
+      content   (buffer-substring-no-properties rmin rmax))
+
+     (delete-region rmin rmax)
+     (insert (funcall transf content)))))
                                         ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -1044,34 +1405,77 @@
 
   "
   (interactive)
-  (save-excursion
-    (letc
-     (
-      rmin      (region-beginning)
-      rmax      (region-end)
-      content   (buffer-substring-no-properties rmin rmax))
-
-     (delete-region rmin rmax)
-     (insert (string/escape content)))))
+  (buffer/replace-region  #'string/escape))
 
 
 (defun region/unescape ()
   "
   Unescape a region, select the text and type
-  M-x region/unescape. It is useful to insert
-  example int the function docstring.
-
+  M-x region/unescape. 
   "
   (interactive)
-  (save-excursion
-    (letc
-     (
-      rmin      (region-beginning)
-      rmax      (region-end)
-      content   (buffer-substring-no-properties rmin rmax))
+  (buffer/replace-region #'string/unescape))
 
-     (delete-region rmin rmax)
-     (insert (string/unescape content)))))
+
+(defun region/shift-right ()
+  "
+  Interactive function, that shifts the selected text (region)
+  n times to right from the beggining of each line.
+
+  Usage: M-x region/shift-right 
+  "
+  (interactive)
+  (letc
+   (n  (string-to-number (read-string "shift right ? times : ")))
+   
+   (buffer/replace-region
+    ($f string/replace-regexp "^\\|\n"
+        (apply #'concat (repeat n "\t")) %))))
+
+(defun region/shift-left ()
+  "
+  Interactive function, that shifts the selected text (region)
+  to left n times from the beggining of each line.
+
+  Usage: M-x region/shift-left
+  "
+  (interactive)
+  (letc
+   (
+   n    (string-to-number (read-string "shift right ? times : "))
+   tabs (apply #'concat (repeat n "\t"))
+   )
+   
+   (buffer/replace-region
+    (fcomp ($f string/replace-regexp (concat "^" tabs) ""    %)
+           ($f string/replace-regexp (concat "\n" tabs) "\n" %)))))
+
+
+(defun region/space-right ()
+  "
+  Interactive function, that shifts the selected text (region)
+  1 space  to right from the beggining of each line.
+
+  Usage: M-x region/space-right
+  "
+  (interactive)
+  
+   (buffer/replace-region
+    ($f string/replace-regexp "^\\|\n" " "  %)))
+
+
+(defun region/space-left ()
+  "
+  Interactive function, that shifts the selected text (region)
+  to left n times from the beggining of each line.
+
+  Usage: M-x region/shift-left
+  "
+  (interactive)
+     
+   (buffer/replace-region
+    (fcomp ($f string/replace-regexp  "^ "  ""  %)
+           ($f string/replace-regexp "\n " "\n" %))))
 
 
 ;;
@@ -1164,6 +1568,7 @@
   (interactive)
   (set-window-configuration winconf)
   (message "View loaded"))
+
 
 ;;; Copy String to Clipboard
 
@@ -1314,6 +1719,109 @@
   (buffer/replace-at-point
    'url
    #'org-tools/create-link-from-url))
+
+(defun org-toc ()
+  (interactive)
+  (occur "^\\*+\s+"))
+
+(defun insert-header ()
+  "Insert a header in the file."
+  (interactive)
+  (save-excursion
+    
+    (goto-char (point-min))
+    
+    (insert
+     (string/template
+      (string/trim-all
+        "  
+        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        ;;
+        ;; File:     <% (file/filename (buffer/file)) %>		
+	    ;; Author:   <% user-full-name %>		
+		;; Email:    caiorss.rodrigues@gmail.com		
+		;;		
+		;; Created: <% (format-time-string \"%Y-%m-%d\") %>		
+		;; 
+        ;;
+        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        "
+     )))))
+
+
+(defun paste-at-point ()
+  (interactive)
+  (letc
+   (
+    offset     (- (point) (line-beginning-position))
+    spaces     (apply #'concat "\n" (repeat offset " " ))  
+    )
+   
+   (save-excursion
+     (insert
+      (string/replace-regexp
+       "\n"
+       spaces
+       (clipboard/paste )
+   )))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;@section: ast - Tools to generate documentation of lisp code.
+;;
+
+
+(defun ast/str->ast (str)
+  (str->sexp (format "\n( %s \n)" str)))
+
+(defun ast/read-file (filename)
+  "
+   Convert a lisp source code to AST, abstract syntax tree,
+   in other words, parses a lisp file.
+   "
+   (ast/str->ast (file/read filename)))
+
+(defun ast/get-functions (ast)
+  "Get all functions from an Elisp AST"
+   (map #'cadr (filter ($f equal 'defun (car %))  ast))) 
+
+(defun ast/get-functions-docstring (ast)
+  (map ($f list
+           :name   (cadr %)
+           :params (caddr %)
+           :doc    (cadddr %))
+   (filter
+    ($f and (equal 'defun (car %)) (stringp  (cadddr %)))
+    ast)))
+
+(defun ast/ast->elispdoc (ast &optional buffer-name)
+  (let*
+      ((buf  (get-buffer-create (or buffer-name "*doc*"))))
+    
+  (with-current-buffer  buf
+    (org-mode)
+    (buffer/erase)
+    (save-excursion
+    (mapc
+     (lambda (%)
+       (progn
+         (insert (format "** %s\n" (plist-get % :name )))
+         (insert (format "Parameters:  %s\n" (plist-get % :params )))
+         (insert (format "Doc:\n  %s\n" (plist-get % :doc)))))
+     (ast/get-functions-docstring ast)))
+
+  buf)))
+
+(defun ast/buffer-doc ()
+  "Generate documentation of function of current buffer, 
+   it is like Java doc for Emacs Lisp.
+
+  Usage: M-x ast/buf
+  "
+  (interactive)
+  (switch-to-buffer-other-window
+   (ast/ast->elispdoc
+    (ast/str->ast (buffer/text)))))
 
 
 

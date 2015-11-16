@@ -42,7 +42,11 @@ case "$1" in
         else
              emacsclient -a "" -t "$2"
         fi
-             ;;
+        ;;
+
+    # Edit file without enter CLI or GUI interface.
+    -edit)
+        emacsclient -a "" -n "$2" ;;
         
     # Execute Command (Eval)
     -cmd)
@@ -81,6 +85,21 @@ case "$1" in
                         | sed 's/["|\)|\(]//g' | sed 's/\s/\n/g'
             ;;
 
+      ## Open Emacs shell in a new window
+       # -ielm)
+       #     emacsclient -a "" -c  --eval "(progn (new-frame) (ielm))" 
+       #     ;;
+
+      ## Open Emascs Elisp shell (IELM) on terminal:
+     -ielm)
+         emacsclient -a "" -t --eval "(ielm)"
+         ;;
+
+     ## Open Emacs eshell on terminal
+     -eshell)
+         emacsclient -a "" -t --eval "(eshell)"
+         ;;
+     
     *)
 
 echo "
@@ -93,6 +112,8 @@ Usage:
  -start           Starts Emacs as sever, daemon.
 
  -stop            Stop Emacs daemon.
+
+-edit <file>      Open file in daemon.
 
  -gui             Open a new Emacs frame
 

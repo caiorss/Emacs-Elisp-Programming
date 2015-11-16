@@ -14,12 +14,9 @@ file:images/emacs_logo.png
 
     - Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
 
-Emacs doesn't need introduction. It is a scriptable and fully
-programmable text editor that can be customized in Elisp,
-an Emacs own lisp dialect that is based on [[https://en.wikipedia.org/wiki/Maclisp][MacLisp]], one of oldest lisp
-dialects, older than Common Lisp and Scheme, it was written in  1976
-by the legendary [[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incopatibilities with
-Common Lisp it has many constructs similar to it. An excellent book about Common Lisp
+Emacs doesn't need presetation. It is a scriptable and fully programmable text editor that can be customized in Elisp,
+an Emacs own lisp dialect that is based on [[https://en.wikipedia.org/wiki/Maclisp][MacLisp]], one of oldest lisp dialects, older than Common Lisp and Scheme, it was written in  1976
+by the legendary [[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incopatibilities with Common Lisp it has many constructs similar to it. An excellent book about Common Lisp
 that is also useful for Elisp and Scheme is available at [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]].
 
 
@@ -100,13 +97,14 @@ See also:
 
 **** File
 
-|         |                               |
-|---------+-------------------------------|
-| C-x C-s | Save Current Buffer           |
-| C-x C-w | Save Buffer as different file |
-| C-x s   | Save all buffers              |
-| C-x C-f | Open File                     |
-| C-x C-C | Close Emacs                   |
+|           |                                |
+|-----------+--------------------------------|
+| C-x C-s   | Save Current Buffer            |
+| C-x C-w   | Save Buffer as different file  |
+| C-x s     | Save all buffers interactively |
+| C-u C-x s | Save all buffers               |
+| C-x C-f   | Open File                      |
+| C-x C-C   | Close Emacs                    |
 
 **** Buffers
 
@@ -224,39 +222,66 @@ See also:
 
 |       |                                          |
 |-------+------------------------------------------|
+| C-h a | Command Apropos                          |
+| C-h i | Info documentation reader                |
 | C-h f | Describe function                        |
 | C-h v | Describe variable                        |
 | C-h m | Describe mode                            |
 | C-h s | Describe syntax                          |
 | C-h b | Describe key bindings for current buffer |
-| C-h a | Command Apropos                          |
+| C-h k | Describe a particular key binding.       |
 
 
-*** Selected Key Bindings for Programming*
+*** Selected Key Bindings for Programming
 
-|                   |                                                |
-|-------------------+------------------------------------------------|
-| M-x find-file     | Open a new file or a existing file.            |
-| M-;               | Comment/ Uncomment Selected Code               |
-| M-/               | Autocomplete word (Equivalent to VIM Ctrl + p) |
-| M-x goto-char     | Got a character position                       |
-| Mg-g <line-num>   | Go to line number                              |
-| Mg-c <cursor-pos> | Go to character position                       |
-|                   |                                                |
-|-------------------+------------------------------------------------|
-| C-x C - (minus)   | Decrease font size                             |
-| C-x C + (plus)    | Increase font size                             |
-|                   |                                                |
-|-------------------+------------------------------------------------|
-| C-x r m           | Make bookmark                                  |
-| C-x r b           | Jump to bookmarks                              |
-|                   |                                                |
-|-------------------+------------------------------------------------|
-| C-y               | Copy selected text by cursor (Copy region)     |
-| C-y               | Paste when no text is selected. (Yank)         |
-| C-k               | Delete current line from cursor position.      |
-| C-w               | Cut (Wipe Out)                                 |
-|                   |                                                |
+
+*FILE EDITING*
+
+|                          |                                                |
+|--------------------------+------------------------------------------------|
+| C-x C-f                  | Open a new file or a existing file.            |
+| C-x C-s                  | Save current buffer                            |
+| C-x b                    | Swithc Buffer                                  |
+| M-;                      | Comment/ Uncomment Selected Code               |
+| M-/                      | Autocomplete word (Equivalent to VIM Ctrl + p) |
+| C-g                      | Cancel any Emacs command                       |
+| M-x list-command-history | List the most recent commands (M-x <command>)  |
+|                          |                                                |
+
+*NAVIGATION*
+
+|                   |                                               |
+|-------------------+-----------------------------------------------|
+| C-a               | Move the cursor to the beggining of line      |
+| C-e               | Move the cursor to the end of line            |
+| M-<               | Move the cursor to the beggining of buffer    |
+| M->               | Move to the cursor tor end of buffer          |
+| M-x goto-char     | Got a character position                      |
+| Mg-g <line-num>   | Go to line number                             |
+| Mg-c <cursor-pos> | Go to character position                      |
+| M-m               | Jump to first non whitespace in current line. |
+|-------------------+-----------------------------------------------|
+| C-x r m           | Make bookmark                                 |
+| C-x r b           | Jump to bookmarks                             |
+
+*TEXT EDITING*
+
+|                    |                                                         |
+|--------------------+---------------------------------------------------------|
+| C-y                | Copy selected text by cursor (Copy region)              |
+| C-y                | Paste when no text is selected. (Yank)                  |
+| C-k                | Delete current line from cursor position.               |
+| C-w                | Cut (Wipe Out)                                          |
+| M-del              | Delete previous word                                    |
+| M-d                | Delete next word                                        |
+| C-x C-o            | Delete all empty line around the cursor.                |
+| M-q                | Justify / Re-align current paragraph                    |
+|                    |                                                         |
+| C-x C - (minus)    | Decrease font size                                      |
+| C-x C + (plus)     | Increase font size                                      |
+|                    |                                                         |
+| M-x replace-string | Batch replace string in selected region or  buffer.     |
+| M-x replace-regexp | Batch replace regex pattern in selected text or buffer. |
 
 *** Keybindings for Lisp programming
 
@@ -312,8 +337,9 @@ Useful lisp key bindings to edit and navigate Lisp code.
 
 *** Ubiquitous Emacs Key Bindings
 
-Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in Unix apps like Bash, Sh and
-all shells that uses the GNU readline library.
+Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in
+Unix apps like Bash, Sh and all shells that uses the GNU readline
+library.
 
 | Key | Emacs                                                     | Bash Shell                               |
 |-----+-----------------------------------------------------------+------------------------------------------|
@@ -382,6 +408,15 @@ scratch buffer and test it in the shell.
 
 file:images/scratch_buffer_usage_4.png
 
+The command *M-x eval-expression* which is bound to the key bind *M-:* can
+be used to evaluate Elisp commands in any buffer and test buffer local
+variables.
+
+Example:
+
+file:images/mx_eval_buffer1.png
+
+file:images/mx_eval_buffer2.png
 
 ** Basic Operations
 
@@ -478,6 +513,34 @@ ELISP> '(10 203 40 "hello" () ("empty" 65))
 
 ELISP>
 #+END_SRC
+
+** Type Predicates and Literals
+
+Basic Types
+
+| Type   | Predicate | Literal         | Description                                       |
+|--------+-----------+-----------------+---------------------------------------------------|
+| Nil    | null      | nil '()         | Test if argument is nil                           |
+| Number | numberp   | 100, 200e3      | Test if it is number.                             |
+| String | stringp   | "hello"         | Test if it is string                              |
+| Symbol | symbolp   | 'sym :keyworkd  | Test if it is a symbol.                           |
+|        |           |                 |                                                   |
+| Atom   | atom      | 'x "h" :key 200 | Everything that is not a list or pair is an atom. |
+| List   | listp     | '(1 2 x y)      | Test if it is a list                              |
+| Pair   | consp     | '( a . 200)     | Test if it is a pair (cons cell)                  |
+| Vector | vectorp   | [1 200 'sym]    | Test if it is a vector                            |
+
+
+Emacs Objects
+
+| Object  | Predicate |
+|---------+-----------|
+| Buffer  | bufferp   |
+| Window  | windowp   |
+| Frame   | framep    |
+| Process | processp  |
+
+
 
 ** Defining Variables
 
@@ -6581,64 +6644,68 @@ Non Categorized:
     * [[https://www.youtube.com/watch?v=oJTwQvgfgMM][Emacs Org-mode - a system for note-taking and project planning]]
     * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
 
+* Eshell 
 
-* Resources
+Features:
 
-** Documentation
+  - Shell implemented in Emacs Lisp.
+  - Eshell can run elisp functions and can be extended in Elisp.
+  - It is Multiplatform, works on Linux, OSX and Windows.
 
-*** Manual
 
-    * [[http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents][GNU Emacs Lisp Reference Manual]]
-    * http://blog.gnumonk.com/2012/07/effective-emacs-part1.html
+Links:
 
-*** Tutorials
+  - [[https://www.masteringemacs.org/article/complete-guide-mastering-eshell][Mastering Eshell - Mastering Emacs]]
+  - [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell: The Emacs Shell]]
+  - [[http://www.howardism.org/Technical/Emacs/eshell-fun.html][Eschewing Zshell for Emacs Shell]]
+  - [[http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html][Ben's Journal: Finally wrapping my head around eshell (the emacs shell)]]
+  - [[http://mjwall.com/blog/2013/10/04/how-i-use-emacs/][How I use Emacs - mjwall.com]]
+  - [[http://blog.gnumonk.com/2012/07/effective-emacs-part1.html][We Live By Code: Effective emacs - Part:1]]
+  - [[https://github.com/howardabrams/dot-files/blob/master/emacs-eshell.org][dot-files/emacs-eshell.org at master · howardabrams/dot-files · GitHub]]
+  - [[http://www.emacswiki.org/emacs/EshellAndEmacsServer][EmacsWiki: Eshell And Emacs Server]]
+  - [[http://www.emacswiki.org/emacs/ShellMode][EmacsWiki: Shell Mode]]
+  - [[http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell][Using Emacs Eshell as the ultimate shell | Smash Company]]
+  - [[https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/][Eshell completion for git, bzr, and hg | Tassilo's Blog]]
 
-    * [[http://rosettacode.org/wiki/Category:Emacs_Lisp][Rosetta Code/ Category:Emacs Lisp]]
-    * [[http://emacslife.com/how-to-read-emacs-lisp.html][Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs]]
-    * [[http://sachachua.com/blog/series/read-lisp-tweak-emacs/][Read Lisp, Tweak Emacs [Beginner 1/4]: How to try Emacs Lisp]]
-    * [[http://emacswiki.org/emacs/ElispCookbook][Elisp Cookbook]]* [[http://ergoemacs.org/][ErgoEmacs]]
-    * [[http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/][Essential Elisp Libraries - Functional Programmin in Elisp]]
+* Developement Environments for Emacs
+** Python
 
-*** Wikis
+Set Python Interpreter:
 
-    * [[https://wiki.archlinux.org/index.php/Emacs][Emacs / Arch Wiki]]
-    * [[http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html][Emacs Lisp for Perl Programmers]]
-    * [[http://hyperpolyglot.org/lisp][Hyperglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp]]
-    *Github*
+#+BEGIN_SRC elisp
+(setq python-python-command "/path-to-python-/python")
+#+END_SRC
 
-    * [[https://github.com/hypernumbers/learn_elisp_the_hard_way][Learn Elisp the Hard Way]]
-    *Lexical Scope*
+To run the interpretrer type: =M-x run-python=
 
-    * [[http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html][On elisp and programming in general]]
+Run more than one Python version, usage: M-x run-python3, M-x run-python2
 
-*** Issues
+#+BEGIN_SRC elisp 
 
-    * [[http://www.khngai.com/emacs/cygwin.php][Emacs on Windows / Cygwin]]
-    * [[http://gregorygrubbs.com/emacs/10-tips-emacs-windows/][10 Tips for Powerful Emacs on Windows]]
-** Selected Dot Emacs
 
-    * [[http://pages.sachachua.com/.emacs.d/Sacha.html][Sacha Chua's Emacs configuration]]
-    * [[https://github.com/howardabrams/dot-files/blob/master/emacs.org][Howard Abrams dot emacs]]
-    * http://uce.uniovi.es/tips/Emacs/mydotemacs.html
+(defun run-python3 ()
+   (interactive)
+   (run-python  "/usr/bin/python2" nil t))  
 
-    * http://www.dgp.toronto.edu/~ghali/emacs.html
+(defun run-python2 ()
+   (interactive)
+   (run-python  "/usr/bin/python" nil t))  
 
-    * http://whattheemacsd.com/
+(defun run-ipython3 ()
+   (interactive)
+   (run-python  "~/anaconda3/bin/ipython" nil t))   
 
-    * https://snarfed.org/dotfiles/.emacs
 
-    * http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el
-
-** Developement Environments for Emacs
-
-*** Python
+#+END_SRC
 
     * [[http://wikemacs.org/wiki/Python][Python Settings]]
     * [[http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/][Setting up Emacs to Support both Python 2 and Python 3]]
     * [[https://github.com/proofit404/pyenv-mode][Pyenv Mode]]
     * [[http://www.johndcook.com/blog/2012/02/09/python-org-mode/][Running Python and R inside Emacs by John D. Cook]]
+    * [[http://www.emacswiki.org/emacs/PythonProgrammingInEmacs][EmacsWiki: Python Programming In Emacs]]
+    * [[http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/][Emacs as a Python IDE - Jessica Hamrick]]
 
-*** Javascript
+** Javascript
 
     * [[http://wikemacs.org/wiki/JavaScript][Java Script]]
 
@@ -6646,20 +6713,20 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
     * [[https://github.com/swank-js/swank-js][Swank backend for Node.JS and in-browser JavaScript]]
 
-*** C / C++
+** C / C++
 
-    * [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]* [[https://github.com/atilaneves/cmake-ide][C make IDE]]
+    * [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]
+    * [[https://github.com/atilaneves/cmake-ide][C make IDE]]
 
-*** Ocaml
+** Ocaml
 
     * [[http://wikemacs.org/wiki/OCaml][Ocaml]]
-*** Haskell
+** Haskell
 
     * [[http://wikemacs.org/wiki/Haskell-mode][Haskell Mode]]* [[https://wiki.haskell.org/Emacs/Inferior_Haskell_processes][Emacs/Inferior Haskell processes]]
 
-*** Lisp
-
-**** All Lisp Dialects
+** Lisp Dialects
+*** All Lisp Dialects
 
     * [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][The Animated Guide to Paredit]]
     * [[http://wikemacs.org/wiki/Paredit-mode][Paredit-mode]]* [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
@@ -6677,7 +6744,7 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 #+END_SRC
 
-**** Common Lisp
+*** Common Lisp
 
     * [[https://common-lisp.net/project/slime/][SLIME: The Superior Lisp Interaction Mode for Emacs]]
     * [[https://www.masteringemacs.org/article/evaluating-elisp-emacs][Evaluating Elisp in Emacs By Mickey Petersen]]
@@ -6697,7 +6764,7 @@ Set Lisp Interpreter
 
 #+END_SRC
 
-**** Scheme
+*** Scheme
 
 The variable scheme-program-name controls which Scheme implementation Emacs will run.
 
@@ -6723,7 +6790,7 @@ The function M-x run-scheme will run the selected scheme program.
     * [[http://alexott.net/en/writings/emacs-devenv/EmacsScheme.html][Support for the Scheme programming language]]
     * [[https://mayukhmukherjee.wordpress.com/2014/01/03/setup-lisp/][Setup lisp programming environment]]
     * [[http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html][A Little Elisp to Make Emacs and Racket Play Nicer]]
-**** Clojure
+*** Clojure
 
     * [[http://pythonhackers.com/p/clojure-emacs/cider][CIDER is a Clojure IDE and REPL for Emacs]]
     * [[http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html][Practical Starter Tips for Clojure]]
@@ -6737,6 +6804,118 @@ The function M-x run-scheme will run the selected scheme program.
     * [[https://github.com/joelmccracken/projectile][Project Interaction Library for Emacs]]
     * [[http://www.gnu.org/software/emacs/manual/html_node/widget/index.html][The Emacs Widget Library]]
     * [[http://www.emacswiki.org/emacs/InteractivelyDoThings][InteractivelyDoThings]]
+
+* Resources
+
+** Emacs Tutorials
+
+*** Motivation
+    
+    * [[http://martinfowler.com/bliki/InternalReprogrammability.html][Internal Reprogrammability]] by Martin Fowler
+    
+    * [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org][Master Emacs in one year]]
+
+"This guide is about using Emacs as a professional’s tool. I will not
+show off Emacs as a geek’s toy because I am far from geek
+stereotype. I will focus on philosophy and methodology only. No
+technical details involved." 
+
+    * [[http://emacs.sexy/][Emacs is sexy]]
+
+    * [[http://batsov.com/articles/2011/11/19/why-emacs/][Why Emacs? - (think)]]
+
+    * [[http://www.emacswiki.org/emacs/LispMachine][EmacsWiki: Lisp Machine]]
+
+*** Introduction to Elisp
+
+    * [[http://emacslife.com/how-to-read-emacs-lisp.html][Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua]]
+    * http://www.fincher.org/tips/Languages/Emacs.shtml
+    * [[https://github.com/chrisdone/elisp-guide#manipulating-the-buffer][A quick guide to Emacs Lisp programming]]
+    * [[http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html][Learn Emacs Lisp in 15 minutes]]
+    * [[http://steve-yegge.blogspot.it/2008/01/emergency-elisp.html][Emergency Elisp]]
+    * [[http://wikemacs.org/wiki/Emacs_Lisp_Cookbook][Emacs Lisp Cookbook]]
+    * [[https://github.com/doitian/emacs.d][Quick Started]]
+    * [[http://ergoemacs.org][Xah's Emacs Tutorial - ErgoEmacs]]
+    * [[https://www.masteringemacs.org/][Mastering Emacs mastering the world’s best text editor]]
+
+    * [[http://www.splode.com/~friedman/software/emacs-lisp/][Software: Emacs Lisp]]  
+ 
+     Many useful Emacs Lisp codes like user interface enhancement.
+
+    * [[http://rosettacode.org/wiki/Category:Emacs_Lisp][Rosetta Code/ Category:Emacs Lisp]]
+    * [[http://emacswiki.org/emacs/ElispCookbook][Elisp Cookbook]]
+    * [[http://ergoemacs.org/][ErgoEmacs]]
+    * [[http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/][Essential Elisp Libraries - Functional Programmin in Elisp]]
+
+*** Tips and Tricks
+
+    * [[https://wiki.archlinux.org/index.php/Emacs][Emacs - Arch Linux Wiki]]
+    * [[http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html][Emacs Tiny Tools]]
+    * [[https://github.com/emacs-tw/awesome-emacs][Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.]]
+    * [[https://translate.google.ca/translate?sl=auto&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=http%3A%2F%2Femacs-jp.github.io%2Ftips%2Fenvironment-variable.html&edit-text=&act=url][Setting Environment Variables]]
+
+    * [[http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/][3 Interactive Functions That Work On Regions]]
+
+    * [[http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html][Introducing Names: practical namespaces for Emacs-Lisp]]
+
+*** Packages
+
+    * [[https://github.com/capitaomorte/yasnippet][Yasnippet]]
+
+*** Cases
+
+    * [[http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/][From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide]]
+    * [[http://technical-dresese.blogspot.com/2008/11/why-ive-abandoned-eclipse-for-emacs.html][Why Ive Abandoned Eclipse For Emacs]]
+    * [[http://technical-dresese.blogspot.com/2008/08/in-org-mode-abandoning-gtd.html][In Org Mode Abandoning Gtd]]
+    * [[http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html][Running Lisp In Productionl]]
+
+*** Non Categorized
+
+
+    * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
+    * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15
+    * https://marmalade-repo.org/
+    * [[http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html][Hooks Local Variables And Namespacesl]]
+    * http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192
+
+** Documentation
+*** Manual and References
+
+    * [[http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents][GNU Emacs Lisp Reference Manual]]
+    * [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html][Command and Function Index]]
+    * http://blog.gnumonk.com/2012/07/effective-emacs-part1.html
+
+*** Wikis
+
+    * [[https://wiki.archlinux.org/index.php/Emacs][Emacs / Arch Wiki]]
+    * [[http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html][Emacs Lisp for Perl Programmers]]
+    * [[http://hyperpolyglot.org/lisp][Hyperglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp]]
+    *Github*
+
+    * [[https://github.com/hypernumbers/learn_elisp_the_hard_way][Learn Elisp the Hard Way]]
+    *Lexical Scope*
+
+    * [[http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html][On elisp and programming in general]]
+
+*** Issues
+
+    * [[http://www.khngai.com/emacs/cygwin.php][Emacs on Windows / Cygwin]]
+    * [[http://gregorygrubbs.com/emacs/10-tips-emacs-windows/][10 Tips for Powerful Emacs on Windows]]
+** Selected Dot Emacs
+
+    * [[http://pages.sachachua.com/.emacs.d/Sacha.html][Sacha Chua's Emacs configuration]]
+
+    * [[https://github.com/howardabrams/dot-files/blob/master/emacs.org][Howard Abrams dot emacs]]
+
+    * http://uce.uniovi.es/tips/Emacs/mydotemacs.html
+
+    * http://www.dgp.toronto.edu/~ghali/emacs.html
+
+    * http://whattheemacsd.com/
+
+    * https://snarfed.org/dotfiles/.emacs
+
+    * http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el
 ** Emacs Starter Kits
 
 *Space Emacs*
@@ -6754,54 +6933,6 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 [[https://github.com/fniessen/emacs-leuven][Link Github]]
 
-** Selected Emacs Tutorials
-
-*** Emacs Documentation
-
-    * [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html][Command and Function Index]]
-
-*** Introduction to Elisp
-
-    * [[http://emacslife.com/how-to-read-emacs-lisp.html][Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua]]
-    * [[https://github.com/chrisdone/elisp-guide#manipulating-the-buffer][A quick guide to Emacs Lisp programming]]
-    * [[http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html][Learn Emacs Lisp in 15 minutes]]
-    * [[http://steve-yegge.blogspot.it/2008/01/emergency-elisp.html][Emergency Elisp]]
-    * [[http://wikemacs.org/wiki/Emacs_Lisp_Cookbook][Emacs Lisp Cookbook]]
-    * [[https://github.com/doitian/emacs.d][Quick Started]]
-    * [[http://ergoemacs.org][Xah's Emacs Tutorial - ErgoEmacs]]
-    * [[https://www.masteringemacs.org/][Mastering Emacs mastering the world’s best text editor]]
-
-*** Tips and Tricks
-
-    * [[https://wiki.archlinux.org/index.php/Emacs][Emacs - Arch Linux Wiki]]
-    * [[http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html][Emacs Tiny Tools]]
-    * [[https://github.com/emacs-tw/awesome-emacs][Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.]]
-    * [[https://translate.google.ca/translate?sl=auto&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=http%3A%2F%2Femacs-jp.github.io%2Ftips%2Fenvironment-variable.html&edit-text=&act=url][Setting Environment Variables]]
-
-    * [[http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/][3 Interactive Functions That Work On Regions]]
-
-    * [[http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html][Introducing Names: practical namespaces for Emacs-Lisp]]
-
-*** Packages
-
-    * [[https://github.com/capitaomorte/yasnippet][Yasnippet]]
-
-
-*** Cases
-
-    * [[http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/][From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide]]
-    * [[http://technical-dresese.blogspot.com/2008/11/why-ive-abandoned-eclipse-for-emacs.html][Why Ive Abandoned Eclipse For Emacs]]
-    * [[http://technical-dresese.blogspot.com/2008/08/in-org-mode-abandoning-gtd.html][In Org Mode Abandoning Gtd]]
-    * [[http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html][Running Lisp In Productionl]]
-
-*** Non Categorized
-
-
-    * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
-    * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15
-    * https://marmalade-repo.org/
-    * [[http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html][Hooks Local Variables And Namespacesl]]
-    * http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192
 ** Books
 
     - [[https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf][An Introduction to Programming in Emacs Lisp]] by Robert J. Chassell
@@ -6815,14 +6946,12 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 ** Community
 
-*** Channels
-
 *Usenet*
 
-   - news:comp.emacs
-   - news:gnu.emacs.help
+   - comp.emacs
+   - gnu.emacs.help
 
-also available at:
+It is also available at:
 
   - https://groups.google.com/forum/#!forum/comp.emacs
   - https://groups.google.com/forum/#!forum/gnu.emacs.help
@@ -6830,21 +6959,39 @@ also available at:
 
 *IRC*
 
-http://www.emacswiki.org/emacs/InternetRelayChat
+   - http://www.emacswiki.org/emacs/InternetRelayChat
 
 *Reddit*
 
-http://reddit.com/r/emacs
+   - http://reddit.com/r/emacs
 
 *Stack Overflow*
 
-http://stackoverflow.com/questions/tagged/emacs
+  - http://stackoverflow.com/questions/tagged/emacs
+
+*Gooble Plus*
+
+  - [[https://plus.google.com/communities/114815898697665598016][Emacs - Community - Google+]]
+
 ** Blogs
 
   - [[http://endlessparentheses.com/archive.html][Endless Parentheses · Concise ramblings on Emacs productivity.]]
+
   - [[http://nic.ferrier.me.uk/][nic.ferrier.me.uk - what hacking is]]
+
   - http://xahlee.blogspot.com
 
+  - [[http://nullprogram.com/][null program « null program]] 
+
+  - [[http://edward.oconnor.cx/elisp/][Emacs Lisp — Edward O’Connor]]
+
+  - [[http://sachachua.com/blog/category/emacs/][emacs Archives - sacha chua :: living an awesome life]]
+ 
+  - [[http://emacsrocks.com/][Emacs Rocks!]]
+
+  - [[http://emacs.readthedocs.org/en/latest/][About This Document — Emacs latest documentation]]
+
+  - [[http://emacsredux.com/][Emacs Redux]]
 
 ** Videos and Screencasts
 
@@ -6974,7 +7121,7 @@ Useful screencasts to help learn Emacs faster.
     surprisingly easy to assemble. (Much faster than editing a
     screencast about it!)
 
-**  Technical Notes
+** Technical Notes
 
 *Emacs architecture:*
 
@@ -7000,7 +7147,6 @@ Forth Compiler to Emacs Bytecodes
 
     - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/forth.el
     - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth
-
 
 ** Selected Codes
 
