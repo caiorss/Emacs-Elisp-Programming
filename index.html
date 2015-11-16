@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs In a Box</title>
-<!-- 2015-11-16 Seg 12:15 -->
+<!-- 2015-11-16 Seg 14:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -305,8 +305,9 @@ for the JavaScript code in this tag.
 <ul class="org-ul">
 <li><a href="https://github.com/caiorss/Emacs-Elisp-Programming">Github Link</a>
 </li>
-
 <li>Short Link: <a href="http://tinyurl.com/emacsinabox">http://tinyurl.com/emacsinabox</a> - Mneumonic: <b>Emacs In A Box</b>
+</li>
+<li><a href="http://caiorss.github.io/Emacs-Elisp-Programming">HTML Version - github.io</a>
 </li>
 </ul>
 
@@ -9688,6 +9689,36 @@ The variable scheme-program-name controls which Scheme implementation Emacs will
 The function M-x run-scheme will run the selected scheme program.
 </p>
 
+<p>
+The following functions are useful to run a specific Scheme version or
+implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
+&#x2026; 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #707183;">(</span><span style="color: #1c86ee;">defun</span> <span style="color: #cd9b1d;">run-scheme-gambit</span> <span style="color: #7388d6;">()</span>
+  <span style="color: #7388d6;">(</span>interactive<span style="color: #7388d6;">)</span>
+  <span style="color: #7f7f7f;">;;; </span><span style="color: #7f7f7f;">It could also be: (run-scheme "/opt/gambit/bin/gsc")</span>
+  <span style="color: #7f7f7f;">;;; </span><span style="color: #7f7f7f;">executable-find will return the path to executable.</span>
+  <span style="color: #7f7f7f;">;;;</span>
+  <span style="color: #7388d6;">(</span>run-scheme <span style="color: #909183;">(</span>executable-find <span style="color: #8b7355;">"gsc"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+
+<span style="color: #707183;">(</span><span style="color: #1c86ee;">defun</span> <span style="color: #cd9b1d;">run-scheme-guile</span> <span style="color: #7388d6;">()</span>
+  <span style="color: #7388d6;">(</span>interactive<span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>run-scheme <span style="color: #909183;">(</span>executable-find <span style="color: #8b7355;">"guile"</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #1c86ee;">defun</span> <span style="color: #cd9b1d;">run-scheme-chicken</span> <span style="color: #7388d6;">()</span>
+  <span style="color: #7388d6;">(</span>interactive<span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>run-scheme  <span style="color: #8b7355;">"/opt/chicken/bin/csi"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #1c86ee;">defun</span> <span style="color: #cd9b1d;">run-racket</span> <span style="color: #7388d6;">()</span>
+  <span style="color: #7388d6;">(</span>interactive<span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>run-scheme <span style="color: #8b7355;">"/opt/bin/racket"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
 <ul class="org-ul">
 <li><a href="http://emacswiki.org/emacs/Scheme">Emacs Wiki - Scheme</a>
 </li>
@@ -9704,6 +9735,7 @@ The function M-x run-scheme will run the selected scheme program.
 </ul>
 </div>
 </div>
+
 <div id="outline-container-sec-9-6-4" class="outline-4">
 <h4 id="sec-9-6-4"><span class="section-number-4">9.6.4</span> Clojure</h4>
 <div class="outline-text-4" id="text-9-6-4">
@@ -10460,7 +10492,7 @@ Large Collection of Codes to Emacs
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2015-11-16 Seg 12:15</p>
+<p class="date">Created: 2015-11-16 Seg 14:13</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

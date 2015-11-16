@@ -364,6 +364,26 @@
   (if x (funcall f x) nil))
   
 
+;; Returns true to every value
+(defun elsef (x)  t)
+
+
+(defmacro cond-p (obj &rest predicate-actions)
+  "
+  Example:
+
+     (cond-p  'sym
+              symbolp   \"A symbol\"
+              numberp   \"A number\"
+              bufferp   \"A buffer\"
+              )
+     \"A symbol\"
+
+  "
+  `(cond   
+    ,@(mapcar (lambda (cell) `( (,(car cell) ,obj)  ,(cadr cell)))
+                     (plist->alist predicate-actions))))      
+
 ;;
 ;; Function Composition Macro
 ;;

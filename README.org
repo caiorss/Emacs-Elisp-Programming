@@ -6800,12 +6800,38 @@ The variable scheme-program-name controls which Scheme implementation Emacs will
 
 The function M-x run-scheme will run the selected scheme program.
 
+The following functions are useful to run a specific Scheme version or
+implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
+... 
+
+#+BEGIN_SRC elisp
+
+(defun run-scheme-gambit ()
+  (interactive)
+  ;;; It could also be: (run-scheme "/opt/gambit/bin/gsc")
+  ;;; executable-find will return the path to executable.
+  ;;;
+  (run-scheme (executable-find "gsc")))
+
+
+(defun run-scheme-guile ()
+  (interactive)
+  (run-scheme (executable-find "guile")))
+
+(defun run-scheme-chicken ()
+  (interactive)
+  (run-scheme  "/opt/chicken/bin/csi"))
+
+
+#+END_SRC
+
     * [[http://emacswiki.org/emacs/Scheme][Emacs Wiki - Scheme]]
     * [[http://www.nongnu.org/geiser/][Geiser]]
     * [[http://community.schemewiki.org/?emacs-tutorial][A Tutorial For Using Emacs with Scheme]]
     * [[http://alexott.net/en/writings/emacs-devenv/EmacsScheme.html][Support for the Scheme programming language]]
     * [[https://mayukhmukherjee.wordpress.com/2014/01/03/setup-lisp/][Setup lisp programming environment]]
     * [[http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html][A Little Elisp to Make Emacs and Racket Play Nicer]]
+
 *** Clojure
 
     * [[http://pythonhackers.com/p/clojure-emacs/cider][CIDER is a Clojure IDE and REPL for Emacs]]

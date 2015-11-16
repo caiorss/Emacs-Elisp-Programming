@@ -8057,6 +8057,32 @@ The variable scheme-program-name controls which Scheme implementation Emacs will
 
 The function M-x run-scheme will run the selected scheme program.
 
+The following functions are useful to run a specific Scheme version or
+implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
+&#x2026; 
+
+```lisp
+(defun run-scheme-gambit ()
+  (interactive)
+  ;;; It could also be: (run-scheme "/opt/gambit/bin/gsc")
+  ;;; executable-find will return the path to executable.
+  ;;;
+  (run-scheme (executable-find "gsc")))
+
+
+(defun run-scheme-guile ()
+  (interactive)
+  (run-scheme (executable-find "guile")))
+
+(defun run-scheme-chicken ()
+  (interactive)
+  (run-scheme  "/opt/chicken/bin/csi"))
+
+(defun run-racket ()
+  (interactive)
+  (run-scheme "/opt/bin/racket"))
+```
+
 -   [Emacs Wiki - Scheme](http://emacswiki.org/emacs/Scheme)
 -   [Geiser](http://www.nongnu.org/geiser/)
 -   [A Tutorial For Using Emacs with Scheme](http://community.schemewiki.org/?emacs-tutorial)
