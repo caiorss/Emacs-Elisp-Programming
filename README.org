@@ -27,12 +27,12 @@ file:images/emacs_logo.png
 *Repository Link*
 
     - [[https://github.com/caiorss/Emacs-Elisp-Programming][Github Repository]]
-    - Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
+    - Short Link: http://tinyurl.com/emacsinabox - Mnemonic: *Emacs In A Box*
     - [[http://caiorss.github.io/Emacs-Elisp-Programming][HTML Version - github.io]]
 
-Emacs doesn't need presetation. It is a scriptable and fully programmable text editor that can be customized in Elisp,
+Emacs doesn't need presentation. It is a scriptable and fully programmable text editor that can be customized in Elisp,
 an Emacs own lisp dialect that is based on [[https://en.wikipedia.org/wiki/Maclisp][MacLisp]], one of oldest lisp dialects, older than Common Lisp and Scheme, it was written in  1976
-by the legendary [[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incopatibilities with Common Lisp it has many constructs similar to it. An excellent book about Common Lisp
+by the legendary [[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incompatibilities with Common Lisp it has many constructs similar to it. An excellent book about Common Lisp
 that is also useful for Elisp and Scheme is available at [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]].
 
 
@@ -691,7 +691,7 @@ ELISP> [1 2 3 4 (+ 1 2 3 54)]
 | Nil    | null      | nil '()         | Test if argument is nil                           |
 | Number | numberp   | 100, 200e3      | Test if it is number.                             |
 | String | stringp   | "hello"         | Test if it is string                              |
-| Symbol | symbolp   | 'sym :keyworkd  | Test if it is a symbol.                           |
+| Symbol | symbolp   | 'sym :keyword   | Test if it is a symbol.                           |
 |        |           |                 |                                                   |
 | Atom   | atom      | 'x "h" :key 200 | Everything that is not a list or pair is an atom. |
 | List   | listp     | '(1 2 x y)      | Test if it is a list                              |
@@ -1023,7 +1023,7 @@ ELISP> (apply #'sum nil)
 0
 
 ELISP> (sum nil)
-    ** Eval error **  Wrong type argument: number-or-marker-p, ni
+    ** Eval error **  Wrong type argument: number-or-marker-p, nil
 
 ;;----------------------------------
 
@@ -6078,9 +6078,9 @@ or by entering the command below in the shell IELM or by putting it in the confi
 ** Mode Key Bindings
 
 * Solutions
-**  Quick edit and reload Emac Configuration File.
+**  Quick edit and reload Emacs Configuration File.
 
-It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
+It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
 #+BEGIN_SRC elisp
 
@@ -6917,7 +6917,7 @@ Move within headlines:
 
 *Markdown*
 
-Text formating
+Text formatting
 
 | Markdown      | View        |
 |---------------+-------------|
@@ -6936,7 +6936,7 @@ Hyperlinks
 | :shell:uname%20-a                | shell:uname%20-a    | Execute Shell Command: uname -a |
 | :elisp:(message%20"Hello world") |                     |                                 |
 
-** Refereces
+** References
 
 Manual:
 
@@ -7032,7 +7032,7 @@ examine ways of marking up text in Org Mode, as well as various link
 types that connect Org headlines and files, as well as links that can
 execute code.
 
-*NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with 
+*Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with 
 Orgmode by Tory S. Anderson*
 
    - [[https://www.youtube.com/watch?v=nkv8PpxrL3k][NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode - YouTube]]
@@ -7082,7 +7082,7 @@ Links:
   - [[http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell][Using Emacs Eshell as the ultimate shell | Smash Company]]
   - [[https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/][Eshell completion for git, bzr, and hg | Tassilo's Blog]]
 
-* Developement Environments for Emacs
+* Development Environments for Emacs
 ** Python
 
 Set Python Interpreter:
@@ -7119,7 +7119,7 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
     * [[http://www.johndcook.com/blog/2012/02/09/python-org-mode/][Running Python and R inside Emacs by John D. Cook]]
     * [[http://www.emacswiki.org/emacs/PythonProgrammingInEmacs][EmacsWiki: Python Programming In Emacs]]
     * [[http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/][Emacs as a Python IDE - Jessica Hamrick]]
-
+      
 ** Javascript
 
     * [[http://wikemacs.org/wiki/JavaScript][Java Script]]
@@ -7424,7 +7424,7 @@ It is also available at:
 
   - http://stackoverflow.com/questions/tagged/emacs
 
-*Gooble Plus*
+*Google Plus*
 
   - [[https://plus.google.com/communities/114815898697665598016][Emacs - Community - Google+]]
 
@@ -7476,7 +7476,7 @@ Useful screencasts to help learn Emacs faster.
 
     The basics of working with buffers in Emacs Lisp. Buffers are a
     central concept in Emacs of course and one of the main reasons
-    it's useul. They are a versatile tool, you can use them for text
+    it's useful. They are a versatile tool, you can use them for text
     to be edited but you can also use them for presenting user
     interfaces,   like Emacs' mail modes do.
 
@@ -7496,7 +7496,7 @@ Useful screencasts to help learn Emacs faster.
 
 
    - [[https://www.youtube.com/watch?v=-Woj10ARLWw][Dynamic vs lexical scope]]
-   A small screencast to llustrate lexical and dynamic scope in Emacs
+   A small screencast to illustrate lexical and dynamic scope in Emacs
    with a very simple example.
 
   - [[https://www.youtube.com/watch?v=35EcPapMqOU&list=PLakpda32F-ThKQZ3XeYOfDa7ZtwEaK0j_&index=43][Hack Emacs - Working in the REPL]]
