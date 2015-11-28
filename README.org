@@ -27,12 +27,12 @@ file:images/emacs_logo.png
 *Repository Link*
 
     - [[https://github.com/caiorss/Emacs-Elisp-Programming][Github Repository]]
-    - Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
+    - Short Link: http://tinyurl.com/emacsinabox - Mnemonic: *Emacs In A Box*
     - [[http://caiorss.github.io/Emacs-Elisp-Programming][HTML Version - github.io]]
 
-Emacs doesn't need presetation. It is a scriptable and fully programmable text editor that can be customized in Elisp,
+Emacs doesn't need presentation. It is a scriptable and fully programmable text editor that can be customized in Elisp,
 an Emacs own lisp dialect that is based on [[https://en.wikipedia.org/wiki/Maclisp][MacLisp]], one of oldest lisp dialects, older than Common Lisp and Scheme, it was written in  1976
-by the legendary [[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incopatibilities with Common Lisp it has many constructs similar to it. An excellent book about Common Lisp
+by the legendary [[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incompatibilities with Common Lisp it has many constructs similar to it. An excellent book about Common Lisp
 that is also useful for Elisp and Scheme is available at [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]].
 
 
@@ -121,15 +121,15 @@ Key Sequence
 | M-x        | Reserved to execute Emacs Commands. |
 | C-g        | Reserved to cancel Emacs commands.   |
 
-Key Mneumonics
+Key Mnemonics
 
-| Letter | Mneumonic |
+| Letter | Mnemonic |
 |--------+-----------|
 | p      | previous  |
 | n      | next      |
 | b      | backward  |
 | f      | forward   |
-| a      | beggining |
+| a      | beginning |
 | e      | end       |
 
 
@@ -199,7 +199,7 @@ See also:
 | C-r   | Backward Search                                                         |
 | M-%   | Replace                                                                 |
 | C-s   | Jump to next occurrence                                                 |
-| C-r   | Jump to previour occurrence                                             |
+| C-r   | Jump to previous occurrence                                            |
 | C-g   | Exit search                                                             |
 | A-s . | Find Symbol under cursor                                                |
 | A-s w | Find Symbol under cursor, match symbols with underscore, dot, hyphen .. |
@@ -259,7 +259,7 @@ See also:
 |--------------------------+-------------------------------------------------------------|
 | M - x  <command>         | Enter a command                                             |
 | C - g                    | Cancel command input                                        |
-| C-x ESC ESC              | Redo last command, edit elisp expression that excecutes it. |
+| C-x ESC ESC              | Redo last command, edit elisp expression that executes it. |
 | M-x list-command-history | List the most recent commands (M-x <command>)               |
 | M - :                    | Eval a lisp expression in current buffer                    |
 | M - x  eval-expression   | Eval a lisp expression in current buffer                    |
@@ -270,7 +270,7 @@ See also:
 | M -x  shell              | Run a shell                                                 |
 | M -!  <command>          | Run a single shell command like: ls, pwd, make ...          |
 | M-x eval-region          | Evaluate selected region as elisp code                      |
-| M-x eval-buffer          | Evaluate curren buffer as elips code                        |
+| M-x eval-buffer          | Evaluate curren buffer as elisp code                      |
 
 
 **** Information
@@ -296,7 +296,7 @@ See also:
 |--------------------------+------------------------------------------------|
 | C-x C-f                  | Open a new file or a existing file.            |
 | C-x C-s                  | Save current buffer                            |
-| C-x b                    | Swithc Buffer                                  |
+| C-x b                    | Switch Buffer                                 |
 | M-;                      | Comment/ Uncomment Selected Code               |
 | M-/                      | Autocomplete word (Equivalent to VIM Ctrl + p) |
 | C-g                      | Cancel any Emacs command                       |
@@ -306,9 +306,9 @@ See also:
 
 |                   |                                               |
 |-------------------+-----------------------------------------------|
-| C-a               | Move the cursor to the beggining of line      |
+| C-a               | Move the cursor to the beginning of line     |
 | C-e               | Move the cursor to the end of line            |
-| M-<               | Move the cursor to the beggining of buffer    |
+| M-<               | Move the cursor to the beginning of buffer   |
 | M->               | Move to the cursor tor end of buffer          |
 | M-x goto-char     | Got a character position                      |
 | Mg-g <line-num>   | Go to line number                             |
@@ -386,8 +386,8 @@ Useful lisp key bindings to edit and navigate Lisp code.
 | C-M-b | Move backward over a balanced expression  |
 | C-M-k | Delete s-expression under cursor          |
 |       |                                           |
-| C-M-a | Move to the beggining of current function |
-| C-M-e | Move to the end f current function        |
+| C-M-a | Move to the beginning of current function |
+| C-M-e | Move to the end of current function       |
 
 *** Ubiquitous Emacs Key Bindings
 
@@ -395,35 +395,35 @@ Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in
 Unix apps like Bash, Sh and all shells that uses the GNU readline
 library.
 
-| Key | Emacs                                                     | Bash Shell                               |
-|-----+-----------------------------------------------------------+------------------------------------------|
-| C-a | Move the cursor to the beggining of line                  | same                                     |
-| C-e | Move the cursor to the end of line                        | same                                     |
-|     |                                                           |                                          |
-| C-n | Move the cursor to the next line  (downward)              | Show next command in the history.        |
-| C-p | Move the cursor to the previous line (upward)             | Show the previou command in the history. |
-| C-j | New line character (same as Return)                       | same                                     |
-|     |                                                           |                                          |
-| A-b | Move the cursor backward one word                         | same                                     |
-| A-f | Move the cursor forward one word                          | same                                     |
-|     |                                                           |                                          |
-| A-t | Swap current word with previous                           | same                                     |
-|     |                                                           |                                          |
-| A-d | Delete the next word                                      | same                                     |
-|     |                                                           |                                          |
-| C-k | Delete the remaining of line from current cursor position | same                                     |
-| C-y | Paste the deleted line with (C-k) or copied line (Yank)   | same                                     |
-| A-w | Copy the slected text                                     |                                          |
-|     |                                                           |                                          |
-|     |                                                           |                                          |
-| C-r | Search forward for a string                               | Search for previous command              |
-| C-s | Search backward for a string                              | No implemented.                          |
-|     |                                                           |                                          |
-|     |                                                           |                                          |
-| c-l | Redraws the screen with the cursor in the middle.         | Clear the screen.                        |
-|     |                                                           |                                          |
-| C-_ | Undo                                                      | same                                     |
-|     |                                                           |                                          |
+| Key | Emacs                                                     | Bash Shell                                |
+|-----+-----------------------------------------------------------+-------------------------------------------|
+| C-a | Move the cursor to the beggining of line                  | same                                      |
+| C-e | Move the cursor to the end of line                        | same                                      |
+|     |                                                           |                                           |
+| C-n | Move the cursor to the next line  (downward)              | Show next command in the history.         |
+| C-p | Move the cursor to the previous line (upward)             | Show the previous command in the history. |
+| C-j | New line character (same as Return)                       | same                                      |
+|     |                                                           |                                           |
+| A-b | Move the cursor backward one word                         | same                                      |
+| A-f | Move the cursor forward one word                          | same                                      |
+|     |                                                           |                                           |
+| A-t | Swap current word with previous                           | same                                      |
+|     |                                                           |                                           |
+| A-d | Delete the next word                                      | same                                      |
+|     |                                                           |                                           |
+| C-k | Delete the remaining of line from current cursor position | same                                      |
+| C-y | Paste the deleted line with (C-k) or copied line (Yank)   | same                                      |
+| A-w | Copy the slected text                                     |                                           |
+|     |                                                           |                                           |
+|     |                                                           |                                           |
+| C-r | Search forward for a string                               | Search for previous command               |
+| C-s | Search backward for a string                              | No implemented.                           |
+|     |                                                           |                                           |
+|     |                                                           |                                           |
+| c-l | Redraws the screen with the cursor in the middle.         | Clear the screen.                         |
+|     |                                                           |                                           |
+| C-_ | Undo                                                      | same                                      |
+|     |                                                           |                                           |
 
 See also:
 
@@ -691,7 +691,7 @@ ELISP> [1 2 3 4 (+ 1 2 3 54)]
 | Nil    | null      | nil '()         | Test if argument is nil                           |
 | Number | numberp   | 100, 200e3      | Test if it is number.                             |
 | String | stringp   | "hello"         | Test if it is string                              |
-| Symbol | symbolp   | 'sym :keyworkd  | Test if it is a symbol.                           |
+| Symbol | symbolp   | 'sym :keyword   | Test if it is a symbol.                           |
 |        |           |                 |                                                   |
 | Atom   | atom      | 'x "h" :key 200 | Everything that is not a list or pair is an atom. |
 | List   | listp     | '(1 2 x y)      | Test if it is a list                              |
@@ -1023,7 +1023,7 @@ ELISP> (apply #'sum nil)
 0
 
 ELISP> (sum nil)
-    ** Eval error **  Wrong type argument: number-or-marker-p, ni
+    ** Eval error **  Wrong type argument: number-or-marker-p, nil
 
 ;;----------------------------------
 
@@ -2362,7 +2362,7 @@ or
 (eval-buffer)
 #+END_SRC
 
-Open a prompt, request user input in current buffer and evalutes.
+Open a prompt, request user input in current buffer and evaluates.
 #+END_SRC
 M-x eval-expression
 #+END_SRC
@@ -2406,7 +2406,7 @@ ELISP> (filter #'buffer-file-name (buffer-list))
 ELISP> (reject #'buffer-file-name (buffer-list))
 (#<buffer *ielm*> #<buffer *Help*> #<buffer  *Minibuf-1*> #<buffer emacs> #<buffer *scratch*> ..)
 
-;;; The command M-x org-html-export-to-htm will export this document (README.org) to html
+;;; The command M-x org-html-export-to-html will export this document (README.org) to html
 ;;  the command M-x org2html will do so too.
 ;;
 (defalias #'org2html #'org-html-export-to-html)
@@ -2594,7 +2594,7 @@ ELISP>
 #+END_SRC
 
 
-***** CL-Case  - Case Swithc
+***** CL-Case  - Case Switch
 
 #+BEGIN_SRC elisp
 (defun test-cl-case (operation x y)
@@ -2825,7 +2825,7 @@ is a list containing three elements.
 3
 nil
 
-;; Fibbonaci Computing Loop
+;; Fibonacci Computing Loop
 ;;
 (do ((n 0 (1+ n))
      (cur 0 next)
@@ -2893,7 +2893,7 @@ ELISP> (remove-if-not 'null '(1 2 3 nil 5 6 nil nil ))
 ;;
 ;;   > filter (\x -> not (predicate x)) list
 ;;
-;; a more apropriate name would be reject
+;; a more appropriate name would be reject
 ;;
 ELISP> (remove-if 'null '(1 2 3 nil 5 6 nil nil ))
 (1 2 3 5 6)
@@ -3617,7 +3617,7 @@ my-symbol
 > (list 'a a 'b b 'c c 'd d)
 (a 10 b 20 c my-symbol d "a string")
 
-;;;; Asssociaiton List
+;;;; Association List
 > (list (cons 'a  a) (cons 'b b) (cons 'c c) (cons 'd  d))
 ((a . 10)
  (b . 20)
@@ -4712,7 +4712,7 @@ ELISP> (display-buffer (process-buffer (get-process "py")))
  #<window 21 on pybff>
 ELISP>
 
-;;;; Start Asyncronous Process
+;;;; Start Asynchronous Process
 
 ;;  Start the process named py, with the buffer named pybff
 ;;  using the command python, /usr/bin/python (on linux)
@@ -5219,18 +5219,14 @@ Lisp Dialects
 
 Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 
-| Mode                              |   Description             | Mode Hook                |
-|-----------------------------------|---------------------------|--------------------------|
-| inferior-emacs-lisp-mode          |  Emacs Lisp Interpreter (shell) - IELM  | ielm-mode-hook           |
-| eshell-mode                       |  Eshell Mode              | eshell-mode-hook |
-| lisp-interaction-mode             |  Mode of scratch buffer   |   |
-| inferior-lisp                     |  Lisp Subprocess          |   |
-| inferior-ess-mode                 |  R language subprocess    |   |
-
-
-|                       |                          |
-|-----------------------|--------------------------|
-| [[http://emacswiki.org/emacs/ElDoc][eldoc-mode]]       |  Minor mode which shows ,in the echo area, the argument list of the function call current function |
+| Mode                     | Description                                                                                       | Mode Hook        |
+|--------------------------+---------------------------------------------------------------------------------------------------+------------------|
+| inferior-emacs-lisp-mode | Emacs Lisp Interpreter (shell) - IELM                                                             | ielm-mode-hook   |
+| eshell-mode              | Eshell Mode                                                                                       | eshell-mode-hook |
+| lisp-interaction-mode    | Mode of scratch buffer                                                                            |                  |
+| inferior-lisp            | Lisp Subprocess                                                                                   |                  |
+| inferior-ess-mode        | R language subprocess                                                                             |                  |
+| [[http://emacswiki.org/emacs/ElDoc][eldoc-mode]]               | Minor mode which shows ,in the echo area, the argument list of the function call current function |                  |
 
 
 **** Mode Association with Files
@@ -5318,7 +5314,7 @@ Associate a file pattern with a mode:
 (defun mode/show ()
   "  Returns all modes associated with files
 
-     To query the file extesions associated with a mode
+     To query the file extensions associated with a mode
      use:
          > (mode/ftypes 'markdown-mode)
 
@@ -5668,9 +5664,9 @@ Stop Blink Cursor
 =(blink-cursor-mode 0)=
 
 
-*Space / Tabs - Identation*
+*Space / Tabs - Indentation*
 
-Set identation with spaces instead of tabs with 4 spaces
+Set indentation with spaces instead of tabs with 4 spaces
 
 #+BEGIN_SRC elisp
 
@@ -5762,11 +5758,11 @@ From: [[https://news.ycombinator.com/item?id=1654164][Ask HN Emacs Users: What's
 
 **  Set Default Web Browser
 
-Set the default web browsr used by (browse-url <url>) function and by org-mode.
+Set the default web browser used by (browse-url <url>) function and by org-mode.
 
 #+BEGIN_SRC elisp
 
- ;; Set the default web browser to Chromium Browsr
+ ;; Set the default web browser to Chromium Browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "chromium-browser")
 
@@ -5923,9 +5919,9 @@ It will insert the current date in the format: 2015-10-20 at the current cursor 
 (global-set-key (kbd "C-c M-k") #'go-to-bookmark)
 #+END_SRC
 
-*Open a Emacs Lisp developement window*
+*Open a Emacs Lisp development window*
 
-It will open a Emacs developement window whatever the current frames opened. It will split the curent frame (window) verically and swithc to scratch buffer in the left and the emacs shell in the right side.
+It will open a Emacs development window whatever the current frames opened. It will split the current frame (window) vertically and switch to scratch buffer in the left and the emacs shell in the right side.
 
 #+BEGIN_SRC elisp
 
@@ -5946,7 +5942,7 @@ file:images/develop_window.png
 
 *Open URL at Cursor*
 
-Put the cursor at beggining of an URL and type C-c M-u (Ctrl-c + Alt-u) to open the URL in the web browser.
+Put the cursor at beginning of an URL and type C-c M-u (Ctrl-c + Alt-u) to open the URL in the web browser.
 
 #+BEGIN_SRC elisp
 
@@ -6078,9 +6074,9 @@ or by entering the command below in the shell IELM or by putting it in the confi
 ** Mode Key Bindings
 
 * Solutions
-**  Quick edit and reload Emac Configuration File.
+**  Quick edit and reload Emacs Configuration File.
 
-It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
+It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
 #+BEGIN_SRC elisp
 
@@ -6136,13 +6132,13 @@ file:images/utils_menu2.png
 
      ("Shells" ;; submenu
        ["Ielm   - Emacs Lisp Shell"       (ielm)]
-       ["Eshell - Emacs Buitin Shell"    (eshell)]
+       ["Eshell - Emacs Builtin Shell"    (eshell)]
        ["Native Shell "                  (shell)]
       ["---------------------" nil]
       ["Edit .bashrc" (find-file  "~/.bashrc")]
       ["Edit .profile" (find-file "~/.profile")]
       ["Edit .Xresources" (find-file "~/.Xresources")]
-      ["Edit .xsessin"    (find-file "~/.xsession")]
+      ["Edit .xsession"    (find-file "~/.xsession")]
       ["See all GNU MAN pages" ( info)]
       ["See a specific Man Page" (woman)]
 
@@ -6156,7 +6152,7 @@ file:images/utils_menu2.png
 
       ["Edit  init.el" (find-file  user-init-file)]
       ["Reload init.el" (load-file user-init-file)]
-      ["Open .emac.d dir" (find-file "~/.emacs.d")]
+      ["Open .emacs.d dir" (find-file "~/.emacs.d")]
       ["List packages"     (list-packages)]
       ["Install package"   (package-install)]
 
@@ -6458,7 +6454,7 @@ File: sessions.el
 #+END_SRC
 
 
-To save all bufffers with files:
+To save all buffers with files:
 
 #+BEGIN_SRC
 M-x load-file ;; Enter session.el
@@ -6466,7 +6462,7 @@ M-x save-session
 #+END_SRC
 
 
-To reload the files save in the seesion enter:
+To reload the files save in the session enter:
 
 #+BEGIN_SRC
 M-x load-file    ;; Enter session.el
@@ -6715,7 +6711,7 @@ ELISP> (macroexpand
 
 **  Save and Restore Current Window Configuration
 
-Press <F7> to save the curren window configuration and <F8> to restore. The functions can also be executed with A-x save-view or A-x restore-view.
+Press <F7> to save the current window configuration and <F8> to restore. The functions can also be executed with A-x save-view or A-x restore-view.
 
 #+BEGIN_SRC elisp
 
@@ -6847,7 +6843,7 @@ Features:
   - Everything stored in text format: The most portable format.
   - Todo List.
   - It can be used as a personal Wiki.
-  - Table editing, formating, built-in spreadsheet.
+  - Table editing, formatting, built-in spreadsheet.
   - Tags, Headlines
   - Literate programming, Run code blocks, Create Interactive and
     reproducible software documentation.
@@ -6917,7 +6913,7 @@ Move within headlines:
 
 *Markdown*
 
-Text formating
+Text formatting
 
 | Markdown      | View        |
 |---------------+-------------|
@@ -6936,7 +6932,7 @@ Hyperlinks
 | :shell:uname%20-a                | shell:uname%20-a    | Execute Shell Command: uname -a |
 | :elisp:(message%20"Hello world") |                     |                                 |
 
-** Refereces
+** References
 
 Manual:
 
@@ -7032,7 +7028,7 @@ examine ways of marking up text in Org Mode, as well as various link
 types that connect Org headlines and files, as well as links that can
 execute code.
 
-*NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with 
+*Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with 
 Orgmode by Tory S. Anderson*
 
    - [[https://www.youtube.com/watch?v=nkv8PpxrL3k][NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode - YouTube]]
@@ -7082,7 +7078,7 @@ Links:
   - [[http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell][Using Emacs Eshell as the ultimate shell | Smash Company]]
   - [[https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/][Eshell completion for git, bzr, and hg | Tassilo's Blog]]
 
-* Developement Environments for Emacs
+* Development Environments for Emacs
 ** Python
 
 Set Python Interpreter:
@@ -7091,7 +7087,7 @@ Set Python Interpreter:
 (setq python-python-command "/path-to-python-/python")
 #+END_SRC
 
-To run the interpretrer type: =M-x run-python=
+To run the interpreter type: =M-x run-python=
 
 Run more than one Python version, usage: M-x run-python3, M-x run-python2
 
@@ -7424,7 +7420,7 @@ It is also available at:
 
   - http://stackoverflow.com/questions/tagged/emacs
 
-*Gooble Plus*
+*Google Plus*
 
   - [[https://plus.google.com/communities/114815898697665598016][Emacs - Community - Google+]]
 
@@ -7476,7 +7472,7 @@ Useful screencasts to help learn Emacs faster.
 
     The basics of working with buffers in Emacs Lisp. Buffers are a
     central concept in Emacs of course and one of the main reasons
-    it's useul. They are a versatile tool, you can use them for text
+    it's useful. They are a versatile tool, you can use them for text
     to be edited but you can also use them for presenting user
     interfaces,   like Emacs' mail modes do.
 
@@ -7496,7 +7492,7 @@ Useful screencasts to help learn Emacs faster.
 
 
    - [[https://www.youtube.com/watch?v=-Woj10ARLWw][Dynamic vs lexical scope]]
-   A small screencast to llustrate lexical and dynamic scope in Emacs
+   A small screencast to illustrate lexical and dynamic scope in Emacs
    with a very simple example.
 
   - [[https://www.youtube.com/watch?v=35EcPapMqOU&list=PLakpda32F-ThKQZ3XeYOfDa7ZtwEaK0j_&index=43][Hack Emacs - Working in the REPL]]
