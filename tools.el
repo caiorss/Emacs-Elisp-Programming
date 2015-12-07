@@ -11,6 +11,8 @@
 ;; It also provides many reusable macros to make Emacs programming easier.
 ;;
 ;;
+;;  
+;;
 ;;-----------------------------------------------------------------
 
 ;; Load Common Lisp Emulation Library 
@@ -60,6 +62,9 @@
 (defun string/replace-regexp (pat sub str)
   (replace-regexp-in-string pat sub str t))
 
+(defun string/remove-regexp (pat str)
+  (replace-regexp-in-string pat "" str t))
+  
 
 (defun string/replace-seq  (list-of-patterns replacement str)
   "
@@ -163,6 +168,9 @@
   (split-string str sep)
   )
 
+(defun string/split-lines (str)
+  (string/split "\n" str))
+
 (defun string/chop-suffix (suffix s)
   "Remove a string suffix
 
@@ -187,6 +195,14 @@
 (defun string/unescape (str)
    (replace-regexp-in-string  "\\\\\"" "\"" str))
 
+(defun string/apply-lines (func str)
+  "Apply a function to each line of a string str and
+   returns all new lines joined.
+
+   Example: 
+
+  "
+  (string/join "\n" (map func  (string/split-lines str))))
 
 (defun string/template (str &optional plist)
   "
@@ -571,7 +587,7 @@
   (foldl #'pass-result x exprs))
 
 
-(defmacro --> (x &rest exprs)
+(defmacro ->> (x &rest exprs)
   "
    (-->
       5
@@ -931,7 +947,7 @@
   " List directory with absolute path"
   (letc
     (abs-dirpath  (expand-file-name dirpath))
-    (-->
+    (->>
      (directory-files abs-dirpath)
      (remove-from-list '("." ".."))
      (map ($f file/concat-path abs-dirpath %)))))
@@ -1010,7 +1026,7 @@
   (prin1-to-string sexp))
 
 (defun sexp->file (sexp filename)
-  (--> sexp
+  (->> sexp
        sexp->str
        (file/write filename)))
 
@@ -1344,19 +1360,23 @@
                  (region-end))
   )
 
+(defun buffer/replace-between-points (pmin pmax transf-func)
+  (save-excursion
+    (let
+      ((content (buffer-substring-no-properties pmin pmax)))    
+      (delete-region pmin pmax)
+      (insert (funcall transf-func content)))))
+
 (defun buffer/replace-line (line-transf)
   "
   Replace the current line by appliying the
   line-trasf, Line Transformation Function
   to current line.
   "
-  (save-excursion
-    (let
-      ((line (buffer/line)))
-      (progn
-        (buffer/delete-line)
-        (insert (funcall line-transf line))
-        ))))
+  (buffer/replace-between-points
+   (line-beginning-position)
+   (line-end-position)
+   line-transf))
 
 (defun buffer/replace-line (region-transf)
   "
@@ -1387,12 +1407,15 @@
     ))
 
 (defun buffer/replace-at-point (thing transf-func)
-       (let
-           ((content (buffer/at-point thing)))
+  (let*
+      ((bounds (bounds-of-thing-at-point thing))
+       (pmin   (car bounds))
+       (pmax   (cdr bounds))
+       )
+    (buffer/replace-between-points  pmin pmax transf)
+    ))
 
-         (save-excursion
-             (buffer/delete-at-point thing)
-             (insert (funcall transf-func content)))))
+
 
 
 (defun buffer/replace-region (transf)
@@ -1401,17 +1424,41 @@
   and applies the function transf to the selected text and then 
   replaces it by the result of function application.
   "
-  (interactive)
-  (save-excursion
-    (letc
-     (
-      rmin      (region-beginning)
-      rmax      (region-end)
-      content   (buffer-substring-no-properties rmin rmax))
+  (interactive)      
+  (buffer/replace-between-points (region-beginning) (region-end) transf))
 
-     (delete-region rmin rmax)
-     (insert (funcall transf content)))))
-                                        ;
+
+(defun buffer/replace-buffer (transf)
+  (interactive)
+  (buffer/replace-between-points (point-min) (point-max) transf)
+  )
+
+
+(defun buffer/remove-line-numbers ()
+  "Remove all line numbers from current buffer 
+   at the beggining of each line. It is useful to remove 
+   line number from source codes. 
+
+   Usage : M-x buffer/remove-line-numbers 
+
+   Example:
+
+      Before                 After
+     --------                --------- 
+      00  import sys         import sys
+      01  import os  ---->>  import os 
+      02  print ...          print ...        
+   
+   "
+  (interactive)
+
+  (buffer/replace-buffer
+   (lambda (str)
+     (string/apply-lines
+      ($f string/remove-regexp "^[0-9]+" %)
+      str
+      ) 
+     )))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;  @SECTION: Regions.
@@ -1496,6 +1543,9 @@
    (buffer/replace-region
     (fcomp ($f string/replace-regexp  "^ "  ""  %)
            ($f string/replace-regexp "\n " "\n" %))))
+
+
+
 
 
 ;;

@@ -30,17 +30,23 @@ file:images/emacs_logo.png
     - Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
     - [[http://caiorss.github.io/Emacs-Elisp-Programming][HTML Version - github.io]]
 
-Emacs doesn't need presetation. It is a scriptable and fully programmable text editor that can be customized in Elisp,
-an Emacs own lisp dialect that is based on [[https://en.wikipedia.org/wiki/Maclisp][MacLisp]], one of oldest lisp dialects, older than Common Lisp and Scheme, it was written in  1976
-by the legendary [[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incopatibilities with Common Lisp it has many constructs similar to it. An excellent book about Common Lisp
-that is also useful for Elisp and Scheme is available at [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]].
+Emacs doesn't need any presentation. Emacs is a software [[https://en.wikipedia.org/wiki/Lisp_machine]["Lisp
+Machine"]] that provides a programmable text editor, email reader, text
+web browser, image viwer, calculator, shell, games, easter-eggs and
+more.  Emacs is programmed in Elisp, an Emacs own lisp dialect that is
+based on [[https://en.wikipedia.org/wiki/Maclisp][MacLisp]], one of oldest lisp dialects, older than Common Lisp
+and Scheme, created in MIT. Emacs was written in 1976 by the legendary
+[[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incompatibilities with Common Lisp it
+has many constructs similar to it and n excellent book about Common
+Lisp that is also useful to understand Elisp and Scheme is [[http://unintelligible.org/onlisp/onlisp.html][On Lisp -
+by Paul Graham]].
 
 
 Note:
 
  - It is a work in progress.
  - You can see this document inside Emacs
-   since it was converted to org-mode, see [[file:README.org][README.org]].
+   since it was converted to org-mode, see the file *README.org*
 
 *Configuration File*
 
@@ -93,7 +99,7 @@ $ emacs --version
 
 The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
 enabled by typing: M-x cua-mode or by inserting =(cua-mode) in emacs
-configuration file, emacs also supports the Vim keybindings by
+configuration file, emacs also supports the Vim key bindings by
 installing the evil package =(M-x package-install evil)=.
 
 See also:
@@ -141,7 +147,6 @@ See also:
   - [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Changing-Key-Bindings.html][Emacs Manual - 21.12 Changing Key Bindings]]
   - [[http://stackoverflow.com/questions/1144424/are-there-any-emacs-key-combinations-reserved-for-custom-commands][Are there any emacs key combinations reserved for custom commands?]]
   - [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][Mastering Key Bindings in Emacs]]
-
 
 *** Key Bindings by Task
 
@@ -286,7 +291,6 @@ See also:
 | C-h b | Describe key bindings for current buffer |
 | C-h k | Describe a particular key binding.       |
 
-
 *** Selected Key Bindings and Commands for Programming
 
 
@@ -430,6 +434,8 @@ See also:
   - [[http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/][Bash Emacs Editing Mode Cheat Sheet]]
   - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
 
+
+
 * Elisp
 
 This section will use the Emacs interactive elisp shell IELM that can
@@ -440,6 +446,8 @@ It is recommended to insert *(require 'cl)* in the Emacs init file
 that loads the library cl - Common Lisp Extension Library, that
 provides many useful common lisp functions and macros like remove-if,
 remove-if-not, cl-case and so on.
+
+See also: [[http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html][Common Lisp Extensions - Common Lisp Extensions]]
 
 ** Using the Scratch Buffer and Interpreter
 
@@ -2330,13 +2338,12 @@ emacs-lisp-mode
 *Eval Commands in Elisp mode*
 
 References:
-    - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Eval.html]
-    - [Evaluating Emacs Lisp Expressions]]
+
+  - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Eval.html][Evaluating Emacs Lisp Expressions]]
 
 Evaluate the defun containing or after point, and print the value in the echo area (eval-defun).
 
 #+BEGIN_SRC
-
 M-x eval-defun
 
 or
@@ -2345,30 +2352,36 @@ or
 #+END_SRC
 
 Evaluate all the Emacs Lisp expressions in the region.
-#+END_SRC
+
+#+BEGIN_SRC
 M-x eval-region
 
 or
 
 (eval-region)
+
 #+END_SRC
 
 Evaluate all the Emacs Lisp expressions in the current buffer/ window.
-#+END_SRC
+
+#+BEGIN_SRC
 M-x eval-buffer
 
 or
 
 (eval-buffer)
+
 #+END_SRC
 
 Open a prompt, request user input in current buffer and evalutes.
-#+END_SRC
+
+#+BEGIN_SRC
 M-x eval-expression
 #+END_SRC
 
 Eval/ Load a File
-#+END_SRC
+
+#+BEGIN_SRC
 M-x load-file
 
 or
@@ -3562,9 +3575,11 @@ Macros are useful to create new lisp special forms like if and when,
 create new control structures, domain specific languages, eliminate
 boilerplate code, automate code  and redefine syntax.
 Elisp macro constructs has the same syntax of Common Lisp.
-** Quasiquote
 
-Quasiquote is useful to create s-expression templates, data structure templates and lisp macros.
+** Quasi-quote
+
+Quasi-quote is useful to create s-expression templates, data structure
+templates and lisp macros.
 
 #+BEGIN_SRC elisp
 
@@ -4505,9 +4520,166 @@ Usage: A-x replace-regexp-entire-buffer
 
 #+END_SRC
 
+**  Point, Region, Line and Buffer 
+
+*** Point
+
+*Point* is the number of characters from the beginning of the buffer to
+the current cursor location, or cursor position for short. To see the
+function documention type =C-h-f= and enter the function name or 
+=M-x describe-function=.
+
+Point 
+
+| Function                           | Description                                                         |
+|------------------------------------+---------------------------------------------------------------------|
+| (point)                            | Current cursor position                                             |
+| (point-min)                        | Minimum cursor position in current buffer. (always returns 1)       |
+| (point-max)                        | Maximum cursor positon in current buffer.                           |
+|                                    |                                                                     |
+| (line-beginning-position)          | Point of the begginign  of current line.                            |
+| (line-end-position)                | Point of the end of current line.                                   |
+|                                    |                                                                     |
+| (region-beginning)                 | Position of the beginning current region (selected text).           |
+| (region-end)                       | Position of the end current region.                                 |
+|                                    |                                                                     |
+| (bounds-of-thing-at-point <thing>) | Returns the cons pair '(beginning . end) positon of thing at point. |
+
+
+Point Interface Functions 
+
+| Function                                       | Description                                                            |
+|------------------------------------------------+------------------------------------------------------------------------|
+| (goto-char <point>)                            | Move the cursor to a given point.                                      |
+| (insert <string>)                              | Insert text at current point.                                          |
+| (buffer-substring <pmin> <pmax>)               | Returns the text with properties between the points <pmin> and <pmax>. |
+| (buffer-substring-no-properties <pmin> <pmax>) | Returns the text without properties between the points.                |
+| (delete-region <pmin> <pmax>)                  | Deletes the text between <pmin> and <pmax>.                            |
+|                                                |                                                                        |
+
+
+To test the functions described in this section the current buffer
+must be set to another buffer using the fuctions 
+
+=(set-buffer <buffer-name or buffer-object>)= 
+
+or enter C-c C-b when using the IELM.
+
+Example:
+
+file:images/emacs_points_functions.png
+
+
+Examples:
+
+#+BEGIN_SRC elisp
+
+> (point)
+99696
+
+> (point-min)
+1
+
+
+> (point-max)
+185623
+
+>  (line-beginning-position)
+99774
+
+>  (line-end-position)
+99804
+
+> (buffer-substring-no-properties 
+    (line-beginning-position)
+    (line-end-position))
+
+(defun delete-line ()
+  (interactive)
+  (delete-region  (line-beginning-position)  (line-end-position)))
+
+(defun delete-region ()
+  (interactive)
+  (delete-region  (region-beginning) (region-end)))
+
+(defun insert-end-of-buffer ()
+  (interactive)
+
+  ;; Save Current Cursor Position
+  ;; and go back to initial positon when
+  ;; finish this block 
+  (save-excursion  
+    (goto-char (point-max)) ;;; Go to end of buffer 
+    (insert "Testing insert end of buffer")
+    ))
+
+#+END_SRC
+
+
+
+*** Thing at Point API
+
+See also:
+
+ - [[http://www.emacswiki.org/emacs/ThingAtPoint][EmacsWiki: Thing At Point]]
+ - [[http://ergoemacs.org/emacs/elisp_thing-at-point.html][Emacs Lisp: Using thing-at-point]]
+ - [[http://ergoemacs.org/emacs/elisp_all_about_lines.html][Emacs Lisp: Functions for Processing Lines]]
+ - [[http://ergoemacs.org/emacs/elisp_thing-at-point_problems.html][Emacs Lisp: Problems of thing-at-point]]
+
+From the documentation:
+
+=(thing-at-point THING &optional NO-PROPERTIES)=
+
+Return the THING at point THING should be a symbol specifying a type
+of syntactic entity.  
+
+Possibilities include `symbol', `list', `sexp', `defun', `filename',
+`url', `email', `word', `sentence', `whitespace', `line', `number',
+and `page'.
+
+When the optional argument NO-PROPERTIES is non-nil, strip text
+properties from the return value.
+
+Example:
+
+#+BEGIN_SRC elisp
+(thing-at-point 'email)
+#+END_SRC
+
+file:images/thing_at_point_example1.png
+
+#+BEGIN_SRC elisp
+(thing-at-point 'sexp)
+#+END_SRC
+
+
+file:images/thing_at_point_sexp.png
+
+
+#+BEGIN_SRC elisp
+
+ELISP> (set-buffer "*scratch*")
+#<buffer *scratch*>
+ELISP> 
+(let* 
+    ((bounds (bounds-of-thing-at-point 'sexp))
+     (pmin   (if bounds (car bounds) nil))
+     (pmax   (if bounds (cdr bounds) nil))
+     )
+  (if (and pmin pmax)
+      (buffer-substring-no-properties pmin pmax)))
+"(defun f (x y)\n             (+ (* 3 x) (* 4 y)))"
+ELISP> 
+
+#+END_SRC
+
+
+file:images/thing_at_point_sexp2.png
+
 **  Files and Directories and OS Interface
 
 [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html][Files]]
+
 **** Directory and Path
 
 #+BEGIN_SRC elisp
@@ -4780,7 +4952,6 @@ ELISP> (mapcar
 
 #+END_SRC
 
-
 **** File Name Components
 
 [[http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html][File Name Components]]
@@ -4837,7 +5008,72 @@ ELISP>
 
     * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html][Current Buffer]]
     * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html][Creating New Buffer]]
+**  Discoverability / Get Documentation
 
+*Apropos*
+
+#+BEGIN_SRC
+
+M-x <apropos command>
+#+END_SRC
+
+Apropos Commands
+
+#+BEGIN_SRC
+
+apropos
+apropos-command
+apropos-documentation
+info-apropos
+apropos-library
+apropos-variable
+apropos-value
+
+#+END_SRC
+
+
+
+***  Describe
+
+See also:
+
+    * [[https://alexschroeder.ch/geocities/kensanata/dot-emacs.html][.emacs file by Alex]]
+    * [[http://qdot.github.io/conf_emacs/][qDot's Emacs Configuration]]
+
+*Describe Function*
+
+This calls the command describe-function. Type a function name and get documentation of it.
+
+#+BEGIN_SRC
+
+ELISP> (describe-function <function-name>)
+
+or
+
+M-x describe-function
+
+or type the keys
+
+C-h f
+#+END_SRC
+
+*Describe Variable*
+
+This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
+
+
+#+BEGIN_SRC
+
+ELISP> (describe-variable <variable-name>)
+ELISP> (describe-variable 'load-path)
+
+M-x describe-variable
+
+or
+
+C-h v
+#+END_SRC
+      
 **  Window Functions
 
 **** Basic Window Functions
@@ -5126,66 +5362,6 @@ ELISP>
     * http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_432.html
     * http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_441.html
     * http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html
-
-**  Special Variables
-
-#+BEGIN_SRC elisp
-
-ELISP> emacs-major-version
-24
-
-ELISP> load-path
-    ("/home/tux/.emacs.d/elpa/color-theme-cobalt-0.0.2/"
-    "/home/tux/.emacs.d/elpa/color-theme-20080305.34/"
-    "/home/tux/.emacs.d/elpa/company-ghc-20150613.123/"
-    "/home/tux/.emacs.d/elpa/company-0.8.12/
-    ...)
-
-
-ELISP> window-system
-x
-ELISP>
-
-;;; Stores the operating system type
-;;
-ELISP> system-type
-gnu/linux
-ELISP>
-
-ELISP> system-configuration
-"i686-pc-linux-gnu"
-ELISP>
-
-;;;;;;;; User Settings ;;;;;;;;;
-
-ELISP> shell-file-name
-"/bin/bash"
-ELISP>
-
-ELISP> user-full-name
-"tux"
-ELISP> user-mail-address
-"tux@tuxhorse"
-
-;; Emacs Configuration File which is loaded at Emacs startup.
-;;
-ELISP> user-init-file
-"/home/tux/.emacs.d/init.el"
-ELISP>
-
-;; Directory where is the user configuration file, this path also works
-;; for Windows
-;;
-ELISP> user-emacs-directory
-"~/.emacs.d/"
-
-
-ELISP> exec-directory
-"/usr/lib/emacs/24.4/i686-linux-gnu/"
-ELISP>
-
-#+END_SRC
-
 **  Emacs Modes
 
 **** Major Mode
@@ -5442,7 +5618,64 @@ ELISP>
 The following is a list of hook variables that let you provide functions to be called from within Emacs on suitable occasions.
 
 http://sunsite.ualberta.ca/Documentation/Gnu/emacs-lisp-ref-21-2.7/html_node/elisp_727.html
+**  Special Variables
 
+#+BEGIN_SRC elisp
+
+ELISP> emacs-major-version
+24
+
+ELISP> load-path
+    ("/home/tux/.emacs.d/elpa/color-theme-cobalt-0.0.2/"
+    "/home/tux/.emacs.d/elpa/color-theme-20080305.34/"
+    "/home/tux/.emacs.d/elpa/company-ghc-20150613.123/"
+    "/home/tux/.emacs.d/elpa/company-0.8.12/
+    ...)
+
+
+ELISP> window-system
+x
+ELISP>
+
+;;; Stores the operating system type
+;;
+ELISP> system-type
+gnu/linux
+ELISP>
+
+ELISP> system-configuration
+"i686-pc-linux-gnu"
+ELISP>
+
+;;;;;;;; User Settings ;;;;;;;;;
+
+ELISP> shell-file-name
+"/bin/bash"
+ELISP>
+
+ELISP> user-full-name
+"tux"
+ELISP> user-mail-address
+"tux@tuxhorse"
+
+;; Emacs Configuration File which is loaded at Emacs startup.
+;;
+ELISP> user-init-file
+"/home/tux/.emacs.d/init.el"
+ELISP>
+
+;; Directory where is the user configuration file, this path also works
+;; for Windows
+;;
+ELISP> user-emacs-directory
+"~/.emacs.d/"
+
+
+ELISP> exec-directory
+"/usr/lib/emacs/24.4/i686-linux-gnu/"
+ELISP>
+
+#+END_SRC
 **  Network
 
 *Links to Inquiry*
@@ -5464,72 +5697,6 @@ Emacs tools and codes that can be useful as implementation references and proof 
     - https://github.com/clojure/tools.nrepl
 
     - [[https://www.gnu.org/software/emacs/manual/html_mono/dbus.html][D-Bus integration in Emacs]]
-
-**  Discoverability / Get Documentation
-
-*Apropos*
-
-#+BEGIN_SRC
-
-M-x <apropos command>
-#+END_SRC
-
-Apropos Commands
-
-#+BEGIN_SRC
-
-apropos
-apropos-command
-apropos-documentation
-info-apropos
-apropos-library
-apropos-variable
-apropos-value
-
-#+END_SRC
-
-
-
-***  Describe
-
-See also:
-
-    * [[https://alexschroeder.ch/geocities/kensanata/dot-emacs.html][.emacs file by Alex]]
-    * [[http://qdot.github.io/conf_emacs/][qDot's Emacs Configuration]]
-
-*Describe Function*
-
-This calls the command describe-function. Type a function name and get documentation of it.
-
-#+BEGIN_SRC
-
-ELISP> (describe-function <function-name>)
-
-or
-
-M-x describe-function
-
-or type the keys
-
-C-h f
-#+END_SRC
-
-*Describe Variable*
-
-This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
-
-
-#+BEGIN_SRC
-
-ELISP> (describe-variable <variable-name>)
-ELISP> (describe-variable 'load-path)
-
-M-x describe-variable
-
-or
-
-C-h v
-#+END_SRC
 
 * Customization
 
@@ -7368,6 +7535,7 @@ technical details involved."
     * https://snarfed.org/dotfiles/.emacs
 
     * http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el
+
 ** Emacs Starter Kits
 
 *Spacemacs*
