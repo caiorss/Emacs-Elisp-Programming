@@ -50,6 +50,7 @@
   - [Misc](#misc)
   - [Quiet Startup](#quiet-startup)
   - [Set Default Web Browser](#set-default-web-browser)
+- [Color Scheme](#color-scheme)
 - [Key Bindings](#key-bindings)
   - [Global Key Bindings](#global-key-bindings)
     - [Smart window switch](#smart-window-switch)
@@ -7469,11 +7470,110 @@ Set the default web browsr used by (browse-url <url>) function and by org-mode.
       browse-url-generic-program "chromium-browser")
 ```
 
-# Key Bindings<a id="sec-6" name="sec-6"></a>
+# Color Scheme<a id="sec-6" name="sec-6"></a>
 
-## Global Key Bindings<a id="sec-6-1" name="sec-6-1"></a>
+**Show All Colors Available**
 
-### Smart window switch<a id="sec-6-1-1" name="sec-6-1-1"></a>
+`M-x list-colors-display`
+
+![img](images/color_selection_interface.png)
+
+**Color Theme Select**
+
+It will open a window to select the color theme. 
+
+`M-x color-theme-select`
+
+`M-x customize-themes`
+
+**Customize Color Scheme in the GUI** 
+
+It will show a GUI with all customizations and options.
+
+`M-x customize-face`
+
+**See the attributes of text at point**
+
+Put the cursor at the word and type `C-u C-x =`
+
+Or enter the command: 
+
+`M-x describe-text-properties`
+
+**Changing Syntax Colors**
+
+```lisp
+;;
+;; Change Default Background Color 
+;;
+(set-face-background 'default "black")
+
+;; 
+;; Change Default Foreground Color 
+;; 
+(set-face-foreground 'default "cyan")
+
+;; Change Default Font 
+;;
+(set-default-font   "Inconsolata 12")
+
+;; Change the comments color
+;;
+(set-face-attribute 'font-lock-comment-face nil :foreground "#3f7f5f")
+
+;; Change string color 
+;;
+(set-face-attribute 'font-lock-string-face nil :foreground "light blue")
+
+;; Change keyworkd colors 
+;;
+(set-face-attribute 'font-lock-keyword-face nil :foreground "yellow")
+
+;; Change Constants colors
+;;
+(set-face-attribute 'font-lock-constant-face nil :foreground "#4f004f")
+
+
+;; Change Lisp keywords, for instacne  :keyword
+;;
+(set-face-attribute 'font-lock-builtin-face nil :foreground "red")
+
+;; Change the font type 
+;;
+(set-face-attribute 'default nil :family "Menlo" :height 120)
+
+
+;; Change the color scheme of functions to bold and light cyan 
+;;
+(set-face-attribute 'font-lock-function-name-face nil
+                    :foreground "light cyan" :weight 'bold)
+```
+
+See also: 
+
+Misc:
+
+-   [How to learn Emacs - Fix that awful color scheme](http://david.rothlis.net/emacs/customize_colors.html)
+-   [GNU Emacs Lisp Reference Manual: Face Attributes](http://www.gnu.org/software/emacs/manual/html_node/elisp/Face-Attributes.html)
+-   [Colors Available to Emacs](http://raebear.net/comp/emacscolors.html)
+-   [Emacs highlighting and fonts](http://www.nongnu.org/emacs-tiny-tools/font/index-body.html)
+-   [emacs-fu: color theming](http://emacs-fu.blogspot.com.br/2009/03/color-theming.html)
+-   [Emacs: Working with CSS Color Values](http://ergoemacs.org/emacs/emacs_CSS_colors.html)
+-   [mariusk/emacs-color](https://github.com/mariusk/emacs-color)
+-   [Popup color from color string like \`#f2d3aa\` with Emacs - Stack Overflow](http://stackoverflow.com/questions/18806523/popup-color-from-color-string-like-f2d3aa-with-emacs)
+-   [EmacsWiki: Color Palette](http://www.emacswiki.org/emacs/ColorPalette)
+
+Color Themes:
+
+-   [kuanyui/moe-theme.el](https://github.com/kuanyui/moe-theme.el)
+-   [Solarized - Ethan Schoonover](http://ethanschoonover.com/solarized)
+-   [A GNU Emacs Themes Gallery](https://emacsthemes.com/)
+
+# Key Bindings<a id="sec-7" name="sec-7"></a>
+
+## Global Key Bindings<a id="sec-7-1" name="sec-7-1"></a>
+
+### Smart window switch<a id="sec-7-1-1" name="sec-7-1-1"></a>
 
 The traditional window switch with C-x o can be cumbersome to use in the long run. The windmove commands provide a more convenient way to do this. All you have to do is to hold down Shift while pointing at a window with the arrow keys.  [Source](https://wiki.archlinux.org/index.php/Emacs#Modes)
 
@@ -7482,7 +7582,7 @@ The traditional window switch with C-x o can be cumbersome to use in the long ru
   (windmove-default-keybindings))
 ```
 
-### Define Global Key-bindings<a id="sec-6-1-2" name="sec-6-1-2"></a>
+### Define Global Key-bindings<a id="sec-7-1-2" name="sec-7-1-2"></a>
 
 See also:
 
@@ -7732,9 +7832,9 @@ Ctrl-d will delete the entire word under the cursor.
 (global-set-key (kbd "C-d")  #'delete-word)
 ```
 
-### Define Mode Specific Key-bindings<a id="sec-6-1-3" name="sec-6-1-3"></a>
+### Define Mode Specific Key-bindings<a id="sec-7-1-3" name="sec-7-1-3"></a>
 
-### Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)<a id="sec-6-1-4" name="sec-6-1-4"></a>
+### Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)<a id="sec-7-1-4" name="sec-7-1-4"></a>
 
 The popular key-bindings Ctrl+V (cut), Ctrl+C (copy), Ctrl+X (paste) can be enable by typing:
 
@@ -7748,11 +7848,11 @@ or by entering the command below in the shell IELM or by putting it in the confi
 (cua-mode)
 ```
 
-## Mode Key Bindings<a id="sec-6-2" name="sec-6-2"></a>
+## Mode Key Bindings<a id="sec-7-2" name="sec-7-2"></a>
 
-# Solutions<a id="sec-7" name="sec-7"></a>
+# Solutions<a id="sec-8" name="sec-8"></a>
 
-## Quick edit and reload Emac Configuration File.<a id="sec-7-1" name="sec-7-1"></a>
+## Quick edit and reload Emac Configuration File.<a id="sec-8-1" name="sec-8-1"></a>
 
 It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
@@ -7774,7 +7874,7 @@ It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. 
 )
 ```
 
-## Refresh/ Reload File<a id="sec-7-2" name="sec-7-2"></a>
+## Refresh/ Reload File<a id="sec-8-2" name="sec-8-2"></a>
 
 Source: <http://www.emacswiki.org/emacs-en/download/misc-cmds.el>
 
@@ -7791,7 +7891,7 @@ Usage:
 M-x refresh
 \\#+END<sub>SRC</sub>
 
-## Creating Quick Access Menu<a id="sec-7-3" name="sec-7-3"></a>
+## Creating Quick Access Menu<a id="sec-8-3" name="sec-8-3"></a>
 
 ![img](images/utils_menu1.png)
 
@@ -7834,7 +7934,7 @@ M-x refresh
  )) ;; End of Custom Menu
 ```
 
-## Extract Function Documentation<a id="sec-7-4" name="sec-7-4"></a>
+## Extract Function Documentation<a id="sec-8-4" name="sec-8-4"></a>
 
 Source: [Generate emacs-lisp documentation](http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/)
 Primitives:
@@ -7898,7 +7998,7 @@ Function Docstring
 "
 \\#+END<sub>SRC</sub>
 
-## Edit File as Root<a id="sec-7-5" name="sec-7-5"></a>
+## Edit File as Root<a id="sec-8-5" name="sec-8-5"></a>
 
 ```lisp
 (defun open-as-root (filename)
@@ -7930,7 +8030,7 @@ Function Docstring
   (open-as-root filename))))    ;; Open File as root
 ```
 
-## Open Current Buffer Directory<a id="sec-7-6" name="sec-7-6"></a>
+## Open Current Buffer Directory<a id="sec-8-6" name="sec-8-6"></a>
 
 M-x open-dir
 
@@ -7941,7 +8041,7 @@ M-x open-dir
   (find-file (file-name-directory (buffer-file-name))))
 ```
 
-## Open Current Buffer Directory in File Manager<a id="sec-7-7" name="sec-7-7"></a>
+## Open Current Buffer Directory in File Manager<a id="sec-8-7" name="sec-8-7"></a>
 
 M-x open-file-manager
 
@@ -7957,7 +8057,7 @@ M-x open-file-manager
   (call-process "open" nil nil nil "."))
 ```
 
-## Open a terminal Emulator in the directory of Current Buffer<a id="sec-7-8" name="sec-7-8"></a>
+## Open a terminal Emulator in the directory of Current Buffer<a id="sec-8-8" name="sec-8-8"></a>
 
 Despite Emacs can run a shell like python, bash, zsh, it cannot run ncurses based applications. In these cases is necessary to launch an external terminal. This command can be added to the menu in the section: Creating Quick Access Menu (See section )
 Usage:
@@ -7995,7 +8095,7 @@ Code:
   " cmd))))
 ```
 
-## Eval String in Clipboard<a id="sec-7-9" name="sec-7-9"></a>
+## Eval String in Clipboard<a id="sec-8-9" name="sec-8-9"></a>
 
 It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
 
@@ -8016,7 +8116,7 @@ ELISP> (eval-xclip)
 ELISP>
 ```
 
-## Save and Reload Current Session<a id="sec-7-10" name="sec-7-10"></a>
+## Save and Reload Current Session<a id="sec-8-10" name="sec-8-10"></a>
 
 Interactive Developement
 
@@ -8123,7 +8223,7 @@ M-x load-session ;; All previous files in the session
                  ;; saved will be opened
 ```
 
-## Create a menu with all color themes available<a id="sec-7-11" name="sec-7-11"></a>
+## Create a menu with all color themes available<a id="sec-8-11" name="sec-8-11"></a>
 
 ![img](images/colortheme_menu.png)
 
@@ -8296,7 +8396,7 @@ ELISP> (macroexpand '(make-color-menu))
             ...
 ```
 
-## Better Menu Syntax<a id="sec-7-12" name="sec-7-12"></a>
+## Better Menu Syntax<a id="sec-8-12" name="sec-8-12"></a>
 
 This macro defines a more readable menu syntax.
 
@@ -8354,7 +8454,7 @@ ELISP> (macroexpand
               (load-theme 'light-blue)])))
 ```
 
-## Save and Restore Current Window Configuration<a id="sec-7-13" name="sec-7-13"></a>
+## Save and Restore Current Window Configuration<a id="sec-8-13" name="sec-8-13"></a>
 
 Press <F7> to save the curren window configuration and <F8> to restore. The functions can also be executed with A-x save-view or A-x restore-view.
 
@@ -8375,7 +8475,7 @@ Press <F7> to save the curren window configuration and <F8> to restore. The func
 (global-set-key (kbd "<f8>")  #'restore-view)
 ```
 
-## Http and Post Request<a id="sec-7-14" name="sec-7-14"></a>
+## Http and Post Request<a id="sec-8-14" name="sec-8-14"></a>
 
 [Source](http://qiita.com/sanryuu/items/eed79c7b99616e769e67)
 
@@ -8470,9 +8570,9 @@ ELISP> (princ (url-http-post "http://httpbin.org/post" '(("use" . "dummy")  ("pa
 }
 ```
 
-# Org-Mode     :org:mode:data:ideas:<a id="sec-8" name="sec-8"></a>
+# Org-Mode     :org:mode:data:ideas:<a id="sec-9" name="sec-9"></a>
 
-## Overview<a id="sec-8-1" name="sec-8-1"></a>
+## Overview<a id="sec-9-1" name="sec-9-1"></a>
 
 Org-Mode is a mode built-in to Emacs that allows to store structured
 data, information in text format - org-mode markdown that can be
@@ -8512,7 +8612,7 @@ result printed in the document or displayed in the minibuffer.
 
 ![img](images/document_in_org_mode2.png)
 
-## Useful Key bindings for org-mode     :mode:org:key:binding:<a id="sec-8-2" name="sec-8-2"></a>
+## Useful Key bindings for org-mode     :mode:org:key:binding:<a id="sec-9-2" name="sec-9-2"></a>
 
 Move within headlines:
 
@@ -8794,7 +8894,7 @@ Hyperlinks
 </tbody>
 </table>
 
-## Refereces<a id="sec-8-3" name="sec-8-3"></a>
+## Refereces<a id="sec-9-3" name="sec-9-3"></a>
 
 Manual:
 
@@ -8858,9 +8958,9 @@ Non Categorized:
 
 -   [Gareth's Org-Mode Config](http://www.totherme.org/configs/org-stuff.html)
 
-## Videos<a id="sec-8-4" name="sec-8-4"></a>
+## Videos<a id="sec-9-4" name="sec-9-4"></a>
 
-### Tutorials<a id="sec-8-4-1" name="sec-8-4-1"></a>
+### Tutorials<a id="sec-9-4-1" name="sec-9-4-1"></a>
 
 **Org Mode in Depth - by Rick Dillon**
 
@@ -8893,7 +8993,7 @@ Orgmode by Tory S. Anderson**
 -   
 -   
 
-### Presentations<a id="sec-8-4-2" name="sec-8-4-2"></a>
+### Presentations<a id="sec-9-4-2" name="sec-9-4-2"></a>
 
 -   Emacs Org-Mode - A system for note-taking and project planning -  Talk given by Carsten Dominik.
 
@@ -8909,7 +9009,7 @@ Orgmode by Tory S. Anderson**
 
 -   [Teaching with Emacs+org-mode - YouTube](https://www.youtube.com/watch?v=cRUCiF2MwP4)
 
-# Eshell<a id="sec-9" name="sec-9"></a>
+# Eshell<a id="sec-10" name="sec-10"></a>
 
 Features:
 
@@ -8936,9 +9036,9 @@ Links:
 -   [Using Emacs Eshell as the ultimate shell | Smash Company](http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell)
 -   [Eshell completion for git, bzr, and hg | Tassilo's Blog](https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/)
 
-# Developement Environments for Emacs<a id="sec-10" name="sec-10"></a>
+# Developement Environments for Emacs<a id="sec-11" name="sec-11"></a>
 
-## Python<a id="sec-10-1" name="sec-10-1"></a>
+## Python<a id="sec-11-1" name="sec-11-1"></a>
 
 Set Python Interpreter:
 
@@ -8971,7 +9071,7 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
 -   [EmacsWiki: Python Programming In Emacs](http://www.emacswiki.org/emacs/PythonProgrammingInEmacs)
 -   [Emacs as a Python IDE - Jessica Hamrick](http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/)
 
-## Javascript<a id="sec-10-2" name="sec-10-2"></a>
+## Javascript<a id="sec-11-2" name="sec-11-2"></a>
 
 -   [Java Script](http://wikemacs.org/wiki/JavaScript)
 
@@ -8979,22 +9079,22 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 -   [Swank backend for Node.JS and in-browser JavaScript](https://github.com/swank-js/swank-js)
 
-## C / C++<a id="sec-10-3" name="sec-10-3"></a>
+## C / C++<a id="sec-11-3" name="sec-11-3"></a>
 
 -   [C/C++ Development Environment for Emacs](http://tuhdo.github.io/c-ide.html)
 -   [C make IDE](https://github.com/atilaneves/cmake-ide)
 
-## Ocaml<a id="sec-10-4" name="sec-10-4"></a>
+## Ocaml<a id="sec-11-4" name="sec-11-4"></a>
 
 -   [Ocaml](http://wikemacs.org/wiki/OCaml)
 
-## Haskell<a id="sec-10-5" name="sec-10-5"></a>
+## Haskell<a id="sec-11-5" name="sec-11-5"></a>
 
 -   [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)\* [Emacs/Inferior Haskell processes](https://wiki.haskell.org/Emacs/Inferior_Haskell_processes)
 
-## Lisp Dialects<a id="sec-10-6" name="sec-10-6"></a>
+## Lisp Dialects<a id="sec-11-6" name="sec-11-6"></a>
 
-### All Lisp Dialects<a id="sec-10-6-1" name="sec-10-6-1"></a>
+### All Lisp Dialects<a id="sec-11-6-1" name="sec-11-6-1"></a>
 
 -   [The Animated Guide to Paredit](http://danmidwood.com/content/2014/11/21/animated-paredit.html)
 -   [Paredit-mode](http://wikemacs.org/wiki/Paredit-mode)\* [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters)
@@ -9010,7 +9110,7 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 (setq show-paren-style 'expression)
 ```
 
-### Common Lisp<a id="sec-10-6-2" name="sec-10-6-2"></a>
+### Common Lisp<a id="sec-11-6-2" name="sec-11-6-2"></a>
 
 -   [SLIME: The Superior Lisp Interaction Mode for Emacs](https://common-lisp.net/project/slime/)
 -   [Evaluating Elisp in Emacs By Mickey Petersen](https://www.masteringemacs.org/article/evaluating-elisp-emacs)
@@ -9036,7 +9136,7 @@ Set Lisp Interpreter
 (setq inferior-lisp-program "clisp")
 ```
 
-### Scheme<a id="sec-10-6-3" name="sec-10-6-3"></a>
+### Scheme<a id="sec-11-6-3" name="sec-11-6-3"></a>
 
 The variable scheme-program-name controls which Scheme implementation Emacs will run.
 
@@ -9087,7 +9187,7 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
 -   [Setup lisp programming environment](https://mayukhmukherjee.wordpress.com/2014/01/03/setup-lisp/)
 -   [A Little Elisp to Make Emacs and Racket Play Nicer](http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html)
 
-### Clojure<a id="sec-10-6-4" name="sec-10-6-4"></a>
+### Clojure<a id="sec-11-6-4" name="sec-11-6-4"></a>
 
 -   [CIDER is a Clojure IDE and REPL for Emacs](http://pythonhackers.com/p/clojure-emacs/cider)
 -   [Practical Starter Tips for Clojure](http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html)
@@ -9102,11 +9202,11 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
 -   [The Emacs Widget Library](http://www.gnu.org/software/emacs/manual/html_node/widget/index.html)
 -   [InteractivelyDoThings](http://www.emacswiki.org/emacs/InteractivelyDoThings)
 
-# Resources<a id="sec-11" name="sec-11"></a>
+# Resources<a id="sec-12" name="sec-12"></a>
 
-## Emacs Tutorials<a id="sec-11-1" name="sec-11-1"></a>
+## Emacs Tutorials<a id="sec-12-1" name="sec-12-1"></a>
 
-### Motivation<a id="sec-11-1-1" name="sec-11-1-1"></a>
+### Motivation<a id="sec-12-1-1" name="sec-12-1-1"></a>
 
 -   [Internal Reprogrammability](http://martinfowler.com/bliki/InternalReprogrammability.html) by Martin Fowler
 
@@ -9123,7 +9223,7 @@ technical details involved."
 
 -   [EmacsWiki: Lisp Machine](http://www.emacswiki.org/emacs/LispMachine)
 
-### Introduction to Elisp<a id="sec-11-1-2" name="sec-11-1-2"></a>
+### Introduction to Elisp<a id="sec-12-1-2" name="sec-12-1-2"></a>
 
 -   [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua](http://emacslife.com/how-to-read-emacs-lisp.html)
 -   <http://www.fincher.org/tips/Languages/Emacs.shtml>
@@ -9144,7 +9244,7 @@ technical details involved."
 -   [ErgoEmacs](http://ergoemacs.org/)
 -   [Essential Elisp Libraries - Functional Programmin in Elisp](http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/)
 
-### Tips and Tricks<a id="sec-11-1-3" name="sec-11-1-3"></a>
+### Tips and Tricks<a id="sec-12-1-3" name="sec-12-1-3"></a>
 
 -   [Emacs - Arch Linux Wiki](https://wiki.archlinux.org/index.php/Emacs)
 -   [Emacs Tiny Tools](http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html)
@@ -9155,18 +9255,18 @@ technical details involved."
 
 -   [Introducing Names: practical namespaces for Emacs-Lisp](http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html)
 
-### Packages<a id="sec-11-1-4" name="sec-11-1-4"></a>
+### Packages<a id="sec-12-1-4" name="sec-12-1-4"></a>
 
 -   [Yasnippet](https://github.com/capitaomorte/yasnippet)
 
-### Cases<a id="sec-11-1-5" name="sec-11-1-5"></a>
+### Cases<a id="sec-12-1-5" name="sec-12-1-5"></a>
 
 -   [From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/)
 -   [Why Ive Abandoned Eclipse For Emacs](http://technical-dresese.blogspot.com/2008/11/why-ive-abandoned-eclipse-for-emacs.html)
 -   [In Org Mode Abandoning Gtd](http://technical-dresese.blogspot.com/2008/08/in-org-mode-abandoning-gtd.html)
 -   [Running Lisp In Productionl](http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html)
 
-### Non Categorized<a id="sec-11-1-6" name="sec-11-1-6"></a>
+### Non Categorized<a id="sec-12-1-6" name="sec-12-1-6"></a>
 
 -   <http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el>
 -   <http://www.reallysoft.de/code/emacs/snippets.html#b4ac15>
@@ -9174,15 +9274,15 @@ technical details involved."
 -   [Hooks Local Variables And Namespacesl](http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html)
 -   <http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192>
 
-## Documentation<a id="sec-11-2" name="sec-11-2"></a>
+## Documentation<a id="sec-12-2" name="sec-12-2"></a>
 
-### Manual and References<a id="sec-11-2-1" name="sec-11-2-1"></a>
+### Manual and References<a id="sec-12-2-1" name="sec-12-2-1"></a>
 
 -   [GNU Emacs Lisp Reference Manual](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents)
 -   [Command and Function Index](http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html)
 -   <http://blog.gnumonk.com/2012/07/effective-emacs-part1.html>
 
-### Wikis<a id="sec-11-2-2" name="sec-11-2-2"></a>
+### Wikis<a id="sec-12-2-2" name="sec-12-2-2"></a>
 
 -   [Emacs / Arch Wiki](https://wiki.archlinux.org/index.php/Emacs)
 -   [Emacs Lisp for Perl Programmers](http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html)
@@ -9196,12 +9296,12 @@ technical details involved."
 
 -   [On elisp and programming in general](http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html)
 
-### Issues<a id="sec-11-2-3" name="sec-11-2-3"></a>
+### Issues<a id="sec-12-2-3" name="sec-12-2-3"></a>
 
 -   [Emacs on Windows / Cygwin](http://www.khngai.com/emacs/cygwin.php)
 -   [10 Tips for Powerful Emacs on Windows](http://gregorygrubbs.com/emacs/10-tips-emacs-windows/)
 
-## Selected Dot Emacs<a id="sec-11-3" name="sec-11-3"></a>
+## Selected Dot Emacs<a id="sec-12-3" name="sec-12-3"></a>
 
 -   [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
 
@@ -9217,7 +9317,7 @@ technical details involved."
 
 -   <http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el>
 
-## Emacs Starter Kits<a id="sec-11-4" name="sec-11-4"></a>
+## Emacs Starter Kits<a id="sec-12-4" name="sec-12-4"></a>
 
 **Spacemacs**
 
@@ -9237,7 +9337,7 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 [Link Github](https://github.com/fniessen/emacs-leuven)
 
-## Books<a id="sec-11-5" name="sec-11-5"></a>
+## Books<a id="sec-12-5" name="sec-12-5"></a>
 
 -   [An Introduction to Programming in Emacs Lisp](https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf) by Robert J. Chassell
 
@@ -9248,7 +9348,7 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 -   [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html) (Common Lisp)
 
-## Community<a id="sec-11-6" name="sec-11-6"></a>
+## Community<a id="sec-12-6" name="sec-12-6"></a>
 
 **Usenet**
 
@@ -9276,7 +9376,7 @@ It is also available at:
 
 -   [Emacs - Community - Google+](https://plus.google.com/communities/114815898697665598016)
 
-## Blogs<a id="sec-11-7" name="sec-11-7"></a>
+## Blogs<a id="sec-12-7" name="sec-12-7"></a>
 
 -   [Endless Parentheses · Concise ramblings on Emacs productivity.](http://endlessparentheses.com/archive.html)
 
@@ -9296,7 +9396,7 @@ It is also available at:
 
 -   [Emacs Redux](http://emacsredux.com/)
 
-## Videos and Screencasts<a id="sec-11-8" name="sec-11-8"></a>
+## Videos and Screencasts<a id="sec-12-8" name="sec-12-8"></a>
 
 Useful screencasts to help learn Emacs faster.
 
@@ -9422,7 +9522,7 @@ doing graphics in emacs.
     surprisingly easy to assemble. (Much faster than editing a
     screencast about it!)
 
-## Selected Codes<a id="sec-11-9" name="sec-11-9"></a>
+## Selected Codes<a id="sec-12-9" name="sec-12-9"></a>
 
 -   <http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el>
 
@@ -9448,7 +9548,7 @@ Large Collection of Codes to Emacs
 
 -   <http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html>
 
-## Technical Notes<a id="sec-11-10" name="sec-11-10"></a>
+## Technical Notes<a id="sec-12-10" name="sec-12-10"></a>
 
 **Emacs architecture:**
 
