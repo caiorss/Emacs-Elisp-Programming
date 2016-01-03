@@ -5939,6 +5939,112 @@ Set the default web browsr used by (browse-url <url>) function and by org-mode.
 
 
 #+END_SRC
+ 
+* Color Scheme
+
+*Show All Colors Available*
+
+=M-x list-colors-display=
+
+file:images/color_selection_interface.png
+
+*Color Theme Select*
+
+It will open a window to select the color theme. 
+
+=M-x color-theme-select=
+
+=M-x customize-themes=
+
+*Customize Color Scheme in the GUI* 
+
+It will show a GUI with all customizations and options.
+
+=M-x customize-face=
+
+*See the attributes of text at point*
+
+Put the cursor at the word and type =C-u C-x ==
+
+Or enter the command: 
+
+=M-x describe-text-properties=
+
+
+*Changing Syntax Colors*
+
+#+BEGIN_SRC emacs-lisp
+
+;;
+;; Change Default Background Color 
+;;
+(set-face-background 'default "black")
+
+;; 
+;; Change Default Foreground Color 
+;; 
+(set-face-foreground 'default "cyan")
+
+;; Change Default Font 
+;;
+(set-default-font   "Inconsolata 12")
+
+;; Change the comments color
+;;
+(set-face-attribute 'font-lock-comment-face nil :foreground "#3f7f5f")
+
+;; Change string color 
+;;
+(set-face-attribute 'font-lock-string-face nil :foreground "light blue")
+
+;; Change keyworkd colors 
+;;
+(set-face-attribute 'font-lock-keyword-face nil :foreground "yellow")
+
+;; Change Constants colors
+;;
+(set-face-attribute 'font-lock-constant-face nil :foreground "#4f004f")
+
+
+;; Change Lisp keywords, for instacne  :keyword
+;;
+(set-face-attribute 'font-lock-builtin-face nil :foreground "red")
+
+;; Change the font type 
+;;
+(set-face-attribute 'default nil :family "Menlo" :height 120)
+
+
+;; Change the color scheme of functions to bold and light cyan 
+;;
+(set-face-attribute 'font-lock-function-name-face nil
+                    :foreground "light cyan" :weight 'bold)
+
+
+#+END_SRC
+
+
+See also: 
+
+Misc:
+
+ - [[http://david.rothlis.net/emacs/customize_colors.html][How to learn Emacs - Fix that awful color scheme]]
+ - [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Face-Attributes.html][GNU Emacs Lisp Reference Manual: Face Attributes]]
+ - [[http://raebear.net/comp/emacscolors.html][Colors Available to Emacs]]  
+ - [[http://www.nongnu.org/emacs-tiny-tools/font/index-body.html][Emacs highlighting and fonts]]
+ - [[http://emacs-fu.blogspot.com.br/2009/03/color-theming.html][emacs-fu: color theming]] 
+ - [[http://ergoemacs.org/emacs/emacs_CSS_colors.html][Emacs: Working with CSS Color Values]] 
+ - [[https://github.com/mariusk/emacs-color][mariusk/emacs-color]]
+ - [[http://stackoverflow.com/questions/18806523/popup-color-from-color-string-like-f2d3aa-with-emacs][Popup color from color string like `#f2d3aa` with Emacs - Stack Overflow]] 
+ - [[http://www.emacswiki.org/emacs/ColorPalette][EmacsWiki: Color Palette]]  
+
+Color Themes:
+
+ - [[https://github.com/kuanyui/moe-theme.el][kuanyui/moe-theme.el]]
+ - [[http://ethanschoonover.com/solarized][Solarized - Ethan Schoonover]]
+ - [[https://emacsthemes.com/][A GNU Emacs Themes Gallery]] 
+ 
+
 
 * Key Bindings
 ** Global Key Bindings 
