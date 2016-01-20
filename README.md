@@ -7,6 +7,7 @@
     - [Keybindings and Commands for Lisp programming](#keybindings-and-commands-for-lisp-programming)
     - [Ubiquitous Emacs Key Bindings](#ubiquitous-emacs-key-bindings)
 - [Elisp](#elisp)
+  - [Overview](#overview)
   - [Using the Scratch Buffer and Interpreter](#using-the-scratch-buffer-and-interpreter)
   - [Creating Commands (Interactive Functions)](#creating-commands-(interactive-functions))
   - [Basic Operations](#basic-operations)
@@ -18,6 +19,10 @@
   - [Defining Functions](#defining-functions)
   - [List Operations](#list-operations)
   - [Association Lists and Property Lists](#association-lists-and-property-lists)
+    - [Overview](#overview)
+    - [Association List / Alist](#association-list-/-alist)
+    - [Property Lists](#property-lists)
+    - [Converting Alists to Plists and vice-versa](#converting-alists-to-plists-and-vice-versa)
   - [Strings](#strings)
   - [Symbols](#symbols)
   - [Types Conversion](#types-conversion)
@@ -59,6 +64,7 @@
     - [Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)](#enable-ctrl+v-/-ctrl+c-shortcuts-(cua-mode))
   - [Mode Key Bindings](#mode-key-bindings)
 - [Solutions](#solutions)
+  - [Code Navigation with Occur](#code-navigation-with-occur)
   - [Quick edit and reload Emac Configuration File.](#quick-edit-and-reload-emac-configuration-file.)
   - [Refresh/ Reload File](#refresh/-reload-file)
   - [Creating Quick Access Menu](#creating-quick-access-menu)
@@ -1777,6 +1783,8 @@ See also:
 
 # Elisp<a id="sec-2" name="sec-2"></a>
 
+## Overview<a id="sec-2-1" name="sec-2-1"></a>
+
 This section will use the Emacs interactive elisp shell IELM that can
 be accessed by typing **M-x ielm**. You can also use the scratch buffer
 to test Emacs features and elisp codes.
@@ -1788,7 +1796,7 @@ remove-if-not, cl-case and so on.
 
 See also: [Common Lisp Extensions - Common Lisp Extensions](http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html)
 
-## Using the Scratch Buffer and Interpreter<a id="sec-2-1" name="sec-2-1"></a>
+## Using the Scratch Buffer and Interpreter<a id="sec-2-2" name="sec-2-2"></a>
 
 The scratch buffer is useful to evaluate Emacs lisp commands, test new
 features and test new Emacs configurations and dot emacs without need
@@ -1827,7 +1835,7 @@ Example:
 
 ![img](images/mx_eval_buffer2.png)
 
-## Creating Commands (Interactive Functions)<a id="sec-2-2" name="sec-2-2"></a>
+## Creating Commands (Interactive Functions)<a id="sec-2-3" name="sec-2-3"></a>
 
 ```lisp
 (defun buffer/insert-filename ()
@@ -1845,7 +1853,7 @@ After:
 
 ![img](images/emacs-interactive-command2.png)
 
-## Basic Operations<a id="sec-2-3" name="sec-2-3"></a>
+## Basic Operations<a id="sec-2-4" name="sec-2-4"></a>
 
 **Arithmetic**
 
@@ -1937,9 +1945,9 @@ ELISP> '(10 203 40 "hello" () ("empty" 65))
 ELISP>
 ```
 
-## Type Predicates and Literals<a id="sec-2-4" name="sec-2-4"></a>
+## Type Predicates and Literals<a id="sec-2-5" name="sec-2-5"></a>
 
-### Emacs Literals<a id="sec-2-4-1" name="sec-2-4-1"></a>
+### Emacs Literals<a id="sec-2-5-1" name="sec-2-5-1"></a>
 
 ```lisp
 ;;; Numbers
@@ -2021,7 +2029,7 @@ ELISP> [1 2 3 4 (+ 1 2 3 54)]
    (+ 1 2 3 54)]
 ```
 
-### Basic Types Predicate<a id="sec-2-4-2" name="sec-2-4-2"></a>
+### Basic Types Predicate<a id="sec-2-5-2" name="sec-2-5-2"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -2189,7 +2197,7 @@ t
 ELISP>
 ```
 
-### Get Object Type<a id="sec-2-4-3" name="sec-2-4-3"></a>
+### Get Object Type<a id="sec-2-5-3" name="sec-2-5-3"></a>
 
 ```lisp
 ELISP> (type-of (current-buffer))
@@ -2206,7 +2214,7 @@ nil
 ELISP>
 ```
 
-## Defining Variables<a id="sec-2-5" name="sec-2-5"></a>
+## Defining Variables<a id="sec-2-6" name="sec-2-6"></a>
 
 ```lisp
 ;;; Constants
@@ -2276,7 +2284,7 @@ ELISP> y
 ELISP>
 ```
 
-## Defining Functions<a id="sec-2-6" name="sec-2-6"></a>
+## Defining Functions<a id="sec-2-7" name="sec-2-7"></a>
 
 1.  Define Simple Function
 
@@ -2683,7 +2691,7 @@ ELISP>
     (setq lexical-binding t)
     ```
 
-## List Operations<a id="sec-2-7" name="sec-2-7"></a>
+## List Operations<a id="sec-2-8" name="sec-2-8"></a>
 
 See also:
 
@@ -2906,362 +2914,447 @@ ELISP> alist
 ELISP>
 ```
 
-## Association Lists and Property Lists<a id="sec-2-8" name="sec-2-8"></a>
+## Association Lists and Property Lists<a id="sec-2-9" name="sec-2-9"></a>
 
-1.  Association List / Alist
+### Overview<a id="sec-2-9-1" name="sec-2-9-1"></a>
 
-    Reference: [Emacs Manual / Association Lists](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_89.html)
-    
-    ```lisp
-    ELISP> (setq dict
-    '((pine . cones)
-     (oak . acorns)
-     (maple . seeds)))
-    ((pine . cones)
-     (oak . acorns)
-     (maple . seeds))
-    
-    ELISP> dict
-    ((pine . cones)
-     (oak . acorns)
-     (maple . seeds))
-    
-    ;; Get a cell associated with a key
-    ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ELISP>
-    ELISP> (assoc 'oak dict)
-    (oak . acorns)
-    
-    ELISP> (assoc 'wrong dict)
-    nil
-    
-    ;; Get a Key
-    ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    
-    ELISP> (car (assoc 'oak dict))
-    oak
-    ELISP> (cdr (assoc 'oak dict))
-    acorns
-    ELISP>
-    
-    
-    ELISP> (car (assoc 'oak dict))
-    oak
-    ELISP>
-    
-    ;; Get all keys
-    ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    
-    ELISP> (mapcar #'car dict)
-    (pine oak maple)
-    
-    ;; Get all values
-    ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    
-    ELISP> (mapcar #'cdr dict)
-    (cones acorns seeds)
-    ```
-    
-    Example: Filter multiple keys
-    
-    ```lisp
-    ELISP> (defvar language-list
-      '(
-       ("io" . ((:command . "io")
-                 (:description . "Run IO Language script")))
-        ("lua" . ((:command . "lua")
-                  (:description . "Run Lua script")))
-        ("groovy" . ((:command . "groovy")
-                     (:description . "Run Groovy")))
-        ("scala" . ((:command . "scala")
-                    (:cmdopt . "-Dfile.encoding=UTF-8")
-                    (:description . "Run Scala file with scala command")))
-    
-        ("haml" . ((:command . "haml")
-                   (:exec    . "%c %o %s")
-                   (:description . "Convert HAML to HTML")))
-        ("sass" . ((:command . "sass")
-                   (:exec    . "%c %o --no-cac")))
+An association list is a list of cons pairs, that will be called here
+of **clist** or a list of lists of two elements each that will be called
+here of **alist** :
+
+**Association list of type: clist**
+
+Keys: a, x, 2 and 4
+Values: b, y, 3 and (1 2 3 4 5)
+
+```eamcs-lisp
+ELISP> '((a . b) (x . y) (2 . 3) (4 . (1 2 3 4 5)))
+((a . b)
+ (x . y)
+ (2 . 3)
+ (4 1 2 3 4 5)
+
+ELISP> (cons 'a 'b)
+(a . b)
+
+ELISP> (cons 'a (cons 'b (cons 'c nil)))
+(a b c)
+```
+
+Not that in this list '(4 . (1 2 3 4)) becomes '(4 1 2 3 4) what makes
+this list ambiguous for associations with multiple elements. The list
+most used by Emacs API is the **clist**.
+
+**Assocation list of type: alist**
+
+```lisp
+ELISP> '((a  b) (x  y) (2  3) (4  (1 2 3 4 5)))
+((a b)
+ (x y)
+ (2 3)
+ (4
+  (1 2 3 4 5)))
+
+ELISP> (list (list 'a 'b) (list 'x 'y) (list 2 3) (list 2 '(1 2 3 4 5)))
+((a b)
+ (x y)
+ (2 3)
+ (2
+  (1 2 3 4 5)))
+```
+
+This type of list is not ambiguous like the clist. 
+
+**Property Lists: Plist**
+
+Property lists are lists of consecutive pairs of keys and values. The
+advantage of this list is that it requires less parenthesis and it is
+more human readable. 
+
+```lisp
+'(:key1 value1 :key2 value2 :key3 1002.23 :key4 (a b c d e))
+
+ELISP> '(:key1 value1 :key2 value2 :key3 1002.23 :key4 (a b c d e))
+(:key1 value1 :key2 value2 :key3 1002.23 :key4
+       (a b c d e))
+
+;;; It is more useful in configuration files 
+
+(
+:key1  value1 
+:key2  value2
+:key3  value3 
+:key4  (a b c d e )
+)
+```
+
+### Association List / Alist<a id="sec-2-9-2" name="sec-2-9-2"></a>
+
+Reference: [Emacs Manual / Association Lists](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_89.html)
+
+```lisp
+ELISP> (setq dict
+'((pine . cones)
+ (oak . acorns)
+ (maple . seeds)))
+((pine . cones)
+ (oak . acorns)
+ (maple . seeds))
+
+ELISP> dict
+((pine . cones)
+ (oak . acorns)
+ (maple . seeds))
+
+;; Get a cell associated with a key
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ELISP>
+ELISP> (assoc 'oak dict)
+(oak . acorns)
+
+ELISP> (assoc 'wrong dict)
+nil
+
+;; Get a Key
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (car (assoc 'oak dict))
+oak
+ELISP> (cdr (assoc 'oak dict))
+acorns
+ELISP>
+
+
+ELISP> (car (assoc 'oak dict))
+oak
+ELISP>
+
+;; Get all keys
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (mapcar #'car dict)
+(pine oak maple)
+
+;; Get all values
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (mapcar #'cdr dict)
+(cones acorns seeds)
+```
+
+Example: Filter multiple keys
+
+```lisp
+ELISP> (defvar language-list
+  '(
+   ("io" . ((:command . "io")
+             (:description . "Run IO Language script")))
+    ("lua" . ((:command . "lua")
+              (:description . "Run Lua script")))
+    ("groovy" . ((:command . "groovy")
+                 (:description . "Run Groovy")))
+    ("scala" . ((:command . "scala")
+                (:cmdopt . "-Dfile.encoding=UTF-8")
+                (:description . "Run Scala file with scala command")))
+
+    ("haml" . ((:command . "haml")
+               (:exec    . "%c %o %s")
+               (:description . "Convert HAML to HTML")))
+    ("sass" . ((:command . "sass")
+               (:exec    . "%c %o --no-cac")))
+ ))
+language-list
+
+
+ELISP> (assoc  "scala"  language-list )
+("scala"
+ (:command . "scala")
+ (:cmdopt . "-Dfile.encoding=UTF-8")
+ (:description . "Run Scala file with scala command"))
+
+ELISP> (assoc  "lua"  language-list )
+("lua"
+ (:command . "lua")
+ (:description . "Run Lua script"))
+
+ELISP> (assoc  "wrong"  language-list )
+nil
+
+ELISP> (assoc ':command (assoc  "scala"  language-list ))
+(:command . "scala")
+
+ELISP> (cdr (assoc ':command (assoc  "scala"  language-list )))
+"scala"
+ELISP>
+
+ELISP> (assoc ':description (assoc  "scala"  language-list ))
+(:description . "Run Scala file with scala command")
+
+ELISP> (cdr (assoc ':description (assoc  "scala"  language-list )))
+"Run Scala file with scala command"
+ELISP>
+
+ELISP> (mapcar 'car language-list)
+("io" "lua" "groovy" "scala" "haml" "sass")
+
+ELISP> (mapcar 'cdr language-list)
+(((:command . "io")
+  (:description . "Run IO Language script"))
+ ((:command . "lua")
+  (:description . "Run Lua script"))
+ ((:command . "groovy")
+  (:description . "Run Groovy"))
+ ((:command . "scala")
+  (:cmdopt . "-Dfile.encoding=UTF-8")
+  (:description . "Run Scala file with scala command"))
+ ((:command . "haml")
+  (:exec . "%c %o %s")
+  (:description . "Convert HAML to HTML"))
+ ((:command . "sass")
+  (:exec . "%c %o --no-cac")))
+
+ELISP>
+
+ELISP> (mapcar (lambda (x) (
+                             list
+                             (car x)
+                             (cdr x)
+                             ))
+                            language-list)
+(("io"
+  ((:command . "io")
+   (:description . "Run IO Language script")))
+ ("lua"
+  ((:command . "lua")
+   (:description . "Run Lua script")))
+ ("groovy"
+  ((:command . "groovy")
+   (:description . "Run Groovy")))
+ ("scala"
+  ((:command . "scala")
+   (:cmdopt . "-Dfile.encoding=UTF-8")
+   (:description . "Run Scala file with scala command")))
+ ("haml"
+  ((:command . "haml")
+   (:exec . "%c %o %s")
+   (:description . "Convert HAML to HTML")))
+ ("sass"
+  ((:command . "sass")
+   (:exec . "%c %o --no-cac"))))
+
+ELISP>
+
+ELISP> (mapcar (lambda (x) (
+     list
+     (car x)
+     (assoc ':command       (cdr x))
+     (assoc ':cmdopt        (cdr x))
+     (assoc ':description   (cdr x))
      ))
-    language-list
-    
-    
-    ELISP> (assoc  "scala"  language-list )
-    ("scala"
-     (:command . "scala")
-     (:cmdopt . "-Dfile.encoding=UTF-8")
-     (:description . "Run Scala file with scala command"))
-    
-    ELISP> (assoc  "lua"  language-list )
-    ("lua"
-     (:command . "lua")
-     (:description . "Run Lua script"))
-    
-    ELISP> (assoc  "wrong"  language-list )
-    nil
-    
-    ELISP> (assoc ':command (assoc  "scala"  language-list ))
-    (:command . "scala")
-    
-    ELISP> (cdr (assoc ':command (assoc  "scala"  language-list )))
-    "scala"
-    ELISP>
-    
-    ELISP> (assoc ':description (assoc  "scala"  language-list ))
-    (:description . "Run Scala file with scala command")
-    
-    ELISP> (cdr (assoc ':description (assoc  "scala"  language-list )))
-    "Run Scala file with scala command"
-    ELISP>
-    
-    ELISP> (mapcar 'car language-list)
-    ("io" "lua" "groovy" "scala" "haml" "sass")
-    
-    ELISP> (mapcar 'cdr language-list)
-    (((:command . "io")
-      (:description . "Run IO Language script"))
-     ((:command . "lua")
-      (:description . "Run Lua script"))
-     ((:command . "groovy")
-      (:description . "Run Groovy"))
-     ((:command . "scala")
-      (:cmdopt . "-Dfile.encoding=UTF-8")
-      (:description . "Run Scala file with scala command"))
-     ((:command . "haml")
-      (:exec . "%c %o %s")
-      (:description . "Convert HAML to HTML"))
-     ((:command . "sass")
-      (:exec . "%c %o --no-cac")))
-    
-    ELISP>
-    
-    ELISP> (mapcar (lambda (x) (
-                                 list
-                                 (car x)
-                                 (cdr x)
-                                 ))
-                                language-list)
-    (("io"
-      ((:command . "io")
-       (:description . "Run IO Language script")))
-     ("lua"
-      ((:command . "lua")
-       (:description . "Run Lua script")))
-     ("groovy"
-      ((:command . "groovy")
-       (:description . "Run Groovy")))
-     ("scala"
-      ((:command . "scala")
-       (:cmdopt . "-Dfile.encoding=UTF-8")
-       (:description . "Run Scala file with scala command")))
-     ("haml"
-      ((:command . "haml")
-       (:exec . "%c %o %s")
-       (:description . "Convert HAML to HTML")))
-     ("sass"
-      ((:command . "sass")
-       (:exec . "%c %o --no-cac"))))
-    
-    ELISP>
-    
-    ELISP> (mapcar (lambda (x) (
+    language-list)
+
+(("io"
+  (:command . "io")
+  nil
+  (:description . "Run IO Language script"))
+ ("lua"
+  (:command . "lua")
+  nil
+  (:description . "Run Lua script"))
+ ("groovy"
+  (:command . "groovy")
+  nil
+  (:description . "Run Groovy"))
+ ("scala"
+  (:command . "scala")
+  (:cmdopt . "-Dfile.encoding=UTF-8")
+  (:description . "Run Scala file with scala command"))
+ ("haml"
+  (:command . "haml")
+  nil
+  (:description . "Convert HAML to HTML"))
+ ("sass"
+  (:command . "sass")
+  nil nil))
+
+ELISP>
+
+
+ELISP> (mapcar (lambda (x) (
          list
          (car x)
-         (assoc ':command       (cdr x))
-         (assoc ':cmdopt        (cdr x))
-         (assoc ':description   (cdr x))
+         (cdr (assoc ':command   (cdr x)))
+         (cdr (assoc ':cmdopt       (cdr x)))
+         (cdr (assoc ':description   (cdr x)))
          ))
+
         language-list)
-    
-    (("io"
-      (:command . "io")
-      nil
-      (:description . "Run IO Language script"))
-     ("lua"
-      (:command . "lua")
-      nil
-      (:description . "Run Lua script"))
-     ("groovy"
-      (:command . "groovy")
-      nil
-      (:description . "Run Groovy"))
-     ("scala"
-      (:command . "scala")
-      (:cmdopt . "-Dfile.encoding=UTF-8")
-      (:description . "Run Scala file with scala command"))
-     ("haml"
-      (:command . "haml")
-      nil
-      (:description . "Convert HAML to HTML"))
-     ("sass"
-      (:command . "sass")
-      nil nil))
-    
+(("io" "io" nil "Run IO Language script")
+ ("lua" "lua" nil "Run Lua script")
+ ("groovy" "groovy" nil "Run Groovy")
+ ("scala" "scala" "-Dfile.encoding=UTF-8" "Run Scala file with scala command")
+ ("haml" "haml" nil "Convert HAML to HTML")
+ ("sass" "sass" nil nil))
+
+ELISP>
+
+ELISP> (defun get-value (alist key) (cdr (assoc key alist)))
+get-value
+ELISP> (get-value language-list "scala")
+((:command . "scala")
+ (:cmdopt . "-Dfile.encoding=UTF-8")
+ (:description . "Run Scala file with scala command"))
+
+ELISP> (get-value language-list "lua")
+((:command . "lua")
+ (:description . "Run Lua script"))
+
+ELISP>
+ELISP> (get-value language-list "0")
+nil
+ELISP>
+
+
+ELISP> (defun get-key-value (alist key field)
+                (cdr (assoc  field  (cdr (assoc key alist))  )))
+get-key-value
+ELISP>
+ELISP> (get-key-value language-list "scala" ':description)
+"Run Scala file with scala command"
+ELISP>
+
+ELISP> (get-key-value language-list "scala" ':command)
+"scala"
+ELISP>
+```
+
+### Property Lists<a id="sec-2-9-3" name="sec-2-9-3"></a>
+
+```lisp
+    ELISP> (defvar plst (list :buffer (current-buffer) :line 10 :pos 2000))
+    plst
+
     ELISP>
-    
-    
-    ELISP> (mapcar (lambda (x) (
-             list
-             (car x)
-             (cdr (assoc ':command   (cdr x)))
-             (cdr (assoc ':cmdopt       (cdr x)))
-             (cdr (assoc ':description   (cdr x)))
-             ))
-    
-            language-list)
-    (("io" "io" nil "Run IO Language script")
-     ("lua" "lua" nil "Run Lua script")
-     ("groovy" "groovy" nil "Run Groovy")
-     ("scala" "scala" "-Dfile.encoding=UTF-8" "Run Scala file with scala command")
-     ("haml" "haml" nil "Convert HAML to HTML")
-     ("sass" "sass" nil nil))
-    
+    ELISP> (plist-get plst :line)
+    10
+
+    ELISP> (plist-get plst :pos)
+    2000
+
+    ELISP> (plist-get plst :buffer)
+    #<buffer *ielm*>
     ELISP>
-    
-    ELISP> (defun get-value (alist key) (cdr (assoc key alist)))
-    get-value
-    ELISP> (get-value language-list "scala")
-    ((:command . "scala")
-     (:cmdopt . "-Dfile.encoding=UTF-8")
-     (:description . "Run Scala file with scala command"))
-    
-    ELISP> (get-value language-list "lua")
-    ((:command . "lua")
-     (:description . "Run Lua script"))
-    
+
     ELISP>
-    ELISP> (get-value language-list "0")
+    ELISP> (plist-get plst :buffdfds)
     nil
     ELISP>
-    
-    
-    ELISP> (defun get-key-value (alist key field)
-                    (cdr (assoc  field  (cdr (assoc key alist))  )))
-    get-key-value
-    ELISP>
-    ELISP> (get-key-value language-list "scala" ':description)
-    "Run Scala file with scala command"
-    ELISP>
-    
-    ELISP> (get-key-value language-list "scala" ':command)
-    "scala"
-    ELISP>
-    ```
 
-2.  Property Lists
+    ELISP> (plist-member plst :buffer)
+    (:buffer #<buffer *ielm*> :line 10 :pos 2000)
 
-    ```lisp
-        ELISP> (defvar plst (list :buffer (current-buffer) :line 10 :pos 2000))
-        plst
-    
-        ELISP>
-        ELISP> (plist-get plst :line)
-        10
-    
-        ELISP> (plist-get plst :pos)
-        2000
-    
-        ELISP> (plist-get plst :buffer)
-        #<buffer *ielm*>
-        ELISP>
-    
-        ELISP>
-        ELISP> (plist-get plst :buffdfds)
-        nil
-        ELISP>
-    
-        ELISP> (plist-member plst :buffer)
-        (:buffer #<buffer *ielm*> :line 10 :pos 2000)
-    
-        ELISP> (plist-member plst :bufferasd)
-        nil
-        ELISP>
-    
-        ELISP> (plist-put plst :winconf (current-window-configuration))
-        (:buffer #<buffer *ielm*> :line 10 :pos 2000 :winconf #<window-configuration>)
-    
-        ELISP> plst
-        (:buffer #<buffer *ielm*> :line 10 :pos 2000 :winconf #<window-configuration>)
-    
-        ELISP>
-    ```
-
-3.  Converting Alists to Plists and vice-versa
-
-    ```lisp
-    ;; Alist to plist
-    (defun plist->alist (plist)
-      (if (null plist)
-          '()
-          (cons
-           (list (car plist) (cadr plist))
-           (plist->alist (cddr plist)))))
-    
-    ELISP> (plist->alist (list :x 10 :y 20 :name "point"))
-    ((:x 10)
-     (:y 20)
-     (:name "point"))
-    
-    ;;; Convert association list to plist
-    (defun alist->plist (assocl)
-      (if (null assocl)
-          '()
-        (let
-        ((hd (car assocl))
-         (tl (cdr assocl)))
-          (cons (car hd)
-            (cons (cadr hd)
-              (alist->plist tl))))))
-    
-    ;; Separates a property list into two lists of keys and values.
-    ;;
-    (defun plist->kv (plist)
-      (let ((alist (plist->alist plist)))
-        (cons
-         (mapcar #'car alist)
-         (mapcar #'cdr alist))))
-    
-    ELISP> (setq al (plist->alist (list :x 10 :y 20 :name "point")))
-    ((:x 10)
-     (:y 20)
-     (:name "point"))
-    
-    ELISP> (alist->plist al)
-    (:x 10 :y 20 :name "point")
-    
+    ELISP> (plist-member plst :bufferasd)
+    nil
     ELISP>
-    
-    (setq keylist
-        '("M-i"  'previous-line
-          "M-j"  'backward-char
-          "M-k"  'next-line
-          "M-l"  'forward-char))
-    
-    
-    ELISP> (setq kv (plist->kv keylist))
-    (("M-i" "M-j" "M-k" "M-l")
-     ('previous-line)
-     ('backward-char)
-     ('next-line)
-     ('forward-char))
-    
-    ELISP> (car kv)
-    ("M-i" "M-j" "M-k" "M-l")
-    
-    ELISP> (cdr kv)
-    (('previous-line)
-     ('backward-char)
-     ('next-line)
-     ('forward-char))
-    
-    ELISP>
-    ```
 
-## Strings<a id="sec-2-9" name="sec-2-9"></a>
+    ELISP> (plist-put plst :winconf (current-window-configuration))
+    (:buffer #<buffer *ielm*> :line 10 :pos 2000 :winconf #<window-configuration>)
+
+    ELISP> plst
+    (:buffer #<buffer *ielm*> :line 10 :pos 2000 :winconf #<window-configuration>)
+
+    ELISP>
+```
+
+### Converting Alists to Plists and vice-versa<a id="sec-2-9-4" name="sec-2-9-4"></a>
+
+```lisp
+;; Alist to plist
+(defun plist->alist (plist)
+  (if (null plist)
+      '()
+      (cons
+       (list (car plist) (cadr plist))
+       (plist->alist (cddr plist)))))
+
+ELISP> (plist->alist (list :x 10 :y 20 :name "point"))
+((:x 10)
+ (:y 20)
+ (:name "point"))
+
+;;; Converts association list to plist
+(defun alist->plist (assocl)
+  (if (null assocl)
+      '()
+    (let
+    ((hd (car assocl))
+     (tl (cdr assocl)))
+      (cons (car hd)
+        (cons (cadr hd)
+          (alist->plist tl))))))
+
+;;; Converts plist to clist (List of cons pairs)
+(defun plist->clist (plist)
+  (if (null plist)
+      '()
+      (cons
+       (cons (car plist) (cadr plist))
+      (plist->clist (cddr plist)))))
+
+ELISP> (plist->clist (list :x 10 :y 20 :name "point"))
+((:x . 10)
+ (:y . 20)
+ (:name . "point"))
+
+;; Separates a property list into two lists of keys and values.
+;;
+(defun plist->kv (plist)
+  (let ((alist (plist->alist plist)))
+    (cons
+     (mapcar #'car alist)
+     (mapcar #'cdr alist))))
+
+ELISP> (setq al (plist->alist (list :x 10 :y 20 :name "point")))
+((:x 10)
+ (:y 20)
+ (:name "point"))
+
+ELISP> (alist->plist al)
+(:x 10 :y 20 :name "point")
+
+ELISP>
+
+(setq keylist
+    '("M-i"  'previous-line
+      "M-j"  'backward-char
+      "M-k"  'next-line
+      "M-l"  'forward-char))
+
+
+ELISP> (setq kv (plist->kv keylist))
+(("M-i" "M-j" "M-k" "M-l")
+ ('previous-line)
+ ('backward-char)
+ ('next-line)
+ ('forward-char))
+
+ELISP> (car kv)
+("M-i" "M-j" "M-k" "M-l")
+
+ELISP> (cdr kv)
+(('previous-line)
+ ('backward-char)
+ ('next-line)
+ ('forward-char))
+
+ELISP>
+```
+
+## Strings<a id="sec-2-10" name="sec-2-10"></a>
 
 ```lisp
 ;; Split String
@@ -3366,7 +3459,7 @@ ELISP> (read-from-string
 ELISP>
 ```
 
-## Symbols<a id="sec-2-10" name="sec-2-10"></a>
+## Symbols<a id="sec-2-11" name="sec-2-11"></a>
 
 ```lisp
 ;;; Convert a string to symbol
@@ -3474,7 +3567,7 @@ t
 ELISP>
 ```
 
-## Types Conversion<a id="sec-2-11" name="sec-2-11"></a>
+## Types Conversion<a id="sec-2-12" name="sec-2-12"></a>
 
 **Query Types**
 
@@ -3635,7 +3728,7 @@ some-symbol
     ELISP>
 ```
 
-## Eval<a id="sec-2-12" name="sec-2-12"></a>
+## Eval<a id="sec-2-13" name="sec-2-13"></a>
 
 **Eval Sexp or S-expressions**
 
@@ -3764,7 +3857,7 @@ or
 (load-file "/path/my_lisp_commands.el")
 ```
 
-## Defalias<a id="sec-2-13" name="sec-2-13"></a>
+## Defalias<a id="sec-2-14" name="sec-2-14"></a>
 
 The built-in macro defalias allows to define short and convenient
 names for Emacs functions.
@@ -3829,7 +3922,7 @@ ELISP> (file/filename (buffer-file-name))
 ELISP>
 ```
 
-## Control Structures     :loop:control:iteration:<a id="sec-2-14" name="sec-2-14"></a>
+## Control Structures     :loop:control:iteration:<a id="sec-2-15" name="sec-2-15"></a>
 
 See also:
 
@@ -4196,7 +4289,7 @@ See also:
     55
     ```
 
-## Functional Programming<a id="sec-2-15" name="sec-2-15"></a>
+## Functional Programming<a id="sec-2-16" name="sec-2-16"></a>
 
 See also: [Dash Library Github repository](https://github.com/magnars/dash.el)
 Dash is functional programming library to Emacs with many useful higher order functions.
@@ -4757,7 +4850,7 @@ Dash is functional programming library to Emacs with many useful higher order fu
     ELISP>
     ```
 
-## Structures<a id="sec-2-16" name="sec-2-16"></a>
+## Structures<a id="sec-2-17" name="sec-2-17"></a>
 
 ```lisp
 ELISP> (defstruct account id name balance)
@@ -7852,7 +7945,30 @@ or by entering the command below in the shell IELM or by putting it in the confi
 
 # Solutions<a id="sec-8" name="sec-8"></a>
 
-## Quick edit and reload Emac Configuration File.<a id="sec-8-1" name="sec-8-1"></a>
+## Code Navigation with Occur<a id="sec-8-1" name="sec-8-1"></a>
+
+The function **occur** is useful for code navigation and scan code
+statements, this function is invoked by M-x occur. The function occur
+can also be used to create code navigation functions that scan the
+code for statements. 
+
+The function python/scan-functions will scan for all lines that starts
+with def statement in a Python code and show the matching lines in the
+right side.
+
+```lisp
+(defun python/scan-functions ()
+  (interactive)  
+  (split-window-horizontally)
+  (occur "def")
+  )
+```
+
+Example 
+
+![img](images/occur_statement_scan.png)
+
+## Quick edit and reload Emac Configuration File.<a id="sec-8-2" name="sec-8-2"></a>
 
 It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
@@ -7874,7 +7990,7 @@ It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. 
 )
 ```
 
-## Refresh/ Reload File<a id="sec-8-2" name="sec-8-2"></a>
+## Refresh/ Reload File<a id="sec-8-3" name="sec-8-3"></a>
 
 Source: <http://www.emacswiki.org/emacs-en/download/misc-cmds.el>
 
@@ -7891,7 +8007,7 @@ Usage:
 M-x refresh
 \\#+END<sub>SRC</sub>
 
-## Creating Quick Access Menu<a id="sec-8-3" name="sec-8-3"></a>
+## Creating Quick Access Menu<a id="sec-8-4" name="sec-8-4"></a>
 
 ![img](images/utils_menu1.png)
 
@@ -7934,7 +8050,7 @@ M-x refresh
  )) ;; End of Custom Menu
 ```
 
-## Extract Function Documentation<a id="sec-8-4" name="sec-8-4"></a>
+## Extract Function Documentation<a id="sec-8-5" name="sec-8-5"></a>
 
 Source: [Generate emacs-lisp documentation](http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/)
 Primitives:
@@ -7998,7 +8114,7 @@ Function Docstring
 "
 \\#+END<sub>SRC</sub>
 
-## Edit File as Root<a id="sec-8-5" name="sec-8-5"></a>
+## Edit File as Root<a id="sec-8-6" name="sec-8-6"></a>
 
 ```lisp
 (defun open-as-root (filename)
@@ -8030,7 +8146,7 @@ Function Docstring
   (open-as-root filename))))    ;; Open File as root
 ```
 
-## Open Current Buffer Directory<a id="sec-8-6" name="sec-8-6"></a>
+## Open Current Buffer Directory<a id="sec-8-7" name="sec-8-7"></a>
 
 M-x open-dir
 
@@ -8041,7 +8157,7 @@ M-x open-dir
   (find-file (file-name-directory (buffer-file-name))))
 ```
 
-## Open Current Buffer Directory in File Manager<a id="sec-8-7" name="sec-8-7"></a>
+## Open Current Buffer Directory in File Manager<a id="sec-8-8" name="sec-8-8"></a>
 
 M-x open-file-manager
 
@@ -8057,7 +8173,7 @@ M-x open-file-manager
   (call-process "open" nil nil nil "."))
 ```
 
-## Open a terminal Emulator in the directory of Current Buffer<a id="sec-8-8" name="sec-8-8"></a>
+## Open a terminal Emulator in the directory of Current Buffer<a id="sec-8-9" name="sec-8-9"></a>
 
 Despite Emacs can run a shell like python, bash, zsh, it cannot run ncurses based applications. In these cases is necessary to launch an external terminal. This command can be added to the menu in the section: Creating Quick Access Menu (See section )
 Usage:
@@ -8095,7 +8211,7 @@ Code:
   " cmd))))
 ```
 
-## Eval String in Clipboard<a id="sec-8-9" name="sec-8-9"></a>
+## Eval String in Clipboard<a id="sec-8-10" name="sec-8-10"></a>
 
 It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
 
@@ -8116,7 +8232,7 @@ ELISP> (eval-xclip)
 ELISP>
 ```
 
-## Save and Reload Current Session<a id="sec-8-10" name="sec-8-10"></a>
+## Save and Reload Current Session<a id="sec-8-11" name="sec-8-11"></a>
 
 Interactive Developement
 
@@ -8223,7 +8339,7 @@ M-x load-session ;; All previous files in the session
                  ;; saved will be opened
 ```
 
-## Create a menu with all color themes available<a id="sec-8-11" name="sec-8-11"></a>
+## Create a menu with all color themes available<a id="sec-8-12" name="sec-8-12"></a>
 
 ![img](images/colortheme_menu.png)
 
@@ -8396,7 +8512,7 @@ ELISP> (macroexpand '(make-color-menu))
             ...
 ```
 
-## Better Menu Syntax<a id="sec-8-12" name="sec-8-12"></a>
+## Better Menu Syntax<a id="sec-8-13" name="sec-8-13"></a>
 
 This macro defines a more readable menu syntax.
 
@@ -8454,7 +8570,7 @@ ELISP> (macroexpand
               (load-theme 'light-blue)])))
 ```
 
-## Save and Restore Current Window Configuration<a id="sec-8-13" name="sec-8-13"></a>
+## Save and Restore Current Window Configuration<a id="sec-8-14" name="sec-8-14"></a>
 
 Press <F7> to save the curren window configuration and <F8> to restore. The functions can also be executed with A-x save-view or A-x restore-view.
 
@@ -8475,7 +8591,7 @@ Press <F7> to save the curren window configuration and <F8> to restore. The func
 (global-set-key (kbd "<f8>")  #'restore-view)
 ```
 
-## Http and Post Request<a id="sec-8-14" name="sec-8-14"></a>
+## Http and Post Request<a id="sec-8-15" name="sec-8-15"></a>
 
 [Source](http://qiita.com/sanryuu/items/eed79c7b99616e769e67)
 

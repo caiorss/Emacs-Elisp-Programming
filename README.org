@@ -1,7 +1,7 @@
 # -*- mode: org; -*-
 
 #+AUTHOR: Caio Rodrigues
-#+EMAIL: caiorss dot rodrigues dot at gmail dot com
+#+EMAIL: <caiorss.rodrigues@gmail.com>
 #+TITLE: Emacs In a Box
 #+URL:  http://tinyurl.com/emacsinabox
 #+STARTUP: overview
@@ -435,8 +435,8 @@ See also:
   - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
 
 
-
 * Elisp
+** Overview 
 
 This section will use the Emacs interactive elisp shell IELM that can
 be accessed by typing *M-x ielm*. You can also use the scratch buffer
@@ -508,7 +508,6 @@ file:images/emacs-interactive-command1.png
 After:
 
 file:images/emacs-interactive-command2.png
-
 
 ** Basic Operations
 
@@ -1495,8 +1494,85 @@ ELISP>
 #+END_SRC
 
 ** Association Lists and Property Lists
+*** Overview 
 
-***** Association List / Alist
+An association list is a list of cons pairs, that will be called here
+of *clist* or a list of lists of two elements each that will be called
+here of *alist* :
+
+*Association list of type: clist*
+
+Keys: a, x, 2 and 4
+Values: b, y, 3 and (1 2 3 4 5)
+
+#+BEGIN_SRC eamcs-lisp 
+
+ELISP> '((a . b) (x . y) (2 . 3) (4 . (1 2 3 4 5)))
+((a . b)
+ (x . y)
+ (2 . 3)
+ (4 1 2 3 4 5)
+
+ELISP> (cons 'a 'b)
+(a . b)
+
+ELISP> (cons 'a (cons 'b (cons 'c nil)))
+(a b c)
+#+END_SRC
+
+Not that in this list '(4 . (1 2 3 4)) becomes '(4 1 2 3 4) what makes
+this list ambiguous for associations with multiple elements. The list
+most used by Emacs API is the *clist*.
+
+*Assocation list of type: alist*
+
+#+BEGIN_SRC emacs-lisp 
+ELISP> '((a  b) (x  y) (2  3) (4  (1 2 3 4 5)))
+((a b)
+ (x y)
+ (2 3)
+ (4
+  (1 2 3 4 5)))
+
+ELISP> (list (list 'a 'b) (list 'x 'y) (list 2 3) (list 2 '(1 2 3 4 5)))
+((a b)
+ (x y)
+ (2 3)
+ (2
+  (1 2 3 4 5)))
+#+END_SRC
+
+This type of list is not ambiguous like the clist. 
+
+
+*Property Lists: Plist*
+
+Property lists are lists of consecutive pairs of keys and values. The
+advantage of this list is that it requires less parenthesis and it is
+more human readable. 
+
+#+BEGIN_SRC elisp
+
+'(:key1 value1 :key2 value2 :key3 1002.23 :key4 (a b c d e))
+
+ELISP> '(:key1 value1 :key2 value2 :key3 1002.23 :key4 (a b c d e))
+(:key1 value1 :key2 value2 :key3 1002.23 :key4
+       (a b c d e))
+
+;;; It is more useful in configuration files 
+
+(
+:key1  value1 
+:key2  value2
+:key3  value3 
+:key4  (a b c d e )
+)
+
+
+#+END_SRC
+
+
+*** Association List / Alist
 
 Reference: [[http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_89.html][Emacs Manual / Association Lists]]
 
@@ -1744,7 +1820,7 @@ ELISP> (get-key-value language-list "scala" ':command)
 ELISP>
 #+END_SRC
 
-***** Property Lists
+*** Property Lists
 
 
 #+BEGIN_SRC elisp
@@ -1784,7 +1860,7 @@ ELISP>
     ELISP>
 #+END_SRC
 
-***** Converting Alists to Plists and vice-versa
+*** Converting Alists to Plists and vice-versa
 
 #+BEGIN_SRC elisp
 
@@ -1801,7 +1877,7 @@ ELISP> (plist->alist (list :x 10 :y 20 :name "point"))
  (:y 20)
  (:name "point"))
 
-;;; Convert association list to plist
+;;; Converts association list to plist
 (defun alist->plist (assocl)
   (if (null assocl)
       '()
@@ -1811,6 +1887,19 @@ ELISP> (plist->alist (list :x 10 :y 20 :name "point"))
       (cons (car hd)
         (cons (cadr hd)
           (alist->plist tl))))))
+
+;;; Converts plist to clist (List of cons pairs)
+(defun plist->clist (plist)
+  (if (null plist)
+      '()
+      (cons
+       (cons (car plist) (cadr plist))
+      (plist->clist (cddr plist)))))
+
+ELISP> (plist->clist (list :x 10 :y 20 :name "point"))
+((:x . 10)
+ (:y . 20)
+ (:name . "point"))
 
 ;; Separates a property list into two lists of keys and values.
 ;;
@@ -6044,8 +6133,6 @@ Color Themes:
  - [[http://ethanschoonover.com/solarized][Solarized - Ethan Schoonover]]
  - [[https://emacsthemes.com/][A GNU Emacs Themes Gallery]] 
  
-
-
 * Key Bindings
 ** Global Key Bindings 
 
@@ -6347,10 +6434,35 @@ or by entering the command below in the shell IELM or by putting it in the confi
 (cua-mode)
 #+END_SRC
 
-
 ** Mode Key Bindings
 
 * Solutions
+**  Code Navigation with Occur  
+
+The function *occur* is useful for code navigation and scan code
+statements, this function is invoked by M-x occur. The function occur
+can also be used to create code navigation functions that scan the
+code for statements. 
+
+The function python/scan-functions will scan for all lines that starts
+with def statement in a Python code and show the matching lines in the
+right side.
+
+#+BEGIN_SRC emacs-lisp 
+
+(defun python/scan-functions ()
+  (interactive)  
+  (split-window-horizontally)
+  (occur "def")
+  )
+
+
+#+END_SRC 
+
+Example 
+
+file:images/occur_statement_scan.png
+
 **  Quick edit and reload Emac Configuration File.
 
 It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.

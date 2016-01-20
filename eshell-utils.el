@@ -16,10 +16,10 @@
 
 ;; (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)
 
-(setq
-      ;;eshell-cmpl-cycle-completions nil
-      eshell-save-history-on-exit t
-      eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
+;; (setq
+;;       ;;eshell-cmpl-cycle-completions nil
+;;       eshell-save-history-on-exit t
+;;       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
 
 
 (defun eshell/println (x)
@@ -37,6 +37,9 @@
 (defun eshell/fe (file)
   "Open file in another frame"
       (find-file-other-frame file))
+
+(defun eshell/ns (file)
+  (find-file-noselect file))
 
 
 (defun eshell/list-files ()
@@ -101,12 +104,13 @@
 ;;
 ;; Set eshell prompt
 ;;
-(setq eshell-prompt-function
-  (lambda nil
-    (concat
-     "[" (user-login-name) "@" (getenv "HOSTNAME") ":"
-     (eshell/pwd)
-     "]\n$ ")))
+
+;; (setq eshell-prompt-function
+;;   (lambda nil
+;;     (concat
+;;      "[" (user-login-name) "@" (getenv "HOSTNAME") ":"
+;;      (eshell/pwd)
+;;      "]\n$ ")))
 
 
 
