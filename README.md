@@ -1,4 +1,5 @@
 - [Emacs - Programming and Customization](#emacs---programming-and-customization)
+  - [Overview](#overview)
   - [Command Line Options](#command-line-options)
   - [Default Key Bindings and Useful Commands](#default-key-bindings-and-useful-commands)
     - [Key Notation and Conventions](#key-notation-and-conventions)
@@ -8,8 +9,9 @@
     - [Ubiquitous Emacs Key Bindings](#ubiquitous-emacs-key-bindings)
 - [Elisp](#elisp)
   - [Overview](#overview)
-  - [Using the Scratch Buffer and Interpreter](#using-the-scratch-buffer-and-interpreter)
-  - [Creating Commands (Interactive Functions)](#creating-commands-(interactive-functions))
+    - [Using the Scratch Buffer and Interpreter](#using-the-scratch-buffer-and-interpreter)
+    - [Creating Commands (Interactive Functions)](#creating-commands-(interactive-functions))
+    - [Exploring Emacs](#exploring-emacs)
   - [Basic Operations](#basic-operations)
   - [Type Predicates and Literals](#type-predicates-and-literals)
     - [Emacs Literals](#emacs-literals)
@@ -123,6 +125,8 @@
 
 # Emacs - Programming and Customization<a id="sec-1" name="sec-1"></a>
 
+## Overview<a id="sec-1-1" name="sec-1-1"></a>
+
 ![img](images/emacs_logo.png)
 
 **Repository Link**
@@ -157,7 +161,7 @@ is in the same directory of all emacs configuration files.
 The Emacs scratch buffer can be used to test new features and try
 Emacs codes along with IELM - Emacs Lisp interactive shell.
 
-## Command Line Options<a id="sec-1-1" name="sec-1-1"></a>
+## Command Line Options<a id="sec-1-2" name="sec-1-2"></a>
 
 Start emacs ignoring the <file:///home/tux/.emacs.d/init.el> or <file:///home/tux/.emacs> configuration file.
 
@@ -188,20 +192,20 @@ Show Emacs version
 $ emacs --version
 ```
 
-## Default Key Bindings and Useful Commands<a id="sec-1-2" name="sec-1-2"></a>
+## Default Key Bindings and Useful Commands<a id="sec-1-3" name="sec-1-3"></a>
 
 The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
 enabled by typing: M-x cua-mode or by inserting =(cua-mode) in emacs
 configuration file, emacs also supports the Vim key bindings by
-installing the evil package `(M-x package-install evil)`.
+installing the evil package `(M-x package-install evil)`. 
 
 See also:
 
 -   [GNU Emacs Key Bindings  Reference Card](https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf)
 
-### Key Notation and Conventions<a id="sec-1-2-1" name="sec-1-2-1"></a>
+### Key Notation and Conventions<a id="sec-1-3-1" name="sec-1-3-1"></a>
 
-Key Notation
+**Key Notation**
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -230,6 +234,13 @@ Key Notation
 
 
 <tr>
+<td class="left">A</td>
+<td class="left">Meta</td>
+<td class="left">Alt</td>
+</tr>
+
+
+<tr>
 <td class="left">C</td>
 <td class="left">Control</td>
 <td class="left">Ctrl</td>
@@ -251,7 +262,9 @@ Key Notation
 </tbody>
 </table>
 
-Key Sequence
+-   Some texts uses A - Alt instead of Meta.
+
+**Key Sequence**
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -300,7 +313,7 @@ Key Sequence
 </tbody>
 </table>
 
-Key Mneumonics
+**Key Mneumonics**
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -363,7 +376,7 @@ See also:
 -   [Are there any emacs key combinations reserved for custom commands?](http://stackoverflow.com/questions/1144424/are-there-any-emacs-key-combinations-reserved-for-custom-commands)
 -   [Mastering Key Bindings in Emacs](https://www.masteringemacs.org/article/mastering-key-bindings-emacs)
 
-### Key Bindings by Task<a id="sec-1-2-2" name="sec-1-2-2"></a>
+### Key Bindings by Task<a id="sec-1-3-2" name="sec-1-3-2"></a>
 
 1.  File
 
@@ -457,13 +470,13 @@ See also:
     
     
     <tr>
-    <td class="left">C-x <right arrow></td>
+    <td class="left">C-x [right]</td>
     <td class="left">Move to next buffer</td>
     </tr>
     
     
     <tr>
-    <td class="left">C-x <left arrow></td>
+    <td class="left">C-x [left]</td>
     <td class="left">Move to previous buffer</td>
     </tr>
     </tbody>
@@ -646,19 +659,19 @@ See also:
     
     
     <tr>
-    <td class="left">A-s .</td>
+    <td class="left">M-s .</td>
     <td class="left">Find Symbol under cursor</td>
     </tr>
     
     
     <tr>
-    <td class="left">A-s w</td>
+    <td class="left">M-s w</td>
     <td class="left">Find Symbol under cursor, match symbols with underscore, dot, hyphen ..</td>
     </tr>
     
     
     <tr>
-    <td class="left">A-s o</td>
+    <td class="left">M-s o</td>
     <td class="left">List all matching lines</td>
     </tr>
     </tbody>
@@ -1073,7 +1086,7 @@ See also:
     </tbody>
     </table>
 
-### Selected Key Bindings and Commands for Programming<a id="sec-1-2-3" name="sec-1-2-3"></a>
+### Selected Key Bindings and Commands for Programming<a id="sec-1-3-3" name="sec-1-3-3"></a>
 
 **FILE EDITING**
 
@@ -1319,7 +1332,7 @@ See also:
 </tbody>
 </table>
 
-### Keybindings and Commands for Lisp programming<a id="sec-1-2-4" name="sec-1-2-4"></a>
+### Keybindings and Commands for Lisp programming<a id="sec-1-3-4" name="sec-1-3-4"></a>
 
 Useful lisp key bindings to edit and navigate Lisp code.
 
@@ -1561,7 +1574,7 @@ Useful lisp key bindings to edit and navigate Lisp code.
 </tbody>
 </table>
 
-### Ubiquitous Emacs Key Bindings<a id="sec-1-2-5" name="sec-1-2-5"></a>
+### Ubiquitous Emacs Key Bindings<a id="sec-1-3-5" name="sec-1-3-5"></a>
 
 Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in
 Unix apps like Bash, Sh and all shells that uses the GNU readline
@@ -1636,14 +1649,14 @@ library.
 
 
 <tr>
-<td class="left">A-b</td>
+<td class="left">M-b</td>
 <td class="left">Move the cursor backward one word</td>
 <td class="left">same</td>
 </tr>
 
 
 <tr>
-<td class="left">A-f</td>
+<td class="left">M-f</td>
 <td class="left">Move the cursor forward one word</td>
 <td class="left">same</td>
 </tr>
@@ -1657,7 +1670,7 @@ library.
 
 
 <tr>
-<td class="left">A-t</td>
+<td class="left">M-t</td>
 <td class="left">Swap current word with previous</td>
 <td class="left">same</td>
 </tr>
@@ -1671,7 +1684,7 @@ library.
 
 
 <tr>
-<td class="left">A-d</td>
+<td class="left">M-d</td>
 <td class="left">Delete the next word</td>
 <td class="left">same</td>
 </tr>
@@ -1699,7 +1712,7 @@ library.
 
 
 <tr>
-<td class="left">A-w</td>
+<td class="left">M-w</td>
 <td class="left">Copy the slected text</td>
 <td class="left">&#xa0;</td>
 </tr>
@@ -1796,7 +1809,7 @@ remove-if-not, cl-case and so on.
 
 See also: [Common Lisp Extensions - Common Lisp Extensions](http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html)
 
-## Using the Scratch Buffer and Interpreter<a id="sec-2-2" name="sec-2-2"></a>
+### Using the Scratch Buffer and Interpreter<a id="sec-2-1-1" name="sec-2-1-1"></a>
 
 The scratch buffer is useful to evaluate Emacs lisp commands, test new
 features and test new Emacs configurations and dot emacs without need
@@ -1835,7 +1848,7 @@ Example:
 
 ![img](images/mx_eval_buffer2.png)
 
-## Creating Commands (Interactive Functions)<a id="sec-2-3" name="sec-2-3"></a>
+### Creating Commands (Interactive Functions)<a id="sec-2-1-2" name="sec-2-1-2"></a>
 
 ```lisp
 (defun buffer/insert-filename ()
@@ -1853,7 +1866,67 @@ After:
 
 ![img](images/emacs-interactive-command2.png)
 
-## Basic Operations<a id="sec-2-4" name="sec-2-4"></a>
+### Exploring Emacs<a id="sec-2-1-3" name="sec-2-1-3"></a>
+
+1.  Function Bound to Key Binding
+
+    Emacs is almost a "Functional Programming editor", to every key bind,
+    menu action, interactive command or mouse action is bound a
+    function. 
+    
+    For example: to the key bind `C-x <right>` is bound the interactive
+    function `next-buffer` that can be executed with M-x next-buffer.
+    
+    To learn which function is bound to key type: `M-x describe-key` and
+    then type the key binding like `C-x <right>` to pop up a window that
+    shows the function bound to that key or just type `C-h-k` and type the
+    key combination. 
+    
+    ![img](images/function_keybind_describe.png) 
+
+2.  List All Defined Key Bindings
+
+    The command `M-x describe-bindings` or the key binding `C-h b` shows a
+    list of all defined keys and all functions that are associated to them
+    in all modes, including the buffer major mode.
+    
+    Example:
+    
+    `C-h b` in the <span class="underline">scratch buffer</span> (Elisp interactive mode). 
+    
+    The picture shows the major mode key bindings (elisp interactive mode)
+    for the scratch buffer.
+    
+    ![img](images/emacs-list-all-key-bindings.png)
+    
+    This command also shows <span class="underline">minor modes</span> key bindings.
+    
+    The image bellow shows the minor mode (pareddit) key bindings:
+    
+    ![img](images/minor-mode-binding-pareddit.png)
+    
+    If the user select the function pareddit-kill (which is associated with
+    the key binding `C-k` in pareddit-mode) and type return, it will show
+    the function documentation or what the key combination does. 
+    
+    ![img](images/minor-mode-binding-pareddit2.png)
+
+3.  Function Documentation
+
+    Emacs keeps an in-memory documentation of all functions. To see the documentation type `M-x describe-function` or `C h k` and type the function name
+    or put the cursor at the beggining of the function name and type `M-x describe-function`.  
+    
+    Example: `M-x describe-function` replace-regexp
+    
+    This can also be invoked with:
+    
+    ```lisp
+    (describe-function 'replace-regexp)
+    ```
+    
+    ![img](images/function-documentation-describe.png)
+
+## Basic Operations<a id="sec-2-2" name="sec-2-2"></a>
 
 **Arithmetic**
 
@@ -1945,9 +2018,9 @@ ELISP> '(10 203 40 "hello" () ("empty" 65))
 ELISP>
 ```
 
-## Type Predicates and Literals<a id="sec-2-5" name="sec-2-5"></a>
+## Type Predicates and Literals<a id="sec-2-3" name="sec-2-3"></a>
 
-### Emacs Literals<a id="sec-2-5-1" name="sec-2-5-1"></a>
+### Emacs Literals<a id="sec-2-3-1" name="sec-2-3-1"></a>
 
 ```lisp
 ;;; Numbers
@@ -2029,7 +2102,7 @@ ELISP> [1 2 3 4 (+ 1 2 3 54)]
    (+ 1 2 3 54)]
 ```
 
-### Basic Types Predicate<a id="sec-2-5-2" name="sec-2-5-2"></a>
+### Basic Types Predicate<a id="sec-2-3-2" name="sec-2-3-2"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -2197,7 +2270,7 @@ t
 ELISP>
 ```
 
-### Get Object Type<a id="sec-2-5-3" name="sec-2-5-3"></a>
+### Get Object Type<a id="sec-2-3-3" name="sec-2-3-3"></a>
 
 ```lisp
 ELISP> (type-of (current-buffer))
@@ -2214,7 +2287,7 @@ nil
 ELISP>
 ```
 
-## Defining Variables<a id="sec-2-6" name="sec-2-6"></a>
+## Defining Variables<a id="sec-2-4" name="sec-2-4"></a>
 
 ```lisp
 ;;; Constants
@@ -2284,7 +2357,7 @@ ELISP> y
 ELISP>
 ```
 
-## Defining Functions<a id="sec-2-7" name="sec-2-7"></a>
+## Defining Functions<a id="sec-2-5" name="sec-2-5"></a>
 
 1.  Define Simple Function
 
@@ -2691,7 +2764,7 @@ ELISP>
     (setq lexical-binding t)
     ```
 
-## List Operations<a id="sec-2-8" name="sec-2-8"></a>
+## List Operations<a id="sec-2-6" name="sec-2-6"></a>
 
 See also:
 
@@ -2914,9 +2987,9 @@ ELISP> alist
 ELISP>
 ```
 
-## Association Lists and Property Lists<a id="sec-2-9" name="sec-2-9"></a>
+## Association Lists and Property Lists<a id="sec-2-7" name="sec-2-7"></a>
 
-### Overview<a id="sec-2-9-1" name="sec-2-9-1"></a>
+### Overview<a id="sec-2-7-1" name="sec-2-7-1"></a>
 
 An association list is a list of cons pairs, that will be called here
 of **clist** or a list of lists of two elements each that will be called
@@ -2988,7 +3061,7 @@ ELISP> '(:key1 value1 :key2 value2 :key3 1002.23 :key4 (a b c d e))
 )
 ```
 
-### Association List / Alist<a id="sec-2-9-2" name="sec-2-9-2"></a>
+### Association List / Alist<a id="sec-2-7-2" name="sec-2-7-2"></a>
 
 Reference: [Emacs Manual / Association Lists](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_89.html)
 
@@ -3232,7 +3305,7 @@ ELISP> (get-key-value language-list "scala" ':command)
 ELISP>
 ```
 
-### Property Lists<a id="sec-2-9-3" name="sec-2-9-3"></a>
+### Property Lists<a id="sec-2-7-3" name="sec-2-7-3"></a>
 
 ```lisp
     ELISP> (defvar plst (list :buffer (current-buffer) :line 10 :pos 2000))
@@ -3270,7 +3343,7 @@ ELISP>
     ELISP>
 ```
 
-### Converting Alists to Plists and vice-versa<a id="sec-2-9-4" name="sec-2-9-4"></a>
+### Converting Alists to Plists and vice-versa<a id="sec-2-7-4" name="sec-2-7-4"></a>
 
 ```lisp
 ;; Alist to plist
@@ -3354,7 +3427,7 @@ ELISP> (cdr kv)
 ELISP>
 ```
 
-## Strings<a id="sec-2-10" name="sec-2-10"></a>
+## Strings<a id="sec-2-8" name="sec-2-8"></a>
 
 ```lisp
 ;; Split String
@@ -3459,7 +3532,7 @@ ELISP> (read-from-string
 ELISP>
 ```
 
-## Symbols<a id="sec-2-11" name="sec-2-11"></a>
+## Symbols<a id="sec-2-9" name="sec-2-9"></a>
 
 ```lisp
 ;;; Convert a string to symbol
@@ -3567,7 +3640,7 @@ t
 ELISP>
 ```
 
-## Types Conversion<a id="sec-2-12" name="sec-2-12"></a>
+## Types Conversion<a id="sec-2-10" name="sec-2-10"></a>
 
 **Query Types**
 
@@ -3728,7 +3801,7 @@ some-symbol
     ELISP>
 ```
 
-## Eval<a id="sec-2-13" name="sec-2-13"></a>
+## Eval<a id="sec-2-11" name="sec-2-11"></a>
 
 **Eval Sexp or S-expressions**
 
@@ -3857,7 +3930,7 @@ or
 (load-file "/path/my_lisp_commands.el")
 ```
 
-## Defalias<a id="sec-2-14" name="sec-2-14"></a>
+## Defalias<a id="sec-2-12" name="sec-2-12"></a>
 
 The built-in macro defalias allows to define short and convenient
 names for Emacs functions.
@@ -3922,7 +3995,7 @@ ELISP> (file/filename (buffer-file-name))
 ELISP>
 ```
 
-## Control Structures     :loop:control:iteration:<a id="sec-2-15" name="sec-2-15"></a>
+## Control Structures     :loop:control:iteration:<a id="sec-2-13" name="sec-2-13"></a>
 
 See also:
 
@@ -4289,7 +4362,7 @@ See also:
     55
     ```
 
-## Functional Programming<a id="sec-2-16" name="sec-2-16"></a>
+## Functional Programming<a id="sec-2-14" name="sec-2-14"></a>
 
 See also: [Dash Library Github repository](https://github.com/magnars/dash.el)
 Dash is functional programming library to Emacs with many useful higher order functions.
@@ -4850,7 +4923,7 @@ Dash is functional programming library to Emacs with many useful higher order fu
     ELISP>
     ```
 
-## Structures<a id="sec-2-17" name="sec-2-17"></a>
+## Structures<a id="sec-2-15" name="sec-2-15"></a>
 
 ```lisp
 ELISP> (defstruct account id name balance)
@@ -9102,10 +9175,9 @@ examine ways of marking up text in Org Mode, as well as various link
 types that connect Org headlines and files, as well as links that can
 execute code.
 
-**NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with 
-Orgmode by Tory S. Anderson**
+**NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode by Tory S. Anderson**
 
--   [NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode - YouTube](https://www.youtube.com/watch?v=nkv8PpxrL3k)
+-   [Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode](https://www.youtube.com/watch?v%3Dnkv8PpxrL3k)
 -   
 -   
 
@@ -9206,7 +9278,10 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
 ## Haskell<a id="sec-11-5" name="sec-11-5"></a>
 
--   [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)\* [Emacs/Inferior Haskell processes](https://wiki.haskell.org/Emacs/Inferior_Haskell_processes)
+See:
+
+-   [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)
+-   [Emacs/Inferior Haskell processes](https://wiki.haskell.org/Emacs/Inferior_Haskell_processes)
 
 ## Lisp Dialects<a id="sec-11-6" name="sec-11-6"></a>
 

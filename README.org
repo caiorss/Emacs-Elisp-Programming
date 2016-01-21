@@ -1,8 +1,10 @@
 # -*- mode: org; -*-
-
 #+AUTHOR: Caio Rodrigues
 #+EMAIL: <caiorss.rodrigues@gmail.com>
 #+TITLE: Emacs In a Box
+#+KEYWORDS: emacs, elisp, lisp, programming 
+#+LANGUAGE: en
+#+DESCRIPTION: Emacs programming and customization. 
 #+URL:  http://tinyurl.com/emacsinabox
 #+STARTUP: overview
 
@@ -21,7 +23,7 @@
 #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
 
 * Emacs - Programming and Customization
-
+** Overview
 file:images/emacs_logo.png
 
 *Repository Link*
@@ -100,7 +102,7 @@ $ emacs --version
 The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
 enabled by typing: M-x cua-mode or by inserting =(cua-mode) in emacs
 configuration file, emacs also supports the Vim key bindings by
-installing the evil package =(M-x package-install evil)=.
+installing the evil package =(M-x package-install evil)=. 
 
 See also:
 
@@ -108,16 +110,19 @@ See also:
 
 *** Key Notation and Conventions
 
-Key Notation
+*Key Notation*
 
-| Key | Name    | Modern Keyboard Equivalence |    
-|-----+---------+-----------------------------|    
-| M   | Meta    | Alt                         |    
-| C   | Control | Ctrl                        |    
+| Key | Name    | Modern Keyboard Equivalence |
+|-----+---------+-----------------------------|
+| M   | Meta    | Alt                         |
+| A   | Meta    | Alt                         |
+| C   | Control | Ctrl                        |
 | S   | Shift   | Shift                       |
 | SPC | Space   | Space                       |
 
-Key Sequence
+ * Some texts uses A - Alt instead of Meta.  
+
+*Key Sequence*
 
 | Prefix Key | Purpose                              |
 |------------+--------------------------------------|
@@ -127,7 +132,7 @@ Key Sequence
 | M-x        | Reserved to execute Emacs Commands. |
 | C-g        | Reserved to cancel Emacs commands.   |
 
-Key Mneumonics
+*Key Mneumonics*
 
 | Letter | Mneumonic |
 |--------+-----------|
@@ -149,7 +154,6 @@ See also:
   - [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][Mastering Key Bindings in Emacs]]
 
 *** Key Bindings by Task
-
 **** File
 
 |           |                                |
@@ -163,13 +167,13 @@ See also:
 
 **** Buffers
 
-|                   |                         |
-|-------------------+-------------------------|
-| C-x b             | Select Another Buffer   |
-| C-x C-b           | List all buffers        |
-| C-x k             | Kill a buffer           |
-| C-x <right arrow> | Move to next buffer     |
-| C-x <left arrow>  | Move to previous buffer |
+|             |                         |
+|-------------+-------------------------|
+| C-x b       | Select Another Buffer   |
+| C-x C-b     | List all buffers        |
+| C-x k       | Kill a buffer           |
+| C-x [right] | Move to next buffer     |
+| C-x [left]  | Move to previous buffer |
 
 **** Navigation
 
@@ -206,9 +210,9 @@ See also:
 | C-s   | Jump to next occurrence                                                 |
 | C-r   | Jump to previour occurrence                                             |
 | C-g   | Exit search                                                             |
-| A-s . | Find Symbol under cursor                                                |
-| A-s w | Find Symbol under cursor, match symbols with underscore, dot, hyphen .. |
-| A-s o | List all matching lines                                                 |
+| M-s . | Find Symbol under cursor                                                |
+| M-s w | Find Symbol under cursor, match symbols with underscore, dot, hyphen .. |
+| M-s o | List all matching lines                                                 |
 
 **** Highlight
 
@@ -276,7 +280,6 @@ See also:
 | M -!  <command>          | Run a single shell command like: ls, pwd, make ...          |
 | M-x eval-region          | Evaluate selected region as elisp code                      |
 | M-x eval-buffer          | Evaluate curren buffer as elips code                        |
-
 
 **** Information
 
@@ -408,16 +411,16 @@ library.
 | C-p | Move the cursor to the previous line (upward)             | Show the previou command in the history. |
 | C-j | New line character (same as Return)                       | same                                     |
 |     |                                                           |                                          |
-| A-b | Move the cursor backward one word                         | same                                     |
-| A-f | Move the cursor forward one word                          | same                                     |
+| M-b | Move the cursor backward one word                         | same                                     |
+| M-f | Move the cursor forward one word                          | same                                     |
 |     |                                                           |                                          |
-| A-t | Swap current word with previous                           | same                                     |
+| M-t | Swap current word with previous                           | same                                     |
 |     |                                                           |                                          |
-| A-d | Delete the next word                                      | same                                     |
+| M-d | Delete the next word                                      | same                                     |
 |     |                                                           |                                          |
 | C-k | Delete the remaining of line from current cursor position | same                                     |
 | C-y | Paste the deleted line with (C-k) or copied line (Yank)   | same                                     |
-| A-w | Copy the slected text                                     |                                          |
+| M-w | Copy the slected text                                     |                                          |
 |     |                                                           |                                          |
 |     |                                                           |                                          |
 | C-r | Search forward for a string                               | Search for previous command              |
@@ -434,7 +437,6 @@ See also:
   - [[http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/][Bash Emacs Editing Mode Cheat Sheet]]
   - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
 
-
 * Elisp
 ** Overview 
 
@@ -449,7 +451,7 @@ remove-if-not, cl-case and so on.
 
 See also: [[http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html][Common Lisp Extensions - Common Lisp Extensions]]
 
-** Using the Scratch Buffer and Interpreter
+*** Using the Scratch Buffer and Interpreter
 
 
 The scratch buffer is useful to evaluate Emacs lisp commands, test new
@@ -489,7 +491,7 @@ file:images/mx_eval_buffer1.png
 
 file:images/mx_eval_buffer2.png
 
-** Creating Commands (Interactive Functions)
+*** Creating Commands (Interactive Functions)
 
 #+BEGIN_SRC elisp 
 
@@ -508,6 +510,65 @@ file:images/emacs-interactive-command1.png
 After:
 
 file:images/emacs-interactive-command2.png
+
+*** Exploring Emacs 
+**** Function Bound to Key Binding 
+
+Emacs is almost a "Functional Programming editor", to every key bind,
+menu action, interactive command or mouse action is bound a
+function. 
+
+For example: to the key bind =C-x <right>= is bound the interactive
+function =next-buffer= that can be executed with M-x next-buffer.
+
+To learn which function is bound to key type: =M-x describe-key= and
+then type the key binding like =C-x <right>= to pop up a window that
+shows the function bound to that key or just type =C-h-k= and type the
+key combination. 
+
+file:images/function_keybind_describe.png 
+
+**** List All Defined Key Bindings
+
+The command =M-x describe-bindings= or the key binding =C-h b= shows a
+list of all defined keys and all functions that are associated to them
+in all modes, including the buffer major mode.
+
+Example:
+
+=C-h b= in the _scratch buffer_ (Elisp interactive mode). 
+
+The picture shows the major mode key bindings (elisp interactive mode)
+for the scratch buffer.
+
+file:images/emacs-list-all-key-bindings.png
+
+This command also shows _minor modes_ key bindings.
+
+The image bellow shows the minor mode (pareddit) key bindings:
+
+file:images/minor-mode-binding-pareddit.png
+
+If the user select the function pareddit-kill (which is associated with
+the key binding =C-k= in pareddit-mode) and type return, it will show
+the function documentation or what the key combination does. 
+
+file:images/minor-mode-binding-pareddit2.png
+
+**** Function Documentation 
+
+Emacs keeps an in-memory documentation of all functions. To see the documentation type =M-x describe-function= or =C h k= and type the function name
+or put the cursor at the beggining of the function name and type =M-x describe-function=.  
+
+Example: =M-x describe-function= replace-regexp
+
+This can also be invoked with:
+
+#+BEGIN_SRC elisp 
+(describe-function 'replace-regexp)
+#+END_SRC
+
+file:images/function-documentation-describe.png
 
 ** Basic Operations
 
@@ -7390,7 +7451,6 @@ Non Categorized:
    * [[http://www.totherme.org/configs/org-stuff.html][Gareth's Org-Mode Config]]
 
 ** Videos
-
 *** Tutorials
 
 *Org Mode in Depth - by Rick Dillon*
@@ -7417,10 +7477,9 @@ examine ways of marking up text in Org Mode, as well as various link
 types that connect Org headlines and files, as well as links that can
 execute code.
 
-*NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with 
-Orgmode by Tory S. Anderson*
+ *NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode by Tory S. Anderson*
 
-   - [[https://www.youtube.com/watch?v=nkv8PpxrL3k][NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode - YouTube]]
+   - [[https://www.youtube.com/watch?v%3Dnkv8PpxrL3k][Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode]]
    - 
    - 
 
@@ -7438,8 +7497,7 @@ Orgmode by Tory S. Anderson*
 
      * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
 
-     * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]
-       
+     * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]      
 * Eshell 
 
 Features:
@@ -7523,7 +7581,10 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
     * [[http://wikemacs.org/wiki/OCaml][Ocaml]]
 ** Haskell
 
-    * [[http://wikemacs.org/wiki/Haskell-mode][Haskell Mode]]* [[https://wiki.haskell.org/Emacs/Inferior_Haskell_processes][Emacs/Inferior Haskell processes]]
+See:
+
+  * [[http://wikemacs.org/wiki/Haskell-mode][Haskell Mode]]
+  * [[https://wiki.haskell.org/Emacs/Inferior_Haskell_processes][Emacs/Inferior Haskell processes]]
 
 ** Lisp Dialects
 *** All Lisp Dialects
