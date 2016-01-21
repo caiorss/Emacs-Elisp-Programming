@@ -6517,12 +6517,32 @@ right side.
   (occur "def")
   )
 
-
 #+END_SRC 
 
 Example 
 
 file:images/occur_statement_scan.png
+
+
+It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
+@NOTE.
+
+
+#+BEGIN_SRC emacs-lisp 
+
+(defun scan-code-tags ()
+     "
+     Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:
+  
+     "
+     (interactive)
+     (split-window-horizontally)
+     (occur "@FIXME:\\|@TODO:\\|@BUG:\\|@NOTE:"))
+
+#+END_SRC
+
+
+file:images/scan_code_tags.png
 
 **  Quick edit and reload Emac Configuration File.
 
@@ -7586,6 +7606,14 @@ See:
   * [[http://wikemacs.org/wiki/Haskell-mode][Haskell Mode]]
   * [[https://wiki.haskell.org/Emacs/Inferior_Haskell_processes][Emacs/Inferior Haskell processes]]
 
+** R Language 
+
+See:
+
+ - [[http://blog.revolutionanalytics.com/2014/03/emacs-ess-and-r-for-zombies.html][Emacs, ESS and R for Zombies]]
+ - [[http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/][Using Emacs to work with R « Stack Exchange Stats Blog]]
+ - 
+
 ** Lisp Dialects
 *** All Lisp Dialects
 
@@ -7706,7 +7734,6 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
 
 * Resources
 ** Emacs Tutorials
-
 *** Motivation
     
     * [[http://martinfowler.com/bliki/InternalReprogrammability.html][Internal Reprogrammability]] by Martin Fowler
@@ -7788,9 +7815,11 @@ technical details involved."
     * [[https://wiki.archlinux.org/index.php/Emacs][Emacs / Arch Wiki]]
     * [[http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html][Emacs Lisp for Perl Programmers]]
     * [[http://hyperpolyglot.org/lisp][Hyperglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp]]
+
     *Github*
 
     * [[https://github.com/hypernumbers/learn_elisp_the_hard_way][Learn Elisp the Hard Way]]
+
     *Lexical Scope*
 
     * [[http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html][On elisp and programming in general]]

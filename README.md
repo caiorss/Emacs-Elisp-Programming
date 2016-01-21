@@ -95,6 +95,7 @@
   - [C / C++](#c-/-c++)
   - [Ocaml](#ocaml)
   - [Haskell](#haskell)
+  - [R Language](#r-language)
   - [Lisp Dialects](#lisp-dialects)
     - [All Lisp Dialects](#all-lisp-dialects)
     - [Common Lisp](#common-lisp)
@@ -8041,6 +8042,22 @@ Example
 
 ![img](images/occur_statement_scan.png)
 
+It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
+@NOTE.
+
+```lisp
+(defun scan-code-tags ()
+     "
+     Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:
+  
+     "
+     (interactive)
+     (split-window-horizontally)
+     (occur "@FIXME:\\|@TODO:\\|@BUG:\\|@NOTE:"))
+```
+
+![img](images/scan_code_tags.png)
+
 ## Quick edit and reload Emac Configuration File.<a id="sec-8-2" name="sec-8-2"></a>
 
 It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
@@ -9283,9 +9300,17 @@ See:
 -   [Haskell Mode](http://wikemacs.org/wiki/Haskell-mode)
 -   [Emacs/Inferior Haskell processes](https://wiki.haskell.org/Emacs/Inferior_Haskell_processes)
 
-## Lisp Dialects<a id="sec-11-6" name="sec-11-6"></a>
+## R Language<a id="sec-11-6" name="sec-11-6"></a>
 
-### All Lisp Dialects<a id="sec-11-6-1" name="sec-11-6-1"></a>
+See:
+
+-   [Emacs, ESS and R for Zombies](http://blog.revolutionanalytics.com/2014/03/emacs-ess-and-r-for-zombies.html)
+-   [Using Emacs to work with R « Stack Exchange Stats Blog](http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/)
+-   
+
+## Lisp Dialects<a id="sec-11-7" name="sec-11-7"></a>
+
+### All Lisp Dialects<a id="sec-11-7-1" name="sec-11-7-1"></a>
 
 -   [The Animated Guide to Paredit](http://danmidwood.com/content/2014/11/21/animated-paredit.html)
 -   [Paredit-mode](http://wikemacs.org/wiki/Paredit-mode)\* [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters)
@@ -9301,7 +9326,7 @@ See:
 (setq show-paren-style 'expression)
 ```
 
-### Common Lisp<a id="sec-11-6-2" name="sec-11-6-2"></a>
+### Common Lisp<a id="sec-11-7-2" name="sec-11-7-2"></a>
 
 -   [SLIME: The Superior Lisp Interaction Mode for Emacs](https://common-lisp.net/project/slime/)
 -   [Evaluating Elisp in Emacs By Mickey Petersen](https://www.masteringemacs.org/article/evaluating-elisp-emacs)
@@ -9327,7 +9352,7 @@ Set Lisp Interpreter
 (setq inferior-lisp-program "clisp")
 ```
 
-### Scheme<a id="sec-11-6-3" name="sec-11-6-3"></a>
+### Scheme<a id="sec-11-7-3" name="sec-11-7-3"></a>
 
 The variable scheme-program-name controls which Scheme implementation Emacs will run.
 
@@ -9378,7 +9403,7 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
 -   [Setup lisp programming environment](https://mayukhmukherjee.wordpress.com/2014/01/03/setup-lisp/)
 -   [A Little Elisp to Make Emacs and Racket Play Nicer](http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html)
 
-### Clojure<a id="sec-11-6-4" name="sec-11-6-4"></a>
+### Clojure<a id="sec-11-7-4" name="sec-11-7-4"></a>
 
 -   [CIDER is a Clojure IDE and REPL for Emacs](http://pythonhackers.com/p/clojure-emacs/cider)
 -   [Practical Starter Tips for Clojure](http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html)
