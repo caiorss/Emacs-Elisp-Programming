@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs In a Box</title>
-<!-- 2016-01-21 Qui 13:55 -->
+<!-- 2016-01-26 Ter 16:26 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -219,23 +219,34 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-4-1">4.1. Emacs Terminology</a></li>
 <li><a href="#sec-4-2">4.2. Emacs API</a></li>
-<li><a href="#sec-4-3">4.3. Bufffers</a></li>
-<li><a href="#sec-4-4">4.4. Point, Region, Line and Buffer</a>
+<li><a href="#sec-4-3">4.3. Discoverability / Get Documentation</a>
 <ul>
-<li><a href="#sec-4-4-1">4.4.1. Point</a></li>
-<li><a href="#sec-4-4-2">4.4.2. Thing at Point API</a></li>
+<li><a href="#sec-4-3-1">4.3.1. Describe</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-5">4.5. Files and Directories and OS Interface</a></li>
-<li><a href="#sec-4-6">4.6. Discoverability / Get Documentation</a>
+<li><a href="#sec-4-4">4.4. Buffers</a></li>
+<li><a href="#sec-4-5">4.5. Point, Region, Line and Buffer</a>
 <ul>
-<li><a href="#sec-4-6-1">4.6.1. Describe</a></li>
+<li><a href="#sec-4-5-1">4.5.1. Point</a></li>
+<li><a href="#sec-4-5-2">4.5.2. Thing at Point API</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-7">4.7. Window Functions</a></li>
-<li><a href="#sec-4-8">4.8. Emacs Modes</a></li>
-<li><a href="#sec-4-9">4.9. Special Variables</a></li>
-<li><a href="#sec-4-10">4.10. Network</a></li>
+<li><a href="#sec-4-6">4.6. Files, Directories and Path</a>
+<ul>
+<li><a href="#sec-4-6-1">4.6.1. Basic Functions</a></li>
+<li><a href="#sec-4-6-2">4.6.2. File Name Components</a></li>
+<li><a href="#sec-4-6-3">4.6.3. Read / Write file to a string</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-7">4.7. Date and Time</a></li>
+<li><a href="#sec-4-8">4.8. OS Interface</a></li>
+<li><a href="#sec-4-9">4.9. Call External Commands or Apps</a></li>
+<li><a href="#sec-4-10">4.10. Environment Variables</a></li>
+<li><a href="#sec-4-11">4.11. Process Management</a></li>
+<li><a href="#sec-4-12">4.12. Window Functions</a></li>
+<li><a href="#sec-4-13">4.13. Emacs Modes</a></li>
+<li><a href="#sec-4-14">4.14. Special Variables</a></li>
+<li><a href="#sec-4-15">4.15. Network</a></li>
 </ul>
 </li>
 <li><a href="#sec-5">5. Customization</a>
@@ -302,12 +313,13 @@ for the JavaScript code in this tag.
 <li><a href="#sec-11-3">11.3. C / C++</a></li>
 <li><a href="#sec-11-4">11.4. Ocaml</a></li>
 <li><a href="#sec-11-5">11.5. Haskell</a></li>
-<li><a href="#sec-11-6">11.6. Lisp Dialects</a>
+<li><a href="#sec-11-6">11.6. R Language</a></li>
+<li><a href="#sec-11-7">11.7. Lisp Dialects</a>
 <ul>
-<li><a href="#sec-11-6-1">11.6.1. All Lisp Dialects</a></li>
-<li><a href="#sec-11-6-2">11.6.2. Common Lisp</a></li>
-<li><a href="#sec-11-6-3">11.6.3. Scheme</a></li>
-<li><a href="#sec-11-6-4">11.6.4. Clojure</a></li>
+<li><a href="#sec-11-7-1">11.7.1. All Lisp Dialects</a></li>
+<li><a href="#sec-11-7-2">11.7.2. Common Lisp</a></li>
+<li><a href="#sec-11-7-3">11.7.3. Scheme</a></li>
+<li><a href="#sec-11-7-4">11.7.4. Clojure</a></li>
 </ul>
 </li>
 </ul>
@@ -6381,7 +6393,7 @@ ELISP&gt;
 
 <tr>
 <td class="left">Yank</td>
-<td class="left">Paste</td>
+<td class="left">Copy</td>
 </tr>
 
 <tr>
@@ -6551,11 +6563,95 @@ See also, from Emacs Wiki:
 </ul>
 </div>
 </div>
-
 <div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Bufffers</h3>
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Discoverability / Get Documentation</h3>
 <div class="outline-text-3" id="text-4-3">
-</div><ol class="org-ol"><li><a id="sec-4-3-0-1" name="sec-4-3-0-1"></a>Buffer Attributes<br  /><div class="outline-text-5" id="text-4-3-0-1">
+<p>
+<b>Apropos</b>
+</p>
+
+<pre class="example">
+M-x &lt;apropos command&gt;
+</pre>
+
+<p>
+Apropos Commands
+</p>
+
+<pre class="example">
+apropos
+apropos-command
+apropos-documentation
+info-apropos
+apropos-library
+apropos-variable
+apropos-value
+</pre>
+</div>
+
+
+
+<div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> Describe</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<p>
+See also:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://alexschroeder.ch/geocities/kensanata/dot-emacs.html">.emacs file by Alex</a>
+</li>
+<li><a href="http://qdot.github.io/conf_emacs/">qDot's Emacs Configuration</a>
+</li>
+</ul>
+
+<p>
+<b>Describe Function</b>
+</p>
+
+<p>
+This calls the command describe-function. Type a function name and get documentation of it.
+</p>
+
+<pre class="example">
+ELISP&gt; (describe-function &lt;function-name&gt;)
+
+or
+
+M-x describe-function
+
+or type the keys
+
+C-h f
+</pre>
+
+<p>
+<b>Describe Variable</b>
+</p>
+
+<p>
+This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
+</p>
+
+
+<pre class="example">
+ELISP&gt; (describe-variable &lt;variable-name&gt;)
+ELISP&gt; (describe-variable 'load-path)
+
+M-x describe-variable
+
+or
+
+C-h v
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Buffers</h3>
+<div class="outline-text-3" id="text-4-4">
+</div><ol class="org-ol"><li><a id="sec-4-4-0-1" name="sec-4-4-0-1"></a>Buffer Attributes<br  /><div class="outline-text-5" id="text-4-4-0-1">
 <p>
 <b>List all Buffers</b>
 </p>
@@ -6789,7 +6885,7 @@ ELISP&gt;
 </div>
 </li>
 
-<li><a id="sec-4-3-0-2" name="sec-4-3-0-2"></a>Buffer Mode<br  /><div class="outline-text-5" id="text-4-3-0-2">
+<li><a id="sec-4-4-0-2" name="sec-4-4-0-2"></a>Buffer Mode<br  /><div class="outline-text-5" id="text-4-4-0-2">
 <p>
 <b>Show Buffers Mode</b>
 </p>
@@ -6839,7 +6935,7 @@ ELISP&gt; <span style="color: #FF516D;">(</span>mapcar <span style="color: #C792
 </div>
 </li>
 
-<li><a id="sec-4-3-0-3" name="sec-4-3-0-3"></a>Get Buffer Contents / Selection / Line<br  /><div class="outline-text-5" id="text-4-3-0-3">
+<li><a id="sec-4-4-0-3" name="sec-4-4-0-3"></a>Get Buffer Contents / Selection / Line<br  /><div class="outline-text-5" id="text-4-4-0-3">
 <p>
 <b>Get Buffer Content as String</b>
 </p>
@@ -6896,7 +6992,7 @@ To test it: M-x eval-expression and enter (get-current-line)
 </div>
 </li>
 
-<li><a id="sec-4-3-0-4" name="sec-4-3-0-4"></a>Search and Replace in the entire Buffer<br  /><div class="outline-text-5" id="text-4-3-0-4">
+<li><a id="sec-4-4-0-4" name="sec-4-4-0-4"></a>Search and Replace in the entire Buffer<br  /><div class="outline-text-5" id="text-4-4-0-4">
 <p>
 Source: <a href="http://emacs.stackexchange.com/questions/249/how-to-search-and-replace-in-the-entire-buffer">How to search and replace in the entire buffer?</a>
 Usage: A-x replace-regexp-entire-buffer
@@ -6919,13 +7015,12 @@ Usage: A-x replace-regexp-entire-buffer
 </div>
 </li></ol>
 </div>
-
-<div id="outline-container-sec-4-4" class="outline-3">
-<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Point, Region, Line and Buffer</h3>
-<div class="outline-text-3" id="text-4-4">
-</div><div id="outline-container-sec-4-4-1" class="outline-4">
-<h4 id="sec-4-4-1"><span class="section-number-4">4.4.1</span> Point</h4>
-<div class="outline-text-4" id="text-4-4-1">
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Point, Region, Line and Buffer</h3>
+<div class="outline-text-3" id="text-4-5">
+</div><div id="outline-container-sec-4-5-1" class="outline-4">
+<h4 id="sec-4-5-1"><span class="section-number-4">4.5.1</span> Point</h4>
+<div class="outline-text-4" id="text-4-5-1">
 <p>
 <b>Point</b> is the number of characters from the beginning of the buffer to
 the current cursor location, or cursor position for short. To see the
@@ -7136,10 +7231,9 @@ Examples:
 </div>
 
 
-
-<div id="outline-container-sec-4-4-2" class="outline-4">
-<h4 id="sec-4-4-2"><span class="section-number-4">4.4.2</span> Thing at Point API</h4>
-<div class="outline-text-4" id="text-4-4-2">
+<div id="outline-container-sec-4-5-2" class="outline-4">
+<h4 id="sec-4-5-2"><span class="section-number-4">4.5.2</span> Thing at Point API</h4>
+<div class="outline-text-4" id="text-4-5-2">
 <p>
 See also:
 </p>
@@ -7235,16 +7329,17 @@ ELISP&gt;
 </div>
 </div>
 </div>
-
-<div id="outline-container-sec-4-5" class="outline-3">
-<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Files and Directories and OS Interface</h3>
-<div class="outline-text-3" id="text-4-5">
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Files, Directories and Path</h3>
+<div class="outline-text-3" id="text-4-6">
 <p>
-<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html">Files</a>
+<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html">Emacs Manual: Files</a>
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="sec-4-5-0-1" name="sec-4-5-0-1"></a>Directory and Path<br  /><div class="outline-text-5" id="text-4-5-0-1">
+<div id="outline-container-sec-4-6-1" class="outline-4">
+<h4 id="sec-4-6-1"><span class="section-number-4">4.6.1</span> Basic Functions</h4>
+<div class="outline-text-4" id="text-4-6-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span style="color: #546D7A;">;; </span><span style="color: #90ee90;">Get and Set current directory</span>
@@ -7292,9 +7387,83 @@ ELISP&gt; <span style="color: #FF516D;">(</span>directory-files <span style="col
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="sec-4-5-0-2" name="sec-4-5-0-2"></a>Date and Time<br  /><div class="outline-text-5" id="text-4-5-0-2">
+<div id="outline-container-sec-4-6-2" class="outline-4">
+<h4 id="sec-4-6-2"><span class="section-number-4">4.6.2</span> File Name Components</h4>
+<div class="outline-text-4" id="text-4-6-2">
+<p>
+<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html">Emacs Manual: File Name Components</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">ELISP&gt; <span style="color: #FF516D;">(</span>file-name-directory <span style="color: #C2E982;">"/usr/bin/env"</span><span style="color: #FF516D;">)</span>
+<span style="color: #C2E982;">"/usr/bin/"</span>
+ELISP&gt;
+
+ELISP&gt; <span style="color: #FF516D;">(</span>file-name-nondirectory <span style="color: #C2E982;">"/usr/bin/env"</span><span style="color: #FF516D;">)</span>
+<span style="color: #C2E982;">"env"</span>
+ELISP&gt;
+
+
+ELISP&gt; <span style="color: #FF516D;">(</span>file-name-base <span style="color: #C2E982;">"/home/foo/zoo1.c"</span><span style="color: #FF516D;">)</span>
+<span style="color: #C2E982;">"zoo1"</span>
+ELISP&gt; <span style="color: #FF516D;">(</span>file-name-base <span style="color: #C2E982;">"/home/foo/zoo1.c.back"</span><span style="color: #FF516D;">)</span>
+<span style="color: #C2E982;">"zoo1.c"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-6-3" class="outline-4">
+<h4 id="sec-4-6-3"><span class="section-number-4">4.6.3</span> Read / Write file to a string</h4>
+<div class="outline-text-4" id="text-4-6-3">
+<p>
+<b>Read File</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">ELISP&gt; <span style="color: #FF516D;">(</span><span style="color: #C792EA;">defun</span> <span style="color: #FF516D;">file-contents</span> <span style="color: #C792EA;">(</span>filename<span style="color: #C792EA;">)</span>
+  <span style="color: #C792EA;">(</span>interactive <span style="color: #C2E982;">"fFind file: "</span><span style="color: #C792EA;">)</span>
+  <span style="color: #C792EA;">(</span><span style="color: #C792EA;">with-temp-buffer</span>
+    <span style="color: #D9F5DD;">(</span>insert-file-contents filename<span style="color: #D9F5DD;">)</span>
+    <span style="color: #D9F5DD;">(</span>buffer-substring-no-properties <span style="color: #74CBC4;">(</span>point-min<span style="color: #74CBC4;">)</span> <span style="color: #74CBC4;">(</span>point-max<span style="color: #74CBC4;">)</span><span style="color: #D9F5DD;">)</span><span style="color: #C792EA;">)</span><span style="color: #FF516D;">)</span>
+
+ELISP&gt; <span style="color: #FF516D;">(</span>file-contents <span style="color: #C2E982;">"/proc/filesystems"</span><span style="color: #FF516D;">)</span>
+<span style="color: #C2E982;">"nodev  sysfs\nnodev    rootfs\nnodev   ramfs\nnodev</span>
+<span style="color: #C2E982;">bdev\nnodev proc\nnodev cgroup\nnode ...</span>
+</pre>
+</div>
+
+<p>
+<b>Write to File</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">ELISP&gt; <span style="color: #FF516D;">(</span>append-to-file <span style="color: #C2E982;">"hello world"</span> nil <span style="color: #C2E982;">"/tmp/hello.txt"</span><span style="color: #FF516D;">)</span>
+nil
+
+ELISP&gt; <span style="color: #FF516D;">(</span>file-contents <span style="color: #C2E982;">"/tmp/hello.txt"</span><span style="color: #FF516D;">)</span>
+<span style="color: #C2E982;">"hello world"</span>
+ELISP&gt;
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html">Current Buffer</a>
+</li>
+<li><a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html">Creating New Buffer</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Date and Time</h3>
+<div class="outline-text-3" id="text-4-7">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span style="color: #546D7A;">;;;</span>
@@ -7321,9 +7490,14 @@ ELISP&gt;
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="sec-4-5-0-3" name="sec-4-5-0-3"></a>Call External Commands or Apps<br  /><div class="outline-text-5" id="text-4-5-0-3">
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> OS Interface</h3>
+</div>
+<div id="outline-container-sec-4-9" class="outline-3">
+<h3 id="sec-4-9"><span class="section-number-3">4.9</span> Call External Commands or Apps</h3>
+<div class="outline-text-3" id="text-4-9">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span style="color: #546D7A;">;;; </span><span style="color: #90ee90;">Call External Command</span>
@@ -7348,9 +7522,15 @@ ELISP&gt;
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="sec-4-5-0-4" name="sec-4-5-0-4"></a>Environment Variables<br  /><div class="outline-text-5" id="text-4-5-0-4">
+<div id="outline-container-sec-4-10" class="outline-3">
+<h3 id="sec-4-10"><span class="section-number-3">4.10</span> Environment Variables</h3>
+<div class="outline-text-3" id="text-4-10">
+<p>
+<a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Environment.html">Emacs Manual: Environment Variables</a>
+</p>
+
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span style="color: #546D7A;">;; </span><span style="color: #90ee90;">Environment Variables</span>
@@ -7389,12 +7569,40 @@ ELISP&gt;
 ELISP&gt; <span style="color: #FF516D;">(</span>eq system-type 'gnu/linux<span style="color: #FF516D;">)</span>
 t
 ELISP&gt;
+
+
+<span style="color: #546D7A;">;;; </span><span style="color: #90ee90;">Show all Evironment Variables </span>
+
+ELISP&gt; <span style="color: #FF516D;">(</span><span style="color: #C792EA;">dolist</span> <span style="color: #C792EA;">(</span>e process-environment<span style="color: #C792EA;">)</span> <span style="color: #C792EA;">(</span>princ <span style="color: #D9F5DD;">(</span>format <span style="color: #C2E982;">"%s\n"</span> e<span style="color: #D9F5DD;">)</span><span style="color: #C792EA;">)</span><span style="color: #FF516D;">)</span>
+JDK_HOME=/opt/java
+EDITOR=vim
+MANPATH=:/home/tux/.opam/4.02.1/man
+QT_PLATFORM_PLUGIN=lxqt
+LC_PAPER=pt_BR.UTF-8
+PYTHONPATH=/home/tux/lib
+
+<span style="color: #546D7A;">;; </span><span style="color: #90ee90;">Insert at cursor position all Enviroment Variables </span>
+<span style="color: #546D7A;">;; </span>
+<span style="color: #546D7A;">;; </span><span style="color: #90ee90;">Copy it to scratch buffer and type C-x C-e to eval this S-expression</span>
+<span style="color: #546D7A;">;;</span>
+&gt; <span style="color: #FF516D;">(</span><span style="color: #C792EA;">dolist</span> <span style="color: #C792EA;">(</span>e process-environment<span style="color: #C792EA;">)</span> <span style="color: #C792EA;">(</span>insert <span style="color: #D9F5DD;">(</span>format <span style="color: #C2E982;">"%s\n"</span> e<span style="color: #D9F5DD;">)</span><span style="color: #C792EA;">)</span><span style="color: #FF516D;">)</span>
+
+JDK_HOME=/opt/java
+EDITOR=vim
+MANPATH=:/home/tux/.opam/4.02.1/man
+QT_PLATFORM_PLUGIN=lxqt
+LC_PAPER=pt_BR.UTF-8
+PYTHONPATH=/home/tux/lib
+LC_NUMERIC=pt_BR.UTF-8
+...
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="sec-4-5-0-5" name="sec-4-5-0-5"></a>Process Management<br  /><div class="outline-text-5" id="text-4-5-0-5">
+<div id="outline-container-sec-4-11" class="outline-3">
+<h3 id="sec-4-11"><span class="section-number-3">4.11</span> Process Management</h3>
+<div class="outline-text-3" id="text-4-11">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span style="color: #546D7A;">;;;; </span><span style="color: #90ee90;">List all process</span>
@@ -7520,165 +7728,12 @@ ELISP&gt; <span style="color: #FF516D;">(</span>mapcar
 </pre>
 </div>
 </div>
-</li>
-
-<li><a id="sec-4-5-0-6" name="sec-4-5-0-6"></a>File Name Components<br  /><div class="outline-text-5" id="text-4-5-0-6">
-<p>
-<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html">File Name Components</a>
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt; <span style="color: #FF516D;">(</span>file-name-directory <span style="color: #C2E982;">"/usr/bin/env"</span><span style="color: #FF516D;">)</span>
-<span style="color: #C2E982;">"/usr/bin/"</span>
-ELISP&gt;
-
-ELISP&gt; <span style="color: #FF516D;">(</span>file-name-nondirectory <span style="color: #C2E982;">"/usr/bin/env"</span><span style="color: #FF516D;">)</span>
-<span style="color: #C2E982;">"env"</span>
-ELISP&gt;
-
-
-ELISP&gt; <span style="color: #FF516D;">(</span>file-name-base <span style="color: #C2E982;">"/home/foo/zoo1.c"</span><span style="color: #FF516D;">)</span>
-<span style="color: #C2E982;">"zoo1"</span>
-ELISP&gt; <span style="color: #FF516D;">(</span>file-name-base <span style="color: #C2E982;">"/home/foo/zoo1.c.back"</span><span style="color: #FF516D;">)</span>
-<span style="color: #C2E982;">"zoo1.c"</span>
-</pre>
-</div>
-</div>
-</li>
-
-<li><a id="sec-4-5-0-7" name="sec-4-5-0-7"></a>Read / Write file to a string<br  /><div class="outline-text-5" id="text-4-5-0-7">
-<p>
-<b>Read File</b>
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt; <span style="color: #FF516D;">(</span><span style="color: #C792EA;">defun</span> <span style="color: #FF516D;">file-contents</span> <span style="color: #C792EA;">(</span>filename<span style="color: #C792EA;">)</span>
-  <span style="color: #C792EA;">(</span>interactive <span style="color: #C2E982;">"fFind file: "</span><span style="color: #C792EA;">)</span>
-  <span style="color: #C792EA;">(</span><span style="color: #C792EA;">with-temp-buffer</span>
-    <span style="color: #D9F5DD;">(</span>insert-file-contents filename<span style="color: #D9F5DD;">)</span>
-    <span style="color: #D9F5DD;">(</span>buffer-substring-no-properties <span style="color: #74CBC4;">(</span>point-min<span style="color: #74CBC4;">)</span> <span style="color: #74CBC4;">(</span>point-max<span style="color: #74CBC4;">)</span><span style="color: #D9F5DD;">)</span><span style="color: #C792EA;">)</span><span style="color: #FF516D;">)</span>
-
-ELISP&gt; <span style="color: #FF516D;">(</span>file-contents <span style="color: #C2E982;">"/proc/filesystems"</span><span style="color: #FF516D;">)</span>
-<span style="color: #C2E982;">"nodev  sysfs\nnodev    rootfs\nnodev   ramfs\nnodev</span>
-<span style="color: #C2E982;">bdev\nnodev proc\nnodev cgroup\nnode ...</span>
-</pre>
 </div>
 
-<p>
-<b>Write to File</b>
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt; <span style="color: #FF516D;">(</span>append-to-file <span style="color: #C2E982;">"hello world"</span> nil <span style="color: #C2E982;">"/tmp/hello.txt"</span><span style="color: #FF516D;">)</span>
-nil
-
-ELISP&gt; <span style="color: #FF516D;">(</span>file-contents <span style="color: #C2E982;">"/tmp/hello.txt"</span><span style="color: #FF516D;">)</span>
-<span style="color: #C2E982;">"hello world"</span>
-ELISP&gt;
-</pre>
-</div>
-
-<ul class="org-ul">
-<li><a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html">Current Buffer</a>
-</li>
-<li><a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html">Creating New Buffer</a>
-</li>
-</ul>
-</div>
-</li></ol>
-</div>
-<div id="outline-container-sec-4-6" class="outline-3">
-<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Discoverability / Get Documentation</h3>
-<div class="outline-text-3" id="text-4-6">
-<p>
-<b>Apropos</b>
-</p>
-
-<pre class="example">
-M-x &lt;apropos command&gt;
-</pre>
-
-<p>
-Apropos Commands
-</p>
-
-<pre class="example">
-apropos
-apropos-command
-apropos-documentation
-info-apropos
-apropos-library
-apropos-variable
-apropos-value
-</pre>
-</div>
-
-
-
-<div id="outline-container-sec-4-6-1" class="outline-4">
-<h4 id="sec-4-6-1"><span class="section-number-4">4.6.1</span> Describe</h4>
-<div class="outline-text-4" id="text-4-6-1">
-<p>
-See also:
-</p>
-
-<ul class="org-ul">
-<li><a href="https://alexschroeder.ch/geocities/kensanata/dot-emacs.html">.emacs file by Alex</a>
-</li>
-<li><a href="http://qdot.github.io/conf_emacs/">qDot's Emacs Configuration</a>
-</li>
-</ul>
-
-<p>
-<b>Describe Function</b>
-</p>
-
-<p>
-This calls the command describe-function. Type a function name and get documentation of it.
-</p>
-
-<pre class="example">
-ELISP&gt; (describe-function &lt;function-name&gt;)
-
-or
-
-M-x describe-function
-
-or type the keys
-
-C-h f
-</pre>
-
-<p>
-<b>Describe Variable</b>
-</p>
-
-<p>
-This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
-</p>
-
-
-<pre class="example">
-ELISP&gt; (describe-variable &lt;variable-name&gt;)
-ELISP&gt; (describe-variable 'load-path)
-
-M-x describe-variable
-
-or
-
-C-h v
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-4-7" class="outline-3">
-<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Window Functions</h3>
-<div class="outline-text-3" id="text-4-7">
-</div><ol class="org-ol"><li><a id="sec-4-7-0-1" name="sec-4-7-0-1"></a>Basic Window Functions<br  /><div class="outline-text-5" id="text-4-7-0-1">
+<div id="outline-container-sec-4-12" class="outline-3">
+<h3 id="sec-4-12"><span class="section-number-3">4.12</span> Window Functions</h3>
+<div class="outline-text-3" id="text-4-12">
+</div><ol class="org-ol"><li><a id="sec-4-12-0-1" name="sec-4-12-0-1"></a>Basic Window Functions<br  /><div class="outline-text-5" id="text-4-12-0-1">
 <p>
 Original Window before be changed.
 </p>
@@ -7831,7 +7886,7 @@ ELISP&gt;
 </div>
 </li>
 
-<li><a id="sec-4-7-0-2" name="sec-4-7-0-2"></a>Manipulate Buffer in Another Window<br  /><div class="outline-text-5" id="text-4-7-0-2">
+<li><a id="sec-4-12-0-2" name="sec-4-12-0-2"></a>Manipulate Buffer in Another Window<br  /><div class="outline-text-5" id="text-4-12-0-2">
 <p>
 Description: Split window vertically, create a new buffer not associated to a file named dummy, and switch
 to this buffer on the second window and set the current buffer to dummy.
@@ -7961,7 +8016,7 @@ ELISP&gt; <span style="color: #FF516D;">(</span>mapcar <span style="color: #C792
 </div>
 </li>
 
-<li><a id="sec-4-7-0-3" name="sec-4-7-0-3"></a>Window Configuration<br  /><div class="outline-text-5" id="text-4-7-0-3">
+<li><a id="sec-4-12-0-3" name="sec-4-12-0-3"></a>Window Configuration<br  /><div class="outline-text-5" id="text-4-12-0-3">
 <p>
 The function current-window-configuration returns the current  emacs window configuration.
 </p>
@@ -8085,10 +8140,10 @@ ELISP&gt;
 </div>
 </li></ol>
 </div>
-<div id="outline-container-sec-4-8" class="outline-3">
-<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Emacs Modes</h3>
-<div class="outline-text-3" id="text-4-8">
-</div><ol class="org-ol"><li><a id="sec-4-8-0-1" name="sec-4-8-0-1"></a>Major Mode<br  /><div class="outline-text-5" id="text-4-8-0-1">
+<div id="outline-container-sec-4-13" class="outline-3">
+<h3 id="sec-4-13"><span class="section-number-3">4.13</span> Emacs Modes</h3>
+<div class="outline-text-3" id="text-4-13">
+</div><ol class="org-ol"><li><a id="sec-4-13-0-1" name="sec-4-13-0-1"></a>Major Mode<br  /><div class="outline-text-5" id="text-4-13-0-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -8231,7 +8286,7 @@ Lisp Dialects
 </div>
 </li>
 
-<li><a id="sec-4-8-0-2" name="sec-4-8-0-2"></a>Minor Modes<br  /><div class="outline-text-5" id="text-4-8-0-2">
+<li><a id="sec-4-13-0-2" name="sec-4-13-0-2"></a>Minor Modes<br  /><div class="outline-text-5" id="text-4-13-0-2">
 <p>
 Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 </p>
@@ -8312,7 +8367,7 @@ Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 </li>
 
 
-<li><a id="sec-4-8-0-3" name="sec-4-8-0-3"></a>Mode Association with Files<br  /><div class="outline-text-5" id="text-4-8-0-3">
+<li><a id="sec-4-13-0-3" name="sec-4-13-0-3"></a>Mode Association with Files<br  /><div class="outline-text-5" id="text-4-13-0-3">
 <p>
 The variable auto-mode-alist holds all modes associated with file extension.
 </p>
@@ -8460,7 +8515,7 @@ ELISP&gt; <span style="color: #FF516D;">(</span>show-doc #'mode/ftypes<span styl
 </div>
 </li>
 
-<li><a id="sec-4-8-0-4" name="sec-4-8-0-4"></a>Mode Specific Key Bindings<br  /><div class="outline-text-5" id="text-4-8-0-4">
+<li><a id="sec-4-13-0-4" name="sec-4-13-0-4"></a>Mode Specific Key Bindings<br  /><div class="outline-text-5" id="text-4-13-0-4">
 <p>
 The function <b>define-key</b>  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: #+END<sub>SRC</sub> A-x describe-key #+END<sub>SRC</sub> and then type the key bind.
 </p>
@@ -8508,7 +8563,7 @@ ELISP&gt;
 </li>
 
 
-<li><a id="sec-4-8-0-5" name="sec-4-8-0-5"></a>Modes Customization<br  /><div class="outline-text-5" id="text-4-8-0-5">
+<li><a id="sec-4-13-0-5" name="sec-4-13-0-5"></a>Modes Customization<br  /><div class="outline-text-5" id="text-4-13-0-5">
 <ul class="org-ul">
 <li><a href="http://www.emacswiki.org/emacs/MinorMode">Minor Mode  - Emacs Wiki</a>
 </li>
@@ -8552,7 +8607,7 @@ ELISP&gt;
 </li>
 
 
-<li><a id="sec-4-8-0-6" name="sec-4-8-0-6"></a>Mode Hooks<br  /><div class="outline-text-5" id="text-4-8-0-6">
+<li><a id="sec-4-13-0-6" name="sec-4-13-0-6"></a>Mode Hooks<br  /><div class="outline-text-5" id="text-4-13-0-6">
 <ul class="org-ul">
 <li><a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html">http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html</a>
 </li>
@@ -8568,9 +8623,9 @@ The following is a list of hook variables that let you provide functions to be c
 </div>
 </li></ol>
 </div>
-<div id="outline-container-sec-4-9" class="outline-3">
-<h3 id="sec-4-9"><span class="section-number-3">4.9</span> Special Variables</h3>
-<div class="outline-text-3" id="text-4-9">
+<div id="outline-container-sec-4-14" class="outline-3">
+<h3 id="sec-4-14"><span class="section-number-3">4.14</span> Special Variables</h3>
+<div class="outline-text-3" id="text-4-14">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; emacs-major-version
@@ -8629,9 +8684,9 @@ ELISP&gt; load-path
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-10" class="outline-3">
-<h3 id="sec-4-10"><span class="section-number-3">4.10</span> Network</h3>
-<div class="outline-text-3" id="text-4-10">
+<div id="outline-container-sec-4-15" class="outline-3">
+<h3 id="sec-4-15"><span class="section-number-3">4.15</span> Network</h3>
+<div class="outline-text-3" id="text-4-15">
 <p>
 <b>Links to Inquiry</b>
 </p>
@@ -9588,12 +9643,42 @@ right side.
 </div>
 
 <p>
-Example 
+Example: 
 </p>
 
 
 <div class="figure">
 <p><img src="images/occur_statement_scan.png" alt="occur_statement_scan.png" />
+</p>
+</div>
+
+
+<p>
+It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
+@NOTE. This fuction can be excuted by typing: <code>M-x scan-code-tags</code>
+</p>
+
+<p>
+Example:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #FF516D;">(</span><span style="color: #C792EA;">defun</span> <span style="color: #FF516D;">scan-code-tags</span> <span style="color: #C792EA;">()</span>
+     <span style="color: #9FC59F;">"</span>
+<span style="color: #9FC59F;">     Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:</span>
+<span style="color: #9FC59F;">  </span>
+<span style="color: #9FC59F;">     "</span>
+     <span style="color: #C792EA;">(</span>interactive<span style="color: #C792EA;">)</span>
+     <span style="color: #C792EA;">(</span>split-window-horizontally<span style="color: #C792EA;">)</span>
+     <span style="color: #C792EA;">(</span>occur <span style="color: #C2E982;">"@FIXME:</span><span style="color: #C792EA;">\\|</span><span style="color: #C2E982;">@TODO:</span><span style="color: #C792EA;">\\|</span><span style="color: #C2E982;">@BUG:</span><span style="color: #C792EA;">\\|</span><span style="color: #C2E982;">@NOTE:"</span><span style="color: #C792EA;">)</span><span style="color: #FF516D;">)</span>
+</pre>
+</div>
+
+
+
+<div class="figure">
+<p><img src="images/scan_code_tags.png" alt="scan_code_tags.png" />
 </p>
 </div>
 </div>
@@ -11224,11 +11309,28 @@ See:
 </div>
 
 <div id="outline-container-sec-11-6" class="outline-3">
-<h3 id="sec-11-6"><span class="section-number-3">11.6</span> Lisp Dialects</h3>
+<h3 id="sec-11-6"><span class="section-number-3">11.6</span> R Language</h3>
 <div class="outline-text-3" id="text-11-6">
-</div><div id="outline-container-sec-11-6-1" class="outline-4">
-<h4 id="sec-11-6-1"><span class="section-number-4">11.6.1</span> All Lisp Dialects</h4>
-<div class="outline-text-4" id="text-11-6-1">
+<p>
+See:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://blog.revolutionanalytics.com/2014/03/emacs-ess-and-r-for-zombies.html">Emacs, ESS and R for Zombies</a>
+</li>
+<li><a href="http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/">Using Emacs to work with R « Stack Exchange Stats Blog</a>
+</li>
+<li></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-11-7" class="outline-3">
+<h3 id="sec-11-7"><span class="section-number-3">11.7</span> Lisp Dialects</h3>
+<div class="outline-text-3" id="text-11-7">
+</div><div id="outline-container-sec-11-7-1" class="outline-4">
+<h4 id="sec-11-7-1"><span class="section-number-4">11.7.1</span> All Lisp Dialects</h4>
+<div class="outline-text-4" id="text-11-7-1">
 <ul class="org-ul">
 <li><a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">The Animated Guide to Paredit</a>
 </li>
@@ -11253,9 +11355,9 @@ See:
 </div>
 </div>
 
-<div id="outline-container-sec-11-6-2" class="outline-4">
-<h4 id="sec-11-6-2"><span class="section-number-4">11.6.2</span> Common Lisp</h4>
-<div class="outline-text-4" id="text-11-6-2">
+<div id="outline-container-sec-11-7-2" class="outline-4">
+<h4 id="sec-11-7-2"><span class="section-number-4">11.7.2</span> Common Lisp</h4>
+<div class="outline-text-4" id="text-11-7-2">
 <ul class="org-ul">
 <li><a href="https://common-lisp.net/project/slime/">SLIME: The Superior Lisp Interaction Mode for Emacs</a>
 </li>
@@ -11300,9 +11402,9 @@ Set Lisp Interpreter
 </div>
 </div>
 
-<div id="outline-container-sec-11-6-3" class="outline-4">
-<h4 id="sec-11-6-3"><span class="section-number-4">11.6.3</span> Scheme</h4>
-<div class="outline-text-4" id="text-11-6-3">
+<div id="outline-container-sec-11-7-3" class="outline-4">
+<h4 id="sec-11-7-3"><span class="section-number-4">11.7.3</span> Scheme</h4>
+<div class="outline-text-4" id="text-11-7-3">
 <p>
 The variable scheme-program-name controls which Scheme implementation Emacs will run.
 </p>
@@ -11372,9 +11474,79 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
 </div>
 </div>
 
-<div id="outline-container-sec-11-6-4" class="outline-4">
-<h4 id="sec-11-6-4"><span class="section-number-4">11.6.4</span> Clojure</h4>
-<div class="outline-text-4" id="text-11-6-4">
+<div id="outline-container-sec-11-7-4" class="outline-4">
+<h4 id="sec-11-7-4"><span class="section-number-4">11.7.4</span> Clojure</h4>
+<div class="outline-text-4" id="text-11-7-4">
+<p>
+Scheme inferior mode (Scheme shell support) can be used to run Clojure
+repl without Cider. It is faster to begginers set up a Clojure
+environment quickly.
+</p>
+
+<p>
+The code below sets the following key bindings:
+</p>
+
+<ul class="org-ul">
+<li><code>C-x Ce</code> to Send the last Sexp to clojure repl.
+</li>
+<li><code>C-c =</code>  to Send the definition to the repl, it sends the outermost
+s-expression to the repl regardless where is the cursor.
+</li>
+<li><code>C-c C-p</code> Send a region to the repl. 
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #FF516D;">(</span><span style="color: #C792EA;">progn</span>
+  <span style="color: #C792EA;">(</span>define-key clojure-mode-map  
+      <span style="color: #D9F5DD;">(</span>kbd <span style="color: #C2E982;">"C-x C-e"</span><span style="color: #D9F5DD;">)</span> #'scheme-send-last-sexp<span style="color: #C792EA;">)</span>
+
+  <span style="color: #C792EA;">(</span>define-key clojure-mode-map
+    <span style="color: #D9F5DD;">(</span>kbd <span style="color: #C2E982;">"C-c ="</span><span style="color: #D9F5DD;">)</span> #'scheme-send-definition<span style="color: #C792EA;">)</span>
+ 
+  <span style="color: #FF516D;">)</span>
+
+
+<span style="color: #FF516D;">(</span><span style="color: #C792EA;">defun</span> <span style="color: #FF516D;">cloujure-repl</span>  <span style="color: #C792EA;">()</span>
+  <span style="color: #C792EA;">(</span>interactive<span style="color: #C792EA;">)</span>
+  
+  <span style="color: #C792EA;">(</span>run-scheme <span style="color: #C2E982;">"java -jar /opt/clojure.jar"</span><span style="color: #C792EA;">)</span><span style="color: #FF516D;">)</span>
+
+
+
+<span style="color: #FF516D;">(</span><span style="color: #C792EA;">defun</span> <span style="color: #FF516D;">run-clojure-batch</span> <span style="color: #C792EA;">()</span>
+  <span style="color: #9FC59F;">"Run a clojure file in batch mode"</span>
+  <span style="color: #C792EA;">(</span>interactive<span style="color: #C792EA;">)</span>
+
+  
+  <span style="color: #C792EA;">(</span>start-process <span style="color: #C2E982;">"clojure-batch1"</span>     <span style="color: #546D7A;">;; </span><span style="color: #90ee90;">Process name </span>
+                 <span style="color: #C2E982;">"*clojure-batch*"</span>   <span style="color: #546D7A;">;; </span><span style="color: #90ee90;">Buffer name </span>
+
+                 <span style="color: #546D7A;">;;; </span><span style="color: #90ee90;">Command line </span>
+                 <span style="color: #C2E982;">"java"</span> <span style="color: #C2E982;">"-jar"</span> <span style="color: #C2E982;">"/opt/clojure.jar"</span> <span style="color: #D9F5DD;">(</span>buffer-file-name<span style="color: #D9F5DD;">)</span><span style="color: #C792EA;">)</span>
+
+  <span style="color: #C792EA;">(</span>split-window-vertically<span style="color: #C792EA;">)</span>
+
+  <span style="color: #C792EA;">(</span>switch-to-buffer-other-window <span style="color: #C2E982;">"*clojure-batch*"</span><span style="color: #C792EA;">)</span><span style="color: #FF516D;">)</span>
+</pre>
+</div>
+
+
+<p>
+Download Clojure:
+</p>
+
+<pre class="example">
+cd /opt/ 
+curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.jar
+</pre>
+
+<p>
+<b>See:</b>
+</p>
+
 <ul class="org-ul">
 <li><a href="http://pythonhackers.com/p/clojure-emacs/cider">CIDER is a Clojure IDE and REPL for Emacs</a>
 </li>
@@ -11581,6 +11753,7 @@ Many useful Emacs Lisp codes like user interface enhancement.
 <li><a href="http://hyperpolyglot.org/lisp">Hyperglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp</a>
 </li>
 </ul>
+
 <p>
 <b>Github</b>
 </p>
@@ -11589,6 +11762,7 @@ Many useful Emacs Lisp codes like user interface enhancement.
 <li><a href="https://github.com/hypernumbers/learn_elisp_the_hard_way">Learn Elisp the Hard Way</a>
 </li>
 </ul>
+
 <p>
 <b>Lexical Scope</b>
 </p>
@@ -12160,7 +12334,7 @@ Large Collection of Codes to Emacs
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-01-21 Qui 13:55</p>
+<p class="date">Created: 2016-01-26 Ter 16:26</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

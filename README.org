@@ -4266,7 +4266,7 @@ ELISP>
 | Frame             | The current window of emacs                                                |
 | Windows           | Each frame can be split in sections that Emacs documentation calls windows |
 | Fill              | Word Wrap                                                                  |
-| Yank              | Paste                                                                      |
+| Yank              | Copy                                                                 |
 | Kill              | Cut                                                                        |
 | Kill Ring         | Clipboard                                                                  |
 | Mode Line         | Status Bar                                                                 |
@@ -4340,8 +4340,73 @@ See also, from Emacs Wiki:
    * [[http://www.emacswiki.org/emacs/EmacsLispLimitations][Emacs Lisp Limitations]]
    * [[http://www.emacswiki.org/emacs/CommonLisp][Why isn't more of CommonLisp in GNU Emacs?]]
    * [[http://www.emacswiki.org/emacs/WhyDoesElispSuck][Why Does ElispSuck]]
+**  Discoverability / Get Documentation
 
-**  Bufffers
+*Apropos*
+
+#+BEGIN_SRC
+
+M-x <apropos command>
+#+END_SRC
+
+Apropos Commands
+
+#+BEGIN_SRC
+
+apropos
+apropos-command
+apropos-documentation
+info-apropos
+apropos-library
+apropos-variable
+apropos-value
+
+#+END_SRC
+
+
+
+***  Describe
+
+See also:
+
+    * [[https://alexschroeder.ch/geocities/kensanata/dot-emacs.html][.emacs file by Alex]]
+    * [[http://qdot.github.io/conf_emacs/][qDot's Emacs Configuration]]
+
+*Describe Function*
+
+This calls the command describe-function. Type a function name and get documentation of it.
+
+#+BEGIN_SRC
+
+ELISP> (describe-function <function-name>)
+
+or
+
+M-x describe-function
+
+or type the keys
+
+C-h f
+#+END_SRC
+
+*Describe Variable*
+
+This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
+
+
+#+BEGIN_SRC
+
+ELISP> (describe-variable <variable-name>)
+ELISP> (describe-variable 'load-path)
+
+M-x describe-variable
+
+or
+
+C-h v
+#+END_SRC
+
+**  Buffers
 
 **** Buffer Attributes
 
@@ -4669,9 +4734,7 @@ Usage: A-x replace-regexp-entire-buffer
       (replace-match replacement))))
 
 #+END_SRC
-
 **  Point, Region, Line and Buffer 
-
 *** Point
 
 *Point* is the number of characters from the beginning of the buffer to
@@ -4766,7 +4829,6 @@ Examples:
 #+END_SRC
 
 
-
 *** Thing at Point API
 
 See also:
@@ -4825,12 +4887,11 @@ ELISP>
 
 
 file:images/thing_at_point_sexp2.png
+**  Files, Directories and Path 
 
-**  Files and Directories and OS Interface
+ [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html][Emacs Manual: Files]]
 
-[[http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html][Files]]
-
-**** Directory and Path
+*** Basic Functions
 
 #+BEGIN_SRC elisp
 
@@ -4877,8 +4938,65 @@ ELISP> (directory-files "/home/tux/PycharmProjects/Haskell/")
 "README.back.md" "README.html" "README.md" "Test.html" "build.sh" "clean.sh"
 "codes" "dict.sh" "haskell" "ocaml" "papers" "tags" "tmp")
 #+END_SRC
+ 
+*** File Name Components
 
-**** Date and Time
+  [[http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html][Emacs Manual: File Name Components]]
+
+#+BEGIN_SRC elisp
+
+ELISP> (file-name-directory "/usr/bin/env")
+"/usr/bin/"
+ELISP>
+
+ELISP> (file-name-nondirectory "/usr/bin/env")
+"env"
+ELISP>
+
+
+ELISP> (file-name-base "/home/foo/zoo1.c")
+"zoo1"
+ELISP> (file-name-base "/home/foo/zoo1.c.back")
+"zoo1.c"
+
+#+END_SRC
+
+*** Read / Write file to a string
+
+
+*Read File*
+
+#+BEGIN_SRC elisp
+
+
+ELISP> (defun file-contents (filename)
+  (interactive "fFind file: ")
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (buffer-substring-no-properties (point-min) (point-max))))
+
+ELISP> (file-contents "/proc/filesystems")
+"nodev  sysfs\nnodev    rootfs\nnodev   ramfs\nnodev
+bdev\nnodev proc\nnodev cgroup\nnode ...
+
+#+END_SRC
+
+*Write to File*
+
+#+BEGIN_SRC elisp
+
+ELISP> (append-to-file "hello world" nil "/tmp/hello.txt")
+nil
+
+ELISP> (file-contents "/tmp/hello.txt")
+"hello world"
+ELISP>
+#+END_SRC
+
+    * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html][Current Buffer]]
+    * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html][Creating New Buffer]]
+**  Date and Time 
+
 
 #+BEGIN_SRC elisp
 
@@ -4905,7 +5023,8 @@ ELISP> (format-time-string "%d/%m/%Y %H:%M:%S" (current-time))
 ELISP>
 #+END_SRC
 
-**** Call External Commands or Apps
+**  OS Interface
+**  Call External Commands or Apps
 
 #+BEGIN_SRC elisp
 
@@ -4931,7 +5050,9 @@ ELISP> (shell-command-to-string "uname -a" )
 ELISP>
 #+END_SRC
 
-**** Environment Variables
+**  Environment Variables
+
+ [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Environment.html][Emacs Manual: Environment Variables]]
 
 #+BEGIN_SRC elisp
 
@@ -4972,9 +5093,35 @@ ELISP> (eq system-type 'gnu/linux)
 t
 ELISP>
 
-#+END_SRC
 
-**** Process Management
+;;; Show all Evironment Variables 
+
+ELISP> (dolist (e process-environment) (princ (format "%s\n" e)))
+JDK_HOME=/opt/java
+EDITOR=vim
+MANPATH=:/home/tux/.opam/4.02.1/man
+QT_PLATFORM_PLUGIN=lxqt
+LC_PAPER=pt_BR.UTF-8
+PYTHONPATH=/home/tux/lib
+
+;; Insert at cursor position all Enviroment Variables 
+;; 
+;; Copy it to scratch buffer and type C-x C-e to eval this S-expression
+;;
+> (dolist (e process-environment) (insert (format "%s\n" e)))
+
+JDK_HOME=/opt/java
+EDITOR=vim
+MANPATH=:/home/tux/.opam/4.02.1/man
+QT_PLATFORM_PLUGIN=lxqt
+LC_PAPER=pt_BR.UTF-8
+PYTHONPATH=/home/tux/lib
+LC_NUMERIC=pt_BR.UTF-8
+...
+
+#+END_SRC
+ 
+**  Process Management
 
 #+BEGIN_SRC elisp
 
@@ -5100,128 +5247,6 @@ ELISP> (mapcar
             (nil "*ielm*")
             nil open))
 
-#+END_SRC
-
-**** File Name Components
-
-[[http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html][File Name Components]]
-
-#+BEGIN_SRC elisp
-
-ELISP> (file-name-directory "/usr/bin/env")
-"/usr/bin/"
-ELISP>
-
-ELISP> (file-name-nondirectory "/usr/bin/env")
-"env"
-ELISP>
-
-
-ELISP> (file-name-base "/home/foo/zoo1.c")
-"zoo1"
-ELISP> (file-name-base "/home/foo/zoo1.c.back")
-"zoo1.c"
-
-#+END_SRC
-
-**** Read / Write file to a string
-
-
-*Read File*
-
-#+BEGIN_SRC elisp
-
-
-ELISP> (defun file-contents (filename)
-  (interactive "fFind file: ")
-  (with-temp-buffer
-    (insert-file-contents filename)
-    (buffer-substring-no-properties (point-min) (point-max))))
-
-ELISP> (file-contents "/proc/filesystems")
-"nodev  sysfs\nnodev    rootfs\nnodev   ramfs\nnodev
-bdev\nnodev proc\nnodev cgroup\nnode ...
-
-#+END_SRC
-
-*Write to File*
-
-#+BEGIN_SRC elisp
-
-ELISP> (append-to-file "hello world" nil "/tmp/hello.txt")
-nil
-
-ELISP> (file-contents "/tmp/hello.txt")
-"hello world"
-ELISP>
-#+END_SRC
-
-    * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html][Current Buffer]]
-    * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html][Creating New Buffer]]
-**  Discoverability / Get Documentation
-
-*Apropos*
-
-#+BEGIN_SRC
-
-M-x <apropos command>
-#+END_SRC
-
-Apropos Commands
-
-#+BEGIN_SRC
-
-apropos
-apropos-command
-apropos-documentation
-info-apropos
-apropos-library
-apropos-variable
-apropos-value
-
-#+END_SRC
-
-
-
-***  Describe
-
-See also:
-
-    * [[https://alexschroeder.ch/geocities/kensanata/dot-emacs.html][.emacs file by Alex]]
-    * [[http://qdot.github.io/conf_emacs/][qDot's Emacs Configuration]]
-
-*Describe Function*
-
-This calls the command describe-function. Type a function name and get documentation of it.
-
-#+BEGIN_SRC
-
-ELISP> (describe-function <function-name>)
-
-or
-
-M-x describe-function
-
-or type the keys
-
-C-h f
-#+END_SRC
-
-*Describe Variable*
-
-This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
-
-
-#+BEGIN_SRC
-
-ELISP> (describe-variable <variable-name>)
-ELISP> (describe-variable 'load-path)
-
-M-x describe-variable
-
-or
-
-C-h v
 #+END_SRC
       
 **  Window Functions
@@ -6519,14 +6544,15 @@ right side.
 
 #+END_SRC 
 
-Example 
+Example: 
 
 file:images/occur_statement_scan.png
 
 
 It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
-@NOTE.
+@NOTE. This fuction can be excuted by typing: =M-x scan-code-tags=
 
+Example:
 
 #+BEGIN_SRC emacs-lisp 
 
@@ -7614,7 +7640,7 @@ See:
  - [[http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/][Using Emacs to work with R « Stack Exchange Stats Blog]]
  - 
 
-** Lisp Dialects
+** Lisp Dialects 
 *** All Lisp Dialects
 
     * [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][The Animated Guide to Paredit]]
@@ -7718,6 +7744,63 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
     * [[http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html][A Little Elisp to Make Emacs and Racket Play Nicer]]
 
 *** Clojure
+
+Scheme inferior mode (Scheme shell support) can be used to run Clojure
+repl without Cider. It is faster to begginers set up a Clojure
+environment quickly.
+
+The code below sets the following key bindings:
+
+ - =C-x Ce= to Send the last Sexp to clojure repl.
+ - =C-c ==  to Send the definition to the repl, it sends the outermost
+   s-expression to the repl regardless where is the cursor.
+ - =C-c C-p= Send a region to the repl. 
+
+#+BEGIN_SRC emacs-lisp 
+
+(progn
+  (define-key clojure-mode-map  
+      (kbd "C-x C-e") #'scheme-send-last-sexp)
+
+  (define-key clojure-mode-map
+    (kbd "C-c =") #'scheme-send-definition)
+ 
+  )
+
+
+(defun cloujure-repl  ()
+  (interactive)
+  
+  (run-scheme "java -jar /opt/clojure.jar"))
+
+
+
+(defun run-clojure-batch ()
+  "Run a clojure file in batch mode"
+  (interactive)
+
+  
+  (start-process "clojure-batch1"     ;; Process name 
+                 "*clojure-batch*"   ;; Buffer name 
+
+                 ;;; Command line 
+                 "java" "-jar" "/opt/clojure.jar" (buffer-file-name))
+
+  (split-window-vertically)
+
+  (switch-to-buffer-other-window "*clojure-batch*"))
+
+#+END_SRC
+
+
+Download Clojure:
+
+#+BEGIN_SRC 
+cd /opt/ 
+curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.jar
+#+END_SRC
+
+*See:*
 
     * [[http://pythonhackers.com/p/clojure-emacs/cider][CIDER is a Clojure IDE and REPL for Emacs]]
     * [[http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html][Practical Starter Tips for Clojure]]

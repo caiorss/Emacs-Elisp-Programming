@@ -39,13 +39,21 @@
 - [Emacs API](#emacs-api)
   - [Emacs Terminology](#emacs-terminology)
   - [Emacs API](#emacs-api)
-  - [Bufffers](#bufffers)
+  - [Discoverability / Get Documentation](#discoverability-/-get-documentation)
+    - [Describe](#describe)
+  - [Buffers](#buffers)
   - [Point, Region, Line and Buffer](#point,-region,-line-and-buffer)
     - [Point](#point)
     - [Thing at Point API](#thing-at-point-api)
-  - [Files and Directories and OS Interface](#files-and-directories-and-os-interface)
-  - [Discoverability / Get Documentation](#discoverability-/-get-documentation)
-    - [Describe](#describe)
+  - [Files, Directories and Path](#files,-directories-and-path)
+    - [Basic Functions](#basic-functions)
+    - [File Name Components](#file-name-components)
+    - [Read / Write file to a string](#read-/-write-file-to-a-string)
+  - [Date and Time](#date-and-time)
+  - [OS Interface](#os-interface)
+  - [Call External Commands or Apps](#call-external-commands-or-apps)
+  - [Environment Variables](#environment-variables)
+  - [Process Management](#process-management)
   - [Window Functions](#window-functions)
   - [Emacs Modes](#emacs-modes)
   - [Special Variables](#special-variables)
@@ -5613,7 +5621,7 @@ ELISP>
 
 <tr>
 <td class="left">Yank</td>
-<td class="left">Paste</td>
+<td class="left">Copy</td>
 </tr>
 
 
@@ -5711,7 +5719,65 @@ See also, from Emacs Wiki:
 -   [Why isn't more of CommonLisp in GNU Emacs?](http://www.emacswiki.org/emacs/CommonLisp)
 -   [Why Does ElispSuck](http://www.emacswiki.org/emacs/WhyDoesElispSuck)
 
-## Bufffers<a id="sec-4-3" name="sec-4-3"></a>
+## Discoverability / Get Documentation<a id="sec-4-3" name="sec-4-3"></a>
+
+**Apropos**
+
+```
+M-x <apropos command>
+```
+
+Apropos Commands
+
+```
+apropos
+apropos-command
+apropos-documentation
+info-apropos
+apropos-library
+apropos-variable
+apropos-value
+```
+
+### Describe<a id="sec-4-3-1" name="sec-4-3-1"></a>
+
+See also:
+
+-   [.emacs file by Alex](https://alexschroeder.ch/geocities/kensanata/dot-emacs.html)
+-   [qDot's Emacs Configuration](http://qdot.github.io/conf_emacs/)
+
+**Describe Function**
+
+This calls the command describe-function. Type a function name and get documentation of it.
+
+```
+ELISP> (describe-function <function-name>)
+
+or
+
+M-x describe-function
+
+or type the keys
+
+C-h f
+```
+
+**Describe Variable**
+
+This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
+
+```
+ELISP> (describe-variable <variable-name>)
+ELISP> (describe-variable 'load-path)
+
+M-x describe-variable
+
+or
+
+C-h v
+```
+
+## Buffers<a id="sec-4-4" name="sec-4-4"></a>
 
 1.  Buffer Attributes
 
@@ -6009,9 +6075,9 @@ See also, from Emacs Wiki:
           (replace-match replacement))))
     ```
 
-## Point, Region, Line and Buffer<a id="sec-4-4" name="sec-4-4"></a>
+## Point, Region, Line and Buffer<a id="sec-4-5" name="sec-4-5"></a>
 
-### Point<a id="sec-4-4-1" name="sec-4-4-1"></a>
+### Point<a id="sec-4-5-1" name="sec-4-5-1"></a>
 
 **Point** is the number of characters from the beginning of the buffer to
 the current cursor location, or cursor position for short. To see the
@@ -6212,7 +6278,7 @@ Examples:
     ))
 ```
 
-### Thing at Point API<a id="sec-4-4-2" name="sec-4-4-2"></a>
+### Thing at Point API<a id="sec-4-5-2" name="sec-4-5-2"></a>
 
 See also:
 
@@ -6266,382 +6332,354 @@ ELISP>
 
 ![img](images/thing_at_point_sexp2.png)
 
-## Files and Directories and OS Interface<a id="sec-4-5" name="sec-4-5"></a>
+## Files, Directories and Path<a id="sec-4-6" name="sec-4-6"></a>
 
-[Files](http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html)
+[Emacs Manual: Files](http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html)
 
-1.  Directory and Path
+### Basic Functions<a id="sec-4-6-1" name="sec-4-6-1"></a>
 
-    ```lisp
-    ;; Get and Set current directory
-    
-    ELISP> (pwd)
-    "Directory /home/tux/tmp/"
-    
-    ELISP> (cd "/etc/")
-    "/etc/"
-    
-    ELISP> (pwd)
-    "Directory /etc/"
-    ELISP>
-    
-    
-    ELISP> (file-name-directory "/etc/hosts")
-    "/etc/"
-    
-    ;; Expand File Name
-    ;;
-    ELISP> (expand-file-name "~/")
-    "/home/tux/"
-    ELISP> (expand-file-name ".")
-    "/home/tux/tmp"
-    ELISP> (expand-file-name "..")
-    "/home/tux"
-    ELISP>
-    
-    
-    ;;;;; Create a Directory
-    ;;;
-    ELISP> (mkdir "dummy")
-    nil
-    ELISP> (mkdir "dummy")
-        ** Eval error **  File exists: /home/tux/dummy
-    ELISP>
-    
-    ;;; List Directory
-    ;;;;
-    ;;;
-    ELISP> (directory-files "/home/tux/PycharmProjects/Haskell/")
-    ("." ".." ".git" ".gitignore" ".idea" "LICENSE" "Make" "Makefile"
-    "README.back.md" "README.html" "README.md" "Test.html" "build.sh" "clean.sh"
-    "codes" "dict.sh" "haskell" "ocaml" "papers" "tags" "tmp")
-    ```
+```lisp
+;; Get and Set current directory
 
-2.  Date and Time
+ELISP> (pwd)
+"Directory /home/tux/tmp/"
 
-    ```lisp
-    ;;;
-    ;;; Print Current Time
-    ;;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; (current-time-string)
-    ;;;;;;;;;;
-    "Sun Jun 21 06:10:28 2015"
-    
-    ;; Year-Month-Day:
-    (insert (format-time-string "%Y-%m-%d"))
-    
-    ;; Hour:Minutes:Seconds
-    (insert (format-time-string "%H-%M-%S"))
-    
-    
-    ;; Format Current Time
-    ;;
-    ;;;;;;;
-    ELISP> (format-time-string "%d/%m/%Y %H:%M:%S" (current-time))
-    "27/06/2015 22:05:10"
-    ELISP>
-    ```
+ELISP> (cd "/etc/")
+"/etc/"
 
-3.  Call External Commands or Apps
+ELISP> (pwd)
+"Directory /etc/"
+ELISP>
 
-    ```lisp
-    ;;; Call External Command
-    ;;;;;;
-    ;; It will launch Lxterminal
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;...
-    ELISP> (call-process "lxterminal")
-    0
-    ELISP>
-    
-    
-    ;; Shell Command to String
-    ;;;;;;;
-    ELISP> (shell-command-to-string "pwd")
-    "/home/tux/PycharmProjects/ocaml/prelude\n"
-    ELISP
-    ELISP> (shell-command-to-string "uname" )
-    "Linux\n"
-    ELISP> (shell-command-to-string "uname -a" )
-    "Linux tuxhorse 3.19.0-18-generic #18-Ubuntu SMP Tue May 19 18:30:59 UTC 2015 i686 i686 i686 GNU/Linux\n"
-    ELISP>
-    ```
 
-4.  Environment Variables
+ELISP> (file-name-directory "/etc/hosts")
+"/etc/"
 
-    ```lisp
-    ;; Environment Variables
-    ;;
-    ELISP> (getenv "PATH")
-    "/home/tux/.opam/4.02.1/bin:/home/tux/bin:/home/tux/.opam/4.02.1/bin
-    :/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-    :/usr/local/games:/opt/java:/opt/java/bin:/home/tux/bin:/home/tux/usr/bin
-    :/home/tux/.apps:/opt/jython:/opt/jython/bin:/opt/jython/Lib"
-    
-    ELISP> (getenv "HOME")
-    "/home/tux"
-    
-    
-    ;; Set Environment Variables
-    ;;
-    
-    ELISP> (setenv "JAVA_HOME" "/usr/local/java")
-    "/usr/local/java"
-    
-    ELISP> (setenv "LANG" "en_US.UTF8")
-    "en_US.UTF8"
-    
-    ELISP> (getenv "LANG")
-    "en_US.UTF8"
-    ELISP>
-    
-    ;; Detect Operating System
-    ;;
-    ;;
-    ELISP> system-type
-    gnu/linux
-    ELISP>
-    
-    ;; Test if the operating system is Linux
-    ELISP> (eq system-type 'gnu/linux)
-    t
-    ELISP>
-    ```
+;; Expand File Name
+;;
+ELISP> (expand-file-name "~/")
+"/home/tux/"
+ELISP> (expand-file-name ".")
+"/home/tux/tmp"
+ELISP> (expand-file-name "..")
+"/home/tux"
+ELISP>
 
-5.  Process Management
 
-    ```lisp
-    ;;;; List all process
-    
-    ELISP> (process-list)
-    (#<process ocaml-toplevel> #<process ielm> #<process merlin> #<process melpa.org> #<process melpa.milkbox.net>)
-    
-    ;;;; Get a process, given its name.
-    
-    ELISP> (get-process "merlin")
-     #<process merlin>
-    ELISP>
-    
-    ;;;; Names
-    
-    ELISP> (mapcar 'process-name (process-list))
-    ("ocaml-toplevel" "ielm" "merlin" "melpa.org" "melpa.milkbox.net")
-    
-    ELISP>
-    
-    ;;;; Commmand of a process
-    
-    ELISP> (process-command (get-process "ocaml-toplevel"))
-    ("/home/tux/bin/opam" "config" "exec" "--" "ocaml")
-    
-    ELISP> (process-command (get-process "ielm"))
-    ("hexl")
-    
-    ;;;; Process ID
-    
-    ELISP>
-    ELISP> (process-id (get-process "ocaml-toplevel"))
-    2488
-    ELISP>
-    ELISP> (process-id (get-process "ielm"))
-    25579
-    ELISP>
-    
-    ;;;; Buffer Process
-    
-    ELISP> (process-buffer (get-process "ocaml-toplevel"))
-     #<buffer *ocaml-toplevel*>
-    ELISP>
-    
-    ELISP> (buffer-name (process-buffer (get-process "ocaml-toplevel")))
-    "*ocaml-toplevel*"
-    ELISP>
-    
-    ELISP> (mapcar (lambda (p) (buffer-name (process-buffer p))) (process-list))
-    ("pybff" "*ocaml-toplevel*" "*ielm*" " *merlin (default)*" "*ielm*" "*ielm*")
-    
-    ;;;; Display Buffer Process Window
-    
-    ELISP> (display-buffer (process-buffer (get-process "py")))
-     #<window 21 on pybff>
-    ELISP>
-    
-    ;;;; Start Asyncronous Process
-    
-    ;;  Start the process named py, with the buffer named pybff
-    ;;  using the command python, /usr/bin/python (on linux)
-    ;;
-    ELISP> (start-process "py"   "pybff" "python")
-     #<process py>
-    
-    ELISP> (process-list)
-    (#<process py> #<process ocaml-toplevel> #<process ielm>
-     #<process merlin> #<process melpa.org> #<process melpa.milkbox.net>)
-    
-    
-    ;;;; End Asynchronous Process
-    
-    ;; End the process named py
-    ELISP> (process-send-eof "py")
-    "py"
-    
-    ELISP> (process-send-eof "py")
-        ** Eval error **  Process py does not exist
-    ELISP>
-    
-    ;;;; Send String to Process
-    
-    ELISP> (process-send-string "py" "print 'Hello world'\n")
-    nil
-    ELISP>
-    
-    ;;;; Get Multiple Fields
-    
-    ELISP> (mapcar
-            (lambda (p)(list
-                         p
-                        (process-name p)
-                        (process-command p)
-                        (list (process-buffer p) (buffer-name (process-buffer p)))
-                        (process-id p)
-                        (process-status p)
-            ))
-            (process-list))
-    ((#<process py> "py"
-                ("python")
-                (#<buffer pybff> "pybff")
-                3374 run)
-     (#<process ocaml-toplevel> "ocaml-toplevel"
-                ("/home/tux/bin/opam" "config" "exec" "--" "ocaml")
-                (#<buffer *ocaml-toplevel*> "*ocaml-toplevel*")
-                2488 run)
-     (#<process ielm> "ielm"
-                ("hexl")
-                (#<buffer *ielm*> "*ielm*")
-                25579 run)
-     (#<process merlin> "merlin"
-                ("ocamlmerlin" "-protocol" "sexp")
-                (#<buffer  *merlin
-                           (default)
-                           *> " *merlin (default)*")
-                24926 run)
-     (#<process melpa.org> "melpa.org" nil
-                (nil "*ielm*")
-                nil open)
-     (#<process melpa.milkbox.net> "melpa.milkbox.net" nil
-                (nil "*ielm*")
-                nil open))
-    ```
+;;;;; Create a Directory
+;;;
+ELISP> (mkdir "dummy")
+nil
+ELISP> (mkdir "dummy")
+    ** Eval error **  File exists: /home/tux/dummy
+ELISP>
 
-6.  File Name Components
-
-    [File Name Components](http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html)
-    
-    ```lisp
-    ELISP> (file-name-directory "/usr/bin/env")
-    "/usr/bin/"
-    ELISP>
-    
-    ELISP> (file-name-nondirectory "/usr/bin/env")
-    "env"
-    ELISP>
-    
-    
-    ELISP> (file-name-base "/home/foo/zoo1.c")
-    "zoo1"
-    ELISP> (file-name-base "/home/foo/zoo1.c.back")
-    "zoo1.c"
-    ```
-
-7.  Read / Write file to a string
-
-    **Read File**
-    
-    ```lisp
-    ELISP> (defun file-contents (filename)
-      (interactive "fFind file: ")
-      (with-temp-buffer
-        (insert-file-contents filename)
-        (buffer-substring-no-properties (point-min) (point-max))))
-    
-    ELISP> (file-contents "/proc/filesystems")
-    "nodev  sysfs\nnodev    rootfs\nnodev   ramfs\nnodev
-    bdev\nnodev proc\nnodev cgroup\nnode ...
-    ```
-    
-    **Write to File**
-    
-    ```lisp
-    ELISP> (append-to-file "hello world" nil "/tmp/hello.txt")
-    nil
-    
-    ELISP> (file-contents "/tmp/hello.txt")
-    "hello world"
-    ELISP>
-    ```
-    
-    -   [Current Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html)
-    -   [Creating New Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html)
-
-## Discoverability / Get Documentation<a id="sec-4-6" name="sec-4-6"></a>
-
-**Apropos**
-
-```
-M-x <apropos command>
+;;; List Directory
+;;;;
+;;;
+ELISP> (directory-files "/home/tux/PycharmProjects/Haskell/")
+("." ".." ".git" ".gitignore" ".idea" "LICENSE" "Make" "Makefile"
+"README.back.md" "README.html" "README.md" "Test.html" "build.sh" "clean.sh"
+"codes" "dict.sh" "haskell" "ocaml" "papers" "tags" "tmp")
 ```
 
-Apropos Commands
+### File Name Components<a id="sec-4-6-2" name="sec-4-6-2"></a>
 
-```
-apropos
-apropos-command
-apropos-documentation
-info-apropos
-apropos-library
-apropos-variable
-apropos-value
-```
+[Emacs Manual: File Name Components](http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html)
 
-### Describe<a id="sec-4-6-1" name="sec-4-6-1"></a>
+```lisp
+ELISP> (file-name-directory "/usr/bin/env")
+"/usr/bin/"
+ELISP>
 
-See also:
+ELISP> (file-name-nondirectory "/usr/bin/env")
+"env"
+ELISP>
 
--   [.emacs file by Alex](https://alexschroeder.ch/geocities/kensanata/dot-emacs.html)
--   [qDot's Emacs Configuration](http://qdot.github.io/conf_emacs/)
 
-**Describe Function**
-
-This calls the command describe-function. Type a function name and get documentation of it.
-
-```
-ELISP> (describe-function <function-name>)
-
-or
-
-M-x describe-function
-
-or type the keys
-
-C-h f
+ELISP> (file-name-base "/home/foo/zoo1.c")
+"zoo1"
+ELISP> (file-name-base "/home/foo/zoo1.c.back")
+"zoo1.c"
 ```
 
-**Describe Variable**
+### Read / Write file to a string<a id="sec-4-6-3" name="sec-4-6-3"></a>
 
-This calls the command describe-variable. Type the name of a variable at the prompt and press return. This displays the variable's documentation and value.
+**Read File**
 
+```lisp
+ELISP> (defun file-contents (filename)
+  (interactive "fFind file: ")
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (buffer-substring-no-properties (point-min) (point-max))))
+
+ELISP> (file-contents "/proc/filesystems")
+"nodev  sysfs\nnodev    rootfs\nnodev   ramfs\nnodev
+bdev\nnodev proc\nnodev cgroup\nnode ...
 ```
-ELISP> (describe-variable <variable-name>)
-ELISP> (describe-variable 'load-path)
 
-M-x describe-variable
+**Write to File**
 
-or
+```lisp
+ELISP> (append-to-file "hello world" nil "/tmp/hello.txt")
+nil
 
-C-h v
+ELISP> (file-contents "/tmp/hello.txt")
+"hello world"
+ELISP>
 ```
 
-## Window Functions<a id="sec-4-7" name="sec-4-7"></a>
+-   [Current Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html)
+-   [Creating New Buffer](http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html)
+
+## Date and Time<a id="sec-4-7" name="sec-4-7"></a>
+
+```lisp
+;;;
+;;; Print Current Time
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (current-time-string)
+;;;;;;;;;;
+"Sun Jun 21 06:10:28 2015"
+
+;; Year-Month-Day:
+(insert (format-time-string "%Y-%m-%d"))
+
+;; Hour:Minutes:Seconds
+(insert (format-time-string "%H-%M-%S"))
+
+
+;; Format Current Time
+;;
+;;;;;;;
+ELISP> (format-time-string "%d/%m/%Y %H:%M:%S" (current-time))
+"27/06/2015 22:05:10"
+ELISP>
+```
+
+## OS Interface<a id="sec-4-8" name="sec-4-8"></a>
+
+## Call External Commands or Apps<a id="sec-4-9" name="sec-4-9"></a>
+
+```lisp
+;;; Call External Command
+;;;;;;
+;; It will launch Lxterminal
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;...
+ELISP> (call-process "lxterminal")
+0
+ELISP>
+
+
+;; Shell Command to String
+;;;;;;;
+ELISP> (shell-command-to-string "pwd")
+"/home/tux/PycharmProjects/ocaml/prelude\n"
+ELISP
+ELISP> (shell-command-to-string "uname" )
+"Linux\n"
+ELISP> (shell-command-to-string "uname -a" )
+"Linux tuxhorse 3.19.0-18-generic #18-Ubuntu SMP Tue May 19 18:30:59 UTC 2015 i686 i686 i686 GNU/Linux\n"
+ELISP>
+```
+
+## Environment Variables<a id="sec-4-10" name="sec-4-10"></a>
+
+[Emacs Manual: Environment Variables](http://www.gnu.org/software/emacs/manual/html_node/emacs/Environment.html)
+
+```lisp
+;; Environment Variables
+;;
+ELISP> (getenv "PATH")
+"/home/tux/.opam/4.02.1/bin:/home/tux/bin:/home/tux/.opam/4.02.1/bin
+:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+:/usr/local/games:/opt/java:/opt/java/bin:/home/tux/bin:/home/tux/usr/bin
+:/home/tux/.apps:/opt/jython:/opt/jython/bin:/opt/jython/Lib"
+
+ELISP> (getenv "HOME")
+"/home/tux"
+
+
+;; Set Environment Variables
+;;
+
+ELISP> (setenv "JAVA_HOME" "/usr/local/java")
+"/usr/local/java"
+
+ELISP> (setenv "LANG" "en_US.UTF8")
+"en_US.UTF8"
+
+ELISP> (getenv "LANG")
+"en_US.UTF8"
+ELISP>
+
+;; Detect Operating System
+;;
+;;
+ELISP> system-type
+gnu/linux
+ELISP>
+
+;; Test if the operating system is Linux
+ELISP> (eq system-type 'gnu/linux)
+t
+ELISP>
+
+
+;;; Show all Evironment Variables 
+
+ELISP> (dolist (e process-environment) (princ (format "%s\n" e)))
+JDK_HOME=/opt/java
+EDITOR=vim
+MANPATH=:/home/tux/.opam/4.02.1/man
+QT_PLATFORM_PLUGIN=lxqt
+LC_PAPER=pt_BR.UTF-8
+PYTHONPATH=/home/tux/lib
+
+;; Insert at cursor position all Enviroment Variables 
+;; 
+;; Copy it to scratch buffer and type C-x C-e to eval this S-expression
+;;
+> (dolist (e process-environment) (insert (format "%s\n" e)))
+
+JDK_HOME=/opt/java
+EDITOR=vim
+MANPATH=:/home/tux/.opam/4.02.1/man
+QT_PLATFORM_PLUGIN=lxqt
+LC_PAPER=pt_BR.UTF-8
+PYTHONPATH=/home/tux/lib
+LC_NUMERIC=pt_BR.UTF-8
+...
+```
+
+## Process Management<a id="sec-4-11" name="sec-4-11"></a>
+
+```lisp
+;;;; List all process
+
+ELISP> (process-list)
+(#<process ocaml-toplevel> #<process ielm> #<process merlin> #<process melpa.org> #<process melpa.milkbox.net>)
+
+;;;; Get a process, given its name.
+
+ELISP> (get-process "merlin")
+ #<process merlin>
+ELISP>
+
+;;;; Names
+
+ELISP> (mapcar 'process-name (process-list))
+("ocaml-toplevel" "ielm" "merlin" "melpa.org" "melpa.milkbox.net")
+
+ELISP>
+
+;;;; Commmand of a process
+
+ELISP> (process-command (get-process "ocaml-toplevel"))
+("/home/tux/bin/opam" "config" "exec" "--" "ocaml")
+
+ELISP> (process-command (get-process "ielm"))
+("hexl")
+
+;;;; Process ID
+
+ELISP>
+ELISP> (process-id (get-process "ocaml-toplevel"))
+2488
+ELISP>
+ELISP> (process-id (get-process "ielm"))
+25579
+ELISP>
+
+;;;; Buffer Process
+
+ELISP> (process-buffer (get-process "ocaml-toplevel"))
+ #<buffer *ocaml-toplevel*>
+ELISP>
+
+ELISP> (buffer-name (process-buffer (get-process "ocaml-toplevel")))
+"*ocaml-toplevel*"
+ELISP>
+
+ELISP> (mapcar (lambda (p) (buffer-name (process-buffer p))) (process-list))
+("pybff" "*ocaml-toplevel*" "*ielm*" " *merlin (default)*" "*ielm*" "*ielm*")
+
+;;;; Display Buffer Process Window
+
+ELISP> (display-buffer (process-buffer (get-process "py")))
+ #<window 21 on pybff>
+ELISP>
+
+;;;; Start Asyncronous Process
+
+;;  Start the process named py, with the buffer named pybff
+;;  using the command python, /usr/bin/python (on linux)
+;;
+ELISP> (start-process "py"   "pybff" "python")
+ #<process py>
+
+ELISP> (process-list)
+(#<process py> #<process ocaml-toplevel> #<process ielm>
+ #<process merlin> #<process melpa.org> #<process melpa.milkbox.net>)
+
+
+;;;; End Asynchronous Process
+
+;; End the process named py
+ELISP> (process-send-eof "py")
+"py"
+
+ELISP> (process-send-eof "py")
+    ** Eval error **  Process py does not exist
+ELISP>
+
+;;;; Send String to Process
+
+ELISP> (process-send-string "py" "print 'Hello world'\n")
+nil
+ELISP>
+
+;;;; Get Multiple Fields
+
+ELISP> (mapcar
+        (lambda (p)(list
+                     p
+                    (process-name p)
+                    (process-command p)
+                    (list (process-buffer p) (buffer-name (process-buffer p)))
+                    (process-id p)
+                    (process-status p)
+        ))
+        (process-list))
+((#<process py> "py"
+            ("python")
+            (#<buffer pybff> "pybff")
+            3374 run)
+ (#<process ocaml-toplevel> "ocaml-toplevel"
+            ("/home/tux/bin/opam" "config" "exec" "--" "ocaml")
+            (#<buffer *ocaml-toplevel*> "*ocaml-toplevel*")
+            2488 run)
+ (#<process ielm> "ielm"
+            ("hexl")
+            (#<buffer *ielm*> "*ielm*")
+            25579 run)
+ (#<process merlin> "merlin"
+            ("ocamlmerlin" "-protocol" "sexp")
+            (#<buffer  *merlin
+                       (default)
+                       *> " *merlin (default)*")
+            24926 run)
+ (#<process melpa.org> "melpa.org" nil
+            (nil "*ielm*")
+            nil open)
+ (#<process melpa.milkbox.net> "melpa.milkbox.net" nil
+            (nil "*ielm*")
+            nil open))
+```
+
+## Window Functions<a id="sec-4-12" name="sec-4-12"></a>
 
 1.  Basic Window Functions
 
@@ -6907,7 +6945,7 @@ C-h v
     -   <http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_441.html>
     -   <http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html>
 
-## Emacs Modes<a id="sec-4-8" name="sec-4-8"></a>
+## Emacs Modes<a id="sec-4-13" name="sec-4-13"></a>
 
 1.  Major Mode
 
@@ -7341,7 +7379,7 @@ C-h v
     
     <http://sunsite.ualberta.ca/Documentation/Gnu/emacs-lisp-ref-21-2.7/html_node/elisp_727.html>
 
-## Special Variables<a id="sec-4-9" name="sec-4-9"></a>
+## Special Variables<a id="sec-4-14" name="sec-4-14"></a>
 
 ```lisp
 ELISP> emacs-major-version
@@ -7398,7 +7436,7 @@ ELISP> exec-directory
 ELISP>
 ```
 
-## Network<a id="sec-4-10" name="sec-4-10"></a>
+## Network<a id="sec-4-15" name="sec-4-15"></a>
 
 **Links to Inquiry**
 
@@ -8038,12 +8076,14 @@ right side.
   )
 ```
 
-Example 
+Example: 
 
 ![img](images/occur_statement_scan.png)
 
 It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
-@NOTE.
+@NOTE. This fuction can be excuted by typing: `M-x scan-code-tags`
+
+Example:
 
 ```lisp
 (defun scan-code-tags ()
@@ -9404,6 +9444,60 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
 -   [A Little Elisp to Make Emacs and Racket Play Nicer](http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html)
 
 ### Clojure<a id="sec-11-7-4" name="sec-11-7-4"></a>
+
+Scheme inferior mode (Scheme shell support) can be used to run Clojure
+repl without Cider. It is faster to begginers set up a Clojure
+environment quickly.
+
+The code below sets the following key bindings:
+
+-   `C-x Ce` to Send the last Sexp to clojure repl.
+-   `C-c =`  to Send the definition to the repl, it sends the outermost
+    s-expression to the repl regardless where is the cursor.
+-   `C-c C-p` Send a region to the repl.
+
+```lisp
+(progn
+  (define-key clojure-mode-map  
+      (kbd "C-x C-e") #'scheme-send-last-sexp)
+
+  (define-key clojure-mode-map
+    (kbd "C-c =") #'scheme-send-definition)
+ 
+  )
+
+
+(defun cloujure-repl  ()
+  (interactive)
+  
+  (run-scheme "java -jar /opt/clojure.jar"))
+
+
+
+(defun run-clojure-batch ()
+  "Run a clojure file in batch mode"
+  (interactive)
+
+  
+  (start-process "clojure-batch1"     ;; Process name 
+                 "*clojure-batch*"   ;; Buffer name 
+
+                 ;;; Command line 
+                 "java" "-jar" "/opt/clojure.jar" (buffer-file-name))
+
+  (split-window-vertically)
+
+  (switch-to-buffer-other-window "*clojure-batch*"))
+```
+
+Download Clojure:
+
+```
+cd /opt/ 
+curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.jar
+```
+
+**See:**
 
 -   [CIDER is a Clojure IDE and REPL for Emacs](http://pythonhackers.com/p/clojure-emacs/cider)
 -   [Practical Starter Tips for Clojure](http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html)

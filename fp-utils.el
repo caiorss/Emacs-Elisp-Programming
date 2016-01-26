@@ -1274,17 +1274,18 @@
   (find-file (file/path (buffer/file)))
   )
 
-(defun buffer/rename-file ()
+(defun file/rename ()
   "
   Prompt the user for a new file name to the current buffer file.
-  Usage: M-x buffer/rename-file
+  Usage: M-x file/rename
   "
   (interactive)
   (let (
         (current-name (buffer-file-name))
         (new-name    (read-string "Enter new file name: "))        
-        )        
-    (rename-file current-name new-name 1)
+        )
+    (save-buffer)
+    (rename-file current-name new-name 1)    
     (kill-buffer (current-buffer))
     (find-file new-name)
     (message (format "Buffer file name changed from %s to %s" current-name new-name))
