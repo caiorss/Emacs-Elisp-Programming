@@ -2,9 +2,9 @@
 #+AUTHOR: Caio Rodrigues
 #+EMAIL: <caiorss.rodrigues@gmail.com>
 #+TITLE: Emacs In a Box
-#+KEYWORDS: emacs, elisp, lisp, programming 
+#+KEYWORDS: emacs, elisp, lisp, programming
 #+LANGUAGE: en
-#+DESCRIPTION: Emacs programming and customization. 
+#+DESCRIPTION: Emacs programming and customization.
 #+URL:  http://tinyurl.com/emacsinabox
 #+STARTUP: overview
 
@@ -101,9 +101,9 @@ $ emacs --version
 ** Default Key Bindings and Useful Commands
 
 The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
-enabled by typing: M-x cua-mode or by inserting =(cua-mode) in emacs
-configuration file, emacs also supports the Vim key bindings by
-installing the evil package =(M-x package-install evil)=. 
+enabled by typing: M-x cua-mode or by inserting =(cua-mode) in Emacs
+configuration file. It also supports the Vim key bindings by
+installing the evil package =(M-x package-install evil)=.
 
 See also:
 
@@ -121,7 +121,7 @@ See also:
 | S   | Shift   | Shift                       |
 | SPC | Space   | Space                       |
 
- * Some texts uses A - Alt instead of Meta.  
+ * Some texts uses A - Alt instead of Meta.
 
 *Key Sequence*
 
@@ -133,15 +133,15 @@ See also:
 | M-x        | Reserved to execute Emacs Commands. |
 | C-g        | Reserved to cancel Emacs commands.   |
 
-*Key Mneumonics*
+*Key Mnemonics*
 
-| Letter | Mneumonic |
+| Letter | Mnemonic |
 |--------+-----------|
 | p      | previous  |
 | n      | next      |
 | b      | backward  |
 | f      | forward   |
-| a      | beggining |
+| a      | beginning |
 | e      | end       |
 
 
@@ -155,26 +155,43 @@ See also:
   - [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][Mastering Key Bindings in Emacs]]
 
 *** Key Bindings by Task
+**** Quitting
+
+| Key Binding        | Command (M-x <cmd>)     | Description                                                                |
+|--------------------+-------------------------+----------------------------------------------------------------------------|
+| =C-x C-c=          | save-buffers-kill-emacs | Ask to kill each buffer and close Emacs.                                   |
+| =C-g=              | keyboard-quit           | Cancel any emacs command or prompt.                                        |
+| =C-x k=            | kill-buffer             | Close current buffer.                                                      |
+| =C z= or =C-x C-z= | suspend-emacs           | Iconify Emacs in graphical mode or suspend Emacs process when in terminal. |
+|                    |                         |                                                                            |
+
+
+Note: Neither C-z or C-x C-c work in Cua mode.
+
 **** File
 
-|           |                                |
-|-----------+--------------------------------|
-| C-x C-s   | Save Current Buffer            |
-| C-x C-w   | Save Buffer as different file  |
-| C-x s     | Save all buffers interactively |
-| C-u C-x s | Save all buffers               |
-| C-x C-f   | Open File                      |
-| C-x C-C   | Close Emacs                    |
+| Key Binding | Function                   | Description                                       |
+|-------------+----------------------------+---------------------------------------------------|
+| C-x C-f     | find-file                  | Open File.                                        |
+| C-x C-v     | find-alternate-file        | Open another file and kill current buffer.        |
+| C-x C-s     | save-buffer                | Save Current Buffer.                              |
+| C-x C-w     | write-file                 | Save Buffer as different file.                    |
+| C-x s       | save-some-buffers          | Save all buffers interactively.                   |
+| C-u C-x s   |                            | Save all buffers.                                 |
+| C-x C-C     | save-buffers-kill-terminal | Closes Emacs and asks to save each buffers.       |
+| C-x i       | insert-file                | Insert the content of a file at cursor position.  |
+| -           | revert-buffer              | Update a buffer when the file is changed on disk. |
+| C-x C-q     | read-only-mode             | Toggle read-only mode.                            |
 
 **** Buffers
 
-|             |                         |
-|-------------+-------------------------|
-| C-x b       | Select Another Buffer   |
-| C-x C-b     | List all buffers        |
-| C-x k       | Kill a buffer          |
-| C-x [right] | Move to next buffer     |
-| C-x [left]  | Move to previous buffer |
+| Key Binding | Function         | Description             |
+|-------------+------------------+-------------------------|
+| C-x b       | switch-to-buffer | Select Another Buffer   |
+| C-x C-b     | list-buffers     | List all buffers        |
+| C-x k       | kill-buffer      | Kill a buffer           |
+| C-x [right] | next-buffer      | Move to next buffer     |
+| C-x [left]  | previous-buffer  | Move to previous buffer |
 
 **** Navigation
 
@@ -251,17 +268,17 @@ See also:
 
 **** Windows
 
-|         |                                       |
-|---------+---------------------------------------|
-| C-x k   | Close                                 |
-| C-x b   | Next Window                           |
-| C-x C-b | Choose buffer Window                  |
-| C-x 0   | Delete Current Window                 |
-| C-x 1   | Unsplit                               |
-| C-x 2   | Split Horizontally                    |
-| C-x 3   | Split Vertically                      |
-| C-x o   | Switch Window                         |
-| C-x 2 5 | Launch a new frame (separated window) |
+| Key Binding | Function            | Description                                               |
+|-------------+---------------------+-----------------------------------------------------------|
+| C-x k       | kill-buffer         | Close current buffer                                      |
+| C-x b       | switch-to-buffer    | Switch to buffer                                          |
+| C-x C-b     | list-buffers        | Choose buffer Window                                      |
+| C-x 0       | delete-window       | Delete Current Window                                     |
+| C-x 1       | delete-other-window | Keep the current window and delete the remaining windows. |
+| C-x 2       | split-window-below  | Split Horizontally                                        |
+| C-x 3       |                     | Split Vertically                                          |
+| C-x o       |                     | Switch Window                                             |
+| C-x 2 5     |                     | Launch a new frame (separated window)                     |
 
 **** Commands
 
@@ -284,16 +301,16 @@ See also:
 
 **** Information
 
-|       |                                          |
-|-------+------------------------------------------|
-| C-h a | Command Apropos                          |
-| C-h i | Info documentation reader                |
-| C-h f | Describe function                        |
-| C-h v | Describe variable                        |
-| C-h m | Describe mode                            |
-| C-h s | Describe syntax                          |
-| C-h b | Describe key bindings for current buffer |
-| C-h k | Describe a particular key binding.       |
+| Key Binding | Function          | Description                              |
+|-------------+-------------------+------------------------------------------|
+| C-h a       | apropos           | Command Apropos                          |
+| C-h i       | info              | Info documentation reader                |
+| C-h f       | describe-function | Describe function                        |
+| C-h v       | describe-variable | Describe variable                        |
+| C-h m       | describe-mode     | Describe mode                            |
+| C-h s       | describe-syntax   | Describe syntax                          |
+| C-h b       | describe-bindings | Describe key bindings for current buffer |
+| C-h k       | describe-key      | Describe a particular key binding.       |
 
 *** Selected Key Bindings and Commands for Programming
 
@@ -345,7 +362,7 @@ See also:
 | M-x replace-string | Batch replace string in selected region or  buffer.     |
 | M-x replace-regexp | Batch replace regex pattern in selected text or buffer. |
 
-*** Keybindings and Commands for Lisp programming
+*** Key bindings and Commands for Lisp programming
 
 Useful lisp key bindings to edit and navigate Lisp code.
 
@@ -438,8 +455,8 @@ See also:
   - [[http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/][Bash Emacs Editing Mode Cheat Sheet]]
   - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
 
-** Commands 
- 
+** Commands
+
 | Command                          | Description                                                  |
 |----------------------------------+--------------------------------------------------------------|
 |                                  |                                                              |
@@ -454,25 +471,25 @@ See also:
 | =M-x whitespace-mode=            | Toggle white space view.                                     |
 |                                  |                                                              |
 
-Change current buffer mode: 
+Change current buffer mode:
 
 Sometimes when editing a script without file extension it is useful to
 tell Emacs what is the file format to enable syntax highlight and mode
 functions.
 
- - =M-x sh-mode=      Shell Script - sh extension 
- - =M-x pyhton-mode=  Example: A python script without extension ".py" 
- - =M-x conf-mode=    Configuration file like: .gitconfig, .gitignore, smb.conf 
- 
+ - =M-x sh-mode=      Shell Script - sh extension
+ - =M-x pyhton-mode=  Example: A python script without extension ".py"
+ - =M-x conf-mode=    Configuration file like: .gitconfig, .gitignore, smb.conf
+
 ** Spell Checker
 
 Emacs uses external programs to check the spell. It supports _ispell_,
 _aspell_ and _hunspell_. The variable =ispell-program-name= sets the
 spell check software used by Emacs. The default dictionary used by
-Emacs is US English, but it can be changed with the command 
+Emacs is US English, but it can be changed with the command
 =M-x ispell-change-dicitonary=.
 
-Spell check interface commands: 
+Spell check interface commands:
 
 
 | Command                        | Default Key Bind | Description                                                           |
@@ -511,19 +528,19 @@ The dictionary can be changed with the Elisp code:
 ;;
 (defun ispell-spanish ()
  (interactive)
- (ispell-change-diciontary "castellano")) 
-   
-;; M-x ispell-en 
+ (ispell-change-diciontary "castellano"))
+
+;; M-x ispell-en
 ;;
 (defun ispell-en ()
   (interactive)
-   (ispell-change-diciontary "en")) 
+   (ispell-change-diciontary "en"))
 #+END_SRC
 
 
 To right click in the word and get suggestions use:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (eval-after-load "flyspell"
   '(progn
      (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
@@ -543,16 +560,16 @@ so on.
 
 
 See also:
- 
+
   - [[https://joelkuiper.eu/spellcheck_emacs][Spell checking in Emacs]]
-  - [[http://www.emacswiki.org/emacs/FlySpell][FlySpell - Emacs Wiki.org]] 
+  - [[http://www.emacswiki.org/emacs/FlySpell][FlySpell - Emacs Wiki.org]]
   - [[http://www.emacswiki.org/emacs/InteractiveSpell][InteractiveSpell]]
   - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][Emacs Manual - Check and Correcting Spelling]]
   - [[http://ergoemacs.org/emacs/emacs_spell_checker_problems.html][Emacs Spell Checker Problems]]
   - [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][What's the best spell check setup in emacs]]
 
 * Elisp
-** Overview 
+** Overview
 
 This section will use the Emacs interactive elisp shell IELM that can
 be accessed by typing *M-x ielm*. You can also use the scratch buffer
@@ -607,7 +624,7 @@ file:images/mx_eval_buffer2.png
 
 *** Creating Commands (Interactive Functions)
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 
 (defun buffer/insert-filename ()
   "Insert file name of current buffer at current point"
@@ -625,12 +642,12 @@ After:
 
 file:images/emacs-interactive-command2.png
 
-*** Exploring Emacs 
-**** Function Bound to Key Binding 
+*** Exploring Emacs
+**** Function Bound to Key Binding
 
 Emacs is almost a "Functional Programming editor", to every key bind,
 menu action, interactive command or mouse action is bound a
-function. 
+function.
 
 For example: to the key bind =C-x <right>= is bound the interactive
 function =next-buffer= that can be executed with M-x next-buffer.
@@ -638,9 +655,9 @@ function =next-buffer= that can be executed with M-x next-buffer.
 To learn which function is bound to key type: =M-x describe-key= and
 then type the key binding like =C-x <right>= to pop up a window that
 shows the function bound to that key or just type =C-h-k= and type the
-key combination. 
+key combination.
 
-file:images/function_keybind_describe.png 
+file:images/function_keybind_describe.png
 
 **** List All Defined Key Bindings
 
@@ -650,7 +667,7 @@ in all modes, including the buffer major mode.
 
 Example:
 
-=C-h b= in the _scratch buffer_ (Elisp interactive mode). 
+=C-h b= in the _scratch buffer_ (Elisp interactive mode).
 
 The picture shows the major mode key bindings (elisp interactive mode)
 for the scratch buffer.
@@ -665,20 +682,20 @@ file:images/minor-mode-binding-pareddit.png
 
 If the user select the function pareddit-kill (which is associated with
 the key binding =C-k= in pareddit-mode) and type return, it will show
-the function documentation or what the key combination does. 
+the function documentation or what the key combination does.
 
 file:images/minor-mode-binding-pareddit2.png
 
-**** Function Documentation 
+**** Function Documentation
 
 Emacs keeps an in-memory documentation of all functions. To see the documentation type =M-x describe-function= or =C h k= and type the function name
-or put the cursor at the beggining of the function name and type =M-x describe-function=.  
+or put the cursor at the beggining of the function name and type =M-x describe-function=.
 
 Example: =M-x describe-function= replace-regexp
 
 This can also be invoked with:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (describe-function 'replace-regexp)
 #+END_SRC
 
@@ -790,25 +807,25 @@ ELISP>
 ELISP> 1e3
 1000.0
 
-;;; String 
+;;; String
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ELISP> "Hello World Emacs Literals"
 "Hello World Emacs Literals"
-ELISP> 
+ELISP>
 
 
-;;; Symbol 
+;;; Symbol
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ELISP> 'this-a-symbol
 this-a-symbol
 
-ELISP> 'vector->list 
+ELISP> 'vector->list
 vector->list
 
 ELISP> 'symbol?
 symbol\?
-ELISP> 
+ELISP>
 
 ;; Boolean t and nil
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -816,23 +833,23 @@ ELISP> t
 t
 ELISP> nil
 nil
-ELISP> 
+ELISP>
 
  ;;; Everything that is not "nil" is true:
  ;;-----------------------------------------
 ELISP> (if t "It is true (not nil)" "It is false (it is nil)")
 "It is true (not nil)"
-ELISP> 
+ELISP>
 ELISP> (if 100e3 "It is true (not nil)" "It is false (it is nil)")
 "It is true (not nil)"
 ELISP> (if '(a b c d)  "It is true (not nil)" "It is false (it is nil)")
 "It is true (not nil)"
-ELISP> 
+ELISP>
 
 
 ELISP> (if nil  "It is true (not nil)" "It is false (it is nil)")
 "It is false (it is nil)"
-ELISP> 
+ELISP>
 
 ;;; Pair / Cons Cell
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -894,7 +911,7 @@ Examples:
 
 ELISP> (null nil)
 t
-ELISP> 
+ELISP>
 ELISP> (null '())
 t
 
@@ -908,7 +925,7 @@ ELISP> (atom '(a . b))
 nil
 ELISP> (atom "hello world")
 t
-ELISP> 
+ELISP>
 
 ELISP> (bufferp (current-buffer))
 t
@@ -916,7 +933,7 @@ ELISP> (bufferp (selected-window))
 nil
 ELISP> (windowp (selected-window))
 t
-ELISP> 
+ELISP>
 
 #+END_SRC
 
@@ -926,16 +943,16 @@ ELISP>
 
 ELISP> (type-of (current-buffer))
 buffer
-ELISP> 
+ELISP>
 ELISP> (type-of (selected-window))
 window
-ELISP> 
+ELISP>
 
 ELISP> (equal 'buffer (type-of (current-buffer)))
 t
 ELISP> (equal 'buffer (type-of (selected-window)))
 nil
-ELISP> 
+ELISP>
 
 #+END_SRC
 
@@ -1669,7 +1686,7 @@ ELISP>
 #+END_SRC
 
 ** Association Lists and Property Lists
-*** Overview 
+*** Overview
 
 An association list is a list of cons pairs, that will be called here
 of *clist* or a list of lists of two elements each that will be called
@@ -1680,7 +1697,7 @@ here of *alist* :
 Keys: a, x, 2 and 4
 Values: b, y, 3 and (1 2 3 4 5)
 
-#+BEGIN_SRC eamcs-lisp 
+#+BEGIN_SRC eamcs-lisp
 
 ELISP> '((a . b) (x . y) (2 . 3) (4 . (1 2 3 4 5)))
 ((a . b)
@@ -1701,7 +1718,7 @@ most used by Emacs API is the *clist*.
 
 *Assocation list of type: alist*
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 ELISP> '((a  b) (x  y) (2  3) (4  (1 2 3 4 5)))
 ((a b)
  (x y)
@@ -1717,14 +1734,14 @@ ELISP> (list (list 'a 'b) (list 'x 'y) (list 2 3) (list 2 '(1 2 3 4 5)))
   (1 2 3 4 5)))
 #+END_SRC
 
-This type of list is not ambiguous like the clist. 
+This type of list is not ambiguous like the clist.
 
 
 *Property Lists: Plist*
 
 Property lists are lists of consecutive pairs of keys and values. The
 advantage of this list is that it requires less parenthesis and it is
-more human readable. 
+more human readable.
 
 #+BEGIN_SRC elisp
 
@@ -1734,18 +1751,17 @@ ELISP> '(:key1 value1 :key2 value2 :key3 1002.23 :key4 (a b c d e))
 (:key1 value1 :key2 value2 :key3 1002.23 :key4
        (a b c d e))
 
-;;; It is more useful in configuration files 
+;;; It is more useful in configuration files
 
 (
-:key1  value1 
+:key1  value1
 :key2  value2
-:key3  value3 
+:key3  value3
 :key4  (a b c d e )
 )
 
 
 #+END_SRC
-
 
 *** Association List / Alist
 
@@ -2660,11 +2676,11 @@ names for Emacs functions.
 
 See also: [[http://ergoemacs.org/emacs/emacs_alias.html][ErgoEmacs - Emacs: Use Alias for Fast M-x]]
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 
 ELISP> (require 'cl)
 cl
-ELISP> 
+ELISP>
 
 ELISP> (defalias 'map 'mapcar)
 map
@@ -2673,7 +2689,7 @@ ELISP> (map (lambda (x) (* 3 x)) (list 1 2 3 4 5 6))
 
 ELISP> (defalias 'filter 'remove-if-not) ;; remove-if-not comes from "cl" library
 filter
- 
+
 ;;; Filter all buffers bounded to a file
 ;;
 ELISP> (filter #'buffer-file-name (buffer-list))
@@ -2689,7 +2705,7 @@ ELISP> (reject #'buffer-file-name (buffer-list))
 (defalias #'org2html #'org-html-export-to-html)
 
 ;;
-;;  It is also useful to create more convenient names for Emacs API 
+;;  It is also useful to create more convenient names for Emacs API
 ;; in a namsepace-like fashion that makes easier to find functions and
 ;; autocomplete functions, for instance:
 ;;
@@ -2716,7 +2732,7 @@ ELISP> (file/extension (buffer-file-name))
 "org"
 ELISP> (file/filename (buffer-file-name))
 "README.org"
-ELISP> 
+ELISP>
 
 
 #+END_SRC
@@ -2728,7 +2744,6 @@ See also:
   - [[http://cl-cookbook.sourceforge.net/loop.html][The Common Lisp Cookbook - The Loop Macro]]
   - [[http://www.gigamonkeys.com/book/loop-for-black-belts.html][LOOP for Black Belts]]
   - [[http://www.ai.sri.com/pkarp/loop.html][Tutorial for the Common Lisp Loop Macro]]
-
 
 ***** Conditional Statement
 
@@ -2852,7 +2867,7 @@ ELISP>
 
 #+END_SRC
 
-***** Cond     - Case Switch
+***** Cond - Case Switch
 
 #+BEGIN_SRC elisp
 
@@ -2870,8 +2885,7 @@ ELISP> (cond
 ELISP>
 #+END_SRC
 
-
-***** CL-Case  - Case Swithc
+***** CL-Case - Case Switch
 
 #+BEGIN_SRC elisp
 (defun test-cl-case (operation x y)
@@ -4849,32 +4863,32 @@ Usage: A-x replace-regexp-entire-buffer
       (replace-match replacement))))
 
 #+END_SRC
-**  Point, Region, Line and Buffer 
+**  Point, Region, Line and Buffer
 *** Point
 
 *Point* is the number of characters from the beginning of the buffer to
 the current cursor location, or cursor position for short. To see the
-function documention type =C-h-f= and enter the function name or 
+function documentation type =C-h-f= and enter the function name or
 =M-x describe-function=.
 
-Point 
+Point
 
-| Function                           | Description                                                         |
-|------------------------------------+---------------------------------------------------------------------|
-| (point)                            | Current cursor position                                             |
-| (point-min)                        | Minimum cursor position in current buffer. (always returns 1)       |
-| (point-max)                        | Maximum cursor positon in current buffer.                           |
-|                                    |                                                                     |
-| (line-beginning-position)          | Point of the begginign  of current line.                            |
-| (line-end-position)                | Point of the end of current line.                                   |
-|                                    |                                                                     |
-| (region-beginning)                 | Position of the beginning current region (selected text).           |
-| (region-end)                       | Position of the end current region.                                 |
-|                                    |                                                                     |
-| (bounds-of-thing-at-point <thing>) | Returns the cons pair '(beginning . end) positon of thing at point. |
+| Function                           | Description                                                          |
+|------------------------------------+----------------------------------------------------------------------|
+| (point)                            | Current cursor position                                              |
+| (point-min)                        | Minimum cursor position in current buffer. (always returns 1)        |
+| (point-max)                        | Maximum cursor position in current buffer.                           |
+|                                    |                                                                      |
+| (line-beginning-position)          | Point of the beginning  of current line.                             |
+| (line-end-position)                | Point of the end of current line.                                    |
+|                                    |                                                                      |
+| (region-beginning)                 | Position of the beginning current region (selected text).            |
+| (region-end)                       | Position of the end current region.                                  |
+|                                    |                                                                      |
+| (bounds-of-thing-at-point <thing>) | Returns the cons pair '(beginning . end) position of thing at point. |
 
 
-Point Interface Functions 
+Point Interface Functions
 
 | Function                                       | Description                                                            |
 |------------------------------------------------+------------------------------------------------------------------------|
@@ -4887,9 +4901,9 @@ Point Interface Functions
 
 
 To test the functions described in this section the current buffer
-must be set to another buffer using the fuctions 
+must be set to another buffer using the fuctions
 
-=(set-buffer <buffer-name or buffer-object>)= 
+=(set-buffer <buffer-name or buffer-object>)=
 
 or enter C-c C-b when using the IELM.
 
@@ -4918,7 +4932,7 @@ Examples:
 >  (line-end-position)
 99804
 
-> (buffer-substring-no-properties 
+> (buffer-substring-no-properties
     (line-beginning-position)
     (line-end-position))
 
@@ -4935,9 +4949,9 @@ Examples:
 
   ;; Save Current Cursor Position
   ;; and go back to initial positon when
-  ;; finish this block 
-  (save-excursion  
-    (goto-char (point-max)) ;;; Go to end of buffer 
+  ;; finish this block
+  (save-excursion
+    (goto-char (point-max)) ;;; Go to end of buffer
     (insert "Testing insert end of buffer")
     ))
 
@@ -4958,7 +4972,7 @@ From the documentation:
 =(thing-at-point THING &optional NO-PROPERTIES)=
 
 Return the THING at point THING should be a symbol specifying a type
-of syntactic entity.  
+of syntactic entity.
 
 Possibilities include `symbol', `list', `sexp', `defun', `filename',
 `url', `email', `word', `sentence', `whitespace', `line', `number',
@@ -4987,8 +5001,8 @@ file:images/thing_at_point_sexp.png
 
 ELISP> (set-buffer "*scratch*")
 #<buffer *scratch*>
-ELISP> 
-(let* 
+ELISP>
+(let*
     ((bounds (bounds-of-thing-at-point 'sexp))
      (pmin   (if bounds (car bounds) nil))
      (pmax   (if bounds (cdr bounds) nil))
@@ -4996,13 +5010,13 @@ ELISP>
   (if (and pmin pmax)
       (buffer-substring-no-properties pmin pmax)))
 "(defun f (x y)\n             (+ (* 3 x) (* 4 y)))"
-ELISP> 
+ELISP>
 
 #+END_SRC
 
 
 file:images/thing_at_point_sexp2.png
-**  Files, Directories and Path 
+**  Files, Directories and Path
 
  [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html][Emacs Manual: Files]]
 
@@ -5053,7 +5067,7 @@ ELISP> (directory-files "/home/tux/PycharmProjects/Haskell/")
 "README.back.md" "README.html" "README.md" "Test.html" "build.sh" "clean.sh"
 "codes" "dict.sh" "haskell" "ocaml" "papers" "tags" "tmp")
 #+END_SRC
- 
+
 *** File Name Components
 
   [[http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html][Emacs Manual: File Name Components]]
@@ -5110,7 +5124,12 @@ ELISP>
 
     * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html][Current Buffer]]
     * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html][Creating New Buffer]]
-**  Date and Time 
+
+**  Regex - Regular Expressions
+
+# @TODO: Add notes, documentations and functions about Emacs Regex and S-expression based regex.
+
+**  Date and Time
 
 
 #+BEGIN_SRC elisp
@@ -5209,7 +5228,7 @@ t
 ELISP>
 
 
-;;; Show all Evironment Variables 
+;;; Show all Evironment Variables
 
 ELISP> (dolist (e process-environment) (princ (format "%s\n" e)))
 JDK_HOME=/opt/java
@@ -5219,8 +5238,8 @@ QT_PLATFORM_PLUGIN=lxqt
 LC_PAPER=pt_BR.UTF-8
 PYTHONPATH=/home/tux/lib
 
-;; Insert at cursor position all Enviroment Variables 
-;; 
+;; Insert at cursor position all Enviroment Variables
+;;
 ;; Copy it to scratch buffer and type C-x C-e to eval this S-expression
 ;;
 > (dolist (e process-environment) (insert (format "%s\n" e)))
@@ -5235,14 +5254,14 @@ LC_NUMERIC=pt_BR.UTF-8
 ...
 
 #+END_SRC
- 
+
 **  Process Management
 
 Documentation:
 
   + [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Processes.html][Processes]]
   + [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Asynchronous-Processes.html][Asynchronous Process]]
-  +[[http://www.gnu.org/software/emacs/manual/html_node/elisp/Synchronous-Processes.html][ Synchronous Process]] 
+  +[[http://www.gnu.org/software/emacs/manual/html_node/elisp/Synchronous-Processes.html][ Synchronous Process]]
 
 #+BEGIN_SRC elisp
 
@@ -5368,7 +5387,7 @@ ELISP> (mapcar
             nil open))
 
 #+END_SRC
-      
+
 **  Window Functions
 
 **** Basic Window Functions
@@ -5659,7 +5678,10 @@ ELISP>
     * http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html
 **  Emacs Modes
 
-**** Major Mode
+# @TODO: Describe Emacs modes, mode setup, mode hooks, mode key bindings.
+# @TODO: Show the most useful Emacs Major modes and Minor modes.
+
+*** Major Mode
 
 |  Mode                |   Description              |  File Extension     |
 |----------------------|----------------------------|---------------------|
@@ -5683,10 +5705,10 @@ Lisp Dialects
 |---------------------|----------------------------|---------------------|
 | lisp-mode           | Mode for Common Lisp       | *.lisp              |
 | emacs-lisp-mode     | Mode for Emacs Lisp        | *.el                |
-| schem-mode          | Mode for Scheme            | *.smc, *.ss         |
+| scheme-mode         | Mode for Scheme            | *.smc, *.ss         |
 | clojure-mode        | Mode for Clojure Language  | *.clj               |
 
-**** Minor Modes
+*** Minor Modes
 
 Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 
@@ -5703,8 +5725,7 @@ Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 |-----------------------|--------------------------|
 | [[http://emacswiki.org/emacs/ElDoc][eldoc-mode]]       |  Minor mode which shows ,in the echo area, the argument list of the function call current function |
 
-
-**** Mode Association with Files
+*** Mode Association with Files
 
 The variable auto-mode-alist holds all modes associated with file extension.
 
@@ -5837,7 +5858,7 @@ ELISP> (show-doc #'mode/ftypes)
 
 #+END_SRC
 
-**** Mode Specific Key Bindings
+*** Mode Specific Key Bindings
 
 The function *define-key*  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: #+END_SRC A-x describe-key #+END_SRC and then type the key bind.
 
@@ -5881,8 +5902,7 @@ ELISP>
 
 #+END_SRC
 
-
-**** Modes Customization
+*** Modes Customization
 
     * [[http://www.emacswiki.org/emacs/MinorMode][Minor Mode  - Emacs Wiki]]
     *IELM*
@@ -5905,8 +5925,7 @@ ELISP>
      (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
-
-**** Mode Hooks
+*** Mode Hooks
 
     * http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html
 
@@ -5999,7 +6018,7 @@ See also: http://www.aaronbedra.com/emacs.d/
 
 **  Install Packages                       :customize:custom:install:package:
 
-**** Install an Emacs package from repository:
+*** Install an Emacs package from repository:
 
 To show the package lists type:
 
@@ -6018,7 +6037,7 @@ To install a single package
     M-x package-install evil
 #+END_SRC
 
-**** Install a Single Emacs file *.el
+*** Install a Single Emacs file *.el
 
 #+BEGIN_SRC elisp
 
@@ -6118,8 +6137,7 @@ List all available themes
 #+END_SRC
 
 **  Misc
-
-*Disable/Enable Blink Cursor*
+*** Disable/Enable Blink Cursor
 
 Enable Blink Cursor
 
@@ -6129,10 +6147,9 @@ Stop Blink Cursor
 
 =(blink-cursor-mode 0)=
 
+*** Space / Tabs - Indentation
 
-*Space / Tabs - Identation*
-
-Set identation with spaces instead of tabs with 4 spaces
+Set indentation with spaces instead of tabs with 4 spaces
 
 #+BEGIN_SRC elisp
 
@@ -6154,12 +6171,11 @@ Set identation with spaces instead of tabs with 4 spaces
 
 #+END_SRC
 
-*Font Size and Type*
+*** Font Size and Type
 
 =(set-default-font "Inconsolata 14")=
 
-
-*Character Encoding Default*
+*** Character Encoding Default
 
 #+BEGIN_SRC elisp
 
@@ -6175,8 +6191,7 @@ Set identation with spaces instead of tabs with 4 spaces
 (set-selection-coding-system 'utf-8)
 #+END_SRC
 
-
-*Disable / Enable Backup Files*
+*** Disable / Enable Backup Files
 
 Enable
 
@@ -6186,11 +6201,11 @@ Disable
 
 =(setq make-backup-files nil)=
 
-*Type y/n instead of yes and no*
+*** Type y/n instead of yes and no
 
 =(defalias 'yes-or-no-p 'y-or-n-p)=
 
-*Show Match Parenthesis*
+*** Show Match Parenthesis
 
 #+BEGIN_SRC
 
@@ -6202,7 +6217,7 @@ t
 
 =(add-hook 'before-save-hook 'delete-trailing-whitespace)=
 
-**  Quiet Startup
+***  Quiet Startup
 
 From: [[https://news.ycombinator.com/item?id=1654164][Ask HN Emacs Users: What's in your .emacs file?]]
 
@@ -6222,7 +6237,7 @@ From: [[https://news.ycombinator.com/item?id=1654164][Ask HN Emacs Users: What's
 (setq initial-scratch-message nil)
 #+END_SRC
 
-**  Set Default Web Browser
+***  Set Default Web Browser
 
 Set the default web browsr used by (browse-url <url>) function and by org-mode.
 
@@ -6234,7 +6249,7 @@ Set the default web browsr used by (browse-url <url>) function and by org-mode.
 
 
 #+END_SRC
- 
+
 * Color Scheme
 
 *Show All Colors Available*
@@ -6245,13 +6260,13 @@ file:images/color_selection_interface.png
 
 *Color Theme Select*
 
-It will open a window to select the color theme. 
+It will open a window to select the color theme.
 
 =M-x color-theme-select=
 
 =M-x customize-themes=
 
-*Customize Color Scheme in the GUI* 
+*Customize Color Scheme in the GUI*
 
 It will show a GUI with all customizations and options.
 
@@ -6261,7 +6276,7 @@ It will show a GUI with all customizations and options.
 
 Put the cursor at the word and type =C-u C-x ==
 
-Or enter the command: 
+Or enter the command:
 
 =M-x describe-text-properties=
 
@@ -6271,16 +6286,16 @@ Or enter the command:
 #+BEGIN_SRC emacs-lisp
 
 ;;
-;; Change Default Background Color 
+;; Change Default Background Color
 ;;
 (set-face-background 'default "black")
 
-;; 
-;; Change Default Foreground Color 
-;; 
+;;
+;; Change Default Foreground Color
+;;
 (set-face-foreground 'default "cyan")
 
-;; Change Default Font 
+;; Change Default Font
 ;;
 (set-default-font   "Inconsolata 12")
 
@@ -6288,11 +6303,11 @@ Or enter the command:
 ;;
 (set-face-attribute 'font-lock-comment-face nil :foreground "#3f7f5f")
 
-;; Change string color 
+;; Change string color
 ;;
 (set-face-attribute 'font-lock-string-face nil :foreground "light blue")
 
-;; Change keyworkd colors 
+;; Change keyworkd colors
 ;;
 (set-face-attribute 'font-lock-keyword-face nil :foreground "yellow")
 
@@ -6305,12 +6320,12 @@ Or enter the command:
 ;;
 (set-face-attribute 'font-lock-builtin-face nil :foreground "red")
 
-;; Change the font type 
+;; Change the font type
 ;;
 (set-face-attribute 'default nil :family "Menlo" :height 120)
 
 
-;; Change the color scheme of functions to bold and light cyan 
+;; Change the color scheme of functions to bold and light cyan
 ;;
 (set-face-attribute 'font-lock-function-name-face nil
                     :foreground "light cyan" :weight 'bold)
@@ -6319,28 +6334,28 @@ Or enter the command:
 #+END_SRC
 
 
-See also: 
+See also:
 
 Misc:
 
  - [[http://david.rothlis.net/emacs/customize_colors.html][How to learn Emacs - Fix that awful color scheme]]
  - [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Face-Attributes.html][GNU Emacs Lisp Reference Manual: Face Attributes]]
- - [[http://raebear.net/comp/emacscolors.html][Colors Available to Emacs]]  
+ - [[http://raebear.net/comp/emacscolors.html][Colors Available to Emacs]]
  - [[http://www.nongnu.org/emacs-tiny-tools/font/index-body.html][Emacs highlighting and fonts]]
- - [[http://emacs-fu.blogspot.com.br/2009/03/color-theming.html][emacs-fu: color theming]] 
- - [[http://ergoemacs.org/emacs/emacs_CSS_colors.html][Emacs: Working with CSS Color Values]] 
+ - [[http://emacs-fu.blogspot.com.br/2009/03/color-theming.html][emacs-fu: color theming]]
+ - [[http://ergoemacs.org/emacs/emacs_CSS_colors.html][Emacs: Working with CSS Color Values]]
  - [[https://github.com/mariusk/emacs-color][mariusk/emacs-color]]
- - [[http://stackoverflow.com/questions/18806523/popup-color-from-color-string-like-f2d3aa-with-emacs][Popup color from color string like `#f2d3aa` with Emacs - Stack Overflow]] 
- - [[http://www.emacswiki.org/emacs/ColorPalette][EmacsWiki: Color Palette]]  
+ - [[http://stackoverflow.com/questions/18806523/popup-color-from-color-string-like-f2d3aa-with-emacs][Popup color from color string like `#f2d3aa` with Emacs - Stack Overflow]]
+ - [[http://www.emacswiki.org/emacs/ColorPalette][EmacsWiki: Color Palette]]
 
 Color Themes:
 
  - [[https://github.com/kuanyui/moe-theme.el][kuanyui/moe-theme.el]]
  - [[http://ethanschoonover.com/solarized][Solarized - Ethan Schoonover]]
- - [[https://emacsthemes.com/][A GNU Emacs Themes Gallery]] 
- 
+ - [[https://emacsthemes.com/][A GNU Emacs Themes Gallery]]
+
 * Key Bindings
-** Global Key Bindings 
+** Global Key Bindings
 
 *** Smart window switch
 
@@ -6642,29 +6657,40 @@ or by entering the command below in the shell IELM or by putting it in the confi
 
 ** Mode Key Bindings
 
+* Emacs Packages
+** El-get
+** Elscreen
+** VIM Emulation - EVIL
+** Ibuffer
+** Navbar
+** Speedbar
+** Packages for Lisp Dialects
+*** Rainbow delimiters
+*** Paredit
+
 * Solutions
 **  Code Navigation with Occur                                         :edit:
 
 The function *occur* is useful for code navigation and scan code
 statements, this function is invoked by M-x occur. The function occur
 can also be used to create code navigation functions that scan the
-code for statements. 
+code for statements.
 
 The function python/scan-functions will scan for all lines that starts
 with def statement in a Python code and show the matching lines in the
 right side.
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 
 (defun python/scan-functions ()
-  (interactive)  
+  (interactive)
   (split-window-horizontally)
   (occur "def")
   )
 
-#+END_SRC 
+#+END_SRC
 
-Example: 
+Example:
 
 file:images/occur_statement_scan.png
 
@@ -6674,12 +6700,12 @@ It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
 
 Example:
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 
 (defun scan-code-tags ()
      "
      Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:
-  
+
      "
      (interactive)
      (split-window-horizontally)
@@ -6690,9 +6716,9 @@ Example:
 
 file:images/scan_code_tags.png
 
-**  Quick edit and reload Emac Configuration File.      :elisp:customization:
+**  Quick edit and reload Emacs Configuration File.     :elisp:customization:
 
-It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
+It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
 #+BEGIN_SRC elisp
 
@@ -7127,7 +7153,7 @@ Copy and paste the code below to the scratch buffer and enter M-x eval-buffer. T
 ;; hard to debug and vulnerable to code injection on Web Apps, so a better
 ;; way to write it is to use Elisp macros.
 ;;
-;; @TODO: Change eval-string to an Elisp macro.
+;; @DONE: Change eval-string to an Elisp macro.
 ;;
 (eval-string (make-color-menu-code))
 
@@ -7463,7 +7489,7 @@ Features:
   - Tags, Headlines
   - Literate programming, Run code blocks, Create Interactive and
     reproducible software documentation.
-  - Display and export Latex Formulas 
+  - Display and export Latex Formulas
   - Display Pictures
   - Many link formats
     - Link to files, web, IRC, Usenet News groups
@@ -7512,7 +7538,7 @@ Move within headlines:
 | C-c n w     | Widen the view back                           |
 |             |                                               |
 
-*Table* 
+*Table*
 
 | Key Binding | Description                 |
 |-------------+-----------------------------|
@@ -7548,7 +7574,7 @@ Hyperlinks
 | :shell:uname%20-a                | shell:uname%20-a    | Execute Shell Command: uname -a |
 | :elisp:(message%20"Hello world") |                     |                                 |
 
-** Refereces
+** References
 
 Manual:
 
@@ -7561,17 +7587,17 @@ Manual:
 
 
 Examples:
-   
+
     * [[http://home.fnal.gov/~neilsen/notebook/orgExamples/org-examples.html#sec-5][Emacs org-mode examples and cookbook]]
 
 Many examples about literate programming in Org-mode with Python, R,
 java and C. Shows integration of org-mode tables and Python, R ... and
 code blocks.
 
-    * http://gitwiki.org/Tests/org-mode.org  
+    * http://gitwiki.org/Tests/org-mode.org
     * [[https://chopmode.wordpress.com/2011/01/30/my-org-mode-journey-chapter-1/][My Org-mode journey – Chapter 1 | chop-mode]]
 
-   
+
 Reference Cards and Cheat Sheets:
 
     * [[http://orgmode.org/orgguide.pdf][The Compact Org-Mode Guide]]
@@ -7596,7 +7622,7 @@ Hacking and Tweaking:
 
    * [[http://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-5][Org ad hoc code, quick hacks and workarounds]]
 
-   
+
 
 Cases:
 
@@ -7636,7 +7662,7 @@ to uploading this. I give a brief demo of some of the functionality
 Org Mode tables offer, and an explanation of some of the commands that
 enable it.
 
-   - [[https://www.youtube.com/watch?v=VTh_Xgt69-E][Hack Emacs - Org Mode in Depth: Markup and Links - YouTube]] 
+   - [[https://www.youtube.com/watch?v=VTh_Xgt69-E][Hack Emacs - Org Mode in Depth: Markup and Links - YouTube]]
 
 Description: Part of the Org Mode in Depth series. In this episode, I
 examine ways of marking up text in Org Mode, as well as various link
@@ -7646,8 +7672,8 @@ execute code.
  *NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode by Tory S. Anderson*
 
    - [[https://www.youtube.com/watch?v%3Dnkv8PpxrL3k][Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode]]
-   - 
-   - 
+   -
+   -
 
 *** Presentations
 
@@ -7663,13 +7689,13 @@ execute code.
 
      * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
 
-     * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]      
-* Eshell 
+     * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]
+* Eshell
 
 Features:
 
   - Shell implemented in Emacs Lisp
-  - Integrated to Emacs 
+  - Integrated to Emacs
   - Eshell can run elisp functions and can be extended in Elisp.
   - It is Multiplatform, works on Linux, OSX and Windows.
 
@@ -7700,24 +7726,24 @@ Set Python Interpreter:
 (setq python-python-command "/path-to-python-/python")
 #+END_SRC
 
-To run the interpretrer type: =M-x run-python=
+To run the interpreter type: =M-x run-python=
 
 Run more than one Python version, usage: M-x run-python3, M-x run-python2
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 
 
 (defun run-python3 ()
    (interactive)
-   (run-python  "/usr/bin/python2" nil t))  
+   (run-python  "/usr/bin/python2" nil t))
 
 (defun run-python2 ()
    (interactive)
-   (run-python  "/usr/bin/python" nil t))  
+   (run-python  "/usr/bin/python" nil t))
 
 (defun run-ipython3 ()
    (interactive)
-   (run-python  "~/anaconda3/bin/ipython" nil t))   
+   (run-python  "~/anaconda3/bin/ipython" nil t))
 
 
 #+END_SRC
@@ -7728,9 +7754,9 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
     * [[http://www.johndcook.com/blog/2012/02/09/python-org-mode/][Running Python and R inside Emacs by John D. Cook]]
     * [[http://www.emacswiki.org/emacs/PythonProgrammingInEmacs][EmacsWiki: Python Programming In Emacs]]
     * [[http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/][Emacs as a Python IDE - Jessica Hamrick]]
-    * [[http://planspace.org/20141007-emacs_python/][Emacs and Python]]    
+    * [[http://planspace.org/20141007-emacs_python/][Emacs and Python]]
 
-** Javascript
+** JavaScript
 
     * [[http://wikemacs.org/wiki/JavaScript][Java Script]]
 
@@ -7738,14 +7764,15 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
     * [[https://github.com/swank-js/swank-js][Swank backend for Node.JS and in-browser JavaScript]]
 
-** C / C++                 
+** C / C++
 
     * [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]
     * [[https://github.com/atilaneves/cmake-ide][C make IDE]]
 
 ** Ocaml
 
-    * [[http://wikemacs.org/wiki/OCaml][Ocaml]]
+ - [[http://wikemacs.org/wiki/OCaml][Ocaml]]
+
 ** Haskell
 
 See:
@@ -7753,7 +7780,7 @@ See:
   * [[http://wikemacs.org/wiki/Haskell-mode][Haskell Mode]]
   * [[https://wiki.haskell.org/Emacs/Inferior_Haskell_processes][Emacs/Inferior Haskell processes]]
 
-** R Language 
+** R Language
 
 See:
 
@@ -7761,7 +7788,7 @@ See:
  - [[http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/][Using Emacs to work with R « Stack Exchange Stats Blog]]
  - [[https://www2.stat.duke.edu/courses/Spring09/sta244/computing/R-ESS.html][Running R/S-Plus in Emacs]]
 
-** Lisp Dialects 
+** Lisp Dialects
 *** All Lisp Dialects
 
     * [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][The Animated Guide to Paredit]]
@@ -7815,10 +7842,10 @@ The variable scheme-program-name controls which Scheme implementation Emacs will
 
 #+BEGIN_SRC elisp
 
-;; Racket Lang (Scheme Derivated)
+;; Racket Lang (Scheme Derived)
 (setq scheme-program-name  "racket")
 
-;; Racket Lang (Scheme Derivated)
+;; Racket Lang (Scheme Derived)
 (setq scheme-program-name  "racket")
 
 ;; Chicken Scheme
@@ -7831,7 +7858,7 @@ The function M-x run-scheme will run the selected scheme program.
 
 The following functions are useful to run a specific Scheme version or
 implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
-... 
+...
 
 #+BEGIN_SRC elisp
 
@@ -7867,31 +7894,31 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
 *** Clojure
 
 Scheme inferior mode (Scheme shell support) can be used to run Clojure
-repl without Cider. It is faster to begginers set up a Clojure
-environment quickly.
+repl without Cider. It is a easy and faster to way to beginners run
+and explore Clojure.
 
 The code below sets the following key bindings:
 
  - =C-x Ce= to Send the last Sexp to clojure repl.
  - =C-c ==  to Send the definition to the repl, it sends the outermost
    s-expression to the repl regardless where is the cursor.
- - =C-c C-p= Send a region to the repl. 
+ - =C-c C-p= Send a region to the repl.
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 
 (progn
-  (define-key clojure-mode-map  
+  (define-key clojure-mode-map
       (kbd "C-x C-e") #'scheme-send-last-sexp)
 
   (define-key clojure-mode-map
     (kbd "C-c =") #'scheme-send-definition)
- 
+
   )
 
 
 (defun cloujure-repl  ()
   (interactive)
-  
+
   (run-scheme "java -jar /opt/clojure.jar"))
 
 
@@ -7900,11 +7927,11 @@ The code below sets the following key bindings:
   "Run a clojure file in batch mode"
   (interactive)
 
-  
-  (start-process "clojure-batch1"     ;; Process name 
-                 "*clojure-batch*"   ;; Buffer name 
 
-                 ;;; Command line 
+  (start-process "clojure-batch1"     ;; Process name
+                 "*clojure-batch*"   ;; Buffer name
+
+                 ;;; Command line
                  "java" "-jar" "/opt/clojure.jar" (buffer-file-name))
 
   (split-window-vertically)
@@ -7916,8 +7943,8 @@ The code below sets the following key bindings:
 
 Download Clojure:
 
-#+BEGIN_SRC 
-cd /opt/ 
+#+BEGIN_SRC
+cd /opt/
 curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.jar
 #+END_SRC
 
@@ -7939,18 +7966,18 @@ curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.
 * Resources
 ** Motivation
 
-    * [[http://emacsblog.org/2014/08/21/the-editor-of-a-lifetime/][The Editor of a Lifetime]] 
-   
+    * [[http://emacsblog.org/2014/08/21/the-editor-of-a-lifetime/][The Editor of a Lifetime]]
+
     * [[http://martinfowler.com/bliki/InternalReprogrammability.html][Internal Reprogrammability]] by Martin Fowler
-    
+
     * [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org][Master Emacs in one year]]
 
 "This guide is about using Emacs as a professional’s tool. I will not
 show off Emacs as a geek’s toy because I am far from geek
 stereotype. I will focus on philosophy and methodology only. No
-technical details involved." 
+technical details involved."
 
- 
+
     * [[http://emacs.sexy/][Emacs is sexy]]
 
     * [[http://batsov.com/articles/2011/11/19/why-emacs/][Why Emacs? - (think)]]
@@ -7958,7 +7985,7 @@ technical details involved."
     * [[http://www.emacswiki.org/emacs/LispMachine][EmacsWiki: Lisp Machine]]
 
     * [[http://www.emacswiki.org/emacs/ChurchOfEmacs][The Church of Emacs!!]]
-      
+
 ** Emacs Tutorials
 *** Introduction to Elisp
 
@@ -7972,8 +7999,8 @@ technical details involved."
     * [[http://ergoemacs.org][Xah's Emacs Tutorial - ErgoEmacs]]
     * [[https://www.masteringemacs.org/][Mastering Emacs mastering the world’s best text editor]]
 
-    * [[http://www.splode.com/~friedman/software/emacs-lisp/][Software: Emacs Lisp]]  
- 
+    * [[http://www.splode.com/~friedman/software/emacs-lisp/][Software: Emacs Lisp]]
+
      Many useful Emacs Lisp codes like user interface enhancement.
 
     * [[http://rosettacode.org/wiki/Category:Emacs_Lisp][Rosetta Code/ Category:Emacs Lisp]]
@@ -8011,6 +8038,10 @@ technical details involved."
     * https://marmalade-repo.org/
     * [[http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html][Hooks Local Variables And Namespacesl]]
     * http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192
+
+** Cheat Sheets
+
+ - [[http://scale-it.pl/emacs_cheatsheet.html][Emacs cheatsheet]]
 
 ** Documentation
 *** Manual and References
@@ -8077,7 +8108,7 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 [[http://kieranhealy.org/resources/emacs-starter-kit/][Link]]
 
-** Fun 
+** Fun
 
 
 | Command                   | Description                               |
@@ -8089,7 +8120,6 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 | =M-x hanoi=               | Towers of Hanoi.                          |
 | =M-x zone=                | Make buffers go crazy!!                   |
 | =M-x zone-leave-me-alone= | Stop zoning out.                          |
-
 
 ** Books
 
@@ -8139,12 +8169,12 @@ It is also available at:
 
   - http://xahlee.blogspot.com
 
-  - [[http://nullprogram.com/][null program « null program]] 
+  - [[http://nullprogram.com/][null program « null program]]
 
   - [[http://edward.oconnor.cx/elisp/][Emacs Lisp — Edward O’Connor]]
 
   - [[http://sachachua.com/blog/category/emacs/][emacs Archives - sacha chua - living an awesome life]]
- 
+
   - [[http://emacsrocks.com/][Emacs Rocks!]]
 
   - [[http://emacs.readthedocs.org/en/latest/][About This Document — Emacs latest documentation]]
@@ -8213,8 +8243,8 @@ Useful screencasts to help learn Emacs faster.
    -  [[https://www.youtube.com/watch?v=Q-bmvMWqWmY][Advanced scratch - Emacs Bites]]
 
    A more in depth look at shell tricks we can use to start
-   a scratch emacs for testing packages and deployment and anything
-   else you need a clean emacs for.
+   a scratch Emacs for testing packages and deployment and anything
+   else you need a clean Emacs for.
 
 *Debugging:*
 
@@ -8334,10 +8364,10 @@ Large Collection of Codes to Emacs
 
 *IDEs*
 
-    - [[http://www.slideshare.net/ldami/emacs-a-performant-ide-for-perl-1819917][Emacs, a performant IDE for Perl]]  
-    - [[http://www.slideshare.net/chaitanyagupta/slime-1180051?qid=e6edde21-ed4f-457c-99be-69c1562985bb&v=qf1&b=&from_search=31][An introduction to SLIME, the Superior Lisp Interaction Mode for  Emacs.]] 
+    - [[http://www.slideshare.net/ldami/emacs-a-performant-ide-for-perl-1819917][Emacs, a performant IDE for Perl]]
+    - [[http://www.slideshare.net/chaitanyagupta/slime-1180051?qid=e6edde21-ed4f-457c-99be-69c1562985bb&v=qf1&b=&from_search=31][An introduction to SLIME, the Superior Lisp Interaction Mode for  Emacs.]]
 
-*Lisp* 
+*Lisp*
 
   - [[http://www.slideshare.net/kyleburton/introduction-to-lisp?qid=a835a3eb-d34b-4b76-a421-877be2eceee0&v=qf1&b=&from_search=3][Introduction to Lisp. A survey of lisp's history, current incarnations and advanced features such ]]
   - [[http://www.slideshare.net/aniruddha.chakrabarti/lisp-53412403?qid=f965a29a-27cc-4ed7-a3ca-ddffc84eeba5&v=qf1&b=&from_search=5][High level overview of Lisp programming language]]
