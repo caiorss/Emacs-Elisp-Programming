@@ -7,6 +7,8 @@
     - [Selected Key Bindings and Commands for Programming](#selected-key-bindings-and-commands-for-programming)
     - [Keybindings and Commands for Lisp programming](#keybindings-and-commands-for-lisp-programming)
     - [Ubiquitous Emacs Key Bindings](#ubiquitous-emacs-key-bindings)
+  - [Commands](#commands)
+  - [Spell Checker](#spell-checker)
 - [Elisp](#elisp)
   - [Overview](#overview)
     - [Using the Scratch Buffer and Interpreter](#using-the-scratch-buffer-and-interpreter)
@@ -97,7 +99,7 @@
     - [Tutorials](#tutorials)
     - [Presentations](#presentations)
 - [Eshell](#eshell)
-- [Developement Environments for Emacs](#developement-environments-for-emacs)
+- [Development Environments](#development-environments)
   - [Python](#python)
   - [Javascript](#javascript)
   - [C / C++](#c-/-c++)
@@ -110,8 +112,8 @@
     - [Scheme](#scheme)
     - [Clojure](#clojure)
 - [Resources](#resources)
+  - [Motivation](#motivation)
   - [Emacs Tutorials](#emacs-tutorials)
-    - [Motivation](#motivation)
     - [Introduction to Elisp](#introduction-to-elisp)
     - [Tips and Tricks](#tips-and-tricks)
     - [Packages](#packages)
@@ -123,6 +125,7 @@
     - [Issues](#issues)
   - [Selected Dot Emacs](#selected-dot-emacs)
   - [Emacs Starter Kits](#emacs-starter-kits)
+  - [Fun](#fun)
   - [Books](#books)
   - [Community](#community)
   - [Blogs](#blogs)
@@ -1802,6 +1805,240 @@ See also:
 
 -   [Bash Emacs Editing Mode Cheat Sheet](http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/)
 -   [Confusing behavior of emacs-style keybindings in bash](http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash)
+
+## Commands<a id="sec-1-4" name="sec-1-4"></a>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x help-with-tutorial`</td>
+<td class="left">Open Emacs built in tutorial</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x suspend-emacs`</td>
+<td class="left">Suspend Emacs when in terminal or iconify in graphical mode.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x quit-window`</td>
+<td class="left">Quit Emacs.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x revert-file`</td>
+<td class="left">Update buffer when file is changed externally.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x read-only`  or `C-x C-q`</td>
+<td class="left">Toggle the current buffer read only.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x delete-trailing-whitespace`</td>
+<td class="left">Delete trailing Whistespace</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x tabify`</td>
+<td class="left">Converts all spaces to tab</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x untabify`</td>
+<td class="left">Converts all tabs to spaces.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x whitespace-mode`</td>
+<td class="left">Toggle white space view.</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+Change current buffer mode: 
+
+Sometimes when editing a script without file extension it is useful to
+tell Emacs what is the file format to enable syntax highlight and mode
+functions.
+
+-   `M-x sh-mode`      Shell Script - sh extension
+-   `M-x pyhton-mode`  Example: A python script without extension ".py"
+-   `M-x conf-mode`    Configuration file like: .gitconfig, .gitignore, smb.conf
+
+## Spell Checker<a id="sec-1-5" name="sec-1-5"></a>
+
+Emacs uses external programs to check the spell. It supports <span class="underline">ispell</span>,
+<span class="underline">aspell</span> and <span class="underline">hunspell</span>. The variable `ispell-program-name` sets the
+spell check software used by Emacs. The default dictionary used by
+Emacs is US English, but it can be changed with the command 
+`M-x ispell-change-dicitonary`.
+
+Spell check interface commands: 
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Default Key Bind</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td class="left">`M-x ispell-buffer`</td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the spelling of all buffer.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x ispell-word`</td>
+<td class="left">`M-$`</td>
+<td class="left">Check the spell of word at cursor position.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x ispell-region`</td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the spell of selected text.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x ispell-change-dictionary`</td>
+<td class="left">&#xa0;</td>
+<td class="left">Change the language of dictionary used by the spell check.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x flyspell-mode`</td>
+<td class="left">&#xa0;</td>
+<td class="left">Toggle flyspell mode. When active, it will highlight all misspelled .</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x flyspell-buffer`</td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the hole buffer in flyspell minor mode.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x ispell-kill-ispell`</td>
+<td class="left">&#xa0;</td>
+<td class="left">Kill the Ispell subprocess.</td>
+</tr>
+</tbody>
+</table>
+
+Set the default Spell checker:
+
+```lisp
+(setq ispell-program-name "aspell")
+
+;; or
+(setq ispell-program-name "ispell")
+
+;;
+(setq ispell-program-name "hunspell")
+```
+
+The dictionary can be changed with the Elisp code:
+
+```lisp
+(ispell-chage-dictionary "en")
+(ispell-chage-dictionary "castellano")
+(ispell-chage-dictionary "german")
+
+
+;; M-x ispell-spanish
+;;
+(defun ispell-spanish ()
+ (interactive)
+ (ispell-change-diciontary "castellano")) 
+   
+;; M-x ispell-en 
+;;
+(defun ispell-en ()
+  (interactive)
+   (ispell-change-diciontary "en"))
+```
+
+To right click in the word and get suggestions use:
+
+```lisp
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+```
+
+The ispell doesn't check the spell of comments and strings. This
+behavior can be changed with the code below that allows it to check
+the spell in all programming modes like python-mode, haskell-mode and
+so on.
+
+```lisp
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+```
+
+See also:
+
+-   [Spell checking in Emacs](https://joelkuiper.eu/spellcheck_emacs)
+-   [FlySpell - Emacs Wiki.org](http://www.emacswiki.org/emacs/FlySpell)
+-   [InteractiveSpell](http://www.emacswiki.org/emacs/InteractiveSpell)
+-   [Emacs Manual - Check and Correcting Spelling](http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html)
+-   [Emacs Spell Checker Problems](http://ergoemacs.org/emacs/emacs_spell_checker_problems.html)
+-   [What's the best spell check setup in emacs](http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html)
 
 # Elisp<a id="sec-2" name="sec-2"></a>
 
@@ -5585,13 +5822,19 @@ ELISP>
 <tbody>
 <tr>
 <td class="left">Point</td>
-<td class="left">Cursor position</td>
+<td class="left">Cursor position, number of characters from beggining of the buffer to current cursor position.</td>
 </tr>
 
 
 <tr>
 <td class="left">Buffer</td>
 <td class="left">Place where the user edit something. Not all buffers are bound to a file.</td>
+</tr>
+
+
+<tr>
+<td class="left">Mark</td>
+<td class="left">Beginning of the selected area.</td>
 </tr>
 
 
@@ -5644,7 +5887,7 @@ ELISP>
 
 
 <tr>
-<td class="left">Font Lock</td>
+<td class="left">Font Locking</td>
 <td class="left">Syntax Coloring</td>
 </tr>
 </tbody>
@@ -6555,6 +6798,13 @@ LC_NUMERIC=pt_BR.UTF-8
 ```
 
 ## Process Management<a id="sec-4-11" name="sec-4-11"></a>
+
+Documentation:
+
+-   [Processes](http://www.gnu.org/software/emacs/manual/html_node/elisp/Processes.html)
+-   [Asynchronous Process](http://www.gnu.org/software/emacs/manual/html_node/elisp/Asynchronous-Processes.html)
+
++[ Synchronous Process](http://www.gnu.org/software/emacs/manual/html_node/elisp/Synchronous-Processes.html) 
 
 ```lisp
 ;;;; List all process
@@ -8057,7 +8307,7 @@ or by entering the command below in the shell IELM or by putting it in the confi
 
 # Solutions<a id="sec-8" name="sec-8"></a>
 
-## Code Navigation with Occur<a id="sec-8-1" name="sec-8-1"></a>
+## Code Navigation with Occur     :edit:<a id="sec-8-1" name="sec-8-1"></a>
 
 The function **occur** is useful for code navigation and scan code
 statements, this function is invoked by M-x occur. The function occur
@@ -8098,7 +8348,7 @@ Example:
 
 ![img](images/scan_code_tags.png)
 
-## Quick edit and reload Emac Configuration File.<a id="sec-8-2" name="sec-8-2"></a>
+## Quick edit and reload Emac Configuration File.     :elisp:customization:<a id="sec-8-2" name="sec-8-2"></a>
 
 It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
@@ -8180,7 +8430,7 @@ M-x refresh
  )) ;; End of Custom Menu
 ```
 
-## Extract Function Documentation<a id="sec-8-5" name="sec-8-5"></a>
+## Extract Function Documentation     :elisp:<a id="sec-8-5" name="sec-8-5"></a>
 
 Source: [Generate emacs-lisp documentation](http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/)
 Primitives:
@@ -8244,7 +8494,7 @@ Function Docstring
 "
 \\#+END<sub>SRC</sub>
 
-## Edit File as Root<a id="sec-8-6" name="sec-8-6"></a>
+## Edit File as Root     :edit:<a id="sec-8-6" name="sec-8-6"></a>
 
 ```lisp
 (defun open-as-root (filename)
@@ -9281,7 +9531,7 @@ Links:
 -   [Using Emacs Eshell as the ultimate shell | Smash Company](http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell)
 -   [Eshell completion for git, bzr, and hg | Tassilo's Blog](https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/)
 
-# Developement Environments for Emacs<a id="sec-11" name="sec-11"></a>
+# Development Environments<a id="sec-11" name="sec-11"></a>
 
 ## Python<a id="sec-11-1" name="sec-11-1"></a>
 
@@ -9315,6 +9565,7 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
 -   [Running Python and R inside Emacs by John D. Cook](http://www.johndcook.com/blog/2012/02/09/python-org-mode/)
 -   [EmacsWiki: Python Programming In Emacs](http://www.emacswiki.org/emacs/PythonProgrammingInEmacs)
 -   [Emacs as a Python IDE - Jessica Hamrick](http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/)
+-   [Emacs and Python](http://planspace.org/20141007-emacs_python/)
 
 ## Javascript<a id="sec-11-2" name="sec-11-2"></a>
 
@@ -9346,7 +9597,7 @@ See:
 
 -   [Emacs, ESS and R for Zombies](http://blog.revolutionanalytics.com/2014/03/emacs-ess-and-r-for-zombies.html)
 -   [Using Emacs to work with R « Stack Exchange Stats Blog](http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/)
--   
+-   [Running R/S-Plus in Emacs](https://www2.stat.duke.edu/courses/Spring09/sta244/computing/R-ESS.html)
 
 ## Lisp Dialects<a id="sec-11-7" name="sec-11-7"></a>
 
@@ -9514,9 +9765,9 @@ curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.
 
 # Resources<a id="sec-12" name="sec-12"></a>
 
-## Emacs Tutorials<a id="sec-12-1" name="sec-12-1"></a>
+## Motivation<a id="sec-12-1" name="sec-12-1"></a>
 
-### Motivation<a id="sec-12-1-1" name="sec-12-1-1"></a>
+-   [The Editor of a Lifetime](http://emacsblog.org/2014/08/21/the-editor-of-a-lifetime/)
 
 -   [Internal Reprogrammability](http://martinfowler.com/bliki/InternalReprogrammability.html) by Martin Fowler
 
@@ -9527,13 +9778,18 @@ show off Emacs as a geek’s toy because I am far from geek
 stereotype. I will focus on philosophy and methodology only. No
 technical details involved." 
 
+
 -   [Emacs is sexy](http://emacs.sexy/)
 
 -   [Why Emacs? - (think)](http://batsov.com/articles/2011/11/19/why-emacs/)
 
 -   [EmacsWiki: Lisp Machine](http://www.emacswiki.org/emacs/LispMachine)
 
-### Introduction to Elisp<a id="sec-12-1-2" name="sec-12-1-2"></a>
+-   [The Church of Emacs!!](http://www.emacswiki.org/emacs/ChurchOfEmacs)
+
+## Emacs Tutorials<a id="sec-12-2" name="sec-12-2"></a>
+
+### Introduction to Elisp<a id="sec-12-2-1" name="sec-12-2-1"></a>
 
 -   [Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua](http://emacslife.com/how-to-read-emacs-lisp.html)
 -   <http://www.fincher.org/tips/Languages/Emacs.shtml>
@@ -9554,7 +9810,7 @@ technical details involved."
 -   [ErgoEmacs](http://ergoemacs.org/)
 -   [Essential Elisp Libraries - Functional Programmin in Elisp](http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/)
 
-### Tips and Tricks<a id="sec-12-1-3" name="sec-12-1-3"></a>
+### Tips and Tricks<a id="sec-12-2-2" name="sec-12-2-2"></a>
 
 -   [Emacs - Arch Linux Wiki](https://wiki.archlinux.org/index.php/Emacs)
 -   [Emacs Tiny Tools](http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html)
@@ -9565,18 +9821,18 @@ technical details involved."
 
 -   [Introducing Names: practical namespaces for Emacs-Lisp](http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html)
 
-### Packages<a id="sec-12-1-4" name="sec-12-1-4"></a>
+### Packages<a id="sec-12-2-3" name="sec-12-2-3"></a>
 
 -   [Yasnippet](https://github.com/capitaomorte/yasnippet)
 
-### Cases<a id="sec-12-1-5" name="sec-12-1-5"></a>
+### Cases<a id="sec-12-2-4" name="sec-12-2-4"></a>
 
 -   [From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/)
 -   [Why Ive Abandoned Eclipse For Emacs](http://technical-dresese.blogspot.com/2008/11/why-ive-abandoned-eclipse-for-emacs.html)
 -   [In Org Mode Abandoning Gtd](http://technical-dresese.blogspot.com/2008/08/in-org-mode-abandoning-gtd.html)
 -   [Running Lisp In Productionl](http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html)
 
-### Non Categorized<a id="sec-12-1-6" name="sec-12-1-6"></a>
+### Non Categorized<a id="sec-12-2-5" name="sec-12-2-5"></a>
 
 -   <http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el>
 -   <http://www.reallysoft.de/code/emacs/snippets.html#b4ac15>
@@ -9584,15 +9840,15 @@ technical details involved."
 -   [Hooks Local Variables And Namespacesl](http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html)
 -   <http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192>
 
-## Documentation<a id="sec-12-2" name="sec-12-2"></a>
+## Documentation<a id="sec-12-3" name="sec-12-3"></a>
 
-### Manual and References<a id="sec-12-2-1" name="sec-12-2-1"></a>
+### Manual and References<a id="sec-12-3-1" name="sec-12-3-1"></a>
 
 -   [GNU Emacs Lisp Reference Manual](http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents)
 -   [Command and Function Index](http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html)
 -   <http://blog.gnumonk.com/2012/07/effective-emacs-part1.html>
 
-### Wikis<a id="sec-12-2-2" name="sec-12-2-2"></a>
+### Wikis<a id="sec-12-3-2" name="sec-12-3-2"></a>
 
 -   [Emacs / Arch Wiki](https://wiki.archlinux.org/index.php/Emacs)
 -   [Emacs Lisp for Perl Programmers](http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html)
@@ -9606,12 +9862,12 @@ technical details involved."
 
 -   [On elisp and programming in general](http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html)
 
-### Issues<a id="sec-12-2-3" name="sec-12-2-3"></a>
+### Issues<a id="sec-12-3-3" name="sec-12-3-3"></a>
 
 -   [Emacs on Windows / Cygwin](http://www.khngai.com/emacs/cygwin.php)
 -   [10 Tips for Powerful Emacs on Windows](http://gregorygrubbs.com/emacs/10-tips-emacs-windows/)
 
-## Selected Dot Emacs<a id="sec-12-3" name="sec-12-3"></a>
+## Selected Dot Emacs<a id="sec-12-4" name="sec-12-4"></a>
 
 -   [Sacha Chua's Emacs configuration](http://pages.sachachua.com/.emacs.d/Sacha.html)
 
@@ -9627,7 +9883,7 @@ technical details involved."
 
 -   <http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el>
 
-## Emacs Starter Kits<a id="sec-12-4" name="sec-12-4"></a>
+## Emacs Starter Kits<a id="sec-12-5" name="sec-12-5"></a>
 
 **Spacemacs**
 
@@ -9647,7 +9903,72 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 [Link Github](https://github.com/fniessen/emacs-leuven)
 
-## Books<a id="sec-12-5" name="sec-12-5"></a>
+**An Emacs Starter Kit for the Social Sciences**
+
+[Link](http://kieranhealy.org/resources/emacs-starter-kit/)
+
+## Fun<a id="sec-12-6" name="sec-12-6"></a>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td class="left">`M-x doctor`</td>
+<td class="left">If you fell bad, lost your girlfriend &#x2026;</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x life`</td>
+<td class="left">Run Conway's Life simulation.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x dunnet`</td>
+<td class="left">Text based adventure game</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x tetris`</td>
+<td class="left">Play Tetris.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x hanoi`</td>
+<td class="left">Towers of Hanoi.</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x zone`</td>
+<td class="left">Make buffers go crazy!!</td>
+</tr>
+
+
+<tr>
+<td class="left">`M-x zone-leave-me-alone`</td>
+<td class="left">Stop zoning out.</td>
+</tr>
+</tbody>
+</table>
+
+## Books<a id="sec-12-7" name="sec-12-7"></a>
 
 -   [An Introduction to Programming in Emacs Lisp](https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf) by Robert J. Chassell
 
@@ -9658,7 +9979,7 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 -   [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html) (Common Lisp)
 
-## Community<a id="sec-12-6" name="sec-12-6"></a>
+## Community<a id="sec-12-8" name="sec-12-8"></a>
 
 **Usenet**
 
@@ -9686,7 +10007,7 @@ It is also available at:
 
 -   [Emacs - Community - Google+](https://plus.google.com/communities/114815898697665598016)
 
-## Blogs<a id="sec-12-7" name="sec-12-7"></a>
+## Blogs<a id="sec-12-9" name="sec-12-9"></a>
 
 -   [Endless Parentheses · Concise ramblings on Emacs productivity.](http://endlessparentheses.com/archive.html)
 
@@ -9706,7 +10027,7 @@ It is also available at:
 
 -   [Emacs Redux](http://emacsredux.com/)
 
-## Videos and Screencasts<a id="sec-12-8" name="sec-12-8"></a>
+## Videos and Screencasts<a id="sec-12-10" name="sec-12-10"></a>
 
 Useful screencasts to help learn Emacs faster.
 
@@ -9832,7 +10153,7 @@ doing graphics in emacs.
     surprisingly easy to assemble. (Much faster than editing a
     screencast about it!)
 
-## Selected Codes<a id="sec-12-9" name="sec-12-9"></a>
+## Selected Codes<a id="sec-12-11" name="sec-12-11"></a>
 
 -   <http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el>
 
@@ -9858,7 +10179,7 @@ Large Collection of Codes to Emacs
 
 -   <http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html>
 
-## Technical Notes<a id="sec-12-10" name="sec-12-10"></a>
+## Technical Notes<a id="sec-12-12" name="sec-12-12"></a>
 
 **Emacs architecture:**
 

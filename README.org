@@ -24,6 +24,7 @@
 
 * Emacs - Programming and Customization
 ** Overview
+
 file:images/emacs_logo.png
 
 *Repository Link*
@@ -171,7 +172,7 @@ See also:
 |-------------+-------------------------|
 | C-x b       | Select Another Buffer   |
 | C-x C-b     | List all buffers        |
-| C-x k       | Kill a buffer           |
+| C-x k       | Kill a buffer          |
 | C-x [right] | Move to next buffer     |
 | C-x [left]  | Move to previous buffer |
 
@@ -436,6 +437,119 @@ See also:
 
   - [[http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/][Bash Emacs Editing Mode Cheat Sheet]]
   - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
+
+** Commands 
+ 
+| Command                          | Description                                                  |
+|----------------------------------+--------------------------------------------------------------|
+|                                  |                                                              |
+| =M-x help-with-tutorial=         | Open Emacs built in tutorial                                 |
+| =M-x suspend-emacs=              | Suspend Emacs when in terminal or iconify in graphical mode. |
+| =M-x quit-window=                | Quit Emacs.                                                  |
+| =M-x revert-file=                | Update buffer when file is changed externally.               |
+| =M-x read-only=  or =C-x C-q=    | Toggle the current buffer read only.                         |
+| =M-x delete-trailing-whitespace= | Delete trailing Whistespace                                  |
+| =M-x tabify=                     | Converts all spaces to tab                                   |
+| =M-x untabify=                   | Converts all tabs to spaces.                                 |
+| =M-x whitespace-mode=            | Toggle white space view.                                     |
+|                                  |                                                              |
+
+Change current buffer mode: 
+
+Sometimes when editing a script without file extension it is useful to
+tell Emacs what is the file format to enable syntax highlight and mode
+functions.
+
+ - =M-x sh-mode=      Shell Script - sh extension 
+ - =M-x pyhton-mode=  Example: A python script without extension ".py" 
+ - =M-x conf-mode=    Configuration file like: .gitconfig, .gitignore, smb.conf 
+ 
+** Spell Checker
+
+Emacs uses external programs to check the spell. It supports _ispell_,
+_aspell_ and _hunspell_. The variable =ispell-program-name= sets the
+spell check software used by Emacs. The default dictionary used by
+Emacs is US English, but it can be changed with the command 
+=M-x ispell-change-dicitonary=.
+
+Spell check interface commands: 
+
+
+| Command                        | Default Key Bind | Description                                                           |
+|--------------------------------+------------------+-----------------------------------------------------------------------|
+| =M-x ispell-buffer=            |                  | Check the spelling of all buffer.                                     |
+| =M-x ispell-word=              | =M-$=            | Check the spell of word at cursor position.                           |
+| =M-x ispell-region=            |                  | Check the spell of selected text.                                     |
+| =M-x ispell-change-dictionary= |                  | Change the language of dictionary used by the spell check.            |
+| =M-x flyspell-mode=            |                  | Toggle flyspell mode. When active, it will highlight all misspelled . |
+| =M-x flyspell-buffer=          |                  | Check the hole buffer in flyspell minor mode.                         |
+| =M-x ispell-kill-ispell=       |                  | Kill the Ispell subprocess.                                           |
+
+Set the default Spell checker:
+
+#+BEGIN_SRC elisp
+(setq ispell-program-name "aspell")
+
+;; or
+(setq ispell-program-name "ispell")
+
+;;
+(setq ispell-program-name "hunspell")
+#+END_SRC
+
+
+The dictionary can be changed with the Elisp code:
+
+#+BEGIN_SRC elisp
+
+(ispell-chage-dictionary "en")
+(ispell-chage-dictionary "castellano")
+(ispell-chage-dictionary "german")
+
+
+;; M-x ispell-spanish
+;;
+(defun ispell-spanish ()
+ (interactive)
+ (ispell-change-diciontary "castellano")) 
+   
+;; M-x ispell-en 
+;;
+(defun ispell-en ()
+  (interactive)
+   (ispell-change-diciontary "en")) 
+#+END_SRC
+
+
+To right click in the word and get suggestions use:
+
+#+BEGIN_SRC elisp 
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+#+END_SRC
+
+
+The ispell doesn't check the spell of comments and strings. This
+behavior can be changed with the code below that allows it to check
+the spell in all programming modes like python-mode, haskell-mode and
+so on.
+
+#+BEGIN_SRC elisp
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+END_SRC
+
+
+
+See also:
+ 
+  - [[https://joelkuiper.eu/spellcheck_emacs][Spell checking in Emacs]]
+  - [[http://www.emacswiki.org/emacs/FlySpell][FlySpell - Emacs Wiki.org]] 
+  - [[http://www.emacswiki.org/emacs/InteractiveSpell][InteractiveSpell]]
+  - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][Emacs Manual - Check and Correcting Spelling]]
+  - [[http://ergoemacs.org/emacs/emacs_spell_checker_problems.html][Emacs Spell Checker Problems]]
+  - [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][What's the best spell check setup in emacs]]
 
 * Elisp
 ** Overview 
@@ -4258,19 +4372,20 @@ ELISP>
 * Emacs API
 **  Emacs Terminology
 
-| Emacs Terminology | Description                                                                |
-|-------------------+----------------------------------------------------------------------------|
-| Point             | Cursor position                                                            |
-| Buffer            | Place where the user edit something. Not all buffers are bound to a file.  |
-| Region            | Selected area/ text                                                        |
-| Frame             | The current window of emacs                                                |
-| Windows           | Each frame can be split in sections that Emacs documentation calls windows |
-| Fill              | Word Wrap                                                                  |
-| Yank              | Copy                                                                 |
-| Kill              | Cut                                                                        |
-| Kill Ring         | Clipboard                                                                  |
-| Mode Line         | Status Bar                                                                 |
-| Font Lock         | Syntax Coloring                                                            |
+| Emacs Terminology | Description                                                                                    |
+|-------------------+------------------------------------------------------------------------------------------------|
+| Point             | Cursor position, number of characters from beggining of the buffer to current cursor position. |
+| Buffer            | Place where the user edit something. Not all buffers are bound to a file.                      |
+| Mark              | Beginning of the selected area.                                                                |
+| Region            | Selected area/ text                                                                            |
+| Frame             | The current window of emacs                                                                    |
+| Windows           | Each frame can be split in sections that Emacs documentation calls windows                     |
+| Fill              | Word Wrap                                                                                      |
+| Yank              | Copy                                                                                           |
+| Kill              | Cut                                                                                            |
+| Kill Ring         | Clipboard                                                                                      |
+| Mode Line         | Status Bar                                                                                     |
+| Font Locking      | Syntax Coloring                                                                                |
 
 See also:
 
@@ -5123,8 +5238,13 @@ LC_NUMERIC=pt_BR.UTF-8
  
 **  Process Management
 
-#+BEGIN_SRC elisp
+Documentation:
 
+  + [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Processes.html][Processes]]
+  + [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Asynchronous-Processes.html][Asynchronous Process]]
+  +[[http://www.gnu.org/software/emacs/manual/html_node/elisp/Synchronous-Processes.html][ Synchronous Process]] 
+
+#+BEGIN_SRC elisp
 
 ;;;; List all process
 
@@ -6523,7 +6643,7 @@ or by entering the command below in the shell IELM or by putting it in the confi
 ** Mode Key Bindings
 
 * Solutions
-**  Code Navigation with Occur  
+**  Code Navigation with Occur                                         :edit:
 
 The function *occur* is useful for code navigation and scan code
 statements, this function is invoked by M-x occur. The function occur
@@ -6570,7 +6690,7 @@ Example:
 
 file:images/scan_code_tags.png
 
-**  Quick edit and reload Emac Configuration File.
+**  Quick edit and reload Emac Configuration File.      :elisp:customization:
 
 It is usefult to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
@@ -6659,7 +6779,7 @@ file:images/utils_menu2.png
 
 #+END_SRC
 
-**  Extract Function Documentation
+**  Extract Function Documentation                                    :elisp:
 
 Source: [[http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/][Generate emacs-lisp documentation]]
 Primitives:
@@ -6726,7 +6846,7 @@ Function Docstring
 "
 #+END_SRC
 
-**  Edit File as Root
+**  Edit File as Root                                                  :edit:
 
 #+BEGIN_SRC elisp
 
@@ -7571,7 +7691,7 @@ Links:
   - [[http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell][Using Emacs Eshell as the ultimate shell | Smash Company]]
   - [[https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/][Eshell completion for git, bzr, and hg | Tassilo's Blog]]
 
-* Developement Environments for Emacs
+* Development Environments
 ** Python
 
 Set Python Interpreter:
@@ -7608,6 +7728,7 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
     * [[http://www.johndcook.com/blog/2012/02/09/python-org-mode/][Running Python and R inside Emacs by John D. Cook]]
     * [[http://www.emacswiki.org/emacs/PythonProgrammingInEmacs][EmacsWiki: Python Programming In Emacs]]
     * [[http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/][Emacs as a Python IDE - Jessica Hamrick]]
+    * [[http://planspace.org/20141007-emacs_python/][Emacs and Python]]    
 
 ** Javascript
 
@@ -7617,7 +7738,7 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 
     * [[https://github.com/swank-js/swank-js][Swank backend for Node.JS and in-browser JavaScript]]
 
-** C / C++
+** C / C++                 
 
     * [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]
     * [[https://github.com/atilaneves/cmake-ide][C make IDE]]
@@ -7638,7 +7759,7 @@ See:
 
  - [[http://blog.revolutionanalytics.com/2014/03/emacs-ess-and-r-for-zombies.html][Emacs, ESS and R for Zombies]]
  - [[http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/][Using Emacs to work with R « Stack Exchange Stats Blog]]
- - 
+ - [[https://www2.stat.duke.edu/courses/Spring09/sta244/computing/R-ESS.html][Running R/S-Plus in Emacs]]
 
 ** Lisp Dialects 
 *** All Lisp Dialects
@@ -7816,9 +7937,10 @@ curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.
     * [[http://www.emacswiki.org/emacs/InteractivelyDoThings][InteractivelyDoThings]]
 
 * Resources
-** Emacs Tutorials
-*** Motivation
-    
+** Motivation
+
+    * [[http://emacsblog.org/2014/08/21/the-editor-of-a-lifetime/][The Editor of a Lifetime]] 
+   
     * [[http://martinfowler.com/bliki/InternalReprogrammability.html][Internal Reprogrammability]] by Martin Fowler
     
     * [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org][Master Emacs in one year]]
@@ -7828,12 +7950,16 @@ show off Emacs as a geek’s toy because I am far from geek
 stereotype. I will focus on philosophy and methodology only. No
 technical details involved." 
 
+ 
     * [[http://emacs.sexy/][Emacs is sexy]]
 
     * [[http://batsov.com/articles/2011/11/19/why-emacs/][Why Emacs? - (think)]]
 
     * [[http://www.emacswiki.org/emacs/LispMachine][EmacsWiki: Lisp Machine]]
 
+    * [[http://www.emacswiki.org/emacs/ChurchOfEmacs][The Church of Emacs!!]]
+      
+** Emacs Tutorials
 *** Introduction to Elisp
 
     * [[http://emacslife.com/how-to-read-emacs-lisp.html][Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua]]
@@ -7946,6 +8072,24 @@ Spacemacs a great tool for pair-programming.
 Emacs configuration file with many packages already enabled and a more pleasant set of defaults.
 
 [[https://github.com/fniessen/emacs-leuven][Link Github]]
+
+*An Emacs Starter Kit for the Social Sciences*
+
+[[http://kieranhealy.org/resources/emacs-starter-kit/][Link]]
+
+** Fun 
+
+
+| Command                   | Description                               |
+|---------------------------+-------------------------------------------|
+| =M-x doctor=              | If you fell bad, lost your girlfriend ... |
+| =M-x life=                | Run Conway's Life simulation.             |
+| =M-x dunnet=              | Text based adventure game                 |
+| =M-x tetris=              | Play Tetris.                              |
+| =M-x hanoi=               | Towers of Hanoi.                          |
+| =M-x zone=                | Make buffers go crazy!!                   |
+| =M-x zone-leave-me-alone= | Stop zoning out.                          |
+
 
 ** Books
 
