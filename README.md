@@ -2902,8 +2902,8 @@ ELISP>
     
     ELISP> (defun 1+ (x) (+ 1 x))
     1+
-    ELISP> (defun 3+ (x) (* 3 x))
-    3+
+    ELISP> (defun 3* (x) (* 3 x))
+    3*
     
     ELISP> (sum-fun #'1+  #'3* 4)
     17
