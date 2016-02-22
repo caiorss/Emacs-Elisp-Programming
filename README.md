@@ -4396,7 +4396,7 @@ ELISP> (file/filename (buffer-file-name))
 ELISP>
 ```
 
-## Control Structures     :loop:control:iteration:<a id="sec-2-13" name="sec-2-13"></a>
+## Control Structures<a id="sec-2-13" name="sec-2-13"></a>
 
 See also:
 
@@ -5441,7 +5441,7 @@ ELISP> (mapcar #'account-balance accounts)
 ELISP>
 ```
 
-# Macros and Metaprogramming     :macro:metaprogramming:lisp:<a id="sec-3" name="sec-3"></a>
+# Macros and Metaprogramming<a id="sec-3" name="sec-3"></a>
 
 Macros are useful to create new lisp special forms like if and when,
 create new control structures, domain specific languages, eliminate
@@ -7870,7 +7870,7 @@ Emacs tools and codes that can be useful as implementation references and proof 
 
 See also: <http://www.aaronbedra.com/emacs.d/>
 
-## Install Packages     :customize:custom:install:package:<a id="sec-5-1" name="sec-5-1"></a>
+## Install Packages<a id="sec-5-1" name="sec-5-1"></a>
 
 ### Install an Emacs package from repository:<a id="sec-5-1-1" name="sec-5-1-1"></a>
 
@@ -7903,7 +7903,7 @@ To install a single package
 (require 'package")
 ```
 
-## Hide / Show Emacs Widgets     :customize:custom:widget:gui:<a id="sec-5-2" name="sec-5-2"></a>
+## Hide / Show Emacs Widgets<a id="sec-5-2" name="sec-5-2"></a>
 
 **Hide / Show Menu bar**
 
@@ -7945,7 +7945,7 @@ Hide
 (scroll-bar-mode -1)
 ```
 
-## Themes     :customize:custom:theme:color:<a id="sec-5-3" name="sec-5-3"></a>
+## Themes<a id="sec-5-3" name="sec-5-3"></a>
 
 Load a color theme
 
@@ -8512,7 +8512,7 @@ delimiters at different levels.
 
 # Solutions<a id="sec-9" name="sec-9"></a>
 
-## Code Navigation with Occur     :edit:<a id="sec-9-1" name="sec-9-1"></a>
+## Code Navigation with Occur<a id="sec-9-1" name="sec-9-1"></a>
 
 The function **occur** is useful for code navigation and scan code
 statements, this function is invoked by M-x occur.
@@ -8553,7 +8553,7 @@ Example:
 
 ![img](images/scan_code_tags.png)
 
-## Quick edit and reload Emacs Configuration File.     :elisp:customization:<a id="sec-9-2" name="sec-9-2"></a>
+## Quick edit and reload Emacs Configuration File.<a id="sec-9-2" name="sec-9-2"></a>
 
 It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 
@@ -8635,7 +8635,7 @@ M-x refresh
  )) ;; End of Custom Menu
 ```
 
-## Extract Function Documentation     :elisp:<a id="sec-9-5" name="sec-9-5"></a>
+## Extract Function Documentation<a id="sec-9-5" name="sec-9-5"></a>
 
 Source: [Generate emacs-lisp documentation](http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/)
 Primitives:
@@ -8699,7 +8699,7 @@ Function Docstring
 "
 \\#+END<sub>SRC</sub>
 
-## Edit File as Root     :edit:<a id="sec-9-6" name="sec-9-6"></a>
+## Edit File as Root<a id="sec-9-6" name="sec-9-6"></a>
 
 ```lisp
 (defun open-as-root (filename)
@@ -9271,7 +9271,7 @@ ELISP> (princ (url-http-post "http://httpbin.org/post" '(("use" . "dummy")  ("pa
 }
 ```
 
-# Org-Mode     :org:mode:data:ideas:<a id="sec-10" name="sec-10"></a>
+# Org-Mode<a id="sec-10" name="sec-10"></a>
 
 ## Overview<a id="sec-10-1" name="sec-10-1"></a>
 
@@ -9313,7 +9313,7 @@ result printed in the document or displayed in the minibuffer.
 
 ![img](images/document_in_org_mode2.png)
 
-## Useful Key bindings for org-mode     :mode:org:key:binding:<a id="sec-10-2" name="sec-10-2"></a>
+## Useful Key bindings for org-mode<a id="sec-10-2" name="sec-10-2"></a>
 
 Move within headlines:
 
