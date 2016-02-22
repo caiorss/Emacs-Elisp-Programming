@@ -1,0 +1,9 @@
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="theme/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="theme/css/readtheorg.css"/>
+
+#+HTML_HEAD: <script src="theme/js/jquery.min.js"></script>
+#+HTML_HEAD: <script src="theme/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="theme/js/jquery.stickytableheaders.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="theme/js/readtheorg.js"></script>
+
+

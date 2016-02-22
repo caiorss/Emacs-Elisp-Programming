@@ -1216,7 +1216,7 @@
 (defun buffer/copy-path ()
   "Copy buffer file path to clipboard (kill-ring)"
   (interactive)
-  (clipboard/copy (buffer/file)))
+  (clipboard/set (buffer/file)))
 
 (defun buffer/insert-file-path ()
   "Insert the path of current buffer file at point."
@@ -1408,12 +1408,21 @@
     ))
 
 (defun buffer/replace-at-point (thing transf-func)
+  " 
+  (buffer/replace-at-point  <thing> <transformation-function>)
+
+  transformation-function :: string -> string 
+
+  Replace word, email, url (thing at point) by the result of the application of 
+  transformation function to thing-at-point. 
+
+  "
   (let*
       ((bounds (bounds-of-thing-at-point thing))
        (pmin   (car bounds))
        (pmax   (cdr bounds))
        )
-    (buffer/replace-between-points  pmin pmax transf)
+    (buffer/replace-between-points  pmin pmax transf-func)
     ))
 
 
@@ -1643,14 +1652,17 @@
 
 ;;; Copy String to Clipboard
 
-(defun clipboard/copy (astring)
+(defun clipboard/set (astring)
   "Copy a string to clipboard"
+  
  (with-temp-buffer
   (insert astring)
   (clipboard-kill-region (point-min) (point-max))))
 
-(defun clipboard/paste ()
+(defun clipboard/get ()
   "Return the content of clipboard as string"
+  
+  (interactive)  
   (with-temp-buffer
     (clipboard-yank)
     (buffer-substring-no-properties (point-min) (point-max))))
@@ -1833,7 +1845,7 @@
       (string/replace-regexp
        "\n"
        spaces
-       (clipboard/paste )
+       (clipboard/get )
    )))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

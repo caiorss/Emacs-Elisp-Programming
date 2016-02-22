@@ -93,7 +93,6 @@
   - [Mode Key Bindings](#mode-key-bindings)
 - [Emacs Packages](#emacs-packages)
   - [El-get](#el-get)
-  - [Elscreen](#elscreen)
   - [VIM Emulation - EVIL](#vim-emulation---evil)
   - [Ibuffer](#ibuffer)
   - [Navbar](#navbar)
@@ -101,6 +100,7 @@
   - [Packages for Lisp Dialects](#packages-for-lisp-dialects)
     - [Rainbow delimiters](#rainbow-delimiters)
     - [Paredit](#paredit)
+  - [Elscreen](#elscreen)
 - [Solutions](#solutions)
   - [Code Navigation with Occur](#code-navigation-with-occur)
   - [Quick edit and reload Emacs Configuration File.](#quick-edit-and-reload-emacs-configuration-file.)
@@ -125,7 +125,7 @@
     - [Tutorials](#tutorials)
     - [Presentations](#presentations)
 - [Eshell](#eshell)
-- [Development Environments](#development-environments)
+- [Development Environment](#development-environment)
   - [Python](#python)
   - [JavaScript](#javascript)
   - [C / C++](#c-/-c++)
@@ -137,6 +137,7 @@
     - [Common Lisp](#common-lisp)
     - [Scheme](#scheme)
     - [Clojure](#clojure)
+  - [Java](#java)
 - [Resources](#resources)
   - [Motivation](#motivation)
   - [Emacs Tutorials](#emacs-tutorials)
@@ -182,14 +183,14 @@ based on [MacLisp](https://en.wikipedia.org/wiki/Maclisp), one of oldest lisp di
 and Scheme, created in MIT. Emacs was written in 1976 by the legendary
 [Richard Stallman](https://en.wikipedia.org/wiki/Richard_Stallman). Despite many incompatibilities with Common Lisp it
 has many constructs similar to it and n excellent book about Common
-Lisp that is also useful to understand Elisp and Scheme is [On Lisp -
-by Paul Graham](http://unintelligible.org/onlisp/onlisp.html).
+Lisp that is also useful to understand Elisp and Scheme is [On Lisp - by Paul Graham](http://unintelligible.org/onlisp/onlisp.html).
 
 Note:
 
 -   It is a work in progress.
--   You can see this document inside Emacs
-    since it was converted to org-mode, see the file **README.org**
+-   You can see this document inside Emacs since it was converted to
+    org-mode, see the file **README.org**. It can also be exported to
+    html, pdf, github markdown and so on.
 
 **Configuration File**
 
@@ -1985,55 +1986,55 @@ See also:
 
 
 <tr>
-<td class="left">`M-x help-with-tutorial`</td>
+<td class="left">M-x help-with-tutorial</td>
 <td class="left">Open Emacs built in tutorial</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x suspend-emacs`</td>
+<td class="left">M-x suspend-emacs</td>
 <td class="left">Suspend Emacs when in terminal or iconify in graphical mode.</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x quit-window`</td>
+<td class="left">M-x quit-window</td>
 <td class="left">Quit Emacs.</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x revert-file`</td>
+<td class="left">M-x revert-file</td>
 <td class="left">Update buffer when file is changed externally.</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x read-only`  or `C-x C-q`</td>
+<td class="left">M-x read-only  or C-x C-q</td>
 <td class="left">Toggle the current buffer read only.</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x delete-trailing-whitespace`</td>
+<td class="left">M-x delete-trailing-whitespace</td>
 <td class="left">Delete trailing Whistespace</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x tabify`</td>
+<td class="left">M-x tabify</td>
 <td class="left">Converts all spaces to tab</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x untabify`</td>
+<td class="left">M-x untabify</td>
 <td class="left">Converts all tabs to spaces.</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x whitespace-mode`</td>
+<td class="left">M-x whitespace-mode</td>
 <td class="left">Toggle white space view.</td>
 </tr>
 
@@ -2902,8 +2903,8 @@ ELISP>
     
     ELISP> (defun 1+ (x) (+ 1 x))
     1+
-    ELISP> (defun 3+ (x) (* 3 x))
-    3+
+    ELISP> (defun 3* (x) (* 3 x))
+    3*
     
     ELISP> (sum-fun #'1+  #'3* 4)
     17
@@ -6597,19 +6598,19 @@ Point Interface Functions
 
 
 <tr>
-<td class="left">(buffer-substring <pmin> <pmax>)</td>
+<td class="left">(buffer-substring [pmin] [pmax])</td>
 <td class="left">Returns the text with properties between the points <pmin> and <pmax>.</td>
 </tr>
 
 
 <tr>
-<td class="left">(buffer-substring-no-properties <pmin> <pmax>)</td>
+<td class="left">(buffer-substring-no-properties [pmin] pmax])</td>
 <td class="left">Returns the text without properties between the points.</td>
 </tr>
 
 
 <tr>
-<td class="left">(delete-region <pmin> <pmax>)</td>
+<td class="left">(delete-region [pmin] [pmax])</td>
 <td class="left">Deletes the text between <pmin> and <pmax>.</td>
 </tr>
 
@@ -7832,8 +7833,7 @@ ELISP> user-init-file
 "/home/tux/.emacs.d/init.el"
 ELISP>
 
-;; Directory where is the user configuration file, this path also works
-;; for Windows
+;; Directory where is the user configuration files.
 ;;
 ELISP> user-emacs-directory
 "~/.emacs.d/"
@@ -8467,30 +8467,57 @@ or by entering the command below in the shell IELM or by putting it in the confi
 
 ## El-get<a id="sec-8-1" name="sec-8-1"></a>
 
-## Elscreen<a id="sec-8-2" name="sec-8-2"></a>
+-   [Github: el-get](https://github.com/dimitri/el-get)
 
-## VIM Emulation - EVIL<a id="sec-8-3" name="sec-8-3"></a>
+From documentation: 
 
-## Ibuffer<a id="sec-8-4" name="sec-8-4"></a>
+El-Get allows you to install and manage elisp code for Emacs. It
+supports lots of different types of sources and is able to install
+them, update them and remove them, but more importantly it will init
+them for you. That means it will require the features you need, load
+the necessary files, set the Info paths so that C-h i shows the new
+documentation you now depend on, and finally call your own
+initialisation code for you to setup the extension. Or call it a
+package.
 
-## Navbar<a id="sec-8-5" name="sec-8-5"></a>
+Features:
 
-## Speedbar<a id="sec-8-6" name="sec-8-6"></a>
+-   Download the package directly from source without central repository.
+-   Asynchronous and fast download.
+-   Easy Installation and update.
 
-## Packages for Lisp Dialects<a id="sec-8-7" name="sec-8-7"></a>
+## VIM Emulation - EVIL<a id="sec-8-2" name="sec-8-2"></a>
 
-### Rainbow delimiters<a id="sec-8-7-1" name="sec-8-7-1"></a>
+## Ibuffer<a id="sec-8-3" name="sec-8-3"></a>
 
-### Paredit<a id="sec-8-7-2" name="sec-8-7-2"></a>
+## Navbar<a id="sec-8-4" name="sec-8-4"></a>
+
+## Speedbar<a id="sec-8-5" name="sec-8-5"></a>
+
+## Packages for Lisp Dialects<a id="sec-8-6" name="sec-8-6"></a>
+
+### Rainbow delimiters<a id="sec-8-6-1" name="sec-8-6-1"></a>
+
+Rainbow delimiters is useful for all Lisps dialects like Elisp,
+Clojure, Scheme and etc. It also makes easier to match and spot
+delimiters at different levels.
+
+-   [Emacs Wiki: Rainbow Delimiters](http://www.emacswiki.org/emacs/RainbowDelimiters)
+
+![img](images/rainbow_delimiters.png)
+
+### Paredit<a id="sec-8-6-2" name="sec-8-6-2"></a>
+
+## Elscreen<a id="sec-8-7" name="sec-8-7"></a>
 
 # Solutions<a id="sec-9" name="sec-9"></a>
 
 ## Code Navigation with Occur     :edit:<a id="sec-9-1" name="sec-9-1"></a>
 
 The function **occur** is useful for code navigation and scan code
-statements, this function is invoked by M-x occur. The function occur
-can also be used to create code navigation functions that scan the
-code for statements.
+statements, this function is invoked by M-x occur.
+
+Examples:
 
 The function python/scan-functions will scan for all lines that starts
 with def statement in a Python code and show the matching lines in the
@@ -9709,7 +9736,7 @@ Links:
 -   [Using Emacs Eshell as the ultimate shell | Smash Company](http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell)
 -   [Eshell completion for git, bzr, and hg | Tassilo's Blog](https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/)
 
-# Development Environments<a id="sec-12" name="sec-12"></a>
+# Development Environment<a id="sec-12" name="sec-12"></a>
 
 ## Python<a id="sec-12-1" name="sec-12-1"></a>
 
@@ -9737,6 +9764,39 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
    (run-python  "~/anaconda3/bin/ipython" nil t))
 ```
 
+Search Python packages at Pip:
+
+```lisp
+(defun python/pip-search ()
+  "Search for a pip package. at: https://pypi.python.org"
+
+  (interactive)
+
+  (browse-url
+
+   (format "https://pypi.python.org/pypi?%%3Aaction=search&term=%s&submit=search"
+
+           (read-string "Pip: ")
+
+           (message "Searching pip.")
+
+    )))
+```
+
+Search Python Documentation: 
+
+```lisp
+(defun python/doc-search ()
+  "Search Python3 official documentation. at: https://docs.python.org"
+  (interactive)
+
+  (browse-url
+   (format "https://docs.python.org/3/search.html?q=%s"
+
+           (read-string "Python3 doc: ")
+           )))
+```
+
 -   [Python Settings](http://wikemacs.org/wiki/Python)
 -   [Setting up Emacs to Support both Python 2 and Python 3](http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/)
 -   [Pyenv Mode](https://github.com/proofit404/pyenv-mode)
@@ -9747,9 +9807,25 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
 
 ## JavaScript<a id="sec-12-2" name="sec-12-2"></a>
 
--   [Java Script](http://wikemacs.org/wiki/JavaScript)
+Find Javascript package:
 
-Swank-js provides SLIME REPL and other development tools for in-browser JavaScript and Node.JS. It consists of SWANK backend and accompanying SLIME contrib
+```lisp
+(defun javascript/npm-search ()
+  "Search for a NPM package at: https://www.npmjs.com"
+  (interactive)
+
+  (browse-url
+
+   (format "https://www.npmjs.com/search?q=%s"
+
+           (url-hexify-string  (read-string "npm: "))
+           
+           )))
+```
+
+-   [Java Script](http://wikemacs.org/wiki/JavaScript) Swank-js provides SLIME REPL and other development
+    tools for in-browser JavaScript and Node.JS. It consists of
+    SWANK backend and accompanying SLIME contrib
 
 -   [Swank backend for Node.JS and in-browser JavaScript](https://github.com/swank-js/swank-js)
 
@@ -9763,6 +9839,54 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
 -   [Ocaml](http://wikemacs.org/wiki/OCaml)
 
 ## Haskell<a id="sec-12-5" name="sec-12-5"></a>
+
+Search Hoogle, the Haskell API search engine and the Hackage search engine.
+
+```lisp
+(defun haskell/hoogle ()
+  "Search Hoogle: Haskell API search engine
+   
+   https://www.haskell.org/hoogle
+   "
+  (interactive)
+
+  (browse-url (format  "https://www.haskell.org/hoogle/?hoogle=%s"
+                       (read-string "Hoogle: ")
+                       ))
+
+  (message "Searching Hoogle ...")
+  )
+
+
+(defun haskell/hoogle-region ()
+  "Search selected text on Hoogle: Haskell API Search Engine
+   https://www.haskell.org/hoogle
+  "
+  (interactive)
+  (browse-url (format  "https://www.haskell.org/hoogle/?hoogle=%s"
+
+                       (buffer-substring-no-properties
+                        (region-beginning)  
+                        (region-end)
+                        )
+
+                       )))
+
+(defun haskell/hackage ()
+  " Search a Haskell library at:  https://hackage.haskell.org/
+  "
+  (interactive)
+
+  (browse-url
+
+   (format  "https://hackage.haskell.org/packages/search?terms=%s"
+
+            (read-string "Hackage: ")))
+
+  (message "Searching Hackage ...")
+
+  )
+```
 
 See:
 
@@ -9880,10 +10004,13 @@ and explore Clojure.
 
 The code below sets the following key bindings:
 
--   `C-x Ce` to Send the last Sexp to clojure repl.
--   `C-c =`  to Send the definition to the repl, it sends the outermost
+-   C-x C-e to Send the last Sexp to clojure repl.
+-   C-c =   to Send the definition to the repl, it sends the outermost
     s-expression to the repl regardless where is the cursor.
--   `C-c C-p` Send a region to the repl.
+-   C-c C-p Send a region to the repl.
+-   C-up  Goes to the next input in the shell
+-   C-down Goes to the previous input the shell
+-   C-c C-l Opens the command history.
 
 ```lisp
 (progn
@@ -9940,6 +10067,44 @@ curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.
 -   [Project Interaction Library for Emacs](https://github.com/joelmccracken/projectile)
 -   [The Emacs Widget Library](http://www.gnu.org/software/emacs/manual/html_node/widget/index.html)
 -   [InteractivelyDoThings](http://www.emacswiki.org/emacs/InteractivelyDoThings)
+
+## Java<a id="sec-12-8" name="sec-12-8"></a>
+
+Search Java package documentation:
+
+```lisp
+(defun java/open-javadoc ()
+  "Open Java Official documentation web site: 
+   https://docs.oracle.com/javase/8/docs
+
+   Usage: M-x java/open-javadoc
+  
+   "
+  (interactive)
+
+  (browse-url "https://docs.oracle.com/javase/8/docs/"))
+
+(defun java/search-class ()
+  "Search a Java Class documentation.
+   at: https://docs.oracle.com/javase/<java-version>
+
+   It is assumed that is the Java 8.
+
+   Example:  M-x java/search-class  javax.swing.JPanel
+
+   "
+  (interactive)
+
+  (browse-url
+
+   (format "https://docs.oracle.com/javase/8/docs/api/%s"
+
+           (concat (replace-regexp-in-string "\\." "/"
+
+                                             (read-string "Enter a java class: ")
+                                             
+                                             ) ".html"))))
+```
 
 # Resources<a id="sec-13" name="sec-13"></a>
 
@@ -10108,43 +10273,43 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 <tbody>
 <tr>
-<td class="left">`M-x doctor`</td>
+<td class="left">M-x doctor</td>
 <td class="left">If you fell bad, lost your girlfriend &#x2026;</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x life`</td>
+<td class="left">M-x life</td>
 <td class="left">Run Conway's Life simulation.</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x dunnet`</td>
+<td class="left">M-x dunnet</td>
 <td class="left">Text based adventure game</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x tetris`</td>
+<td class="left">M-x tetris</td>
 <td class="left">Play Tetris.</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x hanoi`</td>
+<td class="left">M-x hanoi</td>
 <td class="left">Towers of Hanoi.</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x zone`</td>
+<td class="left">M-x zone</td>
 <td class="left">Make buffers go crazy!!</td>
 </tr>
 
 
 <tr>
-<td class="left">`M-x zone-leave-me-alone`</td>
+<td class="left">M-x zone-leave-me-alone</td>
 <td class="left">Stop zoning out.</td>
 </tr>
 </tbody>

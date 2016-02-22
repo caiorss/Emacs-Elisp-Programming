@@ -8,19 +8,22 @@
 #+URL:  http://tinyurl.com/emacsinabox
 #+STARTUP: overview
 
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/bigblow/css/htmlize.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/bigblow/css/bigblow.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/bigblow/css/hideshow.css"/>
+#+INCLUDE: theme/style.org
 
-#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery-1.11.0.min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
 
-#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery.localscroll-min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery.zclip.min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/bigblow.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/hideshow.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/bigblow/css/htmlize.css"/>
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/bigblow/css/bigblow.css"/>
+# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/bigblow/css/hideshow.css"/>
+
+# #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery-1.11.0.min.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+
+# #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery.localscroll-min.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/jquery.zclip.min.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/bigblow.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/bigblow/js/hideshow.js"></script>
+# #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
 
 * Emacs - Programming and Customization
 ** Overview
@@ -41,15 +44,15 @@ based on [[https://en.wikipedia.org/wiki/Maclisp][MacLisp]], one of oldest lisp 
 and Scheme, created in MIT. Emacs was written in 1976 by the legendary
 [[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incompatibilities with Common Lisp it
 has many constructs similar to it and n excellent book about Common
-Lisp that is also useful to understand Elisp and Scheme is [[http://unintelligible.org/onlisp/onlisp.html][On Lisp -
-by Paul Graham]].
+Lisp that is also useful to understand Elisp and Scheme is [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]].
 
 
 Note:
 
  - It is a work in progress.
- - You can see this document inside Emacs
-   since it was converted to org-mode, see the file *README.org*
+ - You can see this document inside Emacs since it was converted to
+   org-mode, see the file *README.org*. It can also be exported to
+   html, pdf, github markdown and so on.
 
 *Configuration File*
 
@@ -457,19 +460,19 @@ See also:
 
 ** Commands
 
-| Command                          | Description                                                  |
-|----------------------------------+--------------------------------------------------------------|
-|                                  |                                                              |
-| =M-x help-with-tutorial=         | Open Emacs built in tutorial                                 |
-| =M-x suspend-emacs=              | Suspend Emacs when in terminal or iconify in graphical mode. |
-| =M-x quit-window=                | Quit Emacs.                                                  |
-| =M-x revert-file=                | Update buffer when file is changed externally.               |
-| =M-x read-only=  or =C-x C-q=    | Toggle the current buffer read only.                         |
-| =M-x delete-trailing-whitespace= | Delete trailing Whistespace                                  |
-| =M-x tabify=                     | Converts all spaces to tab                                   |
-| =M-x untabify=                   | Converts all tabs to spaces.                                 |
-| =M-x whitespace-mode=            | Toggle white space view.                                     |
-|                                  |                                                              |
+| Command                        | Description                                                  |
+|--------------------------------+--------------------------------------------------------------|
+|                                |                                                              |
+| M-x help-with-tutorial         | Open Emacs built in tutorial                                 |
+| M-x suspend-emacs              | Suspend Emacs when in terminal or iconify in graphical mode. |
+| M-x quit-window                | Quit Emacs.                                                  |
+| M-x revert-file                | Update buffer when file is changed externally.               |
+| M-x read-only  or C-x C-q      | Toggle the current buffer read only.                         |
+| M-x delete-trailing-whitespace | Delete trailing Whistespace                                  |
+| M-x tabify                     | Converts all spaces to tab                                   |
+| M-x untabify                   | Converts all tabs to spaces.                                 |
+| M-x whitespace-mode            | Toggle white space view.                                     |
+|                                |                                                              |
 
 Change current buffer mode:
 
@@ -1182,8 +1185,8 @@ ELISP>
 
 ELISP> (defun 1+ (x) (+ 1 x))
 1+
-ELISP> (defun 3+ (x) (* 3 x))
-3+
+ELISP> (defun 3* (x) (* 3 x))
+3*
 
 ELISP> (sum-fun #'1+  #'3* 4)
 17
@@ -4890,14 +4893,14 @@ Point
 
 Point Interface Functions
 
-| Function                                       | Description                                                            |
-|------------------------------------------------+------------------------------------------------------------------------|
-| (goto-char <point>)                            | Move the cursor to a given point.                                      |
-| (insert <string>)                              | Insert text at current point.                                          |
-| (buffer-substring <pmin> <pmax>)               | Returns the text with properties between the points <pmin> and <pmax>. |
-| (buffer-substring-no-properties <pmin> <pmax>) | Returns the text without properties between the points.                |
-| (delete-region <pmin> <pmax>)                  | Deletes the text between <pmin> and <pmax>.                            |
-|                                                |                                                                        |
+| Function                                      | Description                                                            |
+|-----------------------------------------------+------------------------------------------------------------------------|
+| (goto-char <point>)                           | Move the cursor to a given point.                                      |
+| (insert <string>)                             | Insert text at current point.                                          |
+| (buffer-substring [pmin] [pmax])              | Returns the text with properties between the points <pmin> and <pmax>. |
+| (buffer-substring-no-properties [pmin] pmax]) | Returns the text without properties between the points.                |
+| (delete-region [pmin] [pmax])                 | Deletes the text between <pmin> and <pmax>.                            |
+|                                               |                                                                        |
 
 
 To test the functions described in this section the current buffer
@@ -4956,7 +4959,6 @@ Examples:
     ))
 
 #+END_SRC
-
 
 *** Thing at Point API
 
@@ -5978,8 +5980,7 @@ ELISP> user-init-file
 "/home/tux/.emacs.d/init.el"
 ELISP>
 
-;; Directory where is the user configuration file, this path also works
-;; for Windows
+;; Directory where is the user configuration files.
 ;;
 ELISP> user-emacs-directory
 "~/.emacs.d/"
@@ -6659,22 +6660,51 @@ or by entering the command below in the shell IELM or by putting it in the confi
 
 * Emacs Packages
 ** El-get
-** Elscreen
+
+  - [[https://github.com/dimitri/el-get][Github: el-get]]
+
+From documentation: 
+
+El-Get allows you to install and manage elisp code for Emacs. It
+supports lots of different types of sources and is able to install
+them, update them and remove them, but more importantly it will init
+them for you. That means it will require the features you need, load
+the necessary files, set the Info paths so that C-h i shows the new
+documentation you now depend on, and finally call your own
+initialisation code for you to setup the extension. Or call it a
+package.
+
+Features:
+
+ - Download the package directly from source without central repository.
+ - Asynchronous and fast download.
+ - Easy Installation and update. 
 ** VIM Emulation - EVIL
 ** Ibuffer
 ** Navbar
 ** Speedbar
 ** Packages for Lisp Dialects
 *** Rainbow delimiters
+
+Rainbow delimiters is useful for all Lisps dialects like Elisp,
+Clojure, Scheme and etc. It also makes easier to match and spot
+delimiters at different levels.
+
+ + [[http://www.emacswiki.org/emacs/RainbowDelimiters][Emacs Wiki: Rainbow Delimiters]]
+
+ file:images/rainbow_delimiters.png
+
 *** Paredit
 
+
+** Elscreen
 * Solutions
 **  Code Navigation with Occur                                         :edit:
 
 The function *occur* is useful for code navigation and scan code
-statements, this function is invoked by M-x occur. The function occur
-can also be used to create code navigation functions that scan the
-code for statements.
+statements, this function is invoked by M-x occur.
+
+Examples:
 
 The function python/scan-functions will scan for all lines that starts
 with def statement in a Python code and show the matching lines in the
@@ -7717,7 +7747,7 @@ Links:
   - [[http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell][Using Emacs Eshell as the ultimate shell | Smash Company]]
   - [[https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/][Eshell completion for git, bzr, and hg | Tassilo's Blog]]
 
-* Development Environments
+* Development Environment
 ** Python
 
 Set Python Interpreter:
@@ -7748,6 +7778,42 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
 
 #+END_SRC
 
+Search Python packages at Pip:
+
+#+BEGIN_SRC elisp
+
+(defun python/pip-search ()
+  "Search for a pip package. at: https://pypi.python.org"
+
+  (interactive)
+
+  (browse-url
+
+   (format "https://pypi.python.org/pypi?%%3Aaction=search&term=%s&submit=search"
+
+           (read-string "Pip: ")
+
+           (message "Searching pip.")
+
+    )))
+#+END_SRC
+
+
+Search Python Documentation: 
+
+#+BEGIN_SRC elisp 
+(defun python/doc-search ()
+  "Search Python3 official documentation. at: https://docs.python.org"
+  (interactive)
+
+  (browse-url
+   (format "https://docs.python.org/3/search.html?q=%s"
+
+           (read-string "Python3 doc: ")
+           )))
+#+END_SRC
+
+
     * [[http://wikemacs.org/wiki/Python][Python Settings]]
     * [[http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/][Setting up Emacs to Support both Python 2 and Python 3]]
     * [[https://github.com/proofit404/pyenv-mode][Pyenv Mode]]
@@ -7758,9 +7824,28 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
 
 ** JavaScript
 
-    * [[http://wikemacs.org/wiki/JavaScript][Java Script]]
+Find Javascript package:
 
-Swank-js provides SLIME REPL and other development tools for in-browser JavaScript and Node.JS. It consists of SWANK backend and accompanying SLIME contrib
+#+BEGIN_SRC elisp 
+
+(defun javascript/npm-search ()
+  "Search for a NPM package at: https://www.npmjs.com"
+  (interactive)
+
+  (browse-url
+
+   (format "https://www.npmjs.com/search?q=%s"
+
+           (url-hexify-string  (read-string "npm: "))
+           
+           )))
+
+#+END_SRC
+
+
+    * [[http://wikemacs.org/wiki/JavaScript][Java Script]] Swank-js provides SLIME REPL and other development
+      tools for in-browser JavaScript and Node.JS. It consists of
+      SWANK backend and accompanying SLIME contrib
 
     * [[https://github.com/swank-js/swank-js][Swank backend for Node.JS and in-browser JavaScript]]
 
@@ -7774,6 +7859,54 @@ Swank-js provides SLIME REPL and other development tools for in-browser JavaScri
  - [[http://wikemacs.org/wiki/OCaml][Ocaml]]
 
 ** Haskell
+
+Search Hoogle, the Haskell API search engine and the Hackage search engine.
+
+#+BEGIN_SRC emacs-lisp
+(defun haskell/hoogle ()
+  "Search Hoogle: Haskell API search engine
+   
+   https://www.haskell.org/hoogle
+   "
+  (interactive)
+
+  (browse-url (format  "https://www.haskell.org/hoogle/?hoogle=%s"
+                       (read-string "Hoogle: ")
+                       ))
+
+  (message "Searching Hoogle ...")
+  )
+
+
+(defun haskell/hoogle-region ()
+  "Search selected text on Hoogle: Haskell API Search Engine
+   https://www.haskell.org/hoogle
+  "
+  (interactive)
+  (browse-url (format  "https://www.haskell.org/hoogle/?hoogle=%s"
+
+                       (buffer-substring-no-properties
+                        (region-beginning)  
+                        (region-end)
+                        )
+
+                       )))
+
+(defun haskell/hackage ()
+  " Search a Haskell library at:  https://hackage.haskell.org/
+  "
+  (interactive)
+
+  (browse-url
+
+   (format  "https://hackage.haskell.org/packages/search?terms=%s"
+
+            (read-string "Hackage: ")))
+
+  (message "Searching Hackage ...")
+
+  )
+#+END_SRC
 
 See:
 
@@ -7899,10 +8032,13 @@ and explore Clojure.
 
 The code below sets the following key bindings:
 
- - =C-x Ce= to Send the last Sexp to clojure repl.
- - =C-c ==  to Send the definition to the repl, it sends the outermost
+ - C-x C-e to Send the last Sexp to clojure repl.
+ - C-c =   to Send the definition to the repl, it sends the outermost
    s-expression to the repl regardless where is the cursor.
- - =C-c C-p= Send a region to the repl.
+ - C-c C-p Send a region to the repl.
+ - C-up  Goes to the next input in the shell 
+ - C-down Goes to the previous input the shell
+ - C-c C-l Opens the command history. 
 
 #+BEGIN_SRC emacs-lisp
 
@@ -7962,6 +8098,49 @@ curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.
     * [[https://github.com/joelmccracken/projectile][Project Interaction Library for Emacs]]
     * [[http://www.gnu.org/software/emacs/manual/html_node/widget/index.html][The Emacs Widget Library]]
     * [[http://www.emacswiki.org/emacs/InteractivelyDoThings][InteractivelyDoThings]]
+
+** Java 
+
+Search Java package documentation:
+
+#+BEGIN_SRC elisp
+
+(defun java/open-javadoc ()
+  "Open Java Official documentation web site: 
+   https://docs.oracle.com/javase/8/docs
+
+   Usage: M-x java/open-javadoc
+  
+   "
+  (interactive)
+
+  (browse-url "https://docs.oracle.com/javase/8/docs/"))
+
+(defun java/search-class ()
+  "Search a Java Class documentation.
+   at: https://docs.oracle.com/javase/<java-version>
+
+   It is assumed that is the Java 8.
+
+   Example:  M-x java/search-class  javax.swing.JPanel
+
+   "
+  (interactive)
+
+  (browse-url
+
+   (format "https://docs.oracle.com/javase/8/docs/api/%s"
+
+           (concat (replace-regexp-in-string "\\." "/"
+
+                                             (read-string "Enter a java class: ")
+                                             
+                                             ) ".html"))))
+
+
+
+
+#+END_SRC
 
 * Resources
 ** Motivation
@@ -8111,15 +8290,15 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 ** Fun
 
 
-| Command                   | Description                               |
-|---------------------------+-------------------------------------------|
-| =M-x doctor=              | If you fell bad, lost your girlfriend ... |
-| =M-x life=                | Run Conway's Life simulation.             |
-| =M-x dunnet=              | Text based adventure game                 |
-| =M-x tetris=              | Play Tetris.                              |
-| =M-x hanoi=               | Towers of Hanoi.                          |
-| =M-x zone=                | Make buffers go crazy!!                   |
-| =M-x zone-leave-me-alone= | Stop zoning out.                          |
+| Command                 | Description                               |
+|-------------------------+-------------------------------------------|
+| M-x doctor              | If you fell bad, lost your girlfriend ... |
+| M-x life                | Run Conway's Life simulation.             |
+| M-x dunnet              | Text based adventure game                 |
+| M-x tetris              | Play Tetris.                              |
+| M-x hanoi               | Towers of Hanoi.                          |
+| M-x zone                | Make buffers go crazy!!                   |
+| M-x zone-leave-me-alone | Stop zoning out.                          |
 
 ** Books
 
