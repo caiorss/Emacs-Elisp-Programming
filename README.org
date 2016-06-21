@@ -268,7 +268,7 @@ Note: Neither C-z or C-x C-c work in Cua mode.
 | C-x 2       | split-window-below  | Split Horizontally                                        |
 | C-x 3       |                     | Split Vertically                                          |
 | C-x o       |                     | Switch Window                                             |
-| C-x 2 5     |                     | Launch a new frame (separated window)                     |
+| C-x 5 2     |                     | Launch a new frame (separated window)                     |
 
 **** Commands
 
