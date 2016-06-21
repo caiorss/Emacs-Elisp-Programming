@@ -402,7 +402,7 @@ Useful lisp key bindings to edit and navigate Lisp code.
 | C-M-k | Delete s-expression under cursor          |
 |       |                                           |
 | C-M-a | Move to the beggining of current function |
-| C-M-e | Move to the end f current function        |
+| C-M-e | Move to the end of current function       |
 
 *** Ubiquitous Emacs Key Bindings
 
