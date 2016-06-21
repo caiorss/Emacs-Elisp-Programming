@@ -592,7 +592,7 @@ buffer.
 file:images/scratch_buffer_usage_3.png
 
 The scratch buffer can be used with the interpreter IELM, to open the
-interpreter type: C-x-3, put the cursor on the other window and type
+interpreter type: C-x 3, put the cursor on the other window(C-x o) and type
 M-x ielm. By this way it is possible to evaluate expressions in the
 scratch buffer and test it in the shell.
 
