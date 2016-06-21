@@ -5849,7 +5849,7 @@ ELISP> (show-doc #'mode/ftypes)
 
 *** Mode Specific Key Bindings
 
-The function *define-key*  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: #+END_SRC A-x describe-key #+END_SRC and then type the key bind.
+The function *define-key*  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: =M-x describe-key= and then type the key bind.
 
 #+BEGIN_SRC elisp
 
@@ -6650,7 +6650,7 @@ or by entering the command below in the shell IELM or by putting it in the confi
 
   - [[https://github.com/dimitri/el-get][Github: el-get]]
 
-From documentation: 
+From documentation:
 
 El-Get allows you to install and manage elisp code for Emacs. It
 supports lots of different types of sources and is able to install
@@ -6665,7 +6665,7 @@ Features:
 
  - Download the package directly from source without central repository.
  - Asynchronous and fast download.
- - Easy Installation and update. 
+ - Easy Installation and update.
 ** VIM Emulation - EVIL
 ** Ibuffer
 ** Navbar
@@ -7786,9 +7786,9 @@ Search Python packages at Pip:
 #+END_SRC
 
 
-Search Python Documentation: 
+Search Python Documentation:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (defun python/doc-search ()
   "Search Python3 official documentation. at: https://docs.python.org"
   (interactive)
@@ -7813,7 +7813,7 @@ Search Python Documentation:
 
 Find Javascript package:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 
 (defun javascript/npm-search ()
   "Search for a NPM package at: https://www.npmjs.com"
@@ -7824,7 +7824,7 @@ Find Javascript package:
    (format "https://www.npmjs.com/search?q=%s"
 
            (url-hexify-string  (read-string "npm: "))
-           
+
            )))
 
 #+END_SRC
@@ -7852,7 +7852,7 @@ Search Hoogle, the Haskell API search engine and the Hackage search engine.
 #+BEGIN_SRC emacs-lisp
 (defun haskell/hoogle ()
   "Search Hoogle: Haskell API search engine
-   
+
    https://www.haskell.org/hoogle
    "
   (interactive)
@@ -7873,7 +7873,7 @@ Search Hoogle, the Haskell API search engine and the Hackage search engine.
   (browse-url (format  "https://www.haskell.org/hoogle/?hoogle=%s"
 
                        (buffer-substring-no-properties
-                        (region-beginning)  
+                        (region-beginning)
                         (region-end)
                         )
 
@@ -8023,9 +8023,9 @@ The code below sets the following key bindings:
  - C-c =   to Send the definition to the repl, it sends the outermost
    s-expression to the repl regardless where is the cursor.
  - C-c C-p Send a region to the repl.
- - C-up  Goes to the next input in the shell 
+ - C-up  Goes to the next input in the shell
  - C-down Goes to the previous input the shell
- - C-c C-l Opens the command history. 
+ - C-c C-l Opens the command history.
 
 #+BEGIN_SRC emacs-lisp
 
@@ -8086,18 +8086,18 @@ curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.
     * [[http://www.gnu.org/software/emacs/manual/html_node/widget/index.html][The Emacs Widget Library]]
     * [[http://www.emacswiki.org/emacs/InteractivelyDoThings][InteractivelyDoThings]]
 
-** Java 
+** Java
 
 Search Java package documentation:
 
 #+BEGIN_SRC elisp
 
 (defun java/open-javadoc ()
-  "Open Java Official documentation web site: 
+  "Open Java Official documentation web site:
    https://docs.oracle.com/javase/8/docs
 
    Usage: M-x java/open-javadoc
-  
+
    "
   (interactive)
 
@@ -8121,7 +8121,7 @@ Search Java package documentation:
            (concat (replace-regexp-in-string "\\." "/"
 
                                              (read-string "Enter a java class: ")
-                                             
+
                                              ) ".html"))))
 
 
