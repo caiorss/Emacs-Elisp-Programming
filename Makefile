@@ -35,6 +35,7 @@ html:
 # Github Flavoured Markdown.
 md:
 	emacs README.org --batch -l ~/.emacs.d/init.el -f org-gfm-export-to-markdown --kill
+	emacs Emacs_Snippets.org --batch -l ~/.emacs.d/init.el -f org-gfm-export-to-markdown --kill
 	# emacs README.org --batch -f org-md-export-to-markdown --kil
 
 html_md: md
