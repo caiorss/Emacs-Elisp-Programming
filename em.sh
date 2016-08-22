@@ -11,17 +11,34 @@
 
 BROWSER=chromium-browser
 
+function emacs_eval () {
+    echo "$1"
+    emacsclient -a "" -n --eval $1
+}
+
+function emacs_start () {
+    emacs --daemon 
+}
+
+function emacs_shutdown () {
+    emacsclient --eval "(kill-emacs)" 
+}
+
+
+
 case "$1" in
 
     # Start Emacs Server
     -start)
-        emacs --daemon ;;
+        emacs_start
+	;;
 
     -stop)
-        emacsclient --eval "(kill-emacs)" ;;
+        emacs_shutdown
+	;;
         
     -restart)
-        emacsclient --eval "(kill-emacs)" ;
+        emacsclient --eval "(kill-emacs)" 
         emacs --daemon ;;
 
     # Open Emacs Frame (GUI)
@@ -46,19 +63,30 @@ case "$1" in
 
     # Edit file without enter CLI or GUI interface.
     -edit)
-        emacsclient -a "" -n "$2" ;;
+        emacsclient -a "" -n "$2"
+	;;
         
     # Execute Command (Eval)
-    -cmd)
-        emacsclient -a "" -n --eval "$2" ;;
+    -eval)	
+        emacsclient -a "" -n --eval "$2"
+	;;
 
+    -eval-frame)
+	emacsclient -a "" -n --eval "(with-selected-frame (make-frame) (eval \"$2\"))"
+	;;
+    
+    -open)
+	emacsclient -a "" -n --eval "(find-file \"$2\")"
+	;;
+    
     # Load Emacs Lisp Source
     -load)
         emacsclient -a "" -n --eval "(load \"$2\")" ;;
-
+	  
+     # Browser man page in terminal 
     -man)
         emacsclient -a "" -t -e "(woman \"$2\")"  ;;
-
+    
     -manual)
         $BROWSER "http://www.gnu.org/software/emacs/manual" ;;
 
@@ -95,10 +123,19 @@ case "$1" in
          emacsclient -a "" -t --eval "(ielm)"
          ;;
 
+     -ielm-frame)
+	 emacsclient -a "" --eval "(with-selected-frame (make-frame) (frame))"
+	 ;;
+
      ## Open Emacs eshell on terminal
      -eshell)
          emacsclient -a "" -t --eval "(eshell)"
-         ;;
+	 ;;
+
+     ## Open Ehsell on a new frame 
+     -eshell-gui)
+	 emacsclient -a "" --eval "(with-selected-frame (make-frame) (eshell))"
+	 ;;
      
     *)
 

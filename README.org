@@ -7,7 +7,7 @@
 #+DESCRIPTION: Emacs programming and customization.
 #+URL:  http://tinyurl.com/emacsinabox
 #+STARTUP: overview
-#+OPTIONS: tags:nil
+#+OPTIONS: 
 
 #+INCLUDE: theme/style.org
 
@@ -50,6 +50,18 @@ is in the same directory of all emacs configuration files.
 The Emacs scratch buffer can be used to test new features and try
 Emacs codes along with IELM - Emacs Lisp interactive shell.
 
+
+*Emacs Features*
+
+ - Can run in GUI or in terminal.
+ - Programmable "text editor" (Lisp Machine)
+ - Support to many programming languages
+ - Can run shells and interpreters inside Emacs. 
+ - Highly customizable
+ - Package manager 
+ - Multiple OS support
+ - Remote file editting through ssh. 
+ 
 ** Command Line Options
 
 Start emacs ignoring the file:~/.emacs.d/init.el or file:~/.emacs configuration file.
@@ -89,11 +101,15 @@ $ emacs --version
 #+END_SRC
 
 ** Default Key Bindings and Useful Commands
+*** Overview 
 
 The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
 enabled by typing: M-x cua-mode or by inserting =(cua-mode) in Emacs
 configuration file. It also supports the Vim key bindings by
 installing the evil package =(M-x package-install evil)=.
+
+Note: The Emacs standard key bindings can be overridden by user
+configuration or modes like cua-mode or evil mode that emulates VI.
 
 See also:
 
@@ -144,11 +160,12 @@ See also:
   - [[http://stackoverflow.com/questions/1144424/are-there-any-emacs-key-combinations-reserved-for-custom-commands][Are there any emacs key combinations reserved for custom commands?]]
   - [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][Mastering Key Bindings in Emacs]]
 
-*** Key Bindings by Task
+*** Key Bindings and Commands by Task
 **** Quitting
 
 | Key Binding        | Command (M-x <cmd>)     | Description                                                                |
 |--------------------+-------------------------+----------------------------------------------------------------------------|
+|                    | kill-emacs              | End Emacs and save all buffers automatically.                              |
 | =C-x C-c=          | save-buffers-kill-emacs | Ask to kill each buffer and close Emacs.                                   |
 | =C-g=              | keyboard-quit           | Cancel any emacs command or prompt.                                        |
 | =C-x k=            | kill-buffer             | Close current buffer.                                                      |
@@ -258,7 +275,7 @@ Note: Neither C-z or C-x C-c work in Cua mode.
 
 **** Windows
 
-| Key Binding | Function            | Description                                               |
+| Key Binding | Command (M-x <cmd>) | Description                                               |
 |-------------+---------------------+-----------------------------------------------------------|
 | C-x k       | kill-buffer         | Close current buffer                                      |
 | C-x b       | switch-to-buffer    | Switch to buffer                                          |
@@ -268,39 +285,73 @@ Note: Neither C-z or C-x C-c work in Cua mode.
 | C-x 2       | split-window-below  | Split Horizontally                                        |
 | C-x 3       |                     | Split Vertically                                          |
 | C-x o       |                     | Switch Window                                             |
-| C-x 2 5     |                     | Launch a new frame (separated window)                     |
 
-**** Commands
+**** Frames 
 
-|                          |                                                             |
-|--------------------------+-------------------------------------------------------------|
-| M - x  <command>         | Enter a command                                             |
-| C - g                    | Cancel command input                                        |
-| C-x ESC ESC              | Redo last command, edit elisp expression that excecutes it. |
-| M-x list-command-history | List the most recent commands (M-x <command>)               |
-| M - :                    | Eval a lisp expression in current buffer                    |
-| M - x  eval-expression   | Eval a lisp expression in current buffer                    |
-|                          |                                                             |
-|--------------------------+-------------------------------------------------------------|
-| M -x  ielm               | Enter Emacs Interactive elisp shell                         |
-| M -x  eshell             | Enter Emacs Shell Written in Elisp                          |
-| M -x  shell              | Run a shell                                                 |
-| M -!  <command>          | Run a single shell command like: ls, pwd, make ...          |
-| M-x eval-region          | Evaluate selected region as elisp code                      |
-| M-x eval-buffer          | Evaluate curren buffer as elips code                        |
 
-**** Information
+| Key Binding    | Command (M-x <cmd>)             | Description                                 |
+|----------------+---------------------------------+---------------------------------------------|
+| C-x 5 0        | kill-buffer                     | Close current frame                         |
+| C-x 5 1        | delete-other-frames             | Close all frames except current one         |
+| C-x 5 2        | make-frame-command              | Create a new frame                          |
+| C-x 5 o        | other-frame                     | Alternate frame                             |
+| C-z or C-x C-z | iconify-or-deiconify-frame      | Minimize current frame                      |
+| C-x 5 f        | find-file-other-frame           | Open file in a new frame.                   |
+| C-x 5 r        | find-file-read-only-other-frame | Open file in a new frame in read-only mode. |
+| C-x 5 b        | switch-to-buffer-other-frame    | Switch to buffer in a new frame.            |
+|                |                                 |                                             |
 
-| Key Binding | Function          | Description                              |
-|-------------+-------------------+------------------------------------------|
-| C-h a       | apropos           | Command Apropos                          |
-| C-h i       | info              | Info documentation reader                |
-| C-h f       | describe-function | Describe function                        |
-| C-h v       | describe-variable | Describe variable                        |
-| C-h m       | describe-mode     | Describe mode                            |
-| C-h s       | describe-syntax   | Describe syntax                          |
-| C-h b       | describe-bindings | Describe key bindings for current buffer |
-| C-h k       | describe-key      | Describe a particular key binding.       |
+Note: 
+
+ - The key bind C-z is overridden by cua-mode if it enabled. 
+
+ - In terminal the key binding C-x C-z or the command
+   =M-x iconify-or-deiconify-frame= suspends the Emacs process. To
+   return to the process: type in the Unix shell fg and return.
+
+**** Restricted Editing 
+
+| Key Binding | M-x <cmd>        | Description                      |
+|-------------+------------------+----------------------------------|
+| C-x n n     | narrow-to-region | Narrow to selected text (region) |
+| C-x n w     | widen            | Back to full buffer              |
+| C-x n d     | narrow-to-defun  | Narrow to an s-expression        |
+
+This set of commands allow to edit a limited area of the buffer. 
+
+Notes: This key bindings are overridden by cua-mode and C-x cuts the
+selected text in this mode. If the keys are overridden then the 
+M-x <command> command must be used or the commands assigned to a new
+key binding. 
+
+**** Keyboard Macros
+
+| Key Binding | M-x <cmd>                 |   |
+|-------------+---------------------------+---|
+| C-x (       | kmacro-start-macro        |   |
+| C-x )       | kmacro-end-macro          |   |
+| C-x e or f4 | kmacro-end-and-call-macro |   |
+
+**** Informationm, Documentation and Help 
+
+| Key Binding | Command (M-x command) | Description                                  |
+|-------------+-----------------------+----------------------------------------------|
+| C-h ?       | help-for-help         | Show all commands to get help on Emacs.      |
+| C-h a       | apropos               | Command Apropos                              |
+| C-h i       | info                  | Info documentation reader                    |
+|             | info-apropos          | Search for a string in emacs info pages      |
+|             | woman                 | Browser Unix man pages                       |
+|-------------+-----------------------+----------------------------------------------|
+|             |                       |                                              |
+| C-h f       | describe-function     | Describe function                            |
+| C-h v       | describe-variable     | Describe variable                            |
+| C-h m       | describe-mode         | Describe mode                                |
+| C-h s       | describe-syntax       | Describe syntax                              |
+| C-h b       | describe-bindings     | Describe key bindings for current buffer     |
+| C-h k       | describe-key          | Describe a particular key binding.           |
+|             |                       |                                              |
+|             | find-library          | Find a library *.el file loaded with require |
+|             |                       | Example: M-x find-library org                |
 
 *** Selected Key Bindings and Commands for Programming
 
@@ -449,7 +500,7 @@ See also:
 
 | Command                        | Description                                                  |
 |--------------------------------+--------------------------------------------------------------|
-|                                |                                                              |
+| M-x kill-emacs                 | Exit emacs                                                   |
 | M-x help-with-tutorial         | Open Emacs built in tutorial                                 |
 | M-x suspend-emacs              | Suspend Emacs when in terminal or iconify in graphical mode. |
 | M-x quit-window                | Quit Emacs.                                                  |
@@ -470,6 +521,83 @@ functions.
  - =M-x sh-mode=      Shell Script - sh extension
  - =M-x pyhton-mode=  Example: A python script without extension ".py"
  - =M-x conf-mode=    Configuration file like: .gitconfig, .gitignore, smb.conf
+
+** Shells 
+
+Emacs have built-in commands to run shells. 
+
+| Name   | Command: M-x <command> | Description                                                                            |
+|--------+------------------------+----------------------------------------------------------------------------------------|
+| shell  | M-x shell              | Runs an inferior shell app. It can run bash, zsh and etc.                              |
+|        |                        |                                                                                        |
+| term   | M-x term               | Emacs' terminal emulator that can run apps like top, vim, bash and etc.                |
+|        |                        | It alows command line line completion inside Emacs in apps like bash, zsh and python . |
+|        |                        |                                                                                        |
+| eshell | M-x eshell             | Emacs' built-in shell written in Elisp. it has elisp implementation of cd, ls, pwd     |
+|        |                        | and other standard Unix commands and apps. Works on all operating systems. Eshell      |
+|        |                        | also can run Elisp functions. It is a good alternative to Microsoft Windows            |
+|        |                        | terminal emulator cmd.exe.                                                             |
+|        |                        |                                                                                        |
+| ielm   | M-x ielm               | Emacs' elisp shell that can be used to control, test and interact with Emacs.          |
+|        |                        |                                                                                        |
+
+Emacs also have commands to run programming languages shells:
+
+| Language           | Command        | Package  |
+|--------------------+----------------+----------|
+| Python             | M-x run-python | -        |
+| Octave             | M-x run-octave | -        |
+| Ruby               | M-x run-ruby   | inf-ruby |
+| Elisp (Emacs Lisp) | M-x ielm       | -        |
+| Scheme             | M-x run-scheme | -        |
+| Lisp               | M-x run-lisp   | -        |
+|                    |                |          |
+
+
+Running Emacs in terminal: 
+
+ - =emacs -nw=  
+
+Running Emacs fast without read ~/emacs.d/init.el or ~/.emacs startup
+file:  
+
+ - =emacs -nw -Q=
+
+ - Start Emacs in terminal running Eshell:  
+
+Running Emacs in terminal or executing some Elisp command or app:
+
+#+BEGIN_SRC sh
+$ emacs -nw -q --eval '(eshell)'
+#+END_SRC
+
+ - Start Emacs in terminal running python:  
+
+#+BEGIN_SRC sh
+$ emacs -nw -q --eval '(progn (run-python "python3") (switch-to-buffer "*Python*"))'
+#+END_SRC
+
+
+See also:
+
+ - Eshell Manual: [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell: The Emacs Shell]]
+
+ - [[http://www.nongnu.org/emacsdoc-fr/manuel/shell.html][Running Shell Commands from Emacs]]
+
+
+ - [[http://unix.stackexchange.com/questions/104325/what-is-the-difference-between-shell-eshell-and-term-in-emacs][What is the difference between shell, eshell, and term in Emacs? -
+   Unix & Linux Stack Exchange]]
+
+ - [[https://www.emacswiki.org/emacs/MultiTerm][EmacsWiki: Multi Term]]
+
+
+ - [[http://www.howardism.org/Technical/Emacs/new-window-manager.html][Emacs is My New Window Manager]]
+
+
+ - [[https://news.ycombinator.com/item?id=8922359][Emacs Is My New Window Manager | Hacker News]]
+
+
+ - [[http://www.informatimago.com/linux/emacs-on-user-mode-linux.html][Emacs standing alone on a Linux Kernel]]
 
 ** Spell Checker
 
@@ -1019,8 +1147,7 @@ ELISP>
 #+END_SRC
 
 ** Defining Functions
-
-***** Define Simple Function
+*** Define Simple Function
 
 Syntax:
 
@@ -1071,7 +1198,7 @@ ELISP> (factorial 5)
 ELISP
 #+END_SRC
 
-***** Anonymous Functions / Lambda Functions
+*** Anonymous Functions / Lambda Functions
 
 Syntax:
 
@@ -1126,7 +1253,7 @@ ELISP> (mapcar (lambda (x) (+ x 3))  '(1 2 3 4 5))
 
 #+END_SRC
 
-***** Passing Functions as Arguments
+*** Passing Functions as Arguments
 
 Functions must be passed with
 
@@ -1185,7 +1312,7 @@ ELISP>
 
 #+END_SRC
 
-***** Variadic Functions
+*** Variadic Functions
 
 Functions with many arguments
 
@@ -1228,7 +1355,7 @@ ELISP> (sum-prod 1 1 2 3 4 5)
 
 #+END_SRC
 
-***** Function with optional argument
+*** Function with optional argument
 
 #+BEGIN_SRC elisp
 
@@ -1283,7 +1410,7 @@ ELISP> (test-optional-default-b 1 nil)
 
 #+END_SRC
 
-***** Functions with Property List argument
+*** Functions with Property List argument
 
 #+BEGIN_SRC elisp
 
@@ -1356,7 +1483,7 @@ ELISP> (make-shell-interface :buffer "pyshell"  :path "/usr/bin/python" :type 's
 
 #+END_SRC
 
-***** Closures
+*** Closures
 
 Emacs lisp dialect doesn't have closure by default, so the code below won't work like in Scheme and Common Lisp:
 
@@ -4396,7 +4523,6 @@ See also:
     * [[http://www.blogbyben.com/2011/04/10-concepts-emacs-newbie-should-master.html][11 Concepts The Emacs Newbie Should Master]]
 
 file:images/Emacs_terminology.png
-
 **  Emacs API
 
 *Emacs API Objects*
@@ -4459,6 +4585,7 @@ See also, from Emacs Wiki:
    * [[http://www.emacswiki.org/emacs/EmacsLispLimitations][Emacs Lisp Limitations]]
    * [[http://www.emacswiki.org/emacs/CommonLisp][Why isn't more of CommonLisp in GNU Emacs?]]
    * [[http://www.emacswiki.org/emacs/WhyDoesElispSuck][Why Does ElispSuck]]
+
 **  Discoverability / Get Documentation
 
 *Apropos*
@@ -4524,10 +4651,8 @@ or
 
 C-h v
 #+END_SRC
-
 **  Buffers
-
-**** Buffer Attributes
+*** Buffer Attributes
 
 *List all Buffers*
 
@@ -4741,7 +4866,7 @@ ELISP>
 
 #+END_SRC
 
-**** Buffer Mode
+*** Buffer Mode
 
 *Show Buffers Mode*
 
@@ -4789,7 +4914,7 @@ ELISP> (mapcar (lambda (b)(
 
 #+END_SRC
 
-**** Get Buffer Contents / Selection / Line
+*** Get Buffer Contents / Selection / Line
 
 *Get Buffer Content as String*
 
@@ -4833,7 +4958,7 @@ To test it: M-x eval-expression and enter (get-current-line)
 )
 #+END_SRC
 
-**** Search and Replace in the entire Buffer
+*** Search and Replace in the entire Buffer
 
 Source: [[http://emacs.stackexchange.com/questions/249/how-to-search-and-replace-in-the-entire-buffer][How to search and replace in the entire buffer?]]
 Usage: A-x replace-regexp-entire-buffer
@@ -5005,7 +5130,36 @@ ELISP>
 
 
 file:images/thing_at_point_sexp2.png
-**  Files, Directories and Path
+**  Message / Output                                  :message:output:dialog:
+*** message 
+
+Display a message at the bottom of the screen.
+
+Example: 
+
+#+BEGIN_SRC emacs-lisp 
+(message "Hello world")
+#+END_SRC
+
+Output:
+
+file:images/message_output1.png
+
+*** message-box 
+
+Display a message, in a dialog box if possible. If a dialog box is not
+available, use the echo area. 
+
+=(message-box FORMAT-STRING &rest ARGS)=
+
+#+BEGIN_SRC emacs-lisp 
+ELISP> (message-box "Time for a break.\nDrink some coffee")
+"Time for a break.\nDrink some coffee"
+#+END_SRC
+
+file:images/message_output2.png
+
+**  Files, Directories and Path                          :api:system:file:os:
 
  [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html][Emacs Manual: Files]]
 
@@ -5113,12 +5267,325 @@ ELISP>
 
     * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Current-Buffer.html][Current Buffer]]
     * [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Buffers.html][Creating New Buffer]]
+**  Window Functions                                      :api:system:window:
+*** Basic Window Functions
 
-**  Regex - Regular Expressions
+Original Window before be changed.
 
-# @TODO: Add notes, documentations and functions about Emacs Regex and S-expression based regex.
+file:images/window_start.png
 
-**  Date and Time
+Split Window Horizontally
+
+#+BEGIN_SRC elisp
+
+    ELISP> (split-window-horizontally)
+    #<window 6 on *ielm*>
+#+END_SRC
+
+file:images/window_horizontally.png
+
+Delete Other Windows
+
+#+BEGIN_SRC elisp
+
+    ELISP> (delete-other-windows)
+    nil
+    ELISP>
+#+END_SRC
+
+file:images/window_delete.png
+
+Split Window Vertically
+
+#+BEGIN_SRC elisp
+
+    ELISP> (split-window-vertically)
+    #<window 10 on *ielm*>
+    ELISP>
+#+END_SRC
+
+file:images/window_vertically.png
+
+Switch to Buffer on other window.
+
+#+BEGIN_SRC elisp
+
+    ELISP> (switch-to-buffer-other-window "init.el")
+    #<buffer init.el>
+    ELISP>
+#+END_SRC
+
+file:images/window_switch_to_buffer.png
+
+Delete Current Window
+
+#+BEGIN_SRC elisp
+
+    ELISP> (split-window-vertically)
+    #<window 18 on *ielm*>
+
+    ELISP> (switch-to-buffer-other-window "init.el")
+    #<buffer init.el>
+#+END_SRC
+
+file:images/window_delete_this0.png
+
+#+BEGIN_SRC elisp
+
+ELISP> (delete-window)
+nil
+ELISP>
+#+END_SRC
+
+file:images/window_delete_this1.png
+
+Launch a new frame
+
+#+BEGIN_SRC elisp
+
+    ELISP> (make-frame)
+    #<frame emacs@tuxhorse 0x9651518>
+    ELISP>
+#+END_SRC
+
+file:images/window_make_frame.png
+
+#+BEGIN_SRC elisp
+
+;;; List Frames:
+
+ELISP> (frame-list)
+(#<frame /home/tux/.emacs.d/init.el 0x95fe518> #<frame *ielm* 0x9651518>)
+
+ELISP>
+
+;; Close the new frame
+;;
+ELISP> (delete-frame)
+nil
+ELISP>
+#+END_SRC
+
+*** Manipulate Buffer in Another Window
+
+Description: Split window vertically, create a new buffer not associated to a file named dummy, and switch
+to this buffer on the second window and set the current buffer to dummy.
+
+#+BEGIN_SRC elisp
+
+    ELISP> (split-window-vertically)
+    #<window 22 on *ielm*>
+
+    ELISP> (setq dummy-buffer (get-buffer-create "dummy"))
+    #<buffer dummy>
+
+    ELISP> (switch-to-buffer-other-window dummy-buffer)
+    #<buffer dummy>
+
+    ELISP> (set-buffer dummy-buffer)
+    #<buffer dummy>
+    ELISP>
+#+END_SRC
+
+file:images/window_manipulate_buffer1.png
+
+
+Description: Insert some text on the buffer dummy.
+
+#+BEGIN_SRC elisp
+
+ELISP> (insert "Testing Emacs GUI capabilities")
+nil
+ELISP>
+
+#+END_SRC
+
+file:images/window_manipulate_buffer2.png
+
+Description: Redirect a shell command to the dummy buffer.
+
+#+BEGIN_SRC elisp
+
+ELISP> (print (shell-command-to-string "lsusb") dummy-buffer)
+;;
+;; Or it could be:
+;;
+;;  (insert (shell-command-to-string "lsusb"))
+
+#+END_SRC
+
+file:images/window_manipulate_buffer3.png
+
+Description: Erase Dummy buffer:
+
+#+BEGIN_SRC elisp
+
+ELISP> (erase-buffer)
+nil
+ELISP>
+#+END_SRC
+
+file:images/window_manipulate_buffer4.png
+
+Change Buffer Safely:
+
+#+BEGIN_SRC elisp
+
+ELISP> (with-current-buffer dummy-buffer
+         (insert (shell-command-to-string "uname -a")))
+nil
+ELISP>
+#+END_SRC
+
+file:images/window_manipulate_buffer5.png
+
+Other Window Operations
+
+#+BEGIN_SRC elisp
+
+
+;; List all Opened windows
+;;
+ELISP> (window-list)
+(#<window 18 on *ielm*> #<window 22 on dummy> #<window 12 on  *Minibuf-1*>)
+
+;; List the buffer of each window
+;;
+ELISP> (mapcar 'window-buffer (window-list))
+(#<buffer *ielm*> #<buffer dummy> #<buffer  *Minibuf-1*>)
+
+;; List the buffer name of each window
+;;
+ELISP> (mapcar (lambda (w)(buffer-name (window-buffer w))) (window-list))
+("*ielm*" "dummy")
+
+#+END_SRC
+
+*** Window Configuration
+
+The function current-window-configuration returns the current  emacs window configuration.
+
+#+BEGIN_SRC elisp
+
+    ELISP> (current-window-configuration)
+    #<window-configuration>
+#+END_SRC
+Save the current window configuration to variable w
+
+#+BEGIN_SRC elisp
+
+    ELISP> (setq w (current-window-configuration))
+    #<window-configuration>
+    ELISP> w
+    #<window-configuration>
+    ELISP>
+#+END_SRC
+
+file:images/window_configuration1.png
+
+Change the Window configuration and buffers:
+
+file:images/window_configuration2.png
+
+Restore the window configuration.
+
+#+BEGIN_SRC elisp
+
+;; Change the windows, buffers and then restore the the current window.
+;;
+    ELISP>
+    ELISP> (set-window-configuration w)
+    t
+    ELISP>
+#+END_SRC
+
+file:images/window_configuration3.png
+
+Not Compiled Yet.
+
+#+BEGIN_SRC
+
+balance-windows
+delete-other-windows
+delete-window
+delete-windows-on
+display-buffer
+shrink-window-if-larger-than-buffer
+switch-to-buffer
+switch-to-buffer-other-window
+other-window
+other-window-for-scrolling
+
+;; Open a new Emacs Window
+(make-frame)
+
+;; Screen Resolution
+
+ELISP> (x-display-pixel-width)
+1366
+
+ELISP> (x-display-pixel-height)
+768
+ELISP>
+ELISP>
+
+;; Resize and Set Emacs Windows position
+;;
+;; From: http://uce.uniovi.es/tips/Emacs/mydotemacs.html#sec-41
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ELISP> (defun resize-frame ()
+  "Set size"
+  (interactive)
+  (set-frame-width (selected-frame) 100)
+  (set-frame-height (selected-frame) 28)
+  (set-frame-position (selected-frame) 0 1))
+resize-frame
+ELISP>
+
+ELISP> (resize-frame)
+t
+ELISP>
+
+#+END_SRC
+
+    * http://ecb.sourceforge.net/docs/The-edit_002darea.html
+    * http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_432.html
+    * http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_441.html
+    * http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html
+**  OS Interface
+***  Find the current operating system  
+
+The variable _system-type_ indicates the current operating system. 
+
+| Value        | Description                       |
+|--------------+-----------------------------------|
+| gnu          | GNU Hurd system.                  |
+| gnu/linux    | GNU/Linux system.                 |
+| gnu/kfreebsd | GNU system with a FreeBSD kernel. |
+| darwin       | Darwin (GNU-Darwin, Mac OS X)     |
+| ms-dos       | MS-DOS application.               |
+| windows-nt   | native W32 application.           |
+| cygwin       | compiled using the Cygwin library |
+
+Example:
+
+#+BEGIN_SRC emacs-lisp 
+ELISP> system-type
+gnu/linux
+
+;; Dispatch by operating system 
+;;
+ELISP> (cl-case  system-type
+          (cywing  "Running cywing")
+          (darwing "Running Mac Osx")
+          (gnu/linux "Running Linux")
+        )
+"Running Linux"
+#+END_SRC
+
+***  Date and Time
 
 
 #+BEGIN_SRC elisp
@@ -5145,9 +5612,7 @@ ELISP> (format-time-string "%d/%m/%Y %H:%M:%S" (current-time))
 "27/06/2015 22:05:10"
 ELISP>
 #+END_SRC
-
-**  OS Interface
-**  Call External Commands or Apps
+***  Call External Commands or Apps
 
 #+BEGIN_SRC elisp
 
@@ -5173,7 +5638,7 @@ ELISP> (shell-command-to-string "uname -a" )
 ELISP>
 #+END_SRC
 
-**  Environment Variables
+***  Environment Variables
 
  [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Environment.html][Emacs Manual: Environment Variables]]
 
@@ -5182,10 +5647,28 @@ ELISP>
 ;; Environment Variables
 ;;
 ELISP> (getenv "PATH")
-"/home/tux/.opam/4.02.1/bin:/home/tux/bin:/home/tux/.opam/4.02.1/bin
-:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-:/usr/local/games:/opt/java:/opt/java/bin:/home/tux/bin:/home/tux/usr/bin
-:/home/tux/.apps:/opt/jython:/opt/jython/bin:/opt/jython/Lib"
+"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+ELISP> 
+
+ELISP> (split-string  (getenv "PATH") ":")
+("/usr/local/sbin" "/usr/local/bin" "/usr/sbin" "/usr/bin")
+
+ELISP> (dolist (e (split-string  (getenv "PATH") ":")) (princ (format "%s\n" e)))
+/usr/local/sbin
+/usr/local/bin
+/usr/sbin
+/usr/bin
+
+;; Alternative: See exec-path variable 
+;;
+ELISP> exec-path
+
+("/usr/local/sbin" 
+"/usr/local/bin" 
+"/usr/sbin" 
+"/usr/bin" 
+"/usr/lib/emacs/24.5/x86_64-unknown-linux-gnu")
+
 
 ELISP> (getenv "HOME")
 "/home/tux"
@@ -5244,7 +5727,7 @@ LC_NUMERIC=pt_BR.UTF-8
 
 #+END_SRC
 
-**  Process Management
+***  Process Management
 
 Documentation:
 
@@ -5376,295 +5859,53 @@ ELISP> (mapcar
             nil open))
 
 #+END_SRC
+**  Timer 
+*** run-with-timer 
 
-**  Window Functions
+Perform an action after a delay of SECS seconds. Repeat the action
+every REPEAT seconds, if REPEAT is non-nil.  SECS and REPEAT may be
+integers or floating point numbers.  The action is to call FUNCTION
+with arguments ARGS. (Documentation)
 
-**** Basic Window Functions
+This function returns a timer object which you can use in
+cancel-timer.
 
-Original Window before be changed.
+ - =(run-with-timer SECS REPEAT FUNCTION &rest ARGS)=
 
-file:images/window_start.png
+Example 1: Run a single time and then pop up a message box after 5
+seconds.
 
-Split Window Horizontally
-
-#+BEGIN_SRC elisp
-
-    ELISP> (split-window-horizontally)
-    #<window 6 on *ielm*>
+#+BEGIN_SRC emacs-lisp
+(run-with-timer 5 nil
+   (lambda () (message-box "Hello World Emacs")))
 #+END_SRC
 
-file:images/window_horizontally.png
+Example 2: Run 4 times 
 
-Delete Other Windows
-
-#+BEGIN_SRC elisp
-
-    ELISP> (delete-other-windows)
-    nil
-    ELISP>
+#+BEGIN_SRC emacs-lisp 
+(run-with-timer 5 4
+   (lambda () (message-box "Hello World Emacs")))
 #+END_SRC
 
-file:images/window_delete.png
-
-Split Window Vertically
-
-#+BEGIN_SRC elisp
-
-    ELISP> (split-window-vertically)
-    #<window 10 on *ielm*>
-    ELISP>
-#+END_SRC
-
-file:images/window_vertically.png
-
-Switch to Buffer on other window.
-
-#+BEGIN_SRC elisp
-
-    ELISP> (switch-to-buffer-other-window "init.el")
-    #<buffer init.el>
-    ELISP>
-#+END_SRC
-
-file:images/window_switch_to_buffer.png
-
-Delete Current Window
-
-#+BEGIN_SRC elisp
-
-    ELISP> (split-window-vertically)
-    #<window 18 on *ielm*>
-
-    ELISP> (switch-to-buffer-other-window "init.el")
-    #<buffer init.el>
-#+END_SRC
-
-file:images/window_delete_this0.png
-
-#+BEGIN_SRC elisp
-
-ELISP> (delete-window)
-nil
-ELISP>
-#+END_SRC
-
-file:images/window_delete_this1.png
-
-Launch a new frame
-
-#+BEGIN_SRC elisp
-
-    ELISP> (make-frame)
-    #<frame emacs@tuxhorse 0x9651518>
-    ELISP>
-#+END_SRC
-
-file:images/window_make_frame.png
-
-#+BEGIN_SRC elisp
-
-;;; List Frames:
-
-ELISP> (frame-list)
-(#<frame /home/tux/.emacs.d/init.el 0x95fe518> #<frame *ielm* 0x9651518>)
-
-ELISP>
-
-;; Close the new frame
-;;
-ELISP> (delete-frame)
-nil
-ELISP>
-#+END_SRC
-
-**** Manipulate Buffer in Another Window
-
-Description: Split window vertically, create a new buffer not associated to a file named dummy, and switch
-to this buffer on the second window and set the current buffer to dummy.
-
-#+BEGIN_SRC elisp
-
-    ELISP> (split-window-vertically)
-    #<window 22 on *ielm*>
-
-    ELISP> (setq dummy-buffer (get-buffer-create "dummy"))
-    #<buffer dummy>
-
-    ELISP> (switch-to-buffer-other-window dummy-buffer)
-    #<buffer dummy>
-
-    ELISP> (set-buffer dummy-buffer)
-    #<buffer dummy>
-    ELISP>
-#+END_SRC
-
-file:images/window_manipulate_buffer1.png
-
-
-Description: Insert some text on the buffer dummy.
-
-#+BEGIN_SRC elisp
-
-ELISP> (insert "Testing Emacs GUI capabilities")
-nil
-ELISP>
-
-#+END_SRC
-
-file:images/window_manipulate_buffer2.png
-
-Description: Redirect a shell command to the dummy buffer.
-
-#+BEGIN_SRC elisp
-
-ELISP> (print (shell-command-to-string "lsusb") dummy-buffer)
-;;
-;; Or it could be:
-;;
-;;  (insert (shell-command-to-string "lsusb"))
-
-#+END_SRC
-
-file:images/window_manipulate_buffer3.png
-
-Description: Erase Dummy buffer:
-
-#+BEGIN_SRC elisp
-
-ELISP> (erase-buffer)
-nil
-ELISP>
-#+END_SRC
-
-file:images/window_manipulate_buffer4.png
-
-Change Buffer Safely:
-
-#+BEGIN_SRC elisp
-
-ELISP> (with-current-buffer dummy-buffer
-         (insert (shell-command-to-string "uname -a")))
-nil
-ELISP>
-#+END_SRC
-
-file:images/window_manipulate_buffer5.png
-
-Other Window Operations
-
-#+BEGIN_SRC elisp
-
-
-;; List all Opened windows
-;;
-ELISP> (window-list)
-(#<window 18 on *ielm*> #<window 22 on dummy> #<window 12 on  *Minibuf-1*>)
-
-;; List the buffer of each window
-;;
-ELISP> (mapcar 'window-buffer (window-list))
-(#<buffer *ielm*> #<buffer dummy> #<buffer  *Minibuf-1*>)
-
-;; List the buffer name of each window
-;;
-ELISP> (mapcar (lambda (w)(buffer-name (window-buffer w))) (window-list))
-("*ielm*" "dummy")
-
-#+END_SRC
-
-**** Window Configuration
-
-The function current-window-configuration returns the current  emacs window configuration.
-
-#+BEGIN_SRC elisp
-
-    ELISP> (current-window-configuration)
-    #<window-configuration>
-#+END_SRC
-Save the current window configuration to variable w
-
-#+BEGIN_SRC elisp
-
-    ELISP> (setq w (current-window-configuration))
-    #<window-configuration>
-    ELISP> w
-    #<window-configuration>
-    ELISP>
-#+END_SRC
-
-file:images/window_configuration1.png
-
-Change the Window configuration and buffers:
-
-file:images/window_configuration2.png
-
-Restore the window configuration.
-
-#+BEGIN_SRC elisp
-
-;; Change the windows, buffers and then restore the the current window.
-;;
-    ELISP>
-    ELISP> (set-window-configuration w)
-    t
-    ELISP>
-#+END_SRC
-
-file:images/window_configuration3.png
-
-Not Compiled Yet.
-
-#+BEGIN_SRC
-
-balance-windows
-delete-other-windows
-delete-window
-delete-windows-on
-display-buffer
-shrink-window-if-larger-than-buffer
-switch-to-buffer
-switch-to-buffer-other-window
-other-window
-other-window-for-scrolling
-
-;; Open a new Emacs Window
-(make-frame)
-
-;; Screen Resolution
-
-ELISP> (x-display-pixel-width)
-1366
-
-ELISP> (x-display-pixel-height)
-768
-ELISP>
-ELISP>
-
-;; Resize and Set Emacs Windows position
-;;
-;; From: http://uce.uniovi.es/tips/Emacs/mydotemacs.html#sec-41
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-ELISP> (defun resize-frame ()
-  "Set size"
+Example 3: Pop up a message showing that the coffee is ready after 3
+minutes. 
+
+#+BEGIN_SRC emacs-lisp 
+(defun cofee-wait ()
   (interactive)
-  (set-frame-width (selected-frame) 100)
-  (set-frame-height (selected-frame) 28)
-  (set-frame-position (selected-frame) 0 1))
-resize-frame
-ELISP>
 
-ELISP> (resize-frame)
-t
-ELISP>
+  (let ((minutes 3))
+
+    (run-with-timer (* 60 minutes)  nil 
+     (lambda () (message-box "Coffee done"))
+     )
+
+    (message "Waiting for the cofee")
+    ))
+  
 
 #+END_SRC
 
-    * http://ecb.sourceforge.net/docs/The-edit_002darea.html
-    * http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_432.html
-    * http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_441.html
-    * http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html
 **  Emacs Modes
 
 # @TODO: Describe Emacs modes, mode setup, mode hooks, mode key bindings.
@@ -5999,6 +6240,334 @@ Emacs tools and codes that can be useful as implementation references and proof 
     - https://github.com/clojure/tools.nrepl
 
     - [[https://www.gnu.org/software/emacs/manual/html_mono/dbus.html][D-Bus integration in Emacs]]
+
+* Regex - Regular Expressions
+** Overview 
+
+# @TODO: Add notes, documentations and functions about Emacs Regex and S-expression based regex.
+
+The Emacs regular expressions are different from the standard Perl
+regular expressions that are used by most languages. 
+
+Note: The regex patterns entered in elisp code between "" quotes
+requires two backlashes. 
+
+Example: The pattern =\s-= will match white space in =M-x
+<commands>=. To match white space in Elisp code the pattern must be
+written as "\\s-"
+
+Note: Lookahead and lookbehind like in PCRE are not supported.
+
+Usefulness: 
+
+ - Batch search replace 
+ - Interactive Search Replace
+ - Create customized commands to change or search source code.
+ - Refactor code
+
+To see Emacs regex manual evaluate the s-expression:
+
+#+BEGIN_SRC elisp 
+(info "(emacs) Regexps")
+#+END_SRC
+
+** Emacs Regex 
+
+*Special characters*
+
+| .       | any character (but newline)                            |
+| *       | previous character or group, repeated 0 or more time   |
+| +       | previous character or group, repeated 1 or more time   |
+| ?       | previous character or group, repeated 0 or 1 time      |
+| ^       | start of line                                          |
+| $       | end of line                                            |
+| [...]   | any character between brackets                         |
+| [^..]   | any character not in the brackets                      |
+| [a-z]   | any character between a and z                          |
+| \       | prevents interpretation of following special char      |
+| \\vert  | or                                                     |
+| \w      | word constituent                                       |
+| \b      | word boundary                                          |
+| \sc     | character with c syntax (e.g. \s- for whitespace char) |
+| \( \)   | start\end of group                                     |
+| \< \>   | start\end of word                                      |
+| \` \'   | start\end of buffer                                    |
+| \1      | string matched by the first group                      |
+| \n      | string matched by the nth group                        |
+| \{3\}   | previous character or group, repeated 3 times          |
+| \{3,\}  | previous character or group, repeated 3 or more times  |
+| \{3,6\} | previous character or group, repeated 3 to 6 times     |
+
+
+*POSIX Character classes* 
+
+|            |                                                      |
+|------------+------------------------------------------------------|
+| [:digit:]  | digit, same as [0-9]                                 |
+| [:upper:]  | letter in uppercase                                  |
+| [:space:]  | whitespace character, as defined by the syntax table |
+| [:xdigit:] | hexadecimal digit                                    |
+| [:cntrl:]  | control character                                    |
+| [:ascii:]  | ascii character                                      |
+|            |                                                      |
+
+
+*Syntax Classes*
+
+|     |                           |         |                           |
+|-----+---------------------------+---------+---------------------------|
+| \s- | whitespace character      | \s/     | character quote character |
+| \sw | word constituent          | \s$     | paired delimiter          |
+| \s_ | symbol constituent        | \s'     | expression prefix         |
+| \s. | punctuation character     | \s<     | comment starter           |
+| \s( | open delimiter character  | \s>     | comment starter           |
+| \s) | close delimiter character | \s!     | generic comment delimiter |
+| \s" | string quote character    | \s\vert | generic string delimiter  |
+| \s\ | escape character          |         |                           |
+
+
+*Emacs X Perl Regex*
+
+| Emacs Regex        | Perl Regex | Description                         |
+|--------------------+------------+-------------------------------------|
+| \( \)              | (  )       | Capture group                       |
+| \{ \}              | {  }       |                                     |
+| \s-                | \s         | White space                         |
+| \1, \2, \3, \4     | $1, $2, $3 | Result of capture: search, replace. |
+| [ ]                | [ ]        | Character class                     |
+| [0-9] or [:digit:] | \d         | Digit from 0 to 9                   |
+| \b                 | \b         | Word boundary                       |
+| \w                 | \w         | Word character                      |
+
+** Regex Commands 
+
+|-------+---------------------------------------------|
+| C-M-s | incremental forward search matching regexp  |
+| C-M-r | incremental backward search matching regexp |
+
+Buffer Commands 
+
+| M-x replace-regexp         | replace string matching regexp                         |
+| M-x query-replace-regexp   | same, but query before each replacement                |
+| M-x align-regexp           | align, using strings matching regexp as delimiters     |
+| M-x highlight-regexp       | highlight strings matching regexp                      |
+| M-x grep                   | call unix grep command and put result in a buffer      |
+| M-x lgrep                  | user-friendly interface to the grep command            |
+| M-x rgrep                  | recursive grep                                         |
+| M-x dired-do-copy-regexp   | copy files with names matching regexp                  |
+| M-x dired-do-rename-regexp | rename files matching regexp                           |
+| M-x find-grep-dired        | display files containing matches for regexp with Dired |
+
+Line Commands 
+
+| Command (M-x command)           | Alias                     | Description                                      |
+|---------------------------------+---------------------------+--------------------------------------------------|
+| keep-lines                      | delete-non-matching-lines | Delete all lines except those containing matches |
+| flush-lines                     | delete-matching-lines     | Delete lines containing matches                  |
+| highlight-lines-matching-regexp | hi-lock-line-face-buffer  | Highlight lines matching regexp                  |
+| occur                           | list-matching-lines       | Show lines containing a match                    |
+| multi-occur                     |                           | Show lines in all buffers containing a match     |
+| how-many                        | count-matches             | Count the number of strings matching regexp      |
+
+** Regex Functions 
+
+ - match-string
+ - match-end
+ - match-beginning
+ - re-search
+ - re-search-forward
+ - replace-string-in-regexp
+ - replace-string
+
+** Build regex interactively 
+
+=M-x re-builder= 
+
+
+=M-x query-replace-regexp=
+
+** Emacs Regex rx-notation
+
+rx is an emacs built-in macro inspired by Olin Shivers' Scheme Shell:
+schsh rx-notation that allows to encode regular expressions in
+s-expressions expressive and readable way and also to build complex
+regex patterns.
+
+
+Rx macro:
+
+#+BEGIN_SRC elisp 
+(require 'rx)
+
+;;  (rx <patterns>)
+
+ELISP> (rx digit)
+"[[:digit:]]"
+
+ELISP> (rx-to-string '(or "foo" "bar"))
+"\\(?:\\(?:bar\\|foo\\)\\)"
+#+END_SRC
+
+| Description               | rx notation | Emacs regex              |
+|---------------------------+-------------+--------------------------|
+| Beginning of Line         | bol         | ^                        |
+| End of Line               | eol         | $                        |
+|                           |             |                          |
+| Begining of String        | bos         | =\\`=                    |
+| End of String             | eos         | =\\'=                    |
+|                           |             |                          |
+| Beginning of Word         | bow         | =\\<=                    |
+| End of Word               | eow         | =\\>=                    |
+|                           |             |                          |
+| Digit 0 to 9              | digit       | \lbr\lbr:digit:\rbr\rbr  |
+| Hexadecimal digit         | hex         | \lbr\lbr:xdigit:\rbr\rbr |
+| Match ascii character     |             |                          |
+| Match anything lower case | lower       | \lbr\lbr:lower:\rbr\rbr  |
+| Match anything upper case | upper       | \lbr\lbr:upper:\rbr\rbr  |
+|                           |             |                          |
+|                           |             |                          |
+| word                      |             | =\sw=                    |
+|                           |             |                          |
+|                           |             |                          |
+
+
+Zero or More - greedy regexp 
+
+#+BEGIN_SRC 
+=(* SEXP ...)
+#+END_SRC
+
+Zero or more - non-greedy regexp 
+
+#+BEGIN_SRC 
+=(*? SEXP ...)
+#+END_SRC
+
+One or more occurrence of pattern
+
+#+BEGIN_SRC 
+(1+ SEXP ...)
+
+;; or 
+
+(one-or-more SEXP ...)
+#+END_SRC
+
+One or more - non-greedy regexp 
+
+#+BEGIN_SRC 
+(+? SEXP ...)
+#+END_SRC
+
+Matches n occurrences of a pattern 
+
+#+BEGIN_SRC 
+(= N SEXP ...)
+#+END_SRC
+
+
+Matches n or more occurrences 
+
+#+BEGIN_SRC 
+(>= N SEXP ...)
+#+END_SRC
+
+
+Example: 
+
+#+BEGIN_SRC elisp
+ELISP> (require 'rx)
+rx
+
+ELISP> (rx (+ digit))
+"[[:digit:]]+"
+
+ELISP> (rx digit (+ digit))
+"[[:digit:]][[:digit:]]+"
+
+ELISP> (rx bol (+ digit) eol)
+"^[[:digit:]]+$"
+
+ELISP> (rx (zero-or-more digit))
+"[[:digit:]]*"
+
+ELISP> (rx (one-or-more digit))
+"[[:digit:]]+"
+
+ELISP> (rx (or "cat" "rat" "dog"))
+"\\(?:cat\\|dog\\|rat\\)"
+
+;; (replace-regexp-in-string REGEXP REP STRING 
+;;      &optional FIXEDCASE LITERAL SUBEXP START)
+
+ELISP> (replace-regexp-in-string 
+          (rx (or "cat" "rat" "dog")) 
+          "" 
+          "cat cata rat rat dograt dog cat2334 23rat2")
+" a     2334 232"
+
+;; Replaces only in the beggining of line 
+;;
+ELISP>  (replace-regexp-in-string 
+          (rx bol (or "cat" "rat" "dog"))
+          "" 
+          "cat cata rat rat dograt dog cat2334 23rat2")
+" cata rat rat dograt dog cat2334 23rat2"
+
+
+ELISP>  (replace-regexp-in-string 
+          (rx bow (or "cat" "rat" "dog") eow)
+          "" 
+          "cat cata rat rat dograt dog cat2334 23rat2")
+" cata   dograt  cat2334 23rat2"
+
+ELISP>  (rx bow (or "cat" "rat" "dog") eow)               
+"\\<\\(?:cat\\|dog\\|rat\\)\\>"
+
+;;  Removes all whitespaces 
+;;
+ELISP>  (replace-regexp-in-string 
+          (rx (* whitespace))
+          "" 
+          "cat cata rat rat dograt dog cat2334 23rat2")
+
+"catcataratratdogratdogcat233423rat"
+
+ELISP>  (replace-regexp-in-string 
+          (rx (* whitespace))
+          "" 
+          "cat cata rat rat dograt dog cat2334 23rat2")
+
+"catcataratratdogratdogcat233423rat"
+
+;; Capture group 
+;;
+ELISP>  (replace-regexp-in-string 
+          (rx (submatch bow (or "cat" "rat" "dog") eow))
+          "(\\1)" 
+          "cat cata rat rat dograt dog cat2334 23rat2")
+
+"(cat) cata (rat) (rat) dograt (dog) cat2334 23rat2"
+
+ELISP> (rx (submatch bow (or "cat" "rat" "dog") eow))
+"\\(\\<\\(?:cat\\|dog\\|rat\\)\\>\\)"
+#+END_SRC
+
+** See also 
+
+ - [[https://www.emacswiki.org/emacs/rx][EmacsWiki: rx]]
+
+ - [[https://carlfg.wordpress.com/2014/05/13/introduction-to-regex-in-emacs/][Introduction to Regex in Emacs | tas devil]]
+
+ - [[http://emacs-fu.blogspot.com.br/2009/05/building-regular-expression.html][emacs-fu: building regular expressions]] 
+
+ - [[https://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_31.html][GNU Emacs Lisp Reference Manual - Searching and Matching]]
+
+ - [[https://www.masteringemacs.org/article/re-builder-interactive-regexp-builder][re-builder: the Interactive regexp builder - Mastering Emacs]]
+
+ - [[http://ergoemacs.org/emacs/emacs_regex.html][Emacs: Regex Tutorial]]
+
+ - [[http://ramenlabs.com/2011/12/29/using-perl-compatible-regular-expressions-in-emacs/][Using Perl-compatible regular expressions in Emacs | ramenlabs]]
 
 * Customization
 
@@ -6344,7 +6913,6 @@ Color Themes:
 
 * Key Bindings
 ** Global Key Bindings
-
 *** Smart window switch
 
 The traditional window switch with C-x o can be cumbersome to use in the long run. The windmove commands provide a more convenient way to do this. All you have to do is to hold down Shift while pointing at a window with the arrow keys.  [[https://wiki.archlinux.org/index.php/Emacs#Modes][Source]]
@@ -6683,7 +7251,6 @@ delimiters at different levels.
 
 *** Paredit
 
-
 ** Elscreen
 * Solutions
 **  Code Navigation with Occur                                         :edit:
@@ -6732,6 +7299,58 @@ Example:
 
 
 file:images/scan_code_tags.png
+**  Shell Command Interface 
+
+#+BEGIN_SRC elisp 
+
+(defun shell-command-to-lines (command)
+  (remove-if-not  (lambda (s) (/= (length s) 0))
+                  (split-string
+                   (shell-command-to-string command) "\n")))
+
+(defun find-files (directory pattern)
+  (shell-command-to-lines
+   (format "find %s -name '%s'"
+           directory
+           pattern)))
+
+#+END_SRC
+
+Example:
+
+#+BEGIN_SRC elisp 
+
+ELISP> (shell-command-to-lines "ls /etc/R")
+("javaconf" "ldpaths" "Makeconf" "Renviron" "repositories")
+
+
+ELISP> (mapc #'print (shell-command-to-lines "ls /etc/R"))
+
+"javaconf"
+
+"ldpaths"
+
+"Makeconf"
+
+"Renviron"
+
+"repositories"
+
+
+
+ELISP> (mapc #'print (find-files "/etc/" "*.conf"))
+
+"find: ‘/etc/sudoers.d’: Permission denied"
+
+"/etc/security/namespace.conf"
+
+"/etc/security/pam_env.conf"
+
+"/etc/security/group.conf"
+
+"/etc/security/limits.conf"
+...
+#+END_SRC
 
 **  Quick edit and reload Emacs Configuration File.     :elisp:customization:
 
@@ -6883,13 +7502,13 @@ ELISP> (fun2org 'sample-function)
 "** sample-function (a b c)
 Function Docstring
 
- #+BEGIN_SRC emacs-lisp
  (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
- #+END_SRC
 "
-#+END_SRC
+ #+END_SRC
 
-**  Edit File as Root                                                  :edit:
+
+
+**  Edit File as Root                                            :utils:edit:
 
 #+BEGIN_SRC elisp
 
@@ -7391,7 +8010,7 @@ Press <F7> to save the curren window configuration and <F8> to restore. The func
 
 #+END_SRC
 
-**  Http and Post Request
+**  Http and Post Request                            :utils:connections:http:
 
 [[http://qiita.com/sanryuu/items/eed79c7b99616e769e67][Source]]
 #+BEGIN_SRC elisp
@@ -7485,6 +8104,77 @@ ELISP> (princ (url-http-post "http://httpbin.org/post" '(("use" . "dummy")  ("pa
   "origin": "167.103.159.147",
   "url": "http://httpbin.org/post"
 }
+
+
+#+END_SRC
+
+**  Test internet connection                               :utils:connection:
+
+
+The function =utils/traceroute-connection= runs the program traceroute
+in asynchronous mode. The output (stdout and stderr) is piped to the
+the buffer =*test-connection*=. This buffer is opened in another
+window. The command =utils/ping-connection= runs the command ping.
+
+In Arch Linux it can be installed with: =pacman -S
+core/traceroute=. 
+
+Usage: =M-x utils/traceroute-connection= and =M-x utils/ping-connection=. 
+
+#+BEGIN_SRC emacs-lisp
+
+(defun utils/traceroute-connection ()
+
+  (interactive)
+
+  (let  ((buf           "*test-connection*")
+         (test-address  "46.228.47.114")   ;;; Yahoo IP: www.yahoo.com 
+        )
+
+  (start-process
+   "conn"               ;; Name 
+    buf                 ;; Buffer name
+   "traceroute"         ;; Command to execute 
+    test-address        ;; Google IP (www.google.com)
+   )
+
+  (if (not (equal (buffer-name) buf))
+      (switch-to-buffer-other-window buf))
+  )
+
+  ;;; Go to the end of the buffer 
+  (goto-char (point-max))
+
+  (other-window 0)
+  
+  )
+
+(defun utils/ping-connection ()
+
+  (interactive)
+
+  (let  ((buf           "*test-connection*")
+         (test-address  "46.228.47.114")   ;;; Yahoo IP: www.yahoo.com 
+        )
+
+  (start-process
+   "conn"               ;; Name 
+    buf                 ;; Buffer name
+   "ping"         ;; Command to execute 
+    test-address        ;; Google IP (www.google.com)
+   )
+
+  (if (not (equal (buffer-name) buf))
+      (switch-to-buffer-other-window buf))
+  )
+
+  ;;; Go to the end of the buffer 
+  (goto-char (point-max))
+
+  (other-window 0)
+  
+  )
+
 
 
 #+END_SRC

@@ -587,8 +587,8 @@
   (foldl #'pass-result x exprs))
 
 
-(defmacro ->> (x &rest exprs)
-  "
+(defmacro $->> (x &rest exprs)
+  "             
    (-->
       5
       (/ 20)
@@ -596,7 +596,7 @@
       (- 16))
 
    ;; Macro expansion
-
+   
    (- 16 (+ 10 20 (/ 20 5))) = -18
   "
   (foldl #'pass-result-last x exprs))
@@ -925,6 +925,11 @@
     (buffer-substring-no-properties (point-min) (point-max))))
 
 (defun file/write (filename content)
+  " 
+  (file/write <filename> <content>)
+
+  Write to a file. If the file exists it will be overwritten.
+  "
   (progn
    (when (file-exists-p filename) (delete-file filename))
    (append-to-file content nil filename)))
@@ -937,7 +942,7 @@
   " List directory with absolute path"
   (letc
     (abs-dirpath  (expand-file-name dirpath))
-    (-->
+    ($->>
      (directory-files abs-dirpath)
      (remove-from-list '("." ".."))
      (map ($f file/concat-path abs-dirpath %)))))
@@ -947,7 +952,7 @@
   " List directory with absolute path"
   (letc
     (abs-dirpath  (expand-file-name dirpath))
-    (->>
+    ($->>
      (directory-files abs-dirpath)
      (remove-from-list '("." ".."))
      (map ($f file/concat-path abs-dirpath %)))))
@@ -1026,7 +1031,7 @@
   (prin1-to-string sexp))
 
 (defun sexp->file (sexp filename)
-  (->> sexp
+  ($->> sexp
        sexp->str
        (file/write filename)))
 
@@ -1456,7 +1461,7 @@
       Before                 After
      --------                --------- 
       00  import sys         import sys
-      01  import os  ---->>  import os 
+      01  import os  ---$->>  import os 
       02  print ...          print ...        
    
    "
