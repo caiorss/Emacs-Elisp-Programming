@@ -79,24 +79,47 @@
     - [Switch between buffers associated with files](#switch-between-buffers-associated-with-files)
     - [Switch between Emacs major modes](#switch-between-emacs-major-modes)
     - [Open a list of web sites](#open-a-list-of-web-sites)
-  - [Eshell](#eshell)
-    - [Overview](#overview)
-    - [Start Eshell Directly from command line](#start-eshell-directly-from-command-line)
-    - [Useful elisp commands inside eshell](#useful-elisp-commands-inside-eshell)
-    - [Clear eshell](#clear-eshell)
-    - [Set eshell prompt](#set-eshell-prompt)
-    - [Change Eshell current directory](#change-eshell-current-directory)
-    - [Change Eshell current directory to current buffer](#change-eshell-current-directory-to-current-buffer)
-    - [Open eshell in another window](#open-eshell-in-another-window)
-    - [Open eshell in another frame](#open-eshell-in-another-frame)
-    - [Open eshell file names from ls output with Return key](#open-eshell-file-names-from-ls-output-with-return-key)
-    - [Functions to copy eshell data to clipboard](#functions-to-copy-eshell-data-to-clipboard)
-    - [Creating Eshell aliases programatically](#creating-eshell-aliases-programatically)
   - [Non categorized](#non-categorized)
     - [Save the scratch buffer and reload every Emacs startup](#save-the-scratch-buffer-and-reload-every-emacs-startup)
-- [Configuration Snippetes](#configuration-snippetes)
+- [Eshell](#eshell)
+  - [Overview](#overview)
+  - [Start Eshell Directly from command line](#start-eshell-directly-from-command-line)
+  - [Useful elisp commands inside eshell](#useful-elisp-commands-inside-eshell)
+  - [Clear eshell](#clear-eshell)
+  - [Set eshell prompt](#set-eshell-prompt)
+    - [Simple prompt](#simple-prompt)
+    - [Colorized prompt](#colorized-prompt)
+  - [Change Eshell current directory](#change-eshell-current-directory)
+  - [Change Eshell current directory to current buffer](#change-eshell-current-directory-to-current-buffer)
+  - [Open eshell in another window](#open-eshell-in-another-window)
+  - [Open eshell in another frame](#open-eshell-in-another-frame)
+  - [Open eshell file names from ls output with Return key](#open-eshell-file-names-from-ls-output-with-return-key)
+  - [Functions to copy eshell data to clipboard](#functions-to-copy-eshell-data-to-clipboard)
+    - [Copy current directory](#copy-current-directory)
+  - [Creating Eshell aliases programatically](#creating-eshell-aliases-programatically)
+- [Emacs On Microsoft Windows](#emacs-on-microsoft-windows)
+- [Configuration Snippets](#configuration-snippets)
+  - [Separte Customization from init file](#separte-customization-from-init-file)
+  - [Backup Settings](#backup-settings)
+  - [Tab width and Spaces](#tab-width-and-spaces)
   - [Save Minibuffer History](#save-minibuffer-history)
+  - [Show Line number and column number in minibuffer](#show-line-number-and-column-number-in-minibuffer)
+  - [Enable find file at point](#enable-find-file-at-point)
+  - [Unique buffer names](#unique-buffer-names)
+  - [Mark Current Line](#mark-current-line)
+  - [Recent Files](#recent-files)
 - [Emacs Server and Client](#emacs-server-and-client)
+- [Org-mode](#org-mode)
+  - [Code Block Templates](#code-block-templates)
+  - [Custom Protocols](#custom-protocols)
+    - [Open directory with dired mode](#open-directory-with-dired-mode)
+    - [Open directory with system file manager](#open-directory-with-system-file-manager)
+    - [Man page](#man-page)
+    - [Elisp Documentation](#elisp-documentation)
+  - [Settings](#settings)
+    - [General Settings](#general-settings)
+    - [Code Block - Org-babel](#code-block---org-babel)
+- [Useful Commands for Elisp Developers](#useful-commands-for-elisp-developers)
 - [Useful Elisp Info Pages](#useful-elisp-info-pages)
   - [Elisp](#elisp)
   - [Customization](#customization)
@@ -485,6 +508,18 @@ Returns the selected text of the current buffer.
 <tr>
 <td class="left">read-regexp</td>
 <td class="left">Read input as regular expression</td>
+</tr>
+
+
+<tr>
+<td class="left">read-passwd</td>
+<td class="left">Read password</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 </tbody>
 </table>
@@ -1477,6 +1512,69 @@ Source: [hiroina/.emacs](https://gist.github.com/hiroina/4702961)
 )
 ```
 
+-   Open multiple marked files
+
+```lisp
+(defun dired-open-files (files)
+  "
+  Open all marked files in dired mode with m. 
+  
+  Usage: 
+        1. Mark the files with m 
+        2. M-x dired-open-files  
+  "
+  (interactive  (list (dired-get-marked-files)) )
+
+  (mapc #'find-file files)
+
+  )
+```
+
+Close multiple marked files 
+
+```lisp
+(setq lexical-binding t)
+
+(defun compose (fn1 fn2)
+  (let ((lexical-binding t))
+
+    (lambda (x)
+       (funcall fn2 (funcall fn1 x))
+    )
+  ))
+
+(defun dired-close-files (files)
+
+  (interactive  (list (dired-get-marked-files)) )
+
+  (mapc (compose #'get-file-buffer #'kill-buffer) files)
+
+  )
+```
+
+-   Open a file with default system app in dired mode
+
+Usage. Select a file in dired mode and enter `M-x dired-xdg`
+
+```lisp
+(defun dired-xdg ()
+  "
+   Open file at point in dired buffer with current Windows
+   default app
+
+   Usage: In the dired mode select a file and type M-x dired-xdg
+   to execute the file with the system default app.
+  "
+  (interactive)
+
+  (with-current-buffer
+      (start-process
+       "proc"
+       nil
+       ;; Command
+       "cmd"  "/c"  "start" (dired-get-filename))))
+```
+
 ## Helm Snippets<a id="sec-1-17" name="sec-1-17"></a>
 
 ### Browser Recent files<a id="sec-1-17-1" name="sec-1-17-1"></a>
@@ -1732,305 +1830,9 @@ Switch between buffers associated with files.
   )
 ```
 
-## Eshell<a id="sec-1-18" name="sec-1-18"></a>
+## Non categorized<a id="sec-1-18" name="sec-1-18"></a>
 
-### Overview<a id="sec-1-18-1" name="sec-1-18-1"></a>
-
-Eshell is a shell implemented in Emacs with many commands implemented
-in Elisp which makes it cross platform, the commands ls, pwd, cd and
-etc. works in the same way for Linux, Windows or OSX. In Windows OS it
-is a good alternative to cmd.exe. 
-
-Command to clear Eshell. It can be invoked with $ clear in eshell.
-
-See also:
-
--   [Mastering Eshell](https://www.masteringemacs.org/article/complete-guide-mastering-eshell) / Mastering Emacs
-
--   [Finally wrapping my head around eshell (the emacs shell)](http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html)
-
--   
-
-### Start Eshell Directly from command line<a id="sec-1-18-2" name="sec-1-18-2"></a>
-
-Start eshell directly in a new Emacs sessions in the terminal wihout
-load init.el.
-
-```sh
-$ emacs -Q -q -nw --eval '(eshell)'
-```
-
-Or 
-
-```sh
-$ emacs -Q -q -nw -f eshell
-```
-
-![img](images/eshell_directly_in_terminal.png)
-
-Start eshell directly in a new Emacs Window 
-
-```sh
-emacs -q -f eshell # Don't load init file.
-```
-
-Or 
-
-```sh
-emacs -q -f eshell # Load init file
-```
-
-![img](images/eshell_directly_gui.png)
-
-### Useful elisp commands inside eshell<a id="sec-1-18-3" name="sec-1-18-3"></a>
-
-Eshell can run Elisp command - M-x <command> like ordinary Unix shell
-apps. 
-
-Open a file in the current window
-
--   `$ find-file /etc/hosts.conf`
-
-Open a file in other window 
-
--   `$ find-file-other-window /etc/host.conf`
-
-Open a file in other frame 
-
--   `$ find-file-other-frame /etc/host.conf`
-
-Browser a directory in current window 
-
--   `$ dired /var/log`
-
-Browser a directory in another window 
-
--   `$ dired-other-window /var/log`
-
-Browser a directory in another frame 
-
--   `$ dired-other-frame /var/log`
-
-### Clear eshell<a id="sec-1-18-4" name="sec-1-18-4"></a>
-
-```lisp
-(defun eshell/clear ()
-  "clear the eshell buffer."
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)))
-```
-
-In eshell:
-
-```sh
-~ $ which eshell
-eshell is an interactive compiled Lisp function in `eshell.el'
-~ $
-```
-
-Before the command clear:
-
-![img](images/eshell_clear1.png) 
-
-After the command clear:
-
-![img](images/eshell_clear2.png) 
-
-### Set eshell prompt<a id="sec-1-18-5" name="sec-1-18-5"></a>
-
-1.  Simple prompt
-
-    ```lisp
-    (setq eshell-prompt-function (lambda () "eshell > "))
-    ```
-    
-    ![img](images/eshell_prompt_setting1.png)
-    
-    **Prompt with current directory**
-
-2.  Colorized prompt
-
-    ```lisp
-    (setq eshell-prompt-function
-          (lambda nil
-          	(concat
-          	 (propertize (eshell/pwd) 'face '(:foreground "#8787af"))
-          	 (propertize "❯" 'face '(:foreground "#f75f5f"))
-          	 (propertize "❯" 'face '(:foreground "#ffaf5f"))
-          	 (propertize "❯" 'face '(:foreground "#87af5f"))
-    	 (propertize " " 'face nil))))
-    ```
-    
-    ![img](images/eshell_prompt_setting2.png)
-
-### Change Eshell current directory<a id="sec-1-18-6" name="sec-1-18-6"></a>
-
-This command can be used in Menus or with helm.
-
-```lisp
-(defun eshell-chdir (path)  
-  (with-current-buffer "*eshell*"
-    (cd path)
-    (eshell-emit-prompt)))
-
-(eshell-chdir "~/Downloads")
-```
-
-### Change Eshell current directory to current buffer<a id="sec-1-18-7" name="sec-1-18-7"></a>
-
-Usage: M-x eshell-cwd
-
-```lisp
-(defun eshell-cwd ()
-  "
-  Sets the eshell directory to the current buffer
-  
-  Usage: M-x eshell-cwd 
-  "
-  (interactive)
-
-  (let (
-        (path (file-name-directory (or  (buffer-file-name) default-directory)))
-       )
-
-    (with-current-buffer "*eshell*"
-      (cd path)
-      (eshell-emit-prompt))))
-```
-
-### Open eshell in another window<a id="sec-1-18-8" name="sec-1-18-8"></a>
-
-Source: [mini-eshell.el](https://gist.github.com/semmypurewal/b7748e0d6785f3c50e46)
-
-Usage: M-x open-mini-eshell 
-
-```lisp
-;; open up a mini-eshell
-(defun quarter-window-vertically ()
-  "create a new window a quarter size of the current window"
-  (split-window-vertically)
-  (other-window 1)
-  (split-window-vertically)
-  (other-window -1)
-  (delete-window)
-)
-
-(defun open-mini-eshell ()
-  "open a mini-eshell in a small window at the bottom of the current window"
-  (interactive)
-  (quarter-window-vertically)
-  (other-window 1)
-  (eshell)
-)
-```
-
-### Open eshell in another frame<a id="sec-1-18-9" name="sec-1-18-9"></a>
-
-Usage: M-x eshell-other-frame 
-
-```lisp
-(defun eshell-other-frame ()
-  "
-  Open eshell in another frame.
-
-  Usage: M-x eshell-other-frame 
-  "
-  (interactive)
-  (with-selected-frame (make-frame)
-    (eshell)))
-```
-
-### Open eshell file names from ls output with Return key<a id="sec-1-18-10" name="sec-1-18-10"></a>
-
-Source: [Emacs Wiki](https://www.emacswiki.org/emacs/EshellEnhancedLS)  
-
-This code allows to open files from `$ ls` command output by selecting
-the file name and hitting return or by clicking with the middle mouse
-button.
-
-```lisp
-(eval-after-load "em-ls"
-    '(progn
-       (defun ted-eshell-ls-find-file-at-point (point)
-         "RET on Eshell's `ls' output to open files."
-         (interactive "d")
-         (find-file (buffer-substring-no-properties
-                     (previous-single-property-change point 'help-echo)
-                     (next-single-property-change point 'help-echo))))
-
-       (defun pat-eshell-ls-find-file-at-mouse-click (event)
-         "Middle click on Eshell's `ls' output to open files.
- From Patrick Anderson via the wiki."
-         (interactive "e")
-         (ted-eshell-ls-find-file-at-point (posn-point (event-end event))))
-
-       (let ((map (make-sparse-keymap)))
-         (define-key map (kbd "RET")      'ted-eshell-ls-find-file-at-point)
-         (define-key map (kbd "<return>") 'ted-eshell-ls-find-file-at-point)
-         (define-key map (kbd "<mouse-2>") 'pat-eshell-ls-find-file-at-mouse-click)
-         (defvar ted-eshell-ls-keymap map))
-
-       (defadvice eshell-ls-decorated-name (after ted-electrify-ls activate)
-         "Eshell's `ls' now lets you click or RET on file names to open them."
-         (add-text-properties 0 (length ad-return-value)
-                              (list 'help-echo "RET, mouse-2: visit this file"
-                                    'mouse-face 'highlight
-                                    'keymap ted-eshell-ls-keymap)
-                              ad-return-value)
-         ad-return-value)))
-```
-
-### Functions to copy eshell data to clipboard<a id="sec-1-18-11" name="sec-1-18-11"></a>
-
-1.  Copy current directory
-
-    ```lisp
-    (defun clipboard/set (astring)
-      "Copy a string to clipboard"
-    
-       (with-temp-buffer
-        (insert astring)
-        (clipboard-kill-region (point-min) (point-max))))
-    
-    ;; Copy current directory to clipboard 
-    ;;
-    ;; Usage:  Enter $ copy-pwd in eshell 
-    ;;
-    (defun eshell/copy-pwd ()
-     (clipboard/set (eshell/pwd)))
-    
-    ;; Copy file name with full path to clipboard 
-    ;;
-    ;; Usage: Enter $ copy-fpath <filename> in eshell. 
-    ;; 
-    (defun eshell/copy-fpath (fname)
-    
-      (let ((fpath (concat (eshell/pwd) "/" fname)))
-    
-           (clipboard/set fpath)
-           (concat "Copied path: " fpath)))
-    ```
-    
-    ![img](images/eshell_clipboard.png)
-
-### Creating Eshell aliases programatically<a id="sec-1-18-12" name="sec-1-18-12"></a>
-
-```lisp
-(eshell/alias "ff" "find-file $1")
-
-(eshell/alias "fw" "find-file-other-window $1")
-
-(eshell/alias "fr" "find-file-other-frame $1")
-```
-
-Example of usage:
-
-![img](images/emacs_eshell_alias.png)
-
-## Non categorized<a id="sec-1-19" name="sec-1-19"></a>
-
-### Save the scratch buffer and reload every Emacs startup<a id="sec-1-19-1" name="sec-1-19-1"></a>
+### Save the scratch buffer and reload every Emacs startup<a id="sec-1-18-1" name="sec-1-18-1"></a>
 
 Saves the scratch buffer to a file every times Emacs is closed.
 
@@ -2071,9 +1873,389 @@ Source: [scratch.el](https://gist.github.com/kobapan/034d5123321b32bb68ca)
   (ignore-errors (kill-buffer ".scratch")))
 ```
 
-# Configuration Snippetes<a id="sec-2" name="sec-2"></a>
+# Eshell<a id="sec-2" name="sec-2"></a>
 
-## Save Minibuffer History<a id="sec-2-1" name="sec-2-1"></a>
+## Overview<a id="sec-2-1" name="sec-2-1"></a>
+
+Eshell is a shell implemented in Emacs with many commands implemented
+in Elisp which makes it cross platform, the commands ls, pwd, cd and
+etc. works in the same way for Linux, Windows or OSX. In Windows OS it
+is a good alternative to cmd.exe. 
+
+Command to clear Eshell. It can be invoked with $ clear in eshell.
+
+See also:
+
+-   [Mastering Eshell](https://www.masteringemacs.org/article/complete-guide-mastering-eshell) / Mastering Emacs
+
+-   [Finally wrapping my head around eshell (the emacs shell)](http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html)
+
+-   
+
+## Start Eshell Directly from command line<a id="sec-2-2" name="sec-2-2"></a>
+
+Start eshell directly in a new Emacs sessions in the terminal wihout
+load init.el.
+
+```sh
+$ emacs -Q -q -nw --eval '(eshell)'
+```
+
+Or 
+
+```sh
+$ emacs -Q -q -nw -f eshell
+```
+
+![img](images/eshell_directly_in_terminal.png)
+
+Start eshell directly in a new Emacs Window 
+
+```sh
+emacs -q -f eshell # Don't load init file.
+```
+
+Or 
+
+```sh
+emacs -q -f eshell # Load init file
+```
+
+![img](images/eshell_directly_gui.png)
+
+## Useful elisp commands inside eshell<a id="sec-2-3" name="sec-2-3"></a>
+
+Eshell can run Elisp command - M-x <command> like ordinary Unix shell
+apps. 
+
+Open a file in the current window
+
+-   `$ find-file /etc/hosts.conf`
+
+Open a file in other window 
+
+-   `$ find-file-other-window /etc/host.conf`
+
+Open a file in other frame 
+
+-   `$ find-file-other-frame /etc/host.conf`
+
+Browser a directory in current window 
+
+-   `$ dired /var/log`
+
+Browser a directory in another window 
+
+-   `$ dired-other-window /var/log`
+
+Browser a directory in another frame 
+
+-   `$ dired-other-frame /var/log`
+
+## Clear eshell<a id="sec-2-4" name="sec-2-4"></a>
+
+```lisp
+(defun eshell/clear ()
+  "clear the eshell buffer."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+```
+
+In eshell:
+
+```sh
+~ $ which eshell
+eshell is an interactive compiled Lisp function in `eshell.el'
+~ $
+```
+
+Before the command clear:
+
+![img](images/eshell_clear1.png) 
+
+After the command clear:
+
+![img](images/eshell_clear2.png) 
+
+## Set eshell prompt<a id="sec-2-5" name="sec-2-5"></a>
+
+### Simple prompt<a id="sec-2-5-1" name="sec-2-5-1"></a>
+
+```lisp
+(setq eshell-prompt-function (lambda () "eshell > "))
+```
+
+![img](images/eshell_prompt_setting1.png)
+
+**Prompt with current directory**
+
+### Colorized prompt<a id="sec-2-5-2" name="sec-2-5-2"></a>
+
+```lisp
+(setq eshell-prompt-function
+      (lambda nil
+      	(concat
+      	 (propertize (eshell/pwd) 'face '(:foreground "#8787af"))
+      	 (propertize "❯" 'face '(:foreground "#f75f5f"))
+      	 (propertize "❯" 'face '(:foreground "#ffaf5f"))
+      	 (propertize "❯" 'face '(:foreground "#87af5f"))
+	 (propertize " " 'face nil))))
+```
+
+![img](images/eshell_prompt_setting2.png)
+
+## Change Eshell current directory<a id="sec-2-6" name="sec-2-6"></a>
+
+This command can be used in Menus or with helm.
+
+```lisp
+(defun eshell-chdir (path)  
+  (with-current-buffer "*eshell*"
+    (cd path)
+    (eshell-emit-prompt)))
+
+(eshell-chdir "~/Downloads")
+```
+
+## Change Eshell current directory to current buffer<a id="sec-2-7" name="sec-2-7"></a>
+
+Usage: M-x eshell-cwd
+
+```lisp
+(defun eshell-cwd ()
+  "
+  Sets the eshell directory to the current buffer
+  
+  Usage: M-x eshell-cwd 
+  "
+  (interactive)
+
+  (let (
+        (path (file-name-directory (or  (buffer-file-name) default-directory)))
+       )
+
+    (with-current-buffer "*eshell*"
+      (cd path)
+      (eshell-emit-prompt))))
+```
+
+## Open eshell in another window<a id="sec-2-8" name="sec-2-8"></a>
+
+Source: [mini-eshell.el](https://gist.github.com/semmypurewal/b7748e0d6785f3c50e46)
+
+Usage: M-x open-mini-eshell 
+
+```lisp
+;; open up a mini-eshell
+(defun quarter-window-vertically ()
+  "create a new window a quarter size of the current window"
+  (split-window-vertically)
+  (other-window 1)
+  (split-window-vertically)
+  (other-window -1)
+  (delete-window)
+)
+
+(defun open-mini-eshell ()
+  "open a mini-eshell in a small window at the bottom of the current window"
+  (interactive)
+  (quarter-window-vertically)
+  (other-window 1)
+  (eshell)
+)
+```
+
+## Open eshell in another frame<a id="sec-2-9" name="sec-2-9"></a>
+
+Usage: M-x eshell-other-frame 
+
+```lisp
+(defun eshell-other-frame ()
+  "
+  Open eshell in another frame.
+
+  Usage: M-x eshell-other-frame 
+  "
+  (interactive)
+  (with-selected-frame (make-frame)
+    (eshell)))
+```
+
+## Open eshell file names from ls output with Return key<a id="sec-2-10" name="sec-2-10"></a>
+
+Source: [Emacs Wiki](https://www.emacswiki.org/emacs/EshellEnhancedLS)  
+
+This code allows to open files from `$ ls` command output by selecting
+the file name and hitting return or by clicking with the middle mouse
+button.
+
+```lisp
+(eval-after-load "em-ls"
+    '(progn
+       (defun ted-eshell-ls-find-file-at-point (point)
+         "RET on Eshell's `ls' output to open files."
+         (interactive "d")
+         (find-file (buffer-substring-no-properties
+                     (previous-single-property-change point 'help-echo)
+                     (next-single-property-change point 'help-echo))))
+
+       (defun pat-eshell-ls-find-file-at-mouse-click (event)
+         "Middle click on Eshell's `ls' output to open files.
+ From Patrick Anderson via the wiki."
+         (interactive "e")
+         (ted-eshell-ls-find-file-at-point (posn-point (event-end event))))
+
+       (let ((map (make-sparse-keymap)))
+         (define-key map (kbd "RET")      'ted-eshell-ls-find-file-at-point)
+         (define-key map (kbd "<return>") 'ted-eshell-ls-find-file-at-point)
+         (define-key map (kbd "<mouse-2>") 'pat-eshell-ls-find-file-at-mouse-click)
+         (defvar ted-eshell-ls-keymap map))
+
+       (defadvice eshell-ls-decorated-name (after ted-electrify-ls activate)
+         "Eshell's `ls' now lets you click or RET on file names to open them."
+         (add-text-properties 0 (length ad-return-value)
+                              (list 'help-echo "RET, mouse-2: visit this file"
+                                    'mouse-face 'highlight
+                                    'keymap ted-eshell-ls-keymap)
+                              ad-return-value)
+         ad-return-value)))
+```
+
+## Functions to copy eshell data to clipboard<a id="sec-2-11" name="sec-2-11"></a>
+
+### Copy current directory<a id="sec-2-11-1" name="sec-2-11-1"></a>
+
+```lisp
+(defun clipboard/set (astring)
+  "Copy a string to clipboard"
+
+   (with-temp-buffer
+    (insert astring)
+    (clipboard-kill-region (point-min) (point-max))))
+
+;; Copy current directory to clipboard 
+;;
+;; Usage:  Enter $ copy-pwd in eshell 
+;;
+(defun eshell/copy-pwd ()
+ (clipboard/set (eshell/pwd)))
+
+;; Copy file name with full path to clipboard 
+;;
+;; Usage: Enter $ copy-fpath <filename> in eshell. 
+;; 
+(defun eshell/copy-fpath (fname)
+
+  (let ((fpath (concat (eshell/pwd) "/" fname)))
+
+       (clipboard/set fpath)
+       (concat "Copied path: " fpath)))
+```
+
+![img](images/eshell_clipboard.png)
+
+## Creating Eshell aliases programatically<a id="sec-2-12" name="sec-2-12"></a>
+
+```lisp
+(eshell/alias "ff" "find-file $1")
+
+(eshell/alias "fw" "find-file-other-window $1")
+
+(eshell/alias "fr" "find-file-other-frame $1")
+```
+
+Example of usage:
+
+![img](images/emacs_eshell_alias.png)
+
+# Emacs On Microsoft Windows<a id="sec-3" name="sec-3"></a>
+
+To get bash for Windows install with Chocolately package manager or
+download GIT version control app that comes bundled with bash and Unix
+utilities like grep, mv, ssh, df and dd. 
+
+Command to run Bash. Usage: M-x run-bash 
+
+```lisp
+(defun run-bash ()
+      (interactive)
+      (let ((shell-file-name "C:\\Program Files\\Git\\bin\\bash.exe"))
+            (shell "*bash*")))
+```
+
+Command to run cmd.exe. Usage: M-x run-cmdexe 
+
+```lisp
+(defun run-cmdexe ()
+      (interactive)
+      (let ((shell-file-name "cmd.exe"))
+            (shell "*cmd.exe*")))
+```
+
+To run Unix utilities and other command lines apps in Emacs add to the
+PATH variable the path to their directory:
+
+```lisp
+(setenv  "PATH" (concat
+
+         ;; Path where is installed df.exe, curl.exe, dd.exe and other Unix tools.
+         "C:\\Program Files\\Git\\usr\\bin" ";"
+
+         ;; Path where is installed Fsi.exe (Fsharp Interpreter)
+         ;; Fsc.exe (F# - Fsharp Compiler)
+         "C:/Program Files (x86)/Microsoft SDKs/F#/4.0/Framework/v4.0/Fsi.exe" ";"
+         (getenv "PATH")
+
+         ))
+```
+
+# Configuration Snippets<a id="sec-4" name="sec-4"></a>
+
+## Separte Customization from init file<a id="sec-4-1" name="sec-4-1"></a>
+
+```lisp
+; For the built in customization UI in emacs that no one uses. If
+;; some package tries to use it, at least have the decency to keep
+;; this config file clean.
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+```
+
+## Backup Settings<a id="sec-4-2" name="sec-4-2"></a>
+
+```lisp
+;disable backup
+(setq backup-inhibited t)
+
+;disable auto save
+(setq auto-save-default nil)
+
+
+;;  Get Rid of temporary files ending in ~
+;;  The temporary files will be in the temporary directory
+;;
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+
+;; Move Deleted Files to Trash
+;;
+(setq delete-by-moving-to-trash t)
+```
+
+## Tab width and Spaces<a id="sec-4-3" name="sec-4-3"></a>
+
+
+```lisp
+;; force emacs to always use spaces instead of tab characters
+(setq-default indent-tabs-mode nil)
+
+;; set default tab width to 4 spaces
+(setq default-tab-width 4)
+(setq tab-width 4)
+```
+
+## Save Minibuffer History<a id="sec-4-4" name="sec-4-4"></a>
 
 Saves the minibuffer history on every Emacs session. 
 
@@ -2085,7 +2267,63 @@ Saves the minibuffer history on every Emacs session.
 (setq savehist-file "~/.emacs.d/tmp/savehist")
 ```
 
-# Emacs Server and Client<a id="sec-3" name="sec-3"></a>
+## Show Line number and column number in minibuffer<a id="sec-4-5" name="sec-4-5"></a>
+
+```lisp
+(setq line-number-mode               t)
+(setq column-number-mode             t)
+```
+
+## Enable find file at point<a id="sec-4-6" name="sec-4-6"></a>
+
+When doing C-x C-f use information at point (your cursor) to open file
+or URL. I.e. if your cursor is on a file path, or URL, it defaults to
+that filled in the minibuffer.
+
+```lisp
+;;find-file-at-point, smarter C-x C-f when point on path or URL
+(ffap-bindings)
+```
+
+## Unique buffer names<a id="sec-4-7" name="sec-4-7"></a>
+
+```lisp
+;; Unique buffer name
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+```
+
+## Mark Current Line<a id="sec-4-8" name="sec-4-8"></a>
+
+Enable Mark Current Line 
+
+```lisp
+;; mark current line:
+(global-hl-line-mode 1)
+```
+
+Disable Mark Current Line 
+
+```lisp
+;; mark current line:
+(global-hl-line-mode 0)
+```
+
+## Recent Files<a id="sec-4-9" name="sec-4-9"></a>
+
+
+Show recent files in the File menu. 
+
+```lisp
+;; recentf stuff
+;; recentf - F5
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-saved-items 500)
+(setq recentf-max-menu-items 60)
+```
+
+# Emacs Server and Client<a id="sec-5" name="sec-5"></a>
 
 See also:
 
@@ -2107,9 +2345,418 @@ See also:
 
 -   [Packages for Emacs Programmers](http://nic.ferrier.me.uk/blog/2012_07/emacs-packages-for-programmers)
 
-# Useful Elisp Info Pages<a id="sec-4" name="sec-4"></a>
+# Org-mode<a id="sec-6" name="sec-6"></a>
 
-## Elisp<a id="sec-4-1" name="sec-4-1"></a>
+## Code Block Templates<a id="sec-6-1" name="sec-6-1"></a>
+
+When the user writes '<p'in org-mode and hits tab key it expands to a
+python source code block like this:
+
+```org
+#+BEGIN_SRC python :results value
+
+#+END_SRC
+```
+
+Elisp code:
+
+```lisp
+(add-to-list 'org-structure-template-alist
+	     '("p" "#+BEGIN_SRC python :results ?value\n\n#+END_SRC"))
+```
+
+## Custom Protocols<a id="sec-6-2" name="sec-6-2"></a>
+
+### Open directory with dired mode<a id="sec-6-2-1" name="sec-6-2-1"></a>
+
+Org-mode already provides the protocol `file:<filename>` to open a
+directory or file. The motivation to implement this protocol is that it
+is unambiguous like file protocol and easy to search. 
+
+Hyperlink syntax:  `dir:<file-path>`
+
+```lisp
+(add-hook 'org-mode-hook
+          (lambda ()
+	      (org-add-link-type "dir" #'dired nil)
+	      ))
+```
+
+Org-mode file example:
+
+```
+Log directory      -  dir:/var/log  -  [[dir:/var/log][Log directory]]
+
+System cofiguration - dir:/etc
+```
+
+### Open directory with system file manager<a id="sec-6-2-2" name="sec-6-2-2"></a>
+
+Hyperlink format: `dire:<directory-path>`
+
+```lisp
+(defvar default-file-manager-app "pcmanfm-qt")
+
+(defun org/protocol-dire (input)    
+  (start-process  "proc" ;; Process name
+		  nil    ;; Buffer name
+
+		  default-file-manager
+		  input
+		  ))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+	      (org-add-link-type "dire" #'org/protocol-dire nil)
+	      ))
+```
+
+Example:
+
+```
+To open the directory file:/var/log in the system file 
+manager click on the hyperlink bellow.
+
+
+ - Hyperlink1:   dire:/var/log 
+
+ - Hyperlink2:   [[dire:/var/log][System Log directory]]
+```
+
+![img](images/org-mode-protocol-file-manager.png)
+
+### Man page<a id="sec-6-2-3" name="sec-6-2-3"></a>
+
+Provides a hyperlink that displays a man page when clicked. 
+
+```lisp
+(add-hook 'org-mode-hook
+          (lambda ()
+	         (org-add-link-type  "man" #'woman nil)))
+```
+
+Example: 
+
+file test.org 
+
+```
+Click on the hyperlinks bellow to open the man pages:
+
+Gcc Man Page: 
+
+ - man:gcc 
+
+C-function cbrt Man Page 
+
+ - man:cbrt 
+
+ - [[man:cbrt][C-function cbrt Man Page]]
+```
+
+### Elisp Documentation<a id="sec-6-2-4" name="sec-6-2-4"></a>
+
+Provides clickable link that shows the the Elisp documentation. 
+
+A link of format `elisp-doc:add-hook` will show the `add-hook`
+documentation when clicked. 
+
+Hyperlink format:  `elisp-doc:<function-name>` or `[elisp-doc:<function-name>]`
+
+```lisp
+(defun org/protocol-elisp-doc (function-symbol)
+  (princ function-symbol)
+  (describe-function (intern-soft function-symbol))
+  
+  )
+
+
+(defun org/protocol-elisp-doc-html (path desc backend)
+   (cl-case backend
+     (html (format
+            "<a href='' title='%s'>%s</a>"
+            (documentation (intern-soft path))
+            (or desc path)))))    
+
+
+(add-hook 'org-mode-hook
+
+	  (lambda ()
+
+	    (org-add-link-type "elisp-doc" #'org/protocol-elisp-doc #'org/protocol-elisp-doc-html)
+	    ))
+```
+
+Example: 
+
+file: `/tmp/test.org`
+
+```org-mode
+Elisp documentation protocol:
+
+[[elisp-doc:add-hook][Function Add hook]]
+
+The function elisp-doc:start-process is used to start an asynchronous process.
+```
+
+This screenshot show what happens when the user clicks in the hyperlink.
+
+![img](images/elisp-doc-org-mode-protocol-click.png)
+
+Exported to html with: `M-x org-html-export-to-html` 
+
+![img](images/elisp-doc-org-mode-protocol.png) 
+
+## Settings<a id="sec-6-3" name="sec-6-3"></a>
+
+### General Settings<a id="sec-6-3-1" name="sec-6-3-1"></a>
+
+Syntax highlight for code blocks  `#+BEGIN_SRC .. #+END_SRC`
+
+```lisp
+;; Syntax highlight for code blocks  #+BEGIN_SRC .. #+END_SRC 
+;;
+(setq org-src-fontify-natively t)
+```
+
+Syntax highlight for latex fragments 
+
+```lisp
+(setq org-highlight-latex-and-related '(latex script entities))
+```
+
+### Code Block - Org-babel<a id="sec-6-3-2" name="sec-6-3-2"></a>
+
+Enable source code block in org files 
+
+```lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (sh . t)
+   (python . t)
+   (scheme . t)
+   (lisp . t)
+   (clojure . t)
+   (R . t)
+   (latex . t)
+   (ruby . t)
+   (C . t)
+   ;;; (C++ . t)
+   (ditaa . t)
+   (haskell . t)
+ ;;  (fsharp . t)
+ ;;  (java . t)
+ ;;  (scala . t)
+;;   (javascript . t)
+   (maxima . t)
+  ))
+```
+
+Disable Security confirmation: 
+
+```lisp
+;; Disable security confirmations  
+;;
+
+(setq   ;; Confirmation for running coide blocks 
+        org-confirm-babel-evaluate      nil
+        ;; Confirmation for elisp links 
+        org-confirm-elisp-link-function nil
+        ;; Confirmation for shell links 
+        org-confirm-shell-link-function nil
+
+        org-export-babel-evaluate       nil
+        )
+```
+
+# Useful Commands for Elisp Developers<a id="sec-7" name="sec-7"></a>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command: M-x [command]</th>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">check-paren</td>
+<td class="left">&#xa0;</td>
+<td class="left">Find unmatched parenthesis</td>
+</tr>
+
+
+<tr>
+<td class="left">view-echo-area-messages</td>
+<td class="left">C-h e</td>
+<td class="left">Show the message buffer</td>
+</tr>
+</tbody>
+
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">find-variable</td>
+<td class="left">&#xa0;</td>
+<td class="left">Open the file at the point the variable is defined.</td>
+</tr>
+
+
+<tr>
+<td class="left">find-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Open an Emacs library or package in the load-path.</td>
+</tr>
+
+
+<tr>
+<td class="left">find-function</td>
+<td class="left">&#xa0;</td>
+<td class="left">Opens an library.el file at the point the function is defined.</td>
+</tr>
+
+
+<tr>
+<td class="left">locate-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Show path of a library.el (Emacs Package) file.</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+
+<tbody>
+<tr>
+<td class="left">**Documentation Commands**</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">apropos</td>
+<td class="left">C-h</td>
+<td class="left">Search for all elisp symbols, variables and functions that match a regex pattern.</td>
+</tr>
+
+
+<tr>
+<td class="left">apropos-command</td>
+<td class="left">C-h a</td>
+<td class="left">Search for all commands (M-x cmd) that match a regexp pattern.</td>
+</tr>
+
+
+<tr>
+<td class="left">apropos-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Show all symbols associated with an Elisp library (Emacs Package)</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">info-apropos</td>
+<td class="left">&#xa0;</td>
+<td class="left">Find all info pages that match a pattern.</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="left">describe-function</td>
+<td class="left">C-h f</td>
+<td class="left">Show function documentation or docstring.</td>
+</tr>
+
+
+<tr>
+<td class="left">describe-mode</td>
+<td class="left">C-h m</td>
+<td class="left">Show current major mode documentation and all key bindings associated.</td>
+</tr>
+
+
+<tr>
+<td class="left">describe-bindings</td>
+<td class="left">C-h-b</td>
+<td class="left">Show all associated key bindings with the current buffer.</td>
+</tr>
+
+
+<tr>
+<td class="left">describe-variable</td>
+<td class="left">C-h v</td>
+<td class="left">Show variable documentation</td>
+</tr>
+
+
+<tr>
+<td class="left">describe-package</td>
+<td class="left">&#xa0;</td>
+<td class="left">Describe an Emacs package installed from Melpa repository.</td>
+</tr>
+
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+# Useful Elisp Info Pages<a id="sec-8" name="sec-8"></a>
+
+## Elisp<a id="sec-8-1" name="sec-8-1"></a>
 
 Elisp Top Page
 
@@ -2135,7 +2782,25 @@ Tips about documenting Elisp
 (info "(elisp)Documentation Tips")
 ```
 
-## Customization<a id="sec-4-2" name="sec-4-2"></a>
+Misc 
+
+```lisp
+(info "(elisp) Symbols")
+```
+
+```lisp
+(info "(elisp) Function Cells")
+```
+
+```lisp
+(info "(elisp) Defining Commands")
+```
+
+```lisp
+(info "(elisp) Functions")
+```
+
+## Customization<a id="sec-8-2" name="sec-8-2"></a>
 
 **Customization:**
 
@@ -2149,31 +2814,39 @@ Tips about documenting Elisp
 (info "(elisp) Customization")
 ```
 
-## Layout<a id="sec-4-3" name="sec-4-3"></a>
+## Layout<a id="sec-8-3" name="sec-8-3"></a>
 
 ```lisp
 (info "(emacs) Fonts")
 ```
 
-## Syntax Tables<a id="sec-4-4" name="sec-4-4"></a>
+## Syntax Tables<a id="sec-8-4" name="sec-8-4"></a>
 
 ```lisp
 (info "(elisp) Syntax Tables")
 ```
 
-## Environment Variables and OS Detection<a id="sec-4-5" name="sec-4-5"></a>
+## Environment Variables and OS Detection<a id="sec-8-5" name="sec-8-5"></a>
 
 ```lisp
 (info "(elisp) System Environment")
 ```
 
-## Subprocess Creation<a id="sec-4-6" name="sec-4-6"></a>
+## Subprocess Creation<a id="sec-8-6" name="sec-8-6"></a>
+
+-   Creating Subprocesses
 
 ```lisp
 (info "(elisp) Subprocess Creation")
 ```
 
-## Keybindings<a id="sec-4-7" name="sec-4-7"></a>
+-   Get process output
+
+```lisp
+(info "(elisp) Accepting Output")
+```
+
+## Keybindings<a id="sec-8-7" name="sec-8-7"></a>
 
 ```lisp
 (info "(elisp) Function Keys")
@@ -2187,7 +2860,7 @@ Tips about documenting Elisp
 (info "(emacs) Windows Keyboard")
 ```
 
-## Hooks (Events Callbacks)<a id="sec-4-8" name="sec-4-8"></a>
+## Hooks (Events Callbacks)<a id="sec-8-8" name="sec-8-8"></a>
 
 ```lisp
 (info "(elisp) Hooks")
@@ -2201,7 +2874,7 @@ Tips about documenting Elisp
 (info "(elisp) Advising Functions")
 ```
 
-## Buffer<a id="sec-4-9" name="sec-4-9"></a>
+## Buffer<a id="sec-8-9" name="sec-8-9"></a>
 
 Buffers 
 
@@ -2249,7 +2922,7 @@ Buffer Local Variable
 (info "(emacs) File Variables")
 ```
 
-## Window<a id="sec-4-10" name="sec-4-10"></a>
+## Window<a id="sec-8-10" name="sec-8-10"></a>
 
 Frame
 
@@ -2257,7 +2930,7 @@ Frame
 (info "(elisp) Windows")
 ```
 
-## Frame<a id="sec-4-11" name="sec-4-11"></a>
+## Frame<a id="sec-8-11" name="sec-8-11"></a>
 
 Frame
 
@@ -2271,7 +2944,7 @@ Frame Parameters
 (info "(elisp) Frame Parameters")
 ```
 
-## Files<a id="sec-4-12" name="sec-4-12"></a>
+## Files<a id="sec-8-12" name="sec-8-12"></a>
 
 Files 
 
@@ -2297,13 +2970,13 @@ Buffer Local Variable
 (info "(emacs) File Variables")
 ```
 
-## Text Enconding ISO UTF8 &#x2026;<a id="sec-4-13" name="sec-4-13"></a>
+## Text Enconding ISO UTF8 &#x2026;<a id="sec-8-13" name="sec-8-13"></a>
 
 ```lisp
 (info "(emacs) International")
 ```
 
-## Loading, Libraries and Packages<a id="sec-4-14" name="sec-4-14"></a>
+## Loading, Libraries and Packages<a id="sec-8-14" name="sec-8-14"></a>
 
 Loading 
 
@@ -2327,7 +3000,7 @@ Packages
 (info "(elisp) Packaging")
 ```
 
-## Batch Mode<a id="sec-4-15" name="sec-4-15"></a>
+## Batch Mode<a id="sec-8-15" name="sec-8-15"></a>
 
 Batch Mode
 
@@ -2335,13 +3008,13 @@ Batch Mode
 (info "(elisp) Batch Mode")
 ```
 
-## Syntax Highlight<a id="sec-4-16" name="sec-4-16"></a>
+## Syntax Highlight<a id="sec-8-16" name="sec-8-16"></a>
 
 ```lisp
 (info "(elisp) Syntax Class Table")
 ```
 
-# Selected Gists<a id="sec-5" name="sec-5"></a>
+# Selected Gists<a id="sec-9" name="sec-9"></a>
 
 -   [extract archives from eshell](https://gist.github.com/justinabrahms/1390864)
 

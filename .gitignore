@@ -3,3 +3,6 @@
 
 # Packaging
 .cask
+/Todolist.org
+/files/EmacsAPI.odg
+*.back

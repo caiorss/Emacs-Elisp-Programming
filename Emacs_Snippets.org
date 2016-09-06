@@ -345,6 +345,8 @@ Returns the selected text of the current buffer.
 | read-file-name      | Read input as file name          |
 | read-directory-name | Read input as path to directory  |
 | read-regexp         | Read input as regular expression |
+| read-passwd         | Read password                    |
+|                     |                                  |
 
 *** Read string 
 
@@ -1336,6 +1338,70 @@ Source: [[https://gist.github.com/hiroina/4702961][hiroina/.emacs]]
 
 #+END_SRC
 
+ - Open multiple marked files 
+
+#+BEGIN_SRC elisp 
+(defun dired-open-files (files)
+  "
+  Open all marked files in dired mode with m. 
+  
+  Usage: 
+        1. Mark the files with m 
+        2. M-x dired-open-files  
+  "
+  (interactive  (list (dired-get-marked-files)) )
+
+  (mapc #'find-file files)
+
+  )
+#+END_SRC
+
+Close multiple marked files 
+
+#+BEGIN_SRC elisp 
+
+(setq lexical-binding t)
+
+(defun compose (fn1 fn2)
+  (let ((lexical-binding t))
+
+    (lambda (x)
+       (funcall fn2 (funcall fn1 x))
+    )
+  ))
+
+(defun dired-close-files (files)
+
+  (interactive  (list (dired-get-marked-files)) )
+
+  (mapc (compose #'get-file-buffer #'kill-buffer) files)
+
+  )
+#+END_SRC
+
+ - Open a file with default system app in dired mode 
+
+Usage. Select a file in dired mode and enter =M-x dired-xdg=
+
+#+BEGIN_SRC elisp
+(defun dired-xdg ()
+  "
+   Open file at point in dired buffer with current Windows
+   default app
+
+   Usage: In the dired mode select a file and type M-x dired-xdg
+   to execute the file with the system default app.
+  "
+  (interactive)
+
+  (with-current-buffer
+      (start-process
+       "proc"
+       nil
+       ;; Command
+       "cmd"  "/c"  "start" (dired-get-filename))))
+#+END_SRC
+
 ** Helm Snippets 
 *** Browser Recent files  
 
@@ -1597,303 +1663,6 @@ Switch between buffers associated with files.
 
 
 #+END_SRC
-
-** Eshell 
-*** Overview 
-
-Eshell is a shell implemented in Emacs with many commands implemented
-in Elisp which makes it cross platform, the commands ls, pwd, cd and
-etc. works in the same way for Linux, Windows or OSX. In Windows OS it
-is a good alternative to cmd.exe. 
-
-Command to clear Eshell. It can be invoked with $ clear in eshell.
-
-See also:
- 
- - [[https://www.masteringemacs.org/article/complete-guide-mastering-eshell][Mastering Eshell]] / Mastering Emacs
-
- - [[http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html][Finally wrapping my head around eshell (the emacs shell)]]
-
- - 
-
-*** Start Eshell Directly from command line 
-
-Start eshell directly in a new Emacs sessions in the terminal wihout
-load init.el.
-
-#+BEGIN_SRC sh 
-$ emacs -Q -q -nw --eval '(eshell)'
-#+END_SRC
-
-Or 
-
-#+BEGIN_SRC sh 
-$ emacs -Q -q -nw -f eshell 
-#+END_SRC
-
-file:images/eshell_directly_in_terminal.png
-
-
-Start eshell directly in a new Emacs Window 
-
-#+BEGIN_SRC sh 
-emacs -q -f eshell # Don't load init file. 
-#+END_SRC
-
-Or 
-
-#+BEGIN_SRC sh
-emacs -q -f eshell # Load init file 
-#+END_SRC
-
-file:images/eshell_directly_gui.png
-
-*** Useful elisp commands inside eshell
-
-Eshell can run Elisp command - M-x <command> like ordinary Unix shell
-apps. 
-
-Open a file in the current window
-
- - =$ find-file /etc/hosts.conf= 
-
-Open a file in other window 
-
- - =$ find-file-other-window /etc/host.conf=
-
-Open a file in other frame 
-
- - =$ find-file-other-frame /etc/host.conf=
-
-Browser a directory in current window 
-
- - =$ dired /var/log= 
-
-Browser a directory in another window 
-
- - =$ dired-other-window /var/log=
-
-Browser a directory in another frame 
-
- - =$ dired-other-frame /var/log=
-
-*** Clear eshell 
-
-#+BEGIN_SRC elisp 
-(defun eshell/clear ()
-  "clear the eshell buffer."
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)))
-#+END_SRC
-
-In eshell:
-
-#+BEGIN_SRC sh
-~ $ which eshell
-eshell is an interactive compiled Lisp function in `eshell.el'
-~ $ 
-#+END_SRC
-
-
-Before the command clear:
-
-file:images/eshell_clear1.png 
-
-After the command clear:
-
-file:images/eshell_clear2.png 
-*** Set eshell prompt 
-**** Simple prompt
-
-#+BEGIN_SRC elisp 
-(setq eshell-prompt-function (lambda () "eshell > "))
-#+END_SRC
-
-file:images/eshell_prompt_setting1.png
-
-*Prompt with current directory*
-
-**** Colorized prompt 
-
-#+BEGIN_SRC elisp 
-(setq eshell-prompt-function
-      (lambda nil
-      	(concat
-      	 (propertize (eshell/pwd) 'face '(:foreground "#8787af"))
-      	 (propertize "❯" 'face '(:foreground "#f75f5f"))
-      	 (propertize "❯" 'face '(:foreground "#ffaf5f"))
-      	 (propertize "❯" 'face '(:foreground "#87af5f"))
-	 (propertize " " 'face nil))))
-#+END_SRC
-
-file:images/eshell_prompt_setting2.png
-
-*** Change Eshell current directory 
-
-This command can be used in Menus or with helm.
-
-#+BEGIN_SRC elisp 
-(defun eshell-chdir (path)  
-  (with-current-buffer "*eshell*"
-    (cd path)
-    (eshell-emit-prompt)))
-
-(eshell-chdir "~/Downloads")
-#+END_SRC
-
-*** Change Eshell current directory to current buffer 
-
-Usage: M-x eshell-cwd
-
-#+BEGIN_SRC elisp 
-(defun eshell-cwd ()
-  "
-  Sets the eshell directory to the current buffer
-  
-  Usage: M-x eshell-cwd 
-  "
-  (interactive)
-
-  (let (
-        (path (file-name-directory (or  (buffer-file-name) default-directory)))
-       )
-
-    (with-current-buffer "*eshell*"
-      (cd path)
-      (eshell-emit-prompt))))
-#+END_SRC
-
-*** Open eshell in another window 
-
-Source: [[https://gist.github.com/semmypurewal/b7748e0d6785f3c50e46][mini-eshell.el]]
-
-Usage: M-x open-mini-eshell 
-
-#+BEGIN_SRC elisp 
-;; open up a mini-eshell
-(defun quarter-window-vertically ()
-  "create a new window a quarter size of the current window"
-  (split-window-vertically)
-  (other-window 1)
-  (split-window-vertically)
-  (other-window -1)
-  (delete-window)
-)
-
-(defun open-mini-eshell ()
-  "open a mini-eshell in a small window at the bottom of the current window"
-  (interactive)
-  (quarter-window-vertically)
-  (other-window 1)
-  (eshell)
-)
-#+END_SRC
-
-*** Open eshell in another frame 
-
-Usage: M-x eshell-other-frame 
-
-#+BEGIN_SRC elisp 
-(defun eshell-other-frame ()
-  "
-  Open eshell in another frame.
-
-  Usage: M-x eshell-other-frame 
-  "
-  (interactive)
-  (with-selected-frame (make-frame)
-    (eshell)))
-#+END_SRC
-
-*** Open eshell file names from ls output with Return key
-
-Source: [[https://www.emacswiki.org/emacs/EshellEnhancedLS][Emacs Wiki]]  
-
-This code allows to open files from =$ ls= command output by selecting
-the file name and hitting return or by clicking with the middle mouse
-button.
-
-#+BEGIN_SRC elisp 
-(eval-after-load "em-ls"
-    '(progn
-       (defun ted-eshell-ls-find-file-at-point (point)
-         "RET on Eshell's `ls' output to open files."
-         (interactive "d")
-         (find-file (buffer-substring-no-properties
-                     (previous-single-property-change point 'help-echo)
-                     (next-single-property-change point 'help-echo))))
-
-       (defun pat-eshell-ls-find-file-at-mouse-click (event)
-         "Middle click on Eshell's `ls' output to open files.
- From Patrick Anderson via the wiki."
-         (interactive "e")
-         (ted-eshell-ls-find-file-at-point (posn-point (event-end event))))
-
-       (let ((map (make-sparse-keymap)))
-         (define-key map (kbd "RET")      'ted-eshell-ls-find-file-at-point)
-         (define-key map (kbd "<return>") 'ted-eshell-ls-find-file-at-point)
-         (define-key map (kbd "<mouse-2>") 'pat-eshell-ls-find-file-at-mouse-click)
-         (defvar ted-eshell-ls-keymap map))
-
-       (defadvice eshell-ls-decorated-name (after ted-electrify-ls activate)
-         "Eshell's `ls' now lets you click or RET on file names to open them."
-         (add-text-properties 0 (length ad-return-value)
-                              (list 'help-echo "RET, mouse-2: visit this file"
-                                    'mouse-face 'highlight
-                                    'keymap ted-eshell-ls-keymap)
-                              ad-return-value)
-         ad-return-value)))
-
-#+END_SRC
-
-*** Functions to copy eshell data to clipboard 
-**** Copy current directory 
-
-#+BEGIN_SRC elisp 
-
-(defun clipboard/set (astring)
-  "Copy a string to clipboard"
-
-   (with-temp-buffer
-    (insert astring)
-    (clipboard-kill-region (point-min) (point-max))))
-
-;; Copy current directory to clipboard 
-;;
-;; Usage:  Enter $ copy-pwd in eshell 
-;;
-(defun eshell/copy-pwd ()
- (clipboard/set (eshell/pwd)))
-
-;; Copy file name with full path to clipboard 
-;;
-;; Usage: Enter $ copy-fpath <filename> in eshell. 
-;; 
-(defun eshell/copy-fpath (fname)
-
-  (let ((fpath (concat (eshell/pwd) "/" fname)))
-
-       (clipboard/set fpath)
-       (concat "Copied path: " fpath)))
-#+END_SRC
-
-file:images/eshell_clipboard.png
-
-*** Creating Eshell aliases programatically 
-
-#+BEGIN_SRC elisp 
-(eshell/alias "ff" "find-file $1")
-
-(eshell/alias "fw" "find-file-other-window $1")
-
-(eshell/alias "fr" "find-file-other-frame $1")
-#+END_SRC
-
-Example of usage:
-
-file:images/emacs_eshell_alias.png
-
 ** Non categorized 
 *** Save the scratch buffer and reload every Emacs startup 
 
@@ -1937,8 +1706,395 @@ Source: [[https://gist.github.com/kobapan/034d5123321b32bb68ca][scratch.el]]
   (ignore-errors (kill-buffer ".scratch")))
 
 #+END_SRC
+* Eshell 
+** Overview 
 
-* Configuration Snippetes 
+Eshell is a shell implemented in Emacs with many commands implemented
+in Elisp which makes it cross platform, the commands ls, pwd, cd and
+etc. works in the same way for Linux, Windows or OSX. In Windows OS it
+is a good alternative to cmd.exe. 
+
+Command to clear Eshell. It can be invoked with $ clear in eshell.
+
+See also:
+ 
+ - [[https://www.masteringemacs.org/article/complete-guide-mastering-eshell][Mastering Eshell]] / Mastering Emacs
+
+ - [[http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html][Finally wrapping my head around eshell (the emacs shell)]]
+
+ - 
+
+** Start Eshell Directly from command line 
+
+Start eshell directly in a new Emacs sessions in the terminal wihout
+load init.el.
+
+#+BEGIN_SRC sh 
+$ emacs -Q -q -nw --eval '(eshell)'
+#+END_SRC
+
+Or 
+
+#+BEGIN_SRC sh 
+$ emacs -Q -q -nw -f eshell 
+#+END_SRC
+
+file:images/eshell_directly_in_terminal.png
+
+
+Start eshell directly in a new Emacs Window 
+
+#+BEGIN_SRC sh 
+emacs -q -f eshell # Don't load init file. 
+#+END_SRC
+
+Or 
+
+#+BEGIN_SRC sh
+emacs -q -f eshell # Load init file 
+#+END_SRC
+
+file:images/eshell_directly_gui.png
+
+** Useful elisp commands inside eshell
+
+Eshell can run Elisp command - M-x <command> like ordinary Unix shell
+apps. 
+
+Open a file in the current window
+
+ - =$ find-file /etc/hosts.conf= 
+
+Open a file in other window 
+
+ - =$ find-file-other-window /etc/host.conf=
+
+Open a file in other frame 
+
+ - =$ find-file-other-frame /etc/host.conf=
+
+Browser a directory in current window 
+
+ - =$ dired /var/log= 
+
+Browser a directory in another window 
+
+ - =$ dired-other-window /var/log=
+
+Browser a directory in another frame 
+
+ - =$ dired-other-frame /var/log=
+
+** Clear eshell 
+
+#+BEGIN_SRC elisp 
+(defun eshell/clear ()
+  "clear the eshell buffer."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+#+END_SRC
+
+In eshell:
+
+#+BEGIN_SRC sh
+~ $ which eshell
+eshell is an interactive compiled Lisp function in `eshell.el'
+~ $ 
+#+END_SRC
+
+
+Before the command clear:
+
+file:images/eshell_clear1.png 
+
+After the command clear:
+
+file:images/eshell_clear2.png 
+** Set eshell prompt 
+*** Simple prompt
+
+#+BEGIN_SRC elisp 
+(setq eshell-prompt-function (lambda () "eshell > "))
+#+END_SRC
+
+file:images/eshell_prompt_setting1.png
+
+*Prompt with current directory*
+
+*** Colorized prompt 
+
+#+BEGIN_SRC elisp 
+(setq eshell-prompt-function
+      (lambda nil
+      	(concat
+      	 (propertize (eshell/pwd) 'face '(:foreground "#8787af"))
+      	 (propertize "❯" 'face '(:foreground "#f75f5f"))
+      	 (propertize "❯" 'face '(:foreground "#ffaf5f"))
+      	 (propertize "❯" 'face '(:foreground "#87af5f"))
+	 (propertize " " 'face nil))))
+#+END_SRC
+
+file:images/eshell_prompt_setting2.png
+
+** Change Eshell current directory 
+
+This command can be used in Menus or with helm.
+
+#+BEGIN_SRC elisp 
+(defun eshell-chdir (path)  
+  (with-current-buffer "*eshell*"
+    (cd path)
+    (eshell-emit-prompt)))
+
+(eshell-chdir "~/Downloads")
+#+END_SRC
+
+** Change Eshell current directory to current buffer 
+
+Usage: M-x eshell-cwd
+
+#+BEGIN_SRC elisp 
+(defun eshell-cwd ()
+  "
+  Sets the eshell directory to the current buffer
+  
+  Usage: M-x eshell-cwd 
+  "
+  (interactive)
+
+  (let (
+        (path (file-name-directory (or  (buffer-file-name) default-directory)))
+       )
+
+    (with-current-buffer "*eshell*"
+      (cd path)
+      (eshell-emit-prompt))))
+#+END_SRC
+
+** Open eshell in another window 
+
+Source: [[https://gist.github.com/semmypurewal/b7748e0d6785f3c50e46][mini-eshell.el]]
+
+Usage: M-x open-mini-eshell 
+
+#+BEGIN_SRC elisp 
+;; open up a mini-eshell
+(defun quarter-window-vertically ()
+  "create a new window a quarter size of the current window"
+  (split-window-vertically)
+  (other-window 1)
+  (split-window-vertically)
+  (other-window -1)
+  (delete-window)
+)
+
+(defun open-mini-eshell ()
+  "open a mini-eshell in a small window at the bottom of the current window"
+  (interactive)
+  (quarter-window-vertically)
+  (other-window 1)
+  (eshell)
+)
+#+END_SRC
+
+** Open eshell in another frame 
+
+Usage: M-x eshell-other-frame 
+
+#+BEGIN_SRC elisp 
+(defun eshell-other-frame ()
+  "
+  Open eshell in another frame.
+
+  Usage: M-x eshell-other-frame 
+  "
+  (interactive)
+  (with-selected-frame (make-frame)
+    (eshell)))
+#+END_SRC
+
+** Open eshell file names from ls output with Return key
+
+Source: [[https://www.emacswiki.org/emacs/EshellEnhancedLS][Emacs Wiki]]  
+
+This code allows to open files from =$ ls= command output by selecting
+the file name and hitting return or by clicking with the middle mouse
+button.
+
+#+BEGIN_SRC elisp 
+(eval-after-load "em-ls"
+    '(progn
+       (defun ted-eshell-ls-find-file-at-point (point)
+         "RET on Eshell's `ls' output to open files."
+         (interactive "d")
+         (find-file (buffer-substring-no-properties
+                     (previous-single-property-change point 'help-echo)
+                     (next-single-property-change point 'help-echo))))
+
+       (defun pat-eshell-ls-find-file-at-mouse-click (event)
+         "Middle click on Eshell's `ls' output to open files.
+ From Patrick Anderson via the wiki."
+         (interactive "e")
+         (ted-eshell-ls-find-file-at-point (posn-point (event-end event))))
+
+       (let ((map (make-sparse-keymap)))
+         (define-key map (kbd "RET")      'ted-eshell-ls-find-file-at-point)
+         (define-key map (kbd "<return>") 'ted-eshell-ls-find-file-at-point)
+         (define-key map (kbd "<mouse-2>") 'pat-eshell-ls-find-file-at-mouse-click)
+         (defvar ted-eshell-ls-keymap map))
+
+       (defadvice eshell-ls-decorated-name (after ted-electrify-ls activate)
+         "Eshell's `ls' now lets you click or RET on file names to open them."
+         (add-text-properties 0 (length ad-return-value)
+                              (list 'help-echo "RET, mouse-2: visit this file"
+                                    'mouse-face 'highlight
+                                    'keymap ted-eshell-ls-keymap)
+                              ad-return-value)
+         ad-return-value)))
+
+#+END_SRC
+
+** Functions to copy eshell data to clipboard 
+*** Copy current directory 
+
+#+BEGIN_SRC elisp 
+
+(defun clipboard/set (astring)
+  "Copy a string to clipboard"
+
+   (with-temp-buffer
+    (insert astring)
+    (clipboard-kill-region (point-min) (point-max))))
+
+;; Copy current directory to clipboard 
+;;
+;; Usage:  Enter $ copy-pwd in eshell 
+;;
+(defun eshell/copy-pwd ()
+ (clipboard/set (eshell/pwd)))
+
+;; Copy file name with full path to clipboard 
+;;
+;; Usage: Enter $ copy-fpath <filename> in eshell. 
+;; 
+(defun eshell/copy-fpath (fname)
+
+  (let ((fpath (concat (eshell/pwd) "/" fname)))
+
+       (clipboard/set fpath)
+       (concat "Copied path: " fpath)))
+#+END_SRC
+
+file:images/eshell_clipboard.png
+
+** Creating Eshell aliases programatically 
+
+#+BEGIN_SRC elisp 
+(eshell/alias "ff" "find-file $1")
+
+(eshell/alias "fw" "find-file-other-window $1")
+
+(eshell/alias "fr" "find-file-other-frame $1")
+#+END_SRC
+
+Example of usage:
+
+file:images/emacs_eshell_alias.png
+
+* Emacs On Microsoft Windows 
+
+To get bash for Windows install with Chocolately package manager or
+download GIT version control app that comes bundled with bash and Unix
+utilities like grep, mv, ssh, df and dd. 
+
+Command to run Bash. Usage: M-x run-bash 
+
+#+BEGIN_SRC elisp 
+(defun run-bash ()
+      (interactive)
+      (let ((shell-file-name "C:\\Program Files\\Git\\bin\\bash.exe"))
+            (shell "*bash*")))
+#+END_SRC
+
+
+Command to run cmd.exe. Usage: M-x run-cmdexe 
+
+#+BEGIN_SRC elisp 
+(defun run-cmdexe ()
+      (interactive)
+      (let ((shell-file-name "cmd.exe"))
+            (shell "*cmd.exe*")))
+#+END_SRC
+
+To run Unix utilities and other command lines apps in Emacs add to the
+PATH variable the path to their directory:
+
+#+BEGIN_SRC elisp 
+(setenv  "PATH" (concat
+
+         ;; Path where is installed df.exe, curl.exe, dd.exe and other Unix tools.
+         "C:\\Program Files\\Git\\usr\\bin" ";"
+
+         ;; Path where is installed Fsi.exe (Fsharp Interpreter)
+         ;; Fsc.exe (F# - Fsharp Compiler)
+         "C:/Program Files (x86)/Microsoft SDKs/F#/4.0/Framework/v4.0/Fsi.exe" ";"
+         (getenv "PATH")
+
+         ))
+#+END_SRC
+
+* Configuration Snippets 
+** Separte Customization from init file 
+
+
+#+BEGIN_SRC elisp
+; For the built in customization UI in emacs that no one uses. If
+;; some package tries to use it, at least have the decency to keep
+;; this config file clean.
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+#+END_SRC
+** Backup Settings
+
+
+#+BEGIN_SRC emacs-lisp
+
+;disable backup
+(setq backup-inhibited t)
+
+;disable auto save
+(setq auto-save-default nil)
+
+
+;;  Get Rid of temporary files ending in ~
+;;  The temporary files will be in the temporary directory
+;;
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+
+;; Move Deleted Files to Trash
+;;
+(setq delete-by-moving-to-trash t)
+
+#+END_SRC
+
+** Tab width and Spaces
+    :PROPERTIES:
+    :ID:       4c533ce2-a074-4a52-8a5f-8e3105145ab5
+    :END:
+    
+#+BEGIN_SRC emacs-lisp
+
+;; force emacs to always use spaces instead of tab characters
+(setq-default indent-tabs-mode nil)
+
+;; set default tab width to 4 spaces
+(setq default-tab-width 4)
+(setq tab-width 4)
+
+#+END_SRC
+
 ** Save Minibuffer History 
 
 Saves the minibuffer history on every Emacs session. 
@@ -1949,6 +2105,68 @@ Saves the minibuffer history on every Emacs session.
 
 ;; To set the file which the minibuffer is saved use:
 (setq savehist-file "~/.emacs.d/tmp/savehist")
+#+END_SRC
+
+** Show Line number and column number in minibuffer
+
+#+BEGIN_SRC elisp
+(setq line-number-mode               t)
+(setq column-number-mode             t)
+#+END_SRC
+
+** Enable find file at point
+
+When doing C-x C-f use information at point (your cursor) to open file
+or URL. I.e. if your cursor is on a file path, or URL, it defaults to
+that filled in the minibuffer.
+
+#+BEGIN_SRC elisp
+;;find-file-at-point, smarter C-x C-f when point on path or URL
+(ffap-bindings)
+#+END_SRC
+
+** Unique buffer names 
+
+#+BEGIN_SRC elisp 
+;; Unique buffer name
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+#+END_SRC
+
+** Mark Current Line 
+
+Enable Mark Current Line 
+
+#+BEGIN_SRC elisp 
+;; mark current line:
+(global-hl-line-mode 1)
+#+END_SRC
+
+Disable Mark Current Line 
+
+#+BEGIN_SRC elisp 
+;; mark current line:
+(global-hl-line-mode 0)
+#+END_SRC
+
+
+** Recent Files
+    :PROPERTIES:
+    :ID:       afabff51-cd40-468f-ab10-06adbf6570a7
+    :END:
+
+Show recent files in the File menu. 
+
+#+BEGIN_SRC emacs-lisp
+
+;; recentf stuff
+;; recentf - F5
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-saved-items 500)
+(setq recentf-max-menu-items 60)
+
+
 #+END_SRC
 
 * Emacs Server and Client 
@@ -1980,6 +2198,268 @@ See also:
  
  - [[http://nic.ferrier.me.uk/blog/2012_07/emacs-packages-for-programmers][Packages for Emacs Programmers]] 
 
+* Org-mode
+** Code Block Templates 
+
+When the user writes '<p'in org-mode and hits tab key it expands to a
+python source code block like this:
+
+#+BEGIN_SRC org
+,#+BEGIN_SRC python :results value
+
+,#+END_SRC
+#+END_SRC
+
+
+Elisp code:
+
+#+BEGIN_SRC elisp 
+(add-to-list 'org-structure-template-alist
+	     '("p" "#+BEGIN_SRC python :results ?value\n\n#+END_SRC"))
+#+END_SRC
+** Custom Protocols 
+*** Open directory with dired mode 
+
+Org-mode already provides the protocol ~file:<filename>~ to open a
+directory or file. The motivation to implement this protocol is that it
+is unambiguous like file protocol and easy to search. 
+
+Hyperlink syntax:  ~dir:<file-path>~
+
+
+#+BEGIN_SRC elisp 
+(add-hook 'org-mode-hook
+          (lambda ()
+	      (org-add-link-type "dir" #'dired nil)
+	      ))
+#+END_SRC
+
+
+Org-mode file example:
+
+#+BEGIN_SRC 
+Log directory      -  dir:/var/log  -  [[dir:/var/log][Log directory]]
+
+System cofiguration - dir:/etc  
+#+END_SRC
+
+
+*** Open directory with system file manager 
+
+Hyperlink format: ~dire:<directory-path>~
+
+#+BEGIN_SRC elisp 
+(defvar default-file-manager-app "pcmanfm-qt")
+
+(defun org/protocol-dire (input)    
+  (start-process  "proc" ;; Process name
+		  nil    ;; Buffer name
+
+		  default-file-manager
+		  input
+		  ))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+	      (org-add-link-type "dire" #'org/protocol-dire nil)
+	      ))
+#+END_SRC
+
+Example:
+
+#+BEGIN_SRC 
+
+To open the directory file:/var/log in the system file 
+manager click on the hyperlink bellow.
+
+
+ - Hyperlink1:   dire:/var/log 
+
+ - Hyperlink2:   [[dire:/var/log][System Log directory]]
+
+#+END_SRC
+
+
+file:images/org-mode-protocol-file-manager.png
+
+*** Man page 
+
+Provides a hyperlink that displays a man page when clicked. 
+
+
+#+BEGIN_SRC elisp
+(add-hook 'org-mode-hook
+          (lambda ()
+	         (org-add-link-type  "man" #'woman nil)))
+#+END_SRC
+
+Example: 
+
+file test.org 
+
+#+BEGIN_SRC
+Click on the hyperlinks bellow to open the man pages:
+
+Gcc Man Page: 
+
+ - man:gcc 
+
+C-function cbrt Man Page 
+
+ - man:cbrt 
+
+ - [[man:cbrt][C-function cbrt Man Page]]
+#+END_SRC
+
+*** Elisp Documentation 
+
+Provides clickable link that shows the the Elisp documentation. 
+
+A link of format ~elisp-doc:add-hook~ will show the =add-hook=
+documentation when clicked. 
+
+Hyperlink format:  ~elisp-doc:<function-name>~ or ~[elisp-doc:<function-name>]~
+
+#+BEGIN_SRC elisp 
+(defun org/protocol-elisp-doc (function-symbol)
+  (princ function-symbol)
+  (describe-function (intern-soft function-symbol))
+  
+  )
+
+
+(defun org/protocol-elisp-doc-html (path desc backend)
+   (cl-case backend
+     (html (format
+            "<a href='' title='%s'>%s</a>"
+            (documentation (intern-soft path))
+            (or desc path)))))    
+
+
+(add-hook 'org-mode-hook
+
+	  (lambda ()
+
+	    (org-add-link-type "elisp-doc" #'org/protocol-elisp-doc #'org/protocol-elisp-doc-html)
+	    ))
+
+#+END_SRC
+
+Example: 
+
+file: ~/tmp/test.org~
+
+#+BEGIN_SRC org-mode 
+Elisp documentation protocol:
+
+[[elisp-doc:add-hook][Function Add hook]]
+
+The function elisp-doc:start-process is used to start an asynchronous process. 
+#+END_SRC
+
+
+This screenshot show what happens when the user clicks in the hyperlink.
+
+file:images/elisp-doc-org-mode-protocol-click.png
+
+Exported to html with: =M-x org-html-export-to-html= 
+
+file:images/elisp-doc-org-mode-protocol.png 
+** Settings 
+*** General Settings 
+
+Syntax highlight for code blocks  ~#+BEGIN_SRC .. #+END_SRC~
+
+#+BEGIN_SRC elisp 
+;; Syntax highlight for code blocks  #+BEGIN_SRC .. #+END_SRC 
+;;
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+Syntax highlight for latex fragments 
+
+#+BEGIN_SRC elisp 
+(setq org-highlight-latex-and-related '(latex script entities))
+#+END_SRC
+
+
+*** Code Block - Org-babel 
+
+Enable source code block in org files 
+
+#+BEGIN_SRC elisp 
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (sh . t)
+   (python . t)
+   (scheme . t)
+   (lisp . t)
+   (clojure . t)
+   (R . t)
+   (latex . t)
+   (ruby . t)
+   (C . t)
+   ;;; (C++ . t)
+   (ditaa . t)
+   (haskell . t)
+ ;;  (fsharp . t)
+ ;;  (java . t)
+ ;;  (scala . t)
+;;   (javascript . t)
+   (maxima . t)
+  ))
+#+END_SRC
+
+
+Disable Security confirmation: 
+
+#+BEGIN_SRC elisp 
+;; Disable security confirmations  
+;;
+
+(setq   ;; Confirmation for running coide blocks 
+        org-confirm-babel-evaluate      nil
+        ;; Confirmation for elisp links 
+        org-confirm-elisp-link-function nil
+        ;; Confirmation for shell links 
+        org-confirm-shell-link-function nil
+
+        org-export-babel-evaluate       nil
+        )
+#+END_SRC
+
+* Useful Commands for Elisp Developers 
+
+| Command: M-x [command]   | Key Binding | Description                                                                       |
+|--------------------------+-------------+-----------------------------------------------------------------------------------|
+|                          |             |                                                                                   |
+| check-paren              |             | Find unmatched parenthesis                                                        |
+| view-echo-area-messages  | C-h e       | Show the message buffer                                                           |
+|--------------------------+-------------+-----------------------------------------------------------------------------------|
+|                          |             |                                                                                   |
+| find-variable            |             | Open the file at the point the variable is defined.                               |
+| find-library             |             | Open an Emacs library or package in the load-path.                                |
+| find-function            |             | Opens an library.el file at the point the function is defined.                    |
+| locate-library           |             | Show path of a library.el (Emacs Package) file.                                   |
+|                          |             |                                                                                   |
+|--------------------------+-------------+-----------------------------------------------------------------------------------|
+| *Documentation Commands* |             |                                                                                   |
+|                          |             |                                                                                   |
+| apropos                  | C-h         | Search for all elisp symbols, variables and functions that match a regex pattern. |
+| apropos-command          | C-h a       | Search for all commands (M-x cmd) that match a regexp pattern.                    |
+| apropos-library          |             | Show all symbols associated with an Elisp library (Emacs Package)                 |
+|                          |             |                                                                                   |
+| info-apropos             |             | Find all info pages that match a pattern.                                         |
+|                          |             |                                                                                   |
+| describe-function        | C-h f       | Show function documentation or docstring.                                         |
+| describe-mode            | C-h m       | Show current major mode documentation and all key bindings associated.            |
+| describe-bindings        | C-h-b       | Show all associated key bindings with the current buffer.                         |
+| describe-variable        | C-h v       | Show variable documentation                                                       |
+| describe-package         |             | Describe an Emacs package installed from Melpa repository.                        |
+|                          |             |                                                                                   |
+
 * Useful Elisp Info Pages 
 ** Elisp 
 
@@ -2008,6 +2488,25 @@ Tips about documenting Elisp
 
 #+BEGIN_SRC elisp
 (info "(elisp)Documentation Tips")
+#+END_SRC
+
+Misc 
+
+
+#+BEGIN_SRC elisp
+(info "(elisp) Symbols")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Function Cells")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Defining Commands")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Functions")
 #+END_SRC
 
 ** Customization 
@@ -2043,8 +2542,16 @@ Tips about documenting Elisp
 #+END_SRC
 ** Subprocess Creation
 
+ - Creating Subprocesses 
+
 #+BEGIN_SRC elisp
 (info "(elisp) Subprocess Creation")
+#+END_SRC
+  
+ - Get process output 
+
+#+BEGIN_SRC elisp 
+(info "(elisp) Accepting Output")
 #+END_SRC
 
 ** Keybindings
@@ -2223,7 +2730,6 @@ Batch Mode
 #+BEGIN_SRC elisp
 (info "(elisp) Syntax Class Table")
 #+END_SRC
-
 * Selected Gists 
 
  - [[https://gist.github.com/justinabrahms/1390864][extract archives from eshell]]

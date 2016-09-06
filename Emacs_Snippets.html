@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Snippets</title>
-<!-- 2016-08-22 Mon 19:54 -->
+<!-- 2016-09-06 Tue 10:55 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues Soares Silva" />
@@ -346,56 +346,94 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-17-6">1.17.6. Open a list of web sites</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-18">1.18. Eshell</a>
+<li><a href="#sec-1-18">1.18. Non categorized</a>
 <ul>
-<li><a href="#sec-1-18-1">1.18.1. Overview</a></li>
-<li><a href="#sec-1-18-2">1.18.2. Start Eshell Directly from command line</a></li>
-<li><a href="#sec-1-18-3">1.18.3. Useful elisp commands inside eshell</a></li>
-<li><a href="#sec-1-18-4">1.18.4. Clear eshell</a></li>
-<li><a href="#sec-1-18-5">1.18.5. Set eshell prompt</a></li>
-<li><a href="#sec-1-18-6">1.18.6. Change Eshell current directory</a></li>
-<li><a href="#sec-1-18-7">1.18.7. Change Eshell current directory to current buffer</a></li>
-<li><a href="#sec-1-18-8">1.18.8. Open eshell in another window</a></li>
-<li><a href="#sec-1-18-9">1.18.9. Open eshell in another frame</a></li>
-<li><a href="#sec-1-18-10">1.18.10. Open eshell file names from ls output with Return key</a></li>
-<li><a href="#sec-1-18-11">1.18.11. Functions to copy eshell data to clipboard</a></li>
-<li><a href="#sec-1-18-12">1.18.12. Creating Eshell aliases programatically</a></li>
+<li><a href="#sec-1-18-1">1.18.1. Save the scratch buffer and reload every Emacs startup</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-19">1.19. Non categorized</a>
+</ul>
+</li>
+<li><a href="#sec-2">2. Eshell</a>
 <ul>
-<li><a href="#sec-1-19-1">1.19.1. Save the scratch buffer and reload every Emacs startup</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#sec-2">2. Configuration Snippetes</a>
+<li><a href="#sec-2-1">2.1. Overview</a></li>
+<li><a href="#sec-2-2">2.2. Start Eshell Directly from command line</a></li>
+<li><a href="#sec-2-3">2.3. Useful elisp commands inside eshell</a></li>
+<li><a href="#sec-2-4">2.4. Clear eshell</a></li>
+<li><a href="#sec-2-5">2.5. Set eshell prompt</a>
 <ul>
-<li><a href="#sec-2-1">2.1. Save Minibuffer History</a></li>
+<li><a href="#sec-2-5-1">2.5.1. Simple prompt</a></li>
+<li><a href="#sec-2-5-2">2.5.2. Colorized prompt</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3. Emacs Server and Client</a></li>
-<li><a href="#sec-4">4. Useful Elisp Info Pages</a>
+<li><a href="#sec-2-6">2.6. Change Eshell current directory</a></li>
+<li><a href="#sec-2-7">2.7. Change Eshell current directory to current buffer</a></li>
+<li><a href="#sec-2-8">2.8. Open eshell in another window</a></li>
+<li><a href="#sec-2-9">2.9. Open eshell in another frame</a></li>
+<li><a href="#sec-2-10">2.10. Open eshell file names from ls output with Return key</a></li>
+<li><a href="#sec-2-11">2.11. Functions to copy eshell data to clipboard</a>
 <ul>
-<li><a href="#sec-4-1">4.1. Elisp</a></li>
-<li><a href="#sec-4-2">4.2. Customization</a></li>
-<li><a href="#sec-4-3">4.3. Layout</a></li>
-<li><a href="#sec-4-4">4.4. Syntax Tables</a></li>
-<li><a href="#sec-4-5">4.5. Environment Variables and OS Detection</a></li>
-<li><a href="#sec-4-6">4.6. Subprocess Creation</a></li>
-<li><a href="#sec-4-7">4.7. Keybindings</a></li>
-<li><a href="#sec-4-8">4.8. Hooks (Events Callbacks)</a></li>
-<li><a href="#sec-4-9">4.9. Buffer</a></li>
-<li><a href="#sec-4-10">4.10. Window</a></li>
-<li><a href="#sec-4-11">4.11. Frame</a></li>
-<li><a href="#sec-4-12">4.12. Files</a></li>
-<li><a href="#sec-4-13">4.13. Text Enconding ISO UTF8 &#x2026;</a></li>
-<li><a href="#sec-4-14">4.14. Loading, Libraries and Packages</a></li>
-<li><a href="#sec-4-15">4.15. Batch Mode</a></li>
-<li><a href="#sec-4-16">4.16. Syntax Highlight</a></li>
+<li><a href="#sec-2-11-1">2.11.1. Copy current directory</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">5. Selected Gists</a></li>
+<li><a href="#sec-2-12">2.12. Creating Eshell aliases programatically</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Emacs On Microsoft Windows</a></li>
+<li><a href="#sec-4">4. Configuration Snippets</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Separte Customization from init file</a></li>
+<li><a href="#sec-4-2">4.2. Backup Settings</a></li>
+<li><a href="#sec-4-3">4.3. Tab width and Spaces</a></li>
+<li><a href="#sec-4-4">4.4. Save Minibuffer History</a></li>
+<li><a href="#sec-4-5">4.5. Show Line number and column number in minibuffer</a></li>
+<li><a href="#sec-4-6">4.6. Enable find file at point</a></li>
+<li><a href="#sec-4-7">4.7. Unique buffer names</a></li>
+<li><a href="#sec-4-8">4.8. Mark Current Line</a></li>
+<li><a href="#sec-4-9">4.9. Recent Files</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Emacs Server and Client</a></li>
+<li><a href="#sec-6">6. Org-mode</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Code Block Templates</a></li>
+<li><a href="#sec-6-2">6.2. Custom Protocols</a>
+<ul>
+<li><a href="#sec-6-2-1">6.2.1. Open directory with dired mode</a></li>
+<li><a href="#sec-6-2-2">6.2.2. Open directory with system file manager</a></li>
+<li><a href="#sec-6-2-3">6.2.3. Man page</a></li>
+<li><a href="#sec-6-2-4">6.2.4. Elisp Documentation</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-3">6.3. Settings</a>
+<ul>
+<li><a href="#sec-6-3-1">6.3.1. General Settings</a></li>
+<li><a href="#sec-6-3-2">6.3.2. Code Block - Org-babel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Useful Commands for Elisp Developers</a></li>
+<li><a href="#sec-8">8. Useful Elisp Info Pages</a>
+<ul>
+<li><a href="#sec-8-1">8.1. Elisp</a></li>
+<li><a href="#sec-8-2">8.2. Customization</a></li>
+<li><a href="#sec-8-3">8.3. Layout</a></li>
+<li><a href="#sec-8-4">8.4. Syntax Tables</a></li>
+<li><a href="#sec-8-5">8.5. Environment Variables and OS Detection</a></li>
+<li><a href="#sec-8-6">8.6. Subprocess Creation</a></li>
+<li><a href="#sec-8-7">8.7. Keybindings</a></li>
+<li><a href="#sec-8-8">8.8. Hooks (Events Callbacks)</a></li>
+<li><a href="#sec-8-9">8.9. Buffer</a></li>
+<li><a href="#sec-8-10">8.10. Window</a></li>
+<li><a href="#sec-8-11">8.11. Frame</a></li>
+<li><a href="#sec-8-12">8.12. Files</a></li>
+<li><a href="#sec-8-13">8.13. Text Enconding ISO UTF8 &#x2026;</a></li>
+<li><a href="#sec-8-14">8.14. Loading, Libraries and Packages</a></li>
+<li><a href="#sec-8-15">8.15. Batch Mode</a></li>
+<li><a href="#sec-8-16">8.16. Syntax Highlight</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">9. Selected Gists</a></li>
 </ul>
 </div>
 </div>
@@ -893,6 +931,16 @@ Returns the selected text of the current buffer.
 <tr>
 <td class="left">read-regexp</td>
 <td class="left">Read input as regular expression</td>
+</tr>
+
+<tr>
+<td class="left">read-passwd</td>
+<td class="left">Read password</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 </tbody>
 </table>
@@ -2299,6 +2347,85 @@ Source: <a href="https://gist.github.com/hiroina/4702961">hiroina/.emacs</a>
 <span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
+
+<ul class="org-ul">
+<li>Open multiple marked files 
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">dired-open-files</span> <span class="org-rainbow-delimiters-depth-2">(</span>files<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-doc">"</span>
+<span class="org-doc">  Open all marked files in dired mode with m. </span>
+<span class="org-doc">  </span>
+<span class="org-doc">  Usage: </span>
+<span class="org-doc">        1. Mark the files with m </span>
+<span class="org-doc">        2. M-x dired-open-files  </span>
+<span class="org-doc">  "</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>interactive  <span class="org-rainbow-delimiters-depth-3">(</span>list <span class="org-rainbow-delimiters-depth-4">(</span>dired-get-marked-files<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>mapc #'find-file files<span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+Close multiple marked files 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setq lexical-binding t<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">compose</span> <span class="org-rainbow-delimiters-depth-2">(</span>fn1 fn2<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-4">(</span>lexical-binding t<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-4">(</span>x<span class="org-rainbow-delimiters-depth-4">)</span>
+       <span class="org-rainbow-delimiters-depth-4">(</span>funcall fn2 <span class="org-rainbow-delimiters-depth-5">(</span>funcall fn1 x<span class="org-rainbow-delimiters-depth-5">)</span><span class="org-rainbow-delimiters-depth-4">)</span>
+    <span class="org-rainbow-delimiters-depth-3">)</span>
+  <span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">dired-close-files</span> <span class="org-rainbow-delimiters-depth-2">(</span>files<span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>interactive  <span class="org-rainbow-delimiters-depth-3">(</span>list <span class="org-rainbow-delimiters-depth-4">(</span>dired-get-marked-files<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>mapc <span class="org-rainbow-delimiters-depth-3">(</span>compose #'get-file-buffer #'kill-buffer<span class="org-rainbow-delimiters-depth-3">)</span> files<span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Open a file with default system app in dired mode 
+</li>
+</ul>
+
+<p>
+Usage. Select a file in dired mode and enter <code>M-x dired-xdg</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">dired-xdg</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"</span>
+<span class="org-doc">   Open file at point in dired buffer with current Windows</span>
+<span class="org-doc">   default app</span>
+
+<span class="org-doc">   Usage: In the dired mode select a file and type M-x dired-xdg</span>
+<span class="org-doc">   to execute the file with the system default app.</span>
+<span class="org-doc">  "</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>interactive<span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">with-current-buffer</span>
+      <span class="org-rainbow-delimiters-depth-3">(</span>start-process
+       <span class="org-string">"proc"</span>
+       nil
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">Command</span>
+       <span class="org-string">"cmd"</span>  <span class="org-string">"/c"</span>  <span class="org-string">"start"</span> <span class="org-rainbow-delimiters-depth-4">(</span>dired-get-filename<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
 </div>
 </div>
 
@@ -2607,13 +2734,66 @@ Switch between buffers associated with files.
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-1-18" class="outline-3">
-<h3 id="sec-1-18"><span class="section-number-3">1.18</span> Eshell</h3>
+<h3 id="sec-1-18"><span class="section-number-3">1.18</span> Non categorized</h3>
 <div class="outline-text-3" id="text-1-18">
 </div><div id="outline-container-sec-1-18-1" class="outline-4">
-<h4 id="sec-1-18-1"><span class="section-number-4">1.18.1</span> Overview</h4>
+<h4 id="sec-1-18-1"><span class="section-number-4">1.18.1</span> Save the scratch buffer and reload every Emacs startup</h4>
 <div class="outline-text-4" id="text-1-18-1">
+<p>
+Saves the scratch buffer to a file every times Emacs is closed.
+</p>
+
+<p>
+Source: <a href="https://gist.github.com/kobapan/034d5123321b32bb68ca">scratch.el</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setq scratch-buffer-file <span class="org-string">"~/.emacs.d/scratch.el"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span>setq initial-scratch-message <span class="org-string">""</span><span class="org-rainbow-delimiters-depth-1">)</span>           <span class="org-comment-delimiter">;</span><span class="org-comment">initial message</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'kill-emacs-hook 'scratch-save<span class="org-rainbow-delimiters-depth-1">)</span>   <span class="org-comment-delimiter">; </span>
+<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'window-setup-hook 'scratch-resume<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-comment-delimiter">; </span>
+
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">window-setup-hook </span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">@see info 38.1.1 Summary: Sequence of Actions at Startup</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'kill-buffer-hook<span class="org-comment-delimiter">; </span><span class="org-comment">*scratch* </span>
+          <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span>
+            <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-4">(</span>equal <span class="org-rainbow-delimiters-depth-5">(</span>buffer-name<span class="org-rainbow-delimiters-depth-5">)</span> <span class="org-string">"*scratch*"</span><span class="org-rainbow-delimiters-depth-4">)</span> <span class="org-rainbow-delimiters-depth-4">(</span>scratch-save<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'after-save-hook        
+          <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span>
+            <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">unless</span> <span class="org-rainbow-delimiters-depth-4">(</span>get-buffer <span class="org-string">"*scratch*"</span><span class="org-rainbow-delimiters-depth-4">)</span> <span class="org-rainbow-delimiters-depth-4">(</span>scratch-resume<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">scratch-save</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-4">(</span>buf <span class="org-rainbow-delimiters-depth-5">(</span>get-buffer <span class="org-string">"*scratch*"</span><span class="org-rainbow-delimiters-depth-5">)</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">when</span> buf
+      <span class="org-rainbow-delimiters-depth-4">(</span>set-buffer buf<span class="org-rainbow-delimiters-depth-4">)</span>
+      <span class="org-rainbow-delimiters-depth-4">(</span>write-file scratch-buffer-file<span class="org-rainbow-delimiters-depth-4">)</span>
+      <span class="org-rainbow-delimiters-depth-4">(</span><span class="org-keyword">ignore-errors</span> <span class="org-rainbow-delimiters-depth-5">(</span>kill-buffer <span class="org-string">"scratch.el"</span><span class="org-rainbow-delimiters-depth-5">)</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">scratch-resume</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"*scratch* "</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>interactive<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>set-buffer <span class="org-rainbow-delimiters-depth-3">(</span>get-buffer-create <span class="org-string">"*scratch*"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>funcall initial-major-mode<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>insert-file-contents scratch-buffer-file nil nil nil t<span class="org-rainbow-delimiters-depth-2">)</span>
+  
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">ignore-errors</span> <span class="org-rainbow-delimiters-depth-3">(</span>kill-buffer <span class="org-string">".scratch"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Eshell</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Overview</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 Eshell is a shell implemented in Emacs with many commands implemented
 in Elisp which makes it cross platform, the commands ls, pwd, cd and
@@ -2641,9 +2821,9 @@ See also:
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-2" class="outline-4">
-<h4 id="sec-1-18-2"><span class="section-number-4">1.18.2</span> Start Eshell Directly from command line</h4>
-<div class="outline-text-4" id="text-1-18-2">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Start Eshell Directly from command line</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 Start eshell directly in a new Emacs sessions in the terminal wihout
 load init.el.
@@ -2700,9 +2880,9 @@ Or
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-3" class="outline-4">
-<h4 id="sec-1-18-3"><span class="section-number-4">1.18.3</span> Useful elisp commands inside eshell</h4>
-<div class="outline-text-4" id="text-1-18-3">
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Useful elisp commands inside eshell</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 Eshell can run Elisp command - M-x &lt;command&gt; like ordinary Unix shell
 apps. 
@@ -2764,9 +2944,9 @@ Browser a directory in another frame
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-4" class="outline-4">
-<h4 id="sec-1-18-4"><span class="section-number-4">1.18.4</span> Clear eshell</h4>
-<div class="outline-text-4" id="text-1-18-4">
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Clear eshell</h3>
+<div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">eshell/clear</span> <span class="org-rainbow-delimiters-depth-2">()</span>
@@ -2811,10 +2991,12 @@ After the command clear:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-18-5" class="outline-4">
-<h4 id="sec-1-18-5"><span class="section-number-4">1.18.5</span> Set eshell prompt</h4>
-<div class="outline-text-4" id="text-1-18-5">
-</div><ol class="org-ol"><li><a id="sec-1-18-5-1" name="sec-1-18-5-1"></a>Simple prompt<br  /><div class="outline-text-5" id="text-1-18-5-1">
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Set eshell prompt</h3>
+<div class="outline-text-3" id="text-2-5">
+</div><div id="outline-container-sec-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1"><span class="section-number-4">2.5.1</span> Simple prompt</h4>
+<div class="outline-text-4" id="text-2-5-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setq eshell-prompt-function <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-doc">"eshell &gt; "</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -2831,9 +3013,11 @@ After the command clear:
 <b>Prompt with current directory</b>
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="sec-1-18-5-2" name="sec-1-18-5-2"></a>Colorized prompt<br  /><div class="outline-text-5" id="text-1-18-5-2">
+<div id="outline-container-sec-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2"><span class="section-number-4">2.5.2</span> Colorized prompt</h4>
+<div class="outline-text-4" id="text-2-5-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setq eshell-prompt-function
@@ -2853,12 +3037,12 @@ After the command clear:
 </p>
 </div>
 </div>
-</li></ol>
+</div>
 </div>
 
-<div id="outline-container-sec-1-18-6" class="outline-4">
-<h4 id="sec-1-18-6"><span class="section-number-4">1.18.6</span> Change Eshell current directory</h4>
-<div class="outline-text-4" id="text-1-18-6">
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Change Eshell current directory</h3>
+<div class="outline-text-3" id="text-2-6">
 <p>
 This command can be used in Menus or with helm.
 </p>
@@ -2876,9 +3060,9 @@ This command can be used in Menus or with helm.
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-7" class="outline-4">
-<h4 id="sec-1-18-7"><span class="section-number-4">1.18.7</span> Change Eshell current directory to current buffer</h4>
-<div class="outline-text-4" id="text-1-18-7">
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Change Eshell current directory to current buffer</h3>
+<div class="outline-text-3" id="text-2-7">
 <p>
 Usage: M-x eshell-cwd
 </p>
@@ -2905,9 +3089,9 @@ Usage: M-x eshell-cwd
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-8" class="outline-4">
-<h4 id="sec-1-18-8"><span class="section-number-4">1.18.8</span> Open eshell in another window</h4>
-<div class="outline-text-4" id="text-1-18-8">
+<div id="outline-container-sec-2-8" class="outline-3">
+<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Open eshell in another window</h3>
+<div class="outline-text-3" id="text-2-8">
 <p>
 Source: <a href="https://gist.github.com/semmypurewal/b7748e0d6785f3c50e46">mini-eshell.el</a>
 </p>
@@ -2940,9 +3124,9 @@ Usage: M-x open-mini-eshell
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-9" class="outline-4">
-<h4 id="sec-1-18-9"><span class="section-number-4">1.18.9</span> Open eshell in another frame</h4>
-<div class="outline-text-4" id="text-1-18-9">
+<div id="outline-container-sec-2-9" class="outline-3">
+<h3 id="sec-2-9"><span class="section-number-3">2.9</span> Open eshell in another frame</h3>
+<div class="outline-text-3" id="text-2-9">
 <p>
 Usage: M-x eshell-other-frame 
 </p>
@@ -2963,9 +3147,9 @@ Usage: M-x eshell-other-frame
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-10" class="outline-4">
-<h4 id="sec-1-18-10"><span class="section-number-4">1.18.10</span> Open eshell file names from ls output with Return key</h4>
-<div class="outline-text-4" id="text-1-18-10">
+<div id="outline-container-sec-2-10" class="outline-3">
+<h3 id="sec-2-10"><span class="section-number-3">2.10</span> Open eshell file names from ls output with Return key</h3>
+<div class="outline-text-3" id="text-2-10">
 <p>
 Source: <a href="https://www.emacswiki.org/emacs/EshellEnhancedLS">Emacs Wiki</a>  
 </p>
@@ -3012,10 +3196,12 @@ button.
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-11" class="outline-4">
-<h4 id="sec-1-18-11"><span class="section-number-4">1.18.11</span> Functions to copy eshell data to clipboard</h4>
-<div class="outline-text-4" id="text-1-18-11">
-</div><ol class="org-ol"><li><a id="sec-1-18-11-1" name="sec-1-18-11-1"></a>Copy current directory<br  /><div class="outline-text-5" id="text-1-18-11-1">
+<div id="outline-container-sec-2-11" class="outline-3">
+<h3 id="sec-2-11"><span class="section-number-3">2.11</span> Functions to copy eshell data to clipboard</h3>
+<div class="outline-text-3" id="text-2-11">
+</div><div id="outline-container-sec-2-11-1" class="outline-4">
+<h4 id="sec-2-11-1"><span class="section-number-4">2.11.1</span> Copy current directory</h4>
+<div class="outline-text-4" id="text-2-11-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">clipboard/set</span> <span class="org-rainbow-delimiters-depth-2">(</span>astring<span class="org-rainbow-delimiters-depth-2">)</span>
@@ -3051,12 +3237,12 @@ button.
 </p>
 </div>
 </div>
-</li></ol>
+</div>
 </div>
 
-<div id="outline-container-sec-1-18-12" class="outline-4">
-<h4 id="sec-1-18-12"><span class="section-number-4">1.18.12</span> Creating Eshell aliases programatically</h4>
-<div class="outline-text-4" id="text-1-18-12">
+<div id="outline-container-sec-2-12" class="outline-3">
+<h3 id="sec-2-12"><span class="section-number-3">2.12</span> Creating Eshell aliases programatically</h3>
+<div class="outline-text-3" id="text-2-12">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>eshell/alias <span class="org-string">"ff"</span> <span class="org-string">"find-file $1"</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -3080,67 +3266,128 @@ Example of usage:
 </div>
 </div>
 
-<div id="outline-container-sec-1-19" class="outline-3">
-<h3 id="sec-1-19"><span class="section-number-3">1.19</span> Non categorized</h3>
-<div class="outline-text-3" id="text-1-19">
-</div><div id="outline-container-sec-1-19-1" class="outline-4">
-<h4 id="sec-1-19-1"><span class="section-number-4">1.19.1</span> Save the scratch buffer and reload every Emacs startup</h4>
-<div class="outline-text-4" id="text-1-19-1">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Emacs On Microsoft Windows</h2>
+<div class="outline-text-2" id="text-3">
 <p>
-Saves the scratch buffer to a file every times Emacs is closed.
+To get bash for Windows install with Chocolately package manager or
+download GIT version control app that comes bundled with bash and Unix
+utilities like grep, mv, ssh, df and dd. 
 </p>
 
 <p>
-Source: <a href="https://gist.github.com/kobapan/034d5123321b32bb68ca">scratch.el</a>
+Command to run Bash. Usage: M-x run-bash 
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setq scratch-buffer-file <span class="org-string">"~/.emacs.d/scratch.el"</span><span class="org-rainbow-delimiters-depth-1">)</span>
-
-<span class="org-rainbow-delimiters-depth-1">(</span>setq initial-scratch-message <span class="org-string">""</span><span class="org-rainbow-delimiters-depth-1">)</span>           <span class="org-comment-delimiter">;</span><span class="org-comment">initial message</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'kill-emacs-hook 'scratch-save<span class="org-rainbow-delimiters-depth-1">)</span>   <span class="org-comment-delimiter">; </span>
-<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'window-setup-hook 'scratch-resume<span class="org-rainbow-delimiters-depth-1">)</span><span class="org-comment-delimiter">; </span>
-
-<span class="org-comment-delimiter">;;  </span><span class="org-comment">window-setup-hook </span>
-<span class="org-comment-delimiter">;;  </span><span class="org-comment">@see info 38.1.1 Summary: Sequence of Actions at Startup</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'kill-buffer-hook<span class="org-comment-delimiter">; </span><span class="org-comment">*scratch* </span>
-          <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span>
-            <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-4">(</span>equal <span class="org-rainbow-delimiters-depth-5">(</span>buffer-name<span class="org-rainbow-delimiters-depth-5">)</span> <span class="org-string">"*scratch*"</span><span class="org-rainbow-delimiters-depth-4">)</span> <span class="org-rainbow-delimiters-depth-4">(</span>scratch-save<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
-
-<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'after-save-hook        
-          <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span>
-            <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">unless</span> <span class="org-rainbow-delimiters-depth-4">(</span>get-buffer <span class="org-string">"*scratch*"</span><span class="org-rainbow-delimiters-depth-4">)</span> <span class="org-rainbow-delimiters-depth-4">(</span>scratch-resume<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-bash</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+      <span class="org-rainbow-delimiters-depth-2">(</span>interactive<span class="org-rainbow-delimiters-depth-2">)</span>
+      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-4">(</span>shell-file-name <span class="org-string">"C:\\Program Files\\Git\\bin\\bash.exe"</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+            <span class="org-rainbow-delimiters-depth-3">(</span>shell <span class="org-string">"*bash*"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
 
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">scratch-save</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-4">(</span>buf <span class="org-rainbow-delimiters-depth-5">(</span>get-buffer <span class="org-string">"*scratch*"</span><span class="org-rainbow-delimiters-depth-5">)</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
-    <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">when</span> buf
-      <span class="org-rainbow-delimiters-depth-4">(</span>set-buffer buf<span class="org-rainbow-delimiters-depth-4">)</span>
-      <span class="org-rainbow-delimiters-depth-4">(</span>write-file scratch-buffer-file<span class="org-rainbow-delimiters-depth-4">)</span>
-      <span class="org-rainbow-delimiters-depth-4">(</span><span class="org-keyword">ignore-errors</span> <span class="org-rainbow-delimiters-depth-5">(</span>kill-buffer <span class="org-string">"scratch.el"</span><span class="org-rainbow-delimiters-depth-5">)</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<p>
+Command to run cmd.exe. Usage: M-x run-cmdexe 
+</p>
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">scratch-resume</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-doc">"*scratch* "</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>interactive<span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>set-buffer <span class="org-rainbow-delimiters-depth-3">(</span>get-buffer-create <span class="org-string">"*scratch*"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>funcall initial-major-mode<span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>insert-file-contents scratch-buffer-file nil nil nil t<span class="org-rainbow-delimiters-depth-2">)</span>
-  
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">ignore-errors</span> <span class="org-rainbow-delimiters-depth-3">(</span>kill-buffer <span class="org-string">".scratch"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-cmdexe</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+      <span class="org-rainbow-delimiters-depth-2">(</span>interactive<span class="org-rainbow-delimiters-depth-2">)</span>
+      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-4">(</span>shell-file-name <span class="org-string">"cmd.exe"</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
+            <span class="org-rainbow-delimiters-depth-3">(</span>shell <span class="org-string">"*cmd.exe*"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+To run Unix utilities and other command lines apps in Emacs add to the
+PATH variable the path to their directory:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setenv  <span class="org-string">"PATH"</span> <span class="org-rainbow-delimiters-depth-2">(</span>concat
+
+         <span class="org-comment-delimiter">;; </span><span class="org-comment">Path where is installed df.exe, curl.exe, dd.exe and other Unix tools.</span>
+         <span class="org-string">"C:\\Program Files\\Git\\usr\\bin"</span> <span class="org-string">";"</span>
+
+         <span class="org-comment-delimiter">;; </span><span class="org-comment">Path where is installed Fsi.exe (Fsharp Interpreter)</span>
+         <span class="org-comment-delimiter">;; </span><span class="org-comment">Fsc.exe (F# - Fsharp Compiler)</span>
+         <span class="org-string">"C:/Program Files (x86)/Microsoft SDKs/F#/4.0/Framework/v4.0/Fsi.exe"</span> <span class="org-string">";"</span>
+         <span class="org-rainbow-delimiters-depth-3">(</span>getenv <span class="org-string">"PATH"</span><span class="org-rainbow-delimiters-depth-3">)</span>
+
+         <span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Configuration Snippets</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Separte Customization from init file</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">; </span><span class="org-comment">For the built in customization UI in emacs that no one uses. If</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">some package tries to use it, at least have the decency to keep</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">this config file clean.</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq custom-file <span class="org-string">"~/.emacs.d/custom.el"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>load custom-file 'noerror<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Backup Settings</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;</span><span class="org-comment">disable backup</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq backup-inhibited t<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;</span><span class="org-comment">disable auto save</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq auto-save-default nil<span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">Get Rid of temporary files ending in ~</span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">The temporary files will be in the temporary directory</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq backup-directory-alist
+      `<span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-string">".*"</span> . ,temporary-file-directory<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Move Deleted Files to Trash</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq delete-by-moving-to-trash t<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Configuration Snippetes</h2>
-<div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Save Minibuffer History</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><a id="ID-4c533ce2-a074-4a52-8a5f-8e3105145ab5" name="ID-4c533ce2-a074-4a52-8a5f-8e3105145ab5"></a><span class="section-number-3">4.3</span> Tab width and Spaces</h3>
+<div class="outline-text-3" id="text-4-3">
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">force emacs to always use spaces instead of tab characters</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq-default indent-tabs-mode nil<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">set default tab width to 4 spaces</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq default-tab-width 4<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq tab-width 4<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Save Minibuffer History</h3>
+<div class="outline-text-3" id="text-4-4">
 <p>
 Saves the minibuffer history on every Emacs session. 
 </p>
@@ -3156,11 +3403,104 @@ Saves the minibuffer history on every Emacs session.
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Show Line number and column number in minibuffer</h3>
+<div class="outline-text-3" id="text-4-5">
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setq line-number-mode               t<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq column-number-mode             t<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Emacs Server and Client</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Enable find file at point</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+When doing C-x C-f use information at point (your cursor) to open file
+or URL. I.e. if your cursor is on a file path, or URL, it defaults to
+that filled in the minibuffer.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">find-file-at-point, smarter C-x C-f when point on path or URL</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>ffap-bindings<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Unique buffer names</h3>
+<div class="outline-text-3" id="text-4-7">
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Unique buffer name</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">require</span> '<span class="org-constant">uniquify</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq uniquify-buffer-name-style 'forward<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Mark Current Line</h3>
+<div class="outline-text-3" id="text-4-8">
+<p>
+Enable Mark Current Line 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">mark current line:</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>global-hl-line-mode 1<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+Disable Mark Current Line 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">mark current line:</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>global-hl-line-mode 0<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-4-9" class="outline-3">
+<h3 id="sec-4-9"><a id="ID-afabff51-cd40-468f-ab10-06adbf6570a7" name="ID-afabff51-cd40-468f-ab10-06adbf6570a7"></a><span class="section-number-3">4.9</span> Recent Files</h3>
+<div class="outline-text-3" id="text-4-9">
+
+<p>
+Show recent files in the File menu. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">recentf stuff</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">recentf - F5</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">require</span> '<span class="org-constant">recentf</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>recentf-mode 1<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq recentf-max-saved-items 500<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq recentf-max-menu-items 60<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Emacs Server and Client</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 See also:
 </p>
@@ -3217,12 +3557,511 @@ See also:
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Useful Elisp Info Pages</h2>
-<div class="outline-text-2" id="text-4">
-</div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Elisp</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Org-mode</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Code Block Templates</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+When the user writes '&lt;p'in org-mode and hits tab key it expands to a
+python source code block like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+BEGIN_SRC python :results value</span>
+<span class="org-org-block-background">
+</span><span class="org-org-block-end-line">#+END_SRC</span>
+</pre>
+</div>
+
+
+<p>
+Elisp code:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>add-to-list 'org-structure-template-alist
+         '<span class="org-rainbow-delimiters-depth-2">(</span><span class="org-string">"p"</span> <span class="org-string">"#+BEGIN_SRC python :results ?value\n\n#+END_SRC"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Custom Protocols</h3>
+<div class="outline-text-3" id="text-6-2">
+</div><div id="outline-container-sec-6-2-1" class="outline-4">
+<h4 id="sec-6-2-1"><span class="section-number-4">6.2.1</span> Open directory with dired mode</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<p>
+Org-mode already provides the protocol <code>file:&lt;filename&gt;</code> to open a
+directory or file. The motivation to implement this protocol is that it
+is unambiguous like file protocol and easy to search. 
+</p>
+
+<p>
+Hyperlink syntax:  <code>dir:&lt;file-path&gt;</code>
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'org-mode-hook
+          <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span>
+          <span class="org-rainbow-delimiters-depth-3">(</span>org-add-link-type <span class="org-string">"dir"</span> #'dired nil<span class="org-rainbow-delimiters-depth-3">)</span>
+          <span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<p>
+Org-mode file example:
+</p>
+
+<pre class="example">
+Log directory      -  dir:/var/log  -  [[dir:/var/log][Log directory]]
+
+System cofiguration - dir:/etc
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6-2-2" class="outline-4">
+<h4 id="sec-6-2-2"><span class="section-number-4">6.2.2</span> Open directory with system file manager</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<p>
+Hyperlink format: <code>dire:&lt;directory-path&gt;</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defvar</span> <span class="org-variable-name">default-file-manager-app</span> <span class="org-string">"pcmanfm-qt"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">org/protocol-dire</span> <span class="org-rainbow-delimiters-depth-2">(</span>input<span class="org-rainbow-delimiters-depth-2">)</span>    
+  <span class="org-rainbow-delimiters-depth-2">(</span>start-process  <span class="org-string">"proc"</span> <span class="org-comment-delimiter">;; </span><span class="org-comment">Process name</span>
+          nil    <span class="org-comment-delimiter">;; </span><span class="org-comment">Buffer name</span>
+
+          default-file-manager
+          input
+          <span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'org-mode-hook
+          <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span>
+          <span class="org-rainbow-delimiters-depth-3">(</span>org-add-link-type <span class="org-string">"dire"</span> #'org/protocol-dire nil<span class="org-rainbow-delimiters-depth-3">)</span>
+          <span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+Example:
+</p>
+
+<pre class="example">
+To open the directory file:/var/log in the system file 
+manager click on the hyperlink bellow.
+
+
+ - Hyperlink1:   dire:/var/log 
+
+ - Hyperlink2:   [[dire:/var/log][System Log directory]]
+</pre>
+
+
+
+<div class="figure">
+<p><img src="images/org-mode-protocol-file-manager.png" alt="org-mode-protocol-file-manager.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2-3" class="outline-4">
+<h4 id="sec-6-2-3"><span class="section-number-4">6.2.3</span> Man page</h4>
+<div class="outline-text-4" id="text-6-2-3">
+<p>
+Provides a hyperlink that displays a man page when clicked. 
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'org-mode-hook
+          <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span>
+             <span class="org-rainbow-delimiters-depth-3">(</span>org-add-link-type  <span class="org-string">"man"</span> #'woman nil<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+Example: 
+</p>
+
+<p>
+file test.org 
+</p>
+
+<pre class="example">
+Click on the hyperlinks bellow to open the man pages:
+
+Gcc Man Page: 
+
+ - man:gcc 
+
+C-function cbrt Man Page 
+
+ - man:cbrt 
+
+ - [[man:cbrt][C-function cbrt Man Page]]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2-4" class="outline-4">
+<h4 id="sec-6-2-4"><span class="section-number-4">6.2.4</span> Elisp Documentation</h4>
+<div class="outline-text-4" id="text-6-2-4">
+<p>
+Provides clickable link that shows the the Elisp documentation. 
+</p>
+
+<p>
+A link of format <code>elisp-doc:add-hook</code> will show the <code>add-hook</code>
+documentation when clicked. 
+</p>
+
+<p>
+Hyperlink format:  <code>elisp-doc:&lt;function-name&gt;</code> or <code>[elisp-doc:&lt;function-name&gt;]</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">org/protocol-elisp-doc</span> <span class="org-rainbow-delimiters-depth-2">(</span>function-symbol<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>princ function-symbol<span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>describe-function <span class="org-rainbow-delimiters-depth-3">(</span>intern-soft function-symbol<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  
+  <span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">org/protocol-elisp-doc-html</span> <span class="org-rainbow-delimiters-depth-2">(</span>path desc backend<span class="org-rainbow-delimiters-depth-2">)</span>
+   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">cl-case</span> backend
+     <span class="org-rainbow-delimiters-depth-3">(</span>html <span class="org-rainbow-delimiters-depth-4">(</span>format
+            <span class="org-string">"&lt;a href='' title='%s'&gt;%s&lt;/a&gt;"</span>
+            <span class="org-rainbow-delimiters-depth-5">(</span>documentation <span class="org-rainbow-delimiters-depth-6">(</span>intern-soft path<span class="org-rainbow-delimiters-depth-6">)</span><span class="org-rainbow-delimiters-depth-5">)</span>
+            <span class="org-rainbow-delimiters-depth-5">(</span>or desc path<span class="org-rainbow-delimiters-depth-5">)</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>    
+
+
+<span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'org-mode-hook
+
+      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">lambda</span> <span class="org-rainbow-delimiters-depth-3">()</span>
+
+        <span class="org-rainbow-delimiters-depth-3">(</span>org-add-link-type <span class="org-string">"elisp-doc"</span> #'org/protocol-elisp-doc #'org/protocol-elisp-doc-html<span class="org-rainbow-delimiters-depth-3">)</span>
+        <span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+Example: 
+</p>
+
+<p>
+file: <code>/tmp/test.org</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org-mode">Elisp documentation protocol:
+
+[[elisp-doc:add-hook][Function Add hook]]
+
+The function elisp-doc:start-process is used to start an asynchronous process.
+</pre>
+</div>
+
+
+<p>
+This screenshot show what happens when the user clicks in the hyperlink.
+</p>
+
+
+<div class="figure">
+<p><img src="images/elisp-doc-org-mode-protocol-click.png" alt="elisp-doc-org-mode-protocol-click.png" />
+</p>
+</div>
+
+<p>
+Exported to html with: <code>M-x org-html-export-to-html</code> 
+</p>
+
+
+<div class="figure">
+<p><img src="images/elisp-doc-org-mode-protocol.png" alt="elisp-doc-org-mode-protocol.png" /> 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> Settings</h3>
+<div class="outline-text-3" id="text-6-3">
+</div><div id="outline-container-sec-6-3-1" class="outline-4">
+<h4 id="sec-6-3-1"><span class="section-number-4">6.3.1</span> General Settings</h4>
+<div class="outline-text-4" id="text-6-3-1">
+<p>
+Syntax highlight for code blocks  <code>#+BEGIN_SRC .. #+END_SRC</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Syntax highlight for code blocks  #+BEGIN_SRC .. #+END_SRC </span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>setq org-src-fontify-natively t<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+Syntax highlight for latex fragments 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setq org-highlight-latex-and-related '<span class="org-rainbow-delimiters-depth-2">(</span>latex script entities<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6-3-2" class="outline-4">
+<h4 id="sec-6-3-2"><span class="section-number-4">6.3.2</span> Code Block - Org-babel</h4>
+<div class="outline-text-4" id="text-6-3-2">
+<p>
+Enable source code block in org files 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>org-babel-do-load-languages
+ 'org-babel-load-languages
+ '<span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span>emacs-lisp . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>sh . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>python . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>scheme . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>lisp . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>clojure . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>R . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>latex . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>ruby . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>C . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-comment-delimiter">;;; </span><span class="org-comment">(C++ . t)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>ditaa . t<span class="org-rainbow-delimiters-depth-3">)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>haskell . t<span class="org-rainbow-delimiters-depth-3">)</span>
+ <span class="org-comment-delimiter">;;  </span><span class="org-comment">(fsharp . t)</span>
+ <span class="org-comment-delimiter">;;  </span><span class="org-comment">(java . t)</span>
+ <span class="org-comment-delimiter">;;  </span><span class="org-comment">(scala . t)</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">(javascript . t)</span>
+   <span class="org-rainbow-delimiters-depth-3">(</span>maxima . t<span class="org-rainbow-delimiters-depth-3">)</span>
+  <span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<p>
+Disable Security confirmation: 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Disable security confirmations  </span>
+<span class="org-comment-delimiter">;;</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span>setq   <span class="org-comment-delimiter">;; </span><span class="org-comment">Confirmation for running coide blocks </span>
+        org-confirm-babel-evaluate      nil
+        <span class="org-comment-delimiter">;; </span><span class="org-comment">Confirmation for elisp links </span>
+        org-confirm-elisp-link-function nil
+        <span class="org-comment-delimiter">;; </span><span class="org-comment">Confirmation for shell links </span>
+        org-confirm-shell-link-function nil
+
+        org-export-babel-evaluate       nil
+        <span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Useful Commands for Elisp Developers</h2>
+<div class="outline-text-2" id="text-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command: M-x [command]</th>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">check-paren</td>
+<td class="left">&#xa0;</td>
+<td class="left">Find unmatched parenthesis</td>
+</tr>
+
+<tr>
+<td class="left">view-echo-area-messages</td>
+<td class="left">C-h e</td>
+<td class="left">Show the message buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">find-variable</td>
+<td class="left">&#xa0;</td>
+<td class="left">Open the file at the point the variable is defined.</td>
+</tr>
+
+<tr>
+<td class="left">find-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Open an Emacs library or package in the load-path.</td>
+</tr>
+
+<tr>
+<td class="left">find-function</td>
+<td class="left">&#xa0;</td>
+<td class="left">Opens an library.el file at the point the function is defined.</td>
+</tr>
+
+<tr>
+<td class="left">locate-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Show path of a library.el (Emacs Package) file.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>Documentation Commands</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">apropos</td>
+<td class="left">C-h</td>
+<td class="left">Search for all elisp symbols, variables and functions that match a regex pattern.</td>
+</tr>
+
+<tr>
+<td class="left">apropos-command</td>
+<td class="left">C-h a</td>
+<td class="left">Search for all commands (M-x cmd) that match a regexp pattern.</td>
+</tr>
+
+<tr>
+<td class="left">apropos-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Show all symbols associated with an Elisp library (Emacs Package)</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">info-apropos</td>
+<td class="left">&#xa0;</td>
+<td class="left">Find all info pages that match a pattern.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">describe-function</td>
+<td class="left">C-h f</td>
+<td class="left">Show function documentation or docstring.</td>
+</tr>
+
+<tr>
+<td class="left">describe-mode</td>
+<td class="left">C-h m</td>
+<td class="left">Show current major mode documentation and all key bindings associated.</td>
+</tr>
+
+<tr>
+<td class="left">describe-bindings</td>
+<td class="left">C-h-b</td>
+<td class="left">Show all associated key bindings with the current buffer.</td>
+</tr>
+
+<tr>
+<td class="left">describe-variable</td>
+<td class="left">C-h v</td>
+<td class="left">Show variable documentation</td>
+</tr>
+
+<tr>
+<td class="left">describe-package</td>
+<td class="left">&#xa0;</td>
+<td class="left">Describe an Emacs package installed from Melpa repository.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Useful Elisp Info Pages</h2>
+<div class="outline-text-2" id="text-8">
+</div><div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Elisp</h3>
+<div class="outline-text-3" id="text-8-1">
 <p>
 Elisp Top Page
 </p>
@@ -3263,12 +4102,41 @@ Tips about documenting Elisp
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp)Documentation Tips"</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
+
+<p>
+Misc 
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Symbols"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Function Cells"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Defining Commands"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Functions"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Customization</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Customization</h3>
+<div class="outline-text-3" id="text-8-2">
 <p>
 <b>Customization:</b>
 </p>
@@ -3291,9 +4159,9 @@ Tips about documenting Elisp
 </div>
 </div>
 
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Layout</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-sec-8-3" class="outline-3">
+<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Layout</h3>
+<div class="outline-text-3" id="text-8-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(emacs) Fonts"</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -3302,9 +4170,9 @@ Tips about documenting Elisp
 </div>
 </div>
 
-<div id="outline-container-sec-4-4" class="outline-3">
-<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Syntax Tables</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-sec-8-4" class="outline-3">
+<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Syntax Tables</h3>
+<div class="outline-text-3" id="text-8-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Syntax Tables"</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -3313,9 +4181,9 @@ Tips about documenting Elisp
 </div>
 </div>
 
-<div id="outline-container-sec-4-5" class="outline-3">
-<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Environment Variables and OS Detection</h3>
-<div class="outline-text-3" id="text-4-5">
+<div id="outline-container-sec-8-5" class="outline-3">
+<h3 id="sec-8-5"><span class="section-number-3">8.5</span> Environment Variables and OS Detection</h3>
+<div class="outline-text-3" id="text-8-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) System Environment"</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -3323,20 +4191,36 @@ Tips about documenting Elisp
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-6" class="outline-3">
-<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Subprocess Creation</h3>
-<div class="outline-text-3" id="text-4-6">
+<div id="outline-container-sec-8-6" class="outline-3">
+<h3 id="sec-8-6"><span class="section-number-3">8.6</span> Subprocess Creation</h3>
+<div class="outline-text-3" id="text-8-6">
+<ul class="org-ul">
+<li>Creating Subprocesses 
+</li>
+</ul>
+
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Subprocess Creation"</span><span class="org-rainbow-delimiters-depth-1">)</span>
 </pre>
 </div>
+
+<ul class="org-ul">
+<li>Get process output 
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Accepting Output"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-sec-4-7" class="outline-3">
-<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Keybindings</h3>
-<div class="outline-text-3" id="text-4-7">
+<div id="outline-container-sec-8-7" class="outline-3">
+<h3 id="sec-8-7"><span class="section-number-3">8.7</span> Keybindings</h3>
+<div class="outline-text-3" id="text-8-7">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Function Keys"</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -3358,9 +4242,9 @@ Tips about documenting Elisp
 </div>
 </div>
 
-<div id="outline-container-sec-4-8" class="outline-3">
-<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Hooks (Events Callbacks)</h3>
-<div class="outline-text-3" id="text-4-8">
+<div id="outline-container-sec-8-8" class="outline-3">
+<h3 id="sec-8-8"><span class="section-number-3">8.8</span> Hooks (Events Callbacks)</h3>
+<div class="outline-text-3" id="text-8-8">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Hooks"</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -3381,9 +4265,9 @@ Tips about documenting Elisp
 </div>
 </div>
 
-<div id="outline-container-sec-4-9" class="outline-3">
-<h3 id="sec-4-9"><span class="section-number-3">4.9</span> Buffer</h3>
-<div class="outline-text-3" id="text-4-9">
+<div id="outline-container-sec-8-9" class="outline-3">
+<h3 id="sec-8-9"><span class="section-number-3">8.9</span> Buffer</h3>
+<div class="outline-text-3" id="text-8-9">
 <p>
 Buffers 
 </p>
@@ -3468,9 +4352,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-4-10" class="outline-3">
-<h3 id="sec-4-10"><span class="section-number-3">4.10</span> Window</h3>
-<div class="outline-text-3" id="text-4-10">
+<div id="outline-container-sec-8-10" class="outline-3">
+<h3 id="sec-8-10"><span class="section-number-3">8.10</span> Window</h3>
+<div class="outline-text-3" id="text-8-10">
 <p>
 Frame
 </p>
@@ -3483,9 +4367,9 @@ Frame
 </div>
 </div>
 
-<div id="outline-container-sec-4-11" class="outline-3">
-<h3 id="sec-4-11"><span class="section-number-3">4.11</span> Frame</h3>
-<div class="outline-text-3" id="text-4-11">
+<div id="outline-container-sec-8-11" class="outline-3">
+<h3 id="sec-8-11"><span class="section-number-3">8.11</span> Frame</h3>
+<div class="outline-text-3" id="text-8-11">
 <p>
 Frame
 </p>
@@ -3508,9 +4392,9 @@ Frame Parameters
 </div>
 </div>
 
-<div id="outline-container-sec-4-12" class="outline-3">
-<h3 id="sec-4-12"><span class="section-number-3">4.12</span> Files</h3>
-<div class="outline-text-3" id="text-4-12">
+<div id="outline-container-sec-8-12" class="outline-3">
+<h3 id="sec-8-12"><span class="section-number-3">8.12</span> Files</h3>
+<div class="outline-text-3" id="text-8-12">
 <p>
 Files 
 </p>
@@ -3554,9 +4438,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-4-13" class="outline-3">
-<h3 id="sec-4-13"><span class="section-number-3">4.13</span> Text Enconding ISO UTF8 &#x2026;</h3>
-<div class="outline-text-3" id="text-4-13">
+<div id="outline-container-sec-8-13" class="outline-3">
+<h3 id="sec-8-13"><span class="section-number-3">8.13</span> Text Enconding ISO UTF8 &#x2026;</h3>
+<div class="outline-text-3" id="text-8-13">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(emacs) International"</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -3565,9 +4449,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-4-14" class="outline-3">
-<h3 id="sec-4-14"><span class="section-number-3">4.14</span> Loading, Libraries and Packages</h3>
-<div class="outline-text-3" id="text-4-14">
+<div id="outline-container-sec-8-14" class="outline-3">
+<h3 id="sec-8-14"><span class="section-number-3">8.14</span> Loading, Libraries and Packages</h3>
+<div class="outline-text-3" id="text-8-14">
 <p>
 Loading 
 </p>
@@ -3606,9 +4490,9 @@ Packages
 </div>
 </div>
 
-<div id="outline-container-sec-4-15" class="outline-3">
-<h3 id="sec-4-15"><span class="section-number-3">4.15</span> Batch Mode</h3>
-<div class="outline-text-3" id="text-4-15">
+<div id="outline-container-sec-8-15" class="outline-3">
+<h3 id="sec-8-15"><span class="section-number-3">8.15</span> Batch Mode</h3>
+<div class="outline-text-3" id="text-8-15">
 <p>
 Batch Mode
 </p>
@@ -3621,9 +4505,9 @@ Batch Mode
 </div>
 </div>
 
-<div id="outline-container-sec-4-16" class="outline-3">
-<h3 id="sec-4-16"><span class="section-number-3">4.16</span> Syntax Highlight</h3>
-<div class="outline-text-3" id="text-4-16">
+<div id="outline-container-sec-8-16" class="outline-3">
+<h3 id="sec-8-16"><span class="section-number-3">8.16</span> Syntax Highlight</h3>
+<div class="outline-text-3" id="text-8-16">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>info <span class="org-string">"(elisp) Syntax Class Table"</span><span class="org-rainbow-delimiters-depth-1">)</span>
@@ -3632,10 +4516,9 @@ Batch Mode
 </div>
 </div>
 </div>
-
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Selected Gists</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Selected Gists</h2>
+<div class="outline-text-2" id="text-9">
 <ul class="org-ul">
 <li><a href="https://gist.github.com/justinabrahms/1390864">extract archives from eshell</a>
 </li>
@@ -3670,7 +4553,7 @@ UNIX command into a new Emacs buffer
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues Soares Silva</p>
-<p class="date">Created: 2016-08-22 Mon 19:54</p>
+<p class="date">Created: 2016-09-06 Tue 10:55</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
