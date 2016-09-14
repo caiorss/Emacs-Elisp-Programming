@@ -6090,7 +6090,7 @@ ELISP> (show-doc #'mode/ftypes)
 
 *** Mode Specific Key Bindings
 
-The function *define-key*  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: #+END_SRC A-x describe-key #+END_SRC and then type the key bind.
+The function *define-key*  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: =M-x describe-key= and then type the key bind.
 
 #+BEGIN_SRC elisp
 
