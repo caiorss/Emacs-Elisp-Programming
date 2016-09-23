@@ -2082,10 +2082,55 @@ Example of usage:
 file:images/emacs_eshell_alias.png
 
 * Emacs On Microsoft Windows 
+** Set HOME variable 
 
-To get bash for Windows install with Chocolately package manager or
-download GIT version control app that comes bundled with bash and Unix
-utilities like grep, mv, ssh, df and dd. 
+The HOME environment variable sets the user directory path. On Windows
+it is equivalent to %USERPROFILE%, however many Unix applications
+compiled for Windows requires this variable to be set and it also helps to
+browser directories faster through Emacs.
+ 
+Userprofile environment variable:
+
+#+BEGIN_SRC 
+C:\Users\arch>echo %USERPROFILE%
+C:\Users\arch
+#+END_SRC
+
+It can be set permanently by using the commmand below on cmd.exe shell.
+
+#+BEGIN_SRC 
+setx HOME %USERPROFILE%
+#+END_SRC
+
+To test if the variable is set. Open a new cmd.exe shell and type:
+
+#+BEGIN_SRC 
+C:\Users\arch>echo %HOME%
+C:\Users\arch
+#+END_SRC
+
+*It allows to browser Windows directories as:*
+
+|------------+-------------------------|
+| ~          | C:\Users\arch           |
+| ~/Desktop  | C:\Users\arch\Documents |
+| ~/.emacs.d | C:\Users\arch\.emacs.d  |
+
+
+*It also allows the commands:*
+
+To open file _~/.emac.d/init.el_  (C:\Users\arch\.emacs.d\init.el)
+
+ - C-x C-f find-file ~/.emac.d/init.el 
+
+To open directory (C:\Users\arch\Desktop)
+
+ - C-x C-d ~/Desktop 
+** Unix utilities 
+
+You can bash install with Chocolately package manager or download GIT
+version control app that comes bundled with bash and Unix utilities
+like grep, mv, ssh, df and dd.
 
 Command to run Bash. Usage: M-x run-bash 
 
@@ -2106,24 +2151,230 @@ Command to run cmd.exe. Usage: M-x run-cmdexe
             (shell "*cmd.exe*")))
 #+END_SRC
 
+** Path Environment Variables 
+
 To run Unix utilities and other command lines apps in Emacs add to the
-PATH variable the path to their directory:
+PATH system environment variable the path to their directories like this:
+
 
 #+BEGIN_SRC elisp 
 (setenv  "PATH" (concat
 
-         ;; Path where is installed df.exe, curl.exe, dd.exe and other Unix tools.
-         "C:\\Program Files\\Git\\usr\\bin" ";"
+		;; "c:/Windows/System32" ";" 
+		 
+		 "c:/Windows/Microsoft.NET/Framework/v4.0.30319" ";"
+		 
+		 "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319" ";"
+		 
+		 ;; Unix tools 
+		 "C:\\Program Files\\Git\\usr\\bin" ";"
 
-         ;; Path where is installed Fsi.exe (Fsharp Interpreter)
-         ;; Fsc.exe (F# - Fsharp Compiler)
-         "C:/Program Files (x86)/Microsoft SDKs/F#/4.0/Framework/v4.0/Fsi.exe" ";"
-         (getenv "PATH")
+		 ;; User binary files 
+		 "C:\\User\\arch\\bin" ";"
+		 
+		 ;; Mono Installation.
+		 "c:\\Program Files\\Mono\\bin" ";"
+
+		 "c:\\Program Files\\Mono\\lib\\mono\\4.5" ";"
+		 
+		 (getenv "PATH")
 
          ))
 #+END_SRC
 
+** Eshell 
+*** Overview 
+
+Eshell provides many benefits to Windows users: 
+
+ - Many unix like commands implemented on Emacs' Lisp like: mv, cp, which ...
+
+ - Completion
+
+ - History: C-c C-l 
+
+ - Easy copy and paste unlike cmd.exe
+
+ - Integration with Eamcs since it can run Emacs commands (interactive
+   functions) like shell commands.
+
+*** Screenshots
+
+file:images/eshell-windows-demo1.png
+
+*** Demonstrations
+**** Commands and history 
+
+To open the history type: C-c C-l 
+
+file:images/eshell-windows-demo1.gif
+
+**** Emacs Integration 
+
+http://i.imgur.com/0kVYnXO.gif
+
+Eshell can run Emacs elisp commands (interactive functions) like
+find-file, dired as ordinary shell commands like is shown above. 
+
+The function _find-file_ can be executed in eshell as shell command
+=find-file ~/.emacs.d/init.el= .
+
+#+BEGIN_SRC elisp
+(find-file "~/.emacs.d/init.el")
+#+END_SRC
+
+Some useful Elisp commands on Eshell:
+
+Open file:
+
+ - find-file
+ - find-file-other-window
+ - find-file-other-frame 
+
+Open directory:
+
+ - dired
+ - dired-other-window 
+ - dired-other-frame
+
+**** Asyncrhonous Commands 
+
+#+BEGIN_SRC 
+~/Desktop $ notepad.exe &
+#+END_SRC
+
+**** Copy command output to clibpoard 
+
+Eshell comes with a pseudo clipboard device /dev/kill that is useful
+to handle clipboard.
+
+
+*Copy command output to clibpboard*
+
+#+BEGIN_SRC sh
+~/Desktop $ ipconfig.exe > /dev/kill
+#+END_SRC
+
+*Show clibpoard content*
+
+#+BEGIN_SRC sh 
+
+#+END_SRC
+
+
+**** Shell Commands mixed with Emacs commands 
+
+Note: split-string Is an Emacs function.
+
+*Example 1:*
+
+#+BEGIN_SRC sh
+~/Desktop $ split-string $PATH ";" 
+
+(#("C:/Program Files (x86)/Microsoft SDKs/F#/4.0/Framework/v4.0" 0 59
+   (escaped t))
+ #("c:/Windows/System32" 0 19
+   (escaped t))
+ #("c:/Windows/Microsoft.NET/Framework/v4.0.30319" 0 45
+   (escaped t))
+ #("C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319" 0 45
+   (escaped t))
+ #("C:\\Program Files\\Git\\usr\\bin" 0 28
+   (escaped t))
+ #("C:\\User\\arch\\bin" 0 16
+   (escaped t))
+ #("c:\\Program Files\\Mono\\bin" 0 25
+   (escaped t))
+ #("c:\\Program Files\\Mono\\lib\\mono\\4.5" 0 34
+   (escaped t))
+ "")
+~/Desktop $ 
+#+END_SRC
+
+
+*Exmaple 2:*
+
+#+BEGIN_SRC sh 
+~/Desktop $ for m in {split-string $PATH ";"} {echo $m}
+
+C:/Program Files (x86)/Microsoft SDKs/F#/4.0/Framework/v4.0
+c:/Windows/System32
+c:/Windows/Microsoft.NET/Framework/v4.0.30319
+C:\Windows\Microsoft.NET\Framework\v4.0.30319
+C:\Program Files\Git\usr\bin
+C:\User\arch\bin
+c:\Program Files\Mono\bin
+c:\Program Files\Mono\lib\mono\4.5
+~/Desktop $ 
+#+END_SRC
+
+
+*Example 3:*
+
+#+BEGIN_SRC sh
+~/Desktop $ for m in $load-path { echo $m}
+
+e:/projects/org-wiki
+~/.emacs.d/packages
+c:/Users/arch/.emacs.d/elpa/csharp-mode-20160901.319
+c:/Users/arch/.emacs.d/elpa/fsharp-mode-20160719.315
+c:/Users/arch/.emacs.d/elpa/flycheck-20160817.321
+c:/Users/arch/.emacs.d/elpa/company-quickhelp-20160211.718
+c:/Users/arch/.emacs.d/elpa/company-20160730.1516
+c:/Users/arch/.emacs.d/elpa/helm-anything-20141126.231
+c:/Users/arch/.emacs.d/elpa/anything-20160822.1852
+c:/Users/arch/.emacs.d/elpa/helm-20160824.745
+...
+#+END_SRC
+
+** Powershell 
+
+This command runs Powershell on Emacs:
+
+#+BEGIN_SRC elisp 
+(defun run-powershell ()
+  "Run powershell"
+  (interactive)
+  (async-shell-command "c:/windows/system32/WindowsPowerShell/v1.0/powershell.exe -Command -"
+		       nil
+		       nil)
+  )
+#+END_SRC
+
+Usage: M-x run-powershell. 
+
 * Configuration Snippets 
+** Basic Settings
+*** Turn-off Alarm Bell 
+
+#+BEGIN_SRC elisp 
+(setq ring-bell-function #'ignore)
+#+END_SRC
+
+*** Turn-off Cursor Blink 
+
+#+BEGIN_SRC elisp 
+(blink-cursor-mode -1)
+#+END_SRC
+
+*** Turn-off Startup Screen 
+
+#+BEGIN_SRC elisp 
+(setq inhibit-startup-screen t)
+#+END_SRC
+    
+*** Ask y or n instead of yes or no 
+
+#+BEGIN_SRC elisp 
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** Languages and Encoding
+
+#+BEGIN_SRC elisp 
+(prefer-coding-system 'utf-8)
+#+END_SRC
+
 ** Separte Customization from init file 
 
 
@@ -2134,8 +2385,23 @@ PATH variable the path to their directory:
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 #+END_SRC
-** Backup Settings
+** Tab width and Spaces
+    :PROPERTIES:
+    :ID:       4c533ce2-a074-4a52-8a5f-8e3105145ab5
+    :END:
+    
+#+BEGIN_SRC emacs-lisp
 
+;; force emacs to always use spaces instead of tab characters
+(setq-default indent-tabs-mode nil)
+
+;; set default tab width to 4 spaces
+(setq default-tab-width 4)
+(setq tab-width 4)
+
+#+END_SRC
+
+** Backup Settings
 
 #+BEGIN_SRC emacs-lisp
 
@@ -2156,34 +2422,6 @@ PATH variable the path to their directory:
 ;;
 (setq delete-by-moving-to-trash t)
 
-#+END_SRC
-
-** Tab width and Spaces
-    :PROPERTIES:
-    :ID:       4c533ce2-a074-4a52-8a5f-8e3105145ab5
-    :END:
-    
-#+BEGIN_SRC emacs-lisp
-
-;; force emacs to always use spaces instead of tab characters
-(setq-default indent-tabs-mode nil)
-
-;; set default tab width to 4 spaces
-(setq default-tab-width 4)
-(setq tab-width 4)
-
-#+END_SRC
-
-** Save Minibuffer History 
-
-Saves the minibuffer history on every Emacs session. 
-
-#+BEGIN_SRC elisp 
-(savehist-mode 1)
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-
-;; To set the file which the minibuffer is saved use:
-(setq savehist-file "~/.emacs.d/tmp/savehist")
 #+END_SRC
 
 ** Show Line number and column number in minibuffer
@@ -2228,7 +2466,6 @@ Disable Mark Current Line
 (global-hl-line-mode 0)
 #+END_SRC
 
-
 ** Recent Files
     :PROPERTIES:
     :ID:       afabff51-cd40-468f-ab10-06adbf6570a7
@@ -2246,6 +2483,18 @@ Show recent files in the File menu.
 (setq recentf-max-menu-items 60)
 
 
+#+END_SRC
+
+** Save Minibuffer History 
+
+Saves the minibuffer history on every Emacs session. 
+
+#+BEGIN_SRC elisp 
+(savehist-mode 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+
+;; To set the file which the minibuffer is saved use:
+(setq savehist-file "~/.emacs.d/tmp/savehist")
 #+END_SRC
 
 * Emacs Server and Client 
