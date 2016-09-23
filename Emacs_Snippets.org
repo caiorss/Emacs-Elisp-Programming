@@ -1293,6 +1293,85 @@ Usage: M-x search-google
   (browse-url "https://www.gnu.org/software/emacs/manual/"))
 #+END_SRC
 
+*** Browser Inside Emacs
+
+Emacs Provides a built-in lightweight web browser eww browser that can be used to
+quick access web sites in terminal or Emacs GUI.
+
+Open a Url with eww-browser:
+
+ - =M-x eww <url>=
+
+#+BEGIN_SRC elisp
+(eww-browse-url "http://m.reddit.com/r/emacs")
+#+END_SRC
+
+*Open a html file with eww-browser*
+
+ - =M-x eww-open-file <file-name>=
+
+It is useful to view html documentation inside Emacs.
+
+#+BEGIN_SRC elisp
+(eww-open-file "/some/html/file.html")
+#+END_SRC
+
+
+*Key Bindings*
+
+| Key Binding  | Description                      |
+|--------------+----------------------------------|
+| C-h m        | Show all keybindings of eww-mode |
+| q            | Quit eww browser                 |
+| Return/Enter | Open url at point                |
+| Tab          | Jump to next hyperlink           |
+| C-A i        | Jump to previous hyperlink       |
+| Space        | Scrow Down                       |
+| Esc          | Scrow Up                         |
+| w            | Copy page Url                    |
+| l            | Go to previous page              |
+| n            | Got to next page                 |
+| g            | Update/ Refresh                  |
+
+
+
+
+To load web sites faster use mobile url. Some suggestions:
+
+Reddit
+
+ - http://m.reddit.com
+ - http://m.reddit.com/r/emacs
+
+Google Search
+
+ - ~http://www.google.com/m?q=<query>~  - Country/Culture sensitive search
+
+ - ~http://www.google.ca/m?q=<query>~   - Country/Culture insensitive search, always English.
+
+
+Google News:
+
+ - http://www.gooogle.com/m/news - Country/Culure sensitive
+
+ - http://www.google.ca/m/news - Canada News
+
+Arch Linux Wiki
+
+ - http://wiki.archlinux.org/index.php/Table_of_contents
+
+Wikipedia
+
+ - http://en.m.wikipedia.org
+
+Hackernews
+
+ - http://www.news.ycombinator.com
+
+See the browser http request:
+
+ - http://www.httpbin.org/get
+
 ** Packages 
 *** Test if package is installed 
 *** Install a package if it is not installed 
