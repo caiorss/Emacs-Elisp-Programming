@@ -1,13 +1,4 @@
 # -*- mode: org; -*-
-#+AUTHOR: Caio Rodrigues
-#+EMAIL: <caiorss.rodrigues@gmail.com>
-#+KEYWORDS: emacs, elisp, lisp, programming
-#+LANGUAGE: en
-#+DESCRIPTION: Emacs programming and customization.
-#+URL:  http://tinyurl.com/emacsinabox
-#+STARTUP: overview
-#+OPTIONS: 
-
 #+INCLUDE: theme/style.org
 #+TITLE: Emacs In a Box
 

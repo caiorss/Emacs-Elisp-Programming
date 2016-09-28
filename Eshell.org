@@ -1,4 +1,6 @@
-
+# -*- mode: org; -*-
+#+INCLUDE: theme/style.org
+#+TITLE: Eshell 
 
 * Eshell
 
