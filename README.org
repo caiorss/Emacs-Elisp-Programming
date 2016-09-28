@@ -76,6 +76,10 @@ as ls, pwd, cp, mv implemented in Elisp.
 Programming language-specific configurations. 
 
 
+ - [[file:Emacs_On_Windows.org][Emacs on Microsoft Windows]]
+
+Emacs settings for Microsoft Windows OS.
+
  - [[file:Utilities.org][Utilities]] 
 
 Emacs utilities and goodness like Calculator, Magit, Helm and so on.
