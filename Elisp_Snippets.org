@@ -1019,6 +1019,125 @@ ELISP> (directory-files "/etc/" nil "\\.cfg")
 ("rc_maps.cfg" "vdpau_wrapper.cfg")
 
 #+END_SRC
+** Dired mode snippets 
+
+The dired mode is the mode used by Emacs to browser directories.
+
+See also: [[https://www.reddit.com/r/emacs/comments/4agkye/how_do_you_customize_dired/][How do you customize dired?]]
+
+Source: [[https://gist.github.com/hiroina/4702961][hiroina/.emacs]]
+
+ - Copy path of file at point.
+
+#+BEGIN_SRC elisp
+(defun dired-copy-path ()
+  "In dired, copy file path to kill-buffer.  At 2nd time it copy current directory to kill-buffer."
+  (interactive)
+  (let (path)
+    (setq path (dired-file-name-at-point))
+	(if (string= path (current-kill 0 1)) (setq path (dired-current-directory)))
+    (message path)
+    (kill-new path)
+  )
+)
+#+END_SRC
+
+
+ - Create empty file at current directory opened in dired mode.
+
+#+BEGIN_SRC elisp
+(defun dired-touch ()
+  "Creates empty file at current directory."
+  (interactive)
+
+  (append-to-file "" nil (read-string "New file: "))
+  (if (equal major-mode 'dired-mode)
+
+      (revert-buffer)
+      ))
+#+END_SRC
+
+ - Open directory at point with Microsoft Explorer in Windows OS. 
+
+#+BEGIN_SRC elisp 
+(defun dired-exec-explorer ()
+  "In dired, execute Explorer"
+  (interactive)
+  (let (path)
+    (setq path (dired-file-name-at-point))
+    (setq path (replace-regexp-in-string "~" "c:/home" path))
+    (setq path (replace-regexp-in-string "/" "\\\\" path))
+    (message path)
+    ;(kill-new path)
+    (start-process "explorer" nil "explorer" (concat "/select," path))
+  )
+)
+
+#+END_SRC
+
+ - Open multiple marked files 
+
+#+BEGIN_SRC elisp 
+(defun dired-open-files (files)
+  "
+  Open all marked files in dired mode with m. 
+  
+  Usage: 
+        1. Mark the files with m 
+        2. M-x dired-open-files  
+  "
+  (interactive  (list (dired-get-marked-files)) )
+
+  (mapc #'find-file files)
+
+  )
+#+END_SRC
+
+Close multiple marked files 
+
+#+BEGIN_SRC elisp 
+
+(setq lexical-binding t)
+
+(defun compose (fn1 fn2)
+  (let ((lexical-binding t))
+
+    (lambda (x)
+       (funcall fn2 (funcall fn1 x))
+    )
+  ))
+
+(defun dired-close-files (files)
+
+  (interactive  (list (dired-get-marked-files)) )
+
+  (mapc (compose #'get-file-buffer #'kill-buffer) files)
+
+  )
+#+END_SRC
+
+ - Open a file with default system app in dired mode 
+
+Usage. Select a file in dired mode and enter =M-x dired-xdg=
+
+#+BEGIN_SRC elisp
+(defun dired-xdg ()
+  "
+   Open file at point in dired buffer with current Windows
+   default app
+
+   Usage: In the dired mode select a file and type M-x dired-xdg
+   to execute the file with the system default app.
+  "
+  (interactive)
+
+  (with-current-buffer
+      (start-process
+       "proc"
+       nil
+       ;; Command
+       "cmd"  "/c"  "start" (dired-get-filename))))
+#+END_SRC
 
 ** Text Manipulation 
 *** Text alignment 
@@ -1085,7 +1204,6 @@ From: [[https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d][jidaikob
     (insert strings)
 (goto-char beg)))
 #+END_SRC
-
 ** Emacs Introspection 
 *** User init file
 
@@ -1371,7 +1489,6 @@ Hackernews
 See the browser http request:
 
  - http://www.httpbin.org/get
-
 ** Http Requests 
 *** Download File 
 
@@ -1424,116 +1541,9 @@ Access-Control-Allow-Credentials: true
   "url": "http://www.httpbin.org/get"
 }
 #+end_example
-
-
 ** Packages 
 *** Test if package is installed 
 *** Install a package if it is not installed 
-** Dired mode snippets 
-
-The dired mode is the mode used by Emacs to browser directories.
-
-See also: [[https://www.reddit.com/r/emacs/comments/4agkye/how_do_you_customize_dired/][How do you customize dired?]]
-
-Source: [[https://gist.github.com/hiroina/4702961][hiroina/.emacs]]
-
- - Copy path of file at point.
-
-#+BEGIN_SRC elisp
-(defun dired-copy-path ()
-  "In dired, copy file path to kill-buffer.  At 2nd time it copy current directory to kill-buffer."
-  (interactive)
-  (let (path)
-    (setq path (dired-file-name-at-point))
-	(if (string= path (current-kill 0 1)) (setq path (dired-current-directory)))
-    (message path)
-    (kill-new path)
-  )
-)
-#+END_SRC
-
-
- - Open directory at point with Microsoft Explorer in Windows OS. 
-
-#+BEGIN_SRC elisp 
-(defun dired-exec-explorer ()
-  "In dired, execute Explorer"
-  (interactive)
-  (let (path)
-    (setq path (dired-file-name-at-point))
-    (setq path (replace-regexp-in-string "~" "c:/home" path))
-    (setq path (replace-regexp-in-string "/" "\\\\" path))
-    (message path)
-    ;(kill-new path)
-    (start-process "explorer" nil "explorer" (concat "/select," path))
-  )
-)
-
-#+END_SRC
-
- - Open multiple marked files 
-
-#+BEGIN_SRC elisp 
-(defun dired-open-files (files)
-  "
-  Open all marked files in dired mode with m. 
-  
-  Usage: 
-        1. Mark the files with m 
-        2. M-x dired-open-files  
-  "
-  (interactive  (list (dired-get-marked-files)) )
-
-  (mapc #'find-file files)
-
-  )
-#+END_SRC
-
-Close multiple marked files 
-
-#+BEGIN_SRC elisp 
-
-(setq lexical-binding t)
-
-(defun compose (fn1 fn2)
-  (let ((lexical-binding t))
-
-    (lambda (x)
-       (funcall fn2 (funcall fn1 x))
-    )
-  ))
-
-(defun dired-close-files (files)
-
-  (interactive  (list (dired-get-marked-files)) )
-
-  (mapc (compose #'get-file-buffer #'kill-buffer) files)
-
-  )
-#+END_SRC
-
- - Open a file with default system app in dired mode 
-
-Usage. Select a file in dired mode and enter =M-x dired-xdg=
-
-#+BEGIN_SRC elisp
-(defun dired-xdg ()
-  "
-   Open file at point in dired buffer with current Windows
-   default app
-
-   Usage: In the dired mode select a file and type M-x dired-xdg
-   to execute the file with the system default app.
-  "
-  (interactive)
-
-  (with-current-buffer
-      (start-process
-       "proc"
-       nil
-       ;; Command
-       "cmd"  "/c"  "start" (dired-get-filename))))
-#+END_SRC
 
 ** Helm Snippets 
 *** Browser Recent files  
