@@ -1,4 +1,19 @@
+# -*- mode: org; -*-
+#+AUTHOR: Caio Rodrigues
+#+EMAIL: <caiorss.rodrigues@gmail.com>
+#+KEYWORDS: emacs, elisp, lisp, programming
+#+LANGUAGE: en
+#+DESCRIPTION: Emacs programming and customization.
+#+URL:  http://tinyurl.com/emacsinabox
+#+STARTUP: overview
+#+OPTIONS: 
+
+#+INCLUDE: theme/style.org
+#+TITLE: Emacs Utilities 
+
 * Emacs Utilities 
+** Manpage Reader 
+** Info Page Reader 
 ** Spell Checker
 
 Emacs uses external programs to check the spell. It supports _ispell_,
@@ -85,4 +100,290 @@ See also:
   - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][Emacs Manual - Check and Correcting Spelling]]
   - [[http://ergoemacs.org/emacs/emacs_spell_checker_problems.html][Emacs Spell Checker Problems]]
   - [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][What's the best spell check setup in emacs]]
+** Calculator - M-x calc 
 
+*Overview:*
+ 
+ - RPN Calculation (Like HP48g series)
+
+ - Good for small calculation and verify expected values.
+
+ - Scientific calculator
+
+ - Bitwise operation: Useful for low level programming like:
+   C-programming, embedded systems, network, machine instructions
+
+ - Units - Convert units like meters, inches, feets, min, seconds,
+   bits, bytes ...
+
+ - Functions (cos, sin, exp bound to keybindings)
+
+ - Date calculations
+
+ - Symbolic Math 
+
+*Documentation*
+
+|                      |               |
+|----------------------+---------------|
+| Describe keybindings | C-h m         |
+| Calc Info manual     | M-x calc-info |
+|                      |               |
+
+*Stack Commands*
+
+|      |     |                                     |
+|------+-----+-------------------------------------|
+| Dup  | RET | Duplicate last number of stack.     |
+| Swap | Tab | Swap the last two numbers of stack. |
+|      |     |                                     |
+|      |     |                                     |
+ 
+
+*Scientific Functions*
+
+| Function               | Key    |
+|------------------------+--------|
+| set precision          | p      |
+| change sign            | n      |
+| reciprocal 1/n         | &      |
+| square root            | Q      |
+|                        |        |
+| ln                     | L      |
+| exp (e^x)              | E      |
+| 10^x                   | H E    |
+|                        |        |
+| sin                    | S      |
+| cos                    | C      |
+| tan                    | T      |
+|                        |        |
+| radian mode            | m r    |
+| degree mode            | m d    |
+|                        |        |
+| pi \pi  (3.415...)     | P      |
+|                        |        |
+| factorial              | !, k d |
+| Prime factorization    | k f    |
+| GCD                    | k g    |
+| LCM                    | k l    |
+| Error function - erf   | f e    |
+| Error fuinction - erfc | I f e  |
+|                        |        |
+
+*Financial Functions*
+
+|                                       |          |
+|---------------------------------------+----------|
+| Enter percentage                      | M-%      |
+| Convert to percentage                 | c %      |
+| Percentage change                     | b %      |
+|                                       |          |
+| present value                         | b P      |
+| future value                          | b F      |
+| rate of return                        | b T      |
+| number of payments                    | b #      |
+| size of payments                      | b M      |
+| net present value, int rate of return | b N, b I |
+|                                       |          |
+
+*Formula transformation*
+
+| Description                      | Key binding                          | Output                                    |
+|----------------------------------+--------------------------------------+-------------------------------------------|
+| Enter a formula                  | ' (-b + sqrt(b^2 - 4*a*c) / (2 * a)) |                                           |
+| Print the formula in Latex mode  | dL                                   | ~\frac{\sqrt{b^2 - 4 a c} - b}{2 a}~      |
+| Creates a C-lanaguage code       | dC                                   | ~(sqrt(pow(b, 2) - 4*(a*c)) - b) / (2*a)~ |
+| Normal Language                  | dN                                   | =_' (-b + sqrt(b^2 - 4*a*c) / (2 * a))_=  |
+| Show formula in big display mode | dB                                   |                                           |
+
+*Unit Conversions*
+
+| Description                    | M-x command |
+|--------------------------------+-------------|
+| Enter number with unites       | ' 100 ft/hr |
+| Convert to new unit, base unit | u c, u b    |
+| Convert temperature units      | u t         |
+| Simplify unit expression       | u s         |
+| View unit table                | u v         |
+
+
+*Numbers with different base* 
+
+| Description | Emacs Calc | Base 10 |
+|-------------+------------+---------|
+| Binary      | 2#11110101 |     245 |
+| Octal       |       8#27 |      23 |
+| Hexadecimal |    16#FFFF |   65535 |
+
+*Bitwise Operations* 
+
+| Keybinding | M-x command        | Description                                   |
+|------------+--------------------+-----------------------------------------------|
+|            |                    | *Number Representation*                       |
+| d 0        |                    | Decimal (Standard )                           |
+| d 2        |                    | Number representation to binary 2#00100111    |
+| 0 d 2      |                    | Two-complement binary                         |
+| d 6        |                    | Hexadecimal                                   |
+|            |                    |                                               |
+|            |                    | *Word Size*                                   |
+| b w        |                    | Set word size (8 bits, 16 bits, 32 bits ...)  |
+| b c        | calc-clip          | Clip the current number to current word size. |
+|            |                    |                                               |
+|            |                    | *Bitwise operation*                           |
+| b a        | calc-and           | Bitwise AND                                   |
+| b o        | calc-or            | Bitwise OR                                    |
+| b x        | calc-xor           | Bitwise XOR                                   |
+| b n        | calc-not           | Bitwise NOT                                   |
+| b d        | calc-diff          | Bitwise difference                            |
+| b r        | calc-rshift-binary | Bitwise right shift by 1 bit                  |
+| b l        | calc-lshift-binary | Bitwise left shift by 1 bit                   |
+
+
+
+See also
+
+ - [[https://florian.adamsky.it/2016/03/31/emacs-calc-for-programmers-and-cs.html][Emacs Calc for Programmers and Computer Scientists - Florian
+   Adamsky]]
+
+
+ - [[http://www.johndcook.com/blog/2010/10/11/emacs-calc/][The Emacs calculator calc]]
+
+
+ - [[https://www.gnu.org/software/emacs/refcards/pdf/calccard.pdf][Calc mode reference card.]]
+
+
+ - [[https://www.youtube.com/watch?v=D9lmCbLGZ_c][An Emacs Calc-Mode Epiphany - YouTube]]
+
+
+ - [[http://www.drlock.com/blog/2013/01/31/the-gnu-emacs-calculator/][DrLock.com » Blog Archive » The GNU Emacs Calculator]]
+
+
+ - [[https://vimeo.com/14742598][Emacs-Calc: The Poor Man’s Mathematica on Vimeo]]
+
+
+ - [[http://beige.ucs.indiana.edu/P573/node97.html][Calc, the King of Calculators]]
+
+
+ - [[https://truongnghiem.wordpress.com/common-calculations-in-emacscalc/][Common calculations in Emacs/Calc | Truong's Weblog]]
+ 
+
+ - [[https://truongnghiem.wordpress.com/2010/07/12/make-typing-mathematical-equations-in-latex-easier-with-emacs-calc/][Make typing mathematical equations in LaTeX easier with Emacs’
+   Calc | Truong's Weblog]]  
+
+
+ - [[https://www.reddit.com/r/emacs/comments/1mbn0s/the_emacs_calculator/][The Emacs Calculator : emacs]]
+
+
+ - [[https://www.emacswiki.org/emacs/Calc_Tutorials_by_Andrew_Hyatt][EmacsWiki: Calc Tutorials by Andrew Hyatt]]
+
+
+ - [[http://stackoverflow.com/questions/13057245/how-to-completely-erase-emacs-calcs-state][How to completely erase Emacs Calc's state? - Stack Overflow]]
+
+
+ - [[https://www.slac.stanford.edu/comp/unix/gnu-info/calc_2.html][GNU Emacs Calc 2.02 Manual - Getting Started]]
+
+** Magit - Emacs Interface to GIT 
+   :PROPERTIES:
+   :ID:       c1ca4260-446b-456b-a555-bcdd4bc5329f
+   :END:
+
+ See:  
+
+  - http://stackapps.com/questions/3950/sx-stack-exchange-for-emacs
+
+ Magit Remote Branches 
+  
+  -  http://jr0cket.co.uk/2012/12/driving-git-with-emacs-pure-magic-with.html  
+
+
+ Magit Reference Card:
+
+  - https://magit.vc/manual/magit-refcard.pdf 
+
+ Another Reference Card 
+
+  - http://wiki-old.lihebi.com/posts/tools/software/emacs/packages/magit/
+
+
+  - http://ergoemacs.org/emacs/emacs_magit-mode_tutorial.html
+
+
+ | Command M-x           | Key bind     | GIT           |                                               |
+ |                       | magit-status |               |                                               |
+ |-----------------------+--------------+---------------+-----------------------------------------------|
+ | magit-status          |              | git status    | Magit status is the main entry point to Magit |
+ | magit-init            |              | git init      | Init a git repository                         |
+ | magit-log             |              | git log       |                                               |
+ | magit-process-bufffer | $            |               | Displays the git command and its output       |
+ |                       | g            |               | Update magit status buffer                    |
+ |                       | l            |               | History                                       |
+ |                       | L            |               | Verbose history                               |
+ |                       | !!           | git <command> | Run a git command                             |
+ |                       | !s           |               | Magit shell command                           |
+ |                       |              |               |                                               |
+
+
+ Remote Branches 
+
+ | Command M-x         |                              |
+ |---------------------+------------------------------|
+ | magit-add-remote    | Add a remote branch to magit |
+ | magit-remote-add    | M-a add remote repository    |
+ | magit-remote-remove | M-d remove remote repository |
+ |                     |                              |
+
+
+ Untracked files commands:
+
+ |       |                                       |   |
+ |-------+---------------------------------------+---|
+ | s     | Add untracked file to staging area    |   |
+ | C-u S | Stage all untracked and tracked files |   |
+ | i     | Add filename to .gitignore            |   |
+ | k     | Delete untracked file, forever        |   |
+
+
+ Staging and Commiting 
+
+ |         |                                         |
+ |---------+-----------------------------------------|
+ | u       | Unstage                                 |
+ | C-u s   | Prompt file for stagin                  |
+ | U       | Unstage everything that has been staged |
+ | c       | Pop buffer for commit message           |
+ | C-c C-c | Amend commit message                    |
+ | C-c C-k | Erage magit-log-edit buffer and bury it |
+ |         |                                         |
+
+ Tagging 
+
+ |     |                          |
+ |-----+--------------------------|
+ | t t | Create a lightweight tag |
+ | t a | Create annotated tag     |
+
+
+ Stashing 
+
+ |     |                  |
+ |-----+------------------|
+ | z z | Create new stash |
+ | a   | Apply stash      |
+ | A   | Pop a stash      |
+ | k   | Drop a stash     |
+
+
+ Branch 
+
+ |       |                                               |
+ |-------+-----------------------------------------------|
+ |       |                                               |
+ | b v   | Branch manager                                |
+ | b b   | Switch to a different branch                  |
+ | b n   | Create a new branch                           |
+ | k     | Delete current branch                         |
+ | C-u k | Delte branch event if it hasn't been merged   |
+ | m m   | Merge the branch in current line to specified |
+ | g     | Refresh branch list                           |
+ | q     | Buries the branch list and deletes the window |
+ |       |                                               |
