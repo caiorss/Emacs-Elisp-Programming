@@ -399,7 +399,6 @@ See also:
   - [[http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/][Bash Emacs Editing Mode Cheat Sheet]]
   - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
 
-
 ** Commands
 
 | Command                        | Description                                                  |
@@ -409,6 +408,7 @@ See also:
 | M-x suspend-emacs              | Suspend Emacs when in terminal or iconify in graphical mode. |
 | M-x quit-window                | Quit Emacs.                                                  |
 | M-x revert-file                | Update buffer when file is changed externally.               |
+| M-x auto-revert-mode           | Auto update the current file when its changed externally.    |
 | M-x read-only  or C-x C-q      | Toggle the current buffer read only.                         |
 | M-x delete-trailing-whitespace | Delete trailing Whistespace                                  |
 | M-x tabify                     | Converts all spaces to tab                                   |
@@ -416,11 +416,17 @@ See also:
 | M-x whitespace-mode            | Toggle white space view.                                     |
 |                                |                                                              |
 
-Change current buffer mode:
+Notes:
 
-Sometimes when editing a script without file extension it is useful to
-tell Emacs what is the file format to enable syntax highlight and mode
-functions.
+ - The command auto-revert-mode is useful to edit alongside IDEs like
+   Visual Studio or Eclipse. If you change the file it is
+   automatically updated.
+
+*Change current buffer mode*
+
+it is useful to tell Emacs the file format to enable syntax highlight
+and mode functions when editing a script or configuration file without
+file extension like .gitconfig or python script without it.
 
  - =M-x sh-mode=      Shell Script - sh extension
  - =M-x pyhton-mode=  Example: A python script without extension ".py"
