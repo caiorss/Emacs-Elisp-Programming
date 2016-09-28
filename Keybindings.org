@@ -7,6 +7,7 @@
 #+URL:  http://tinyurl.com/emacsinabox
 #+STARTUP: overview
 #+OPTIONS: 
+#+INCLUDE: theme/style.org
 
 #+TITLE: Emacs Keybindings
 
