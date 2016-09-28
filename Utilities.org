@@ -7,13 +7,21 @@
 #+URL:  http://tinyurl.com/emacsinabox
 #+STARTUP: overview
 #+OPTIONS: 
-
 #+INCLUDE: theme/style.org
+
 #+TITLE: Emacs Utilities 
 
 * Emacs Utilities 
 ** Manpage Reader 
+
+To read manpages enter =M-x woman=.
+
 ** Info Page Reader 
+
+ - To Browser info pages and also the Emacs documentation. =M-x info=
+
+ - Search Info pages. =M-x info-apropos=
+
 ** Spell Checker
 
 Emacs uses external programs to check the spell. It supports _ispell_,
@@ -111,7 +119,7 @@ See also:
  - Scientific calculator
 
  - Bitwise operation: Useful for low level programming like:
-   C-programming, embedded systems, network, machine instructions
+   C-programming, embedded systems, network and machine instructions
 
  - Units - Convert units like meters, inches, feets, min, seconds,
    bits, bytes ...
@@ -387,3 +395,14 @@ See also
  | g     | Refresh branch list                           |
  | q     | Buries the branch list and deletes the window |
  |       |                                               |
+** Helm utilities 
+
+- M-x helm-M-x - Show all M-x commands
+
+- M-x helm-buffers-list  - Switch buffers
+
+- M-x helm-find-files  - Helm equivalent of M-x find-files
+
+- M-x helm-show-kill-ring
+
+- M-x helm-info  - Search Info pages. 
