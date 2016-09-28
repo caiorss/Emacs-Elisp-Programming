@@ -1372,6 +1372,60 @@ See the browser http request:
 
  - http://www.httpbin.org/get
 
+** Http Requests 
+*** Download File 
+
+#+BEGIN_SRC 
+(url-copy-file <url> <filename>)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(url-copy-file "http://www.httpbin.org/get" "/tmp/output")
+(find-file "/tmp/output")
+#+END_SRC
+
+*** url-retrieve-synchronously
+
+#+BEGIN_SRC 
+(url-retrieve-synchronously URL &optional SILENT INHIBIT-COOKIES)
+#+END_SRC
+
+Example: 
+
+#+BEGIN_SRC elisp 
+(with-current-buffer  (url-retrieve-synchronously "http://www.httpbin.org/get")
+   (buffer-substring-no-properties (point-min) (point-max)))
+#+END_SRC
+
+Output:
+
+#+RESULTS:
+#+begin_example
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 23 Sep 2016 23:44:21 GMT
+Content-Type: application/json
+Content-Length: 304
+Connection: keep-alive
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+
+{
+  "args": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "gzip", 
+    "Extension": "Security/Digest Security/SSL", 
+    "Host": "www.httpbin.org", 
+    "Mime-Version": "1.0", 
+    "User-Agent": "URL/Emacs"
+  }, 
+  "origin": "179.176.152.199", 
+  "url": "http://www.httpbin.org/get"
+}
+#+end_example
+
+
 ** Packages 
 *** Test if package is installed 
 *** Install a package if it is not installed 
