@@ -1,5 +1,5 @@
 # -*- mode: org; -*-
-#+INCLUDE: theme/style.org
+#+INCLUDE: theme/style.org 
 #+TITLE: Emacs In a Box
 
 * Emacs - Programming and Customization
@@ -67,7 +67,9 @@ Emacs standard keybindings and useful commands.
 
  - [[file:Eshell.org][Eshell]]
 
-Eshell 
+Eshell - Multiplatform unix shell written in Elisp highly integrated
+with Emacs and with serveral platform indenpentent shell commands such
+as ls, pwd, cp, mv implemented in Elisp.
 
  - [[file:Development_Environment.org][Development Environment]]
 
@@ -76,7 +78,7 @@ Programming language-specific configurations.
 
  - [[file:Utilities.org][Utilities]] 
 
-Emacs utilities and goodness. 
+Emacs utilities and goodness like Calculator, Magit, Helm and so on.
 
  - [[file:Resources.org][Resources]]
  
