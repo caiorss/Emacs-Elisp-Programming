@@ -1,0 +1,413 @@
+
+
+* Resources
+** Motivation
+
+    * [[http://emacsblog.org/2014/08/21/the-editor-of-a-lifetime/][The Editor of a Lifetime]]
+
+    * [[http://martinfowler.com/bliki/InternalReprogrammability.html][Internal Reprogrammability]] by Martin Fowler
+
+    * [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org][Master Emacs in one year]]
+
+"This guide is about using Emacs as a professional’s tool. I will not
+show off Emacs as a geek’s toy because I am far from geek
+stereotype. I will focus on philosophy and methodology only. No
+technical details involved."
+
+
+    * [[http://emacs.sexy/][Emacs is sexy]]
+
+    * [[http://batsov.com/articles/2011/11/19/why-emacs/][Why Emacs? - (think)]]
+
+    * [[http://www.emacswiki.org/emacs/LispMachine][EmacsWiki: Lisp Machine]]
+
+    * [[http://www.emacswiki.org/emacs/ChurchOfEmacs][The Church of Emacs!!]]
+
+** Emacs Tutorials
+*** Introduction to Elisp
+
+    * [[http://emacslife.com/how-to-read-emacs-lisp.html][Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua]]
+    * http://www.fincher.org/tips/Languages/Emacs.shtml
+    * [[https://github.com/chrisdone/elisp-guide#manipulating-the-buffer][A quick guide to Emacs Lisp programming]]
+    * [[http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html][Learn Emacs Lisp in 15 minutes]]
+    * [[http://steve-yegge.blogspot.it/2008/01/emergency-elisp.html][Emergency Elisp]]
+    * [[http://wikemacs.org/wiki/Emacs_Lisp_Cookbook][Emacs Lisp Cookbook]]
+    * [[https://github.com/doitian/emacs.d][Quick Started]]
+    * [[http://ergoemacs.org][Xah's Emacs Tutorial - ErgoEmacs]]
+    * [[https://www.masteringemacs.org/][Mastering Emacs mastering the world’s best text editor]]
+
+    * [[http://www.splode.com/~friedman/software/emacs-lisp/][Software: Emacs Lisp]]
+
+     Many useful Emacs Lisp codes like user interface enhancement.
+
+    * [[http://rosettacode.org/wiki/Category:Emacs_Lisp][Rosetta Code/ Category:Emacs Lisp]]
+    * [[http://emacswiki.org/emacs/ElispCookbook][Elisp Cookbook]]
+    * [[http://ergoemacs.org/][ErgoEmacs]]
+    * [[http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/][Essential Elisp Libraries - Functional Programmin in Elisp]]
+
+*** Tips and Tricks
+
+    * [[https://wiki.archlinux.org/index.php/Emacs][Emacs - Arch Linux Wiki]]
+    * [[http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html][Emacs Tiny Tools]]
+    * [[https://github.com/emacs-tw/awesome-emacs][Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.]]
+    * [[https://translate.google.ca/translate?sl=auto&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=http%3A%2F%2Femacs-jp.github.io%2Ftips%2Fenvironment-variable.html&edit-text=&act=url][Setting Environment Variables]]
+
+    * [[http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/][3 Interactive Functions That Work On Regions]]
+
+    * [[http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html][Introducing Names: practical namespaces for Emacs-Lisp]]
+
+*** Packages
+
+    * [[https://github.com/capitaomorte/yasnippet][Yasnippet]]
+
+*** Cases
+
+    * [[http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/][From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide]]
+    * [[http://technical-dresese.blogspot.com/2008/11/why-ive-abandoned-eclipse-for-emacs.html][Why Ive Abandoned Eclipse For Emacs]]
+    * [[http://technical-dresese.blogspot.com/2008/08/in-org-mode-abandoning-gtd.html][In Org Mode Abandoning Gtd]]
+    * [[http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html][Running Lisp In Productionl]]
+
+*** Non Categorized
+
+
+    * http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el
+    * http://www.reallysoft.de/code/emacs/snippets.html#b4ac15
+    * https://marmalade-repo.org/
+    * [[http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html][Hooks Local Variables And Namespacesl]]
+    * http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192
+
+** Cheat Sheets
+
+ - [[http://scale-it.pl/emacs_cheatsheet.html][Emacs cheatsheet]]
+
+** Documentation
+*** Manual and References
+
+    * [[http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents][GNU Emacs Lisp Reference Manual]]
+    * [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html][Command and Function Index]]
+    * http://blog.gnumonk.com/2012/07/effective-emacs-part1.html
+
+*** Wikis
+
+    * [[https://wiki.archlinux.org/index.php/Emacs][Emacs / Arch Wiki]]
+    * [[http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html][Emacs Lisp for Perl Programmers]]
+    * [[http://hyperpolyglot.org/lisp][Hyperglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp]]
+
+    *Github*
+
+    * [[https://github.com/hypernumbers/learn_elisp_the_hard_way][Learn Elisp the Hard Way]]
+
+    *Lexical Scope*
+
+    * [[http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html][On elisp and programming in general]]
+
+*** Issues
+
+    * [[http://www.khngai.com/emacs/cygwin.php][Emacs on Windows / Cygwin]]
+    * [[http://gregorygrubbs.com/emacs/10-tips-emacs-windows/][10 Tips for Powerful Emacs on Windows]]
+** Selected Dot Emacs
+
+    * [[http://pages.sachachua.com/.emacs.d/Sacha.html][Sacha Chua's Emacs configuration]]
+
+    * [[https://github.com/howardabrams/dot-files/blob/master/emacs.org][Howard Abrams dot emacs]]
+
+    * http://uce.uniovi.es/tips/Emacs/mydotemacs.html
+
+    * http://www.dgp.toronto.edu/~ghali/emacs.html
+
+    * http://whattheemacsd.com/
+
+    * https://snarfed.org/dotfiles/.emacs
+
+    * http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el
+
+** Emacs Starter Kits
+
+*Spacemacs*
+
+From the documentation:
+
+Spacemacs is a new way to experience Emacs -- a sophisticated and
+polished set-up focused on ergonomics, mnemonics and consistency. It
+can be used naturally by both Emacs and Vim users -- you can even mix
+the two editing styles. Switching easily between input styles makes
+Spacemacs a great tool for pair-programming.
+
+[[https://github.com/syl20bnr/spacemacs][Link Github]]
+
+*Emacs Leuven*
+
+Emacs configuration file with many packages already enabled and a more pleasant set of defaults.
+
+[[https://github.com/fniessen/emacs-leuven][Link Github]]
+
+*An Emacs Starter Kit for the Social Sciences*
+
+[[http://kieranhealy.org/resources/emacs-starter-kit/][Link]]
+
+** Fun
+
+
+| Command                 | Description                               |
+|-------------------------+-------------------------------------------|
+| M-x doctor              | If you fell bad, lost your girlfriend ... |
+| M-x life                | Run Conway's Life simulation.             |
+| M-x dunnet              | Text based adventure game                 |
+| M-x tetris              | Play Tetris.                              |
+| M-x hanoi               | Towers of Hanoi.                          |
+| M-x zone                | Make buffers go crazy!!                   |
+| M-x zone-leave-me-alone | Stop zoning out.                          |
+
+** Books
+
+    - [[https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf][An Introduction to Programming in Emacs Lisp]] by Robert J. Chassell
+
+    - [[http://emacswiki.org/emacs/ElispCookbook][Elisp Cookbook - Emacs Wiki]]
+    - http://wikemacs.org/wiki/Emacs_Lisp_Cookbook
+    - [[http://www.bookshelf.jp/texi/lispintro/emacs-lisp-intro-en.html#SEC_Top][Programming in Emacs Lisp]]
+    - [[http://www.bookshelf.jp/texi/emacs/emacs-en_toc.html#SEC_Contents][GNU Emacs Manual]]
+
+    - [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]] (Common Lisp)
+
+** Community
+
+*Usenet*
+
+   - comp.emacs
+   - gnu.emacs.help
+
+It is also available at:
+
+  - https://groups.google.com/forum/#!forum/comp.emacs
+  - https://groups.google.com/forum/#!forum/gnu.emacs.help
+
+
+*IRC*
+
+   - http://www.emacswiki.org/emacs/InternetRelayChat
+
+*Reddit*
+
+   - http://reddit.com/r/emacs
+
+*Stack Overflow*
+
+  - http://stackoverflow.com/questions/tagged/emacs
+
+*Gooble Plus*
+
+  - [[https://plus.google.com/communities/114815898697665598016][Emacs - Community - Google+]]
+
+** Blogs
+
+  - [[http://endlessparentheses.com/archive.html][Endless Parentheses · Concise ramblings on Emacs productivity.]]
+
+  - [[http://nic.ferrier.me.uk/][nic.ferrier.me.uk - what hacking is]]
+
+  - http://xahlee.blogspot.com
+
+  - [[http://nullprogram.com/][null program « null program]]
+
+  - [[http://edward.oconnor.cx/elisp/][Emacs Lisp — Edward O’Connor]]
+
+  - [[http://sachachua.com/blog/category/emacs/][emacs Archives - sacha chua - living an awesome life]]
+
+  - [[http://emacsrocks.com/][Emacs Rocks!]]
+
+  - [[http://emacs.readthedocs.org/en/latest/][About This Document — Emacs latest documentation]]
+
+  - [[http://emacsredux.com/][Emacs Redux]]
+
+** Videos and Screencasts
+
+Useful screencasts to help learn Emacs faster.
+
+*Basic Emacs*
+
+   - [[https://www.youtube.com/watch?v=YAIZvpSOlAs][Hack Emacs - Working with Buffers]]
+
+   - [[https://www.youtube.com/watch?v=aIMECr7K35Q][Hack Emacs - Working with Windows and Frames]]
+
+   - [[https://www.youtube.com/watch?v=9anwyep2CR0][Hack Emacs - The Mark and the Point]]
+
+   - [[https://www.youtube.com/watch?v=BTBAOOLM_tE][Hack Emacs - Using Initialization Files]]
+
+   - [[https://www.youtube.com/watch?v=VmITzI-POv0][Hack Emacs - Loading Mechanisms]]
+   In this episode, we look at four loading mechanisms for elisp: load, require, autoload and idle-require. User requested.
+
+   - [[https://www.youtube.com/watch?v=IvihNaXANW0][Hack Emacs - Using the Customization System]]
+   We explore the 'customize' system for customizing Emacs' behavior. The first of three parts covering the essential ways of changing Emacs' behavior at startup.
+
+
+
+*Elisp*
+
+  - [[https://www.youtube.com/watch?v=qajLhM0aseM][Buffer basics - Emacs Bites]]
+
+    The basics of working with buffers in Emacs Lisp. Buffers are a
+    central concept in Emacs of course and one of the main reasons
+    it's useul. They are a versatile tool, you can use them for text
+    to be edited but you can also use them for presenting user
+    interfaces,   like Emacs' mail modes do.
+
+  - [[https://www.youtube.com/watch?v=2z-YBsd5snY&list=PLakpda32F-ThIaulLS8yNN6I4U3Q8Yic_][An Introduction to Emacs Lisp]]
+
+   Emacs can be thought of as a big Lisp interpreter, so you can't
+   master Emacs without learning some Emacs Lisp. We'll be introducing
+   Emacs  Lisp by describing its simple syntax, demonstrating a few
+   Lisp functions for manipulating buffers, regions, and strings,
+   writing a few utility functions, and binding those functions to
+    custom keys. By the end of the talk, you should able to do the same.
+
+  - [[https://www.youtube.com/watch?v=51mesucWxaM][Emacs Bites - the Crash Course]]
+
+   Very basic intro to programming Emacs covering basic setq, let and
+   defun for global variables, local variables and functions.
+
+
+   - [[https://www.youtube.com/watch?v=-Woj10ARLWw][Dynamic vs lexical scope]]
+   A small screencast to llustrate lexical and dynamic scope in Emacs
+   with a very simple example.
+
+  - [[https://www.youtube.com/watch?v=35EcPapMqOU&list=PLakpda32F-ThKQZ3XeYOfDa7ZtwEaK0j_&index=43][Hack Emacs - Working in the REPL]]
+   In this episode I discuss how programming in Emacs is different than an IDE, and show a couple of short examples of how you can program in a REPL in Emacs Lisp and Scheme.
+   I didn't cover quite as much as I hoped, so I might do a more technical in-depth episode on REPL usage.
+
+*Development*
+
+   - [[https://www.youtube.com/watch?v=QRBcm6jFJ3Q][2015-04-08 Emacs Lisp Development Tips with John Wiegley]]
+
+   -  [[https://www.youtube.com/watch?v=Q-bmvMWqWmY][Advanced scratch - Emacs Bites]]
+
+   A more in depth look at shell tricks we can use to start
+   a scratch Emacs for testing packages and deployment and anything
+   else you need a clean Emacs for.
+
+*Debugging:*
+
+   - [[https://www.youtube.com/watch?v=odkYXXYOxpo][Debugging basics by Nic Ferrier]]
+
+   Edebug, instrumenting and stepping and breakpoints. Also
+   macroexpand and how it helps with debugging.
+
+
+*IDO Mode:*
+
+    -  [[https://vimeo.com/1013263][What You Can Learn From ido.el]]
+
+
+*Development Environment*
+
+  - [[https://www.youtube.com/watch?v=-4O-ZYjQxks][Emacs Tutorial: Yasnippet]]
+  - [[https://www.youtube.com/watch?v=FLpJR-0hL3I][Using Yasnippet in Emacs to write faster Scala code]]
+
+  - [[https://www.youtube.com/watch?v=VnWVu8VVDbI][Installing Common Lisp, Emacs, Slime & Quicklisp]]
+
+   This video will show you how to set up a decent common lisp
+   development environment. This video is not going into great
+   detail of how everything works just yet but will get you a working
+    environment so you can start exploring the tools available to you.
+  (It also shows how to setup Emacs on Windows)
+
+  - [[https://www.youtube.com/watch?v=zobx3T7hGNA][Emacs - Magit Basics]]  (Git integration to Emacs)
+
+  This Screencast shows basic features of the Magit like this git commands.
+
+  - [[https://www.youtube.com/watch?v=5FQwQ0QWBTU][CppCon 2015: Atila Neves "Emacs as a C++ IDE"]]
+
+  - [[https://www.youtube.com/watch?v=MBhJBMYfWUo][Searching the Web with engine-mode]]
+
+
+*Org-mode*
+
+  - [[https://www.youtube.com/watch?v=KdcXu_RdKI0][How I Use org-capture and Stuff]]
+    Org-capture is a great way to take notes and plan in Emacs. Capture templates provide a flexible way to extend org-capture and personalize the way you record various bits of information.
+
+*Non Categorized*
+
+  - [[https://www.youtube.com/watch?v=QFClYrhV1z4][Emacs Lisp Development - John Wiegley - Emacs Conference 2013]]
+
+  - [[https://www.youtube.com/watch?v=zzbEjmlIET0][Turtle Graphics with Emacs Lisp]]
+
+  Ray Puzio shows us his implementation of turtle graphics in emacs
+  and takes us under the shell to see how it works. Turtle graphics
+  are a way of  drawing pictures in which one provides a series of
+  directions such as "move forward" or "turn left" to steer the pen.
+  (The name comes from the fact that the original implementation
+  involved  a robotic turtle as an output device controlled by the
+  computer.) In addition to providing a useful and entertaining
+  program, this talk also discusses techniques of pbm graphics and
+  the use of a buffer for drawing which are of general use when
+  doing graphics in emacs.
+
+  - [[https://www.youtube.com/watch?v=XjKtkEMUYGc][Writing A Spotify Client in 16 Minutes]]
+   You can write a Spotify client in no time at all, using Emacs. With
+    a bit of research and the marvellous Helm front end, it's actually
+    surprisingly easy to assemble. (Much faster than editing a
+    screencast about it!)
+
+** Selected Codes
+
+    * http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el
+
+    * http://repo.or.cz/w/emacs.git/blob_plain/emacs-24:/lisp/progmodes/python.el
+
+    * http://emacswiki.org/emacs/file-template.el
+
+    * http://aperiodic.net/phil/configs/elisp/ledger.el
+
+    * http://sachachua.com/notebook/emacs/small-functions.el
+
+    * http://web.mit.edu/Emacs/source/emacs/lisp/emacs-lisp/easymenu.el
+
+    * http://code.haskell.org/haskellmode-emacs/haskell-mode.el
+
+    * http://pastebin.com/h2G9Ua5p
+
+    * https://raw.githubusercontent.com/rejeep/f.el/master/f.el
+
+    * https://github.com/dimitri/el-get
+
+Large Collection of Codes to Emacs
+
+    * http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html
+
+** Technical Notes
+
+*Emacs architecture:*
+
+    * [[https://www.gnu.org/software/emacs/emacs-paper.html][EMACS: The Extensible, Customizable Display Editor by Richard Stallman]]
+
+*REPL - Erlang Emacs Extension: Distel*
+
+    * [[http://www.erlang.org/euc/02/distel.ps][Distel: Distributed Emacs for Erlang]]
+    * [[http://massemanet.github.io/distel/][Distel emacs - erlang IDE - Github Repository]]
+    * [[ftp://publications.ai.mit.edu/ai-publications/pdf/AITR-1451.pdf][Emacs Lisp in Edwin Scheme  AI Memo No. TR-1451 - MIT by Mattew Birkholz]]
+
+*Key Bindings and Emacs Terminology*
+
+    * [[http://aliquote.org/memos/2014/08/04/a-modular-configuration-for-emacs][A modular configuration for Emacs / Ergoemacs]]
+    * [[http://ergoemacs.org/emacs/modernization.html][Modernization of Emacs (Simple Changes Emacs Should Adopt)]]
+
+*Emacs Bytecodes*
+
+    - http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_15.html
+    - [[http://nullprogram.com/blog/2014/01/04/][Emacs Bytecodes internals]]
+
+*Forth Compiler to Emacs Bytecodes*
+
+    - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/forth.el
+    - https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth
+
+*IDEs*
+
+    - [[http://www.slideshare.net/ldami/emacs-a-performant-ide-for-perl-1819917][Emacs, a performant IDE for Perl]]
+    - [[http://www.slideshare.net/chaitanyagupta/slime-1180051?qid=e6edde21-ed4f-457c-99be-69c1562985bb&v=qf1&b=&from_search=31][An introduction to SLIME, the Superior Lisp Interaction Mode for  Emacs.]]
+
+*Lisp*
+
+  - [[http://www.slideshare.net/kyleburton/introduction-to-lisp?qid=a835a3eb-d34b-4b76-a421-877be2eceee0&v=qf1&b=&from_search=3][Introduction to Lisp. A survey of lisp's history, current incarnations and advanced features such ]]
+  - [[http://www.slideshare.net/aniruddha.chakrabarti/lisp-53412403?qid=f965a29a-27cc-4ed7-a3ca-ddffc84eeba5&v=qf1&b=&from_search=5][High level overview of Lisp programming language]]
+  - [[http://www.slideshare.net/fukamachi/redesigning-common-lisp?qid=f965a29a-27cc-4ed7-a3ca-ddffc84eeba5&v=qf1&b=&from_search=8][Redesigning Common Lisp]]
+  - [[http://www.slideshare.net/vseloved/lisp-for-python-programmers?qid=a835a3eb-d34b-4b76-a421-877be2eceee0&v=qf1&b=&from_search=4][Lisp for Python Programmers]]
+  - [[http://paulgraham.com/diff.html][What Made Lisp Different]] by Paul Graham

@@ -1,0 +1,435 @@
+# -*- mode: org; -*-
+#+AUTHOR: Caio Rodrigues
+#+EMAIL: <caiorss.rodrigues@gmail.com>
+#+KEYWORDS: emacs, elisp, lisp, programming
+#+LANGUAGE: en
+#+DESCRIPTION: Emacs programming and customization.
+#+URL:  http://tinyurl.com/emacsinabox
+#+STARTUP: overview
+#+OPTIONS: 
+
+#+TITLE: Emacs Keybindings
+
+* Emacs Keybindings
+** Default Key Bindings and Useful Commands
+*** Overview 
+
+The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
+enabled by typing: M-x cua-mode or by inserting =(cua-mode) in Emacs
+configuration file. It also supports the Vim key bindings by
+installing the evil package =(M-x package-install evil)=.
+
+Note: The Emacs standard key bindings can be overridden by user
+configuration or modes like cua-mode or evil mode that emulates VI.
+
+See also:
+
+    - [[https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf][GNU Emacs Key Bindings  Reference Card]]
+
+*** Key Notation and Conventions
+
+*Key Notation*
+
+| Key | Name    | Modern Keyboard Equivalence |
+|-----+---------+-----------------------------|
+| M   | Meta    | Alt                         |
+| A   | Meta    | Alt                         |
+| C   | Control | Ctrl                        |
+| S   | Shift   | Shift                       |
+| SPC | Space   | Space                       |
+
+ * Some texts uses A - Alt instead of Meta.
+
+*Key Sequence*
+
+| Prefix Key | Purpose                              |
+|------------+--------------------------------------|
+| C-x <keys> | General extend commands              |
+| C-h <keys> | Help Commands                        |
+| C-c <keys> | Mode specific extended commands      |
+| M-x        | Reserved to execute Emacs Commands. |
+| C-g        | Reserved to cancel Emacs commands.   |
+
+*Key Mnemonics*
+
+| Letter | Mnemonic |
+|--------+-----------|
+| p      | previous  |
+| n      | next      |
+| b      | backward  |
+| f      | forward   |
+| a      | beginning |
+| e      | end       |
+
+
+
+See also:
+
+  - [[http://ergoemacs.org/emacs/emacs_kb_shortcuts_pain.html][Why Emacs's Keyboard Shortcuts are Painful]]
+  - [[http://ergoemacs.org/emacs/command-frequency.html][Emacs's Command Frequency Statistics]]
+  - [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Changing-Key-Bindings.html][Emacs Manual - 21.12 Changing Key Bindings]]
+  - [[http://stackoverflow.com/questions/1144424/are-there-any-emacs-key-combinations-reserved-for-custom-commands][Are there any emacs key combinations reserved for custom commands?]]
+  - [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][Mastering Key Bindings in Emacs]]
+
+*** Key Bindings and Commands by Task
+**** Quitting
+
+| Key Binding        | Command (M-x <cmd>)     | Description                                                                |
+|--------------------+-------------------------+----------------------------------------------------------------------------|
+|                    | kill-emacs              | End Emacs and save all buffers automatically.                              |
+| =C-x C-c=          | save-buffers-kill-emacs | Ask to kill each buffer and close Emacs.                                   |
+| =C-g=              | keyboard-quit           | Cancel any emacs command or prompt.                                        |
+| =C-x k=            | kill-buffer             | Close current buffer.                                                      |
+| =C z= or =C-x C-z= | suspend-emacs           | Iconify Emacs in graphical mode or suspend Emacs process when in terminal. |
+|                    |                         |                                                                            |
+
+
+Note: Neither C-z or C-x C-c work in Cua mode.
+
+**** File
+
+| Key Binding | Function                   | Description                                       |
+|-------------+----------------------------+---------------------------------------------------|
+| C-x C-f     | find-file                  | Open File.                                        |
+| C-x C-v     | find-alternate-file        | Open another file and kill current buffer.        |
+| C-x C-s     | save-buffer                | Save Current Buffer.                              |
+| C-x C-w     | write-file                 | Save Buffer as different file.                    |
+| C-x s       | save-some-buffers          | Save all buffers interactively.                   |
+| C-u C-x s   |                            | Save all buffers.                                 |
+| C-x C-C     | save-buffers-kill-terminal | Closes Emacs and asks to save each buffers.       |
+| C-x i       | insert-file                | Insert the content of a file at cursor position.  |
+| -           | revert-buffer              | Update a buffer when the file is changed on disk. |
+| C-x C-q     | read-only-mode             | Toggle read-only mode.                            |
+
+**** Buffers
+
+| Key Binding | Function         | Description             |
+|-------------+------------------+-------------------------|
+| C-x b       | switch-to-buffer | Select Another Buffer   |
+| C-x C-b     | list-buffers     | List all buffers        |
+| C-x k       | kill-buffer      | Kill a buffer           |
+| C-x [right] | next-buffer      | Move to next buffer     |
+| C-x [left]  | previous-buffer  | Move to previous buffer |
+
+**** Navigation
+
+
+|                   |                                                                 |
+|-------------------+-----------------------------------------------------------------|
+| C-a               | Go to start of the line                                         |
+| C-e               | Go to end of the line.                                          |
+| C-k               | Cut/Delete from cursor current position to the end of the line. |
+| M-<               | Move to top of buffer                                           |
+| M->               | Move to Bottom of buffer                                        |
+| M-f               | Move forward one word                                           |
+| M-b               | Move backward one word                                          |
+| M-[left key]      | Move backward one word                                          |
+| M-[right key]     | Move forward one word                                           |
+| Mg-g <line-num>   | Go to line number                                               |
+| Mg-c <cursor-pos> | Go to character position                                        |
+
+**** Bookmarks
+
+|         |                                  |
+|---------+----------------------------------|
+| C-x r m | Add current buffer to bookmarks. |
+| C-x r b | Open a buffer from bookmarks.    |
+| C-x r l | List bookmarks.                  |
+
+**** Search
+
+|       |                                                                         |
+|-------+-------------------------------------------------------------------------|
+| C-s   | Forward Search                                                          |
+| C-r   | Backward Search                                                         |
+| M-%   | Replace                                                                 |
+| C-s   | Jump to next occurrence                                                 |
+| C-r   | Jump to previour occurrence                                             |
+| C-g   | Exit search                                                             |
+| M-s . | Find Symbol under cursor                                                |
+| M-s w | Find Symbol under cursor, match symbols with underscore, dot, hyphen .. |
+| M-s o | List all matching lines                                                 |
+
+**** Highlight
+
+|         |                                  |
+|---------+----------------------------------|
+| M-s-h-. | Highlight symbol under cursor    |
+| M-s-h-p | Highlight phrase                 |
+| M-s-h-r | Highlight regex                  |
+| M-s-h-l | Highlight lines matching a regex |
+| M-s-h-u | Unhighlight regex                |
+
+**** Select, Copy, Cut and Paste
+
+|           |                                                             |
+|-----------+-------------------------------------------------------------|
+| C - _     | Undo                                                        |
+| C - x u   | Redo                                                        |
+| C - Space | Begin Selection                                             |
+| C - G     | Cancel Selection                                            |
+| C-x h     | Select the whole buffer                                     |
+| M-w       | Copy                                                        |
+| C-y       | Paste  (Yank)                                               |
+| C-w       | Cut    (Wipe out), Delete and copy to clipboard (Kill Ring) |
+|           |                                                             |
+
+**** Word Case / Comment and Uncomment
+
+|     |                                                |
+|-----+------------------------------------------------|
+| M-u | Make word uppercase                            |
+| M-l | Make word lowercase                            |
+| M-c | Make word title (Capitalize only first letter) |
+|     |                                                |
+| M-; | Comment/ Uncomment Selected Code               |
+
+**** Windows
+
+| Key Binding | Command (M-x <cmd>) | Description                                               |
+|-------------+---------------------+-----------------------------------------------------------|
+| C-x k       | kill-buffer         | Close current buffer                                      |
+| C-x b       | switch-to-buffer    | Switch to buffer                                          |
+| C-x C-b     | list-buffers        | Choose buffer Window                                      |
+| C-x 0       | delete-window       | Delete Current Window                                     |
+| C-x 1       | delete-other-window | Keep the current window and delete the remaining windows. |
+| C-x 2       | split-window-below  | Split Horizontally                                        |
+| C-x 3       |                     | Split Vertically                                          |
+| C-x o       |                     | Switch Window                                             |
+
+**** Frames 
+
+
+| Key Binding    | Command (M-x <cmd>)             | Description                                 |
+|----------------+---------------------------------+---------------------------------------------|
+| C-x 5 0        | kill-buffer                     | Close current frame                         |
+| C-x 5 1        | delete-other-frames             | Close all frames except current one         |
+| C-x 5 2        | make-frame-command              | Create a new frame                          |
+| C-x 5 o        | other-frame                     | Alternate frame                             |
+| C-z or C-x C-z | iconify-or-deiconify-frame      | Minimize current frame                      |
+| C-x 5 f        | find-file-other-frame           | Open file in a new frame.                   |
+| C-x 5 r        | find-file-read-only-other-frame | Open file in a new frame in read-only mode. |
+| C-x 5 b        | switch-to-buffer-other-frame    | Switch to buffer in a new frame.            |
+|                |                                 |                                             |
+
+Note: 
+
+ - The key bind C-z is overridden by cua-mode if it enabled. 
+
+ - In terminal the key binding C-x C-z or the command
+   =M-x iconify-or-deiconify-frame= suspends the Emacs process. To
+   return to the process: type in the Unix shell fg and return.
+
+**** Restricted Editing 
+
+| Key Binding | M-x <cmd>        | Description                      |
+|-------------+------------------+----------------------------------|
+| C-x n n     | narrow-to-region | Narrow to selected text (region) |
+| C-x n w     | widen            | Back to full buffer              |
+| C-x n d     | narrow-to-defun  | Narrow to an s-expression        |
+
+This set of commands allow to edit a limited area of the buffer. 
+
+Notes: This key bindings are overridden by cua-mode and C-x cuts the
+selected text in this mode. If the keys are overridden then the 
+M-x <command> command must be used or the commands assigned to a new
+key binding. 
+
+**** Keyboard Macros
+
+| Key Binding | M-x <cmd>                 |   |
+|-------------+---------------------------+---|
+| C-x (       | kmacro-start-macro        |   |
+| C-x )       | kmacro-end-macro          |   |
+| C-x e or f4 | kmacro-end-and-call-macro |   |
+
+**** Informationm, Documentation and Help 
+
+| Key Binding | Command (M-x command) | Description                                  |
+|-------------+-----------------------+----------------------------------------------|
+| C-h ?       | help-for-help         | Show all commands to get help on Emacs.      |
+| C-h a       | apropos               | Command Apropos                              |
+| C-h i       | info                  | Info documentation reader                    |
+|             | info-apropos          | Search for a string in emacs info pages      |
+|             | woman                 | Browser Unix man pages                       |
+|-------------+-----------------------+----------------------------------------------|
+|             |                       |                                              |
+| C-h f       | describe-function     | Describe function                            |
+| C-h v       | describe-variable     | Describe variable                            |
+| C-h m       | describe-mode         | Describe mode                                |
+| C-h s       | describe-syntax       | Describe syntax                              |
+| C-h b       | describe-bindings     | Describe key bindings for current buffer     |
+| C-h k       | describe-key          | Describe a particular key binding.           |
+|             |                       |                                              |
+|             | find-library          | Find a library *.el file loaded with require |
+|             |                       | Example: M-x find-library org                |
+
+*** Selected Key Bindings and Commands for Programming
+
+
+*FILE EDITING*
+
+|                          |                                                |
+|--------------------------+------------------------------------------------|
+| C-x C-f                  | Open a new file or a existing file.            |
+| C-x C-s                  | Save current buffer                            |
+| C-x b                    | Swithc Buffer                                  |
+| M-;                      | Comment/ Uncomment Selected Code               |
+| M-/                      | Autocomplete word (Equivalent to VIM Ctrl + p) |
+| C-g                      | Cancel any Emacs command                       |
+|                          |                                                |
+
+*NAVIGATION*
+
+|                   |                                               |
+|-------------------+-----------------------------------------------|
+| C-a               | Move the cursor to the beggining of line      |
+| C-e               | Move the cursor to the end of line            |
+| M-<               | Move the cursor to the beggining of buffer    |
+| M->               | Move to the cursor tor end of buffer          |
+| M-x goto-char     | Got a character position                      |
+| Mg-g <line-num>   | Go to line number                             |
+| Mg-c <cursor-pos> | Go to character position                      |
+| M-m               | Jump to first non whitespace in current line. |
+|-------------------+-----------------------------------------------|
+| C-x r m           | Make bookmark                                 |
+| C-x r b           | Jump to bookmarks                             |
+
+*TEXT EDITING*
+
+|                    |                                                         |
+|--------------------+---------------------------------------------------------|
+| C-y                | Copy selected text by cursor (Copy region)              |
+| C-y                | Paste when no text is selected. (Yank)                  |
+| C-k                | Delete current line from cursor position.               |
+| C-w                | Cut (Wipe Out)                                          |
+| M-del              | Delete previous word                                    |
+| M-d                | Delete next word                                        |
+| C-x C-o            | Delete all empty line around the cursor.                |
+| M-q                | Justify / Re-align current paragraph                    |
+|                    |                                                         |
+| C-x C - (minus)    | Decrease font size                                      |
+| C-x C + (plus)     | Increase font size                                      |
+|                    |                                                         |
+| M-x replace-string | Batch replace string in selected region or  buffer.     |
+| M-x replace-regexp | Batch replace regex pattern in selected text or buffer. |
+
+*** Key bindings and Commands for Lisp programming
+
+Useful lisp key bindings to edit and navigate Lisp code.
+
+
+*Lisp Evaluation  (Emacs Lisp)*
+
+|                 |                                                                                       |
+|-----------------+---------------------------------------------------------------------------------------|
+|                 |                                                                                       |
+| C-x C-e         | Evaluate last s-expression under cursor                                               |
+| C-j             | Evaluate last s-expression under cursor and print.                                    |
+| C-u M-:         | Evaluate S-expression in minibuffer and insert result in minibuffer                   |
+| M-:             | Execute S-expression in minibuffer.                                                   |
+| M-x eval-defun  | Evaluates the outermost S-expression, regardless of cursor position within the s-exp. |
+| M-x eval-buffer | Eval the whole buffer                                                                 |
+| M-x eval-region | Eval the selected text                                                                |
+
+*IELM - Emacs Lisp Interpreter*
+
+|          |                                                                                              |
+|----------+----------------------------------------------------------------------------------------------|
+| M-x ielm | Run Emacs Lisp Interpreter                                                                   |
+| C-c C-b  | (IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell. |
+| C-[up]   | (All Shells) Get the next input in the history                                               |
+| C-[down] | (All Shells) Get the previous input in the history                                           |
+| M-p      | (All Shells) Get the previous input in the history                                           |
+| M-n      | (All Shells) Get the next input in the history                                               |
+| C-c C-l  | Display the shell history in another window                                                  |
+
+*Delimiter Wrapping*
+
+|     |                                   |
+|-----+-----------------------------------|
+| M-( | Wrap selection in parentheses     |
+| M-[ | Wrap selection in square brackets |
+| M-{ | Wrap selection in curly brackets  |
+|     |                                   |
+
+*S-expression Navigation*
+
+|       |                                           |
+|-------+-------------------------------------------|
+| C-M-n | Move forward over a parenthetical group   |
+| C-M-p | Move backward over a parenthetical group  |
+| C-M-f | Move forward over a balanced expression   |
+| C-M-b | Move backward over a balanced expression  |
+| C-M-k | Delete s-expression under cursor          |
+|       |                                           |
+| C-M-a | Move to the beggining of current function |
+| C-M-e | Move to the end of current function       |
+
+*** Ubiquitous Emacs Key Bindings
+
+Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in
+Unix apps like Bash, Sh and all shells that uses the GNU readline
+library.
+
+| Key | Emacs                                                     | Bash Shell                               |
+|-----+-----------------------------------------------------------+------------------------------------------|
+| C-a | Move the cursor to the beggining of line                  | same                                     |
+| C-e | Move the cursor to the end of line                        | same                                     |
+|     |                                                           |                                          |
+| C-n | Move the cursor to the next line  (downward)              | Show next command in the history.        |
+| C-p | Move the cursor to the previous line (upward)             | Show the previou command in the history. |
+| C-j | New line character (same as Return)                       | same                                     |
+|     |                                                           |                                          |
+| M-b | Move the cursor backward one word                         | same                                     |
+| M-f | Move the cursor forward one word                          | same                                     |
+|     |                                                           |                                          |
+| M-t | Swap current word with previous                           | same                                     |
+|     |                                                           |                                          |
+| M-d | Delete the next word                                      | same                                     |
+|     |                                                           |                                          |
+| C-k | Delete the remaining of line from current cursor position | same                                     |
+| C-y | Paste the deleted line with (C-k) or copied line (Yank)   | same                                     |
+| M-w | Copy the slected text                                     |                                          |
+|     |                                                           |                                          |
+|     |                                                           |                                          |
+| C-r | Search forward for a string                               | Search for previous command              |
+| C-s | Search backward for a string                              | No implemented.                          |
+|     |                                                           |                                          |
+|     |                                                           |                                          |
+| c-l | Redraws the screen with the cursor in the middle.         | Clear the screen.                        |
+|     |                                                           |                                          |
+| C-_ | Undo                                                      | same                                     |
+|     |                                                           |                                          |
+
+See also:
+
+  - [[http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/][Bash Emacs Editing Mode Cheat Sheet]]
+  - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
+
+
+** Commands
+
+| Command                        | Description                                                  |
+|--------------------------------+--------------------------------------------------------------|
+| M-x kill-emacs                 | Exit emacs                                                   |
+| M-x help-with-tutorial         | Open Emacs built in tutorial                                 |
+| M-x suspend-emacs              | Suspend Emacs when in terminal or iconify in graphical mode. |
+| M-x quit-window                | Quit Emacs.                                                  |
+| M-x revert-file                | Update buffer when file is changed externally.               |
+| M-x read-only  or C-x C-q      | Toggle the current buffer read only.                         |
+| M-x delete-trailing-whitespace | Delete trailing Whistespace                                  |
+| M-x tabify                     | Converts all spaces to tab                                   |
+| M-x untabify                   | Converts all tabs to spaces.                                 |
+| M-x whitespace-mode            | Toggle white space view.                                     |
+|                                |                                                              |
+
+Change current buffer mode:
+
+Sometimes when editing a script without file extension it is useful to
+tell Emacs what is the file format to enable syntax highlight and mode
+functions.
+
+ - =M-x sh-mode=      Shell Script - sh extension
+ - =M-x pyhton-mode=  Example: A python script without extension ".py"
+ - =M-x conf-mode=    Configuration file like: .gitconfig, .gitignore, smb.conf

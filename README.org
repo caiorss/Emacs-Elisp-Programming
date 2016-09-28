@@ -1,0 +1,92 @@
+# -*- mode: org; -*-
+#+AUTHOR: Caio Rodrigues
+#+EMAIL: <caiorss.rodrigues@gmail.com>
+#+KEYWORDS: emacs, elisp, lisp, programming
+#+LANGUAGE: en
+#+DESCRIPTION: Emacs programming and customization.
+#+URL:  http://tinyurl.com/emacsinabox
+#+STARTUP: overview
+#+OPTIONS: 
+
+#+INCLUDE: theme/style.org
+#+TITLE: Emacs In a Box
+
+* Emacs - Programming and Customization
+** Overview
+
+file:images/emacs_logo.png
+
+*Repository Link*
+
+    - [[https://github.com/caiorss/Emacs-Elisp-Programming][Github Repository]]
+    - Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
+    - [[http://caiorss.github.io/Emacs-Elisp-Programming][HTML Version - github.io]]
+
+Emacs doesn't need any presentation. Emacs is a software [[https://en.wikipedia.org/wiki/Lisp_machine]["Lisp
+Machine"]] that provides a programmable text editor, email reader, text
+web browser, image viwer, calculator, shell, games, easter-eggs and
+more.  Emacs is programmed in Elisp, an Emacs own lisp dialect that is
+based on [[https://en.wikipedia.org/wiki/Maclisp][MacLisp]], one of oldest lisp dialects, older than Common Lisp
+and Scheme, created in MIT. Emacs was written in 1976 by the legendary
+[[https://en.wikipedia.org/wiki/Richard_Stallman][Richard Stallman]]. Despite many incompatibilities with Common Lisp it
+has many constructs similar to it and n excellent book about Common
+Lisp that is also useful to understand Elisp and Scheme is [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]].
+
+
+Note:
+
+ - It is a work in progress.
+ - You can see this document inside Emacs since it was converted to
+   org-mode, see the file *README.org*. It can also be exported to
+   html, pdf, github markdown and so on.
+
+*Configuration File*
+
+The user configuration file, which is executed when Emacs starts, is stored in the directory
+=~/.emacs.d/init.el= or =~/.emacs=. The first one is better because it
+is in the same directory of all emacs configuration files.
+
+The Emacs scratch buffer can be used to test new features and try
+Emacs codes along with IELM - Emacs Lisp interactive shell.
+
+
+*Emacs Features*
+
+ - Can run in GUI or in terminal.
+ - Programmable "text editor" (Lisp Machine)
+ - Support to many programming languages
+ - Can run shells and interpreters inside Emacs. 
+ - Highly customizable
+ - Package manager 
+ - Multiple OS support
+ - Remote file editting through ssh. 
+** Contents
+
+ - [[file:Elisp_Programming.org][Elisp Programming]]  
+
+Elisp programming guide and documentation by examples. 
+
+ - [[file:Elisp_Snippets.org][Elisp Snippets]] 
+
+Elisp code examples grouped by category. 
+
+ - [[file:Keybindings.org][Emacs Keybindings]] 
+
+Emacs standard keybindings and useful commands.
+
+ - [[file:Eshell.org][Eshell]]
+
+Eshell 
+
+ - [[file:Development_Environment.org][Development Environment]]
+
+Programming language-specific configurations. 
+
+
+ - [[file:Utilities.org][Utilities]] 
+
+Emacs utilities and goodness. 
+
+ - [[file:Resources.org][Resources]]
+ 
+Emacs Resources. 

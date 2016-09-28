@@ -1,0 +1,29 @@
+
+
+* Eshell
+
+Features:
+
+  - Shell implemented in Emacs Lisp
+  - Integrated to Emacs
+  - Eshell can run elisp functions and can be extended in Elisp.
+  - It is Multiplatform, works on Linux, OSX and Windows.
+
+Example:
+
+file:images/eshell-example1.png
+
+Links:
+
+  - [[https://www.masteringemacs.org/article/complete-guide-mastering-eshell][Mastering Eshell - Mastering Emacs]]
+  - [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell: The Emacs Shell]]
+  - [[http://www.howardism.org/Technical/Emacs/eshell-fun.html][Eschewing Zshell for Emacs Shell]]
+  - [[http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html][Ben's Journal: Finally wrapping my head around eshell (the emacs shell)]]
+  - [[http://mjwall.com/blog/2013/10/04/how-i-use-emacs/][How I use Emacs - mjwall.com]]
+  - [[http://blog.gnumonk.com/2012/07/effective-emacs-part1.html][We Live By Code: Effective emacs - Part:1]]
+  - [[https://github.com/howardabrams/dot-files/blob/master/emacs-eshell.org][dot-files/emacs-eshell.org at master · howardabrams/dot-files · GitHub]]
+  - [[http://www.emacswiki.org/emacs/EshellAndEmacsServer][EmacsWiki: Eshell And Emacs Server]]
+  - [[http://www.emacswiki.org/emacs/ShellMode][EmacsWiki: Shell Mode]]
+  - [[http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell][Using Emacs Eshell as the ultimate shell | Smash Company]]
+  - [[https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/][Eshell completion for git, bzr, and hg | Tassilo's Blog]]
+
