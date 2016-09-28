@@ -1,0 +1,88 @@
+* Emacs Utilities 
+** Spell Checker
+
+Emacs uses external programs to check the spell. It supports _ispell_,
+_aspell_ and _hunspell_. The variable =ispell-program-name= sets the
+spell check software used by Emacs. The default dictionary used by
+Emacs is US English, but it can be changed with the command
+=M-x ispell-change-dicitonary=.
+
+Spell check interface commands:
+
+
+| Command                        | Default Key Bind | Description                                                           |
+|--------------------------------+------------------+-----------------------------------------------------------------------|
+| =M-x ispell-buffer=            |                  | Check the spelling of all buffer.                                     |
+| =M-x ispell-word=              | =M-$=            | Check the spell of word at cursor position.                           |
+| =M-x ispell-region=            |                  | Check the spell of selected text.                                     |
+| =M-x ispell-change-dictionary= |                  | Change the language of dictionary used by the spell check.            |
+| =M-x flyspell-mode=            |                  | Toggle flyspell mode. When active, it will highlight all misspelled . |
+| =M-x flyspell-buffer=          |                  | Check the hole buffer in flyspell minor mode.                         |
+| =M-x ispell-kill-ispell=       |                  | Kill the Ispell subprocess.                                           |
+
+Set the default Spell checker:
+
+#+BEGIN_SRC elisp
+(setq ispell-program-name "aspell")
+
+;; or
+(setq ispell-program-name "ispell")
+
+;;
+(setq ispell-program-name "hunspell")
+#+END_SRC
+
+
+The dictionary can be changed with the Elisp code:
+
+#+BEGIN_SRC elisp
+
+(ispell-chage-dictionary "en")
+(ispell-chage-dictionary "castellano")
+(ispell-chage-dictionary "german")
+
+
+;; M-x ispell-spanish
+;;
+(defun ispell-spanish ()
+ (interactive)
+ (ispell-change-diciontary "castellano"))
+
+;; M-x ispell-en
+;;
+(defun ispell-en ()
+  (interactive)
+   (ispell-change-diciontary "en"))
+#+END_SRC
+
+
+To right click in the word and get suggestions use:
+
+#+BEGIN_SRC elisp
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+#+END_SRC
+
+
+The ispell doesn't check the spell of comments and strings. This
+behavior can be changed with the code below that allows it to check
+the spell in all programming modes like python-mode, haskell-mode and
+so on.
+
+#+BEGIN_SRC elisp
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+END_SRC
+
+
+
+See also:
+
+  - [[https://joelkuiper.eu/spellcheck_emacs][Spell checking in Emacs]]
+  - [[http://www.emacswiki.org/emacs/FlySpell][FlySpell - Emacs Wiki.org]]
+  - [[http://www.emacswiki.org/emacs/InteractiveSpell][InteractiveSpell]]
+  - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][Emacs Manual - Check and Correcting Spelling]]
+  - [[http://ergoemacs.org/emacs/emacs_spell_checker_problems.html][Emacs Spell Checker Problems]]
+  - [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][What's the best spell check setup in emacs]]
+
