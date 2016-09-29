@@ -3,6 +3,83 @@
 #+TITLE: Emacs Utilities 
 
 * Emacs Utilities 
+** Shells 
+
+Emacs have built-in commands to run shells. 
+
+| Name   | Command: M-x <command> | Description                                                                            |
+|--------+------------------------+----------------------------------------------------------------------------------------|
+| shell  | M-x shell              | Runs an inferior shell app. It can run bash, zsh and etc.                              |
+|        |                        |                                                                                        |
+| term   | M-x term               | Emacs' terminal emulator that can run apps like top, vim, bash and etc.                |
+|        |                        | It alows command line line completion inside Emacs in apps like bash, zsh and python . |
+|        |                        |                                                                                        |
+| eshell | M-x eshell             | Emacs' built-in shell written in Elisp. it has elisp implementation of cd, ls, pwd     |
+|        |                        | and other standard Unix commands and apps. Works on all operating systems. Eshell      |
+|        |                        | also can run Elisp functions. It is a good alternative to Microsoft Windows            |
+|        |                        | terminal emulator cmd.exe.                                                             |
+|        |                        |                                                                                        |
+| ielm   | M-x ielm               | Emacs' elisp shell that can be used to control, test and interact with Emacs.          |
+|        |                        |                                                                                        |
+
+Emacs also have commands to run programming languages shells:
+
+| Language           | Command        | Package  |
+|--------------------+----------------+----------|
+| Python             | M-x run-python | -        |
+| Octave             | M-x run-octave | -        |
+| Ruby               | M-x run-ruby   | inf-ruby |
+| Elisp (Emacs Lisp) | M-x ielm       | -        |
+| Scheme             | M-x run-scheme | -        |
+| Lisp               | M-x run-lisp   | -        |
+|                    |                |          |
+
+
+Running Emacs in terminal: 
+
+ - =emacs -nw=  
+
+Running Emacs fast without read ~/emacs.d/init.el or ~/.emacs startup
+file:  
+
+ - =emacs -nw -Q=
+
+ - Start Emacs in terminal running Eshell:  
+
+Running Emacs in terminal or executing some Elisp command or app:
+
+#+BEGIN_SRC sh
+$ emacs -nw -q --eval '(eshell)'
+#+END_SRC
+
+ - Start Emacs in terminal running python:  
+
+#+BEGIN_SRC sh
+$ emacs -nw -q --eval '(progn (run-python "python3") (switch-to-buffer "*Python*"))'
+#+END_SRC
+
+
+See also:
+
+ - Eshell Manual: [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell: The Emacs Shell]]
+
+ - [[http://www.nongnu.org/emacsdoc-fr/manuel/shell.html][Running Shell Commands from Emacs]]
+
+
+ - [[http://unix.stackexchange.com/questions/104325/what-is-the-difference-between-shell-eshell-and-term-in-emacs][What is the difference between shell, eshell, and term in Emacs? -
+   Unix & Linux Stack Exchange]]
+
+ - [[https://www.emacswiki.org/emacs/MultiTerm][EmacsWiki: Multi Term]]
+
+
+ - [[http://www.howardism.org/Technical/Emacs/new-window-manager.html][Emacs is My New Window Manager]]
+
+
+ - [[https://news.ycombinator.com/item?id=8922359][Emacs Is My New Window Manager | Hacker News]]
+
+
+ - [[http://www.informatimago.com/linux/emacs-on-user-mode-linux.html][Emacs standing alone on a Linux Kernel]]
+
 ** Manpage Reader 
 
 To read manpages enter =M-x woman=.
