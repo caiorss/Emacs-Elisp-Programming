@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Development Environment</title>
+<!-- 2016-09-29 qui 05:46 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Caio Rodrigues" />
+<meta  name="description" content="Emacs programming and customization."
+ />
+<meta  name="keywords" content="emacs, elisp, lisp, programming, eshell, editor" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link href="theme/style.css" rel="stylesheet">
+
+<script type="text/javascript" src="theme/org-info.js">
+/**
+ *
+ * @source: theme/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in theme/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in theme/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Development Environment</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Development Environment</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Overview</a></li>
+<li><a href="#sec-1-2">1.2. Python</a></li>
+<li><a href="#sec-1-3">1.3. JavaScript</a></li>
+<li><a href="#sec-1-4">1.4. C / C++</a></li>
+<li><a href="#sec-1-5">1.5. Ocaml</a></li>
+<li><a href="#sec-1-6">1.6. Haskell</a></li>
+<li><a href="#sec-1-7">1.7. R Language</a></li>
+<li><a href="#sec-1-8">1.8. Lisp Dialects</a>
+<ul>
+<li><a href="#sec-1-8-1">1.8.1. All Lisp Dialects</a></li>
+<li><a href="#sec-1-8-2">1.8.2. Common Lisp</a></li>
+<li><a href="#sec-1-8-3">1.8.3. Scheme</a></li>
+<li><a href="#sec-1-8-4">1.8.4. Clojure</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-9">1.9. Java</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Development Environment</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Overview</h3>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Python</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Set Python Interpreter:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> python-python-command <span class="org-string">"/path-to-python-/python"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+To run the interpreter type: <code>M-x run-python</code>
+</p>
+
+<p>
+Run more than one Python version, usage: M-x run-python3, M-x run-python2
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-python3</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+   <span class="org-rainbow-delimiters-depth-2">(</span>run-python  <span class="org-string">"/usr/bin/python2"</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-python2</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+   <span class="org-rainbow-delimiters-depth-2">(</span>run-python  <span class="org-string">"/usr/bin/python"</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-ipython3</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+   <span class="org-rainbow-delimiters-depth-2">(</span>run-python  <span class="org-string">"~/anaconda3/bin/ipython"</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+Search Python packages at Pip:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">python/pip-search</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Search for a pip package. at: https://pypi.python.org"</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+
+   <span class="org-rainbow-delimiters-depth-3">(</span>format <span class="org-string">"https://pypi.python.org/pypi?%%3Aaction=search&amp;term=%s&amp;submit=search"</span>
+
+           <span class="org-rainbow-delimiters-depth-4">(</span>read-string <span class="org-string">"Pip: "</span><span class="org-rainbow-delimiters-depth-4">)</span>
+
+           <span class="org-rainbow-delimiters-depth-4">(</span>message <span class="org-string">"Searching pip."</span><span class="org-rainbow-delimiters-depth-4">)</span>
+
+    <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<p>
+Search Python Documentation:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">python/doc-search</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Search Python3 official documentation. at: https://docs.python.org"</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+   <span class="org-rainbow-delimiters-depth-3">(</span>format <span class="org-string">"https://docs.python.org/3/search.html?q=%s"</span>
+
+           <span class="org-rainbow-delimiters-depth-4">(</span>read-string <span class="org-string">"Python3 doc: "</span><span class="org-rainbow-delimiters-depth-4">)</span>
+           <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<ul class="org-ul">
+<li><a href="http://wikemacs.org/wiki/Python">Python Settings</a>
+</li>
+<li><a href="http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/">Setting up Emacs to Support both Python 2 and Python 3</a>
+</li>
+<li><a href="https://github.com/proofit404/pyenv-mode">Pyenv Mode</a>
+</li>
+<li><a href="http://www.johndcook.com/blog/2012/02/09/python-org-mode/">Running Python and R inside Emacs by John D. Cook</a>
+</li>
+<li><a href="http://www.emacswiki.org/emacs/PythonProgrammingInEmacs">EmacsWiki: Python Programming In Emacs</a>
+</li>
+<li><a href="http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/">Emacs as a Python IDE - Jessica Hamrick</a>
+</li>
+<li><a href="http://planspace.org/20141007-emacs_python/">Emacs and Python</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> JavaScript</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Find Javascript package:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">javascript/npm-search</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Search for a NPM package at: https://www.npmjs.com"</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+
+   <span class="org-rainbow-delimiters-depth-3">(</span>format <span class="org-string">"https://www.npmjs.com/search?q=%s"</span>
+
+           <span class="org-rainbow-delimiters-depth-4">(</span>url-hexify-string  <span class="org-rainbow-delimiters-depth-5">(</span>read-string <span class="org-string">"npm: "</span><span class="org-rainbow-delimiters-depth-5">)</span><span class="org-rainbow-delimiters-depth-4">)</span>
+
+           <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<ul class="org-ul">
+<li><a href="http://wikemacs.org/wiki/JavaScript">Java Script</a> Swank-js provides SLIME REPL and other development
+tools for in-browser JavaScript and Node.JS. It consists of
+SWANK backend and accompanying SLIME contrib
+</li>
+
+<li><a href="https://github.com/swank-js/swank-js">Swank backend for Node.JS and in-browser JavaScript</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> C / C++</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li><a href="http://tuhdo.github.io/c-ide.html">C/C++ Development Environment for Emacs</a>
+</li>
+<li><a href="https://github.com/atilaneves/cmake-ide">C make IDE</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Ocaml</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li><a href="http://wikemacs.org/wiki/OCaml">Ocaml</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Haskell</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Search Hoogle, the Haskell API search engine and the Hackage search engine.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">haskell/hoogle</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Search Hoogle: Haskell API search engine</span>
+
+<span class="org-doc">   https://www.haskell.org/hoogle</span>
+<span class="org-doc">   "</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url <span class="org-rainbow-delimiters-depth-3">(</span>format  <span class="org-string">"https://www.haskell.org/hoogle/?hoogle=%s"</span>
+                       <span class="org-rainbow-delimiters-depth-4">(</span>read-string <span class="org-string">"Hoogle: "</span><span class="org-rainbow-delimiters-depth-4">)</span>
+                       <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>message <span class="org-string">"Searching Hoogle ..."</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">haskell/hoogle-region</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Search selected text on Hoogle: Haskell API Search Engine</span>
+<span class="org-doc">   https://www.haskell.org/hoogle</span>
+<span class="org-doc">  "</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url <span class="org-rainbow-delimiters-depth-3">(</span>format  <span class="org-string">"https://www.haskell.org/hoogle/?hoogle=%s"</span>
+
+                       <span class="org-rainbow-delimiters-depth-4">(</span>buffer-substring-no-properties
+                        <span class="org-rainbow-delimiters-depth-5">(</span>region-beginning<span class="org-rainbow-delimiters-depth-5">)</span>
+                        <span class="org-rainbow-delimiters-depth-5">(</span>region-end<span class="org-rainbow-delimiters-depth-5">)</span>
+                        <span class="org-rainbow-delimiters-depth-4">)</span>
+
+                       <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">haskell/hackage</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">" Search a Haskell library at:  https://hackage.haskell.org/</span>
+<span class="org-doc">  "</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+
+   <span class="org-rainbow-delimiters-depth-3">(</span>format  <span class="org-string">"https://hackage.haskell.org/packages/search?terms=%s"</span>
+
+            <span class="org-rainbow-delimiters-depth-4">(</span>read-string <span class="org-string">"Hackage: "</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>message <span class="org-string">"Searching Hackage ..."</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+See:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://wikemacs.org/wiki/Haskell-mode">Haskell Mode</a>
+</li>
+<li><a href="https://wiki.haskell.org/Emacs/Inferior_Haskell_processes">Emacs/Inferior Haskell processes</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> R Language</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+See:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://blog.revolutionanalytics.com/2014/03/emacs-ess-and-r-for-zombies.html">Emacs, ESS and R for Zombies</a>
+</li>
+<li><a href="http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/">Using Emacs to work with R « Stack Exchange Stats Blog</a>
+</li>
+<li><a href="https://www2.stat.duke.edu/courses/Spring09/sta244/computing/R-ESS.html">Running R/S-Plus in Emacs</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Lisp Dialects</h3>
+<div class="outline-text-3" id="text-1-8">
+</div><div id="outline-container-sec-1-8-1" class="outline-4">
+<h4 id="sec-1-8-1"><span class="section-number-4">1.8.1</span> All Lisp Dialects</h4>
+<div class="outline-text-4" id="text-1-8-1">
+<ul class="org-ul">
+<li><a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">The Animated Guide to Paredit</a>
+</li>
+<li><a href="http://wikemacs.org/wiki/Paredit-mode">Paredit-mode</a>* <a href="https://github.com/Fanael/rainbow-delimiters">Rainbow Delimiters</a>
+</li>
+<li><a href="http://www.emacswiki.org/emacs/NavigatingParentheses">Emacs Wiki - NavigatingParentheses</a>
+</li>
+<li><a href="http://emacs-fu.blogspot.com.br/2010/06/automatic-pairing-of-brackets-and.html">automatic pairing of brackets and quotes</a>
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Turn on paren match highlighting</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>show-paren-mode 1<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> show-paren-delay 0<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Highlight entire s-expression under cursor</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> show-paren-style 'expression<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8-2" class="outline-4">
+<h4 id="sec-1-8-2"><span class="section-number-4">1.8.2</span> Common Lisp</h4>
+<div class="outline-text-4" id="text-1-8-2">
+<ul class="org-ul">
+<li><a href="https://common-lisp.net/project/slime/">SLIME: The Superior Lisp Interaction Mode for Emacs</a>
+</li>
+<li><a href="https://www.masteringemacs.org/article/evaluating-elisp-emacs">Evaluating Elisp in Emacs By Mickey Petersen</a>
+</li>
+<li><a href="https://en.wikibooks.org/wiki/Common_Lisp/First_steps/Installation">Common Lisp/First steps/Installation</a>
+</li>
+<li><a href="http://cl-cookbook.sourceforge.net/emacs-ide.html">The Common Lisp Cookbook - Using Emacs as a Lisp IDE</a>
+</li>
+<li><a href="https://www.cs.colostate.edu/helpdocs/lispEmacs.html">Running Allegro Common Lisp From Emacs</a>
+</li>
+
+<li><a href="https://common-lisp.net/project/lispbox/">Lispbox</a> - Lispbox is just a pre-configured packaging of the
+Emacs editing environment, SLIME (The Superior Lisp Interaction
+Mode for Emacs), the Quicklisp library manager, and the Clozure
+Common Lisp compiler.  Combined, these components integrate to
+provide all of the functionality you would expect from an IDE,
+and more. Lispbox makes it quick and easy to get started using
+them.
+</li>
+</ul>
+
+
+<p>
+Collection of information about using SLIME - a proto-manual.
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.cliki.net/slime-howto">SLIME-HOWTO</a>
+</li>
+</ul>
+
+<p>
+Set Lisp Interpreter
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> inferior-lisp-program <span class="org-string">"clisp"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8-3" class="outline-4">
+<h4 id="sec-1-8-3"><span class="section-number-4">1.8.3</span> Scheme</h4>
+<div class="outline-text-4" id="text-1-8-3">
+<p>
+The variable scheme-program-name controls which Scheme implementation Emacs will run.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Racket Lang (Scheme Derived)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> scheme-program-name  <span class="org-string">"racket"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Racket Lang (Scheme Derived)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> scheme-program-name  <span class="org-string">"racket"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Chicken Scheme</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> scheme-program-name <span class="org-string">"csi"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> scheme-program-name <span class="org-string">"/opt/bin/csi"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<p>
+The function M-x run-scheme will run the selected scheme program.
+</p>
+
+<p>
+The following functions are useful to run a specific Scheme version or
+implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
+&#x2026;
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-gambit</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-comment-delimiter">;;; </span><span class="org-comment">It could also be: (run-scheme "/opt/gambit/bin/gsc")</span>
+  <span class="org-comment-delimiter">;;; </span><span class="org-comment">executable-find will return the path to executable.</span>
+  <span class="org-comment-delimiter">;;;</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme <span class="org-rainbow-delimiters-depth-3">(</span>executable-find <span class="org-string">"gsc"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-guile</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme <span class="org-rainbow-delimiters-depth-3">(</span>executable-find <span class="org-string">"guile"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-chicken</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme  <span class="org-string">"/opt/chicken/bin/csi"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-racket</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme <span class="org-string">"/opt/bin/racket"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><a href="http://emacswiki.org/emacs/Scheme">Emacs Wiki - Scheme</a>
+</li>
+<li><a href="http://www.nongnu.org/geiser/">Geiser</a>
+</li>
+<li><a href="http://community.schemewiki.org/?emacs-tutorial">A Tutorial For Using Emacs with Scheme</a>
+</li>
+<li><a href="http://alexott.net/en/writings/emacs-devenv/EmacsScheme.html">Support for the Scheme programming language</a>
+</li>
+<li><a href="https://mayukhmukherjee.wordpress.com/2014/01/03/setup-lisp/">Setup lisp programming environment</a>
+</li>
+<li><a href="http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html">A Little Elisp to Make Emacs and Racket Play Nicer</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8-4" class="outline-4">
+<h4 id="sec-1-8-4"><span class="section-number-4">1.8.4</span> Clojure</h4>
+<div class="outline-text-4" id="text-1-8-4">
+<p>
+Scheme inferior mode (Scheme shell support) can be used to run Clojure
+repl without Cider. It is a easy and faster to way to beginners run
+and explore Clojure.
+</p>
+
+<p>
+The code below sets the following key bindings:
+</p>
+
+<ul class="org-ul">
+<li>C-x C-e to Send the last Sexp to clojure repl.
+</li>
+<li>C-c =   to Send the definition to the repl, it sends the outermost
+s-expression to the repl regardless where is the cursor.
+</li>
+<li>C-c C-p Send a region to the repl.
+</li>
+<li>C-up  Goes to the next input in the shell
+</li>
+<li>C-down Goes to the previous input the shell
+</li>
+<li>C-c C-l Opens the command history.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">progn</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span>define-key clojure-mode-map
+      <span class="org-rainbow-delimiters-depth-3">(</span>kbd <span class="org-string">"C-x C-e"</span><span class="org-rainbow-delimiters-depth-3">)</span> #'scheme-send-last-sexp<span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>define-key clojure-mode-map
+    <span class="org-rainbow-delimiters-depth-3">(</span>kbd <span class="org-string">"C-c ="</span><span class="org-rainbow-delimiters-depth-3">)</span> #'scheme-send-definition<span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">cloujure-repl</span>  <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme <span class="org-string">"java -jar /opt/clojure.jar"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-clojure-batch</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Run a clojure file in batch mode"</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>start-process <span class="org-string">"clojure-batch1"</span>     <span class="org-comment-delimiter">;; </span><span class="org-comment">Process name</span>
+                 <span class="org-string">"*clojure-batch*"</span>   <span class="org-comment-delimiter">;; </span><span class="org-comment">Buffer name</span>
+
+                 <span class="org-comment-delimiter">;;; </span><span class="org-comment">Command line</span>
+                 <span class="org-string">"java"</span> <span class="org-string">"-jar"</span> <span class="org-string">"/opt/clojure.jar"</span> <span class="org-rainbow-delimiters-depth-3">(</span>buffer-file-name<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>split-window-vertically<span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>switch-to-buffer-other-window <span class="org-string">"*clojure-batch*"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<p>
+Download Clojure:
+</p>
+
+<pre class="example">
+cd /opt/
+curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.jar
+</pre>
+
+<p>
+<b>See:</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://pythonhackers.com/p/clojure-emacs/cider">CIDER is a Clojure IDE and REPL for Emacs</a>
+</li>
+<li><a href="http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html">Practical Starter Tips for Clojure</a>
+</li>
+<li><a href="http://www.braveclojure.com/basic-emacs/">How to Use Emacs, an Excellent Clojure Editor</a>
+</li>
+<li><a href="http://eigenhombre.com/clojure/2014/07/05/emacs-customization-for-clojure/">Emacs Customization for Clojure</a>
+</li>
+<li><a href="http://jr0cket.co.uk/2015/01/getting-started-with-cider-repl-for-clojure-on-emacs-live.html">Getting Started With Cider Repl for Clojure on Emacs Live</a>
+</li>
+</ul>
+
+<p>
+<b>Non Categorized</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://emacswiki.org/emacs/LocalVariables">Local Variables</a>
+</li>
+<li><a href="https://github.com/joelmccracken/projectile">Project Interaction Library for Emacs</a>
+</li>
+<li><a href="http://www.gnu.org/software/emacs/manual/html_node/widget/index.html">The Emacs Widget Library</a>
+</li>
+<li><a href="http://www.emacswiki.org/emacs/InteractivelyDoThings">InteractivelyDoThings</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Java</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Search Java package documentation:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">java/open-javadoc</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Open Java Official documentation web site:</span>
+<span class="org-doc">   https://docs.oracle.com/javase/8/docs</span>
+
+<span class="org-doc">   Usage: M-x java/open-javadoc</span>
+
+<span class="org-doc">   "</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url <span class="org-string">"https://docs.oracle.com/javase/8/docs/"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">java/search-class</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-doc">"Search a Java Class documentation.</span>
+<span class="org-doc">   at: https://docs.oracle.com/javase/&lt;java-version&gt;</span>
+
+<span class="org-doc">   It is assumed that is the Java 8.</span>
+
+<span class="org-doc">   Example:  M-x java/search-class  javax.swing.JPanel</span>
+
+<span class="org-doc">   "</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+
+  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+
+   <span class="org-rainbow-delimiters-depth-3">(</span>format <span class="org-string">"https://docs.oracle.com/javase/8/docs/api/%s"</span>
+
+           <span class="org-rainbow-delimiters-depth-4">(</span>concat <span class="org-rainbow-delimiters-depth-5">(</span>replace-regexp-in-string <span class="org-string">"\\."</span> <span class="org-string">"/"</span>
+
+                                             <span class="org-rainbow-delimiters-depth-6">(</span>read-string <span class="org-string">"Enter a java class: "</span><span class="org-rainbow-delimiters-depth-6">)</span>
+
+                                             <span class="org-rainbow-delimiters-depth-5">)</span> <span class="org-string">".html"</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Caio Rodrigues</p>
+<p class="date">Created: 2016-09-29 qui 05:46</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

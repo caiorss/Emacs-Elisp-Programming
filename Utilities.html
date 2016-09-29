@@ -1,0 +1,1859 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Emacs Utilities</title>
+<!-- 2016-09-29 qui 05:45 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Caio Rodrigues" />
+<meta  name="description" content="Emacs programming and customization."
+ />
+<meta  name="keywords" content="emacs, elisp, lisp, programming, eshell, editor" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link href="theme/style.css" rel="stylesheet">
+
+<script type="text/javascript" src="theme/org-info.js">
+/**
+ *
+ * @source: theme/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in theme/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in theme/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emacs Utilities</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Emacs Utilities</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Shells</a></li>
+<li><a href="#sec-1-2">1.2. Manpage Reader</a></li>
+<li><a href="#sec-1-3">1.3. Info Page Reader</a></li>
+<li><a href="#sec-1-4">1.4. Spell Checker</a></li>
+<li><a href="#sec-1-5">1.5. Calculator - M-x calc</a></li>
+<li><a href="#sec-1-6">1.6. Magit - Emacs Interface to GIT</a></li>
+<li><a href="#sec-1-7">1.7. Helm utilities</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Emacs Utilities</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Shells</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Emacs have built-in commands to run shells. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Name</th>
+<th scope="col" class="left">Command: M-x &lt;command&gt;</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">shell</td>
+<td class="left">M-x shell</td>
+<td class="left">Runs an inferior shell app. It can run bash, zsh and etc.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">term</td>
+<td class="left">M-x term</td>
+<td class="left">Emacs' terminal emulator that can run apps like top, vim, bash and etc.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">It alows command line line completion inside Emacs in apps like bash, zsh and python .</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">eshell</td>
+<td class="left">M-x eshell</td>
+<td class="left">Emacs' built-in shell written in Elisp. it has elisp implementation of cd, ls, pwd</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">and other standard Unix commands and apps. Works on all operating systems. Eshell</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">also can run Elisp functions. It is a good alternative to Microsoft Windows</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">terminal emulator cmd.exe.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">ielm</td>
+<td class="left">M-x ielm</td>
+<td class="left">Emacs' elisp shell that can be used to control, test and interact with Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Emacs also have commands to run programming languages shells:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Language</th>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Python</td>
+<td class="left">M-x run-python</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left">Octave</td>
+<td class="left">M-x run-octave</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left">Ruby</td>
+<td class="left">M-x run-ruby</td>
+<td class="left">inf-ruby</td>
+</tr>
+
+<tr>
+<td class="left">Elisp (Emacs Lisp)</td>
+<td class="left">M-x ielm</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left">Scheme</td>
+<td class="left">M-x run-scheme</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left">Lisp</td>
+<td class="left">M-x run-lisp</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Running Emacs in terminal: 
+</p>
+
+<ul class="org-ul">
+<li><code>emacs -nw</code>  
+</li>
+</ul>
+
+<p>
+Running Emacs fast without read ~/emacs.d/init.el or ~/.emacs startup
+file:  
+</p>
+
+<ul class="org-ul">
+<li><code>emacs -nw -Q</code>
+</li>
+
+<li>Start Emacs in terminal running Eshell:  
+</li>
+</ul>
+
+<p>
+Running Emacs in terminal or executing some Elisp command or app:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ emacs -nw -q --eval <span class="org-string">'(eshell)'</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Start Emacs in terminal running python:  
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ emacs -nw -q --eval <span class="org-string">'(progn (run-python "python3") (switch-to-buffer "*Python*"))'</span>
+</pre>
+</div>
+
+
+<p>
+See also:
+</p>
+
+<ul class="org-ul">
+<li>Eshell Manual: <a href="https://www.gnu.org/software/emacs/manual/html_mono/eshell.html">Eshell: The Emacs Shell</a>
+</li>
+
+<li><a href="http://www.nongnu.org/emacsdoc-fr/manuel/shell.html">Running Shell Commands from Emacs</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://unix.stackexchange.com/questions/104325/what-is-the-difference-between-shell-eshell-and-term-in-emacs">What is the difference between shell, eshell, and term in Emacs? -
+Unix &amp; Linux Stack Exchange</a>
+</li>
+
+<li><a href="https://www.emacswiki.org/emacs/MultiTerm">EmacsWiki: Multi Term</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://www.howardism.org/Technical/Emacs/new-window-manager.html">Emacs is My New Window Manager</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://news.ycombinator.com/item?id=8922359">Emacs Is My New Window Manager | Hacker News</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://www.informatimago.com/linux/emacs-on-user-mode-linux.html">Emacs standing alone on a Linux Kernel</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Manpage Reader</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+To read manpages enter <code>M-x woman</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Info Page Reader</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>To Browser info pages and also the Emacs documentation. <code>M-x info</code>
+</li>
+
+<li>Search Info pages. <code>M-x info-apropos</code>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Spell Checker</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Emacs uses external programs to check the spell. It supports <span class="underline">ispell</span>,
+<span class="underline">aspell</span> and <span class="underline">hunspell</span>. The variable <code>ispell-program-name</code> sets the
+spell check software used by Emacs. The default dictionary used by
+Emacs is US English, but it can be changed with the command
+<code>M-x ispell-change-dicitonary</code>.
+</p>
+
+<p>
+Spell check interface commands:
+</p>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Default Key Bind</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>M-x ispell-buffer</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the spelling of all buffer.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x ispell-word</code></td>
+<td class="left"><code>M-$</code></td>
+<td class="left">Check the spell of word at cursor position.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x ispell-region</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the spell of selected text.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x ispell-change-dictionary</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Change the language of dictionary used by the spell check.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x flyspell-mode</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Toggle flyspell mode. When active, it will highlight all misspelled .</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x flyspell-buffer</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the hole buffer in flyspell minor mode.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x ispell-kill-ispell</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Kill the Ispell subprocess.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Set the default Spell checker:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"aspell"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">or</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"ispell"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;;</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"hunspell"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<p>
+The dictionary can be changed with the Elisp code:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>ispell-chage-dictionary <span class="org-string">"en"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>ispell-chage-dictionary <span class="org-string">"castellano"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-rainbow-delimiters-depth-1">(</span>ispell-chage-dictionary <span class="org-string">"german"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">M-x ispell-spanish</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">ispell-spanish</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+ <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+ <span class="org-rainbow-delimiters-depth-2">(</span>ispell-change-diciontary <span class="org-string">"castellano"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">M-x ispell-en</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">ispell-en</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+   <span class="org-rainbow-delimiters-depth-2">(</span>ispell-change-diciontary <span class="org-string">"en"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<p>
+To right click in the word and get suggestions use:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>eval-after-load <span class="org-string">"flyspell"</span>
+  '<span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">progn</span>
+     <span class="org-rainbow-delimiters-depth-3">(</span>define-key flyspell-mouse-map <span class="org-rainbow-delimiters-depth-4">[</span>down-mouse-3<span class="org-rainbow-delimiters-depth-4">]</span> #'flyspell-correct-word<span class="org-rainbow-delimiters-depth-3">)</span>
+     <span class="org-rainbow-delimiters-depth-3">(</span>define-key flyspell-mouse-map <span class="org-rainbow-delimiters-depth-4">[</span>mouse-3<span class="org-rainbow-delimiters-depth-4">]</span> #'undefined<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<p>
+The ispell doesn't check the spell of comments and strings. This
+behavior can be changed with the code below that allows it to check
+the spell in all programming modes like python-mode, haskell-mode and
+so on.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'prog-mode-hook 'flyspell-prog-mode<span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+
+<p>
+See also:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://joelkuiper.eu/spellcheck_emacs">Spell checking in Emacs</a>
+</li>
+<li><a href="http://www.emacswiki.org/emacs/FlySpell">FlySpell - Emacs Wiki.org</a>
+</li>
+<li><a href="http://www.emacswiki.org/emacs/InteractiveSpell">InteractiveSpell</a>
+</li>
+<li><a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">Emacs Manual - Check and Correcting Spelling</a>
+</li>
+<li><a href="http://ergoemacs.org/emacs/emacs_spell_checker_problems.html">Emacs Spell Checker Problems</a>
+</li>
+<li><a href="http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html">What's the best spell check setup in emacs</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Calculator - M-x calc</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+<b>Overview:</b>
+</p>
+
+<ul class="org-ul">
+<li>RPN Calculation (Like HP48g series)
+</li>
+
+<li>Good for small calculation and verify expected values.
+</li>
+
+<li>Scientific calculator
+</li>
+
+<li>Bitwise operation: Useful for low level programming like:
+C-programming, embedded systems, network and machine instructions
+</li>
+
+<li>Units - Convert units like meters, inches, feets, min, seconds,
+bits, bytes &#x2026;
+</li>
+
+<li>Functions (cos, sin, exp bound to keybindings)
+</li>
+
+<li>Date calculations
+</li>
+
+<li>Symbolic Math 
+</li>
+</ul>
+
+<p>
+<b>Documentation</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Describe keybindings</td>
+<td class="left">C-h m</td>
+</tr>
+
+<tr>
+<td class="left">Calc Info manual</td>
+<td class="left">M-x calc-info</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Stack Commands</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Dup</td>
+<td class="left">RET</td>
+<td class="left">Duplicate last number of stack.</td>
+</tr>
+
+<tr>
+<td class="left">Swap</td>
+<td class="left">Tab</td>
+<td class="left">Swap the last two numbers of stack.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+<b>Scientific Functions</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Function</th>
+<th scope="col" class="left">Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">set precision</td>
+<td class="left">p</td>
+</tr>
+
+<tr>
+<td class="left">change sign</td>
+<td class="left">n</td>
+</tr>
+
+<tr>
+<td class="left">reciprocal 1/n</td>
+<td class="left">&amp;</td>
+</tr>
+
+<tr>
+<td class="left">square root</td>
+<td class="left">Q</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">ln</td>
+<td class="left">L</td>
+</tr>
+
+<tr>
+<td class="left">exp (e^x)</td>
+<td class="left">E</td>
+</tr>
+
+<tr>
+<td class="left">10^x</td>
+<td class="left">H E</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">sin</td>
+<td class="left">S</td>
+</tr>
+
+<tr>
+<td class="left">cos</td>
+<td class="left">C</td>
+</tr>
+
+<tr>
+<td class="left">tan</td>
+<td class="left">T</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">radian mode</td>
+<td class="left">m r</td>
+</tr>
+
+<tr>
+<td class="left">degree mode</td>
+<td class="left">m d</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">pi &pi;  (3.415&#x2026;)</td>
+<td class="left">P</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">factorial</td>
+<td class="left">!, k d</td>
+</tr>
+
+<tr>
+<td class="left">Prime factorization</td>
+<td class="left">k f</td>
+</tr>
+
+<tr>
+<td class="left">GCD</td>
+<td class="left">k g</td>
+</tr>
+
+<tr>
+<td class="left">LCM</td>
+<td class="left">k l</td>
+</tr>
+
+<tr>
+<td class="left">Error function - erf</td>
+<td class="left">f e</td>
+</tr>
+
+<tr>
+<td class="left">Error fuinction - erfc</td>
+<td class="left">I f e</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Financial Functions</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Enter percentage</td>
+<td class="left">M-%</td>
+</tr>
+
+<tr>
+<td class="left">Convert to percentage</td>
+<td class="left">c %</td>
+</tr>
+
+<tr>
+<td class="left">Percentage change</td>
+<td class="left">b %</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">present value</td>
+<td class="left">b P</td>
+</tr>
+
+<tr>
+<td class="left">future value</td>
+<td class="left">b F</td>
+</tr>
+
+<tr>
+<td class="left">rate of return</td>
+<td class="left">b T</td>
+</tr>
+
+<tr>
+<td class="left">number of payments</td>
+<td class="left">b #</td>
+</tr>
+
+<tr>
+<td class="left">size of payments</td>
+<td class="left">b M</td>
+</tr>
+
+<tr>
+<td class="left">net present value, int rate of return</td>
+<td class="left">b N, b I</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Formula transformation</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="left">Key binding</th>
+<th scope="col" class="left">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Enter a formula</td>
+<td class="left">' (-b + sqrt(b^2 - 4*a*c) / (2 * a))</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Print the formula in Latex mode</td>
+<td class="left">dL</td>
+<td class="left"><code>\frac{\sqrt{b^2 - 4 a c} - b}{2 a}</code></td>
+</tr>
+
+<tr>
+<td class="left">Creates a C-lanaguage code</td>
+<td class="left">dC</td>
+<td class="left"><code>(sqrt(pow(b, 2) - 4*(a*c)) - b) / (2*a)</code></td>
+</tr>
+
+<tr>
+<td class="left">Normal Language</td>
+<td class="left">dN</td>
+<td class="left"><code>_' (-b + sqrt(b^2 - 4*a*c) / (2 * a))_</code></td>
+</tr>
+
+<tr>
+<td class="left">Show formula in big display mode</td>
+<td class="left">dB</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Unit Conversions</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="left">M-x command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Enter number with unites</td>
+<td class="left">' 100 ft/hr</td>
+</tr>
+
+<tr>
+<td class="left">Convert to new unit, base unit</td>
+<td class="left">u c, u b</td>
+</tr>
+
+<tr>
+<td class="left">Convert temperature units</td>
+<td class="left">u t</td>
+</tr>
+
+<tr>
+<td class="left">Simplify unit expression</td>
+<td class="left">u s</td>
+</tr>
+
+<tr>
+<td class="left">View unit table</td>
+<td class="left">u v</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+<b>Numbers with different base</b> 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="right">Emacs Calc</th>
+<th scope="col" class="right">Base 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Binary</td>
+<td class="right">2#11110101</td>
+<td class="right">245</td>
+</tr>
+
+<tr>
+<td class="left">Octal</td>
+<td class="right">8#27</td>
+<td class="right">23</td>
+</tr>
+
+<tr>
+<td class="left">Hexadecimal</td>
+<td class="right">16#FFFF</td>
+<td class="right">65535</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Bitwise Operations</b> 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Keybinding</th>
+<th scope="col" class="left">M-x command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><b>Number Representation</b></td>
+</tr>
+
+<tr>
+<td class="left">d 0</td>
+<td class="left">&#xa0;</td>
+<td class="left">Decimal (Standard )</td>
+</tr>
+
+<tr>
+<td class="left">d 2</td>
+<td class="left">&#xa0;</td>
+<td class="left">Number representation to binary 2#00100111</td>
+</tr>
+
+<tr>
+<td class="left">0 d 2</td>
+<td class="left">&#xa0;</td>
+<td class="left">Two-complement binary</td>
+</tr>
+
+<tr>
+<td class="left">d 6</td>
+<td class="left">&#xa0;</td>
+<td class="left">Hexadecimal</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><b>Word Size</b></td>
+</tr>
+
+<tr>
+<td class="left">b w</td>
+<td class="left">&#xa0;</td>
+<td class="left">Set word size (8 bits, 16 bits, 32 bits &#x2026;)</td>
+</tr>
+
+<tr>
+<td class="left">b c</td>
+<td class="left">calc-clip</td>
+<td class="left">Clip the current number to current word size.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><b>Bitwise operation</b></td>
+</tr>
+
+<tr>
+<td class="left">b a</td>
+<td class="left">calc-and</td>
+<td class="left">Bitwise AND</td>
+</tr>
+
+<tr>
+<td class="left">b o</td>
+<td class="left">calc-or</td>
+<td class="left">Bitwise OR</td>
+</tr>
+
+<tr>
+<td class="left">b x</td>
+<td class="left">calc-xor</td>
+<td class="left">Bitwise XOR</td>
+</tr>
+
+<tr>
+<td class="left">b n</td>
+<td class="left">calc-not</td>
+<td class="left">Bitwise NOT</td>
+</tr>
+
+<tr>
+<td class="left">b d</td>
+<td class="left">calc-diff</td>
+<td class="left">Bitwise difference</td>
+</tr>
+
+<tr>
+<td class="left">b r</td>
+<td class="left">calc-rshift-binary</td>
+<td class="left">Bitwise right shift by 1 bit</td>
+</tr>
+
+<tr>
+<td class="left">b l</td>
+<td class="left">calc-lshift-binary</td>
+<td class="left">Bitwise left shift by 1 bit</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<p>
+See also
+</p>
+
+<ul class="org-ul">
+<li><a href="https://florian.adamsky.it/2016/03/31/emacs-calc-for-programmers-and-cs.html">Emacs Calc for Programmers and Computer Scientists - Florian
+Adamsky</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://www.johndcook.com/blog/2010/10/11/emacs-calc/">The Emacs calculator calc</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://www.gnu.org/software/emacs/refcards/pdf/calccard.pdf">Calc mode reference card.</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=D9lmCbLGZ_c">An Emacs Calc-Mode Epiphany - YouTube</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://www.drlock.com/blog/2013/01/31/the-gnu-emacs-calculator/">DrLock.com » Blog Archive » The GNU Emacs Calculator</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://vimeo.com/14742598">Emacs-Calc: The Poor Man’s Mathematica on Vimeo</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://beige.ucs.indiana.edu/P573/node97.html">Calc, the King of Calculators</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://truongnghiem.wordpress.com/common-calculations-in-emacscalc/">Common calculations in Emacs/Calc | Truong's Weblog</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://truongnghiem.wordpress.com/2010/07/12/make-typing-mathematical-equations-in-latex-easier-with-emacs-calc/">Make typing mathematical equations in LaTeX easier with Emacs’
+Calc | Truong's Weblog</a>  
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://www.reddit.com/r/emacs/comments/1mbn0s/the_emacs_calculator/">The Emacs Calculator : emacs</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://www.emacswiki.org/emacs/Calc_Tutorials_by_Andrew_Hyatt">EmacsWiki: Calc Tutorials by Andrew Hyatt</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://stackoverflow.com/questions/13057245/how-to-completely-erase-emacs-calcs-state">How to completely erase Emacs Calc's state? - Stack Overflow</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://www.slac.stanford.edu/comp/unix/gnu-info/calc_2.html">GNU Emacs Calc 2.02 Manual - Getting Started</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><a id="ID-c1ca4260-446b-456b-a555-bcdd4bc5329f" name="ID-c1ca4260-446b-456b-a555-bcdd4bc5329f"></a><span class="section-number-3">1.6</span> Magit - Emacs Interface to GIT</h3>
+<div class="outline-text-3" id="text-1-6">
+
+<p>
+See:  
+</p>
+
+<ul class="org-ul">
+<li><a href="http://stackapps.com/questions/3950/sx-stack-exchange-for-emacs">http://stackapps.com/questions/3950/sx-stack-exchange-for-emacs</a>
+</li>
+</ul>
+
+<p>
+Magit Remote Branches 
+</p>
+
+<ul class="org-ul">
+<li><a href="http://jr0cket.co.uk/2012/12/driving-git-with-emacs-pure-magic-with.html">http://jr0cket.co.uk/2012/12/driving-git-with-emacs-pure-magic-with.html</a>  
+</li>
+</ul>
+
+
+<p>
+Magit Reference Card:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://magit.vc/manual/magit-refcard.pdf">https://magit.vc/manual/magit-refcard.pdf</a> 
+</li>
+</ul>
+
+<p>
+Another Reference Card 
+</p>
+
+<ul class="org-ul">
+<li><a href="http://wiki-old.lihebi.com/posts/tools/software/emacs/packages/magit/">http://wiki-old.lihebi.com/posts/tools/software/emacs/packages/magit/</a>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://ergoemacs.org/emacs/emacs_magit-mode_tutorial.html">http://ergoemacs.org/emacs/emacs_magit-mode_tutorial.html</a>
+</li>
+</ul>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command M-x</th>
+<th scope="col" class="left">Key bind</th>
+<th scope="col" class="left">GIT</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">magit-status</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">magit-status</td>
+<td class="left">&#xa0;</td>
+<td class="left">git status</td>
+<td class="left">Magit status is the main entry point to Magit</td>
+</tr>
+
+<tr>
+<td class="left">magit-init</td>
+<td class="left">&#xa0;</td>
+<td class="left">git init</td>
+<td class="left">Init a git repository</td>
+</tr>
+
+<tr>
+<td class="left">magit-log</td>
+<td class="left">&#xa0;</td>
+<td class="left">git log</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">magit-process-bufffer</td>
+<td class="left">$</td>
+<td class="left">&#xa0;</td>
+<td class="left">Displays the git command and its output</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">g</td>
+<td class="left">&#xa0;</td>
+<td class="left">Update magit status buffer</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">l</td>
+<td class="left">&#xa0;</td>
+<td class="left">History</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">L</td>
+<td class="left">&#xa0;</td>
+<td class="left">Verbose history</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">!!</td>
+<td class="left">git &lt;command&gt;</td>
+<td class="left">Run a git command</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">!s</td>
+<td class="left">&#xa0;</td>
+<td class="left">Magit shell command</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Remote Branches 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command M-x</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">magit-add-remote</td>
+<td class="left">Add a remote branch to magit</td>
+</tr>
+
+<tr>
+<td class="left">magit-remote-add</td>
+<td class="left">M-a add remote repository</td>
+</tr>
+
+<tr>
+<td class="left">magit-remote-remove</td>
+<td class="left">M-d remove remote repository</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Untracked files commands:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">s</td>
+<td class="left">Add untracked file to staging area</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-u S</td>
+<td class="left">Stage all untracked and tracked files</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">i</td>
+<td class="left">Add filename to .gitignore</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">k</td>
+<td class="left">Delete untracked file, forever</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Staging and Commiting 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">u</td>
+<td class="left">Unstage</td>
+</tr>
+
+<tr>
+<td class="left">C-u s</td>
+<td class="left">Prompt file for stagin</td>
+</tr>
+
+<tr>
+<td class="left">U</td>
+<td class="left">Unstage everything that has been staged</td>
+</tr>
+
+<tr>
+<td class="left">c</td>
+<td class="left">Pop buffer for commit message</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-c</td>
+<td class="left">Amend commit message</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-k</td>
+<td class="left">Erage magit-log-edit buffer and bury it</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Tagging 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">t t</td>
+<td class="left">Create a lightweight tag</td>
+</tr>
+
+<tr>
+<td class="left">t a</td>
+<td class="left">Create annotated tag</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Stashing 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">z z</td>
+<td class="left">Create new stash</td>
+</tr>
+
+<tr>
+<td class="left">a</td>
+<td class="left">Apply stash</td>
+</tr>
+
+<tr>
+<td class="left">A</td>
+<td class="left">Pop a stash</td>
+</tr>
+
+<tr>
+<td class="left">k</td>
+<td class="left">Drop a stash</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Branch 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">b v</td>
+<td class="left">Branch manager</td>
+</tr>
+
+<tr>
+<td class="left">b b</td>
+<td class="left">Switch to a different branch</td>
+</tr>
+
+<tr>
+<td class="left">b n</td>
+<td class="left">Create a new branch</td>
+</tr>
+
+<tr>
+<td class="left">k</td>
+<td class="left">Delete current branch</td>
+</tr>
+
+<tr>
+<td class="left">C-u k</td>
+<td class="left">Delte branch event if it hasn't been merged</td>
+</tr>
+
+<tr>
+<td class="left">m m</td>
+<td class="left">Merge the branch in current line to specified</td>
+</tr>
+
+<tr>
+<td class="left">g</td>
+<td class="left">Refresh branch list</td>
+</tr>
+
+<tr>
+<td class="left">q</td>
+<td class="left">Buries the branch list and deletes the window</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Helm utilities</h3>
+<div class="outline-text-3" id="text-1-7">
+<ul class="org-ul">
+<li>M-x helm-M-x - Show all M-x commands
+</li>
+
+<li>M-x helm-buffers-list  - Switch buffers
+</li>
+
+<li>M-x helm-find-files  - Helm equivalent of M-x find-files
+</li>
+
+<li>M-x helm-show-kill-ring
+</li>
+
+<li>M-x helm-info  - Search Info pages. 
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Caio Rodrigues</p>
+<p class="date">Created: 2016-09-29 qui 05:45</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

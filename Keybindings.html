@@ -1,0 +1,2133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Emacs Keybindings</title>
+<!-- 2016-09-29 qui 05:45 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Caio Rodrigues" />
+<meta  name="description" content="Emacs programming and customization."
+ />
+<meta  name="keywords" content="emacs, elisp, lisp, programming, eshell, editor" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link href="theme/style.css" rel="stylesheet">
+
+<script type="text/javascript" src="theme/org-info.js">
+/**
+ *
+ * @source: theme/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in theme/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in theme/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emacs Keybindings</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Emacs Keybindings</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Default Key Bindings and Useful Commands</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Overview</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Key Notation and Conventions</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Key Bindings and Commands by Task</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Selected Key Bindings and Commands for Programming</a></li>
+<li><a href="#sec-1-1-5">1.1.5. Key bindings and Commands for Lisp programming</a></li>
+<li><a href="#sec-1-1-6">1.1.6. Ubiquitous Emacs Key Bindings</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Commands</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Emacs Keybindings</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Default Key Bindings and Useful Commands</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Overview</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+The popular Ctrl-v (paste), Ctrl-c (copy), Ctrl-z (undo) can be
+enabled by typing: M-x cua-mode or by inserting =(cua-mode) in Emacs
+configuration file. It also supports the Vim key bindings by
+installing the evil package <code>(M-x package-install evil)</code>.
+</p>
+
+<p>
+Note: The Emacs standard key bindings can be overridden by user
+configuration or modes like cua-mode or evil mode that emulates VI.
+</p>
+
+<p>
+See also:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf">GNU Emacs Key Bindings  Reference Card</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Key Notation and Conventions</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+<b>Key Notation</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Name</th>
+<th scope="col" class="left">Modern Keyboard Equivalence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M</td>
+<td class="left">Meta</td>
+<td class="left">Alt</td>
+</tr>
+
+<tr>
+<td class="left">A</td>
+<td class="left">Meta</td>
+<td class="left">Alt</td>
+</tr>
+
+<tr>
+<td class="left">C</td>
+<td class="left">Control</td>
+<td class="left">Ctrl</td>
+</tr>
+
+<tr>
+<td class="left">S</td>
+<td class="left">Shift</td>
+<td class="left">Shift</td>
+</tr>
+
+<tr>
+<td class="left">SPC</td>
+<td class="left">Space</td>
+<td class="left">Space</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Some texts uses A - Alt instead of Meta.
+</li>
+</ul>
+
+<p>
+<b>Key Sequence</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Prefix Key</th>
+<th scope="col" class="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x &lt;keys&gt;</td>
+<td class="left">General extend commands</td>
+</tr>
+
+<tr>
+<td class="left">C-h &lt;keys&gt;</td>
+<td class="left">Help Commands</td>
+</tr>
+
+<tr>
+<td class="left">C-c &lt;keys&gt;</td>
+<td class="left">Mode specific extended commands</td>
+</tr>
+
+<tr>
+<td class="left">M-x</td>
+<td class="left">Reserved to execute Emacs Commands.</td>
+</tr>
+
+<tr>
+<td class="left">C-g</td>
+<td class="left">Reserved to cancel Emacs commands.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Key Mnemonics</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Letter</th>
+<th scope="col" class="left">Mnemonic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">p</td>
+<td class="left">previous</td>
+</tr>
+
+<tr>
+<td class="left">n</td>
+<td class="left">next</td>
+</tr>
+
+<tr>
+<td class="left">b</td>
+<td class="left">backward</td>
+</tr>
+
+<tr>
+<td class="left">f</td>
+<td class="left">forward</td>
+</tr>
+
+<tr>
+<td class="left">a</td>
+<td class="left">beginning</td>
+</tr>
+
+<tr>
+<td class="left">e</td>
+<td class="left">end</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<p>
+See also:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://ergoemacs.org/emacs/emacs_kb_shortcuts_pain.html">Why Emacs's Keyboard Shortcuts are Painful</a>
+</li>
+<li><a href="http://ergoemacs.org/emacs/command-frequency.html">Emacs's Command Frequency Statistics</a>
+</li>
+<li><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Changing-Key-Bindings.html">Emacs Manual - 21.12 Changing Key Bindings</a>
+</li>
+<li><a href="http://stackoverflow.com/questions/1144424/are-there-any-emacs-key-combinations-reserved-for-custom-commands">Are there any emacs key combinations reserved for custom commands?</a>
+</li>
+<li><a href="https://www.masteringemacs.org/article/mastering-key-bindings-emacs">Mastering Key Bindings in Emacs</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Key Bindings and Commands by Task</h4>
+<div class="outline-text-4" id="text-1-1-3">
+</div><ol class="org-ol"><li><a id="sec-1-1-3-1" name="sec-1-1-3-1"></a>Quitting<br  /><div class="outline-text-5" id="text-1-1-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Command (M-x &lt;cmd&gt;)</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">kill-emacs</td>
+<td class="left">End Emacs and save all buffers automatically.</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-x C-c</code></td>
+<td class="left">save-buffers-kill-emacs</td>
+<td class="left">Ask to kill each buffer and close Emacs.</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-g</code></td>
+<td class="left">keyboard-quit</td>
+<td class="left">Cancel any emacs command or prompt.</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-x k</code></td>
+<td class="left">kill-buffer</td>
+<td class="left">Close current buffer.</td>
+</tr>
+
+<tr>
+<td class="left"><code>C z</code> or <code>C-x C-z</code></td>
+<td class="left">suspend-emacs</td>
+<td class="left">Iconify Emacs in graphical mode or suspend Emacs process when in terminal.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+Note: Neither C-z or C-x C-c work in Cua mode.
+</p>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-2" name="sec-1-1-3-2"></a>File<br  /><div class="outline-text-5" id="text-1-1-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Function</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x C-f</td>
+<td class="left">find-file</td>
+<td class="left">Open File.</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-v</td>
+<td class="left">find-alternate-file</td>
+<td class="left">Open another file and kill current buffer.</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-s</td>
+<td class="left">save-buffer</td>
+<td class="left">Save Current Buffer.</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-w</td>
+<td class="left">write-file</td>
+<td class="left">Save Buffer as different file.</td>
+</tr>
+
+<tr>
+<td class="left">C-x s</td>
+<td class="left">save-some-buffers</td>
+<td class="left">Save all buffers interactively.</td>
+</tr>
+
+<tr>
+<td class="left">C-u C-x s</td>
+<td class="left">&#xa0;</td>
+<td class="left">Save all buffers.</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-C</td>
+<td class="left">save-buffers-kill-terminal</td>
+<td class="left">Closes Emacs and asks to save each buffers.</td>
+</tr>
+
+<tr>
+<td class="left">C-x i</td>
+<td class="left">insert-file</td>
+<td class="left">Insert the content of a file at cursor position.</td>
+</tr>
+
+<tr>
+<td class="left">-</td>
+<td class="left">revert-buffer</td>
+<td class="left">Update a buffer when the file is changed on disk.</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-q</td>
+<td class="left">read-only-mode</td>
+<td class="left">Toggle read-only mode.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-3" name="sec-1-1-3-3"></a>Buffers<br  /><div class="outline-text-5" id="text-1-1-3-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Function</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x b</td>
+<td class="left">switch-to-buffer</td>
+<td class="left">Select Another Buffer</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-b</td>
+<td class="left">list-buffers</td>
+<td class="left">List all buffers</td>
+</tr>
+
+<tr>
+<td class="left">C-x k</td>
+<td class="left">kill-buffer</td>
+<td class="left">Kill a buffer</td>
+</tr>
+
+<tr>
+<td class="left">C-x [right]</td>
+<td class="left">next-buffer</td>
+<td class="left">Move to next buffer</td>
+</tr>
+
+<tr>
+<td class="left">C-x [left]</td>
+<td class="left">previous-buffer</td>
+<td class="left">Move to previous buffer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-4" name="sec-1-1-3-4"></a>Navigation<br  /><div class="outline-text-5" id="text-1-1-3-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-a</td>
+<td class="left">Go to start of the line</td>
+</tr>
+
+<tr>
+<td class="left">C-e</td>
+<td class="left">Go to end of the line.</td>
+</tr>
+
+<tr>
+<td class="left">C-k</td>
+<td class="left">Cut/Delete from cursor current position to the end of the line.</td>
+</tr>
+
+<tr>
+<td class="left">M-&lt;</td>
+<td class="left">Move to top of buffer</td>
+</tr>
+
+<tr>
+<td class="left">M-&gt;</td>
+<td class="left">Move to Bottom of buffer</td>
+</tr>
+
+<tr>
+<td class="left">M-f</td>
+<td class="left">Move forward one word</td>
+</tr>
+
+<tr>
+<td class="left">M-b</td>
+<td class="left">Move backward one word</td>
+</tr>
+
+<tr>
+<td class="left">M-[left key]</td>
+<td class="left">Move backward one word</td>
+</tr>
+
+<tr>
+<td class="left">M-[right key]</td>
+<td class="left">Move forward one word</td>
+</tr>
+
+<tr>
+<td class="left">Mg-g &lt;line-num&gt;</td>
+<td class="left">Go to line number</td>
+</tr>
+
+<tr>
+<td class="left">Mg-c &lt;cursor-pos&gt;</td>
+<td class="left">Go to character position</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-5" name="sec-1-1-3-5"></a>Bookmarks<br  /><div class="outline-text-5" id="text-1-1-3-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x r m</td>
+<td class="left">Add current buffer to bookmarks.</td>
+</tr>
+
+<tr>
+<td class="left">C-x r b</td>
+<td class="left">Open a buffer from bookmarks.</td>
+</tr>
+
+<tr>
+<td class="left">C-x r l</td>
+<td class="left">List bookmarks.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-6" name="sec-1-1-3-6"></a>Search<br  /><div class="outline-text-5" id="text-1-1-3-6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-s</td>
+<td class="left">Forward Search</td>
+</tr>
+
+<tr>
+<td class="left">C-r</td>
+<td class="left">Backward Search</td>
+</tr>
+
+<tr>
+<td class="left">M-%</td>
+<td class="left">Replace</td>
+</tr>
+
+<tr>
+<td class="left">C-s</td>
+<td class="left">Jump to next occurrence</td>
+</tr>
+
+<tr>
+<td class="left">C-r</td>
+<td class="left">Jump to previour occurrence</td>
+</tr>
+
+<tr>
+<td class="left">C-g</td>
+<td class="left">Exit search</td>
+</tr>
+
+<tr>
+<td class="left">M-s .</td>
+<td class="left">Find Symbol under cursor</td>
+</tr>
+
+<tr>
+<td class="left">M-s w</td>
+<td class="left">Find Symbol under cursor, match symbols with underscore, dot, hyphen ..</td>
+</tr>
+
+<tr>
+<td class="left">M-s o</td>
+<td class="left">List all matching lines</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-7" name="sec-1-1-3-7"></a>Highlight<br  /><div class="outline-text-5" id="text-1-1-3-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-s-h-.</td>
+<td class="left">Highlight symbol under cursor</td>
+</tr>
+
+<tr>
+<td class="left">M-s-h-p</td>
+<td class="left">Highlight phrase</td>
+</tr>
+
+<tr>
+<td class="left">M-s-h-r</td>
+<td class="left">Highlight regex</td>
+</tr>
+
+<tr>
+<td class="left">M-s-h-l</td>
+<td class="left">Highlight lines matching a regex</td>
+</tr>
+
+<tr>
+<td class="left">M-s-h-u</td>
+<td class="left">Unhighlight regex</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-8" name="sec-1-1-3-8"></a>Select, Copy, Cut and Paste<br  /><div class="outline-text-5" id="text-1-1-3-8">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C - _</td>
+<td class="left">Undo</td>
+</tr>
+
+<tr>
+<td class="left">C - x u</td>
+<td class="left">Redo</td>
+</tr>
+
+<tr>
+<td class="left">C - Space</td>
+<td class="left">Begin Selection</td>
+</tr>
+
+<tr>
+<td class="left">C - G</td>
+<td class="left">Cancel Selection</td>
+</tr>
+
+<tr>
+<td class="left">C-x h</td>
+<td class="left">Select the whole buffer</td>
+</tr>
+
+<tr>
+<td class="left">M-w</td>
+<td class="left">Copy</td>
+</tr>
+
+<tr>
+<td class="left">C-y</td>
+<td class="left">Paste  (Yank)</td>
+</tr>
+
+<tr>
+<td class="left">C-w</td>
+<td class="left">Cut    (Wipe out), Delete and copy to clipboard (Kill Ring)</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-9" name="sec-1-1-3-9"></a>Word Case / Comment and Uncomment<br  /><div class="outline-text-5" id="text-1-1-3-9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-u</td>
+<td class="left">Make word uppercase</td>
+</tr>
+
+<tr>
+<td class="left">M-l</td>
+<td class="left">Make word lowercase</td>
+</tr>
+
+<tr>
+<td class="left">M-c</td>
+<td class="left">Make word title (Capitalize only first letter)</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-;</td>
+<td class="left">Comment/ Uncomment Selected Code</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-10" name="sec-1-1-3-10"></a>Windows<br  /><div class="outline-text-5" id="text-1-1-3-10">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Command (M-x &lt;cmd&gt;)</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x k</td>
+<td class="left">kill-buffer</td>
+<td class="left">Close current buffer</td>
+</tr>
+
+<tr>
+<td class="left">C-x b</td>
+<td class="left">switch-to-buffer</td>
+<td class="left">Switch to buffer</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-b</td>
+<td class="left">list-buffers</td>
+<td class="left">Choose buffer Window</td>
+</tr>
+
+<tr>
+<td class="left">C-x 0</td>
+<td class="left">delete-window</td>
+<td class="left">Delete Current Window</td>
+</tr>
+
+<tr>
+<td class="left">C-x 1</td>
+<td class="left">delete-other-window</td>
+<td class="left">Keep the current window and delete the remaining windows.</td>
+</tr>
+
+<tr>
+<td class="left">C-x 2</td>
+<td class="left">split-window-below</td>
+<td class="left">Split Horizontally</td>
+</tr>
+
+<tr>
+<td class="left">C-x 3</td>
+<td class="left">&#xa0;</td>
+<td class="left">Split Vertically</td>
+</tr>
+
+<tr>
+<td class="left">C-x o</td>
+<td class="left">&#xa0;</td>
+<td class="left">Switch Window</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-11" name="sec-1-1-3-11"></a>Frames<br  /><div class="outline-text-5" id="text-1-1-3-11">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Command (M-x &lt;cmd&gt;)</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x 5 0</td>
+<td class="left">kill-buffer</td>
+<td class="left">Close current frame</td>
+</tr>
+
+<tr>
+<td class="left">C-x 5 1</td>
+<td class="left">delete-other-frames</td>
+<td class="left">Close all frames except current one</td>
+</tr>
+
+<tr>
+<td class="left">C-x 5 2</td>
+<td class="left">make-frame-command</td>
+<td class="left">Create a new frame</td>
+</tr>
+
+<tr>
+<td class="left">C-x 5 o</td>
+<td class="left">other-frame</td>
+<td class="left">Alternate frame</td>
+</tr>
+
+<tr>
+<td class="left">C-z or C-x C-z</td>
+<td class="left">iconify-or-deiconify-frame</td>
+<td class="left">Minimize current frame</td>
+</tr>
+
+<tr>
+<td class="left">C-x 5 f</td>
+<td class="left">find-file-other-frame</td>
+<td class="left">Open file in a new frame.</td>
+</tr>
+
+<tr>
+<td class="left">C-x 5 r</td>
+<td class="left">find-file-read-only-other-frame</td>
+<td class="left">Open file in a new frame in read-only mode.</td>
+</tr>
+
+<tr>
+<td class="left">C-x 5 b</td>
+<td class="left">switch-to-buffer-other-frame</td>
+<td class="left">Switch to buffer in a new frame.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Note: 
+</p>
+
+<ul class="org-ul">
+<li>The key bind C-z is overridden by cua-mode if it enabled. 
+</li>
+
+<li>In terminal the key binding C-x C-z or the command
+<code>M-x iconify-or-deiconify-frame</code> suspends the Emacs process. To
+return to the process: type in the Unix shell fg and return.
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-12" name="sec-1-1-3-12"></a>Restricted Editing<br  /><div class="outline-text-5" id="text-1-1-3-12">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">M-x &lt;cmd&gt;</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x n n</td>
+<td class="left">narrow-to-region</td>
+<td class="left">Narrow to selected text (region)</td>
+</tr>
+
+<tr>
+<td class="left">C-x n w</td>
+<td class="left">widen</td>
+<td class="left">Back to full buffer</td>
+</tr>
+
+<tr>
+<td class="left">C-x n d</td>
+<td class="left">narrow-to-defun</td>
+<td class="left">Narrow to an s-expression</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+This set of commands allow to edit a limited area of the buffer. 
+</p>
+
+<p>
+Notes: This key bindings are overridden by cua-mode and C-x cuts the
+selected text in this mode. If the keys are overridden then the 
+M-x &lt;command&gt; command must be used or the commands assigned to a new
+key binding. 
+</p>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-13" name="sec-1-1-3-13"></a>Keyboard Macros<br  /><div class="outline-text-5" id="text-1-1-3-13">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">M-x &lt;cmd&gt;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x (</td>
+<td class="left">kmacro-start-macro</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-x )</td>
+<td class="left">kmacro-end-macro</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-x e or f4</td>
+<td class="left">kmacro-end-and-call-macro</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-1-3-14" name="sec-1-1-3-14"></a>Informationm, Documentation and Help<br  /><div class="outline-text-5" id="text-1-1-3-14">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Command (M-x command)</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-h ?</td>
+<td class="left">help-for-help</td>
+<td class="left">Show all commands to get help on Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">C-h a</td>
+<td class="left">apropos</td>
+<td class="left">Command Apropos</td>
+</tr>
+
+<tr>
+<td class="left">C-h i</td>
+<td class="left">info</td>
+<td class="left">Info documentation reader</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">info-apropos</td>
+<td class="left">Search for a string in emacs info pages</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">woman</td>
+<td class="left">Browser Unix man pages</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-h f</td>
+<td class="left">describe-function</td>
+<td class="left">Describe function</td>
+</tr>
+
+<tr>
+<td class="left">C-h v</td>
+<td class="left">describe-variable</td>
+<td class="left">Describe variable</td>
+</tr>
+
+<tr>
+<td class="left">C-h m</td>
+<td class="left">describe-mode</td>
+<td class="left">Describe mode</td>
+</tr>
+
+<tr>
+<td class="left">C-h s</td>
+<td class="left">describe-syntax</td>
+<td class="left">Describe syntax</td>
+</tr>
+
+<tr>
+<td class="left">C-h b</td>
+<td class="left">describe-bindings</td>
+<td class="left">Describe key bindings for current buffer</td>
+</tr>
+
+<tr>
+<td class="left">C-h k</td>
+<td class="left">describe-key</td>
+<td class="left">Describe a particular key binding.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">find-library</td>
+<td class="left">Find a library *.el file loaded with require</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">Example: M-x find-library org</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Selected Key Bindings and Commands for Programming</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<p>
+<b>FILE EDITING</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-x C-f</td>
+<td class="left">Open a new file or a existing file.</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-s</td>
+<td class="left">Save current buffer</td>
+</tr>
+
+<tr>
+<td class="left">C-x b</td>
+<td class="left">Swithc Buffer</td>
+</tr>
+
+<tr>
+<td class="left">M-;</td>
+<td class="left">Comment/ Uncomment Selected Code</td>
+</tr>
+
+<tr>
+<td class="left">M-/</td>
+<td class="left">Autocomplete word (Equivalent to VIM Ctrl + p)</td>
+</tr>
+
+<tr>
+<td class="left">C-g</td>
+<td class="left">Cancel any Emacs command</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>NAVIGATION</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-a</td>
+<td class="left">Move the cursor to the beggining of line</td>
+</tr>
+
+<tr>
+<td class="left">C-e</td>
+<td class="left">Move the cursor to the end of line</td>
+</tr>
+
+<tr>
+<td class="left">M-&lt;</td>
+<td class="left">Move the cursor to the beggining of buffer</td>
+</tr>
+
+<tr>
+<td class="left">M-&gt;</td>
+<td class="left">Move to the cursor tor end of buffer</td>
+</tr>
+
+<tr>
+<td class="left">M-x goto-char</td>
+<td class="left">Got a character position</td>
+</tr>
+
+<tr>
+<td class="left">Mg-g &lt;line-num&gt;</td>
+<td class="left">Go to line number</td>
+</tr>
+
+<tr>
+<td class="left">Mg-c &lt;cursor-pos&gt;</td>
+<td class="left">Go to character position</td>
+</tr>
+
+<tr>
+<td class="left">M-m</td>
+<td class="left">Jump to first non whitespace in current line.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">C-x r m</td>
+<td class="left">Make bookmark</td>
+</tr>
+
+<tr>
+<td class="left">C-x r b</td>
+<td class="left">Jump to bookmarks</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>TEXT EDITING</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-y</td>
+<td class="left">Copy selected text by cursor (Copy region)</td>
+</tr>
+
+<tr>
+<td class="left">C-y</td>
+<td class="left">Paste when no text is selected. (Yank)</td>
+</tr>
+
+<tr>
+<td class="left">C-k</td>
+<td class="left">Delete current line from cursor position.</td>
+</tr>
+
+<tr>
+<td class="left">C-w</td>
+<td class="left">Cut (Wipe Out)</td>
+</tr>
+
+<tr>
+<td class="left">M-del</td>
+<td class="left">Delete previous word</td>
+</tr>
+
+<tr>
+<td class="left">M-d</td>
+<td class="left">Delete next word</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-o</td>
+<td class="left">Delete all empty line around the cursor.</td>
+</tr>
+
+<tr>
+<td class="left">M-q</td>
+<td class="left">Justify / Re-align current paragraph</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-x C - (minus)</td>
+<td class="left">Decrease font size</td>
+</tr>
+
+<tr>
+<td class="left">C-x C + (plus)</td>
+<td class="left">Increase font size</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x replace-string</td>
+<td class="left">Batch replace string in selected region or  buffer.</td>
+</tr>
+
+<tr>
+<td class="left">M-x replace-regexp</td>
+<td class="left">Batch replace regex pattern in selected text or buffer.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Key bindings and Commands for Lisp programming</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<p>
+Useful lisp key bindings to edit and navigate Lisp code.
+</p>
+
+
+<p>
+<b>Lisp Evaluation  (Emacs Lisp)</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-x C-e</td>
+<td class="left">Evaluate last s-expression under cursor</td>
+</tr>
+
+<tr>
+<td class="left">C-j</td>
+<td class="left">Evaluate last s-expression under cursor and print.</td>
+</tr>
+
+<tr>
+<td class="left">C-u M-:</td>
+<td class="left">Evaluate S-expression in minibuffer and insert result in minibuffer</td>
+</tr>
+
+<tr>
+<td class="left">M-:</td>
+<td class="left">Execute S-expression in minibuffer.</td>
+</tr>
+
+<tr>
+<td class="left">M-x eval-defun</td>
+<td class="left">Evaluates the outermost S-expression, regardless of cursor position within the s-exp.</td>
+</tr>
+
+<tr>
+<td class="left">M-x eval-buffer</td>
+<td class="left">Eval the whole buffer</td>
+</tr>
+
+<tr>
+<td class="left">M-x eval-region</td>
+<td class="left">Eval the selected text</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>IELM - Emacs Lisp Interpreter</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-x ielm</td>
+<td class="left">Run Emacs Lisp Interpreter</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-b</td>
+<td class="left">(IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell.</td>
+</tr>
+
+<tr>
+<td class="left">C-[up]</td>
+<td class="left">(All Shells) Get the next input in the history</td>
+</tr>
+
+<tr>
+<td class="left">C-[down]</td>
+<td class="left">(All Shells) Get the previous input in the history</td>
+</tr>
+
+<tr>
+<td class="left">M-p</td>
+<td class="left">(All Shells) Get the previous input in the history</td>
+</tr>
+
+<tr>
+<td class="left">M-n</td>
+<td class="left">(All Shells) Get the next input in the history</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-l</td>
+<td class="left">Display the shell history in another window</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Delimiter Wrapping</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-(</td>
+<td class="left">Wrap selection in parentheses</td>
+</tr>
+
+<tr>
+<td class="left">M-[</td>
+<td class="left">Wrap selection in square brackets</td>
+</tr>
+
+<tr>
+<td class="left">M-{</td>
+<td class="left">Wrap selection in curly brackets</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>S-expression Navigation</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-M-n</td>
+<td class="left">Move forward over a parenthetical group</td>
+</tr>
+
+<tr>
+<td class="left">C-M-p</td>
+<td class="left">Move backward over a parenthetical group</td>
+</tr>
+
+<tr>
+<td class="left">C-M-f</td>
+<td class="left">Move forward over a balanced expression</td>
+</tr>
+
+<tr>
+<td class="left">C-M-b</td>
+<td class="left">Move backward over a balanced expression</td>
+</tr>
+
+<tr>
+<td class="left">C-M-k</td>
+<td class="left">Delete s-expression under cursor</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-M-a</td>
+<td class="left">Move to the beggining of current function</td>
+</tr>
+
+<tr>
+<td class="left">C-M-e</td>
+<td class="left">Move to the end of current function</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-6" class="outline-4">
+<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Ubiquitous Emacs Key Bindings</h4>
+<div class="outline-text-4" id="text-1-1-6">
+<p>
+Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in
+Unix apps like Bash, Sh and all shells that uses the GNU readline
+library.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Emacs</th>
+<th scope="col" class="left">Bash Shell</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-a</td>
+<td class="left">Move the cursor to the beggining of line</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">C-e</td>
+<td class="left">Move the cursor to the end of line</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-n</td>
+<td class="left">Move the cursor to the next line  (downward)</td>
+<td class="left">Show next command in the history.</td>
+</tr>
+
+<tr>
+<td class="left">C-p</td>
+<td class="left">Move the cursor to the previous line (upward)</td>
+<td class="left">Show the previou command in the history.</td>
+</tr>
+
+<tr>
+<td class="left">C-j</td>
+<td class="left">New line character (same as Return)</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-b</td>
+<td class="left">Move the cursor backward one word</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">M-f</td>
+<td class="left">Move the cursor forward one word</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-t</td>
+<td class="left">Swap current word with previous</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-d</td>
+<td class="left">Delete the next word</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-k</td>
+<td class="left">Delete the remaining of line from current cursor position</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">C-y</td>
+<td class="left">Paste the deleted line with (C-k) or copied line (Yank)</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">M-w</td>
+<td class="left">Copy the slected text</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-r</td>
+<td class="left">Search forward for a string</td>
+<td class="left">Search for previous command</td>
+</tr>
+
+<tr>
+<td class="left">C-s</td>
+<td class="left">Search backward for a string</td>
+<td class="left">No implemented.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">c-l</td>
+<td class="left">Redraws the screen with the cursor in the middle.</td>
+<td class="left">Clear the screen.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-_</td>
+<td class="left">Undo</td>
+<td class="left">same</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+See also:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/">Bash Emacs Editing Mode Cheat Sheet</a>
+</li>
+<li><a href="http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash">Confusing behavior of emacs-style keybindings in bash</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Commands</h3>
+<div class="outline-text-3" id="text-1-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-x kill-emacs</td>
+<td class="left">Exit emacs</td>
+</tr>
+
+<tr>
+<td class="left">M-x help-with-tutorial</td>
+<td class="left">Open Emacs built in tutorial</td>
+</tr>
+
+<tr>
+<td class="left">M-x suspend-emacs</td>
+<td class="left">Suspend Emacs when in terminal or iconify in graphical mode.</td>
+</tr>
+
+<tr>
+<td class="left">M-x quit-window</td>
+<td class="left">Quit Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">M-x revert-file</td>
+<td class="left">Update buffer when file is changed externally.</td>
+</tr>
+
+<tr>
+<td class="left">M-x auto-revert-mode</td>
+<td class="left">Auto update the current file when its changed externally.</td>
+</tr>
+
+<tr>
+<td class="left">M-x read-only  or C-x C-q</td>
+<td class="left">Toggle the current buffer read only.</td>
+</tr>
+
+<tr>
+<td class="left">M-x delete-trailing-whitespace</td>
+<td class="left">Delete trailing Whistespace</td>
+</tr>
+
+<tr>
+<td class="left">M-x tabify</td>
+<td class="left">Converts all spaces to tab</td>
+</tr>
+
+<tr>
+<td class="left">M-x untabify</td>
+<td class="left">Converts all tabs to spaces.</td>
+</tr>
+
+<tr>
+<td class="left">M-x whitespace-mode</td>
+<td class="left">Toggle white space view.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Notes:
+</p>
+
+<ul class="org-ul">
+<li>The command auto-revert-mode is useful to edit alongside IDEs like
+Visual Studio or Eclipse. If you change the file it is
+automatically updated.
+</li>
+</ul>
+
+<p>
+<b>Change current buffer mode</b>
+</p>
+
+<p>
+it is useful to tell Emacs the file format to enable syntax highlight
+and mode functions when editing a script or configuration file without
+file extension like .gitconfig or python script without it.
+</p>
+
+<ul class="org-ul">
+<li><code>M-x sh-mode</code>      Shell Script - sh extension
+</li>
+<li><code>M-x pyhton-mode</code>  Example: A python script without extension ".py"
+</li>
+<li><code>M-x conf-mode</code>    Configuration file like: .gitconfig, .gitignore, smb.conf
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Caio Rodrigues</p>
+<p class="date">Created: 2016-09-29 qui 05:45</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

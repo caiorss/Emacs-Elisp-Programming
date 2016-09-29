@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Emacs Resources</title>
+<!-- 2016-09-29 qui 05:45 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Caio Rodrigues" />
+<meta  name="description" content="Emacs programming and customization."
+ />
+<meta  name="keywords" content="emacs, elisp, lisp, programming, eshell, editor" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link href="theme/style.css" rel="stylesheet">
+
+<script type="text/javascript" src="theme/org-info.js">
+/**
+ *
+ * @source: theme/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in theme/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in theme/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emacs Resources</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Resources</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Motivation</a></li>
+<li><a href="#sec-1-2">1.2. Emacs Tutorials</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. Introduction to Elisp</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Tips and Tricks</a></li>
+<li><a href="#sec-1-2-3">1.2.3. Packages</a></li>
+<li><a href="#sec-1-2-4">1.2.4. Cases</a></li>
+<li><a href="#sec-1-2-5">1.2.5. Non Categorized</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3. Cheat Sheets</a></li>
+<li><a href="#sec-1-4">1.4. Documentation</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. Manual and References</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Wikis</a></li>
+<li><a href="#sec-1-4-3">1.4.3. Issues</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. Selected Dot Emacs</a></li>
+<li><a href="#sec-1-6">1.6. Emacs Starter Kits</a></li>
+<li><a href="#sec-1-7">1.7. Fun</a></li>
+<li><a href="#sec-1-8">1.8. Books</a></li>
+<li><a href="#sec-1-9">1.9. Community</a></li>
+<li><a href="#sec-1-10">1.10. Blogs</a></li>
+<li><a href="#sec-1-11">1.11. Videos and Screencasts</a></li>
+<li><a href="#sec-1-12">1.12. Selected Codes</a></li>
+<li><a href="#sec-1-13">1.13. Technical Notes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Resources</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Motivation</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li><a href="http://emacsblog.org/2014/08/21/the-editor-of-a-lifetime/">The Editor of a Lifetime</a>
+</li>
+
+<li><a href="http://martinfowler.com/bliki/InternalReprogrammability.html">Internal Reprogrammability</a> by Martin Fowler
+</li>
+
+<li><a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org">Master Emacs in one year</a>
+</li>
+</ul>
+
+<p>
+"This guide is about using Emacs as a professional’s tool. I will not
+show off Emacs as a geek’s toy because I am far from geek
+stereotype. I will focus on philosophy and methodology only. No
+technical details involved."
+</p>
+
+
+<ul class="org-ul">
+<li><a href="http://emacs.sexy/">Emacs is sexy</a>
+</li>
+
+<li><a href="http://batsov.com/articles/2011/11/19/why-emacs/">Why Emacs? - (think)</a>
+</li>
+
+<li><a href="http://www.emacswiki.org/emacs/LispMachine">EmacsWiki: Lisp Machine</a>
+</li>
+
+<li><a href="http://www.emacswiki.org/emacs/ChurchOfEmacs">The Church of Emacs!!</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Emacs Tutorials</h3>
+<div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Introduction to Elisp</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ul class="org-ul">
+<li><a href="http://emacslife.com/how-to-read-emacs-lisp.html">Read Lisp, Tweak Emacs: How to read Emacs Lisp so that you can customize Emacs by Sacha Chua</a>
+</li>
+<li><a href="http://www.fincher.org/tips/Languages/Emacs.shtml">http://www.fincher.org/tips/Languages/Emacs.shtml</a>
+</li>
+<li><a href="https://github.com/chrisdone/elisp-guide#manipulating-the-buffer">A quick guide to Emacs Lisp programming</a>
+</li>
+<li><a href="http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html">Learn Emacs Lisp in 15 minutes</a>
+</li>
+<li><a href="http://steve-yegge.blogspot.it/2008/01/emergency-elisp.html">Emergency Elisp</a>
+</li>
+<li><a href="http://wikemacs.org/wiki/Emacs_Lisp_Cookbook">Emacs Lisp Cookbook</a>
+</li>
+<li><a href="https://github.com/doitian/emacs.d">Quick Started</a>
+</li>
+<li><a href="http://ergoemacs.org">Xah's Emacs Tutorial - ErgoEmacs</a>
+</li>
+<li><a href="https://www.masteringemacs.org/">Mastering Emacs mastering the world’s best text editor</a>
+</li>
+
+<li><a href="http://www.splode.com/~friedman/software/emacs-lisp/">Software: Emacs Lisp</a>
+
+<p>
+Many useful Emacs Lisp codes like user interface enhancement.
+</p>
+</li>
+
+<li><a href="http://rosettacode.org/wiki/Category:Emacs_Lisp">Rosetta Code/ Category:Emacs Lisp</a>
+</li>
+<li><a href="http://emacswiki.org/emacs/ElispCookbook">Elisp Cookbook</a>
+</li>
+<li><a href="http://ergoemacs.org/">ErgoEmacs</a>
+</li>
+<li><a href="http://www.wilfred.me.uk/blog/2013/03/31/essential-elisp-libraries/">Essential Elisp Libraries - Functional Programmin in Elisp</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Tips and Tricks</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<ul class="org-ul">
+<li><a href="https://wiki.archlinux.org/index.php/Emacs">Emacs - Arch Linux Wiki</a>
+</li>
+<li><a href="http://www.nongnu.org/emacs-tiny-tools/elisp-coding/index-body.html">Emacs Tiny Tools</a>
+</li>
+<li><a href="https://github.com/emacs-tw/awesome-emacs">Awsome Emacs - A community driven list of useful Emacs packages, libraries and others.</a>
+</li>
+<li><a href="https://translate.google.ca/translate?sl=auto&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=http://emacs-jp.github.io/tips/environment-variable.html&edit-text=&act=url">Setting Environment Variables</a>
+</li>
+
+<li><a href="http://tonyballantyne.com/tech/3-interactive-functions-that-work-on-regions/">3 Interactive Functions That Work On Regions</a>
+</li>
+
+<li><a href="http://endlessparentheses.com/introducing-names-practical-namespaces-for-emacs-lisp.html">Introducing Names: practical namespaces for Emacs-Lisp</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Packages</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<ul class="org-ul">
+<li><a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Cases</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<ul class="org-ul">
+<li><a href="http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/">From Vim to Emacs+Evil chaotic migration guide - From Vim to Emacs+Evil chaotic migration guide</a>
+</li>
+<li><a href="http://technical-dresese.blogspot.com/2008/11/why-ive-abandoned-eclipse-for-emacs.html">Why Ive Abandoned Eclipse For Emacs</a>
+</li>
+<li><a href="http://technical-dresese.blogspot.com/2008/08/in-org-mode-abandoning-gtd.html">In Org Mode Abandoning Gtd</a>
+</li>
+<li><a href="http://tech.grammarly.com/blog/posts/Running-Lisp-in-Production.html">Running Lisp In Productionl</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> Non Categorized</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<ul class="org-ul">
+<li><a href="http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el">http://homepage1.nifty.com/bmonkey/emacs/elisp/completing-help.el</a>
+</li>
+<li><a href="http://www.reallysoft.de/code/emacs/snippets.html#b4ac15">http://www.reallysoft.de/code/emacs/snippets.html#b4ac15</a>
+</li>
+<li><a href="https://marmalade-repo.org/">https://marmalade-repo.org/</a>
+</li>
+<li><a href="http://technical-dresese.blogspot.com/2012/12/hooks-local-variables-and-namespaces.html">Hooks Local Variables And Namespacesl</a>
+</li>
+<li><a href="http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192">http://emacs.g.hatena.ne.jp/kiwanami/20110809/1312877192</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Cheat Sheets</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li><a href="http://scale-it.pl/emacs_cheatsheet.html">Emacs cheatsheet</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Documentation</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Manual and References</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<ul class="org-ul">
+<li><a href="http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents">GNU Emacs Lisp Reference Manual</a>
+</li>
+<li><a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html">Command and Function Index</a>
+</li>
+<li><a href="http://blog.gnumonk.com/2012/07/effective-emacs-part1.html">http://blog.gnumonk.com/2012/07/effective-emacs-part1.html</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Wikis</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<ul class="org-ul">
+<li><a href="https://wiki.archlinux.org/index.php/Emacs">Emacs / Arch Wiki</a>
+</li>
+<li><a href="http://obsidianrook.com/devnotes/elisp-for-perl-programmers.html">Emacs Lisp for Perl Programmers</a>
+</li>
+<li><a href="http://hyperpolyglot.org/lisp">Hyperglot / Lisp: Common Lisp, Racket, Clojure, Emacs Lisp</a>
+</li>
+</ul>
+
+<p>
+<b>Github</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/hypernumbers/learn_elisp_the_hard_way">Learn Elisp the Hard Way</a>
+</li>
+</ul>
+
+<p>
+<b>Lexical Scope</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://prog-elisp.blogspot.com.br/2012/05/lexical-scope.html">On elisp and programming in general</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> Issues</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<ul class="org-ul">
+<li><a href="http://www.khngai.com/emacs/cygwin.php">Emacs on Windows / Cygwin</a>
+</li>
+<li><a href="http://gregorygrubbs.com/emacs/10-tips-emacs-windows/">10 Tips for Powerful Emacs on Windows</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Selected Dot Emacs</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li><a href="http://pages.sachachua.com/.emacs.d/Sacha.html">Sacha Chua's Emacs configuration</a>
+</li>
+
+<li><a href="https://github.com/howardabrams/dot-files/blob/master/emacs.org">Howard Abrams dot emacs</a>
+</li>
+
+<li><a href="http://uce.uniovi.es/tips/Emacs/mydotemacs.html">http://uce.uniovi.es/tips/Emacs/mydotemacs.html</a>
+</li>
+
+<li><a href="http://www.dgp.toronto.edu/~ghali/emacs.html">http://www.dgp.toronto.edu/~ghali/emacs.html</a>
+</li>
+
+<li><a href="http://whattheemacsd.com/">http://whattheemacsd.com/</a>
+</li>
+
+<li><a href="https://snarfed.org/dotfiles/.emacs">https://snarfed.org/dotfiles/.emacs</a>
+</li>
+
+<li><a href="http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el">http://web.mit.edu/Nelhage/Public/dot-elisp/site/g-client/json.el</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Emacs Starter Kits</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+<b>Spacemacs</b>
+</p>
+
+<p>
+From the documentation:
+</p>
+
+<p>
+Spacemacs is a new way to experience Emacs &#x2013; a sophisticated and
+polished set-up focused on ergonomics, mnemonics and consistency. It
+can be used naturally by both Emacs and Vim users &#x2013; you can even mix
+the two editing styles. Switching easily between input styles makes
+Spacemacs a great tool for pair-programming.
+</p>
+
+<p>
+<a href="https://github.com/syl20bnr/spacemacs">Link Github</a>
+</p>
+
+<p>
+<b>Emacs Leuven</b>
+</p>
+
+<p>
+Emacs configuration file with many packages already enabled and a more pleasant set of defaults.
+</p>
+
+<p>
+<a href="https://github.com/fniessen/emacs-leuven">Link Github</a>
+</p>
+
+<p>
+<b>An Emacs Starter Kit for the Social Sciences</b>
+</p>
+
+<p>
+<a href="http://kieranhealy.org/resources/emacs-starter-kit/">Link</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Fun</h3>
+<div class="outline-text-3" id="text-1-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-x doctor</td>
+<td class="left">If you fell bad, lost your girlfriend &#x2026;</td>
+</tr>
+
+<tr>
+<td class="left">M-x life</td>
+<td class="left">Run Conway's Life simulation.</td>
+</tr>
+
+<tr>
+<td class="left">M-x dunnet</td>
+<td class="left">Text based adventure game</td>
+</tr>
+
+<tr>
+<td class="left">M-x tetris</td>
+<td class="left">Play Tetris.</td>
+</tr>
+
+<tr>
+<td class="left">M-x hanoi</td>
+<td class="left">Towers of Hanoi.</td>
+</tr>
+
+<tr>
+<td class="left">M-x zone</td>
+<td class="left">Make buffers go crazy!!</td>
+</tr>
+
+<tr>
+<td class="left">M-x zone-leave-me-alone</td>
+<td class="left">Stop zoning out.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Books</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li><a href="https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf">An Introduction to Programming in Emacs Lisp</a> by Robert J. Chassell
+</li>
+
+<li><a href="http://emacswiki.org/emacs/ElispCookbook">Elisp Cookbook - Emacs Wiki</a>
+</li>
+<li><a href="http://wikemacs.org/wiki/Emacs_Lisp_Cookbook">http://wikemacs.org/wiki/Emacs_Lisp_Cookbook</a>
+</li>
+<li><a href="http://www.bookshelf.jp/texi/lispintro/emacs-lisp-intro-en.html#SEC_Top">Programming in Emacs Lisp</a>
+</li>
+<li><a href="http://www.bookshelf.jp/texi/emacs/emacs-en_toc.html#SEC_Contents">GNU Emacs Manual</a>
+</li>
+
+<li><a href="http://unintelligible.org/onlisp/onlisp.html">On Lisp - by Paul Graham</a> (Common Lisp)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Community</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+<b>Usenet</b>
+</p>
+
+<ul class="org-ul">
+<li>comp.emacs
+</li>
+<li>gnu.emacs.help
+</li>
+</ul>
+
+<p>
+It is also available at:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://groups.google.com/forum/#!forum/comp.emacs">https://groups.google.com/forum/#!forum/comp.emacs</a>
+</li>
+<li><a href="https://groups.google.com/forum/#!forum/gnu.emacs.help">https://groups.google.com/forum/#!forum/gnu.emacs.help</a>
+</li>
+</ul>
+
+
+<p>
+<b>IRC</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.emacswiki.org/emacs/InternetRelayChat">http://www.emacswiki.org/emacs/InternetRelayChat</a>
+</li>
+</ul>
+
+<p>
+<b>Reddit</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://reddit.com/r/emacs">http://reddit.com/r/emacs</a>
+</li>
+</ul>
+
+<p>
+<b>Stack Overflow</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://stackoverflow.com/questions/tagged/emacs">http://stackoverflow.com/questions/tagged/emacs</a>
+</li>
+</ul>
+
+<p>
+<b>Gooble Plus</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://plus.google.com/communities/114815898697665598016">Emacs - Community - Google+</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Blogs</h3>
+<div class="outline-text-3" id="text-1-10">
+<ul class="org-ul">
+<li><a href="http://endlessparentheses.com/archive.html">Endless Parentheses · Concise ramblings on Emacs productivity.</a>
+</li>
+
+<li><a href="http://nic.ferrier.me.uk/">nic.ferrier.me.uk - what hacking is</a>
+</li>
+
+<li><a href="http://xahlee.blogspot.com">http://xahlee.blogspot.com</a>
+</li>
+
+<li><a href="http://nullprogram.com/">null program « null program</a>
+</li>
+
+<li><a href="http://edward.oconnor.cx/elisp/">Emacs Lisp — Edward O’Connor</a>
+</li>
+
+<li><a href="http://sachachua.com/blog/category/emacs/">emacs Archives - sacha chua - living an awesome life</a>
+</li>
+
+<li><a href="http://emacsrocks.com/">Emacs Rocks!</a>
+</li>
+
+<li><a href="http://emacs.readthedocs.org/en/latest/">About This Document — Emacs latest documentation</a>
+</li>
+
+<li><a href="http://emacsredux.com/">Emacs Redux</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> Videos and Screencasts</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Useful screencasts to help learn Emacs faster.
+</p>
+
+<p>
+<b>Basic Emacs</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=YAIZvpSOlAs">Hack Emacs - Working with Buffers</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=aIMECr7K35Q">Hack Emacs - Working with Windows and Frames</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=9anwyep2CR0">Hack Emacs - The Mark and the Point</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=BTBAOOLM_tE">Hack Emacs - Using Initialization Files</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=VmITzI-POv0">Hack Emacs - Loading Mechanisms</a>
+</li>
+</ul>
+<p>
+In this episode, we look at four loading mechanisms for elisp: load, require, autoload and idle-require. User requested.
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=IvihNaXANW0">Hack Emacs - Using the Customization System</a>
+</li>
+</ul>
+<p>
+We explore the 'customize' system for customizing Emacs' behavior. The first of three parts covering the essential ways of changing Emacs' behavior at startup.
+</p>
+
+
+
+<p>
+<b>Elisp</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=qajLhM0aseM">Buffer basics - Emacs Bites</a>
+
+<p>
+The basics of working with buffers in Emacs Lisp. Buffers are a
+central concept in Emacs of course and one of the main reasons
+it's useul. They are a versatile tool, you can use them for text
+to be edited but you can also use them for presenting user
+interfaces,   like Emacs' mail modes do.
+</p>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=2z-YBsd5snY&list=PLakpda32F-ThIaulLS8yNN6I4U3Q8Yic_">An Introduction to Emacs Lisp</a>
+
+<p>
+Emacs can be thought of as a big Lisp interpreter, so you can't
+master Emacs without learning some Emacs Lisp. We'll be introducing
+Emacs  Lisp by describing its simple syntax, demonstrating a few
+Lisp functions for manipulating buffers, regions, and strings,
+writing a few utility functions, and binding those functions to
+ custom keys. By the end of the talk, you should able to do the same.
+</p>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=51mesucWxaM">Emacs Bites - the Crash Course</a>
+
+<p>
+Very basic intro to programming Emacs covering basic setq, let and
+defun for global variables, local variables and functions.
+</p>
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=-Woj10ARLWw">Dynamic vs lexical scope</a>
+</li>
+</ul>
+<p>
+A small screencast to llustrate lexical and dynamic scope in Emacs
+with a very simple example.
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=35EcPapMqOU&list=PLakpda32F-ThKQZ3XeYOfDa7ZtwEaK0j_&index=43">Hack Emacs - Working in the REPL</a>
+In this episode I discuss how programming in Emacs is different than an IDE, and show a couple of short examples of how you can program in a REPL in Emacs Lisp and Scheme.
+I didn't cover quite as much as I hoped, so I might do a more technical in-depth episode on REPL usage.
+</li>
+</ul>
+
+<p>
+<b>Development</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=QRBcm6jFJ3Q">2015-04-08 Emacs Lisp Development Tips with John Wiegley</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=Q-bmvMWqWmY">Advanced scratch - Emacs Bites</a>
+</li>
+</ul>
+
+<p>
+A more in depth look at shell tricks we can use to start
+a scratch Emacs for testing packages and deployment and anything
+else you need a clean Emacs for.
+</p>
+
+<p>
+<b>Debugging:</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=odkYXXYOxpo">Debugging basics by Nic Ferrier</a>
+</li>
+</ul>
+
+<p>
+Edebug, instrumenting and stepping and breakpoints. Also
+macroexpand and how it helps with debugging.
+</p>
+
+
+<p>
+<b>IDO Mode:</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://vimeo.com/1013263">What You Can Learn From ido.el</a>
+</li>
+</ul>
+
+
+<p>
+<b>Development Environment</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=-4O-ZYjQxks">Emacs Tutorial: Yasnippet</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=FLpJR-0hL3I">Using Yasnippet in Emacs to write faster Scala code</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=VnWVu8VVDbI">Installing Common Lisp, Emacs, Slime &amp; Quicklisp</a>
+
+<p>
+This video will show you how to set up a decent common lisp
+development environment. This video is not going into great
+detail of how everything works just yet but will get you a working
+ environment so you can start exploring the tools available to you.
+</p>
+</li>
+</ul>
+<p>
+(It also shows how to setup Emacs on Windows)
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=zobx3T7hGNA">Emacs - Magit Basics</a>  (Git integration to Emacs)
+</li>
+</ul>
+
+<p>
+This Screencast shows basic features of the Magit like this git commands.
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=5FQwQ0QWBTU">CppCon 2015: Atila Neves "Emacs as a C++ IDE"</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=MBhJBMYfWUo">Searching the Web with engine-mode</a>
+</li>
+</ul>
+
+
+<p>
+<b>Org-mode</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=KdcXu_RdKI0">How I Use org-capture and Stuff</a>
+    Org-capture is a great way to take notes and plan in Emacs. Capture templates provide a flexible way to extend org-capture and personalize the way you record various bits of information.
+</li>
+</ul>
+
+<p>
+<b>Non Categorized</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=QFClYrhV1z4">Emacs Lisp Development - John Wiegley - Emacs Conference 2013</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=zzbEjmlIET0">Turtle Graphics with Emacs Lisp</a>
+</li>
+</ul>
+
+<p>
+Ray Puzio shows us his implementation of turtle graphics in emacs
+and takes us under the shell to see how it works. Turtle graphics
+are a way of  drawing pictures in which one provides a series of
+directions such as "move forward" or "turn left" to steer the pen.
+(The name comes from the fact that the original implementation
+involved  a robotic turtle as an output device controlled by the
+computer.) In addition to providing a useful and entertaining
+program, this talk also discusses techniques of pbm graphics and
+the use of a buffer for drawing which are of general use when
+doing graphics in emacs.
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=XjKtkEMUYGc">Writing A Spotify Client in 16 Minutes</a>
+   You can write a Spotify client in no time at all, using Emacs. With
+a bit of research and the marvellous Helm front end, it's actually
+surprisingly easy to assemble. (Much faster than editing a
+screencast about it!)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> Selected Codes</h3>
+<div class="outline-text-3" id="text-1-12">
+<ul class="org-ul">
+<li><a href="http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el">http://forge.scilab.org/index.php/p/scilab-emacs/source/tree/master/scilab.el</a>
+</li>
+
+<li><a href="http://repo.or.cz/w/emacs.git/blob_plain/emacs-24:/lisp/progmodes/python.el">http://repo.or.cz/w/emacs.git/blob_plain/emacs-24:/lisp/progmodes/python.el</a>
+</li>
+
+<li><a href="http://emacswiki.org/emacs/file-template.el">http://emacswiki.org/emacs/file-template.el</a>
+</li>
+
+<li><a href="http://aperiodic.net/phil/configs/elisp/ledger.el">http://aperiodic.net/phil/configs/elisp/ledger.el</a>
+</li>
+
+<li><a href="http://sachachua.com/notebook/emacs/small-functions.el">http://sachachua.com/notebook/emacs/small-functions.el</a>
+</li>
+
+<li><a href="http://web.mit.edu/Emacs/source/emacs/lisp/emacs-lisp/easymenu.el">http://web.mit.edu/Emacs/source/emacs/lisp/emacs-lisp/easymenu.el</a>
+</li>
+
+<li><a href="http://code.haskell.org/haskellmode-emacs/haskell-mode.el">http://code.haskell.org/haskellmode-emacs/haskell-mode.el</a>
+</li>
+
+<li><a href="http://pastebin.com/h2G9Ua5p">http://pastebin.com/h2G9Ua5p</a>
+</li>
+
+<li><a href="https://raw.githubusercontent.com/rejeep/f.el/master/f.el">https://raw.githubusercontent.com/rejeep/f.el/master/f.el</a>
+</li>
+
+<li><a href="https://github.com/dimitri/el-get">https://github.com/dimitri/el-get</a>
+</li>
+</ul>
+
+<p>
+Large Collection of Codes to Emacs
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html">http://www.damtp.cam.ac.uk/user/eglen/emacs/ell.html</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> Technical Notes</h3>
+<div class="outline-text-3" id="text-1-13">
+<p>
+<b>Emacs architecture:</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.gnu.org/software/emacs/emacs-paper.html">EMACS: The Extensible, Customizable Display Editor by Richard Stallman</a>
+</li>
+</ul>
+
+<p>
+<b>REPL - Erlang Emacs Extension: Distel</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.erlang.org/euc/02/distel.ps">Distel: Distributed Emacs for Erlang</a>
+</li>
+<li><a href="http://massemanet.github.io/distel/">Distel emacs - erlang IDE - Github Repository</a>
+</li>
+<li><a href="ftp://publications.ai.mit.edu/ai-publications/pdf/AITR-1451.pdf">Emacs Lisp in Edwin Scheme  AI Memo No. TR-1451 - MIT by Mattew Birkholz</a>
+</li>
+</ul>
+
+<p>
+<b>Key Bindings and Emacs Terminology</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://aliquote.org/memos/2014/08/04/a-modular-configuration-for-emacs">A modular configuration for Emacs / Ergoemacs</a>
+</li>
+<li><a href="http://ergoemacs.org/emacs/modernization.html">Modernization of Emacs (Simple Changes Emacs Should Adopt)</a>
+</li>
+</ul>
+
+<p>
+<b>Emacs Bytecodes</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_15.html">http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_15.html</a>
+</li>
+<li><a href="http://nullprogram.com/blog/2014/01/04/">Emacs Bytecodes internals</a>
+</li>
+</ul>
+
+<p>
+<b>Forth Compiler to Emacs Bytecodes</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/forth.el">https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/forth.el</a>
+</li>
+<li><a href="https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth">https://github.com/larsbrinkhoff/lbForth/blob/master/targets/emacs/asm.fth</a>
+</li>
+</ul>
+
+<p>
+<b>IDEs</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.slideshare.net/ldami/emacs-a-performant-ide-for-perl-1819917">Emacs, a performant IDE for Perl</a>
+</li>
+<li><a href="http://www.slideshare.net/chaitanyagupta/slime-1180051?qid=e6edde21-ed4f-457c-99be-69c1562985bb&v=qf1&b=&from_search=31">An introduction to SLIME, the Superior Lisp Interaction Mode for  Emacs.</a>
+</li>
+</ul>
+
+<p>
+<b>Lisp</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.slideshare.net/kyleburton/introduction-to-lisp?qid=a835a3eb-d34b-4b76-a421-877be2eceee0&v=qf1&b=&from_search=3">Introduction to Lisp. A survey of lisp's history, current incarnations and advanced features such </a>
+</li>
+<li><a href="http://www.slideshare.net/aniruddha.chakrabarti/lisp-53412403?qid=f965a29a-27cc-4ed7-a3ca-ddffc84eeba5&v=qf1&b=&from_search=5">High level overview of Lisp programming language</a>
+</li>
+<li><a href="http://www.slideshare.net/fukamachi/redesigning-common-lisp?qid=f965a29a-27cc-4ed7-a3ca-ddffc84eeba5&v=qf1&b=&from_search=8">Redesigning Common Lisp</a>
+</li>
+<li><a href="http://www.slideshare.net/vseloved/lisp-for-python-programmers?qid=a835a3eb-d34b-4b76-a421-877be2eceee0&v=qf1&b=&from_search=4">Lisp for Python Programmers</a>
+</li>
+<li><a href="http://paulgraham.com/diff.html">What Made Lisp Different</a> by Paul Graham
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Caio Rodrigues</p>
+<p class="date">Created: 2016-09-29 qui 05:45</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
