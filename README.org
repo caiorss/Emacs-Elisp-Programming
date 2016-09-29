@@ -65,6 +65,10 @@ Elisp code examples grouped by category.
 
 Emacs standard keybindings and useful commands.
 
+ - [[file:Customization.org][Customization]] 
+
+Emacs settings and customizations.
+
  - [[file:Eshell.org][Eshell]]
 
 Eshell - Multiplatform unix shell written in Elisp highly integrated
