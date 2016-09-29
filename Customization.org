@@ -3,130 +3,31 @@
 #+TITLE: Customization
 
 * Customization
+** Basic Settings
+*** Turn-off Alarm Bell 
 
-See also: http://www.aaronbedra.com/emacs.d/
-
-**  Install Packages                       :customize:custom:install:package:
-
-*** Install an Emacs package from repository:
-
-To show the package lists type:
-
-#+BEGIN_SRC
-M-x list-packages
+#+BEGIN_SRC elisp 
+(setq ring-bell-function #'ignore)
 #+END_SRC
 
+*** Turn-off Cursor Blink 
 
-
-To install a single package
-
-#+BEGIN_SRC
-
-    M-x package-install <package-name>
-    M-x package-install org-mode
-    M-x package-install evil
+#+BEGIN_SRC elisp 
+(blink-cursor-mode -1)
 #+END_SRC
 
-*** Install a Single Emacs file *.el
+*** Turn-off Startup Screen 
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC elisp 
+(setq inhibit-startup-screen t)
+#+END_SRC
+    
+*** Ask y or n instead of yes or no 
 
-;;; Create the directory ~/.emacs.d/private
-;;; mkdir -p ~/.emacs.d/private
-;;;
-(add-to-list 'load-path "~/.emacs.d/private")
-
-(load-file "file.el")
-
-;;; Or if it is a single package
-
-(require 'package")
-
+#+BEGIN_SRC elisp 
+(defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-**  Hide / Show Emacs Widgets                   :customize:custom:widget:gui:
-
-*Hide / Show Menu bar*
-
-Hide Menu Bar
-
-=(menu-bar-mode 0)=
-
-
-Show Menu Bar
-
-#+BEGIN_SRC
-
-(menu-bar-mode 1)
-#+END_SRC
-
-*Hide / Show Toolbar*
-
-Show Tool Bar
-
-#+BEGIN_SRC
-
-(tool-bar-mode 1)
-#+END_SRC
-
-Hide Tool Bar
-
-#+BEGIN_SRC
-
-(tool-bar-mode 0)
-#+END_SRC
-
-
-*Hide / Show Scroll Bar*
-
-Show
-
-#+BEGIN_SRC
-
-(scroll-bar-mode 1)
-#+END_SRC
-
-Hide
-
-#+BEGIN_SRC
-
-(scroll-bar-mode -1)
-#+END_SRC
-
-**  Themes                                     :customize:custom:theme:color:
-
-Load a color theme
-
-#+BEGIN_SRC elisp
-
-(load-theme 'wombat t)
-#+END_SRC
-
-List all available themes
-
-#+BEGIN_SRC elisp
-
-    ELISP> (custom-available-themes)
-    (cyberpunk adwaita deeper-blue dichromacy leuven light-blue manoj-dark
-    misterioso tango-dark tango tsdh-dark tsdh-light wheatgrass
-    whiteboard wombat)
-
-    or
-
-    M-x custom-available-themes
-
-
-    Print Color Theme Info (elisp code)
-
-    ELISP> (color-theme-print)
-    "Pretty printing current color theme function... done"
-
-    or
-
-    M-x color-theme-print
-#+END_SRC
-
-**  Misc
 *** Disable/Enable Blink Cursor
 
 Enable Blink Cursor
@@ -136,6 +37,26 @@ Enable Blink Cursor
 Stop Blink Cursor
 
 =(blink-cursor-mode 0)=
+
+*** Quiet Startup
+
+From: [[https://news.ycombinator.com/item?id=1654164][Ask HN Emacs Users: What's in your .emacs file?]]
+
+#+BEGIN_SRC elisp
+
+;; Don't display the 'Welcome to GNU Emacs' buffer on startup
+(setq inhibit-startup-message t)
+
+;; Display this instead of "For information about GNU Emacs and the
+;; GNU system, type C-h C-a.". This has been made intentionally hard
+;; to customize in GNU Emacs so I have to resort to hackery.
+(defun display-startup-echo-area-message ()
+  "If it wasn't for this you'd be GNU/Spammed by now"
+  (message ""))
+
+;; Don't insert instructions in the *scratch* buffer
+(setq initial-scratch-message nil)
+#+END_SRC
 
 *** Space / Tabs - Indentation
 
@@ -207,26 +128,6 @@ t
 
 =(add-hook 'before-save-hook 'delete-trailing-whitespace)=
 
-*** Quiet Startup
-
-From: [[https://news.ycombinator.com/item?id=1654164][Ask HN Emacs Users: What's in your .emacs file?]]
-
-#+BEGIN_SRC elisp
-
-;; Don't display the 'Welcome to GNU Emacs' buffer on startup
-(setq inhibit-startup-message t)
-
-;; Display this instead of "For information about GNU Emacs and the
-;; GNU system, type C-h C-a.". This has been made intentionally hard
-;; to customize in GNU Emacs so I have to resort to hackery.
-(defun display-startup-echo-area-message ()
-  "If it wasn't for this you'd be GNU/Spammed by now"
-  (message ""))
-
-;; Don't insert instructions in the *scratch* buffer
-(setq initial-scratch-message nil)
-#+END_SRC
-
 *** Set Default Web Browser
 
 Set the default web browsr used by (browse-url <url>) function and by org-mode.
@@ -238,4 +139,214 @@ Set the default web browsr used by (browse-url <url>) function and by org-mode.
       browse-url-generic-program "chromium-browser")
 
 
+#+END_SRC
+
+** Hide / Show Emacs Widgets                   :customize:custom:widget:gui:
+
+*Hide / Show Menu bar*
+
+Hide Menu Bar
+
+=(menu-bar-mode 0)=
+
+
+Show Menu Bar
+
+#+BEGIN_SRC
+
+(menu-bar-mode 1)
+#+END_SRC
+
+*Hide / Show Toolbar*
+
+Show Tool Bar
+
+#+BEGIN_SRC
+
+(tool-bar-mode 1)
+#+END_SRC
+
+Hide Tool Bar
+
+#+BEGIN_SRC
+
+(tool-bar-mode 0)
+#+END_SRC
+
+
+*Hide / Show Scroll Bar*
+
+Show
+
+#+BEGIN_SRC
+
+(scroll-bar-mode 1)
+#+END_SRC
+
+Hide
+
+#+BEGIN_SRC
+
+(scroll-bar-mode -1)
+#+END_SRC
+
+** Languages and Encoding
+
+#+BEGIN_SRC elisp 
+(prefer-coding-system 'utf-8)
+#+END_SRC
+
+** Separte Customization from init file 
+
+
+#+BEGIN_SRC elisp
+; For the built in customization UI in emacs that no one uses. If
+;; some package tries to use it, at least have the decency to keep
+;; this config file clean.
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+#+END_SRC
+** Tab width and Spaces
+    :PROPERTIES:
+    :ID:       4c533ce2-a074-4a52-8a5f-8e3105145ab5
+    :END:
+    
+#+BEGIN_SRC emacs-lisp
+
+;; force emacs to always use spaces instead of tab characters
+(setq-default indent-tabs-mode nil)
+
+;; set default tab width to 4 spaces
+(setq default-tab-width 4)
+(setq tab-width 4)
+
+#+END_SRC
+
+** Backup Settings
+
+#+BEGIN_SRC emacs-lisp
+
+;disable backup
+(setq backup-inhibited t)
+
+;disable auto save
+(setq auto-save-default nil)
+
+
+;;  Get Rid of temporary files ending in ~
+;;  The temporary files will be in the temporary directory
+;;
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+
+;; Move Deleted Files to Trash
+;;
+(setq delete-by-moving-to-trash t)
+
+#+END_SRC
+
+** Show Line number and column number in minibuffer
+
+#+BEGIN_SRC elisp
+(setq line-number-mode               t)
+(setq column-number-mode             t)
+#+END_SRC
+
+** Enable find file at point
+
+When doing C-x C-f use information at point (your cursor) to open file
+or URL. I.e. if your cursor is on a file path, or URL, it defaults to
+that filled in the minibuffer.
+
+#+BEGIN_SRC elisp
+;;find-file-at-point, smarter C-x C-f when point on path or URL
+(ffap-bindings)
+#+END_SRC
+
+** Unique buffer names 
+
+#+BEGIN_SRC elisp 
+;; Unique buffer name
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+#+END_SRC
+
+** Mark Current Line 
+
+Enable Mark Current Line 
+
+#+BEGIN_SRC elisp 
+;; mark current line:
+(global-hl-line-mode 1)
+#+END_SRC
+
+Disable Mark Current Line 
+
+#+BEGIN_SRC elisp 
+;; mark current line:
+(global-hl-line-mode 0)
+#+END_SRC
+
+** Recent Files
+    :PROPERTIES:
+    :ID:       afabff51-cd40-468f-ab10-06adbf6570a7
+    :END:
+
+Show recent files in the File menu. 
+
+#+BEGIN_SRC emacs-lisp
+
+;; recentf stuff
+;; recentf - F5
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-saved-items 500)
+(setq recentf-max-menu-items 60)
+
+
+#+END_SRC
+
+** Save Minibuffer History 
+
+Saves the minibuffer history on every Emacs session. 
+
+#+BEGIN_SRC elisp 
+(savehist-mode 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+
+;; To set the file which the minibuffer is saved use:
+(setq savehist-file "~/.emacs.d/tmp/savehist")
+#+END_SRC
+
+** Themes                                     :customize:custom:theme:color:
+
+Load a color theme
+
+#+BEGIN_SRC elisp
+
+(load-theme 'wombat t)
+#+END_SRC
+
+List all available themes
+
+#+BEGIN_SRC elisp
+
+    ELISP> (custom-available-themes)
+    (cyberpunk adwaita deeper-blue dichromacy leuven light-blue manoj-dark
+    misterioso tango-dark tango tsdh-dark tsdh-light wheatgrass
+    whiteboard wombat)
+
+    or
+
+    M-x custom-available-themes
+
+
+    Print Color Theme Info (elisp code)
+
+    ELISP> (color-theme-print)
+    "Pretty printing current color theme function... done"
+
+    or
+
+    M-x color-theme-print
 #+END_SRC
