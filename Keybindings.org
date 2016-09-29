@@ -1,8 +1,8 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org
-#+TITLE: Emacs Keybindings
+#+TITLE: Emacs Key Bindings
 
-* Emacs Keybindings
+* Emacs Key bindings
 ** Default Key Bindings and Useful Commands
 *** Overview 
 
@@ -255,7 +255,6 @@ key binding.
 |             |                       |                                              |
 |             | find-library          | Find a library *.el file loaded with require |
 |             |                       | Example: M-x find-library org                |
-
 *** Selected Key Bindings and Commands for Programming
 
 
@@ -306,7 +305,127 @@ key binding.
 | M-x replace-string | Batch replace string in selected region or  buffer.     |
 | M-x replace-regexp | Batch replace regex pattern in selected text or buffer. |
 
-*** Key bindings and Commands for Lisp programming
+*** Ubiquitous Emacs Key Bindings
+
+Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in
+Unix apps like Bash, Sh and all shells that uses the GNU readline
+library.
+
+| Key | Emacs                                                     | Bash Shell                               |
+|-----+-----------------------------------------------------------+------------------------------------------|
+| C-a | Move the cursor to the beggining of line                  | same                                     |
+| C-e | Move the cursor to the end of line                        | same                                     |
+|     |                                                           |                                          |
+| C-n | Move the cursor to the next line  (downward)              | Show next command in the history.        |
+| C-p | Move the cursor to the previous line (upward)             | Show the previou command in the history. |
+| C-j | New line character (same as Return)                       | same                                     |
+|     |                                                           |                                          |
+| M-b | Move the cursor backward one word                         | same                                     |
+| M-f | Move the cursor forward one word                          | same                                     |
+|     |                                                           |                                          |
+| M-t | Swap current word with previous                           | same                                     |
+|     |                                                           |                                          |
+| M-d | Delete the next word                                      | same                                     |
+|     |                                                           |                                          |
+| C-k | Delete the remaining of line from current cursor position | same                                     |
+| C-y | Paste the deleted line with (C-k) or copied line (Yank)   | same                                     |
+| M-w | Copy the slected text                                     |                                          |
+|     |                                                           |                                          |
+|     |                                                           |                                          |
+| C-r | Search forward for a string                               | Search for previous command              |
+| C-s | Search backward for a string                              | No implemented.                          |
+|     |                                                           |                                          |
+|     |                                                           |                                          |
+| c-l | Redraws the screen with the cursor in the middle.         | Clear the screen.                        |
+|     |                                                           |                                          |
+| C-_ | Undo                                                      | same                                     |
+|     |                                                           |                                          |
+
+See also:
+
+  - [[http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/][Bash Emacs Editing Mode Cheat Sheet]]
+  - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
+
+** Key Bindings for Dired-mode and commands to find files
+*** Dired mode key bindings 
+
+Dired mode provides a file manager in Emacs and it allows to browser
+directories, open files, apply operations like copy, move, rename on
+multiple files and apply shell commands on files. It can be invoked
+with _C-x d_ or _M-x dired_.
+
+
+| Key binding | Command                 | Description                                             |
+|------------+-------------------------+---------------------------------------------------------|
+| C-x d      | M-x dired               | Open directory, enters in dired mode                    |
+| C-x 4 d    | M-x dired-other-window  | Open directory in other window                          |
+| C-x 5 d    | M-x dired-other-frame   | Open directtory in other frame                          |
+| C-x C-f    |                         | Open a file on directory of dired buffer                |
+|            |                         |                                                         |
+|            | M-x find-dired          | Find all files in directory matching a pattern.         |
+|            | M-x dired-omit-files    | Omit garbage or unimportant files                       |
+|------------+-------------------------+---------------------------------------------------------|
+| f          |                         | Open file at point in current window                    |
+| o          |                         | Open file at point in another window                    |
+| +          | dired-create-directory  | Create a directory                                      |
+| (          | dired-hide-details-mode | Toggle hide/show details                                |
+|            |                         |                                                         |
+| C-x C-q    |                         | Makes the dired buffer editable. When finishing         |
+|            |                         | changing files enter C-c C-c                            |
+|            |                         |                                                         |
+|------------+-------------------------+---------------------------------------------------------|
+| w          |                         | Copy file name without directory                        |
+| C-0 w      |                         | Copy file name with full path                           |
+| m          |                         | Mark file or directory in dired mode                    |
+| u          |                         | Unmark file                                             |
+| t          |                         | Mark/Unmark all files                                   |
+|            |                         |                                                         |
+| X or !     | dired-o-shell-command   | Apply shell command to file at point. It can be used to |
+|            |                         | extract archives like *.tar, *.zip                      |
+|            |                         |                                                         |
+| M-!        |                         | Apply shell command to marked files (selected with m)   |
+|            |                         |                                                         |
+| &          |                         | Run async shell command on file at point                |
+|            |                         | or apply shell command to a list of files               |
+|------------+-------------------------+---------------------------------------------------------|
+| s          |                         | Change the sorting order of the directory               |
+| D          |                         | Delete file                                             |
+| g          |                         | Update dired buffer if directory has changed            |
+| R          |                         | Rename file                                             |
+| %R         |                         | Rename with regex                                       |
+| y          |                         | Show file type                                          |
+|            |                         |                                                         |
+|------------+-------------------------+---------------------------------------------------------|
+| q          |                         | Kill dired buffer.                                      |
+| m          | dired-mark              | Mark current file                                       |
+| u          | dired-unmark            | Unmark current file.                                    |
+| g          | revert-buffer           | Revert dired buffer (updates it).                       |
+|            | auto-revert-mode        | Auto update dired buffer.                               |
+|            |                         |                                                         |
+
+*** Commands to find files 
+
+Find files in the computer: 
+
+| Command             | Description                                                    |
+|---------------------+----------------------------------------------------------------|
+| M-x find-name-dired | Find all files with given grep match.                          |
+|                     |                                                                |
+| M-x find-grep-dired | Find all file names matching a shell wildcard pattern.         |
+|                     |                                                                |
+| M-x find-dired      | Find all file names with find arguments specified by the user. |
+|                     |                                                                |
+| M-x rgrep           | Search files that contains some regular expression.            |
+|                     | Needs grep and find installed.                                 |
+|                     |                                                                |
+| M-x lgrep           | Search for files matching a regular expression in a            |
+|                     | given directory without enter in subdirectories like rgrep.    |
+|                     |                                                                |
+| M-x locate          | Search files using the mlocate app or locate database.         |
+|                     | Needs locate installed.                                        |
+|                     |                                                                |
+
+** Key bindings and Commands for programming Lisp dialects 
 
 Useful lisp key bindings to edit and navigate Lisp code.
 
@@ -358,48 +477,8 @@ Useful lisp key bindings to edit and navigate Lisp code.
 | C-M-a | Move to the beggining of current function |
 | C-M-e | Move to the end of current function       |
 
-*** Ubiquitous Emacs Key Bindings
-
-Some Emacs Key bindings (Emacs-style key bindings) are ubiquitous in
-Unix apps like Bash, Sh and all shells that uses the GNU readline
-library.
-
-| Key | Emacs                                                     | Bash Shell                               |
-|-----+-----------------------------------------------------------+------------------------------------------|
-| C-a | Move the cursor to the beggining of line                  | same                                     |
-| C-e | Move the cursor to the end of line                        | same                                     |
-|     |                                                           |                                          |
-| C-n | Move the cursor to the next line  (downward)              | Show next command in the history.        |
-| C-p | Move the cursor to the previous line (upward)             | Show the previou command in the history. |
-| C-j | New line character (same as Return)                       | same                                     |
-|     |                                                           |                                          |
-| M-b | Move the cursor backward one word                         | same                                     |
-| M-f | Move the cursor forward one word                          | same                                     |
-|     |                                                           |                                          |
-| M-t | Swap current word with previous                           | same                                     |
-|     |                                                           |                                          |
-| M-d | Delete the next word                                      | same                                     |
-|     |                                                           |                                          |
-| C-k | Delete the remaining of line from current cursor position | same                                     |
-| C-y | Paste the deleted line with (C-k) or copied line (Yank)   | same                                     |
-| M-w | Copy the slected text                                     |                                          |
-|     |                                                           |                                          |
-|     |                                                           |                                          |
-| C-r | Search forward for a string                               | Search for previous command              |
-| C-s | Search backward for a string                              | No implemented.                          |
-|     |                                                           |                                          |
-|     |                                                           |                                          |
-| c-l | Redraws the screen with the cursor in the middle.         | Clear the screen.                        |
-|     |                                                           |                                          |
-| C-_ | Undo                                                      | same                                     |
-|     |                                                           |                                          |
-
-See also:
-
-  - [[http://www.catonmat.net/blog/bash-emacs-editing-mode-cheat-sheet/][Bash Emacs Editing Mode Cheat Sheet]]
-  - [[http://unix.stackexchange.com/questions/150578/confusing-behavior-of-emacs-style-keybindings-in-bash][Confusing behavior of emacs-style keybindings in bash]]
-
 ** Commands
+*** Basic commands 
 
 | Command                        | Description                                                  |
 |--------------------------------+--------------------------------------------------------------|
@@ -422,7 +501,7 @@ Notes:
    Visual Studio or Eclipse. If you change the file it is
    automatically updated.
 
-*Change current buffer mode*
+*** Change current buffer mode
 
 it is useful to tell Emacs the file format to enable syntax highlight
 and mode functions when editing a script or configuration file without
@@ -431,3 +510,4 @@ file extension like .gitconfig or python script without it.
  - =M-x sh-mode=      Shell Script - sh extension
  - =M-x pyhton-mode=  Example: A python script without extension ".py"
  - =M-x conf-mode=    Configuration file like: .gitconfig, .gitignore, smb.conf
+
