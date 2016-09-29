@@ -5,27 +5,27 @@
 * Emacs on Microsoft Windows 
 ** Set HOME variable 
 
-The HOME environment variable sets the user directory path. On Windows
-it is equivalent to %USERPROFILE%, however many Unix applications
-compiled for Windows requires this variable to be set and it also helps to
-browser directories faster through Emacs.
- 
-Userprofile environment variable:
+The HOME environment variable that has the default value
+_/home/<username>)_ on Linux sets the user's directory path.
 
-#+BEGIN_SRC 
+This variable, which is equivalent to  _%USERPROFILE% _(~C:\\Users\<username>~ ) 
+is expected to be set by many Unix applications ported to Windows and it
+also makes directory browser in Emacs and shells easier. 
+
+#+BEGIN_SRC bat 
 C:\Users\arch>echo %USERPROFILE%
 C:\Users\arch
 #+END_SRC
 
 It can be set permanently by using the commmand below on cmd.exe shell.
 
-#+BEGIN_SRC 
+#+BEGIN_SRC bat
 setx HOME %USERPROFILE%
 #+END_SRC
 
 To test if the variable is set. Open a new cmd.exe shell and type:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC bat 
 C:\Users\arch>echo %HOME%
 C:\Users\arch
 #+END_SRC
@@ -47,6 +47,7 @@ To open file _~/.emac.d/init.el_  (C:\Users\arch\.emacs.d\init.el)
 To open directory (C:\Users\arch\Desktop)
 
  - C-x C-d ~/Desktop 
+
 ** Unix utilities 
 
 You can bash install with Chocolately package manager or download GIT
@@ -178,9 +179,6 @@ to handle clipboard.
 
 *Show clibpoard content*
 
-#+BEGIN_SRC sh 
-
-#+END_SRC
 
 
 **** Shell Commands mixed with Emacs commands 
