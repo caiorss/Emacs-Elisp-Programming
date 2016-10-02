@@ -1805,6 +1805,104 @@ Switch between buffers associated with files.
 
 
 #+END_SRC
+*** Interface Makefile 
+
+This command extracts the build tasks from a Makefile and shows it as a
+helm menu where the user can select the task to be executed. It will be
+run as a asynchronous process. 
+
+
+Usage: M-x helm-make 
+
+Version1: 
+
+#+BEGIN_SRC elisp 
+;; Taken from: http://emacs.stackexchange.com/questions/7148/get-all-regexp-matches-in-buffer-as-a-list
+(defun re-seq (regexp string)
+  "Get a list of all regexp matches in a string"
+  (save-match-data
+    (let ((pos 0)
+          matches)
+      (while (string-match regexp string pos)
+        (push (match-string 0 string) matches)
+        (setq pos (match-end 0)))
+      matches)))
+
+(defun helm-make ()
+  (interactive)
+  (let ((tasks    (re-seq "^\\w+"
+                          (with-temp-buffer
+                            (insert-file "Makefile")
+                            (buffer-substring-no-properties (point-min)
+                                                            (point-max)                                                            ))))) 
+    (helm
+     :prompt "Makefile task: "
+     :sources  `((
+                  (name       . "Task")
+                  (candidates . ,tasks)
+                  (action     . (lambda (task)
+                                  (start-process  "make"
+                                                  "*make*"
+                                                  "make" task                                                 
+                                                  )))
+                  )))   
+    (switch-to-buffer "*make*")))
+#+END_SRC
+
+Version2: Remove dependency re-seq.
+
+#+BEGIN_SRC elisp
+(defun helm-make2 ()
+  (interactive)
+
+  (flet ((re-seq2 (regexp string) (save-match-data
+                                    (let ((pos 0)
+                                          matches)
+                                      (while (string-match regexp string pos)
+                                        (push (match-string 0 string) matches)
+                                        (setq pos (match-end 0)))
+                                      matches))))
+    
+    (let ((tasks    (re-seq2 "^\\w+"
+                            (with-temp-buffer
+                              (insert-file "Makefile")
+                              (buffer-substring-no-properties (point-min)
+                                                              (point-max)                                                            ))))) 
+      (helm
+       :prompt "Makefile task: "
+       :sources  `((
+                    (name       . "Task")
+                    (candidates . ,tasks)
+                    (action     . (lambda (task)
+                                    (start-process  "make"
+                                                    "*make*"
+                                                    "make" task                                                 
+                                                    )))
+                    )))   
+      (switch-to-buffer "*make*"))))
+#+END_SRC
+
+Example: Assuming that the current directory has the Makefile with
+content. The command M-x helm-make will show the tasks all, html,
+browse and clean. 
+
+#+BEGIN_SRC makefile 
+all: html
+
+html:
+	mkdir -p dist 
+	emacs --batch -q -l build.el --kill
+	mv dist/README.html dist/index.html 
+	cp -r -v images dist/images
+	cp -r *.org  dist/
+
+browse:
+	firefox dist/index.html
+
+clean:
+	rm -rf dist/*.html dist/*.html~
+#+END_SRC
+
 ** Non categorized 
 *** Save the scratch buffer and reload every Emacs startup 
 
