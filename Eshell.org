@@ -1,8 +1,16 @@
-# -*- mode: org; -*-
 #+INCLUDE: theme/style.org
 #+TITLE: Eshell 
 
-* Eshell
+* Eshell 
+** Overview 
+
+Eshell is a shell implemented in Emacs with many commands implemented
+in Elisp which makes it cross platform and highly integrated to
+Emacs. The commands ls, pwd, cd and etc. works in the same way for
+Linux, Windows or OSX. In Windows OS it is a good alternative to
+cmd.exe.
+
+Command to clear Eshell. It can be invoked with $ clear in eshell.
 
 Features:
 
@@ -11,21 +19,327 @@ Features:
   - Eshell can run elisp functions and can be extended in Elisp.
   - It is Multiplatform, works on Linux, OSX and Windows.
 
+
+
 Example:
 
 file:images/eshell-example1.png
 
-Links:
+** See also
+ 
+  - [[https://www.masteringemacs.org/article/complete-guide-mastering-eshell][Mastering Eshell]] / Mastering Emacs
+
+
+  - [[http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html][Finally wrapping my head around eshell (the emacs shell)]]
+
 
   - [[https://www.masteringemacs.org/article/complete-guide-mastering-eshell][Mastering Eshell - Mastering Emacs]]
+
+
   - [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell: The Emacs Shell]]
+
   - [[http://www.howardism.org/Technical/Emacs/eshell-fun.html][Eschewing Zshell for Emacs Shell]]
+
+
   - [[http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html][Ben's Journal: Finally wrapping my head around eshell (the emacs shell)]]
+
+
   - [[http://mjwall.com/blog/2013/10/04/how-i-use-emacs/][How I use Emacs - mjwall.com]]
+
+
   - [[http://blog.gnumonk.com/2012/07/effective-emacs-part1.html][We Live By Code: Effective emacs - Part:1]]
+
+
   - [[https://github.com/howardabrams/dot-files/blob/master/emacs-eshell.org][dot-files/emacs-eshell.org at master · howardabrams/dot-files · GitHub]]
+
+
   - [[http://www.emacswiki.org/emacs/EshellAndEmacsServer][EmacsWiki: Eshell And Emacs Server]]
+
+
   - [[http://www.emacswiki.org/emacs/ShellMode][EmacsWiki: Shell Mode]]
+
+
   - [[http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell][Using Emacs Eshell as the ultimate shell | Smash Company]]
+
+
   - [[https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/][Eshell completion for git, bzr, and hg | Tassilo's Blog]]
 
+
+ 
+** Start Eshell Directly from command line 
+
+Start eshell directly in a new Emacs sessions in the terminal wihout
+load init.el.
+
+#+BEGIN_SRC sh 
+$ emacs -Q -q -nw --eval '(eshell)'
+#+END_SRC
+
+Or 
+
+#+BEGIN_SRC sh 
+$ emacs -Q -q -nw -f eshell 
+#+END_SRC
+
+file:images/eshell_directly_in_terminal.png
+
+
+Start eshell directly in a new Emacs Window 
+
+#+BEGIN_SRC sh 
+emacs -q -f eshell # Don't load init file. 
+#+END_SRC
+
+Or 
+
+#+BEGIN_SRC sh
+emacs -q -f eshell # Load init file 
+#+END_SRC
+
+file:images/eshell_directly_gui.png
+
+** Useful elisp commands inside eshell
+
+Eshell can run Elisp command - M-x <command> like ordinary Unix shell
+apps. 
+
+Open a file in the current window
+
+ - =$ find-file /etc/hosts.conf= 
+
+Open a file in other window 
+
+ - =$ find-file-other-window /etc/host.conf=
+
+Open a file in other frame 
+
+ - =$ find-file-other-frame /etc/host.conf=
+
+Browser a directory in current window 
+
+ - =$ dired /var/log= 
+
+Browser a directory in another window 
+
+ - =$ dired-other-window /var/log=
+
+Browser a directory in another frame 
+
+ - =$ dired-other-frame /var/log=
+
+** Clear eshell 
+
+#+BEGIN_SRC elisp 
+(defun eshell/clear ()
+  "clear the eshell buffer."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+#+END_SRC
+
+In eshell:
+
+#+BEGIN_SRC sh
+~ $ which eshell
+eshell is an interactive compiled Lisp function in `eshell.el'
+~ $ 
+#+END_SRC
+
+
+Before the command clear:
+
+file:images/eshell_clear1.png 
+
+After the command clear:
+
+file:images/eshell_clear2.png 
+** Set eshell prompt 
+*** Simple prompt
+
+#+BEGIN_SRC elisp 
+(setq eshell-prompt-function (lambda () "eshell > "))
+#+END_SRC
+
+file:images/eshell_prompt_setting1.png
+
+*Prompt with current directory*
+
+*** Colorized prompt 
+
+#+BEGIN_SRC elisp 
+(setq eshell-prompt-function
+      (lambda nil
+      	(concat
+      	 (propertize (eshell/pwd) 'face '(:foreground "#8787af"))
+      	 (propertize "❯" 'face '(:foreground "#f75f5f"))
+      	 (propertize "❯" 'face '(:foreground "#ffaf5f"))
+      	 (propertize "❯" 'face '(:foreground "#87af5f"))
+	 (propertize " " 'face nil))))
+#+END_SRC
+
+file:images/eshell_prompt_setting2.png
+
+** Change Eshell current directory 
+
+This command can be used in Menus or with helm.
+
+#+BEGIN_SRC elisp 
+(defun eshell-chdir (path)  
+  (with-current-buffer "*eshell*"
+    (cd path)
+    (eshell-emit-prompt)))
+
+(eshell-chdir "~/Downloads")
+#+END_SRC
+
+** Change Eshell current directory to current buffer 
+
+Usage: M-x eshell-cwd
+
+#+BEGIN_SRC elisp 
+(defun eshell-cwd ()
+  "
+  Sets the eshell directory to the current buffer
+  
+  Usage: M-x eshell-cwd 
+  "
+  (interactive)
+
+  (let (
+        (path (file-name-directory (or  (buffer-file-name) default-directory)))
+       )
+
+    (with-current-buffer "*eshell*"
+      (cd path)
+      (eshell-emit-prompt))))
+#+END_SRC
+
+** Open eshell in another window 
+
+Source: [[https://gist.github.com/semmypurewal/b7748e0d6785f3c50e46][mini-eshell.el]]
+
+Usage: M-x open-mini-eshell 
+
+#+BEGIN_SRC elisp 
+;; open up a mini-eshell
+(defun quarter-window-vertically ()
+  "create a new window a quarter size of the current window"
+  (split-window-vertically)
+  (other-window 1)
+  (split-window-vertically)
+  (other-window -1)
+  (delete-window)
+)
+
+(defun open-mini-eshell ()
+  "open a mini-eshell in a small window at the bottom of the current window"
+  (interactive)
+  (quarter-window-vertically)
+  (other-window 1)
+  (eshell)
+)
+#+END_SRC
+
+** Open eshell in another frame 
+
+Usage: M-x eshell-other-frame 
+
+#+BEGIN_SRC elisp 
+(defun eshell-other-frame ()
+  "
+  Open eshell in another frame.
+
+  Usage: M-x eshell-other-frame 
+  "
+  (interactive)
+  (with-selected-frame (make-frame)
+    (eshell)))
+#+END_SRC
+
+** Open eshell file names from ls output with Return key
+
+Source: [[https://www.emacswiki.org/emacs/EshellEnhancedLS][Emacs Wiki]]  
+
+This code allows to open files from =$ ls= command output by selecting
+the file name and hitting return or by clicking with the middle mouse
+button.
+
+#+BEGIN_SRC elisp 
+(eval-after-load "em-ls"
+    '(progn
+       (defun ted-eshell-ls-find-file-at-point (point)
+         "RET on Eshell's `ls' output to open files."
+         (interactive "d")
+         (find-file (buffer-substring-no-properties
+                     (previous-single-property-change point 'help-echo)
+                     (next-single-property-change point 'help-echo))))
+
+       (defun pat-eshell-ls-find-file-at-mouse-click (event)
+         "Middle click on Eshell's `ls' output to open files.
+ From Patrick Anderson via the wiki."
+         (interactive "e")
+         (ted-eshell-ls-find-file-at-point (posn-point (event-end event))))
+
+       (let ((map (make-sparse-keymap)))
+         (define-key map (kbd "RET")      'ted-eshell-ls-find-file-at-point)
+         (define-key map (kbd "<return>") 'ted-eshell-ls-find-file-at-point)
+         (define-key map (kbd "<mouse-2>") 'pat-eshell-ls-find-file-at-mouse-click)
+         (defvar ted-eshell-ls-keymap map))
+
+       (defadvice eshell-ls-decorated-name (after ted-electrify-ls activate)
+         "Eshell's `ls' now lets you click or RET on file names to open them."
+         (add-text-properties 0 (length ad-return-value)
+                              (list 'help-echo "RET, mouse-2: visit this file"
+                                    'mouse-face 'highlight
+                                    'keymap ted-eshell-ls-keymap)
+                              ad-return-value)
+         ad-return-value)))
+
+#+END_SRC
+
+** Functions to copy eshell data to clipboard 
+*** Copy current directory 
+
+#+BEGIN_SRC elisp 
+
+(defun clipboard/set (astring)
+  "Copy a string to clipboard"
+
+   (with-temp-buffer
+    (insert astring)
+    (clipboard-kill-region (point-min) (point-max))))
+
+;; Copy current directory to clipboard 
+;;
+;; Usage:  Enter $ copy-pwd in eshell 
+;;
+(defun eshell/copy-pwd ()
+ (clipboard/set (eshell/pwd)))
+
+;; Copy file name with full path to clipboard 
+;;
+;; Usage: Enter $ copy-fpath <filename> in eshell. 
+;; 
+(defun eshell/copy-fpath (fname)
+
+  (let ((fpath (concat (eshell/pwd) "/" fname)))
+
+       (clipboard/set fpath)
+       (concat "Copied path: " fpath)))
+#+END_SRC
+
+file:images/eshell_clipboard.png
+
+** Creating Eshell aliases programatically 
+
+#+BEGIN_SRC elisp 
+(eshell/alias "ff" "find-file $1")
+
+(eshell/alias "fw" "find-file-other-window $1")
+
+(eshell/alias "fr" "find-file-other-frame $1")
+#+END_SRC
+
+Example of usage:
+
+file:images/emacs_eshell_alias.png
