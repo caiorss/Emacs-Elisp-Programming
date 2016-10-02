@@ -2206,36 +2206,6 @@ Disable Security confirmation:
         )
 #+END_SRC
 
-* Useful Commands for Elisp Developers 
-
-| Command: M-x [command]   | Key Binding | Description                                                                       |
-|--------------------------+-------------+-----------------------------------------------------------------------------------|
-|                          |             |                                                                                   |
-| check-paren              |             | Find unmatched parenthesis                                                        |
-| view-echo-area-messages  | C-h e       | Show the message buffer                                                           |
-|--------------------------+-------------+-----------------------------------------------------------------------------------|
-|                          |             |                                                                                   |
-| find-variable            |             | Open the file at the point the variable is defined.                               |
-| find-library             |             | Open an Emacs library or package in the load-path.                                |
-| find-function            |             | Opens an library.el file at the point the function is defined.                    |
-| locate-library           |             | Show path of a library.el (Emacs Package) file.                                   |
-|                          |             |                                                                                   |
-|--------------------------+-------------+-----------------------------------------------------------------------------------|
-| *Documentation Commands* |             |                                                                                   |
-|                          |             |                                                                                   |
-| apropos                  | C-h         | Search for all elisp symbols, variables and functions that match a regex pattern. |
-| apropos-command          | C-h a       | Search for all commands (M-x cmd) that match a regexp pattern.                    |
-| apropos-library          |             | Show all symbols associated with an Elisp library (Emacs Package)                 |
-|                          |             |                                                                                   |
-| info-apropos             |             | Find all info pages that match a pattern.                                         |
-|                          |             |                                                                                   |
-| describe-function        | C-h f       | Show function documentation or docstring.                                         |
-| describe-mode            | C-h m       | Show current major mode documentation and all key bindings associated.            |
-| describe-bindings        | C-h-b       | Show all associated key bindings with the current buffer.                         |
-| describe-variable        | C-h v       | Show variable documentation                                                       |
-| describe-package         |             | Describe an Emacs package installed from Melpa repository.                        |
-|                          |             |                                                                                   |
-
 * Useful Elisp Info Pages 
 ** Elisp 
 

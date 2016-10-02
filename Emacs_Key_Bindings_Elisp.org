@@ -1,0 +1,120 @@
+#+INCLUDE: theme/style.org
+#+TITLE: Emacs key bindings for Elisp programming
+
+* Emacs key bindings for Elisp programming
+** Elisp Evaluation
+
+| Command: M-x [command]   | Key Binding | Description                                                              |
+|--------------------------+-------------+--------------------------------------------------------------------------|
+|                          |             |                                                                          |
+| eval-last-sexp           | C-x C-e     | Evaluate last s-expression under cursor                                  |
+| eval-print-last-sexp     | -           | Evaluate last s-expression under cursor and print.                       |
+| eval-expression          | M-:         | Execute S-expression in minibuffer.                                      |
+| -                        | C-u M-:     | Evaluate S-expression in minibuffer and insert result at point.          |
+|                          |             |                                                                          |
+| eval-defun               | C-M-x       | Evaluates the outermost S-expression, regardless of cursor position      |
+|                          |             | within the s-exp.                                                        |
+|                          |             |                                                                          |
+| eval-buffer              | C-c C-b     | Eval the whole buffer                                                    |
+| eval-region              | -           | Eval the selected text                                                   |
+|                          |             | Eval and print last s-expression.                                        |
+|                          |             | Eval last s-expression.                                                  |
+|                          |             |                                                                          |
+| *repeat-complex-command* | C-x ESC ESC | Useful to reverse engineering Emacs' commands executed with M-x like M-x |
+|                          |             | lgrep or repeat it.                                                      |
+
+Note: command _M-x repeat-complex-command_.
+
+Example: User enter
+ - M-x lgrep
+ - Prompt 1 -> Search for: system.windows.forms
+ - Prompt 2 -> In files (default *.org): *.org
+ - Prompt 3 -> In directory: ~/Documents/wiki
+
+To extract the command type _C-x ESC ESC_ and copy it from the
+minibuffer with C-k and then paste with in the buffer with C-y. The
+result will be:
+
+#+BEGIN_SRC
+(lgrep "system.windows.forms" "*.org" "~/Documents/wiki" nil)
+#+END_SRC
+
+This s-expression can be run again or used in a function or any Elisp
+app. Example:
+
+#+BEGIN_SRC elisp
+  (defun search-my-dir ()
+      (interactive)
+      (lgrep (read-string "Search wiki: ") "*.org" "~/Documents/wiki" nil))
+#+END_SRC
+
+_M-x search-my-dir system.windows_ will search all *.org files containing
+the line that matches system.windows in the directory ~/Documents/wiki.
+
+** Useful Commands
+
+| Command: M-x [command]   | Key Binding | Description                                                                       |
+|--------------------------+-------------+-----------------------------------------------------------------------------------|
+|                          |             |                                                                                   |
+| check-paren              |             | Find unmatched parenthesis                                                        |
+| checkdoc                 |             | Check docstring in an Elisp package (*.el file).                                  |
+| auto-insert              |             | Insert header file of an Elisp package's header file.                             |
+| view-echo-area-messages  | C-h e       | Show the message buffer                                                           |
+|--------------------------+-------------+-----------------------------------------------------------------------------------|
+| *Elisp library*          |             |                                                                                   |
+|                          |             |                                                                                   |
+| find-variable            |             | Open the elisp file at the point the variable is defined.                         |
+| find-library             |             | Open an Emacs library or package in the load-path.                                |
+| find-function            |             | Opens an library.el file at the point the function is defined.                    |
+| locate-library           |             | Show path of a library.el (Emacs Package) file.                                   |
+|                          |             |                                                                                   |
+|--------------------------+-------------+-----------------------------------------------------------------------------------|
+| *Documentation Commands* |             |                                                                                   |
+|                          |             |                                                                                   |
+| apropos                  |             | Search for all elisp symbols, variables and functions that match a regex pattern. |
+| apropos-command          | C-h a       | Search for all commands (M-x cmd) that match a regexp pattern.                    |
+| apropos-library          |             | Show all symbols associated with an Elisp library (Emacs Package)                 |
+|                          |             |                                                                                   |
+| info-apropos             |             | Find all info pages that match a pattern.                                         |
+|                          |             |                                                                                   |
+| describe-function        | C-h f       | Show function documentation or docstring.                                         |
+| describe-mode            | C-h m       | Show current major mode documentation and all key bindings associated.            |
+| describe-bindings        | C-h-b       | Show all associated key bindings with the current buffer.                         |
+| describe-variable        | C-h v       | Show variable documentation                                                       |
+| describe-package         |             | Describe an Emacs package installed from Melpa repository.                        |
+|                          |             |                                                                                   |
+
+** IELM - Emacs Lisp Interpreter
+
+|          |                                                                                              |
+|----------+----------------------------------------------------------------------------------------------|
+| M-x ielm | Run Emacs Lisp Interpreter                                                                   |
+| C-c C-b  | (IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell. |
+| C-[up]   | (All Shells) Get the next input in the history                                               |
+| C-[down] | (All Shells) Get the previous input in the history                                           |
+| M-p      | (All Shells) Get the previous input in the history                                           |
+| M-n      | (All Shells) Get the next input in the history                                               |
+| C-c C-l  | Display the shell history in another window                                                  |
+
+** S-expression Navigation
+
+|       |                                           |
+|-------+-------------------------------------------|
+| C-M-n | Move forward over a parenthetical group   |
+| C-M-p | Move backward over a parenthetical group  |
+| C-M-f | Move forward over a balanced expression   |
+| C-M-b | Move backward over a balanced expression  |
+| C-M-k | Delete s-expression under cursor          |
+|       |                                           |
+| C-M-a | Move to the beggining of current function |
+| C-M-e | Move to the end of current function       |
+
+** Delimiter Wrapping
+
+|     |                                   |
+|-----+-----------------------------------|
+| M-( | Wrap selection in parentheses     |
+| M-[ | Wrap selection in square brackets |
+| M-{ | Wrap selection in curly brackets  |
+|     |                                   |
+

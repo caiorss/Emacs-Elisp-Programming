@@ -61,9 +61,13 @@ Elisp programming guide and documentation by examples.
 
 Elisp code examples grouped by category. 
 
- - [[file:Keybindings.org][Emacs Keybindings]] 
+ - [[file:Keybindings.org][Emacs Key bindings]] 
 
 Emacs standard keybindings and useful commands.
+
+ - [[file:Emacs_Key_Bindings_Elisp.org][Emacs key bindings for Elisp]]
+
+Emacs key bindings and commands for Elisp (Emacs' lisp) development. 
 
  - [[file:Customization.org][Customization]] 
 

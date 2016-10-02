@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Snippets</title>
-<!-- 2016-10-02 dom 01:08 -->
+<!-- 2016-10-02 dom 02:26 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -383,28 +383,27 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#sec-4">4. Useful Commands for Elisp Developers</a></li>
-<li><a href="#sec-5">5. Useful Elisp Info Pages</a>
+<li><a href="#sec-4">4. Useful Elisp Info Pages</a>
 <ul>
-<li><a href="#sec-5-1">5.1. Elisp</a></li>
-<li><a href="#sec-5-2">5.2. Customization</a></li>
-<li><a href="#sec-5-3">5.3. Layout</a></li>
-<li><a href="#sec-5-4">5.4. Syntax Tables</a></li>
-<li><a href="#sec-5-5">5.5. Environment Variables and OS Detection</a></li>
-<li><a href="#sec-5-6">5.6. Subprocess Creation</a></li>
-<li><a href="#sec-5-7">5.7. Keybindings</a></li>
-<li><a href="#sec-5-8">5.8. Hooks (Events Callbacks)</a></li>
-<li><a href="#sec-5-9">5.9. Buffer</a></li>
-<li><a href="#sec-5-10">5.10. Window</a></li>
-<li><a href="#sec-5-11">5.11. Frame</a></li>
-<li><a href="#sec-5-12">5.12. Files</a></li>
-<li><a href="#sec-5-13">5.13. Text Enconding ISO UTF8 &#x2026;</a></li>
-<li><a href="#sec-5-14">5.14. Loading, Libraries and Packages</a></li>
-<li><a href="#sec-5-15">5.15. Batch Mode</a></li>
-<li><a href="#sec-5-16">5.16. Syntax Highlight</a></li>
+<li><a href="#sec-4-1">4.1. Elisp</a></li>
+<li><a href="#sec-4-2">4.2. Customization</a></li>
+<li><a href="#sec-4-3">4.3. Layout</a></li>
+<li><a href="#sec-4-4">4.4. Syntax Tables</a></li>
+<li><a href="#sec-4-5">4.5. Environment Variables and OS Detection</a></li>
+<li><a href="#sec-4-6">4.6. Subprocess Creation</a></li>
+<li><a href="#sec-4-7">4.7. Keybindings</a></li>
+<li><a href="#sec-4-8">4.8. Hooks (Events Callbacks)</a></li>
+<li><a href="#sec-4-9">4.9. Buffer</a></li>
+<li><a href="#sec-4-10">4.10. Window</a></li>
+<li><a href="#sec-4-11">4.11. Frame</a></li>
+<li><a href="#sec-4-12">4.12. Files</a></li>
+<li><a href="#sec-4-13">4.13. Text Enconding ISO UTF8 &#x2026;</a></li>
+<li><a href="#sec-4-14">4.14. Loading, Libraries and Packages</a></li>
+<li><a href="#sec-4-15">4.15. Batch Mode</a></li>
+<li><a href="#sec-4-16">4.16. Syntax Highlight</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">6. Selected Gists</a></li>
+<li><a href="#sec-5">5. Selected Gists</a></li>
 </ul>
 </div>
 </div>
@@ -3554,176 +3553,11 @@ Disable Security confirmation:
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Useful Commands for Elisp Developers</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Useful Elisp Info Pages</h2>
 <div class="outline-text-2" id="text-4">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Command: M-x [command]</th>
-<th scope="col" class="left">Key Binding</th>
-<th scope="col" class="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">check-paren</td>
-<td class="left">&#xa0;</td>
-<td class="left">Find unmatched parenthesis</td>
-</tr>
-
-<tr>
-<td class="left">view-echo-area-messages</td>
-<td class="left">C-h e</td>
-<td class="left">Show the message buffer</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">find-variable</td>
-<td class="left">&#xa0;</td>
-<td class="left">Open the file at the point the variable is defined.</td>
-</tr>
-
-<tr>
-<td class="left">find-library</td>
-<td class="left">&#xa0;</td>
-<td class="left">Open an Emacs library or package in the load-path.</td>
-</tr>
-
-<tr>
-<td class="left">find-function</td>
-<td class="left">&#xa0;</td>
-<td class="left">Opens an library.el file at the point the function is defined.</td>
-</tr>
-
-<tr>
-<td class="left">locate-library</td>
-<td class="left">&#xa0;</td>
-<td class="left">Show path of a library.el (Emacs Package) file.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><b>Documentation Commands</b></td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">apropos</td>
-<td class="left">C-h</td>
-<td class="left">Search for all elisp symbols, variables and functions that match a regex pattern.</td>
-</tr>
-
-<tr>
-<td class="left">apropos-command</td>
-<td class="left">C-h a</td>
-<td class="left">Search for all commands (M-x cmd) that match a regexp pattern.</td>
-</tr>
-
-<tr>
-<td class="left">apropos-library</td>
-<td class="left">&#xa0;</td>
-<td class="left">Show all symbols associated with an Elisp library (Emacs Package)</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">info-apropos</td>
-<td class="left">&#xa0;</td>
-<td class="left">Find all info pages that match a pattern.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">describe-function</td>
-<td class="left">C-h f</td>
-<td class="left">Show function documentation or docstring.</td>
-</tr>
-
-<tr>
-<td class="left">describe-mode</td>
-<td class="left">C-h m</td>
-<td class="left">Show current major mode documentation and all key bindings associated.</td>
-</tr>
-
-<tr>
-<td class="left">describe-bindings</td>
-<td class="left">C-h-b</td>
-<td class="left">Show all associated key bindings with the current buffer.</td>
-</tr>
-
-<tr>
-<td class="left">describe-variable</td>
-<td class="left">C-h v</td>
-<td class="left">Show variable documentation</td>
-</tr>
-
-<tr>
-<td class="left">describe-package</td>
-<td class="left">&#xa0;</td>
-<td class="left">Describe an Emacs package installed from Melpa repository.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Useful Elisp Info Pages</h2>
-<div class="outline-text-2" id="text-5">
-</div><div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Elisp</h3>
-<div class="outline-text-3" id="text-5-1">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Elisp</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 Elisp Top Page
 </p>
@@ -3796,9 +3630,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Customization</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Customization</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 <b>Customization:</b>
 </p>
@@ -3821,9 +3655,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Layout</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Layout</h3>
+<div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(emacs) Fonts"</span>)
@@ -3832,9 +3666,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-5-4" class="outline-3">
-<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Syntax Tables</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Syntax Tables</h3>
+<div class="outline-text-3" id="text-4-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) Syntax Tables"</span>)
@@ -3843,9 +3677,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-5-5" class="outline-3">
-<h3 id="sec-5-5"><span class="section-number-3">5.5</span> Environment Variables and OS Detection</h3>
-<div class="outline-text-3" id="text-5-5">
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Environment Variables and OS Detection</h3>
+<div class="outline-text-3" id="text-4-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) System Environment"</span>)
@@ -3853,9 +3687,9 @@ Misc
 </div>
 </div>
 </div>
-<div id="outline-container-sec-5-6" class="outline-3">
-<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Subprocess Creation</h3>
-<div class="outline-text-3" id="text-5-6">
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Subprocess Creation</h3>
+<div class="outline-text-3" id="text-4-6">
 <ul class="org-ul">
 <li>Creating Subprocesses 
 </li>
@@ -3880,9 +3714,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-5-7" class="outline-3">
-<h3 id="sec-5-7"><span class="section-number-3">5.7</span> Keybindings</h3>
-<div class="outline-text-3" id="text-5-7">
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Keybindings</h3>
+<div class="outline-text-3" id="text-4-7">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) Function Keys"</span>)
@@ -3904,9 +3738,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-5-8" class="outline-3">
-<h3 id="sec-5-8"><span class="section-number-3">5.8</span> Hooks (Events Callbacks)</h3>
-<div class="outline-text-3" id="text-5-8">
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Hooks (Events Callbacks)</h3>
+<div class="outline-text-3" id="text-4-8">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) Hooks"</span>)
@@ -3927,9 +3761,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-5-9" class="outline-3">
-<h3 id="sec-5-9"><span class="section-number-3">5.9</span> Buffer</h3>
-<div class="outline-text-3" id="text-5-9">
+<div id="outline-container-sec-4-9" class="outline-3">
+<h3 id="sec-4-9"><span class="section-number-3">4.9</span> Buffer</h3>
+<div class="outline-text-3" id="text-4-9">
 <p>
 Buffers 
 </p>
@@ -4014,9 +3848,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-5-10" class="outline-3">
-<h3 id="sec-5-10"><span class="section-number-3">5.10</span> Window</h3>
-<div class="outline-text-3" id="text-5-10">
+<div id="outline-container-sec-4-10" class="outline-3">
+<h3 id="sec-4-10"><span class="section-number-3">4.10</span> Window</h3>
+<div class="outline-text-3" id="text-4-10">
 <p>
 Frame
 </p>
@@ -4029,9 +3863,9 @@ Frame
 </div>
 </div>
 
-<div id="outline-container-sec-5-11" class="outline-3">
-<h3 id="sec-5-11"><span class="section-number-3">5.11</span> Frame</h3>
-<div class="outline-text-3" id="text-5-11">
+<div id="outline-container-sec-4-11" class="outline-3">
+<h3 id="sec-4-11"><span class="section-number-3">4.11</span> Frame</h3>
+<div class="outline-text-3" id="text-4-11">
 <p>
 Frame
 </p>
@@ -4054,9 +3888,9 @@ Frame Parameters
 </div>
 </div>
 
-<div id="outline-container-sec-5-12" class="outline-3">
-<h3 id="sec-5-12"><span class="section-number-3">5.12</span> Files</h3>
-<div class="outline-text-3" id="text-5-12">
+<div id="outline-container-sec-4-12" class="outline-3">
+<h3 id="sec-4-12"><span class="section-number-3">4.12</span> Files</h3>
+<div class="outline-text-3" id="text-4-12">
 <p>
 Files 
 </p>
@@ -4100,9 +3934,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-5-13" class="outline-3">
-<h3 id="sec-5-13"><span class="section-number-3">5.13</span> Text Enconding ISO UTF8 &#x2026;</h3>
-<div class="outline-text-3" id="text-5-13">
+<div id="outline-container-sec-4-13" class="outline-3">
+<h3 id="sec-4-13"><span class="section-number-3">4.13</span> Text Enconding ISO UTF8 &#x2026;</h3>
+<div class="outline-text-3" id="text-4-13">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(emacs) International"</span>)
@@ -4111,9 +3945,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-5-14" class="outline-3">
-<h3 id="sec-5-14"><span class="section-number-3">5.14</span> Loading, Libraries and Packages</h3>
-<div class="outline-text-3" id="text-5-14">
+<div id="outline-container-sec-4-14" class="outline-3">
+<h3 id="sec-4-14"><span class="section-number-3">4.14</span> Loading, Libraries and Packages</h3>
+<div class="outline-text-3" id="text-4-14">
 <p>
 Loading 
 </p>
@@ -4152,9 +3986,9 @@ Packages
 </div>
 </div>
 
-<div id="outline-container-sec-5-15" class="outline-3">
-<h3 id="sec-5-15"><span class="section-number-3">5.15</span> Batch Mode</h3>
-<div class="outline-text-3" id="text-5-15">
+<div id="outline-container-sec-4-15" class="outline-3">
+<h3 id="sec-4-15"><span class="section-number-3">4.15</span> Batch Mode</h3>
+<div class="outline-text-3" id="text-4-15">
 <p>
 Batch Mode
 </p>
@@ -4167,9 +4001,9 @@ Batch Mode
 </div>
 </div>
 
-<div id="outline-container-sec-5-16" class="outline-3">
-<h3 id="sec-5-16"><span class="section-number-3">5.16</span> Syntax Highlight</h3>
-<div class="outline-text-3" id="text-5-16">
+<div id="outline-container-sec-4-16" class="outline-3">
+<h3 id="sec-4-16"><span class="section-number-3">4.16</span> Syntax Highlight</h3>
+<div class="outline-text-3" id="text-4-16">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) Syntax Class Table"</span>)
@@ -4178,9 +4012,9 @@ Batch Mode
 </div>
 </div>
 </div>
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Selected Gists</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Selected Gists</h2>
+<div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><a href="https://gist.github.com/justinabrahms/1390864">extract archives from eshell</a>
 </li>
@@ -4215,7 +4049,7 @@ UNIX command into a new Emacs buffer
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-10-02 dom 01:08</p>
+<p class="date">Created: 2016-10-02 dom 02:26</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

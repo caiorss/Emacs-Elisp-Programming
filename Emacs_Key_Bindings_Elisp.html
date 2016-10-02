@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Emacs key bindings for Elisp programming</title>
+<!-- 2016-10-02 dom 02:26 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Caio Rodrigues" />
+<meta  name="description" content="Emacs programming and customization."
+ />
+<meta  name="keywords" content="emacs, elisp, lisp, programming, eshell, editor" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link href="theme/style.css" rel="stylesheet">
+
+<script type="text/javascript" src="theme/org-info.js">
+/**
+ *
+ * @source: theme/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in theme/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in theme/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emacs key bindings for Elisp programming</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Emacs key bindings for Elisp programming</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Elisp Evaluation</a></li>
+<li><a href="#sec-1-2">1.2. Useful Commands</a></li>
+<li><a href="#sec-1-3">1.3. IELM - Emacs Lisp Interpreter</a></li>
+<li><a href="#sec-1-4">1.4. S-expression Navigation</a></li>
+<li><a href="#sec-1-5">1.5. Delimiter Wrapping</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<a href="index.html">Top</a>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Emacs key bindings for Elisp programming</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Elisp Evaluation</h3>
+<div class="outline-text-3" id="text-1-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command: M-x [command]</th>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">eval-last-sexp</td>
+<td class="left">C-x C-e</td>
+<td class="left">Evaluate last s-expression under cursor</td>
+</tr>
+
+<tr>
+<td class="left">eval-print-last-sexp</td>
+<td class="left">-</td>
+<td class="left">Evaluate last s-expression under cursor and print.</td>
+</tr>
+
+<tr>
+<td class="left">eval-expression</td>
+<td class="left">M-:</td>
+<td class="left">Execute S-expression in minibuffer.</td>
+</tr>
+
+<tr>
+<td class="left">-</td>
+<td class="left">C-u M-:</td>
+<td class="left">Evaluate S-expression in minibuffer and insert result at point.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">eval-defun</td>
+<td class="left">C-M-x</td>
+<td class="left">Evaluates the outermost S-expression, regardless of cursor position</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">within the s-exp.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">eval-buffer</td>
+<td class="left">C-c C-b</td>
+<td class="left">Eval the whole buffer</td>
+</tr>
+
+<tr>
+<td class="left">eval-region</td>
+<td class="left">-</td>
+<td class="left">Eval the selected text</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">Eval and print last s-expression.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">Eval last s-expression.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>repeat-complex-command</b></td>
+<td class="left">C-x ESC ESC</td>
+<td class="left">Useful to reverse engineering Emacs' commands executed with M-x like M-x</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">lgrep or repeat it.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Note: command <span class="underline">M-x repeat-complex-command</span>.
+</p>
+
+<p>
+Example: User enter
+</p>
+<ul class="org-ul">
+<li>M-x lgrep
+</li>
+<li>Prompt 1 -&gt; Search for: system.windows.forms
+</li>
+<li>Prompt 2 -&gt; In files (default *.org): *.org
+</li>
+<li>Prompt 3 -&gt; In directory: ~/Documents/wiki
+</li>
+</ul>
+
+<p>
+To extract the command type <span class="underline">C-x ESC ESC</span> and copy it from the
+minibuffer with C-k and then paste with in the buffer with C-y. The
+result will be:
+</p>
+
+<pre class="example">
+(lgrep "system.windows.forms" "*.org" "~/Documents/wiki" nil)
+</pre>
+
+<p>
+This s-expression can be run again or used in a function or any Elisp
+app. Example:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">search-my-dir</span> ()
+    (<span class="org-keyword">interactive</span>)
+    (lgrep (read-string <span class="org-string">"Search wiki: "</span>) <span class="org-string">"*.org"</span> <span class="org-string">"~/Documents/wiki"</span> nil))
+</pre>
+</div>
+
+<p>
+<span class="underline">M-x search-my-dir system.windows</span> will search all *.org files containing
+the line that matches system.windows in the directory ~/Documents/wiki.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Useful Commands</h3>
+<div class="outline-text-3" id="text-1-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command: M-x [command]</th>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">check-paren</td>
+<td class="left">&#xa0;</td>
+<td class="left">Find unmatched parenthesis</td>
+</tr>
+
+<tr>
+<td class="left">checkdoc</td>
+<td class="left">&#xa0;</td>
+<td class="left">Check docstring in an Elisp package (*.el file).</td>
+</tr>
+
+<tr>
+<td class="left">auto-insert</td>
+<td class="left">&#xa0;</td>
+<td class="left">Insert header file of an Elisp package's header file.</td>
+</tr>
+
+<tr>
+<td class="left">view-echo-area-messages</td>
+<td class="left">C-h e</td>
+<td class="left">Show the message buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>Elisp library</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">find-variable</td>
+<td class="left">&#xa0;</td>
+<td class="left">Open the elisp file at the point the variable is defined.</td>
+</tr>
+
+<tr>
+<td class="left">find-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Open an Emacs library or package in the load-path.</td>
+</tr>
+
+<tr>
+<td class="left">find-function</td>
+<td class="left">&#xa0;</td>
+<td class="left">Opens an library.el file at the point the function is defined.</td>
+</tr>
+
+<tr>
+<td class="left">locate-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Show path of a library.el (Emacs Package) file.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>Documentation Commands</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">apropos</td>
+<td class="left">&#xa0;</td>
+<td class="left">Search for all elisp symbols, variables and functions that match a regex pattern.</td>
+</tr>
+
+<tr>
+<td class="left">apropos-command</td>
+<td class="left">C-h a</td>
+<td class="left">Search for all commands (M-x cmd) that match a regexp pattern.</td>
+</tr>
+
+<tr>
+<td class="left">apropos-library</td>
+<td class="left">&#xa0;</td>
+<td class="left">Show all symbols associated with an Elisp library (Emacs Package)</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">info-apropos</td>
+<td class="left">&#xa0;</td>
+<td class="left">Find all info pages that match a pattern.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">describe-function</td>
+<td class="left">C-h f</td>
+<td class="left">Show function documentation or docstring.</td>
+</tr>
+
+<tr>
+<td class="left">describe-mode</td>
+<td class="left">C-h m</td>
+<td class="left">Show current major mode documentation and all key bindings associated.</td>
+</tr>
+
+<tr>
+<td class="left">describe-bindings</td>
+<td class="left">C-h-b</td>
+<td class="left">Show all associated key bindings with the current buffer.</td>
+</tr>
+
+<tr>
+<td class="left">describe-variable</td>
+<td class="left">C-h v</td>
+<td class="left">Show variable documentation</td>
+</tr>
+
+<tr>
+<td class="left">describe-package</td>
+<td class="left">&#xa0;</td>
+<td class="left">Describe an Emacs package installed from Melpa repository.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> IELM - Emacs Lisp Interpreter</h3>
+<div class="outline-text-3" id="text-1-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-x ielm</td>
+<td class="left">Run Emacs Lisp Interpreter</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-b</td>
+<td class="left">(IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell.</td>
+</tr>
+
+<tr>
+<td class="left">C-[up]</td>
+<td class="left">(All Shells) Get the next input in the history</td>
+</tr>
+
+<tr>
+<td class="left">C-[down]</td>
+<td class="left">(All Shells) Get the previous input in the history</td>
+</tr>
+
+<tr>
+<td class="left">M-p</td>
+<td class="left">(All Shells) Get the previous input in the history</td>
+</tr>
+
+<tr>
+<td class="left">M-n</td>
+<td class="left">(All Shells) Get the next input in the history</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-l</td>
+<td class="left">Display the shell history in another window</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> S-expression Navigation</h3>
+<div class="outline-text-3" id="text-1-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-M-n</td>
+<td class="left">Move forward over a parenthetical group</td>
+</tr>
+
+<tr>
+<td class="left">C-M-p</td>
+<td class="left">Move backward over a parenthetical group</td>
+</tr>
+
+<tr>
+<td class="left">C-M-f</td>
+<td class="left">Move forward over a balanced expression</td>
+</tr>
+
+<tr>
+<td class="left">C-M-b</td>
+<td class="left">Move backward over a balanced expression</td>
+</tr>
+
+<tr>
+<td class="left">C-M-k</td>
+<td class="left">Delete s-expression under cursor</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">C-M-a</td>
+<td class="left">Move to the beggining of current function</td>
+</tr>
+
+<tr>
+<td class="left">C-M-e</td>
+<td class="left">Move to the end of current function</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Delimiter Wrapping</h3>
+<div class="outline-text-3" id="text-1-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-(</td>
+<td class="left">Wrap selection in parentheses</td>
+</tr>
+
+<tr>
+<td class="left">M-[</td>
+<td class="left">Wrap selection in square brackets</td>
+</tr>
+
+<tr>
+<td class="left">M-{</td>
+<td class="left">Wrap selection in curly brackets</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Caio Rodrigues</p>
+<p class="date">Created: 2016-10-02 dom 02:26</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
