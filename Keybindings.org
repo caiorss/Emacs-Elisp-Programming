@@ -425,35 +425,10 @@ Find files in the computer:
 |                     | Needs locate installed.                                        |
 |                     |                                                                |
 
-** Key bindings and Commands for programming Lisp dialects 
+** Key bindings for all Lisp dialects 
 
 Useful lisp key bindings to edit and navigate Lisp code.
-
-
-*Lisp Evaluation  (Emacs Lisp)*
-
-|                 |                                                                                       |
-|-----------------+---------------------------------------------------------------------------------------|
-|                 |                                                                                       |
-| C-x C-e         | Evaluate last s-expression under cursor                                               |
-| C-j             | Evaluate last s-expression under cursor and print.                                    |
-| C-u M-:         | Evaluate S-expression in minibuffer and insert result in minibuffer                   |
-| M-:             | Execute S-expression in minibuffer.                                                   |
-| M-x eval-defun  | Evaluates the outermost S-expression, regardless of cursor position within the s-exp. |
-| M-x eval-buffer | Eval the whole buffer                                                                 |
-| M-x eval-region | Eval the selected text                                                                |
-
-*IELM - Emacs Lisp Interpreter*
-
-|          |                                                                                              |
-|----------+----------------------------------------------------------------------------------------------|
-| M-x ielm | Run Emacs Lisp Interpreter                                                                   |
-| C-c C-b  | (IELM only) Change the current buffer of IELM. It is useful control buffers from IELM shell. |
-| C-[up]   | (All Shells) Get the next input in the history                                               |
-| C-[down] | (All Shells) Get the previous input in the history                                           |
-| M-p      | (All Shells) Get the previous input in the history                                           |
-| M-n      | (All Shells) Get the next input in the history                                               |
-| C-c C-l  | Display the shell history in another window                                                  |
+                                                      
 
 *Delimiter Wrapping*
 
