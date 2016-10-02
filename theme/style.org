@@ -9,3 +9,7 @@
 #+INFOJS_OPT: view:showall toc:t ltoc:t mouse:underline path:theme/org-info.js
 
 #+HTML_HEAD: <link href="theme/style.css" rel="stylesheet">
+
+#+BEGIN_HTML
+<a href="index.html">Top</a>
+#+END_HTML
