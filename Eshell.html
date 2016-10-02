@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Eshell</title>
-<!-- 2016-09-29 qui 14:56 -->
+<!-- 2016-10-02 dom 01:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -218,14 +218,55 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Eshell</a></li>
+<li><a href="#sec-1">1. Eshell</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Overview</a></li>
+<li><a href="#sec-1-2">1.2. See also</a></li>
+<li><a href="#sec-1-3">1.3. Start Eshell Directly from command line</a></li>
+<li><a href="#sec-1-4">1.4. Useful elisp commands inside eshell</a></li>
+<li><a href="#sec-1-5">1.5. Clear eshell</a></li>
+<li><a href="#sec-1-6">1.6. Set eshell prompt</a>
+<ul>
+<li><a href="#sec-1-6-1">1.6.1. Simple prompt</a></li>
+<li><a href="#sec-1-6-2">1.6.2. Colorized prompt</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-7">1.7. Change Eshell current directory</a></li>
+<li><a href="#sec-1-8">1.8. Change Eshell current directory to current buffer</a></li>
+<li><a href="#sec-1-9">1.9. Open eshell in another window</a></li>
+<li><a href="#sec-1-10">1.10. Open eshell in another frame</a></li>
+<li><a href="#sec-1-11">1.11. Open eshell file names from ls output with Return key</a></li>
+<li><a href="#sec-1-12">1.12. Functions to copy eshell data to clipboard</a>
+<ul>
+<li><a href="#sec-1-12-1">1.12.1. Copy current directory</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-13">1.13. Creating Eshell aliases programatically</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
+<a href="index.html">Top</a>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Eshell</h2>
 <div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Overview</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Eshell is a shell implemented in Emacs with many commands implemented
+in Elisp which makes it cross platform and highly integrated to
+Emacs. The commands ls, pwd, cd and etc. works in the same way for
+Linux, Windows or OSX. In Windows OS it is a good alternative to
+cmd.exe.
+</p>
+
+<p>
+Command to clear Eshell. It can be invoked with $ clear in eshell.
+</p>
+
 <p>
 Features:
 </p>
@@ -241,6 +282,8 @@ Features:
 </li>
 </ul>
 
+
+
 <p>
 Example:
 </p>
@@ -250,41 +293,538 @@ Example:
 <p><img src="images/eshell-example1.png" alt="eshell-example1.png" />
 </p>
 </div>
+</div>
+</div>
 
-<p>
-Links:
-</p>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> See also</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li><a href="https://www.masteringemacs.org/article/complete-guide-mastering-eshell">Mastering Eshell</a> / Mastering Emacs
+</li>
+</ul>
+
+
+<ul class="org-ul">
+<li><a href="http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html">Finally wrapping my head around eshell (the emacs shell)</a>
+</li>
+</ul>
+
 
 <ul class="org-ul">
 <li><a href="https://www.masteringemacs.org/article/complete-guide-mastering-eshell">Mastering Eshell - Mastering Emacs</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="https://www.gnu.org/software/emacs/manual/html_mono/eshell.html">Eshell: The Emacs Shell</a>
 </li>
+
 <li><a href="http://www.howardism.org/Technical/Emacs/eshell-fun.html">Eschewing Zshell for Emacs Shell</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="http://www.blogbyben.com/2013/08/finally-wrapping-my-head-around-eshell.html">Ben's Journal: Finally wrapping my head around eshell (the emacs shell)</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="http://mjwall.com/blog/2013/10/04/how-i-use-emacs/">How I use Emacs - mjwall.com</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="http://blog.gnumonk.com/2012/07/effective-emacs-part1.html">We Live By Code: Effective emacs - Part:1</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="https://github.com/howardabrams/dot-files/blob/master/emacs-eshell.org">dot-files/emacs-eshell.org at master · howardabrams/dot-files · GitHub</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="http://www.emacswiki.org/emacs/EshellAndEmacsServer">EmacsWiki: Eshell And Emacs Server</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="http://www.emacswiki.org/emacs/ShellMode">EmacsWiki: Shell Mode</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="http://www.smashcompany.com/technology/using-emacs-eshell-as-the-ultimate-shell">Using Emacs Eshell as the ultimate shell | Smash Company</a>
 </li>
+</ul>
+
+
+<ul class="org-ul">
 <li><a href="https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/">Eshell completion for git, bzr, and hg | Tassilo's Blog</a>
 </li>
 </ul>
 </div>
 </div>
+
+
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Start Eshell Directly from command line</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Start eshell directly in a new Emacs sessions in the terminal wihout
+load init.el.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ emacs -Q -q -nw --eval <span class="org-string">'(eshell)'</span>
+</pre>
+</div>
+
+<p>
+Or 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ emacs -Q -q -nw -f eshell
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="images/eshell_directly_in_terminal.png" alt="eshell_directly_in_terminal.png" />
+</p>
+</div>
+
+
+<p>
+Start eshell directly in a new Emacs Window 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">emacs -q -f eshell <span class="org-comment-delimiter"># </span><span class="org-comment">Don't load init file.</span>
+</pre>
+</div>
+
+<p>
+Or 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">emacs -q -f eshell <span class="org-comment-delimiter"># </span><span class="org-comment">Load init file</span>
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="images/eshell_directly_gui.png" alt="eshell_directly_gui.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Useful elisp commands inside eshell</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Eshell can run Elisp command - M-x &lt;command&gt; like ordinary Unix shell
+apps. 
+</p>
+
+<p>
+Open a file in the current window
+</p>
+
+<ul class="org-ul">
+<li><code>$ find-file /etc/hosts.conf</code> 
+</li>
+</ul>
+
+<p>
+Open a file in other window 
+</p>
+
+<ul class="org-ul">
+<li><code>$ find-file-other-window /etc/host.conf</code>
+</li>
+</ul>
+
+<p>
+Open a file in other frame 
+</p>
+
+<ul class="org-ul">
+<li><code>$ find-file-other-frame /etc/host.conf</code>
+</li>
+</ul>
+
+<p>
+Browser a directory in current window 
+</p>
+
+<ul class="org-ul">
+<li><code>$ dired /var/log</code> 
+</li>
+</ul>
+
+<p>
+Browser a directory in another window 
+</p>
+
+<ul class="org-ul">
+<li><code>$ dired-other-window /var/log</code>
+</li>
+</ul>
+
+<p>
+Browser a directory in another frame 
+</p>
+
+<ul class="org-ul">
+<li><code>$ dired-other-frame /var/log</code>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Clear eshell</h3>
+<div class="outline-text-3" id="text-1-5">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">eshell/clear</span> ()
+  <span class="org-doc">"clear the eshell buffer."</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let</span> ((inhibit-read-only t))
+    (erase-buffer)))
+</pre>
+</div>
+
+<p>
+In eshell:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">~ $ which eshell
+eshell is an interactive compiled Lisp <span class="org-keyword">function in</span> <span class="org-sh-quoted-exec">`eshell.el'</span>
+<span class="org-sh-quoted-exec">~ $</span>
+</pre>
+</div>
+
+
+<p>
+Before the command clear:
+</p>
+
+
+<div class="figure">
+<p><img src="images/eshell_clear1.png" alt="eshell_clear1.png" /> 
+</p>
+</div>
+
+<p>
+After the command clear:
+</p>
+
+
+<div class="figure">
+<p><img src="images/eshell_clear2.png" alt="eshell_clear2.png" /> 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Set eshell prompt</h3>
+<div class="outline-text-3" id="text-1-6">
+</div><div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> Simple prompt</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> eshell-prompt-function (<span class="org-keyword">lambda</span> () <span class="org-doc">"eshell &gt; "</span>))
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="images/eshell_prompt_setting1.png" alt="eshell_prompt_setting1.png" />
+</p>
+</div>
+
+<p>
+<b>Prompt with current directory</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> Colorized prompt</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> eshell-prompt-function
+      (<span class="org-keyword">lambda</span> nil
+        (concat
+         (propertize (eshell/pwd) 'face '(<span class="org-builtin">:foreground</span> <span class="org-string">"#8787af"</span>))
+         (propertize <span class="org-string">"&#10095;"</span> 'face '(<span class="org-builtin">:foreground</span> <span class="org-string">"#f75f5f"</span>))
+         (propertize <span class="org-string">"&#10095;"</span> 'face '(<span class="org-builtin">:foreground</span> <span class="org-string">"#ffaf5f"</span>))
+         (propertize <span class="org-string">"&#10095;"</span> 'face '(<span class="org-builtin">:foreground</span> <span class="org-string">"#87af5f"</span>))
+         (propertize <span class="org-string">"&#8201;"</span> 'face nil))))
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="images/eshell_prompt_setting2.png" alt="eshell_prompt_setting2.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Change Eshell current directory</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+This command can be used in Menus or with helm.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">eshell-chdir</span> (path)  
+  (<span class="org-keyword">with-current-buffer</span> <span class="org-string">"*eshell*"</span>
+    (cd path)
+    (eshell-emit-prompt)))
+
+(eshell-chdir <span class="org-string">"~/Downloads"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Change Eshell current directory to current buffer</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Usage: M-x eshell-cwd
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">eshell-cwd</span> ()
+  <span class="org-doc">"</span>
+<span class="org-doc">  Sets the eshell directory to the current buffer</span>
+
+<span class="org-doc">  Usage: M-x eshell-cwd </span>
+<span class="org-doc">  "</span>
+  (<span class="org-keyword">interactive</span>)
+
+  (<span class="org-keyword">let</span> (
+        (path (file-name-directory (<span class="org-keyword">or</span>  (buffer-file-name) default-directory)))
+       )
+
+    (<span class="org-keyword">with-current-buffer</span> <span class="org-string">"*eshell*"</span>
+      (cd path)
+      (eshell-emit-prompt))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Open eshell in another window</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Source: <a href="https://gist.github.com/semmypurewal/b7748e0d6785f3c50e46">mini-eshell.el</a>
+</p>
+
+<p>
+Usage: M-x open-mini-eshell 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">open up a mini-eshell</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">quarter-window-vertically</span> ()
+  <span class="org-doc">"create a new window a quarter size of the current window"</span>
+  (split-window-vertically)
+  (other-window 1)
+  (split-window-vertically)
+  (other-window -1)
+  (delete-window)
+)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">open-mini-eshell</span> ()
+  <span class="org-doc">"open a mini-eshell in a small window at the bottom of the current window"</span>
+  (<span class="org-keyword">interactive</span>)
+  (quarter-window-vertically)
+  (other-window 1)
+  (eshell)
+)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Open eshell in another frame</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+Usage: M-x eshell-other-frame 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">eshell-other-frame</span> ()
+  <span class="org-doc">"</span>
+<span class="org-doc">  Open eshell in another frame.</span>
+
+<span class="org-doc">  Usage: M-x eshell-other-frame </span>
+<span class="org-doc">  "</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">with-selected-frame</span> (make-frame)
+    (eshell)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> Open eshell file names from ls output with Return key</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Source: <a href="https://www.emacswiki.org/emacs/EshellEnhancedLS">Emacs Wiki</a>  
+</p>
+
+<p>
+This code allows to open files from <code>$ ls</code> command output by selecting
+the file name and hitting return or by clicking with the middle mouse
+button.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(eval-after-load <span class="org-string">"em-ls"</span>
+    '(<span class="org-keyword">progn</span>
+       (<span class="org-keyword">defun</span> <span class="org-function-name">ted-eshell-ls-find-file-at-point</span> (point)
+         <span class="org-doc">"RET on Eshell's `</span><span class="org-doc"><span class="org-constant">ls</span></span><span class="org-doc">' output to open files."</span>
+         (<span class="org-keyword">interactive</span> <span class="org-string">"d"</span>)
+         (find-file (buffer-substring-no-properties
+                     (previous-single-property-change point 'help-echo)
+                     (next-single-property-change point 'help-echo))))
+
+       (<span class="org-keyword">defun</span> <span class="org-function-name">pat-eshell-ls-find-file-at-mouse-click</span> (event)
+         <span class="org-doc">"Middle click on Eshell's `</span><span class="org-doc"><span class="org-constant">ls</span></span><span class="org-doc">' output to open files.</span>
+<span class="org-doc"> From Patrick Anderson via the wiki."</span>
+         (<span class="org-keyword">interactive</span> <span class="org-string">"e"</span>)
+         (ted-eshell-ls-find-file-at-point (posn-point (event-end event))))
+
+       (<span class="org-keyword">let</span> ((map (make-sparse-keymap)))
+         (define-key map (kbd <span class="org-string">"RET"</span>)      'ted-eshell-ls-find-file-at-point)
+         (define-key map (kbd <span class="org-string">"&lt;return&gt;"</span>) 'ted-eshell-ls-find-file-at-point)
+         (define-key map (kbd <span class="org-string">"&lt;mouse-2&gt;"</span>) 'pat-eshell-ls-find-file-at-mouse-click)
+         (<span class="org-keyword">defvar</span> <span class="org-variable-name">ted-eshell-ls-keymap</span> map))
+
+       (<span class="org-keyword">defadvice</span> <span class="org-function-name">eshell-ls-decorated-name</span> (after ted-electrify-ls activate)
+         <span class="org-doc">"Eshell's `</span><span class="org-doc"><span class="org-constant">ls</span></span><span class="org-doc">' now lets you click or RET on file names to open them."</span>
+         (add-text-properties 0 (length ad-return-value)
+                              (list 'help-echo <span class="org-string">"RET, mouse-2: visit this file"</span>
+                                    'mouse-face 'highlight
+                                    'keymap ted-eshell-ls-keymap)
+                              ad-return-value)
+         ad-return-value)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> Functions to copy eshell data to clipboard</h3>
+<div class="outline-text-3" id="text-1-12">
+</div><div id="outline-container-sec-1-12-1" class="outline-4">
+<h4 id="sec-1-12-1"><span class="section-number-4">1.12.1</span> Copy current directory</h4>
+<div class="outline-text-4" id="text-1-12-1">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">clipboard/set</span> (astring)
+  <span class="org-doc">"Copy a string to clipboard"</span>
+
+   (<span class="org-keyword">with-temp-buffer</span>
+    (insert astring)
+    (clipboard-kill-region (point-min) (point-max))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Copy current directory to clipboard </span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Usage:  Enter $ copy-pwd in eshell </span>
+<span class="org-comment-delimiter">;;</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">eshell/copy-pwd</span> ()
+ (clipboard/set (eshell/pwd)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Copy file name with full path to clipboard </span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Usage: Enter $ copy-fpath &lt;filename&gt; in eshell. </span>
+<span class="org-comment-delimiter">;; </span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">eshell/copy-fpath</span> (fname)
+
+  (<span class="org-keyword">let</span> ((fpath (concat (eshell/pwd) <span class="org-string">"/"</span> fname)))
+
+       (clipboard/set fpath)
+       (concat <span class="org-string">"Copied path: "</span> fpath)))
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="images/eshell_clipboard.png" alt="eshell_clipboard.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> Creating Eshell aliases programatically</h3>
+<div class="outline-text-3" id="text-1-13">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(eshell/alias <span class="org-string">"ff"</span> <span class="org-string">"find-file $1"</span>)
+
+(eshell/alias <span class="org-string">"fw"</span> <span class="org-string">"find-file-other-window $1"</span>)
+
+(eshell/alias <span class="org-string">"fr"</span> <span class="org-string">"find-file-other-frame $1"</span>)
+</pre>
+</div>
+
+<p>
+Example of usage:
+</p>
+
+
+<div class="figure">
+<p><img src="images/emacs_eshell_alias.png" alt="emacs_eshell_alias.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-09-29 qui 14:56</p>
+<p class="date">Created: 2016-10-02 dom 01:08</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

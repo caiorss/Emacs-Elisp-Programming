@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Development Environment</title>
-<!-- 2016-09-29 qui 14:57 -->
+<!-- 2016-10-02 dom 01:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -241,6 +241,7 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
+<a href="index.html">Top</a>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Development Environment</h2>
@@ -257,7 +258,7 @@ Set Python Interpreter:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> python-python-command <span class="org-string">"/path-to-python-/python"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> python-python-command <span class="org-string">"/path-to-python-/python"</span>)
 </pre>
 </div>
 
@@ -271,17 +272,17 @@ Run more than one Python version, usage: M-x run-python3, M-x run-python2
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-python3</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-   <span class="org-rainbow-delimiters-depth-2">(</span>run-python  <span class="org-string">"/usr/bin/python2"</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">run-python3</span> ()
+   (<span class="org-keyword">interactive</span>)
+   (run-python  <span class="org-string">"/usr/bin/python2"</span> nil t))
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-python2</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-   <span class="org-rainbow-delimiters-depth-2">(</span>run-python  <span class="org-string">"/usr/bin/python"</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">run-python2</span> ()
+   (<span class="org-keyword">interactive</span>)
+   (run-python  <span class="org-string">"/usr/bin/python"</span> nil t))
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-ipython3</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-   <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-   <span class="org-rainbow-delimiters-depth-2">(</span>run-python  <span class="org-string">"~/anaconda3/bin/ipython"</span> nil t<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">run-ipython3</span> ()
+   (<span class="org-keyword">interactive</span>)
+   (run-python  <span class="org-string">"~/anaconda3/bin/ipython"</span> nil t))
 </pre>
 </div>
 
@@ -291,20 +292,20 @@ Search Python packages at Pip:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">python/pip-search</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">python/pip-search</span> ()
   <span class="org-doc">"Search for a pip package. at: https://pypi.python.org"</span>
 
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (<span class="org-keyword">interactive</span>)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+  (browse-url
 
-   <span class="org-rainbow-delimiters-depth-3">(</span>format <span class="org-string">"https://pypi.python.org/pypi?%%3Aaction=search&amp;term=%s&amp;submit=search"</span>
+   (format <span class="org-string">"https://pypi.python.org/pypi?%%3Aaction=search&amp;term=%s&amp;submit=search"</span>
 
-           <span class="org-rainbow-delimiters-depth-4">(</span>read-string <span class="org-string">"Pip: "</span><span class="org-rainbow-delimiters-depth-4">)</span>
+           (read-string <span class="org-string">"Pip: "</span>)
 
-           <span class="org-rainbow-delimiters-depth-4">(</span>message <span class="org-string">"Searching pip."</span><span class="org-rainbow-delimiters-depth-4">)</span>
+           (message <span class="org-string">"Searching pip."</span>)
 
-    <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+    )))
 </pre>
 </div>
 
@@ -315,15 +316,15 @@ Search Python Documentation:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">python/doc-search</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">python/doc-search</span> ()
   <span class="org-doc">"Search Python3 official documentation. at: https://docs.python.org"</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (<span class="org-keyword">interactive</span>)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
-   <span class="org-rainbow-delimiters-depth-3">(</span>format <span class="org-string">"https://docs.python.org/3/search.html?q=%s"</span>
+  (browse-url
+   (format <span class="org-string">"https://docs.python.org/3/search.html?q=%s"</span>
 
-           <span class="org-rainbow-delimiters-depth-4">(</span>read-string <span class="org-string">"Python3 doc: "</span><span class="org-rainbow-delimiters-depth-4">)</span>
-           <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+           (read-string <span class="org-string">"Python3 doc: "</span>)
+           )))
 </pre>
 </div>
 
@@ -356,17 +357,17 @@ Find Javascript package:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">javascript/npm-search</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">javascript/npm-search</span> ()
   <span class="org-doc">"Search for a NPM package at: https://www.npmjs.com"</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (<span class="org-keyword">interactive</span>)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+  (browse-url
 
-   <span class="org-rainbow-delimiters-depth-3">(</span>format <span class="org-string">"https://www.npmjs.com/search?q=%s"</span>
+   (format <span class="org-string">"https://www.npmjs.com/search?q=%s"</span>
 
-           <span class="org-rainbow-delimiters-depth-4">(</span>url-hexify-string  <span class="org-rainbow-delimiters-depth-5">(</span>read-string <span class="org-string">"npm: "</span><span class="org-rainbow-delimiters-depth-5">)</span><span class="org-rainbow-delimiters-depth-4">)</span>
+           (url-hexify-string  (read-string <span class="org-string">"npm: "</span>))
 
-           <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+           )))
 </pre>
 </div>
 
@@ -414,49 +415,49 @@ Search Hoogle, the Haskell API search engine and the Hackage search engine.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">haskell/hoogle</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">haskell/hoogle</span> ()
   <span class="org-doc">"Search Hoogle: Haskell API search engine</span>
 
 <span class="org-doc">   https://www.haskell.org/hoogle</span>
 <span class="org-doc">   "</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (<span class="org-keyword">interactive</span>)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url <span class="org-rainbow-delimiters-depth-3">(</span>format  <span class="org-string">"https://www.haskell.org/hoogle/?hoogle=%s"</span>
-                       <span class="org-rainbow-delimiters-depth-4">(</span>read-string <span class="org-string">"Hoogle: "</span><span class="org-rainbow-delimiters-depth-4">)</span>
-                       <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (browse-url (format  <span class="org-string">"https://www.haskell.org/hoogle/?hoogle=%s"</span>
+                       (read-string <span class="org-string">"Hoogle: "</span>)
+                       ))
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>message <span class="org-string">"Searching Hoogle ..."</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-1">)</span>
+  (message <span class="org-string">"Searching Hoogle ..."</span>)
+  )
 
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">haskell/hoogle-region</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">haskell/hoogle-region</span> ()
   <span class="org-doc">"Search selected text on Hoogle: Haskell API Search Engine</span>
 <span class="org-doc">   https://www.haskell.org/hoogle</span>
 <span class="org-doc">  "</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url <span class="org-rainbow-delimiters-depth-3">(</span>format  <span class="org-string">"https://www.haskell.org/hoogle/?hoogle=%s"</span>
+  (<span class="org-keyword">interactive</span>)
+  (browse-url (format  <span class="org-string">"https://www.haskell.org/hoogle/?hoogle=%s"</span>
 
-                       <span class="org-rainbow-delimiters-depth-4">(</span>buffer-substring-no-properties
-                        <span class="org-rainbow-delimiters-depth-5">(</span>region-beginning<span class="org-rainbow-delimiters-depth-5">)</span>
-                        <span class="org-rainbow-delimiters-depth-5">(</span>region-end<span class="org-rainbow-delimiters-depth-5">)</span>
-                        <span class="org-rainbow-delimiters-depth-4">)</span>
+                       (buffer-substring-no-properties
+                        (region-beginning)
+                        (region-end)
+                        )
 
-                       <span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                       )))
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">haskell/hackage</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">haskell/hackage</span> ()
   <span class="org-doc">" Search a Haskell library at:  https://hackage.haskell.org/</span>
 <span class="org-doc">  "</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (<span class="org-keyword">interactive</span>)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+  (browse-url
 
-   <span class="org-rainbow-delimiters-depth-3">(</span>format  <span class="org-string">"https://hackage.haskell.org/packages/search?terms=%s"</span>
+   (format  <span class="org-string">"https://hackage.haskell.org/packages/search?terms=%s"</span>
 
-            <span class="org-rainbow-delimiters-depth-4">(</span>read-string <span class="org-string">"Hackage: "</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+            (read-string <span class="org-string">"Hackage: "</span>)))
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>message <span class="org-string">"Searching Hackage ..."</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (message <span class="org-string">"Searching Hackage ..."</span>)
 
-  <span class="org-rainbow-delimiters-depth-1">)</span>
+  )
 </pre>
 </div>
 
@@ -511,11 +512,11 @@ See:
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Turn on paren match highlighting</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>show-paren-mode 1<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> show-paren-delay 0<span class="org-rainbow-delimiters-depth-1">)</span>
+(show-paren-mode 1)
+(<span class="org-keyword">setq</span> show-paren-delay 0)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Highlight entire s-expression under cursor</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> show-paren-style 'expression<span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq</span> show-paren-style 'expression)
 </pre>
 </div>
 </div>
@@ -562,7 +563,7 @@ Set Lisp Interpreter
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> inferior-lisp-program <span class="org-string">"clisp"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> inferior-lisp-program <span class="org-string">"clisp"</span>)
 </pre>
 </div>
 </div>
@@ -578,14 +579,14 @@ The variable scheme-program-name controls which Scheme implementation Emacs will
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Racket Lang (Scheme Derived)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> scheme-program-name  <span class="org-string">"racket"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq</span> scheme-program-name  <span class="org-string">"racket"</span>)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Racket Lang (Scheme Derived)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> scheme-program-name  <span class="org-string">"racket"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq</span> scheme-program-name  <span class="org-string">"racket"</span>)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Chicken Scheme</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> scheme-program-name <span class="org-string">"csi"</span><span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> scheme-program-name <span class="org-string">"/opt/bin/csi"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq</span> scheme-program-name <span class="org-string">"csi"</span>)
+(<span class="org-keyword">setq</span> scheme-program-name <span class="org-string">"/opt/bin/csi"</span>)
 </pre>
 </div>
 
@@ -601,25 +602,25 @@ implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-gambit</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-gambit</span> ()
+  (<span class="org-keyword">interactive</span>)
   <span class="org-comment-delimiter">;;; </span><span class="org-comment">It could also be: (run-scheme "/opt/gambit/bin/gsc")</span>
   <span class="org-comment-delimiter">;;; </span><span class="org-comment">executable-find will return the path to executable.</span>
   <span class="org-comment-delimiter">;;;</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme <span class="org-rainbow-delimiters-depth-3">(</span>executable-find <span class="org-string">"gsc"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+  (run-scheme (executable-find <span class="org-string">"gsc"</span>)))
 
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-guile</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme <span class="org-rainbow-delimiters-depth-3">(</span>executable-find <span class="org-string">"guile"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-guile</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (run-scheme (executable-find <span class="org-string">"guile"</span>)))
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-chicken</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme  <span class="org-string">"/opt/chicken/bin/csi"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">run-scheme-chicken</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (run-scheme  <span class="org-string">"/opt/chicken/bin/csi"</span>))
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-racket</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme <span class="org-string">"/opt/bin/racket"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">run-racket</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (run-scheme <span class="org-string">"/opt/bin/racket"</span>))
 </pre>
 </div>
 
@@ -671,37 +672,37 @@ s-expression to the repl regardless where is the cursor.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">progn</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>define-key clojure-mode-map
-      <span class="org-rainbow-delimiters-depth-3">(</span>kbd <span class="org-string">"C-x C-e"</span><span class="org-rainbow-delimiters-depth-3">)</span> #'scheme-send-last-sexp<span class="org-rainbow-delimiters-depth-2">)</span>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">progn</span>
+  (define-key clojure-mode-map
+      (kbd <span class="org-string">"C-x C-e"</span>) #'scheme-send-last-sexp)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>define-key clojure-mode-map
-    <span class="org-rainbow-delimiters-depth-3">(</span>kbd <span class="org-string">"C-c ="</span><span class="org-rainbow-delimiters-depth-3">)</span> #'scheme-send-definition<span class="org-rainbow-delimiters-depth-2">)</span>
+  (define-key clojure-mode-map
+    (kbd <span class="org-string">"C-c ="</span>) #'scheme-send-definition)
 
-  <span class="org-rainbow-delimiters-depth-1">)</span>
-
-
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">cloujure-repl</span>  <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-
-  <span class="org-rainbow-delimiters-depth-2">(</span>run-scheme <span class="org-string">"java -jar /opt/clojure.jar"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+  )
 
 
+(<span class="org-keyword">defun</span> <span class="org-function-name">cloujure-repl</span>  ()
+  (<span class="org-keyword">interactive</span>)
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-clojure-batch</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+  (run-scheme <span class="org-string">"java -jar /opt/clojure.jar"</span>))
+
+
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">run-clojure-batch</span> ()
   <span class="org-doc">"Run a clojure file in batch mode"</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (<span class="org-keyword">interactive</span>)
 
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>start-process <span class="org-string">"clojure-batch1"</span>     <span class="org-comment-delimiter">;; </span><span class="org-comment">Process name</span>
+  (start-process <span class="org-string">"clojure-batch1"</span>     <span class="org-comment-delimiter">;; </span><span class="org-comment">Process name</span>
                  <span class="org-string">"*clojure-batch*"</span>   <span class="org-comment-delimiter">;; </span><span class="org-comment">Buffer name</span>
 
                  <span class="org-comment-delimiter">;;; </span><span class="org-comment">Command line</span>
-                 <span class="org-string">"java"</span> <span class="org-string">"-jar"</span> <span class="org-string">"/opt/clojure.jar"</span> <span class="org-rainbow-delimiters-depth-3">(</span>buffer-file-name<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span>
+                 <span class="org-string">"java"</span> <span class="org-string">"-jar"</span> <span class="org-string">"/opt/clojure.jar"</span> (buffer-file-name))
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>split-window-vertically<span class="org-rainbow-delimiters-depth-2">)</span>
+  (split-window-vertically)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>switch-to-buffer-other-window <span class="org-string">"*clojure-batch*"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+  (switch-to-buffer-other-window <span class="org-string">"*clojure-batch*"</span>))
 </pre>
 </div>
 
@@ -759,18 +760,18 @@ Search Java package documentation:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">java/open-javadoc</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">java/open-javadoc</span> ()
   <span class="org-doc">"Open Java Official documentation web site:</span>
 <span class="org-doc">   https://docs.oracle.com/javase/8/docs</span>
 
 <span class="org-doc">   Usage: M-x java/open-javadoc</span>
 
 <span class="org-doc">   "</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (<span class="org-keyword">interactive</span>)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url <span class="org-string">"https://docs.oracle.com/javase/8/docs/"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+  (browse-url <span class="org-string">"https://docs.oracle.com/javase/8/docs/"</span>))
 
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">java/search-class</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">java/search-class</span> ()
   <span class="org-doc">"Search a Java Class documentation.</span>
 <span class="org-doc">   at: https://docs.oracle.com/javase/&lt;java-version&gt;</span>
 
@@ -779,17 +780,17 @@ Search Java package documentation:
 <span class="org-doc">   Example:  M-x java/search-class  javax.swing.JPanel</span>
 
 <span class="org-doc">   "</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
+  (<span class="org-keyword">interactive</span>)
 
-  <span class="org-rainbow-delimiters-depth-2">(</span>browse-url
+  (browse-url
 
-   <span class="org-rainbow-delimiters-depth-3">(</span>format <span class="org-string">"https://docs.oracle.com/javase/8/docs/api/%s"</span>
+   (format <span class="org-string">"https://docs.oracle.com/javase/8/docs/api/%s"</span>
 
-           <span class="org-rainbow-delimiters-depth-4">(</span>concat <span class="org-rainbow-delimiters-depth-5">(</span>replace-regexp-in-string <span class="org-string">"\\."</span> <span class="org-string">"/"</span>
+           (concat (replace-regexp-in-string <span class="org-string">"\\."</span> <span class="org-string">"/"</span>
 
-                                             <span class="org-rainbow-delimiters-depth-6">(</span>read-string <span class="org-string">"Enter a java class: "</span><span class="org-rainbow-delimiters-depth-6">)</span>
+                                             (read-string <span class="org-string">"Enter a java class: "</span>)
 
-                                             <span class="org-rainbow-delimiters-depth-5">)</span> <span class="org-string">".html"</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+                                             ) <span class="org-string">".html"</span>))))
 </pre>
 </div>
 </div>
@@ -798,7 +799,7 @@ Search Java package documentation:
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-09-29 qui 14:57</p>
+<p class="date">Created: 2016-10-02 dom 01:09</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

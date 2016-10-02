@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Utilities</title>
-<!-- 2016-09-29 qui 14:56 -->
+<!-- 2016-10-02 dom 01:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -232,6 +232,7 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
+<a href="index.html">Top</a>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Emacs Utilities</h2>
@@ -594,13 +595,13 @@ Set the default Spell checker:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"aspell"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"aspell"</span>)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">or</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"ispell"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"ispell"</span>)
 
 <span class="org-comment-delimiter">;;</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"hunspell"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"hunspell"</span>)
 </pre>
 </div>
 
@@ -611,22 +612,22 @@ The dictionary can be changed with the Elisp code:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>ispell-chage-dictionary <span class="org-string">"en"</span><span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>ispell-chage-dictionary <span class="org-string">"castellano"</span><span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>ispell-chage-dictionary <span class="org-string">"german"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(ispell-chage-dictionary <span class="org-string">"en"</span>)
+(ispell-chage-dictionary <span class="org-string">"castellano"</span>)
+(ispell-chage-dictionary <span class="org-string">"german"</span>)
 
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x ispell-spanish</span>
 <span class="org-comment-delimiter">;;</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">ispell-spanish</span> <span class="org-rainbow-delimiters-depth-2">()</span>
- <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
- <span class="org-rainbow-delimiters-depth-2">(</span>ispell-change-diciontary <span class="org-string">"castellano"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">ispell-spanish</span> ()
+ (<span class="org-keyword">interactive</span>)
+ (ispell-change-diciontary <span class="org-string">"castellano"</span>))
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x ispell-en</span>
 <span class="org-comment-delimiter">;;</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">ispell-en</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-   <span class="org-rainbow-delimiters-depth-2">(</span>ispell-change-diciontary <span class="org-string">"en"</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">ispell-en</span> ()
+  (<span class="org-keyword">interactive</span>)
+   (ispell-change-diciontary <span class="org-string">"en"</span>))
 </pre>
 </div>
 
@@ -637,10 +638,10 @@ To right click in the word and get suggestions use:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>eval-after-load <span class="org-string">"flyspell"</span>
-  '<span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">progn</span>
-     <span class="org-rainbow-delimiters-depth-3">(</span>define-key flyspell-mouse-map <span class="org-rainbow-delimiters-depth-4">[</span>down-mouse-3<span class="org-rainbow-delimiters-depth-4">]</span> #'flyspell-correct-word<span class="org-rainbow-delimiters-depth-3">)</span>
-     <span class="org-rainbow-delimiters-depth-3">(</span>define-key flyspell-mouse-map <span class="org-rainbow-delimiters-depth-4">[</span>mouse-3<span class="org-rainbow-delimiters-depth-4">]</span> #'undefined<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(eval-after-load <span class="org-string">"flyspell"</span>
+  '(<span class="org-keyword">progn</span>
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
 </pre>
 </div>
 
@@ -654,7 +655,7 @@ so on.
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>add-hook 'prog-mode-hook 'flyspell-prog-mode<span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 </pre>
 </div>
 
@@ -850,12 +851,12 @@ bits, bytes &#x2026;
 </tr>
 
 <tr>
-<td class="left">exp (e^x)</td>
+<td class="left">exp (e<sup>x</sup>)</td>
 <td class="left">E</td>
 </tr>
 
 <tr>
-<td class="left">10^x</td>
+<td class="left">10<sup>x</sup></td>
 <td class="left">H E</td>
 </tr>
 
@@ -1046,7 +1047,7 @@ bits, bytes &#x2026;
 <tbody>
 <tr>
 <td class="left">Enter a formula</td>
-<td class="left">' (-b + sqrt(b^2 - 4*a*c) / (2 * a))</td>
+<td class="left">' (-b + sqrt(b<sup>2</sup> - 4*a*c) / (2 * a))</td>
 <td class="left">&#xa0;</td>
 </tr>
 
@@ -1851,7 +1852,7 @@ Branch
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-09-29 qui 14:56</p>
+<p class="date">Created: 2016-10-02 dom 01:08</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

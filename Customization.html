@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Customization</title>
-<!-- 2016-09-29 qui 14:57 -->
+<!-- 2016-10-02 dom 01:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -227,33 +227,33 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-1-3">1.1.3. Turn-off Startup Screen</a></li>
 <li><a href="#sec-1-1-4">1.1.4. Ask y or n instead of yes or no</a></li>
 <li><a href="#sec-1-1-5">1.1.5. Disable/Enable Blink Cursor</a></li>
-<li><a href="#sec-1-1-6">1.1.6. Quiet Startup</a></li>
-<li><a href="#sec-1-1-7">1.1.7. Space / Tabs - Indentation</a></li>
-<li><a href="#sec-1-1-8">1.1.8. Font Size and Type</a></li>
-<li><a href="#sec-1-1-9">1.1.9. Character Encoding Default</a></li>
-<li><a href="#sec-1-1-10">1.1.10. Disable / Enable Backup Files</a></li>
-<li><a href="#sec-1-1-11">1.1.11. Type y/n instead of yes and no</a></li>
-<li><a href="#sec-1-1-12">1.1.12. Show Match Parenthesis</a></li>
-<li><a href="#sec-1-1-13">1.1.13. Set Default Web Browser</a></li>
+<li><a href="#sec-1-1-6">1.1.6. Space / Tabs - Indentation</a></li>
+<li><a href="#sec-1-1-7">1.1.7. Font Size and Type</a></li>
+<li><a href="#sec-1-1-8">1.1.8. Character Encoding Default</a></li>
+<li><a href="#sec-1-1-9">1.1.9. Disable / Enable Backup Files</a></li>
+<li><a href="#sec-1-1-10">1.1.10. Show Match Parenthesis</a></li>
+<li><a href="#sec-1-1-11">1.1.11. Set Default Web Browser</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">1.2. Hide / Show Emacs Widgets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="widget">widget</span>&#xa0;<span class="gui">gui</span></span></a></li>
-<li><a href="#sec-1-3">1.3. Languages and Encoding</a></li>
-<li><a href="#sec-1-4">1.4. Separte Customization from init file</a></li>
-<li><a href="#sec-1-5">1.5. Tab width and Spaces</a></li>
-<li><a href="#sec-1-6">1.6. Backup Settings</a></li>
-<li><a href="#sec-1-7">1.7. Show Line number and column number in minibuffer</a></li>
-<li><a href="#sec-1-8">1.8. Enable find file at point</a></li>
-<li><a href="#sec-1-9">1.9. Unique buffer names</a></li>
-<li><a href="#sec-1-10">1.10. Mark Current Line</a></li>
-<li><a href="#sec-1-11">1.11. Recent Files</a></li>
-<li><a href="#sec-1-12">1.12. Save Minibuffer History</a></li>
-<li><a href="#sec-1-13">1.13. Themes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="theme">theme</span>&#xa0;<span class="color">color</span></span></a></li>
+<li><a href="#sec-1-2">1.2. Quiet Startup</a></li>
+<li><a href="#sec-1-3">1.3. Separte Customization from init file</a></li>
+<li><a href="#sec-1-4">1.4. Hide / Show Emacs Widgets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="widget">widget</span>&#xa0;<span class="gui">gui</span></span></a></li>
+<li><a href="#sec-1-5">1.5. Languages and Encoding</a></li>
+<li><a href="#sec-1-6">1.6. Tab width and Spaces</a></li>
+<li><a href="#sec-1-7">1.7. Backup Settings</a></li>
+<li><a href="#sec-1-8">1.8. Show Line number and column number in minibuffer</a></li>
+<li><a href="#sec-1-9">1.9. Enable find file at point</a></li>
+<li><a href="#sec-1-10">1.10. Unique buffer names</a></li>
+<li><a href="#sec-1-11">1.11. Mark Current Line</a></li>
+<li><a href="#sec-1-12">1.12. Recent Files</a></li>
+<li><a href="#sec-1-13">1.13. Save Minibuffer History</a></li>
+<li><a href="#sec-1-14">1.14. Themes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="theme">theme</span>&#xa0;<span class="color">color</span></span></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
+<a href="index.html">Top</a>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Customization</h2>
@@ -266,7 +266,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-4" id="text-1-1-1">
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> ring-bell-function #'ignore<span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> ring-bell-function #'ignore)
 </pre>
 </div>
 </div>
@@ -277,7 +277,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-4" id="text-1-1-2">
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>blink-cursor-mode -1<span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(blink-cursor-mode -1)
 </pre>
 </div>
 </div>
@@ -288,7 +288,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-4" id="text-1-1-3">
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> inhibit-startup-screen t<span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> inhibit-startup-screen t)
 </pre>
 </div>
 </div>
@@ -299,7 +299,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-4" id="text-1-1-4">
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defalias</span> '<span class="org-function-name">yes-or-no-p</span> 'y-or-n-p<span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">defalias</span> '<span class="org-function-name">yes-or-no-p</span> 'y-or-n-p)
 </pre>
 </div>
 </div>
@@ -327,92 +327,66 @@ Stop Blink Cursor
 </div>
 
 <div id="outline-container-sec-1-1-6" class="outline-4">
-<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Quiet Startup</h4>
+<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Space / Tabs - Indentation</h4>
 <div class="outline-text-4" id="text-1-1-6">
-<p>
-From: <a href="https://news.ycombinator.com/item?id=1654164">Ask HN Emacs Users: What's in your .emacs file?</a>
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Don't display the 'Welcome to GNU Emacs' buffer on startup</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> inhibit-startup-message t<span class="org-rainbow-delimiters-depth-1">)</span>
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Display this instead of "For information about GNU Emacs and the</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">GNU system, type C-h C-a.". This has been made intentionally hard</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">to customize in GNU Emacs so I have to resort to hackery.</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">display-startup-echo-area-message</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-  <span class="org-doc">"If it wasn't for this you'd be GNU/Spammed by now"</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>message <span class="org-string">""</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Don't insert instructions in the *scratch* buffer</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> initial-scratch-message nil<span class="org-rainbow-delimiters-depth-1">)</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-1-1-7" class="outline-4">
-<h4 id="sec-1-1-7"><span class="section-number-4">1.1.7</span> Space / Tabs - Indentation</h4>
-<div class="outline-text-4" id="text-1-1-7">
 <p>
 Set indentation with spaces instead of tabs with 4 spaces
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> tab-width 4 indent-tabs-mode nil<span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> tab-width 4 indent-tabs-mode nil)
 
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">set default tab char's display width to 4 spaces</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq-default</span> tab-width 4<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq-default</span> indent-tabs-mode nil<span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq-default</span> tab-width 4)
+(<span class="org-keyword">setq-default</span> indent-tabs-mode nil)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">make tab key always call a indent command.</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq-default</span> tab-always-indent t<span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq-default</span> tab-always-indent t)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">make tab key call indent command or insert tab character, depending on cursor position</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq-default</span> tab-always-indent nil<span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq-default</span> tab-always-indent nil)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">make tab key do indent first then completion.</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq-default</span> tab-always-indent 'complete<span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq-default</span> tab-always-indent 'complete)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-1-8" class="outline-4">
-<h4 id="sec-1-1-8"><span class="section-number-4">1.1.8</span> Font Size and Type</h4>
-<div class="outline-text-4" id="text-1-1-8">
+<div id="outline-container-sec-1-1-7" class="outline-4">
+<h4 id="sec-1-1-7"><span class="section-number-4">1.1.7</span> Font Size and Type</h4>
+<div class="outline-text-4" id="text-1-1-7">
 <p>
 <code>(set-default-font "Inconsolata 14")</code>
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-1-1-9" class="outline-4">
-<h4 id="sec-1-1-9"><span class="section-number-4">1.1.9</span> Character Encoding Default</h4>
-<div class="outline-text-4" id="text-1-1-9">
+<div id="outline-container-sec-1-1-8" class="outline-4">
+<h4 id="sec-1-1-8"><span class="section-number-4">1.1.8</span> Character Encoding Default</h4>
+<div class="outline-text-4" id="text-1-1-8">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Character encodings default to utf-8.</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>prefer-coding-system 'utf-8<span class="org-rainbow-delimiters-depth-1">)</span>
+(prefer-coding-system 'utf-8)
 
-<span class="org-rainbow-delimiters-depth-1">(</span>set-language-environment 'utf-8<span class="org-rainbow-delimiters-depth-1">)</span>
+(set-language-environment 'utf-8)
 
-<span class="org-rainbow-delimiters-depth-1">(</span>set-default-coding-systems 'utf-8<span class="org-rainbow-delimiters-depth-1">)</span>
+(set-default-coding-systems 'utf-8)
 
-<span class="org-rainbow-delimiters-depth-1">(</span>set-terminal-coding-system 'utf-8<span class="org-rainbow-delimiters-depth-1">)</span>
+(set-terminal-coding-system 'utf-8)
 
-<span class="org-rainbow-delimiters-depth-1">(</span>set-selection-coding-system 'utf-8<span class="org-rainbow-delimiters-depth-1">)</span>
+(set-selection-coding-system 'utf-8)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-1-10" class="outline-4">
-<h4 id="sec-1-1-10"><span class="section-number-4">1.1.10</span> Disable / Enable Backup Files</h4>
-<div class="outline-text-4" id="text-1-1-10">
+<div id="outline-container-sec-1-1-9" class="outline-4">
+<h4 id="sec-1-1-9"><span class="section-number-4">1.1.9</span> Disable / Enable Backup Files</h4>
+<div class="outline-text-4" id="text-1-1-9">
 <p>
 Enable
 </p>
@@ -431,18 +405,9 @@ Disable
 </div>
 </div>
 
-<div id="outline-container-sec-1-1-11" class="outline-4">
-<h4 id="sec-1-1-11"><span class="section-number-4">1.1.11</span> Type y/n instead of yes and no</h4>
-<div class="outline-text-4" id="text-1-1-11">
-<p>
-<code>(defalias 'yes-or-no-p 'y-or-n-p)</code>
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-1-1-12" class="outline-4">
-<h4 id="sec-1-1-12"><span class="section-number-4">1.1.12</span> Show Match Parenthesis</h4>
-<div class="outline-text-4" id="text-1-1-12">
+<div id="outline-container-sec-1-1-10" class="outline-4">
+<h4 id="sec-1-1-10"><span class="section-number-4">1.1.10</span> Show Match Parenthesis</h4>
+<div class="outline-text-4" id="text-1-1-10">
 <pre class="example">
 ELISP&gt; (show-paren-mode 1)
 t
@@ -458,9 +423,9 @@ t
 </div>
 </div>
 
-<div id="outline-container-sec-1-1-13" class="outline-4">
-<h4 id="sec-1-1-13"><span class="section-number-4">1.1.13</span> Set Default Web Browser</h4>
-<div class="outline-text-4" id="text-1-1-13">
+<div id="outline-container-sec-1-1-11" class="outline-4">
+<h4 id="sec-1-1-11"><span class="section-number-4">1.1.11</span> Set Default Web Browser</h4>
+<div class="outline-text-4" id="text-1-1-11">
 <p>
 Set the default web browsr used by (browse-url &lt;url&gt;) function and by org-mode.
 </p>
@@ -468,8 +433,8 @@ Set the default web browsr used by (browse-url &lt;url&gt;) function and by org-
 <div class="org-src-container">
 
 <pre class="src src-elisp"> <span class="org-comment-delimiter">;; </span><span class="org-comment">Set the default web browser to Chromium Browsr</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program <span class="org-string">"chromium-browser"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq</span> browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program <span class="org-string">"chromium-browser"</span>)
 </pre>
 </div>
 </div>
@@ -477,8 +442,52 @@ Set the default web browsr used by (browse-url &lt;url&gt;) function and by org-
 </div>
 
 <div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Hide / Show Emacs Widgets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="widget">widget</span>&#xa0;<span class="gui">gui</span></span></h3>
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Quiet Startup</h3>
 <div class="outline-text-3" id="text-1-2">
+<p>
+From: <a href="https://news.ycombinator.com/item?id=1654164">Ask HN Emacs Users: What's in your .emacs file?</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Don't display the 'Welcome to GNU Emacs' buffer on startup</span>
+(<span class="org-keyword">setq</span> inhibit-startup-message t)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Display this instead of "For information about GNU Emacs and the</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">GNU system, type C-h C-a.". This has been made intentionally hard</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">to customize in GNU Emacs so I have to resort to hackery.</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">display-startup-echo-area-message</span> ()
+  <span class="org-doc">"If it wasn't for this you'd be GNU/Spammed by now"</span>
+  (message <span class="org-string">""</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Don't insert instructions in the *scratch* buffer</span>
+(<span class="org-keyword">setq</span> initial-scratch-message nil)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Separte Customization from init file</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+It will keep the user customization created with M-x customize-theme,
+M-x customize-group in a separate file ~/.emacs.d/custom.el.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> custom-file (concat (file-name-as-directory user-emacs-directory)
+                            <span class="org-string">"custom.el"</span>
+                            ))
+(load custom-file 'noerror)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Hide / Show Emacs Widgets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="widget">widget</span>&#xa0;<span class="gui">gui</span></span></h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
 <b>Hide / Show Menu bar</b>
 </p>
@@ -543,89 +552,74 @@ Hide
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Languages and Encoding</h3>
-<div class="outline-text-3" id="text-1-3">
-<div class="org-src-container">
-
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>prefer-coding-system 'utf-8<span class="org-rainbow-delimiters-depth-1">)</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Separte Customization from init file</h3>
-<div class="outline-text-3" id="text-1-4">
-<div class="org-src-container">
-
-<pre class="src src-elisp"><span class="org-comment-delimiter">; </span><span class="org-comment">For the built in customization UI in emacs that no one uses. If</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">some package tries to use it, at least have the decency to keep</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">this config file clean.</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> custom-file <span class="org-string">"~/.emacs.d/custom.el"</span><span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>load custom-file 'noerror<span class="org-rainbow-delimiters-depth-1">)</span>
-</pre>
-</div>
-</div>
-</div>
 <div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><a id="ID-4c533ce2-a074-4a52-8a5f-8e3105145ab5" name="ID-4c533ce2-a074-4a52-8a5f-8e3105145ab5"></a><span class="section-number-3">1.5</span> Tab width and Spaces</h3>
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Languages and Encoding</h3>
 <div class="outline-text-3" id="text-1-5">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(prefer-coding-system 'utf-8)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><a id="ID-4c533ce2-a074-4a52-8a5f-8e3105145ab5" name="ID-4c533ce2-a074-4a52-8a5f-8e3105145ab5"></a><span class="section-number-3">1.6</span> Tab width and Spaces</h3>
+<div class="outline-text-3" id="text-1-6">
 
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">force emacs to always use spaces instead of tab characters</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq-default</span> indent-tabs-mode nil<span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq-default</span> indent-tabs-mode nil)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">set default tab width to 4 spaces</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> default-tab-width 4<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> tab-width 4<span class="org-rainbow-delimiters-depth-1">)</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Backup Settings</h3>
-<div class="outline-text-3" id="text-1-6">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;</span><span class="org-comment">disable backup</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> backup-inhibited t<span class="org-rainbow-delimiters-depth-1">)</span>
-
-<span class="org-comment-delimiter">;</span><span class="org-comment">disable auto save</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> auto-save-default nil<span class="org-rainbow-delimiters-depth-1">)</span>
-
-
-<span class="org-comment-delimiter">;;  </span><span class="org-comment">Get Rid of temporary files ending in ~</span>
-<span class="org-comment-delimiter">;;  </span><span class="org-comment">The temporary files will be in the temporary directory</span>
-<span class="org-comment-delimiter">;;</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> backup-directory-alist
-      `<span class="org-rainbow-delimiters-depth-2">(</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-string">".*"</span> . ,temporary-file-directory<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Move Deleted Files to Trash</span>
-<span class="org-comment-delimiter">;;</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> delete-by-moving-to-trash t<span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">setq</span> default-tab-width 4)
+(<span class="org-keyword">setq</span> tab-width 4)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-1-7" class="outline-3">
-<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Show Line number and column number in minibuffer</h3>
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Backup Settings</h3>
 <div class="outline-text-3" id="text-1-7">
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> line-number-mode               t<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> column-number-mode             t<span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;</span><span class="org-comment">disable backup</span>
+(<span class="org-keyword">setq</span> backup-inhibited t)
+
+<span class="org-comment-delimiter">;</span><span class="org-comment">disable auto save</span>
+(<span class="org-keyword">setq</span> auto-save-default nil)
+
+
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">Get Rid of temporary files ending in ~</span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">The temporary files will be in the temporary directory</span>
+<span class="org-comment-delimiter">;;</span>
+(<span class="org-keyword">setq</span> backup-directory-alist
+      `((<span class="org-string">".*"</span> . ,temporary-file-directory)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Move Deleted Files to Trash</span>
+<span class="org-comment-delimiter">;;</span>
+(<span class="org-keyword">setq</span> delete-by-moving-to-trash t)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-1-8" class="outline-3">
-<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Enable find file at point</h3>
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Show Line number and column number in minibuffer</h3>
 <div class="outline-text-3" id="text-1-8">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> line-number-mode               t)
+(<span class="org-keyword">setq</span> column-number-mode             t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Enable find file at point</h3>
+<div class="outline-text-3" id="text-1-9">
 <p>
 When doing C-x C-f use information at point (your cursor) to open file
 or URL. I.e. if your cursor is on a file path, or URL, it defaults to
@@ -635,28 +629,28 @@ that filled in the minibuffer.
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">find-file-at-point, smarter C-x C-f when point on path or URL</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>ffap-bindings<span class="org-rainbow-delimiters-depth-1">)</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-1-9" class="outline-3">
-<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Unique buffer names</h3>
-<div class="outline-text-3" id="text-1-9">
-<div class="org-src-container">
-
-<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Unique buffer name</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">require</span> '<span class="org-constant">uniquify</span><span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> uniquify-buffer-name-style 'forward<span class="org-rainbow-delimiters-depth-1">)</span>
+(ffap-bindings)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-1-10" class="outline-3">
-<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Mark Current Line</h3>
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Unique buffer names</h3>
 <div class="outline-text-3" id="text-1-10">
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Unique buffer name</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">uniquify</span>)
+(<span class="org-keyword">setq</span> uniquify-buffer-name-style 'forward)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> Mark Current Line</h3>
+<div class="outline-text-3" id="text-1-11">
 <p>
 Enable Mark Current Line 
 </p>
@@ -664,7 +658,7 @@ Enable Mark Current Line
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">mark current line:</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>global-hl-line-mode 1<span class="org-rainbow-delimiters-depth-1">)</span>
+(global-hl-line-mode 1)
 </pre>
 </div>
 
@@ -675,15 +669,15 @@ Disable Mark Current Line
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">mark current line:</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>global-hl-line-mode 0<span class="org-rainbow-delimiters-depth-1">)</span>
+(global-hl-line-mode 0)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-11" class="outline-3">
-<h3 id="sec-1-11"><a id="ID-afabff51-cd40-468f-ab10-06adbf6570a7" name="ID-afabff51-cd40-468f-ab10-06adbf6570a7"></a><span class="section-number-3">1.11</span> Recent Files</h3>
-<div class="outline-text-3" id="text-1-11">
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><a id="ID-afabff51-cd40-468f-ab10-06adbf6570a7" name="ID-afabff51-cd40-468f-ab10-06adbf6570a7"></a><span class="section-number-3">1.12</span> Recent Files</h3>
+<div class="outline-text-3" id="text-1-12">
 
 <p>
 Show recent files in the File menu. 
@@ -693,71 +687,54 @@ Show recent files in the File menu.
 
 <pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">recentf stuff</span>
 <span class="org-comment-delimiter">;; </span><span class="org-comment">recentf - F5</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">require</span> '<span class="org-constant">recentf</span><span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>recentf-mode 1<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> recentf-max-saved-items 500<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> recentf-max-menu-items 60<span class="org-rainbow-delimiters-depth-1">)</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-1-12" class="outline-3">
-<h3 id="sec-1-12"><span class="section-number-3">1.12</span> Save Minibuffer History</h3>
-<div class="outline-text-3" id="text-1-12">
-<p>
-Saves the minibuffer history on every Emacs session. 
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>savehist-mode 1<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> savehist-additional-variables '<span class="org-rainbow-delimiters-depth-2">(</span>kill-ring search-ring regexp-search-ring<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">To set the file which the minibuffer is saved use:</span>
-<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">setq</span> savehist-file <span class="org-string">"~/.emacs.d/tmp/savehist"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">recentf</span>)
+(recentf-mode 1)
+(<span class="org-keyword">setq</span> recentf-max-saved-items 500)
+(<span class="org-keyword">setq</span> recentf-max-menu-items 60)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-1-13" class="outline-3">
-<h3 id="sec-1-13"><span class="section-number-3">1.13</span> Themes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="theme">theme</span>&#xa0;<span class="color">color</span></span></h3>
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> Save Minibuffer History</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
-Load a color theme
+Saves the minibuffer history on every Emacs session. 
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>load-theme 'wombat t<span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(savehist-mode 1)
+(<span class="org-keyword">setq</span> savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">To set the file which the minibuffer is saved use:</span>
+(<span class="org-keyword">setq</span> savehist-file <span class="org-string">"~/.emacs.d/tmp/savehist"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14"><span class="section-number-3">1.14</span> Themes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="theme">theme</span>&#xa0;<span class="color">color</span></span></h3>
+<div class="outline-text-3" id="text-1-14">
+<p>
+<b>Load a color theme</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(load-theme 'wombat t)
 </pre>
 </div>
 
 <p>
-List all available themes
+<b>Choose a color theme</b> 
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-elisp">ELISP&gt; <span class="org-rainbow-delimiters-depth-1">(</span>custom-available-themes<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-rainbow-delimiters-depth-1">(</span>cyberpunk adwaita deeper-blue dichromacy leuven light-blue manoj-dark
-misterioso tango-dark tango tsdh-dark tsdh-light wheatgrass
-whiteboard wombat<span class="org-rainbow-delimiters-depth-1">)</span>
-
-or
-
-M-x custom-available-themes
-
-
-Print Color Theme Info <span class="org-rainbow-delimiters-depth-1">(</span>elisp code<span class="org-rainbow-delimiters-depth-1">)</span>
-
-ELISP&gt; <span class="org-rainbow-delimiters-depth-1">(</span>color-theme-print<span class="org-rainbow-delimiters-depth-1">)</span>
-<span class="org-string">"Pretty printing current color theme function... done"</span>
-
-or
-
-M-x color-theme-print
+<pre class="src src-elisp">M-x customize-theme
 </pre>
 </div>
 </div>
@@ -766,7 +743,7 @@ M-x color-theme-print
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-09-29 qui 14:57</p>
+<p class="date">Created: 2016-10-02 dom 01:09</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

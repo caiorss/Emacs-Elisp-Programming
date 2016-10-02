@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs on Microsoft Windows</title>
-<!-- 2016-09-29 qui 14:56 -->
+<!-- 2016-10-02 dom 01:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -278,6 +278,7 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
+<a href="index.html">Top</a>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Emacs on Microsoft Windows</h2>
@@ -298,8 +299,8 @@ also makes directory browser in Emacs and shells easier.
 
 <div class="org-src-container">
 
-<pre class="src src-bat"><span class="org-function-name">C</span>:\Users\arch&gt;echo %<span class="org-variable-name">USERPROFILE</span>%
-<span class="org-function-name">C</span>:\Users\arch
+<pre class="src src-bat">C:\Users\arch&gt;echo %<span class="org-variable-name">USERPROFILE</span>%
+C:\Users\arch
 </pre>
 </div>
 
@@ -319,8 +320,8 @@ To test if the variable is set. Open a new cmd.exe shell and type:
 
 <div class="org-src-container">
 
-<pre class="src src-bat"><span class="org-function-name">C</span>:\Users\arch&gt;echo %<span class="org-variable-name">HOME</span>%
-<span class="org-function-name">C</span>:\Users\arch
+<pre class="src src-bat">C:\Users\arch&gt;echo %<span class="org-variable-name">HOME</span>%
+C:\Users\arch
 </pre>
 </div>
 
@@ -394,10 +395,10 @@ Command to run Bash. Usage: M-x run-bash
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-bash</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-4">(</span>shell-file-name <span class="org-string">"C:\\Program Files\\Git\\bin\\bash.exe"</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
-            <span class="org-rainbow-delimiters-depth-3">(</span>shell <span class="org-string">"*bash*"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">run-bash</span> ()
+      (<span class="org-keyword">interactive</span>)
+      (<span class="org-keyword">let</span> ((shell-file-name <span class="org-string">"C:\\Program Files\\Git\\bin\\bash.exe"</span>))
+            (shell <span class="org-string">"*bash*"</span>)))
 </pre>
 </div>
 
@@ -408,10 +409,10 @@ Command to run cmd.exe. Usage: M-x run-cmdexe
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-cmdexe</span> <span class="org-rainbow-delimiters-depth-2">()</span>
-      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-      <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">let</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-4">(</span>shell-file-name <span class="org-string">"cmd.exe"</span><span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span>
-            <span class="org-rainbow-delimiters-depth-3">(</span>shell <span class="org-string">"*cmd.exe*"</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">run-cmdexe</span> ()
+      (<span class="org-keyword">interactive</span>)
+      (<span class="org-keyword">let</span> ((shell-file-name <span class="org-string">"cmd.exe"</span>))
+            (shell <span class="org-string">"*cmd.exe*"</span>)))
 </pre>
 </div>
 </div>
@@ -428,28 +429,28 @@ PATH system environment variable the path to their directories like this:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>setenv  <span class="org-string">"PATH"</span> <span class="org-rainbow-delimiters-depth-2">(</span>concat
+<pre class="src src-elisp">(setenv  <span class="org-string">"PATH"</span> (concat
 
-        <span class="org-comment-delimiter">;; </span><span class="org-comment">"c:/Windows/System32" ";" </span>
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">"c:/Windows/System32" ";" </span>
 
-         <span class="org-string">"c:/Windows/Microsoft.NET/Framework/v4.0.30319"</span> <span class="org-string">";"</span>
+                 <span class="org-string">"c:/Windows/Microsoft.NET/Framework/v4.0.30319"</span> <span class="org-string">";"</span>
 
-         <span class="org-string">"C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319"</span> <span class="org-string">";"</span>
+                 <span class="org-string">"C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319"</span> <span class="org-string">";"</span>
 
-         <span class="org-comment-delimiter">;; </span><span class="org-comment">Unix tools </span>
-         <span class="org-string">"C:\\Program Files\\Git\\usr\\bin"</span> <span class="org-string">";"</span>
+                 <span class="org-comment-delimiter">;; </span><span class="org-comment">Unix tools </span>
+                 <span class="org-string">"C:\\Program Files\\Git\\usr\\bin"</span> <span class="org-string">";"</span>
 
-         <span class="org-comment-delimiter">;; </span><span class="org-comment">User binary files </span>
-         <span class="org-string">"C:\\User\\arch\\bin"</span> <span class="org-string">";"</span>
+                 <span class="org-comment-delimiter">;; </span><span class="org-comment">User binary files </span>
+                 <span class="org-string">"C:\\User\\arch\\bin"</span> <span class="org-string">";"</span>
 
-         <span class="org-comment-delimiter">;; </span><span class="org-comment">Mono Installation.</span>
-         <span class="org-string">"c:\\Program Files\\Mono\\bin"</span> <span class="org-string">";"</span>
+                 <span class="org-comment-delimiter">;; </span><span class="org-comment">Mono Installation.</span>
+                 <span class="org-string">"c:\\Program Files\\Mono\\bin"</span> <span class="org-string">";"</span>
 
-         <span class="org-string">"c:\\Program Files\\Mono\\lib\\mono\\4.5"</span> <span class="org-string">";"</span>
+                 <span class="org-string">"c:\\Program Files\\Mono\\lib\\mono\\4.5"</span> <span class="org-string">";"</span>
 
-         <span class="org-rainbow-delimiters-depth-3">(</span>getenv <span class="org-string">"PATH"</span><span class="org-rainbow-delimiters-depth-3">)</span>
+                 (getenv <span class="org-string">"PATH"</span>)
 
-         <span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+         ))
 </pre>
 </div>
 </div>
@@ -531,7 +532,7 @@ The function <span class="underline">find-file</span> can be executed in eshell 
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span>find-file <span class="org-string">"~/.emacs.d/init.el"</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<pre class="src src-elisp">(find-file <span class="org-string">"~/.emacs.d/init.el"</span>)
 </pre>
 </div>
 
@@ -642,14 +643,14 @@ Note: split-string Is an Emacs function.
 
 <pre class="src src-sh">~/Desktop $ for m<span class="org-keyword"> in</span> {split-string $<span class="org-variable-name">PATH</span> <span class="org-string">";"</span>} {<span class="org-builtin">echo</span> $<span class="org-variable-name">m</span>}
 
-<span class="org-function-name">C</span>:/Program Files (x86)/Microsoft SDKs/F#/4.0/Framework/v4.0
-<span class="org-function-name">c</span>:/Windows/System32
-<span class="org-function-name">c</span>:/Windows/Microsoft.NET/Framework/v4.0.30319
-<span class="org-function-name">C</span>:\Windows\Microsoft.NET\Framework\v4.0.30319
-<span class="org-function-name">C</span>:\Program Files\Git\usr\bin
-<span class="org-function-name">C</span>:\User\arch\bin
-<span class="org-function-name">c</span>:\Program Files\Mono\bin
-<span class="org-function-name">c</span>:\Program Files\Mono\lib\mono\4.5
+C:/Program Files (x86)/Microsoft SDKs/F#/4.0/Framework/v4.0
+c:/Windows/System32
+c:/Windows/Microsoft.NET/Framework/v4.0.30319
+C:\Windows\Microsoft.NET\Framework\v4.0.30319
+C:\Program Files\Git\usr\bin
+C:\User\arch\bin
+c:\Program Files\Mono\bin
+c:\Program Files\Mono\lib\mono\4.5
 ~/Desktop $
 </pre>
 </div>
@@ -663,16 +664,16 @@ Note: split-string Is an Emacs function.
 
 <pre class="src src-sh">~/Desktop $ for m<span class="org-keyword"> in</span> $<span class="org-variable-name">load</span>-path { <span class="org-builtin">echo</span> $<span class="org-variable-name">m</span>}
 
-<span class="org-function-name">e</span>:/projects/org-wiki
+e:/projects/org-wiki
 ~/.emacs.d/packages
-<span class="org-function-name">c</span>:/Users/arch/.emacs.d/elpa/csharp-mode-20160901.319
-<span class="org-function-name">c</span>:/Users/arch/.emacs.d/elpa/fsharp-mode-20160719.315
-<span class="org-function-name">c</span>:/Users/arch/.emacs.d/elpa/flycheck-20160817.321
-<span class="org-function-name">c</span>:/Users/arch/.emacs.d/elpa/company-quickhelp-20160211.718
-<span class="org-function-name">c</span>:/Users/arch/.emacs.d/elpa/company-20160730.1516
-<span class="org-function-name">c</span>:/Users/arch/.emacs.d/elpa/helm-anything-20141126.231
-<span class="org-function-name">c</span>:/Users/arch/.emacs.d/elpa/anything-20160822.1852
-<span class="org-function-name">c</span>:/Users/arch/.emacs.d/elpa/helm-20160824.745
+c:/Users/arch/.emacs.d/elpa/csharp-mode-20160901.319
+c:/Users/arch/.emacs.d/elpa/fsharp-mode-20160719.315
+c:/Users/arch/.emacs.d/elpa/flycheck-20160817.321
+c:/Users/arch/.emacs.d/elpa/company-quickhelp-20160211.718
+c:/Users/arch/.emacs.d/elpa/company-20160730.1516
+c:/Users/arch/.emacs.d/elpa/helm-anything-20141126.231
+c:/Users/arch/.emacs.d/elpa/anything-20160822.1852
+c:/Users/arch/.emacs.d/elpa/helm-20160824.745
 ...
 </pre>
 </div>
@@ -690,13 +691,13 @@ This command runs Powershell on Emacs:
 
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">defun</span> <span class="org-function-name">run-powershell</span> <span class="org-rainbow-delimiters-depth-2">()</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">run-powershell</span> ()
   <span class="org-doc">"Run powershell"</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-keyword">interactive</span><span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-2">(</span>async-shell-command <span class="org-string">"c:/windows/system32/WindowsPowerShell/v1.0/powershell.exe -Command -"</span>
-               nil
-               nil<span class="org-rainbow-delimiters-depth-2">)</span>
-  <span class="org-rainbow-delimiters-depth-1">)</span>
+  (<span class="org-keyword">interactive</span>)
+  (async-shell-command <span class="org-string">"c:/windows/system32/WindowsPowerShell/v1.0/powershell.exe -Command -"</span>
+                       nil
+                       nil)
+  )
 </pre>
 </div>
 
@@ -709,7 +710,7 @@ Usage: M-x run-powershell.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-09-29 qui 14:56</p>
+<p class="date">Created: 2016-10-02 dom 01:08</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
