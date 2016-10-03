@@ -1,6 +1,5 @@
 #+AUTHOR: Caio Rodrigues
 #+EMAIL: <caiorss.rodrigues@gmail.com>
-#+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor
 #+LANGUAGE: en
 #+DESCRIPTION: Emacs programming and customization.
 #+URL:  http://tinyurl.com/emacsinabox

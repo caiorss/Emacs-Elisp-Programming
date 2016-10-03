@@ -1,11 +1,12 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org 
 #+TITLE: Emacs In a Box
+#+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor
 
 * Emacs - Programming and Customization
 ** Overview
 
-file:images/emacs_logo.png
+# file:images/emacs_logo.png
 
 *Repository Link*
 

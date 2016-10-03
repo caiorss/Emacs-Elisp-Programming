@@ -1,6 +1,7 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org
 #+TITLE: Emacs Key Bindings
+#+KEYWORDS: emacs,  keybindings, bindings, keyboard, shortcut, default
 
 * Emacs Key bindings
 ** Default Key Bindings and Useful Commands

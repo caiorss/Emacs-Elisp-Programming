@@ -1,6 +1,8 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org
 #+TITLE: Elisp Snippets 
+#+DESCRIPTION: Lots of ELisp examples categorized by task.
+#+KEYWORDS: emacs, elisp, lisp, programming, snippets, examples, code, utilities
 
 * Elisp Snippets 
 ** Strings 

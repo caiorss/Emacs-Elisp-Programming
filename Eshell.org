@@ -1,5 +1,6 @@
 #+INCLUDE: theme/style.org
 #+TITLE: Eshell 
+#+KEYWORDS: emacs, eshell, shell, repl, os, windows, linux, platform
 
 * Eshell 
 ** Overview 
