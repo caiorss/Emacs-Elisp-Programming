@@ -1,6 +1,7 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org
 #+TITLE: Elisp Programming
+#+KEYWORDS: emacs, api, elisp, lisp, programming, customize, functions, shell
 
 * Command Line Options
 

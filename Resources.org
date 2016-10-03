@@ -1,6 +1,7 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org
 #+TITLE: Emacs Resources 
+#+KEYWORDS: emacs, links, resourse, utils, hyperlinks
 
 * Resources
 ** Motivation
