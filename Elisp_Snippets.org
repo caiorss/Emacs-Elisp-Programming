@@ -338,8 +338,9 @@ Returns the selected text of the current buffer.
   (buffer-substring-no-properties (region-beginning) (region-end)))
 #+END_SRC
 
-** Input - Read User Input 
-*** Prompt functions 
+** IO - Input and Output 
+*** Input - Read User Input 
+**** Prompt functions 
 
 | Function            | Description                      |
 |---------------------+----------------------------------|
@@ -350,7 +351,7 @@ Returns the selected text of the current buffer.
 | read-passwd         | Read password                    |
 |                     |                                  |
 
-*** Read string 
+**** Read string 
 
 #+BEGIN_SRC elisp 
 > (read-string "prompt > ") ;; M-x eval-print-last-sexp
@@ -364,7 +365,7 @@ Ask the user for a string and insert in the buffer
 user enter a message in the minibuffer
 #+END_SRC
 
-*** Read file name 
+**** Read file name 
 
 Reads a file name from the user and gives auto completion. Enter tab
 to autocomplete the file name.
@@ -374,7 +375,7 @@ to autocomplete the file name.
 "/etc/fstab"
 #+END_SRC
 
-*** Read file name and insert at point 
+**** Read file name and insert at point 
 
 Opens a prompt that asks for the path in the minibuffer with
 completion and inserts the path at the current point.
@@ -396,14 +397,14 @@ completion and inserts the path at the current point.
   (insert  (read-file-name "file > ")))
 #+END_SRC
 
-*** Read a directory path 
+**** Read a directory path 
 
 #+BEGIN_SRC elisp 
 > (read-directory-name "Enter a directory: ") ;; M-x eval-print-last-sexp 
 "/var/log"
 #+END_SRC
-** Output 
-*** Message 
+*** Output 
+**** Message 
 
 Display a message at the bottom of the screen.
 
@@ -413,9 +414,9 @@ Display a message at the bottom of the screen.
 
 file:images/emacs_message.png
 
-*** Print 
-*** Princ 
-*** Message box 
+**** Print 
+**** Princ 
+**** Message box 
 
 Display a message, in a dialog box if possible. If a dialog box is not
 available, use the echo area.
@@ -426,7 +427,7 @@ available, use the echo area.
 
 file:images/emacs_messagebox.png
 
-*** Tooltip 
+**** Tooltip 
 
 Show a tooltip
 
@@ -1022,12 +1023,15 @@ ELISP> (directory-files "/etc/" nil "\\.cfg")
 
 #+END_SRC
 ** Dired mode snippets 
+*** Overview 
 
 The dired mode is the mode used by Emacs to browser directories.
 
 See also: [[https://www.reddit.com/r/emacs/comments/4agkye/how_do_you_customize_dired/][How do you customize dired?]]
 
 Source: [[https://gist.github.com/hiroina/4702961][hiroina/.emacs]]
+
+*** Copy path of file at point 
 
  - Copy path of file at point.
 
@@ -1044,6 +1048,33 @@ Source: [[https://gist.github.com/hiroina/4702961][hiroina/.emacs]]
 )
 #+END_SRC
 
+*** Paste a file from clibpboard 
+
+This command pastes a file which path is stored in clibpoard. 
+
+Usage: 
+
+ 1. Copy file from clibpoard with Emacs or from system's default file
+    manager.
+
+ 2. M-x  dired-paste-file-from-clipboard
+
+#+BEGIN_SRC elisp 
+(defun dired-paste-file-from-clipboard ()
+  "Paste a file from clpboard to current directory."
+  (interactive)
+  (flet ((clipboard-get ()
+                        (with-temp-buffer     
+                           (clipboard-yank)
+                           (buffer-substring-no-properties
+                            (point-min)
+                            (point-max)))))
+
+    (copy-file (clipboard-get) ".")
+    (revert-buffer)))
+#+END_SRC
+
+*** Create empty file (touch)
 
  - Create empty file at current directory opened in dired mode.
 
@@ -1059,25 +1090,7 @@ Source: [[https://gist.github.com/hiroina/4702961][hiroina/.emacs]]
       ))
 #+END_SRC
 
- - Open directory at point with Microsoft Explorer in Windows OS. 
-
-#+BEGIN_SRC elisp 
-(defun dired-exec-explorer ()
-  "In dired, execute Explorer"
-  (interactive)
-  (let (path)
-    (setq path (dired-file-name-at-point))
-    (setq path (replace-regexp-in-string "~" "c:/home" path))
-    (setq path (replace-regexp-in-string "/" "\\\\" path))
-    (message path)
-    ;(kill-new path)
-    (start-process "explorer" nil "explorer" (concat "/select," path))
-  )
-)
-
-#+END_SRC
-
- - Open multiple marked files 
+*** Open multiple marked files 
 
 #+BEGIN_SRC elisp 
 (defun dired-open-files (files)
@@ -1095,7 +1108,7 @@ Source: [[https://gist.github.com/hiroina/4702961][hiroina/.emacs]]
   )
 #+END_SRC
 
-Close multiple marked files 
+*** Close multiple marked files 
 
 #+BEGIN_SRC elisp 
 
@@ -1118,27 +1131,98 @@ Close multiple marked files
   )
 #+END_SRC
 
- - Open a file with default system app in dired mode 
+*** Open a file with default system application
 
 Usage. Select a file in dired mode and enter =M-x dired-xdg=
 
+Function: xdg-open. Open any file with system's default
+application.
+
+#+BEGIN_SRC elisp 
+(defun xdg-open (filename)
+    "Open a file FILENAME with default system application.
+  This function is operating system independent."
+    (cl-case system-type
+
+      ;;; Linux
+      (gnu/linux      (let ((process-connection-type  nil))
+
+                        (start-process
+                            "proc"
+                            nil
+                                          ;; Command
+                            "xdg-open" (expand-file-name filename))))
+
+      ;;; Free BSD OS
+      (gnu/kfreebsd    (let ((process-connection-type  nil))
+
+                        (start-process
+                            "proc"
+                            nil
+                                          ;; Command
+                            "xdg-open" (expand-file-name filename))))
+
+      ;; Mac OSX - (Not tested )
+      (darwing        (start-process
+                       "proc"
+                       nil
+                       ;; Command
+                       "open" (concat  (expand-file-name filename))))
+
+      ;; Windows 7, 8, 10 - Kernel NT
+      (windows-nt   (start-process
+                     "proc"
+                     nil
+                     ;; Command
+                     "cmd"  "/C"  "start" "" (expand-file-name filename)
+                      )
+
+         )))
+#+END_SRC
+
+Function: dired-xdg
+
 #+BEGIN_SRC elisp
-(defun dired-xdg ()
-  "
-   Open file at point in dired buffer with current Windows
-   default app
+  (defun dired-xdg ()
+    "Open file at point with systems' default app.
+  Usage: In the dired mode select a file and type M-x dired-xdg 
+  to execute the file with the system default app.
+      "
+      (interactive)
+      (with-current-buffer
+          (xdg-open (dired-get-filename))))
+#+END_SRC
 
-   Usage: In the dired mode select a file and type M-x dired-xdg
-   to execute the file with the system default app.
-  "
+*** Close all dired buffers 
+
+#+BEGIN_SRC elisp 
+  (defun dired-close-all ()
+    "Close all dired buffers."
+    (interactive)
+    (mapc (lambda (buf)
+            (if (equal (buffer-local-value 'major-mode buf)
+                       'dired-mode)
+            (kill-buffer buf)))
+
+          (buffer-list)))
+#+END_SRC
+
+*** Open directory at point with Microsoft Explorer in Windows OS. 
+
+#+BEGIN_SRC elisp 
+(defun dired-exec-explorer ()
+  "In dired, execute Explorer"
   (interactive)
+  (let (path)
+    (setq path (dired-file-name-at-point))
+    (setq path (replace-regexp-in-string "~" "c:/home" path))
+    (setq path (replace-regexp-in-string "/" "\\\\" path))
+    (message path)
+    ;(kill-new path)
+    (start-process "explorer" nil "explorer" (concat "/select," path))
+  )
+)
 
-  (with-current-buffer
-      (start-process
-       "proc"
-       nil
-       ;; Command
-       "cmd"  "/c"  "start" (dired-get-filename))))
 #+END_SRC
 
 ** Text Manipulation 
@@ -1946,6 +2030,85 @@ Source: [[https://gist.github.com/kobapan/034d5123321b32bb68ca][scratch.el]]
   
   (ignore-errors (kill-buffer ".scratch")))
 
+#+END_SRC
+* IELM - Inferior Emacs Lisp Mode 
+** Change Prompt 
+
+Change the default IELM prompt "ELISP> " to "> ". 
+
+#+BEGIN_SRC elisp 
+(setq  ielm-prompt "> ")
+#+END_SRC
+
+** Clear IELM shell 
+
+Clear IELM buffer. Usage: M-x ielm/clear 
+
+#+BEGIN_SRC elisp 
+(defun ielm/clear ()
+  "Clear IELM buffer."
+  (interactive)
+  (with-current-buffer "*ielm*"
+      (let ((inhibit-read-only t))
+        (erase-buffer))))
+#+END_SRC
+
+** Send Region to IELM 
+
+Send selected text (region) to IELM and print the output. 
+
+#+BEGIN_SRC elisp
+(defun ielm/send-region ()
+  (interactive)
+  (let ((text (buffer-substring-no-properties (region-beginning)
+                                              (region-end))))
+    (with-current-buffer "*ielm*"
+      (insert text)
+      (ielm-send-input))))
+#+END_SRC
+
+** Set other window's buffer as working buffer 
+
+Usage: =M-x ielm-select-buffer-other-window=
+
+#+BEGIN_SRC elisp 
+  (defun ielm-select-buffer-other-window ()
+    "Select other window' buffer as IELM's working buffer."
+    (interactive)
+    (let ((buf (save-window-excursion
+                 (other-window 1)
+                 (current-buffer))))        
+      (ielm-change-working-buffer buf)
+      (ielm-print-working-buffer)))
+#+END_SRC
+
+** Start IELM in other window setting the working buffer to current buffer
+
+This command starts IELM in other window setting the working buffer to
+current buffer. It allows the user to manipulate the current buffer. 
+
+Usage: M-x ielm-this-buffer 
+
+#+BEGIN_SRC elisp 
+(defun ielm-this-buffer ()
+  "Start IELM in other window with current buffer set to current windows' buffer."
+  (interactive)
+  (let ((buf (current-buffer)))
+    (ielm-other-window)
+    (ielm-change-working-buffer buf)
+    (ielm-print-working-buffer)))
+#+END_SRC
+
+** Launch IELM in other frame 
+
+Usage: M-x ielm-other-frame
+
+#+BEGIN_SRC elisp 
+  (defun ielm-other-frame ()
+    "Launch IELM in other frame."
+    (interactive)
+    (with-selected-frame (make-frame)
+      (ielm)))
 #+END_SRC
 * Emacs Server and Client 
 
