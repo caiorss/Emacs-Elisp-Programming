@@ -91,7 +91,7 @@ ELISP> (join ", " '("1.232" "300"  "500"))
 10
 #+END_SRC
 
-** Clipboard (Kill-ring)
+** Clipboard (Kill-ring)                          :elisp:clipboard:kill:ring:
 *** Copy string to clipboard 
 
 #+BEGIN_SRC elisp
@@ -931,7 +931,7 @@ Open a file and returns a buffer:
 
 #+END_SRC
 
-** Directory 
+** Directory                                                      :directory:
 *** Open directory 
 **** Open directory in current window 
 
@@ -1022,7 +1022,7 @@ ELISP> (directory-files "/etc/" nil "\\.cfg")
 ("rc_maps.cfg" "vdpau_wrapper.cfg")
 
 #+END_SRC
-** Dired mode snippets 
+** Dired mode snippets                                      :directory:dired:
 *** Overview 
 
 The dired mode is the mode used by Emacs to browser directories.
@@ -1131,7 +1131,7 @@ Usage:
   )
 #+END_SRC
 
-*** Open a file with default system application
+*** Open a file with default system application      :dired:file:open:system:
 
 Usage. Select a file in dired mode and enter =M-x dired-xdg=
 
@@ -1205,6 +1205,43 @@ Function: dired-xdg
             (kill-buffer buf)))
 
           (buffer-list)))
+#+END_SRC
+
+*** Browse bookmarked directories               :dired:directory:helm:browse:
+
+The function =M-x dired-bookmarks= opens a helm menu where the user
+can select its favorites directories. It provides quick directory
+navigation.
+
+#+BEGIN_SRC elisp 
+(defvar dired-bookmarks-path-list
+  '("~"
+    "~/Desktop"
+    "~/Downloads" 
+    "~/Documents"
+    "~/Documents/projects"
+    "~/Documents/wiki"
+    "/tmp"
+    ;"/mnt/transfer"
+    "/var/log"
+    "/etc"
+    "/etc/init.d"
+    "~/.config"
+    "~/.local"
+    "~/.local/share"
+    "~/.emacs.d"
+    ))
+  
+(defun dired-bookmarks ()
+  "Open a directory by selecting it in Helm menu."  
+  (interactive)
+  (helm
+   :prompt "Bookmarks: "
+   :sources  `((
+                (name       . "Bookmark: ")
+                (candidates . dired-bookmarks-path-list)
+                (action     . dired)
+                ))))  
 #+END_SRC
 
 *** Open directory at point with Microsoft Explorer in Windows OS. 
@@ -1346,7 +1383,7 @@ Its value is a symbol:
 > (test-window-system)  ;; M-x eval-print-last-sexp
 "Running in terminal "
 #+END_SRC
-** Web Browser 
+** Web Browser                                             :http:web:browser:
 *** Browse Url
 
 Open http://www.yandex.com in the web browser 
@@ -1575,8 +1612,8 @@ Hackernews
 See the browser http request:
 
  - http://www.httpbin.org/get
-** Http Requests 
-*** Download File 
+** Http Requests                                   :http:request:url:network:
+*** Download File                                         :http:web:download:
 
 #+BEGIN_SRC 
 (url-copy-file <url> <filename>)
@@ -1587,7 +1624,7 @@ See the browser http request:
 (find-file "/tmp/output")
 #+END_SRC
 
-*** url-retrieve-synchronously
+*** url-retrieve-synchronously                       :http:web:download:sync:
 
 #+BEGIN_SRC 
 (url-retrieve-synchronously URL &optional SILENT INHIBIT-COOKIES)
@@ -1627,10 +1664,56 @@ Access-Control-Allow-Credentials: true
   "url": "http://www.httpbin.org/get"
 }
 #+end_example
+
+*** Download a file interactively 
+
+This function downloads a file from the url copied to clipboard and
+then asks the user to which file the data will be downloaded
+suggesting the file name extracted from the url.
+
+This function updates the current buffer (revert buffer) if executed
+in a dired buffer (directory).
+
+Testing the function:
+ 
+ - 1. Copy the url:  https://raw.githubusercontent.com/nybbles/kaggle/master/train.csv 
+
+ - 2. M-x download-url-to-file 
+
+ - 3. View file in current directory. =C-x d= to open it.
+ 
+Usage: =M-x download-url-to-file=
+
+#+BEGIN_SRC elisp 
+(defun download-url-to-file ()
+  "Download a file from a URL in the clibpoard.
+This command asks the user for the url suggesting the url
+stored in the clipboard and then asks the user for the file name
+to be downloaded suggesting the file name extracted from the url. 
+"
+  (interactive)        
+  (let*
+      ;; Get the URL suggestion from clibpoard
+      ((text (with-temp-buffer
+                  (clipboard-yank)
+                  (buffer-substring-no-properties (point-min)
+                                                  (point-max))))
+       ;; Ask the user to confirm the url 
+       (url (read-string "Url: " text)))
+
+    (url-copy-file
+     url
+     ;; Get file name. 
+     (read-file-name "File name: "
+                     (car  (last (split-string url "/")))))
+    
+    (when (equal major-mode 'dired-mode)
+      (revert-buffer))))
+#+END_SRC
 ** Packages 
 *** Test if package is installed 
 *** Install a package if it is not installed 
-** Helm Snippets 
+** Helm Snippets                                     :framework:library:helm:
 *** Browser Recent files  
 
 Usage: M-x helm-recent-files 
