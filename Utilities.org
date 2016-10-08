@@ -73,6 +73,54 @@ Emacs also have commands to run programming languages shells:
 | Lisp               | M-x run-lisp   | -        |
 |                    |                |          |
 
+** Async Shell Command
+
+It can run any repls or interactive shell applications, except
+ncurses-based apps like htop.
+
+Example: M-x async-shell-command "java -jar clojure.jar".
+
+It is useful to run programming languages shells even if there is no
+mode or package installed for it.
+
+*Examples:*
+
+Run sqlite3:
+
+ - =M-x async-shell-command sqlite3=
+
+Run scala repl:
+
+ - =M-x async-shell-command scala=
+
+Run mono's csharp repl:
+
+ - =M-x async-shell-command csharp=
+
+Run Windows powershell:
+
+ - =M-x async-shell-command powershell -Command -=
+
+Run [[http://www.beanshell.org/][Java bean shell]] (Java Interpreter):
+
+ - M-x async-shell-command "java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"
+
+or programatically:
+
+#+BEGIN_SRC elisp
+(async-shell-command "java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter")
+#+END_SRC
+
+Defining a command:
+
+#+BEGIN_SRC elisp
+(defun run-bsh ()
+    "Run Java bean shell."
+    (interactive)
+    (async-shell-command "java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"))
+#+END_SRC
+
+** Emacs in Terminal
 
 Running Emacs in terminal: 
 
