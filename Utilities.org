@@ -3,6 +3,45 @@
 #+TITLE: Emacs Utilities 
 
 * Emacs Utilities 
+** Overview
+
+Some Emacs utilities and goodness.
+
+| Feature                       | Command                 | Description                                                  |
+|-------------------------------+-------------------------+--------------------------------------------------------------|
+| Info page                     | M-x info                | Info page reader                                             |
+|                               |                         |                                                              |
+| Manpage                       | M-x woman               | Manpage Reader                                               |
+|                               |                         |                                                              |
+| Diff                          | M-x ediff               | File diff viwer                                              |
+|                               |                         |                                                              |
+| File manager                  | M-x dired or C-x d      | File manager and directory editor                            |
+|                               |                         |                                                              |
+| Async shell command           | M-x async-shell-command | Run any shell command asynchronously. It is useful to        |
+|                               |                         | run REPLs like database shells, shells, interactive CLI apps |
+|                               |                         | and launch apps.                                             |
+|                               |                         |                                                              |
+| Eshel                         | M-x eshell              | Multi platform shell written in Elisp and                    |
+|                               |                         | highly integrated to Emacs.                                  |
+|                               |                         |                                                              |
+| Ielm                          | M-x ielm                | Elisp Interactive shell to control and Debug Emacs           |
+|                               |                         |                                                              |
+| Tramp mode                    |                         | Tramp mode - edit remote files, edit as super user and open  |
+|                               |                         | remote directories through ssh, sftp, telnet and ftp         |
+|                               |                         |                                                              |
+| Compile mode                  | M-x compile             | Integrate Emacs to any build automation tool like make.      |
+|                               |                         | It can extract compilation targets from Makefile.            |
+|                               |                         |                                                              |
+| Calculator                    | M-x calc                | RPN (Reverse Polish Notation) calculator like HP-48g         |
+|                               |                         | series calculator with features like unit conversion,        |
+|                               |                         | financial functions, integration, differentiation and        |
+|                               |                         | symbolic math.                                               |
+|                               |                         |                                                              |
+| Git                           | M-x magit-status        | Git user interface provided by the magit package.            |
+|                               |                         |                                                              |
+|                               |                         |                                                              |
+| Task manager/ Process manager | M-x proced              | Htop like multi platform task manager.                       |
+
 ** Shells 
 
 Emacs have built-in commands to run shells. 
@@ -34,6 +73,54 @@ Emacs also have commands to run programming languages shells:
 | Lisp               | M-x run-lisp   | -        |
 |                    |                |          |
 
+** Async Shell Command
+
+It can run any repls or interactive shell applications, except
+ncurses-based apps like htop.
+
+Example: M-x async-shell-command "java -jar clojure.jar".
+
+It is useful to run programming languages shells even if there is no
+mode or package installed for it.
+
+*Examples:*
+
+Run sqlite3:
+
+ - =M-x async-shell-command sqlite3=
+
+Run scala repl:
+
+ - =M-x async-shell-command scala=
+
+Run mono's csharp repl:
+
+ - =M-x async-shell-command csharp=
+
+Run Windows powershell:
+
+ - =M-x async-shell-command powershell -Command -=
+
+Run [[http://www.beanshell.org/][Java bean shell]] (Java Interpreter):
+
+ - M-x async-shell-command "java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"
+
+or programatically:
+
+#+BEGIN_SRC elisp
+(async-shell-command "java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter")
+#+END_SRC
+
+Defining a command:
+
+#+BEGIN_SRC elisp
+(defun run-bsh ()
+    "Run Java bean shell."
+    (interactive)
+    (async-shell-command "java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"))
+#+END_SRC
+
+** Emacs in Terminal
 
 Running Emacs in terminal: 
 

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Utilities</title>
-<!-- 2016-10-04 ter 16:38 -->
+<!-- 2016-10-08 sáb 14:19 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -219,13 +219,16 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1">1. Emacs Utilities</a>
 <ul>
-<li><a href="#sec-1-1">1.1. Shells</a></li>
-<li><a href="#sec-1-2">1.2. Manpage Reader</a></li>
-<li><a href="#sec-1-3">1.3. Info Page Reader</a></li>
-<li><a href="#sec-1-4">1.4. Spell Checker</a></li>
-<li><a href="#sec-1-5">1.5. Calculator - M-x calc</a></li>
-<li><a href="#sec-1-6">1.6. Magit - Emacs Interface to GIT</a></li>
-<li><a href="#sec-1-7">1.7. Helm utilities</a></li>
+<li><a href="#sec-1-1">1.1. Overview</a></li>
+<li><a href="#sec-1-2">1.2. Shells</a></li>
+<li><a href="#sec-1-3">1.3. Async Shell Command</a></li>
+<li><a href="#sec-1-4">1.4. Emacs in Terminal</a></li>
+<li><a href="#sec-1-5">1.5. Manpage Reader</a></li>
+<li><a href="#sec-1-6">1.6. Info Page Reader</a></li>
+<li><a href="#sec-1-7">1.7. Spell Checker</a></li>
+<li><a href="#sec-1-8">1.8. Calculator - M-x calc</a></li>
+<li><a href="#sec-1-9">1.9. Magit - Emacs Interface to GIT</a></li>
+<li><a href="#sec-1-10">1.10. Helm utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -237,8 +240,229 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> Emacs Utilities</h2>
 <div class="outline-text-2" id="text-1">
 </div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Shells</h3>
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Overview</h3>
 <div class="outline-text-3" id="text-1-1">
+<p>
+Some Emacs utilities and goodness.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Feature</th>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Info page</td>
+<td class="left">M-x info</td>
+<td class="left">Info page reader</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Manpage</td>
+<td class="left">M-x woman</td>
+<td class="left">Manpage Reader</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Diff</td>
+<td class="left">M-x ediff</td>
+<td class="left">File diff viwer</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">File manager</td>
+<td class="left">M-x dired or C-x d</td>
+<td class="left">File manager and directory editor</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Async shell command</td>
+<td class="left">M-x async-shell-command</td>
+<td class="left">Run any shell command asynchronously. It is useful to</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">run REPLs like database shells, shells, interactive CLI apps</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">and launch apps.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Eshel</td>
+<td class="left">M-x eshell</td>
+<td class="left">Multi platform shell written in Elisp and</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">highly integrated to Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Ielm</td>
+<td class="left">M-x ielm</td>
+<td class="left">Elisp Interactive shell to control and Debug Emacs</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Tramp mode</td>
+<td class="left">&#xa0;</td>
+<td class="left">Tramp mode - edit remote files, edit as super user and open</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">remote directories through ssh, sftp, telnet and ftp</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Compile mode</td>
+<td class="left">M-x compile</td>
+<td class="left">Integrate Emacs to any build automation tool like make.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">It can extract compilation targets from Makefile.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Calculator</td>
+<td class="left">M-x calc</td>
+<td class="left">RPN (Reverse Polish Notation) calculator like HP-48g</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">series calculator with features like unit conversion,</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">financial functions, integration, differentiation and</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">symbolic math.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Git</td>
+<td class="left">M-x magit-status</td>
+<td class="left">Git user interface provided by the magit package.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Task manager/ Process manager</td>
+<td class="left">M-x proced</td>
+<td class="left">Htop like multi platform task manager.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Shells</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 Emacs have built-in commands to run shells. 
 </p>
@@ -400,8 +624,103 @@ Emacs also have commands to run programming languages shells:
 </tr>
 </tbody>
 </table>
+</div>
+</div>
 
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Async Shell Command</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+It can run any repls or interactive shell applications, except
+ncurses-based apps like htop.
+</p>
 
+<p>
+Example: M-x async-shell-command "java -jar clojure.jar".
+</p>
+
+<p>
+It is useful to run programming languages shells even if there is no
+mode or package installed for it.
+</p>
+
+<p>
+<b>Examples:</b>
+</p>
+
+<p>
+Run sqlite3:
+</p>
+
+<ul class="org-ul">
+<li><code>M-x async-shell-command sqlite3</code>
+</li>
+</ul>
+
+<p>
+Run scala repl:
+</p>
+
+<ul class="org-ul">
+<li><code>M-x async-shell-command scala</code>
+</li>
+</ul>
+
+<p>
+Run mono's csharp repl:
+</p>
+
+<ul class="org-ul">
+<li><code>M-x async-shell-command csharp</code>
+</li>
+</ul>
+
+<p>
+Run Windows powershell:
+</p>
+
+<ul class="org-ul">
+<li><code>M-x async-shell-command powershell -Command -</code>
+</li>
+</ul>
+
+<p>
+Run <a href="http://www.beanshell.org/">Java bean shell</a> (Java Interpreter):
+</p>
+
+<ul class="org-ul">
+<li>M-x async-shell-command "java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"
+</li>
+</ul>
+
+<p>
+or programatically:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(async-shell-command <span class="org-string">"java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"</span>)
+</pre>
+</div>
+
+<p>
+Defining a command:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">run-bsh</span> ()
+    <span class="org-doc">"Run Java bean shell."</span>
+    (<span class="org-keyword">interactive</span>)
+    (async-shell-command <span class="org-string">"java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Emacs in Terminal</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
 Running Emacs in terminal: 
 </p>
@@ -488,18 +807,18 @@ Unix &amp; Linux Stack Exchange</a>
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Manpage Reader</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Manpage Reader</h3>
+<div class="outline-text-3" id="text-1-5">
 <p>
 To read manpages enter <code>M-x woman</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Info Page Reader</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Info Page Reader</h3>
+<div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>To Browser info pages and also the Emacs documentation. <code>M-x info</code>
 </li>
@@ -510,9 +829,9 @@ To read manpages enter <code>M-x woman</code>.
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Spell Checker</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Spell Checker</h3>
+<div class="outline-text-3" id="text-1-7">
 <p>
 Emacs uses external programs to check the spell. It supports <span class="underline">ispell</span>,
 <span class="underline">aspell</span> and <span class="underline">hunspell</span>. The variable <code>ispell-program-name</code> sets the
@@ -680,9 +999,9 @@ See also:
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Calculator - M-x calc</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Calculator - M-x calc</h3>
+<div class="outline-text-3" id="text-1-8">
 <p>
 <b>Overview:</b>
 </p>
@@ -1384,9 +1703,9 @@ Calc | Truong's Weblog</a>
 </div>
 </div>
 
-<div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6"><a id="ID-c1ca4260-446b-456b-a555-bcdd4bc5329f" name="ID-c1ca4260-446b-456b-a555-bcdd4bc5329f"></a><span class="section-number-3">1.6</span> Magit - Emacs Interface to GIT</h3>
-<div class="outline-text-3" id="text-1-6">
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><a id="ID-c1ca4260-446b-456b-a555-bcdd4bc5329f" name="ID-c1ca4260-446b-456b-a555-bcdd4bc5329f"></a><span class="section-number-3">1.9</span> Magit - Emacs Interface to GIT</h3>
+<div class="outline-text-3" id="text-1-9">
 
 <p>
 See:  
@@ -1826,9 +2145,9 @@ Branch
 </table>
 </div>
 </div>
-<div id="outline-container-sec-1-7" class="outline-3">
-<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Helm utilities</h3>
-<div class="outline-text-3" id="text-1-7">
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Helm utilities</h3>
+<div class="outline-text-3" id="text-1-10">
 <ul class="org-ul">
 <li>M-x helm-M-x - Show all M-x commands
 </li>
@@ -1851,7 +2170,7 @@ Branch
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-10-04 ter 16:38</p>
+<p class="date">Created: 2016-10-08 sáb 14:19</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
