@@ -20,6 +20,9 @@ upload:
 		git commit -a -m "Update pages" && \
 		git push
 
+# Send master branch  to origin/master
+push:
+	git push 
 
 clean:
 	rm -rf dist/*.html dist/*.html~
