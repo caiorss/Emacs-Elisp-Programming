@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs In a Box</title>
-<!-- 2016-10-10 seg 01:19 -->
+<!-- 2016-10-10 seg 10:26 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -222,6 +222,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1-1">1.1. Overview</a></li>
 <li><a href="#sec-1-2">1.2. Contents</a></li>
+<li><a href="#sec-1-3">1.3. Download this content</a></li>
 </ul>
 </li>
 </ul>
@@ -295,7 +296,7 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 </p>
 
 <ul class="org-ul">
-<li>Can run in GUI or in terminal.
+<li>Run in GUI or in terminal.
 </li>
 <li>Programmable "text editor" (Lisp Machine)
 </li>
@@ -305,15 +306,37 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 </li>
 <li>Highly customizable
 </li>
+<li>Easy task automation 
+</li>
 <li>Package manager 
 </li>
 <li>Multiple OS support
 </li>
-<li>Remote file editting through ssh. 
+<li>Remote file editting through ssh. (Tramp mode)
+</li>
+<li>Keyboard macros
+</li>
+<li>Utilities
+<ul class="org-ul">
+<li>Calculator
+</li>
+<li>Eshell
+</li>
+<li>Tramp-mode - Edit remote files and edit as super user (sudo).
+</li>
+<li>Shells
+</li>
+<li>File manager (dired-mode)
+</li>
+<li>Git interface (magit)
+</li>
+</ul>
 </li>
 </ul>
 </div>
 </div>
+
+
 <div id="outline-container-sec-1-2" class="outline-3">
 <h3 id="sec-1-2"><span class="section-number-3">1.2</span> Contents</h3>
 <div class="outline-text-3" id="text-1-2">
@@ -359,7 +382,7 @@ Emacs key bindings and commands for Elisp (Emacs' lisp) development.
 </ul>
 
 <p>
-Emacs settings and customizations.
+Emacs settings and customization.
 </p>
 
 <ul class="org-ul">
@@ -368,8 +391,8 @@ Emacs settings and customizations.
 </ul>
 
 <p>
-Eshell - Multiplatform unix shell written in Elisp highly integrated
-with Emacs and with serveral platform indenpentent shell commands such
+Eshell - Multi-platform unix shell written in Elisp highly integrated
+with Emacs and with several platform independent shell commands such
 as ls, pwd, cp, mv implemented in Elisp.
 </p>
 
@@ -411,11 +434,49 @@ Emacs Resources.
 </p>
 </div>
 </div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Download this content</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+You can download all the pages of this repository with following commands. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">curl -L https://github.com/caiorss/Emacs-Elisp-Programming/archive/gh-pages.zip -o elisp.zip
+unzip -e elisp.zip 
+rm -rf elisp.zip
+mv Emacs-Elisp-Programming-gh-pages Emacs-Elisp-Programming
+firefox Emacs-Elisp-Programming/index.html &amp;
+</pre>
+</div>
+
+<p>
+View the extracted repository contents:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ ls Emacs-Elisp-Programming/
+images/                       Elisp_Snippets2.org            index.html
+theme/                        Elisp_Snippets.html            Keybindings.html
+Customization.html            Elisp_Snippets.org             Keybindings.org
+Customization.org             Emacs_Key_Bindings_Elisp.html  README.org
+Development_Environment.html  Emacs_Key_Bindings_Elisp.org   Resources.html
+Development_Environment.org   Emacs_On_Windows.html          Resources.org
+Elisp_Programming.html        Emacs_On_Windows.org           Utilities.html
+Elisp_Programming.org         Eshell.html                    Utilities.org
+Elisp_Snippets2.html          Eshell.org
+</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-10-10 seg 01:19</p>
+<p class="date">Created: 2016-10-10 seg 10:26</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
