@@ -44,14 +44,25 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
 *Emacs Features*
 
- - Can run in GUI or in terminal.
+ - Run in GUI or in terminal.
  - Programmable "text editor" (Lisp Machine)
  - Support to many programming languages
  - Can run shells and interpreters inside Emacs. 
  - Highly customizable
+ - Easy task automation 
  - Package manager 
  - Multiple OS support
- - Remote file editting through ssh. 
+ - Remote file editting through ssh. (Tramp mode)
+ - Keyboard macros
+ - Utilities
+   - Calculator
+   - Eshell
+   - Tramp-mode - Edit remote files and edit as super user (sudo).
+   - Shells
+   - File manager (dired-mode)
+   - Git interface (magit)
+
+
 ** Contents
 
  - [[file:Elisp_Programming.org][Elisp Programming]]  
@@ -72,12 +83,12 @@ Emacs key bindings and commands for Elisp (Emacs' lisp) development.
 
  - [[file:Customization.org][Customization]] 
 
-Emacs settings and customizations.
+Emacs settings and customization.
 
  - [[file:Eshell.org][Eshell]]
 
-Eshell - Multiplatform unix shell written in Elisp highly integrated
-with Emacs and with serveral platform indenpentent shell commands such
+Eshell - Multi-platform unix shell written in Elisp highly integrated
+with Emacs and with several platform independent shell commands such
 as ls, pwd, cp, mv implemented in Elisp.
 
  - [[file:Development_Environment.org][Development Environment]]
@@ -96,3 +107,30 @@ Emacs utilities and goodness like Calculator, Magit, Helm and so on.
  - [[file:Resources.org][Resources]]
  
 Emacs Resources. 
+
+** Download this content
+
+You can download all the pages of this repository with following commands. 
+
+#+BEGIN_SRC sh
+curl -L https://github.com/caiorss/Emacs-Elisp-Programming/archive/gh-pages.zip -o elisp.zip
+unzip -e elisp.zip 
+rm -rf elisp.zip
+mv Emacs-Elisp-Programming-gh-pages Emacs-Elisp-Programming
+firefox Emacs-Elisp-Programming/index.html &
+#+END_SRC
+
+View the extracted repository contents:
+
+#+BEGIN_SRC sh
+$ ls Emacs-Elisp-Programming/
+images/                       Elisp_Snippets2.org            index.html
+theme/                        Elisp_Snippets.html            Keybindings.html
+Customization.html            Elisp_Snippets.org             Keybindings.org
+Customization.org             Emacs_Key_Bindings_Elisp.html  README.org
+Development_Environment.html  Emacs_Key_Bindings_Elisp.org   Resources.html
+Development_Environment.org   Emacs_On_Windows.html          Resources.org
+Elisp_Programming.html        Emacs_On_Windows.org           Utilities.html
+Elisp_Programming.org         Eshell.html                    Utilities.org
+Elisp_Snippets2.html          Eshell.org
+#+END_SRC
