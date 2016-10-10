@@ -1730,7 +1730,7 @@ Access-Control-Allow-Credentials: true
 }
 #+end_example
 
-*** Download a file interactively
+*** Download a file interactively                    :http:web:download:file:
 
 This function downloads a file from the url copied to clipboard and
 then asks the user to which file the data will be downloaded
@@ -1775,6 +1775,53 @@ to be downloaded suggesting the file name extracted from the url.
     (when (equal major-mode 'dired-mode)
       (revert-buffer))))
 #+END_SRC
+*** Download a file and display it on a buffer    :http:web:buffer:clipboard:
+
+This command reads an url from the user and download the file content
+and displays it on a buffer without write a file to disk. 
+
+Example: 
+
+ 1. User copies the url: (file: [[http://patterns.cs.up.ac.za/examples/ch9/iterator-theory.cs][iterator-theory.cs]])  ~http://patterns.cs.up.ac.za/examples/ch9/iterator-theory.cs~ 
+
+ 2. User enters the command =M-x download-code-view= 
+
+ 3. It will suggest in a prompt the former url. User hit return.
+
+ 4. It download the code and displays it on a buffer *iterator-theory.cs*
+
+ 5. User enter the command. M-x csharp-mode that turns on the syntax hightlight.
+
+#+BEGIN_SRC elisp 
+(defun download-code-view ()
+    "Download a source code from url and displays it on a buffer."
+    (interactive)
+    (let* (
+           ;; Get url from clipboard 
+           (clipboard (with-temp-buffer
+                        (clipboard-yank)
+                        (buffer-substring-no-properties (point-min)
+                                                        (point-max))))
+           ;; Read url and suggesting clipboard 
+           (url      (read-string "Url: " clipboard))
+           (buf      (url-retrieve-synchronously url))
+           ;; Tries to extract the file name from url 
+           (filename (car  (last (split-string url "/"))))         
+           (bufname  (concat "*" filename "*")) 
+           )         
+      (switch-to-buffer buf)
+      ;; Remove http header 
+      (goto-char (point-min))
+      (re-search-forward "^$")
+      (delete-region (point) (point-min))
+      (kill-whole-line)
+      ;; Remove \r characters or ^M
+      (replace-string (char-to-string 13) "")
+      ;; Rename buffer to a better name 
+      (with-current-buffer buf
+        (rename-buffer bufname))))
+#+END_SRC
+
 ** Packages
 *** Test if package is installed
 *** Install a package if it is not installed
