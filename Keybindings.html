@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Key Bindings</title>
-<!-- 2016-10-10 seg 10:26 -->
+<!-- 2016-10-19 qua 13:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -236,9 +236,9 @@ for the JavaScript code in this tag.
 </ul>
 </li>
 <li><a href="#sec-1-3">1.3. Key bindings for all Lisp dialects</a></li>
-<li><a href="#sec-1-4">1.4. Commands</a>
+<li><a href="#sec-1-4">1.4. Useful Commands</a>
 <ul>
-<li><a href="#sec-1-4-1">1.4.1. Basic commands</a></li>
+<li><a href="#sec-1-4-1">1.4.1. Misc commands</a></li>
 <li><a href="#sec-1-4-2">1.4.2. Change current buffer mode</a></li>
 </ul>
 </li>
@@ -1366,10 +1366,7 @@ key binding.
 <div id="outline-container-sec-1-1-4" class="outline-4">
 <h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Selected Key Bindings and Commands for Programming</h4>
 <div class="outline-text-4" id="text-1-1-4">
-<p>
-<b>FILE EDITING</b>
-</p>
-
+</div><ol class="org-ol"><li><a id="sec-1-1-4-1" name="sec-1-1-4-1"></a>File Editing<br  /><div class="outline-text-5" id="text-1-1-4-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1421,11 +1418,10 @@ key binding.
 </tr>
 </tbody>
 </table>
+</div>
+</li>
 
-<p>
-<b>NAVIGATION</b>
-</p>
-
+<li><a id="sec-1-1-4-2" name="sec-1-1-4-2"></a>Navigation<br  /><div class="outline-text-5" id="text-1-1-4-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1493,11 +1489,10 @@ key binding.
 </tr>
 </tbody>
 </table>
+</div>
+</li>
 
-<p>
-<b>TEXT EDITING</b>
-</p>
-
+<li><a id="sec-1-1-4-3" name="sec-1-1-4-3"></a>Text Editing<br  /><div class="outline-text-5" id="text-1-1-4-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1582,9 +1577,103 @@ key binding.
 <td class="left">M-x replace-regexp</td>
 <td class="left">Batch replace regex pattern in selected text or buffer.</td>
 </tr>
+
+<tr>
+<td class="left">M-x regexp-builder</td>
+<td class="left">Build and test Emacs regex patterns.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
 </tbody>
 </table>
 </div>
+</li>
+
+<li><a id="sec-1-1-4-4" name="sec-1-1-4-4"></a>Indentation<br  /><div class="outline-text-5" id="text-1-1-4-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">M-x &lt;command&gt;</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">back-to-identation</td>
+<td class="left">M-m</td>
+<td class="left">Move to the first non-whitespace character on the current line.</td>
+</tr>
+
+<tr>
+<td class="left">ident-region</td>
+<td class="left">C-M-\</td>
+<td class="left">Indent all lines in a region.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">ident-rigidly</td>
+<td class="left">C-x TAB</td>
+<td class="left">Select a region and type C-x TAB. Type right, left (move 1 space) or</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">S-right, S-left (move 1 tab) to move the block to left or right.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left"><span class="underline">This keybinding doesn't work if cua-mode is activated</span>.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+<b>Indent entire buffer</b>
+</p>
+
+<ol class="org-ol">
+<li><code>C-x h</code> -&gt; Select the whole buffer.
+</li>
+<li><code>C-M-\</code> or M-x indent-region 
+</li>
+</ol>
+</div>
+</li></ol>
 </div>
 
 <div id="outline-container-sec-1-1-5" class="outline-4">
@@ -2293,10 +2382,10 @@ Useful lisp key bindings to edit and navigate Lisp code.
 </div>
 
 <div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Commands</h3>
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Useful Commands</h3>
 <div class="outline-text-3" id="text-1-4">
 </div><div id="outline-container-sec-1-4-1" class="outline-4">
-<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Basic commands</h4>
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Misc commands</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -2305,70 +2394,229 @@ Useful lisp key bindings to edit and navigate Lisp code.
 <col  class="left" />
 
 <col  class="left" />
+
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
 <th scope="col" class="left">Command</th>
+<th scope="col" class="left">Key bindings</th>
 <th scope="col" class="left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="left">M-x kill-emacs</td>
-<td class="left">Exit emacs</td>
+<td class="left">-</td>
+<td class="left">Exit Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">M-x save-buffers-kill-terminal</td>
+<td class="left">C-x C-c</td>
+<td class="left">Eixt Emacs and asks to save bufers.</td>
 </tr>
 
 <tr>
 <td class="left">M-x help-with-tutorial</td>
+<td class="left">C-h t</td>
 <td class="left">Open Emacs built in tutorial</td>
 </tr>
 
 <tr>
 <td class="left">M-x suspend-emacs</td>
+<td class="left">&#xa0;</td>
 <td class="left">Suspend Emacs when in terminal or iconify in graphical mode.</td>
 </tr>
 
 <tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x suspend-frame</td>
+<td class="left">C-x C-z</td>
+<td class="left">Minimize frame or suspend Emacs process in terminal. In terminal (Unix)</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">type fg  to return to Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
 <td class="left">M-x quit-window</td>
+<td class="left">&#xa0;</td>
 <td class="left">Quit Emacs.</td>
 </tr>
 
 <tr>
-<td class="left">M-x revert-file</td>
-<td class="left">Update buffer when file is changed externally.</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left">M-x auto-revert-mode</td>
-<td class="left">Auto update the current file when its changed externally.</td>
+<td class="left"><b>Edit</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left">M-x read-only  or C-x C-q</td>
-<td class="left">Toggle the current buffer read only.</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left">M-x delete-trailing-whitespace</td>
-<td class="left">Delete trailing Whistespace</td>
+<td class="left">&#xa0;</td>
+<td class="left">Delete trailing Whistespace and ^M characters or <code>\r</code> from Dos or Windows.</td>
 </tr>
 
 <tr>
 <td class="left">M-x tabify</td>
+<td class="left">&#xa0;</td>
 <td class="left">Converts all spaces to tab</td>
 </tr>
 
 <tr>
 <td class="left">M-x untabify</td>
+<td class="left">&#xa0;</td>
 <td class="left">Converts all tabs to spaces.</td>
 </tr>
 
 <tr>
 <td class="left">M-x whitespace-mode</td>
+<td class="left">&#xa0;</td>
 <td class="left">Toggle white space view.</td>
 </tr>
 
 <tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>Bufferf</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x revert-file</td>
+<td class="left">&#xa0;</td>
+<td class="left">Update buffer when file is changed externally.</td>
+</tr>
+
+<tr>
+<td class="left">M-x auto-revert-mode</td>
+<td class="left">&#xa0;</td>
+<td class="left">Auto update the current file when its changed externally.</td>
+</tr>
+
+<tr>
+<td class="left">M-x auto-revert-tail-mode</td>
+<td class="left">&#xa0;</td>
+<td class="left">Useful to watch log files. Follows tail of file. Equivalent to $ tail -f [file]</td>
+</tr>
+
+<tr>
+<td class="left">M-x rename-buffer</td>
+<td class="left">&#xa0;</td>
+<td class="left">Rename current buffer.</td>
+</tr>
+
+<tr>
+<td class="left">M-x read-only</td>
+<td class="left">C-x C-q</td>
+<td class="left">Toggle the current buffer read only.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>Operating System</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x shell-command</td>
+<td class="left">M-!</td>
+<td class="left">Run a shell command and displays the output in a buffer.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x async-shell-command</td>
+<td class="left">M-&amp;</td>
+<td class="left">Run asynchronous command like shells (python, ghci, scala &#x2026;) and long running</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">commands like ping and traceroute. It can launch any application without freeze Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x make-directory</td>
+<td class="left">&#xa0;</td>
+<td class="left">Prompts for a directory path and creates a directory.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x compile</td>
+<td class="left">&#xa0;</td>
+<td class="left">Run a compilation command. Type g to compile again.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
 </tr>
@@ -2383,6 +2631,10 @@ Notes:
 <li>The command auto-revert-mode is useful to edit alongside IDEs like
 Visual Studio or Eclipse. If you change the file it is
 automatically updated.
+</li>
+
+<li>It may be better to disable C-x C-c, since it is easy to
+accidentally hit and exit Emacs.
 </li>
 </ul>
 </div>
@@ -2412,7 +2664,7 @@ file extension like .gitconfig or python script without it.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-10-10 seg 10:26</p>
+<p class="date">Created: 2016-10-19 qua 13:51</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

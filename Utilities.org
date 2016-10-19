@@ -41,6 +41,14 @@ Some Emacs utilities and goodness.
 |                               |                         |                                                              |
 |                               |                         |                                                              |
 | Task manager/ Process manager | M-x proced              | Htop like multi platform task manager.                       |
+|                               |                         |                                                              |
+| Network information           | M-x ifconfig            | Show iformation about network interfaces                     |
+|                               |                         |                                                              |
+
+Note: 
+
+ - M-x ifconfig - runs ipconfig on Windows and ifconfig or ip on
+   Linux. It is platform agnostic.
 
 ** Shells 
 
@@ -81,17 +89,20 @@ ncurses-based apps like htop.
 Example: M-x async-shell-command "java -jar clojure.jar".
 
 It is useful to run programming languages shells even if there is no
-mode or package installed for it.
+mode or package installed for it. It is possible to rename the shell
+buffer with =M-x rename-buffer= in order to make easier to identify
+the buffer. 
 
 *Examples:*
 
 Run sqlite3:
 
- - =M-x async-shell-command sqlite3=
+ - =M-x async-shell-command sqlite3= 
 
 Run scala repl:
 
- - =M-x async-shell-command scala=
+ - =M-x async-shell-command scala= and then M-x =rename-buffer= ~*scala*~ 
+to change the default buffer name to a more readable name ~*scala*~.
 
 Run mono's csharp repl:
 

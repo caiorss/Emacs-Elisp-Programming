@@ -257,9 +257,7 @@ key binding.
 |             | find-library          | Find a library *.el file loaded with require |
 |             |                       | Example: M-x find-library org                |
 *** Selected Key Bindings and Commands for Programming
-
-
-*FILE EDITING*
+**** File Editing
 
 |                          |                                                |
 |--------------------------+------------------------------------------------|
@@ -271,7 +269,7 @@ key binding.
 | C-g                      | Cancel any Emacs command                       |
 |                          |                                                |
 
-*NAVIGATION*
+**** Navigation 
 
 |                   |                                               |
 |-------------------+-----------------------------------------------|
@@ -287,7 +285,7 @@ key binding.
 | C-x r m           | Make bookmark                                 |
 | C-x r b           | Jump to bookmarks                             |
 
-*TEXT EDITING*
+**** Text Editing
 
 |                    |                                                         |
 |--------------------+---------------------------------------------------------|
@@ -305,6 +303,27 @@ key binding.
 |                    |                                                         |
 | M-x replace-string | Batch replace string in selected region or  buffer.     |
 | M-x replace-regexp | Batch replace regex pattern in selected text or buffer. |
+| M-x regexp-builder | Build and test Emacs regex patterns.                    |
+|                    |                                                         |
+
+**** Indentation 
+
+| M-x <command>      |         |                                                                      |
+|--------------------+---------+----------------------------------------------------------------------|
+| back-to-identation | M-m     | Move to the first non-whitespace character on the current line.      |
+| ident-region       | C-M-\   | Indent all lines in a region.                                        |
+|                    |         |                                                                      |
+| ident-rigidly      | C-x TAB | Select a region and type C-x TAB. Type right, left (move 1 space) or |
+|                    |         | S-right, S-left (move 1 tab) to move the block to left or right.     |
+|                    |         | _This keybinding doesn't work if cua-mode is activated_.             |
+|                    |         |                                                                      |
+|                    |         |                                                                      |
+
+
+*Indent entire buffer*
+
+ 1. =C-x h= -> Select the whole buffer.
+ 2. =C-M-\= or M-x indent-region 
 
 *** Ubiquitous Emacs Key Bindings
 
@@ -453,29 +472,56 @@ Useful lisp key bindings to edit and navigate Lisp code.
 | C-M-a | Move to the beggining of current function |
 | C-M-e | Move to the end of current function       |
 
-** Commands
-*** Basic commands 
+** Useful Commands
+*** Misc commands 
 
-| Command                        | Description                                                  |
-|--------------------------------+--------------------------------------------------------------|
-| M-x kill-emacs                 | Exit emacs                                                   |
-| M-x help-with-tutorial         | Open Emacs built in tutorial                                 |
-| M-x suspend-emacs              | Suspend Emacs when in terminal or iconify in graphical mode. |
-| M-x quit-window                | Quit Emacs.                                                  |
-| M-x revert-file                | Update buffer when file is changed externally.               |
-| M-x auto-revert-mode           | Auto update the current file when its changed externally.    |
-| M-x read-only  or C-x C-q      | Toggle the current buffer read only.                         |
-| M-x delete-trailing-whitespace | Delete trailing Whistespace                                  |
-| M-x tabify                     | Converts all spaces to tab                                   |
-| M-x untabify                   | Converts all tabs to spaces.                                 |
-| M-x whitespace-mode            | Toggle white space view.                                     |
-|                                |                                                              |
+| Command                        | Key bindings | Description                                                                            |
+|--------------------------------+--------------+----------------------------------------------------------------------------------------|
+| M-x kill-emacs                 | -            | Exit Emacs.                                                                            |
+| M-x save-buffers-kill-terminal | C-x C-c      | Eixt Emacs and asks to save bufers.                                                    |
+| M-x help-with-tutorial         | C-h t        | Open Emacs built in tutorial                                                           |
+| M-x suspend-emacs              |              | Suspend Emacs when in terminal or iconify in graphical mode.                           |
+|                                |              |                                                                                        |
+| M-x suspend-frame              | C-x C-z      | Minimize frame or suspend Emacs process in terminal. In terminal (Unix)                |
+|                                |              | type fg  to return to Emacs.                                                           |
+|                                |              |                                                                                        |
+| M-x quit-window                |              | Quit Emacs.                                                                            |
+|                                |              |                                                                                        |
+| *Edit*                         |              |                                                                                        |
+|                                |              |                                                                                        |
+| M-x delete-trailing-whitespace |              | Delete trailing Whistespace and ^M characters or ~\r~ from Dos or Windows.             |
+| M-x tabify                     |              | Converts all spaces to tab                                                             |
+| M-x untabify                   |              | Converts all tabs to spaces.                                                           |
+| M-x whitespace-mode            |              | Toggle white space view.                                                               |
+|                                |              |                                                                                        |
+| *Bufferf*                      |              |                                                                                        |
+|                                |              |                                                                                        |
+| M-x revert-file                |              | Update buffer when file is changed externally.                                         |
+| M-x auto-revert-mode           |              | Auto update the current file when its changed externally.                              |
+| M-x auto-revert-tail-mode      |              | Useful to watch log files. Follows tail of file. Equivalent to $ tail -f [file]        |
+| M-x rename-buffer              |              | Rename current buffer.                                                                 |
+| M-x read-only                  | C-x C-q      | Toggle the current buffer read only.                                                   |
+|                                |              |                                                                                        |
+| *Operating System*             |              |                                                                                        |
+|                                |              |                                                                                        |
+| M-x shell-command              | M-!          | Run a shell command and displays the output in a buffer.                               |
+|                                |              |                                                                                        |
+| M-x async-shell-command        | M-&          | Run asynchronous command like shells (python, ghci, scala ...) and long running        |
+|                                |              | commands like ping and traceroute. It can launch any application without freeze Emacs. |
+|                                |              |                                                                                        |
+| M-x make-directory             |              | Prompts for a directory path and creates a directory.                                  |
+|                                |              |                                                                                        |
+| M-x compile                    |              | Run a compilation command. Type g to compile again.                                    |
+|                                |              |                                                                                        |
 
 Notes:
 
  - The command auto-revert-mode is useful to edit alongside IDEs like
    Visual Studio or Eclipse. If you change the file it is
    automatically updated.
+
+ - It may be better to disable C-x C-c, since it is easy to
+   accidentally hit and exit Emacs.
 
 *** Change current buffer mode
 
