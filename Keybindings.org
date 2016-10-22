@@ -1,7 +1,8 @@
 # -*- mode: org; -*-
-#+INCLUDE: theme/style.org
 #+TITLE: Emacs Key Bindings
 #+KEYWORDS: emacs,  keybindings, bindings, keyboard, shortcut, default
+#+STARTUP: overview 
+#+INCLUDE: theme/style.org
 
 * Emacs Key bindings
 ** Default Key Bindings and Useful Commands
@@ -533,3 +534,167 @@ file extension like .gitconfig or python script without it.
  - =M-x pyhton-mode=  Example: A python script without extension ".py"
  - =M-x conf-mode=    Configuration file like: .gitconfig, .gitignore, smb.conf
 
+* Evil Mode - VIM Emulation Mode 
+
+Note: _EVIL_ - Is not what it seems. It stands for _Extensible VI
+Layer_. I this case "evil is good". It is an Emacs mode to emulate VI
+keybinds and can be installed with =M-x package-install evil=.
+
+To enable evil mode permanently add to init file: 
+
+#+BEGIN_SRC elisp 
+(require 'evil)
+(evil-mode t)
+#+END_SRC
+
+To toggle evil mode type: 
+
+ - =M-x evil-toggle=
+
+
+*Basic Cursor Movement*
+
+| Emacs | Vim/Evil | Description                     |
+|-------+----------+---------------------------------|
+| C-n   | j        | Move cursror down one line      |
+| C-p   | k        | Move cursor up one line         |
+| C-b   | h        | Move cursor left one character  |
+| C-f   | l        | Move cursor right one character |
+|       |          |                                 |
+
+VI Cursor motion:
+
+#+BEGIN_SRC 
+        k
+        |
+   h ---+--- l
+        | 
+        j 
+#+END_SRC
+
+
+*Movement*
+
+| Key Sequence         | Description                                     |
+|----------------------+-------------------------------------------------|
+| *Cursor Movements*   |                                                 |
+| ^F (Ctrl - F)        | Forward Screen                                  |
+| ^B                   | Backward Screen                                 |
+|                      |                                                 |
+|----------------------+-------------------------------------------------|
+| *Line*               |                                                 |
+| 0 or ^               | Begginging of line                              |
+| ~$~                  | End of line                                     |
+| gg                   | Go to first line of file                        |
+| G                    | Go to last line of the file.                    |
+|                      |                                                 |
+|----------------------+-------------------------------------------------|
+| *Nth line or column* |                                                 |
+| <n>gg                | Got to line n, 20gg go to line 20.              |
+| <n>\vert             | Got to to column n, '10\vert' got to column 10. |
+|----------------------+-------------------------------------------------|
+| *Word*               |                                                 |
+| w                    | Move forward by one word                        |
+| b                    | Move backward by one word                       |
+|----------------------+-------------------------------------------------|
+| *Paragraph*          |                                                 |
+| {                    | Go to beggining of next paragraph               |
+| }                    | Go to end of next paragraph                     |
+|----------------------+-------------------------------------------------|
+| *Parenthesis*        |                                                 |
+| %                    | Find match brace and parenthesis.               |
+|----------------------+-------------------------------------------------|
+| *File under cursor*  |                                                 |
+| gf                   | Open file name under cursor                     |
+|                      |                                                 |
+
+
+*Search* 
+
+| Key Sequence | Description                                     |
+|--------------+-------------------------------------------------|
+| ~/~          | Search forward                                  |
+| ?            | Search backward                                 |
+|              |                                                 |
+| ~*~          | Search for word under cursor. To find next word |
+|              | type n and previous type p.                     |
+
+
+*Editing*
+
+| Key Sequence   | Description                      |
+|----------------+----------------------------------|
+| *Undo / Redo*  |                                  |
+| u              | Undo                             |
+|                |                                  |
+| *Delete*       |                                  |
+| x              | Delete char under cursor         |
+| X              | Delete char before cursor        |
+|                |                                  |
+| dd             | Delete line                      |
+| D  (shift + d) | Delete to the end of line        |
+| di'            | Delete text inside quotes        |
+|                |                                  |
+|                |                                  |
+| *Copy*         |                                  |
+| yy             | Copy line                        |
+| Y or y$        | Copy from cursor to end of line. |
+|                |                                  |
+| *Paste*        |                                  |
+| p              | Paste after cursor               |
+| P              | Paste before cursor              |
+|                |                                  |
+| *Line*         |                                  |
+| o              | Add line below                   |
+| O              | Add line above                   |
+| J              | Join lines                       |
+|                |                                  |
+|                |                                  |
+|                |                                  |
+|                |                                  |
+
+*Text Ident*
+
+| Key Sequence      | Description                                  |
+|-------------------+----------------------------------------------|
+| v                 | Select text. Move the cursor to select text. |
+| >                 | Indent to right                              |
+| <                 | Indent to left                               |
+| :set shiftwidth=4 | Set 4 spaces as indent size.                 |
+|                   |                                              |
+
+
+*Commands* 
+
+| Command              | Description                                           |
+|----------------------+-------------------------------------------------------|
+| :<Emacs M-x Command> | Run any Emacs M-x command like M-x dired with :dired. |
+| :w                   | Save current buffer.                                  |
+| :sav <file name>     | Save the current buffer with another file name.       |
+| :q                   | Kill buffer                                           |
+| :! <shell-commmand>  | Run shell command. Example: ':! uname -a'             |
+| :e <file name>       | Open file to edit. Equivalent to C-x C-f              |
+| :<line nth>          | Got to nth line. Example: ':20' got to line 20.       |
+| :ls                  | List buffers.                                         |
+
+
+
+ - [[http://www.saltycrane.com/blog/2015/12/switching-emacs-vim-actually-spacemacs/][Switching from Emacs to Vim (actually Spacemacs) - SaltyCrane Blog]]
+
+ - [[http://irreal.org/blog/?p=259][Emacs Keybindings for Mac OS X | Irreal]]
+     
+ - [[https://www.emacswiki.org/emacs/Evil][EmacsWiki: Evil]] 
+    
+ - [[http://wikemacs.org/wiki/Evil][Evil - WikEmacs]]
+
+ - [[http://blog.jakubarnold.cz/2014/06/23/evil-mode-how-to-switch-from-vim-to-emacs.html][Evil Mode: How I Switched From VIM to Emacs - Jakub Arnold Blog]] 
+
+ - [[http://jen20.com/2015/02/06/configuring-emacs-for-go-part-1.html][Configuring emacs and evil mode for Go development (Part 1)]] 
+
+ - [[https://medium.com/@bryangarza/my-descent-into-evil-98f7017475b6#.y23kjqn3e][My Descent Into Evil – Medium]] 
+
+ - [[https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html][Towards a Vim-like Emacs]]
+
+Evil Mode Manual: 
+
+ - [[wiki-asset-sys:Emacs;evil-manual1.pdf][evil-manual1.pdf]]
