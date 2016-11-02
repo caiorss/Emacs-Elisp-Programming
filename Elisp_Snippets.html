@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Snippets</title>
-<!-- 2016-10-21 sex 21:03 -->
+<!-- 2016-11-02 qua 05:19 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -281,6 +281,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-8-5">1.8.5. Run asynchronous commands piping the output to a buffer</a></li>
 <li><a href="#sec-1-8-6">1.8.6. Run a ncurses / terminal app inside Emacs</a></li>
 <li><a href="#sec-1-8-7">1.8.7. Run apps in external terminal emulator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="os">os</span>&#xa0;<span class="command">command</span></span></a></li>
+<li><a href="#sec-1-8-8">1.8.8. Launch applicatiosn from Emacs</a></li>
 </ul>
 </li>
 <li><a href="#sec-1-9">1.9. File</a>
@@ -310,7 +311,9 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-11-7">1.11.7. Open a file with default system application&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="file">file</span>&#xa0;<span class="open">open</span>&#xa0;<span class="system">system</span></span></a></li>
 <li><a href="#sec-1-11-8">1.11.8. Close all dired buffers</a></li>
 <li><a href="#sec-1-11-9">1.11.9. Browse bookmarked directories&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="directory">directory</span>&#xa0;<span class="helm">helm</span>&#xa0;<span class="browse">browse</span></span></a></li>
-<li><a href="#sec-1-11-10">1.11.10. Open directory at point with Microsoft Explorer in Windows OS.</a></li>
+<li><a href="#sec-1-11-10">1.11.10. Filter dired buffer by file extensions</a></li>
+<li><a href="#sec-1-11-11">1.11.11. Filter dired buffer by regex</a></li>
+<li><a href="#sec-1-11-12">1.11.12. Open directory at point with Microsoft Explorer in Windows OS.</a></li>
 </ul>
 </li>
 <li><a href="#sec-1-12">1.12. Text Manipulation</a>
@@ -348,6 +351,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1-16-1">1.16.1. Test if package is installed</a></li>
 <li><a href="#sec-1-16-2">1.16.2. Install a package if it is not installed</a></li>
+<li><a href="#sec-1-16-3">1.16.3. Install a single-file package from URL</a></li>
 </ul>
 </li>
 <li><a href="#sec-1-17">1.17. Helm Snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="framework">framework</span>&#xa0;<span class="library">library</span>&#xa0;<span class="helm">helm</span></span></a>
@@ -1687,7 +1691,52 @@ Command <code>M-x htop</code> to launch htop.
 </div>
 </div>
 </div>
+<div id="outline-container-sec-1-8-8" class="outline-4">
+<h4 id="sec-1-8-8"><span class="section-number-4">1.8.8</span> Launch applicatiosn from Emacs</h4>
+<div class="outline-text-4" id="text-1-8-8">
+<p>
+This command asks the user a shell command providing tab completion
+and launches an asynchronous process (it doesn't freeze Emacs). Unlike
+asynchronous-shell-command this command doesn't create a new
+buffer. It is useful to launch desktop GUI applications from Emacs
+like Firefox, terminal emulator, file mangers and so on.
+</p>
+
+<p>
+Note: In order to this command find the app the directory of the app
+must be in the $PATH variable. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">shell-launch</span> ()
+  <span class="org-doc">"Launch a process without creating a buffer. It is useful to launch apps from Emacs."</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let*</span> ((cmd-raw  (read-shell-command <span class="org-string">"Launch command: "</span>))
+         (cmd-args (split-string-and-unquote cmd-raw))
+         (cmd      (car cmd-args))       <span class="org-comment-delimiter">;; </span><span class="org-comment">program that will run</span>
+         (args     (cdr cmd-args)))     <span class="org-comment-delimiter">;; </span><span class="org-comment">command arguments</span>
+    (apply #'start-process `(,cmd
+                             nil
+                             ,cmd ,@args
+                             ))))
+</pre>
 </div>
+
+<p>
+This comamnd can be bound to a keybiding with the code bellow that
+bidns the key combination SUPER (Windows Key) + 8.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(global-set-key (kbd <span class="org-string">"s-8"</span>) #'shell-launch)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
 <div id="outline-container-sec-1-9" class="outline-3">
 <h3 id="sec-1-9"><span class="section-number-3">1.9</span> File</h3>
 <div class="outline-text-3" id="text-1-9">
@@ -2252,8 +2301,89 @@ navigation.
 </div>
 
 <div id="outline-container-sec-1-11-10" class="outline-4">
-<h4 id="sec-1-11-10"><span class="section-number-4">1.11.10</span> Open directory at point with Microsoft Explorer in Windows OS.</h4>
+<h4 id="sec-1-11-10"><span class="section-number-4">1.11.10</span> Filter dired buffer by file extensions</h4>
 <div class="outline-text-4" id="text-1-11-10">
+<p>
+Usage: 
+</p>
+
+<ol class="org-ol">
+<li>M-x dired/filter-extension
+</li>
+
+<li>Enter the extensions to filter separated by space like: 'html js ccp'
+</li>
+
+<li>It will only show files matching this extensions. To view all files
+type g.
+</li>
+</ol>
+
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">  (<span class="org-keyword">defun</span> <span class="org-function-name">dired/filter-extension</span> ()
+    <span class="org-doc">"Filter dired buffer by file extensions.</span>
+<span class="org-doc">  Usage: </span>
+<span class="org-doc">1. M-x dired/filter-extension </span>
+<span class="org-doc">2. Enter the file extensions separated by space like: exe dll </span>
+
+<span class="org-doc">It will only show files ending with extensions *.exe and *.dll. </span>
+<span class="org-doc">To show all files of dired buffer again type 'g'."</span>
+    (<span class="org-keyword">interactive</span>)
+    (dired-mark-files-regexp
+     (mapconcat 'identity 
+                (mapcar (<span class="org-keyword">lambda</span> (ext) (format <span class="org-string">"\\.%s$"</span> ext))
+                        (split-string (read-string <span class="org-string">"Extension:  "</span>)))
+                <span class="org-string">"\</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">"</span>
+                ))
+    (dired-toggle-marks)
+    (dired-do-kill-lines))
+</pre>
+</div>
+
+<p>
+The key (') quote can be used to invoke this command:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Filter files by extension </span>
+(define-key dired-mode-map <span class="org-string">"'"</span> #'dired/filter-extension)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-11-11" class="outline-4">
+<h4 id="sec-1-11-11"><span class="section-number-4">1.11.11</span> Filter dired buffer by regex</h4>
+<div class="outline-text-4" id="text-1-11-11">
+<p>
+This command only displays files matching the given regex (Emacs' regex). 
+</p>
+
+<p>
+Example: By entering M-x dired/filter '\.pdf$' without quotes it will
+only show file names ending with .pdf. To display all files again type 'g'.
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">dired/filter</span> ()
+  <span class="org-doc">"Show only files which name matches a regex."</span>
+  (<span class="org-keyword">interactive</span>)
+  (dired-mark-files-regexp (read-regexp <span class="org-string">"Regex: "</span>))
+  (dired-toggle-marks)
+  (dired-do-kill-lines))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-11-12" class="outline-4">
+<h4 id="sec-1-11-12"><span class="section-number-4">1.11.12</span> Open directory at point with Microsoft Explorer in Windows OS.</h4>
+<div class="outline-text-4" id="text-1-11-12">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">dired-exec-explorer</span> ()
@@ -3049,9 +3179,30 @@ Example:
 <div class="outline-text-3" id="text-1-16">
 </div><div id="outline-container-sec-1-16-1" class="outline-4">
 <h4 id="sec-1-16-1"><span class="section-number-4">1.16.1</span> Test if package is installed</h4>
+<div class="outline-text-4" id="text-1-16-1">
+<p>
+If the package is installed returns t (true) and nil otherwise.
+</p>
+
+<ul class="org-ul">
+<li><code>(package-installed-p PACKAGE &amp;optional MIN-VERSION)</code>
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">&gt; (package-installed-p 'helm-core)
+t
+</pre>
 </div>
+</div>
+</div>
+
 <div id="outline-container-sec-1-16-2" class="outline-4">
 <h4 id="sec-1-16-2"><span class="section-number-4">1.16.2</span> Install a package if it is not installed</h4>
+</div>
+<div id="outline-container-sec-1-16-3" class="outline-4">
+<h4 id="sec-1-16-3"><span class="section-number-4">1.16.3</span> Install a single-file package from URL</h4>
 </div>
 </div>
 <div id="outline-container-sec-1-17" class="outline-3">
@@ -4556,7 +4707,7 @@ UNIX command into a new Emacs buffer
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-10-21 sex 21:03</p>
+<p class="date">Created: 2016-11-02 qua 05:19</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
