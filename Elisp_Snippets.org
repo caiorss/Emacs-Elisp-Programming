@@ -1341,6 +1341,63 @@ navigation.
                 ))))
 #+END_SRC
 
+*** Filter dired buffer by file extensions 
+
+Usage: 
+
+ 1. M-x dired/filter-extension
+
+ 2. Enter the extensions to filter separated by space like: 'html js ccp'
+
+ 3. It will only show files matching this extensions. To view all files
+    type g.
+
+
+#+BEGIN_SRC elisp 
+  (defun dired/filter-extension ()
+    "Filter dired buffer by file extensions.
+  Usage: 
+1. M-x dired/filter-extension 
+2. Enter the file extensions separated by space like: exe dll 
+
+It will only show files ending with extensions *.exe and *.dll. 
+To show all files of dired buffer again type 'g'."
+    (interactive)
+    (dired-mark-files-regexp
+     (mapconcat 'identity 
+                (mapcar (lambda (ext) (format "\\.%s$" ext))
+                        (split-string (read-string "Extension:  ")))
+                "\\\|"
+                ))
+    (dired-toggle-marks)
+    (dired-do-kill-lines))
+
+#+END_SRC
+
+The key (') quote can be used to invoke this command:
+
+#+BEGIN_SRC elisp 
+;; Filter files by extension 
+(define-key dired-mode-map "'" #'dired/filter-extension)
+#+END_SRC
+
+*** Filter dired buffer by regex 
+
+This command only displays files matching the given regex (Emacs' regex). 
+
+Example: By entering M-x dired/filter '\.pdf$' without quotes it will
+only show file names ending with .pdf. To display all files again type 'g'.
+
+
+#+BEGIN_SRC elisp 
+  (defun dired/filter ()
+    "Show only files which name matches a regex."
+    (interactive)
+    (dired-mark-files-regexp (read-regexp "Regex: "))
+    (dired-toggle-marks)
+    (dired-do-kill-lines))
+#+END_SRC
+
 *** Open directory at point with Microsoft Explorer in Windows OS.
 
 #+BEGIN_SRC elisp
