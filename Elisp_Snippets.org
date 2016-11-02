@@ -342,14 +342,21 @@ Returns the selected text of the current buffer.
 *** Input - Read User Input
 **** Prompt functions
 
-| Function            | Description                      |
-|---------------------+----------------------------------|
-| read-string         | Read input as string             |
-| read-file-name      | Read input as file name          |
-| read-directory-name | Read input as path to directory  |
-| read-regexp         | Read input as regular expression |
-| read-passwd         | Read password                    |
-|                     |                                  |
+| Function            | Description                                                     |
+|---------------------+-----------------------------------------------------------------|
+| read-string         | Read input as string                                            |
+| read-file-name      | Read input as file name                                         |
+| read-directory-name | Read input as path to directory                                 |
+| read-regexp         | Read input as regular expression                                |
+| read-passwd         | Read password                                                   |
+| read-shell-command  | Read a shell command.                                           |
+| read-command        | Read an M-x elisp command returning a symbol.                   |
+| read-envvar-name    | Read environment variable                                       |
+| read-key            | Read a key from the keyboard.                                   |
+| read-key-sequence   | Read a sequence of keystrokes and return as a string or vector. |
+| read-number         | Read a numeric value                                            |
+| read-regexp         | Read regular expression returning it as string.                 |
+|                     |                                                                 |
 
 **** Read string
 
