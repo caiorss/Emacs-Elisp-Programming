@@ -895,6 +895,38 @@ Command =M-x htop= to launch htop.
 #+RESULTS:
 : htop
 
+*** Launch applicatiosn from Emacs 
+
+This command asks the user a shell command providing tab completion
+and launches an asynchronous process (it doesn't freeze Emacs). Unlike
+asynchronous-shell-command this command doesn't create a new
+buffer. It is useful to launch desktop GUI applications from Emacs
+like Firefox, terminal emulator, file mangers and so on.
+
+Note: In order to this command find the app the directory of the app
+must be in the $PATH variable. 
+
+#+BEGIN_SRC elisp 
+  (defun shell-launch ()
+    "Launch a process without creating a buffer. It is useful to launch apps from Emacs."
+    (interactive)
+    (let* ((cmd-raw  (read-shell-command "Launch command: "))
+           (cmd-args (split-string-and-unquote cmd-raw))
+           (cmd      (car cmd-args))       ;; program that will run
+           (args     (cdr cmd-args)))     ;; command arguments
+      (apply #'start-process `(,cmd
+                               nil
+                               ,cmd ,@args
+                               ))))
+#+END_SRC
+
+This comamnd can be bound to a keybiding with the code bellow that
+bidns the key combination SUPER (Windows Key) + 8.
+
+#+BEGIN_SRC elisp 
+(global-set-key (kbd "s-8") #'shell-launch)
+#+END_SRC
+
 ** File
 *** Test if file or directory exists
 
@@ -1824,7 +1856,18 @@ Example:
 
 ** Packages
 *** Test if package is installed
+
+If the package is installed returns t (true) and nil otherwise.
+
+ - =(package-installed-p PACKAGE &optional MIN-VERSION)=
+
+#+BEGIN_SRC elisp 
+  > (package-installed-p 'helm-core)
+  t
+#+END_SRC
+
 *** Install a package if it is not installed
+*** Install a single-file package from URL 
 ** Helm Snippets                                     :framework:library:helm:
 *** Browser Recent files
 
