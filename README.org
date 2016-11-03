@@ -62,7 +62,6 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
    - File manager (dired-mode)
    - Git interface (magit)
 
-
 ** Contents
 
  - [[file:Elisp_Programming.org][Elisp Programming]]  
@@ -103,6 +102,10 @@ Emacs settings for Microsoft Windows OS.
  - [[file:Utilities.org][Utilities]] 
 
 Emacs utilities and goodness like Calculator, Magit, Helm and so on.
+
+ - [[file:Org-Mode.org][Org-mode]] 
+
+Org-mode notes.
 
  - [[file:Resources.org][Resources]]
  

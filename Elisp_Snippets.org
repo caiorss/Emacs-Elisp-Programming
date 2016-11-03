@@ -250,6 +250,97 @@ exist or was deleted. Usage: M-x scratch.
 
 #+END_SRC
 
+*** Eval String in Clipboard
+
+It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
+
+#+BEGIN_SRC elisp
+
+
+ELISP> (defun eval-string (str) (eval (read str)))
+eval-string
+
+ELISP> (defun eval-xclip () (eval-string (shell-command-to-string "xclip -o")))
+eval-xclip
+
+;;
+;;  Copy the following line in this comment block
+;;
+;;      (message "Loading my copypaste file...")
+
+ELISP> (eval-xclip)
+"Loading my copypaste file..."
+ELISP>
+
+#+END_SRC
+
+***  Extract Function Documentation                                   :elisp:
+
+Source: [[http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/][Generate emacs-lisp documentation]]
+Primitives:
+
+#+BEGIN_SRC elisp
+
+ELISP>
+ELISP> (defun sample-function (a b c)
+           "Function Docstring"
+         (+ a (* 5 b) (* 3 c)))
+
+
+;; Extract Documentation
+;;
+ELISP> (documentation 'sample-function)
+"Function Docstring"
+
+;; Extract Code
+;;
+ELISP> (symbol-function 'sample-function)
+(lambda
+  (a b c)
+  "Function Docstring"
+  (+ a
+     (* 5 b)
+     (* 3 c)))
+
+;; Extract Arguments
+ELISP> (help-function-arglist 'sample-function)
+(a b c)
+#+END_SRC
+
+Final Code
+
+#+BEGIN_SRC elisp
+
+(fun2org 'sample-function)
+    "** sample-function (a b c)\nFunction Docstring\n\n#+BEGIN_SRC emacs-lisp\n(lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))\n#+END_SRC\n"
+    ELISP>
+    ELISP> (defun fun2org (function-symbol)
+      (let ((args (help-function-arglist function-symbol))
+            (doc  (documentation function-symbol))
+            (code (symbol-function function-symbol)))
+        (print (format "** %s %s
+    %s
+
+    #+BEGIN_SRC emacs-lisp
+    %S
+
+    " function-symbol args doc code)))) ;; End of fun2org
+#+END_SRC
+
+
+#+BEGIN_SRC elisp
+
+ELISP> (fun2org 'sample-function)
+
+"** sample-function (a b c)
+Function Docstring
+
+ (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
+"
+ #+END_SRC
+
+
+
 ** Common Lisp Emulation Library
 *** Reduce (fold left) function
 **** Build a number from a list of digits
@@ -1031,6 +1122,41 @@ Open a file and returns a buffer:
 
 > b1
 #<buffer .bashrc>
+
+
+#+END_SRC
+
+*** Edit File as Root                                           :utils:edit:
+
+#+BEGIN_SRC elisp
+
+(defun open-as-root (filename)
+  (interactive)
+  (find-file (concat "/sudo:root@localhost:"  filename)))
+
+
+;; Example:
+;; ELISP> (open-as-root "/etc/host.conf")
+;;
+
+
+;;
+;; Open an already opened buffer as root
+;;
+;; M-x open-buffer-as-root
+;;
+(defun open-buffer-as-root ()
+ (interactive)
+ (let
+     (
+      ;; Get the current buffer file name
+      (filename (buffer-file-name (current-buffer)))
+      ;; Get the current file name
+      (bufname  (buffer-name (current-buffer)))
+     )
+   (progn
+  (kill-buffer bufname)         ;; Kill current buffer
+  (open-as-root filename))))    ;; Open File as root
 
 
 #+END_SRC
@@ -1918,6 +2044,151 @@ Example:
         (rename-buffer bufname))))
 #+END_SRC
 
+***  Http and Post Request                           :utils:connections:http:
+
+[[http://qiita.com/sanryuu/items/eed79c7b99616e769e67][Source]]
+#+BEGIN_SRC elisp
+
+
+(defun url-http-post (url args)
+  "Send ARGS to URL as a POST request."
+  (let (
+        (response-string nil)
+        (url-request-method "POST")
+        (url-request-extra-headers
+         '(("Content-Type" . "application/x-www-form-urlencoded")))
+        (url-request-data
+         (mapconcat (lambda (arg)
+                      (concat (url-hexify-string (car arg))
+                              "="
+                              (url-hexify-string (cdr arg))))
+                    args
+                    "&")))
+    (switch-to-buffer
+     (url-retrieve-synchronously url))
+    (goto-char (point-min))
+    (re-search-forward "\n\n")
+    (setq response-string
+          (buffer-substring-no-properties (point) (point-max)))
+    (kill-buffer (current-buffer))
+    response-string))
+
+(defun url-http-get (url args)
+  "Send ARGS to URL as a GET request."
+  (let (
+        (response-string nil)
+        (url-request-method "GET")
+        (url-request-data
+         (mapconcat (lambda (arg)
+                      (concat (url-hexify-string (car arg))
+                              "="
+                              (url-hexify-string (cdr arg))))
+                    args
+                    "&")))
+    (switch-to-buffer
+     (url-retrieve-synchronously
+      (concat url "?" url-request-data)))
+    (goto-char (point-min))
+    (re-search-forward "\n\n")
+    (setq response-string
+          (buffer-substring-no-properties
+           (point) (point-max)))
+    (kill-buffer (current-buffer))
+    response-string))
+
+
+ELISP> (princ (url-http-get "http://httpbin.org/get" nil))
+{
+  "args": {},
+  "headers": {
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip",
+    "Content-Length": "0",
+    "Extension": "Security/Digest Security/SSL",
+    "Host": "httpbin.org",
+    "Mime-Version": "1.0",
+    "User-Agent": "URL/Emacs"
+  },
+  "origin": "167.103.159.147",
+  "url": "http://httpbin.org/get"
+}
+
+
+ELISP> (princ (url-http-post "http://httpbin.org/post" '(("use" . "dummy")  ("pass" . "something else") ("code" . "pxyz0011213"))))
+{
+  "args": {},
+  "data": "",
+  "files": {},
+  "form": {
+    "code": "pxyz0011213",
+    "pass": "something else",
+    "use": "dummy"
+  },
+  "headers": {
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip",
+    "Content-Length": "48",
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Extension": "Security/Digest Security/SSL",
+    "Host": "httpbin.org",
+    "Mime-Version": "1.0",
+    "User-Agent": "URL/Emacs"
+  },
+  "json": null,
+  "origin": "167.103.159.147",
+  "url": "http://httpbin.org/post"
+}
+
+
+#+END_SRC
+** Interface 
+***  Creating Quick Access Menu
+
+file:images/utils_menu1.png
+
+file:images/utils_menu2.png
+
+#+BEGIN_SRC elisp
+
+
+(require 'easymenu)
+
+(easy-menu-define djcb-menu global-map "Utils"
+  '("Utils"
+
+     ("Shells" ;; submenu
+       ["Ielm   - Emacs Lisp Shell"       (ielm)]
+       ["Eshell - Emacs Buitin Shell"    (eshell)]
+       ["Native Shell "                  (shell)]
+      ["---------------------" nil]
+      ["Edit .bashrc" (find-file  "~/.bashrc")]
+      ["Edit .profile" (find-file "~/.profile")]
+      ["Edit .Xresources" (find-file "~/.Xresources")]
+      ["Edit .xsessin"    (find-file "~/.xsession")]
+      ["See all GNU MAN pages" ( info)]
+      ["See a specific Man Page" (woman)]
+
+      );; End of shells menu
+
+     ("Emacs /Elisp"  ;; submenu
+
+      ["Ielm   - Emacs Lisp Shell"  (ielm)]
+      ["Eval buffer"   ( eval-buffer ) ]
+      ["---------------------" nil]
+
+      ["Edit  init.el" (find-file  user-init-file)]
+      ["Reload init.el" (load-file user-init-file)]
+      ["Open .emac.d dir" (find-file "~/.emacs.d")]
+      ["List packages"     (list-packages)]
+      ["Install package"   (package-install)]
+
+     ) ;; End of Emacs / Elisp submenu
+
+ )) ;; End of Custom Menu
+
+
+#+END_SRC
+
 ** Packages
 *** Test if package is installed
 
@@ -2290,6 +2561,143 @@ browse:
 clean:
 	rm -rf dist/*.html dist/*.html~
 #+END_SRC
+** Persistence 
+***  Save and Reload Current Session
+
+Interactive Developement
+
+#+BEGIN_SRC elisp
+
+ELISP> (defun file-contents (filename)
+  (interactive "fFind file: ")
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (buffer-substring-no-properties (point-min) (point-max))))
+file-contents
+ELISP>
+
+ELISP> (defun write-file (filename content)
+         (append-to-file content nil filename))
+write-file
+ELISP>
+
+ELISP> (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))
+("/home/tux/.emacs.d/init.el" "/sudo:root@localhost:/etc/host.conf")
+
+ELISP> (setq session-file  "~/.emacs.d/lastsession.el")
+"~/.emacs.d/lastsession.el"
+ELISP>
+
+ELISP>
+ELISP> (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list))))
+"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
+
+
+ELISP> (setq code  (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))))
+"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
+ELISP>
+
+ELISP> (setq session-file "~/.emacs.d/lastsession.el")
+
+ELISP> (delete-file session-file)
+nil
+
+ELISP> (write-file session-file code)
+nil
+ELISP>
+
+ELISP> (file-contents session-file)
+"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
+ELISP>
+
+ELISP> (load-file session-file)
+t
+ELISP> last-session-files
+("/home/tux/.emacs.d/init.el" "/sudo:root@localhost:/etc/host.conf")
+
+;;; Open All files defined in Last Session
+ELISP>
+ELISP> (mapcar 'find-file last-session-files)
+(#<buffer init.el> #<buffer host.conf>)
+
+ELISP>
+#+END_SRC
+
+Joining Everything
+
+
+File: sessions.el
+
+#+BEGIN_SRC elisp
+
+(setq session-file "~/.emacs.d/lastsession.el")
+
+(defun write-file (filename content)
+  (append-to-file content nil filename))
+
+
+(defun make-session-code ()
+     (interactive)
+     (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))))
+
+
+(defun save-session ()
+    "Save Current Session"
+    (interactive)
+    (when (file-exists-p session-file) (delete-file session-file))
+    (write-file session-file (make-session-code)))
+
+
+(defun load-session ()
+  (interactive)
+  (load-file session-file)
+  (mapcar 'find-file last-session-files)
+)
+
+(message "Reloaded")
+
+#+END_SRC
+
+
+To save all bufffers with files:
+
+#+BEGIN_SRC
+M-x load-file ;; Enter session.el
+M-x save-session
+#+END_SRC
+
+
+To reload the files save in the seesion enter:
+
+#+BEGIN_SRC
+M-x load-file    ;; Enter session.el
+M-x load-session ;; All previous files in the session
+                 ;; saved will be opened
+#+END_SRC
+
+***  Save and Restore Current Window Configuration
+
+Press <F7> to save the curren window configuration and <F8> to restore. The functions can also be executed with A-x save-view or A-x restore-view.
+
+#+BEGIN_SRC elisp
+
+(defun save-view ()
+  "Save current window configuration"
+  (interactive)
+  (setq winconf  (current-window-configuration))
+  (message "View Saved - Press to restore"))
+
+(defun restore-view ()
+  "Restore saved window configuration"
+  (interactive)
+  (set-window-configuration winconf)
+  (message "View loaded"))
+
+(global-set-key (kbd "<f7>")  #'save-view)
+(global-set-key (kbd "<f8>")  #'restore-view)
+
+#+END_SRC
+
 ** Non categorized
 *** Save the scratch buffer and reload every Emacs startup
 
@@ -2333,6 +2741,277 @@ Source: [[https://gist.github.com/kobapan/034d5123321b32bb68ca][scratch.el]]
   (ignore-errors (kill-buffer ".scratch")))
 
 #+END_SRC
+*** Code Navigation with Occur                                        :edit:
+
+The function *occur* is useful for code navigation and scan code
+statements, this function is invoked by M-x occur.
+
+Examples:
+
+The function python/scan-functions will scan for all lines that starts
+with def statement in a Python code and show the matching lines in the
+right side.
+
+#+BEGIN_SRC emacs-lisp
+
+(defun python/scan-functions ()
+  (interactive)
+  (split-window-horizontally)
+  (occur "def")
+  )
+
+#+END_SRC
+
+Example:
+
+file:images/occur_statement_scan.png
+
+
+It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
+@NOTE. This fuction can be excuted by typing: =M-x scan-code-tags=
+
+Example:
+
+#+BEGIN_SRC emacs-lisp
+
+(defun scan-code-tags ()
+     "
+     Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:
+
+     "
+     (interactive)
+     (split-window-horizontally)
+     (occur "@FIXME:\\|@TODO:\\|@BUG:\\|@NOTE:"))
+
+#+END_SRC
+
+
+file:images/scan_code_tags.png
+
+*** Quick edit and reload Emacs Configuration File.    :elisp:customization:
+
+It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
+
+#+BEGIN_SRC elisp
+
+;; Usage: M-x reload-init-file
+;;
+(defun reload-init-file ()
+  "Reload init.el file"
+  (interactive)
+  (load user-init-file)
+  (message "Reloaded init.el OK.")
+)
+
+;; Usage: M-x open-init-file
+;;
+(defun open-init-file ()
+    (interactive)
+    (find-file user-init-file)
+)
+#+END_SRC
+
+
+*** Refresh / Revert buffer without confirmation.
+
+Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
+
+
+#+BEGIN_SRC elisp
+
+(defun refresh ()
+    "Revert buffer without confirmation."
+    (interactive)
+    (revert-buffer t t))
+#+END_SRC
+
+Usage:
+
+#+END_SRC
+M-x refresh
+#+END_SRC
+
+*** Create a menu with all color themes available
+
+file:images/colortheme_menu.png
+
+*Using Eval*
+
+Copy and paste the code below to the scratch buffer and enter M-x eval-buffer. This code can also be put in ~/emacs.d/init.el, in the config file.
+
+#+BEGIN_SRC elisp
+
+(defun eval-string (str) (eval (read str)))
+
+(defun make-menu-rows ()
+ (mapcar
+   (lambda (x)
+      (format "[\"%s\" (load-theme '%s)]"  (symbol-name x) (symbol-name x) ))
+   (custom-available-themes))
+ )
+
+
+(defun make-color-menu-code ()
+  (format
+   "
+   (easy-menu-define djcb-menu global-map \"Color Themes\"
+     '(\"Color Themes\"
+        %s
+      )
+   )
+   "
+  (mapconcat 'identity (make-menu-rows) "\n")
+
+  ) ;; End of format
+) ;; End of make-color-menu
+
+
+
+;;
+;; "Eval is evil". It must be avoided, because, it is hard to refactor,
+;; hard to debug and vulnerable to code injection on Web Apps, so a better
+;; way to write it is to use Elisp macros.
+;;
+;; @DONE: Change eval-string to an Elisp macro.
+;;
+(eval-string (make-color-menu-code))
+
+#+END_SRC
+
+*Using Macros*
+
+Developement:
+
+#+BEGIN_SRC elisp
+
+ELISP> (custom-available-themes)
+(cyberpunk adwaita deeper-blue dichromacy leuven light-blue manoj-dark misterioso tango-dark tango tsdh-dark tsdh-light wheatgrass whiteboard wombat)
+
+ELISP> (mapcar
+        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
+        (custom-available-themes)
+    )
+(["adwaita"
+  (load-theme 'adwaita)]
+ ["deeper-blue"
+  (load-theme 'deeper-blue)]
+ ["dichromacy"
+  (load-theme 'dichromacy)]
+ ["leuven"
+  (load-theme 'leuven)]
+ ["light-blue"
+  (load-theme 'light-blue)]
+ ["manoj-dark"
+  (load-theme 'manoj-dark)]
+ ["misterioso"
+  (load-theme 'misterioso)]
+ ["tango-dark"
+  (load-theme 'tango-dark)]
+  ...
+
+ELISP>  (defun make-menu-rows ()
+          (mapcar
+        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
+        (custom-available-themes)))
+make-menu-rows
+ELISP>
+ELISP> (make-menu-rows)
+(["adwaita"
+  (load-theme 'adwaita)]
+ ["deeper-blue"
+  (load-theme 'deeper-blue)]
+ ["dichromacy"
+  (load-theme 'dichromacy)]
+ ["leuven"
+  (load-theme 'leuven)]
+  ...
+
+
+ELISP> `(easy-menu-define djcb-menu global-map "Color Themes"
+          '("Color Themes"
+           ,@(make-menu-rows)))
+(easy-menu-define djcb-menu global-map "Color Themes"
+  '("Color Themes"
+    ["adwaita"
+     (load-theme 'adwaita)]
+    ["deeper-blue"
+     (load-theme 'deeper-blue)]
+    ["dichromacy"
+     (load-theme 'dichromacy)]
+    ["leuven"
+     (load-theme 'leuven)]
+    ["light-blue"
+     (load-theme 'light-blue)]
+     ...
+
+;;; Now execute the generated code, the menu will pop up.
+;;;
+
+ELISP> (eval `(easy-menu-define djcb-menu global-map "Color Themes"
+          '("Color Themes"
+           ,@(make-menu-rows))))
+nil
+
+#+END_SRC
+
+Final code
+
+#+BEGIN_SRC elisp
+
+(defun make-menu-rows ()
+          (mapcar
+        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
+        (custom-available-themes)))
+
+
+(defmacro make-color-menu ()
+  `(easy-menu-define djcb-menu global-map "Color Themes"
+     '("Color Themes"
+       ,@(make-menu-rows))))
+
+(make-color-menu)
+
+;;;;; Or copy and paste the following  block on IELM shell
+
+(progn
+    (defun make-menu-rows ()
+              (mapcar
+            (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
+            (custom-available-themes)))
+
+
+    (defmacro make-color-menu ()
+      `(easy-menu-define djcb-menu global-map "Color Themes"
+         '("Color Themes"
+           ,@(make-menu-rows))))
+
+    (make-color-menu)
+)
+
+
+;;;; Testing the macro expansion
+
+ELISP> (macroexpand '(make-color-menu))
+(progn
+  (defvar djcb-menu nil "Color Themes")
+  (easy-menu-do-define 'djcb-menu global-map "Color Themes"
+               '("Color Themes"
+             ["adwaita"
+              (load-theme 'adwaita)]
+             ["deeper-blue"
+              (load-theme 'deeper-blue)]
+             ["dichromacy"
+              (load-theme 'dichromacy)]
+             ["leuven"
+              (load-theme 'leuven)]
+             ["light-blue"
+              (load-theme 'light-blue)]
+            ...
+
+#+END_SRC
+
+
+
 * IELM - Inferior Emacs Lisp Mode
 ** Change Prompt
 
@@ -2673,283 +3352,6 @@ Disable Security confirmation:
         )
 #+END_SRC
 
-* Useful Elisp Info Pages
-** Elisp
-
-Elisp Top Page
-
-#+BEGIN_SRC elisp
-(info "(elisp) Top")
-#+END_SRC
-
-
-Elisp Info Page
-
-#+BEGIN_SRC elisp
-
-(info "(elisp)")
-
-#+END_SRC
-
-Introduction to programming Elisp
-
-#+BEGIN_SRC elisp
-(info "(eintr)")
-#+END_SRC
-
-Tips about documenting Elisp
-
-#+BEGIN_SRC elisp
-(info "(elisp)Documentation Tips")
-#+END_SRC
-
-Misc
-
-
-#+BEGIN_SRC elisp
-(info "(elisp) Symbols")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Function Cells")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Defining Commands")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Functions")
-#+END_SRC
-
-** Customization
-
-*Customization:*
-
-#+BEGIN_SRC elisp
-(info "(emacs) Customization")
-#+END_SRC
-
-*Define Customizable Interface*
-
-#+BEGIN_SRC elisp
-(info "(elisp) Customization")
-#+END_SRC
-
-** Layout
-
-#+BEGIN_SRC elisp
-(info "(emacs) Fonts")
-#+END_SRC
-
-** Syntax Tables
-
-#+BEGIN_SRC elisp
-(info "(elisp) Syntax Tables")
-#+END_SRC
-
-** Environment Variables and OS Detection
-
-#+BEGIN_SRC elisp
-(info "(elisp) System Environment")
-#+END_SRC
-** Subprocess Creation
-
- - Creating Subprocesses
-
-#+BEGIN_SRC elisp
-(info "(elisp) Subprocess Creation")
-#+END_SRC
-
- - Get process output
-
-#+BEGIN_SRC elisp
-(info "(elisp) Accepting Output")
-#+END_SRC
-
-** Keybindings
-
-#+BEGIN_SRC elisp
-(info "(elisp) Function Keys")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Keys in Documentation")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(emacs) Windows Keyboard")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Keymaps")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Key Binding Conventions")
-#+END_SRC
-
-** Hooks (Events Callbacks)
-
-#+BEGIN_SRC elisp
-(info "(elisp) Hooks")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Setting Hooks")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Advising Functions")
-#+END_SRC
-
-** Buffer
-
-Buffers
-
-#+BEGIN_SRC elisp
-(info "(elisp) Buffers")
-#+END_SRC
-
-Buffer Content
-
-#+BEGIN_SRC elisp
-(info "(elisp) Buffer Contents")
-#+END_SRC
-
-
-Cursor
-
-#+BEGIN_SRC elisp
-(info "(elisp) Positions")
-#+END_SRC
-
-Hooks
-
-#+BEGIN_SRC elisp
-(info "(elisp)Change Hooks")
-#+END_SRC
-
-
-Motion
-
-#+BEGIN_SRC elisp
-(info "(elisp) Motion")
-#+END_SRC
-
-
-Text and Strings
-
-#+BEGIN_SRC elisp
-(info "(elisp) Text")
-#+END_SRC
-
-
-#+BEGIN_SRC elisp
-(info "(elisp) Strings and Characters")
-#+END_SRC
-
-
-
-Buffer Local Variable
-
-#+BEGIN_SRC elisp
-(info "(emacs) File Variables")
-#+END_SRC
-
-** Window
-
-Frame
-
-#+BEGIN_SRC elisp
-(info "(elisp) Windows")
-#+END_SRC
-
-** Frame
-
-Frame
-
-#+BEGIN_SRC elisp
-(info "(elisp) Frames")
-#+END_SRC
-
-Frame Parameters
-
-#+BEGIN_SRC elisp
-(info "(elisp) Frame Parameters")
-#+END_SRC
-
-** Files
-
-Files
-
-#+BEGIN_SRC elisp
-(info "(elisp) Files")
-#+END_SRC
-
-Change Files
-
-#+BEGIN_SRC elisp
-(info "(elisp) Changing Files")
-#+END_SRC
-
-File Name Components
-
-#+BEGIN_SRC elisp
-(info "(elisp) File Name Components")
-#+END_SRC
-
-
-Buffer Local Variable
-
-#+BEGIN_SRC elisp
-(info "(emacs) File Variables")
-#+END_SRC
-
-** Text Enconding ISO UTF8 ...
-
-
-#+BEGIN_SRC elisp
-(info "(emacs) International")
-#+END_SRC
-
-** Loading, Libraries and Packages
-
-Loading
-
-#+BEGIN_SRC elisp
-(info "(elisp) How Programs Do Loading")
-#+END_SRC
-
-#+BEGIN_SRC elisp
-(info "(elisp) Loading")
-#+END_SRC
-
-Libraries
-
-#+BEGIN_SRC elisp
-(info "(emacs) Lisp Libraries")
-#+END_SRC
-
-Packages
-
-#+BEGIN_SRC elisp
-(info "(elisp) Packaging")
-#+END_SRC
-
-** Batch Mode
-
-Batch Mode
-
-#+BEGIN_SRC elisp
-(info "(elisp) Batch Mode")
-#+END_SRC
-
-** Syntax Highlight
-
-#+BEGIN_SRC elisp
-(info "(elisp) Syntax Class Table")
-#+END_SRC
 * Selected Gists
 
  - [[https://gist.github.com/justinabrahms/1390864][extract archives from eshell]]

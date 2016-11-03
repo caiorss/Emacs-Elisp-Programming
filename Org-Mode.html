@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Org-mode</title>
+<!-- 2016-11-03 qui 05:23 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Caio Rodrigues" />
+<meta  name="description" content="Emacs programming and customization."
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link href="theme/style.css" rel="stylesheet">
+
+<script type="text/javascript" src="theme/org-info.js">
+/**
+ *
+ * @source: theme/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in theme/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in theme/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Org-mode</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Org-Mode</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Overview</a></li>
+<li><a href="#sec-1-2">1.2. Useful Key bindings for org-mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="mode">mode</span>&#xa0;<span class="org">org</span>&#xa0;<span class="key">key</span>&#xa0;<span class="binding">binding</span></span></a></li>
+<li><a href="#sec-1-3">1.3. References</a></li>
+<li><a href="#sec-1-4">1.4. Videos</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. Tutorials</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Presentations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<a href="index.html">Top</a>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Org-Mode</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Overview</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Org-Mode is a mode built-in to Emacs that allows to store structured
+data, information in text format - org-mode markdown that can be
+exported to html, pdf, latex, markdown, github flavoured markdown
+and more file formats.
+</p>
+
+<p>
+Features:
+</p>
+
+<ul class="org-ul">
+<li>Everything stored in text format: The most portable format.
+</li>
+<li>Todo List.
+</li>
+<li>It can be used as a personal Wiki.
+</li>
+<li>Table editing, formating, built-in spreadsheet.
+</li>
+<li>Tags, Headlines
+</li>
+<li>Literate programming, Run code blocks, Create Interactive and
+reproducible software documentation.
+</li>
+<li>Display and export Latex Formulas
+</li>
+<li>Display Pictures
+</li>
+<li>Many link formats
+<ul class="org-ul">
+<li>Link to files, web, IRC, Usenet News groups
+</li>
+<li>Link to shell commands
+</li>
+<li>Links to trigger Emacs Functions
+</li>
+</ul>
+</li>
+<li>Usefulness
+<ul class="org-ul">
+<li>Authoring
+</li>
+<li>Write Software documentation with embedded snippets
+</li>
+<li>Literate Programming
+</li>
+<li>Reproducible Research
+</li>
+<li>Wiki
+</li>
+<li>Markdown
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+Example: this document is now written in org-mode and the exported to
+html and github flavoured markdown.
+</p>
+
+
+<div class="figure">
+<p><img src="images/document_in_org_mode1.png" alt="document_in_org_mode1.png" />
+</p>
+</div>
+
+<p>
+It also supports inline code blocks that can be evaluated and the
+result printed in the document or displayed in the minibuffer.
+</p>
+
+
+<div class="figure">
+<p><img src="images/document_in_org_mode2.png" alt="document_in_org_mode2.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Useful Key bindings for org-mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="mode">mode</span>&#xa0;<span class="org">org</span>&#xa0;<span class="key">key</span>&#xa0;<span class="binding">binding</span></span></h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Move within headlines:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M - &lt;return&gt;</td>
+<td class="left">Insert headline at same level as the previous one.</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-p</td>
+<td class="left">Move to previous headline</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-n</td>
+<td class="left">Move to next headline</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-u</td>
+<td class="left">Move to higher headline</td>
+</tr>
+
+<tr>
+<td class="left">M-[up]</td>
+<td class="left">Move headline, list row or table row up</td>
+</tr>
+
+<tr>
+<td class="left">M-[down]</td>
+<td class="left">Move headline, list item or table row down</td>
+</tr>
+
+<tr>
+<td class="left">M-[left]</td>
+<td class="left">Demote  list item or headline</td>
+</tr>
+
+<tr>
+<td class="left">M-[right]</td>
+<td class="left">Promote list item or headline</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+<b>Buffer Subtree</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">shift-tab</td>
+<td class="left">Fold / Unfold headlines</td>
+</tr>
+
+<tr>
+<td class="left">C-x n s</td>
+<td class="left">Narrow the buffer subtree to current headline</td>
+</tr>
+
+<tr>
+<td class="left">C-c n w</td>
+<td class="left">Widen the view back</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Table</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-c-!</td>
+<td class="left">Convert region into a table</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Hyperlinks</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-c-C-o</td>
+<td class="left">Open a link</td>
+</tr>
+
+<tr>
+<td class="left">C-c-C-l</td>
+<td class="left">Insert/ Edit a link</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Markdown</b>
+</p>
+
+<p>
+Text formating
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Markdown</th>
+<th scope="col" class="left">View</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>*bold*</code></td>
+<td class="left"><b>bold</b></td>
+</tr>
+
+<tr>
+<td class="left"><code>_underline_</code></td>
+<td class="left"><span class="underline">underline</span></td>
+</tr>
+
+<tr>
+<td class="left"><code>/italic/</code></td>
+<td class="left"><i>italic</i></td>
+</tr>
+
+<tr>
+<td class="left"><code>+strike it+</code></td>
+<td class="left"><del>strike it</del></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Hyperlinks
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Markdown</th>
+<th scope="col" class="left">View</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">:<a href="http://www.bing.com">http://www.bing.com</a></td>
+<td class="left"><a href="http://www.bing.com">http://www.bing.com</a></td>
+<td class="left">Link to  web page</td>
+</tr>
+
+<tr>
+<td class="left">:<a href="ftp://something.net">ftp://something.net</a></td>
+<td class="left">&#xa0;</td>
+<td class="left">Link to ftp</td>
+</tr>
+
+<tr>
+<td class="left">:<a href="file:///etc/fstab">file:///etc/fstab</a></td>
+<td class="left"><a href="file:///etc/fstab">file:///etc/fstab</a></td>
+<td class="left">Link to file <i>{/etc/fstab}</i></td>
+</tr>
+
+<tr>
+<td class="left">:<a href="uname%20-a">uname%20-a</a></td>
+<td class="left"><a href="uname%20-a">uname%20-a</a></td>
+<td class="left">Execute Shell Command: uname -a</td>
+</tr>
+
+<tr>
+<td class="left">:elisp:(message%20"Hello world")</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> References</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Manual:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://orgmode.org/org.html">The Org Manual orgmode.org</a>
+</li>
+<li><a href="https://www.gnu.org/software/emacs/manual/html_node/org/">Org Mode Manual</a>
+</li>
+<li><a href="http://orgmode.org/worg/org-glossary.html">Org Glossary: An Explanation of Basic Org-Mode Concepts</a>
+</li>
+
+<li>Editing
+<ul class="org-ul">
+<li><a href="http://orgmode.org/manual/Structure-editing.html">http://orgmode.org/manual/Structure-editing.html</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>
+Examples:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://home.fnal.gov/~neilsen/notebook/orgExamples/org-examples.html#sec-5">Emacs org-mode examples and cookbook</a>
+</li>
+</ul>
+
+<p>
+Many examples about literate programming in Org-mode with Python, R,
+java and C. Shows integration of org-mode tables and Python, R &#x2026; and
+code blocks.
+</p>
+
+<ul class="org-ul">
+<li><a href="http://gitwiki.org/Tests/org-mode.org">http://gitwiki.org/Tests/org-mode.org</a>
+</li>
+<li><a href="https://chopmode.wordpress.com/2011/01/30/my-org-mode-journey-chapter-1/">My Org-mode journey – Chapter 1 | chop-mode</a>
+</li>
+</ul>
+
+
+<p>
+Reference Cards and Cheat Sheets:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://orgmode.org/orgguide.pdf">The Compact Org-Mode Guide</a>
+</li>
+<li><a href="https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf">Org-Mode Reference Card</a>
+</li>
+
+<li><a href="https://gist.github.com/wdkrnls/1990839">Markup Cheat sheet for Org-mode</a>
+</li>
+</ul>
+
+<p>
+Books:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://doc.norang.ca/org-mode.html">Org Mode - Organize Your Life In Plain Text!</a>
+</li>
+</ul>
+
+<p>
+Hacking and Tweaking:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html">Embedding Youtube videos with org-mode links</a>
+</li>
+<li><a href="http://stackoverflow.com/questions/17435995/paste-an-image-on-clipboard-to-emacs-org-mode-file-without-saving-it">Paste an image on clipboard to Emacs Org mode file without saving it</a>
+</li>
+
+<li><a href="http://orgmode.org/worg/org-faq.html">Org-mode Frequently Asked Questions</a>
+</li>
+
+<li><a href="http://oremacs.com/2015/01/07/org-protocol-1/">My org-protocol setup, part 1.</a>
+</li>
+
+<li><a href="http://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line">Batch export of org-mode files from the command line</a>
+</li>
+
+<li><a href="http://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-5">Org ad hoc code, quick hacks and workarounds</a>
+</li>
+</ul>
+
+
+
+<p>
+Cases:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://kitchingroup.cheme.cmu.edu/blog/2014/08/08/What-we-are-using-org-mode-for/">What we are using org-mode for</a>
+</li>
+<li><a href="http://juanreyero.com/article/emacs/org-teams.html">Org-mode tricks for team management</a>
+</li>
+</ul>
+
+<p>
+Literate Programming:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">Literate DevOps - www.howardism.org</a>
+</li>
+<li><a href="http://stackoverflow.com/questions/18598870/emacs-org-mode-executing-simple-python-code">Emacs Org Mode: Executing simple python code</a>
+</li>
+<li><a href="http://blogs.neuwirth.priv.at/software/2012/03/28/r-and-emacs-with-org-mode/">R and Emacs with org mode</a>
+</li>
+<li><a href="https://github.com/erikriverson/org-mode-R-tutorial/blob/master/org-mode-R-tutorial.org">Org-mode and R: An Introduction Introduction</a>
+</li>
+<li><a href="http://orgmode.org/worg/org-contrib/babel/intro.html">Babel: Introduction</a>
+</li>
+<li><a href="http://orgmode.org/manual/Results-of-evaluation.html">Results of evaluation / Org-Mode Manual</a>
+</li>
+</ul>
+
+<p>
+Non Categorized:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.totherme.org/configs/org-stuff.html">Gareth's Org-Mode Config</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Videos</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Tutorials</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+<b>Org Mode in Depth - by Rick Dillon</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=nsGYet02bEk">Hack Emacs - Org Mode In Depth: Managing Structure - YouTube</a>
+</li>
+</ul>
+
+<p>
+Description: Part of the Org Mode In Depth series. In this episode, we
+examine methods for exploiting the structure of an Org Mode file to
+focus on specific subtrees, control visibility by folding and
+unfolding headlines, navigate among headlines efficiently and
+reorganize headlines my moving and/or promoting and demoting them.
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=fTJVLJd_gz0">Org Mode In Depth: Tables - YouTube</a>
+</li>
+</ul>
+
+<p>
+Description: Actually recorded a few months back, I never got around
+to uploading this. I give a brief demo of some of the functionality
+Org Mode tables offer, and an explanation of some of the commands that
+enable it.
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=VTh_Xgt69-E">Hack Emacs - Org Mode in Depth: Markup and Links - YouTube</a>
+</li>
+</ul>
+
+<p>
+Description: Part of the Org Mode in Depth series. In this episode, I
+examine ways of marking up text in Org Mode, as well as various link
+types that connect Org headlines and files, as well as links that can
+execute code.
+</p>
+
+<p>
+<b>NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode by Tory S. Anderson</b>
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=nkv8PpxrL3k">Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode</a>
+</li>
+<li></li>
+<li></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Presentations</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<ul class="org-ul">
+<li><a href="#coderef-info "(emacs) Misc Help""class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-info "(emacs) Misc Help"');" onmouseout="CodeHighlightOff(this, 'coderef-info "(emacs) Misc Help"');">Emacs Org-Mode - A system for note-taking and project planning</a> -  Talk given by Carsten Dominik.
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=lsYdK0C2RvQ">Embedding Code Snippets In Org Mode</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=VIuOwIBL-ZU">Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=fgizHHd7nOo">Org mode is awesome</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=oJTwQvgfgMM">Emacs Org-mode - a system for note-taking and project planning</a>
+</li>
+
+<li><a href="https://youtu.be/6W82EdwQhxU">Hack-Emacs an Overview of Org-Mode</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=cRUCiF2MwP4">Teaching with Emacs+org-mode - YouTube</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Caio Rodrigues</p>
+<p class="date">Created: 2016-11-03 qui 05:23</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

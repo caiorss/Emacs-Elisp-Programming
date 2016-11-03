@@ -7,15 +7,22 @@
 
 Some Emacs utilities and goodness.
 
-| Feature                       | Command                 | Description                                                  |
+| Feature                       | Entry Point             | Description                                                  |
 |-------------------------------+-------------------------+--------------------------------------------------------------|
+| Package Manager               | M-x list-packages       | List all packages available.                                 |
+|                               | M-x package-insstall    | Install some package                                         |
+|                               |                         |                                                              |
 | Info page                     | M-x info                | Info page reader                                             |
 |                               |                         |                                                              |
 | Manpage                       | M-x woman               | Manpage Reader                                               |
 |                               |                         |                                                              |
-| Diff                          | M-x ediff               | File diff viwer                                              |
+| Diff files                    | M-x ediff               | File diff viwer                                              |
+|                               |                         |                                                              |
+| Diff buffers                  | M-x ediff-buffers       | Buffers diff viewer like ediff                               |
 |                               |                         |                                                              |
 | File manager                  | M-x dired or C-x d      | File manager and directory editor                            |
+|                               |                         |                                                              |
+| Shell Command                 | M-x shell-command       | Run a batch shell command like ifconfig or dmesg (Linux)     |
 |                               |                         |                                                              |
 | Async shell command           | M-x async-shell-command | Run any shell command asynchronously. It is useful to        |
 |                               |                         | run REPLs like database shells, shells, interactive CLI apps |
@@ -43,6 +50,12 @@ Some Emacs utilities and goodness.
 | Task manager/ Process manager | M-x proced              | Htop like multi platform task manager.                       |
 |                               |                         |                                                              |
 | Network information           | M-x ifconfig            | Show iformation about network interfaces                     |
+|                               |                         |                                                              |
+| Color Pallete                 | M-x list-colors-display | Display a collor pallete.                                    |
+|                               |                         |                                                              |
+| GNU Debugger Interface        | M-x gdb                 |                                                              |
+|                               |                         |                                                              |
+| VIM Emulation                 | M-x evil-mode           | It provided by the evil package.                             |
 |                               |                         |                                                              |
 
 Note: 

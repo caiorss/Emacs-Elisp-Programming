@@ -3868,8 +3868,9 @@ ELISP>
 | Windows           | Each frame can be split in sections that Emacs documentation calls windows                     |
 | Fill              | Word Wrap                                                                                      |
 | Yank              | Copy                                                                                           |
-| Kill              | Cut                                                                                            |
+| Kill Region       | Cut                                                                                            |
 | Kill Ring         | Clipboard                                                                                      |
+| Kill Buffer       | Close Buffer                                                                                   |
 | Mode Line         | Status Bar                                                                                     |
 | Font Locking      | Syntax Coloring                                                                                |
 
@@ -3878,6 +3879,7 @@ See also:
     * [[http://www.blogbyben.com/2011/04/10-concepts-emacs-newbie-should-master.html][11 Concepts The Emacs Newbie Should Master]]
 
 file:images/Emacs_terminology.png
+
 **  Emacs API
 
 *Emacs API Objects*
@@ -3941,6 +3943,283 @@ See also, from Emacs Wiki:
    * [[http://www.emacswiki.org/emacs/CommonLisp][Why isn't more of CommonLisp in GNU Emacs?]]
    * [[http://www.emacswiki.org/emacs/WhyDoesElispSuck][Why Does ElispSuck]]
 
+**  Useful Info Pages
+*** Elisp
+
+Elisp Top Page
+
+#+BEGIN_SRC elisp
+(info "(elisp) Top")
+#+END_SRC
+
+
+Elisp Info Page
+
+#+BEGIN_SRC elisp
+
+(info "(elisp)")
+
+#+END_SRC
+
+Introduction to programming Elisp
+
+#+BEGIN_SRC elisp
+(info "(eintr)")
+#+END_SRC
+
+Tips about documenting Elisp
+
+#+BEGIN_SRC elisp
+(info "(elisp)Documentation Tips")
+#+END_SRC
+
+Misc
+
+
+#+BEGIN_SRC elisp
+(info "(elisp) Symbols")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Function Cells")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Defining Commands")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Functions")
+#+END_SRC
+
+*** Customization
+
+*Customization:*
+
+#+BEGIN_SRC elisp
+(info "(emacs) Customization")
+#+END_SRC
+
+*Define Customizable Interface*
+
+#+BEGIN_SRC elisp
+(info "(elisp) Customization")
+#+END_SRC
+
+*** Layout
+
+#+BEGIN_SRC elisp
+(info "(emacs) Fonts")
+#+END_SRC
+
+*** Syntax Tables
+
+#+BEGIN_SRC elisp
+(info "(elisp) Syntax Tables")
+#+END_SRC
+
+*** Environment Variables and OS Detection
+
+#+BEGIN_SRC elisp
+(info "(elisp) System Environment")
+#+END_SRC
+*** Subprocess Creation
+
+ - Creating Subprocesses
+
+#+BEGIN_SRC elisp
+(info "(elisp) Subprocess Creation")
+#+END_SRC
+
+ - Get process output
+
+#+BEGIN_SRC elisp
+(info "(elisp) Accepting Output")
+#+END_SRC
+
+*** Keybindings
+
+#+BEGIN_SRC elisp
+(info "(elisp) Function Keys")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Keys in Documentation")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(emacs) Windows Keyboard")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Keymaps")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Key Binding Conventions")
+#+END_SRC
+
+*** Hooks (Events Callbacks)
+
+#+BEGIN_SRC elisp
+(info "(elisp) Hooks")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Setting Hooks")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Advising Functions")
+#+END_SRC
+
+*** Buffer
+
+Buffers
+
+#+BEGIN_SRC elisp
+(info "(elisp) Buffers")
+#+END_SRC
+
+Buffer Content
+
+#+BEGIN_SRC elisp
+(info "(elisp) Buffer Contents")
+#+END_SRC
+
+
+Cursor
+
+#+BEGIN_SRC elisp
+(info "(elisp) Positions")
+#+END_SRC
+
+Hooks
+
+#+BEGIN_SRC elisp
+(info "(elisp)Change Hooks")
+#+END_SRC
+
+
+Motion
+
+#+BEGIN_SRC elisp
+(info "(elisp) Motion")
+#+END_SRC
+
+
+Text and Strings
+
+#+BEGIN_SRC elisp
+(info "(elisp) Text")
+#+END_SRC
+
+
+#+BEGIN_SRC elisp
+(info "(elisp) Strings and Characters")
+#+END_SRC
+
+
+
+Buffer Local Variable
+
+#+BEGIN_SRC elisp
+(info "(emacs) File Variables")
+#+END_SRC
+
+*** Window
+
+Frame
+
+#+BEGIN_SRC elisp
+(info "(elisp) Windows")
+#+END_SRC
+
+*** Frame
+
+Frame
+
+#+BEGIN_SRC elisp
+(info "(elisp) Frames")
+#+END_SRC
+
+Frame Parameters
+
+#+BEGIN_SRC elisp
+(info "(elisp) Frame Parameters")
+#+END_SRC
+
+*** Files
+
+Files
+
+#+BEGIN_SRC elisp
+(info "(elisp) Files")
+#+END_SRC
+
+Change Files
+
+#+BEGIN_SRC elisp
+(info "(elisp) Changing Files")
+#+END_SRC
+
+File Name Components
+
+#+BEGIN_SRC elisp
+(info "(elisp) File Name Components")
+#+END_SRC
+
+
+Buffer Local Variable
+
+#+BEGIN_SRC elisp
+(info "(emacs) File Variables")
+#+END_SRC
+
+*** Text Enconding ISO UTF8 ...
+
+
+#+BEGIN_SRC elisp
+(info "(emacs) International")
+#+END_SRC
+
+*** Loading, Libraries and Packages
+
+Loading
+
+#+BEGIN_SRC elisp
+(info "(elisp) How Programs Do Loading")
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(info "(elisp) Loading")
+#+END_SRC
+
+Libraries
+
+#+BEGIN_SRC elisp
+(info "(emacs) Lisp Libraries")
+#+END_SRC
+
+Packages
+
+#+BEGIN_SRC elisp
+(info "(elisp) Packaging")
+#+END_SRC
+
+*** Batch Mode
+
+Batch Mode
+
+#+BEGIN_SRC elisp
+(info "(elisp) Batch Mode")
+#+END_SRC
+
+*** Syntax Highlight
+
+#+BEGIN_SRC elisp
+(info "(elisp) Syntax Class Table")
+#+END_SRC
 **  Discoverability / Get Documentation
 
 *Apropos*
@@ -6369,1149 +6648,5 @@ delimiters at different levels.
 *** Paredit
 
 ** Elscreen
-* Solutions
-**  Code Navigation with Occur                                         :edit:
 
-The function *occur* is useful for code navigation and scan code
-statements, this function is invoked by M-x occur.
-
-Examples:
-
-The function python/scan-functions will scan for all lines that starts
-with def statement in a Python code and show the matching lines in the
-right side.
-
-#+BEGIN_SRC emacs-lisp
-
-(defun python/scan-functions ()
-  (interactive)
-  (split-window-horizontally)
-  (occur "def")
-  )
-
-#+END_SRC
-
-Example:
-
-file:images/occur_statement_scan.png
-
-
-It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
-@NOTE. This fuction can be excuted by typing: =M-x scan-code-tags=
-
-Example:
-
-#+BEGIN_SRC emacs-lisp
-
-(defun scan-code-tags ()
-     "
-     Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:
-
-     "
-     (interactive)
-     (split-window-horizontally)
-     (occur "@FIXME:\\|@TODO:\\|@BUG:\\|@NOTE:"))
-
-#+END_SRC
-
-
-file:images/scan_code_tags.png
-**  Shell Command Interface 
-
-#+BEGIN_SRC elisp 
-
-(defun shell-command-to-lines (command)
-  (remove-if-not  (lambda (s) (/= (length s) 0))
-                  (split-string
-                   (shell-command-to-string command) "\n")))
-
-(defun find-files (directory pattern)
-  (shell-command-to-lines
-   (format "find %s -name '%s'"
-           directory
-           pattern)))
-
-#+END_SRC
-
-Example:
-
-#+BEGIN_SRC elisp 
-
-ELISP> (shell-command-to-lines "ls /etc/R")
-("javaconf" "ldpaths" "Makeconf" "Renviron" "repositories")
-
-
-ELISP> (mapc #'print (shell-command-to-lines "ls /etc/R"))
-
-"javaconf"
-
-"ldpaths"
-
-"Makeconf"
-
-"Renviron"
-
-"repositories"
-
-
-
-ELISP> (mapc #'print (find-files "/etc/" "*.conf"))
-
-"find: ‘/etc/sudoers.d’: Permission denied"
-
-"/etc/security/namespace.conf"
-
-"/etc/security/pam_env.conf"
-
-"/etc/security/group.conf"
-
-"/etc/security/limits.conf"
-...
-#+END_SRC
-
-**  Quick edit and reload Emacs Configuration File.     :elisp:customization:
-
-It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
-
-#+BEGIN_SRC elisp
-
-;; Usage: M-x reload-init-file
-;;
-(defun reload-init-file ()
-  "Reload init.el file"
-  (interactive)
-  (load user-init-file)
-  (message "Reloaded init.el OK.")
-)
-
-;; Usage: M-x open-init-file
-;;
-(defun open-init-file ()
-    (interactive)
-    (find-file user-init-file)
-)
-#+END_SRC
-
-**  Refresh/ Reload File
-
-Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
-
-
-#+BEGIN_SRC elisp
-
-(defun refresh ()
-    "Revert buffer without confirmation."
-    (interactive)
-    (revert-buffer t t))
-#+END_SRC
-
-Usage:
-
-#+END_SRC
-M-x refresh
-#+END_SRC
-
-**  Creating Quick Access Menu
-
-file:images/utils_menu1.png
-
-file:images/utils_menu2.png
-
-#+BEGIN_SRC elisp
-
-
-(require 'easymenu)
-
-(easy-menu-define djcb-menu global-map "Utils"
-  '("Utils"
-
-     ("Shells" ;; submenu
-       ["Ielm   - Emacs Lisp Shell"       (ielm)]
-       ["Eshell - Emacs Buitin Shell"    (eshell)]
-       ["Native Shell "                  (shell)]
-      ["---------------------" nil]
-      ["Edit .bashrc" (find-file  "~/.bashrc")]
-      ["Edit .profile" (find-file "~/.profile")]
-      ["Edit .Xresources" (find-file "~/.Xresources")]
-      ["Edit .xsessin"    (find-file "~/.xsession")]
-      ["See all GNU MAN pages" ( info)]
-      ["See a specific Man Page" (woman)]
-
-      );; End of shells menu
-
-     ("Emacs /Elisp"  ;; submenu
-
-      ["Ielm   - Emacs Lisp Shell"  (ielm)]
-      ["Eval buffer"   ( eval-buffer ) ]
-      ["---------------------" nil]
-
-      ["Edit  init.el" (find-file  user-init-file)]
-      ["Reload init.el" (load-file user-init-file)]
-      ["Open .emac.d dir" (find-file "~/.emacs.d")]
-      ["List packages"     (list-packages)]
-      ["Install package"   (package-install)]
-
-     ) ;; End of Emacs / Elisp submenu
-
- )) ;; End of Custom Menu
-
-
-#+END_SRC
-
-**  Extract Function Documentation                                    :elisp:
-
-Source: [[http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/][Generate emacs-lisp documentation]]
-Primitives:
-
-#+BEGIN_SRC elisp
-
-ELISP>
-ELISP> (defun sample-function (a b c)
-           "Function Docstring"
-         (+ a (* 5 b) (* 3 c)))
-
-
-;; Extract Documentation
-;;
-ELISP> (documentation 'sample-function)
-"Function Docstring"
-
-;; Extract Code
-;;
-ELISP> (symbol-function 'sample-function)
-(lambda
-  (a b c)
-  "Function Docstring"
-  (+ a
-     (* 5 b)
-     (* 3 c)))
-
-;; Extract Arguments
-ELISP> (help-function-arglist 'sample-function)
-(a b c)
-#+END_SRC
-
-Final Code
-
-#+BEGIN_SRC elisp
-
-(fun2org 'sample-function)
-    "** sample-function (a b c)\nFunction Docstring\n\n#+BEGIN_SRC emacs-lisp\n(lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))\n#+END_SRC\n"
-    ELISP>
-    ELISP> (defun fun2org (function-symbol)
-      (let ((args (help-function-arglist function-symbol))
-            (doc  (documentation function-symbol))
-            (code (symbol-function function-symbol)))
-        (print (format "** %s %s
-    %s
-
-    #+BEGIN_SRC emacs-lisp
-    %S
-
-    " function-symbol args doc code)))) ;; End of fun2org
-#+END_SRC
-
-
-#+BEGIN_SRC elisp
-
-ELISP> (fun2org 'sample-function)
-
-"** sample-function (a b c)
-Function Docstring
-
- (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
-"
- #+END_SRC
-
-
-
-**  Edit File as Root                                            :utils:edit:
-
-#+BEGIN_SRC elisp
-
-(defun open-as-root (filename)
-  (interactive)
-  (find-file (concat "/sudo:root@localhost:"  filename)))
-
-
-;; Example:
-;; ELISP> (open-as-root "/etc/host.conf")
-;;
-
-
-;;
-;; Open an already opened buffer as root
-;;
-;; M-x open-buffer-as-root
-;;
-(defun open-buffer-as-root ()
- (interactive)
- (let
-     (
-      ;; Get the current buffer file name
-      (filename (buffer-file-name (current-buffer)))
-      ;; Get the current file name
-      (bufname  (buffer-name (current-buffer)))
-     )
-   (progn
-  (kill-buffer bufname)         ;; Kill current buffer
-  (open-as-root filename))))    ;; Open File as root
-
-
-#+END_SRC
-
-**  Open Current Buffer Directory
-
-M-x open-dir
-
-#+BEGIN_SRC elisp
-
-(defun open-dir ()
-  "Open directory of current buffer"
-  (interactive)
-  (find-file (file-name-directory (buffer-file-name))))
-#+END_SRC
-
-**  Open Current Buffer Directory in File Manager
-
-M-x open-file-manager
-
-#+BEGIN_SRC elisp
-
-(defun open-file-manager ()
-  "Open buffer directory in file manager (Linux Only)"
-  (interactive)
-  (call-process "pcmanfm"))
-;; or on Mac
-(defun open-file-manager ()
-  "Open buffer directory in file manager (Mac Only)"
-  (interactive)
-  (call-process "open" nil nil nil "."))
-#+END_SRC
-
-**  Open a terminal Emulator in the directory of Current Buffer
-
-Despite Emacs can run a shell like python, bash, zsh, it cannot run ncurses based applications. In these cases is necessary to launch an external terminal. This command can be added to the menu in the section: [[#creating-quick-access-menu][Creating Quick Access Menu]]
-Usage:
-
-#+BEGIN_SRC text
-M-x open-terminal
-#+END_SRC
-
-Code:
-
-#+BEGIN_SRC elisp
-
-(defun open-terminal ()
-  "Open terminal in file directory"
-  (interactive)
-  (call-process "lxterminal"
-                nil
-                (format "--working-directory='%s'"
-                        (file-name-directory (buffer-file-name)))))
-;; or on Mac
-(defun open-terminal ()
-  "Open terminal in file directory"
-  (interactive)
-  (let ((cmd (format "cd %s" default-directory)))
-    (do-applescript
-     (format
-      "
-  tell application \"iTerm\"
-       activate
-       set _session to current session of current terminal
-       tell _session
-            set command to get the clipboard
-            write text \"%s\"
-       end tell
-  end tell
-  " cmd))))
-#+END_SRC
-
-**  Eval String in Clipboard
-
-It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
-
-#+BEGIN_SRC elisp
-
-
-ELISP> (defun eval-string (str) (eval (read str)))
-eval-string
-
-ELISP> (defun eval-xclip () (eval-string (shell-command-to-string "xclip -o")))
-eval-xclip
-
-;;
-;;  Copy the following line in this comment block
-;;
-;;      (message "Loading my copypaste file...")
-
-ELISP> (eval-xclip)
-"Loading my copypaste file..."
-ELISP>
-
-#+END_SRC
-
-**  Save and Reload Current Session
-
-Interactive Developement
-
-#+BEGIN_SRC elisp
-
-ELISP> (defun file-contents (filename)
-  (interactive "fFind file: ")
-  (with-temp-buffer
-    (insert-file-contents filename)
-    (buffer-substring-no-properties (point-min) (point-max))))
-file-contents
-ELISP>
-
-ELISP> (defun write-file (filename content)
-         (append-to-file content nil filename))
-write-file
-ELISP>
-
-ELISP> (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))
-("/home/tux/.emacs.d/init.el" "/sudo:root@localhost:/etc/host.conf")
-
-ELISP> (setq session-file  "~/.emacs.d/lastsession.el")
-"~/.emacs.d/lastsession.el"
-ELISP>
-
-ELISP>
-ELISP> (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list))))
-"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
-
-
-ELISP> (setq code  (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))))
-"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
-ELISP>
-
-ELISP> (setq session-file "~/.emacs.d/lastsession.el")
-
-ELISP> (delete-file session-file)
-nil
-
-ELISP> (write-file session-file code)
-nil
-ELISP>
-
-ELISP> (file-contents session-file)
-"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"
-ELISP>
-
-ELISP> (load-file session-file)
-t
-ELISP> last-session-files
-("/home/tux/.emacs.d/init.el" "/sudo:root@localhost:/etc/host.conf")
-
-;;; Open All files defined in Last Session
-ELISP>
-ELISP> (mapcar 'find-file last-session-files)
-(#<buffer init.el> #<buffer host.conf>)
-
-ELISP>
-#+END_SRC
-
-Joining Everything
-
-
-File: sessions.el
-
-#+BEGIN_SRC elisp
-
-(setq session-file "~/.emacs.d/lastsession.el")
-
-(defun write-file (filename content)
-  (append-to-file content nil filename))
-
-
-(defun make-session-code ()
-     (interactive)
-     (format "(setq last-session-files '%S)" (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))))
-
-
-(defun save-session ()
-    "Save Current Session"
-    (interactive)
-    (when (file-exists-p session-file) (delete-file session-file))
-    (write-file session-file (make-session-code)))
-
-
-(defun load-session ()
-  (interactive)
-  (load-file session-file)
-  (mapcar 'find-file last-session-files)
-)
-
-(message "Reloaded")
-
-#+END_SRC
-
-
-To save all bufffers with files:
-
-#+BEGIN_SRC
-M-x load-file ;; Enter session.el
-M-x save-session
-#+END_SRC
-
-
-To reload the files save in the seesion enter:
-
-#+BEGIN_SRC
-M-x load-file    ;; Enter session.el
-M-x load-session ;; All previous files in the session
-                 ;; saved will be opened
-#+END_SRC
-
-**  Create a menu with all color themes available
-
-file:images/colortheme_menu.png
-
-*Using Eval*
-
-Copy and paste the code below to the scratch buffer and enter M-x eval-buffer. This code can also be put in ~/emacs.d/init.el, in the config file.
-
-#+BEGIN_SRC elisp
-
-(defun eval-string (str) (eval (read str)))
-
-(defun make-menu-rows ()
- (mapcar
-   (lambda (x)
-      (format "[\"%s\" (load-theme '%s)]"  (symbol-name x) (symbol-name x) ))
-   (custom-available-themes))
- )
-
-
-(defun make-color-menu-code ()
-  (format
-   "
-   (easy-menu-define djcb-menu global-map \"Color Themes\"
-     '(\"Color Themes\"
-        %s
-      )
-   )
-   "
-  (mapconcat 'identity (make-menu-rows) "\n")
-
-  ) ;; End of format
-) ;; End of make-color-menu
-
-
-
-;;
-;; "Eval is evil". It must be avoided, because, it is hard to refactor,
-;; hard to debug and vulnerable to code injection on Web Apps, so a better
-;; way to write it is to use Elisp macros.
-;;
-;; @DONE: Change eval-string to an Elisp macro.
-;;
-(eval-string (make-color-menu-code))
-
-#+END_SRC
-
-*Using Macros*
-
-Developement:
-
-#+BEGIN_SRC elisp
-
-ELISP> (custom-available-themes)
-(cyberpunk adwaita deeper-blue dichromacy leuven light-blue manoj-dark misterioso tango-dark tango tsdh-dark tsdh-light wheatgrass whiteboard wombat)
-
-ELISP> (mapcar
-        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
-        (custom-available-themes)
-    )
-(["adwaita"
-  (load-theme 'adwaita)]
- ["deeper-blue"
-  (load-theme 'deeper-blue)]
- ["dichromacy"
-  (load-theme 'dichromacy)]
- ["leuven"
-  (load-theme 'leuven)]
- ["light-blue"
-  (load-theme 'light-blue)]
- ["manoj-dark"
-  (load-theme 'manoj-dark)]
- ["misterioso"
-  (load-theme 'misterioso)]
- ["tango-dark"
-  (load-theme 'tango-dark)]
-  ...
-
-ELISP>  (defun make-menu-rows ()
-          (mapcar
-        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
-        (custom-available-themes)))
-make-menu-rows
-ELISP>
-ELISP> (make-menu-rows)
-(["adwaita"
-  (load-theme 'adwaita)]
- ["deeper-blue"
-  (load-theme 'deeper-blue)]
- ["dichromacy"
-  (load-theme 'dichromacy)]
- ["leuven"
-  (load-theme 'leuven)]
-  ...
-
-
-ELISP> `(easy-menu-define djcb-menu global-map "Color Themes"
-          '("Color Themes"
-           ,@(make-menu-rows)))
-(easy-menu-define djcb-menu global-map "Color Themes"
-  '("Color Themes"
-    ["adwaita"
-     (load-theme 'adwaita)]
-    ["deeper-blue"
-     (load-theme 'deeper-blue)]
-    ["dichromacy"
-     (load-theme 'dichromacy)]
-    ["leuven"
-     (load-theme 'leuven)]
-    ["light-blue"
-     (load-theme 'light-blue)]
-     ...
-
-;;; Now execute the generated code, the menu will pop up.
-;;;
-
-ELISP> (eval `(easy-menu-define djcb-menu global-map "Color Themes"
-          '("Color Themes"
-           ,@(make-menu-rows))))
-nil
-
-#+END_SRC
-
-Final code
-
-#+BEGIN_SRC elisp
-
-(defun make-menu-rows ()
-          (mapcar
-        (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
-        (custom-available-themes)))
-
-
-(defmacro make-color-menu ()
-  `(easy-menu-define djcb-menu global-map "Color Themes"
-     '("Color Themes"
-       ,@(make-menu-rows))))
-
-(make-color-menu)
-
-;;;;; Or copy and paste the following  block on IELM shell
-
-(progn
-    (defun make-menu-rows ()
-              (mapcar
-            (lambda (sym) `[,(symbol-name sym) (load-theme (quote ,sym))])
-            (custom-available-themes)))
-
-
-    (defmacro make-color-menu ()
-      `(easy-menu-define djcb-menu global-map "Color Themes"
-         '("Color Themes"
-           ,@(make-menu-rows))))
-
-    (make-color-menu)
-)
-
-
-;;;; Testing the macro expansion
-
-ELISP> (macroexpand '(make-color-menu))
-(progn
-  (defvar djcb-menu nil "Color Themes")
-  (easy-menu-do-define 'djcb-menu global-map "Color Themes"
-               '("Color Themes"
-             ["adwaita"
-              (load-theme 'adwaita)]
-             ["deeper-blue"
-              (load-theme 'deeper-blue)]
-             ["dichromacy"
-              (load-theme 'dichromacy)]
-             ["leuven"
-              (load-theme 'leuven)]
-             ["light-blue"
-              (load-theme 'light-blue)]
-            ...
-
-#+END_SRC
-
-**  Better Menu Syntax
-
-This macro defines a more readable menu syntax.
-
-#+BEGIN_SRC elisp
-
-(defun map-apply (fun xss)
-  (mapcar (lambda (xs) (apply fun xs)) xss))
-
-(defun plist->alist (plist)
-  (if (null plist)
-      '()
-      (cons
-       (list (car plist) (cadr plist))
-       (plist->alist (cddr plist)))))
-
-
-(defmacro define-global-menu (menu-name &rest label-actions-plist)
-  `(easy-menu-define djcb-menu global-map ,menu-name
-     (quote (,menu-name
-      ,@(map-apply #'vector
-           (plist->alist label-actions-plist))))))
-
-;;;; Example
-
-  (define-global-menu  "Color Themes"
-    "Adwaita"       (load-theme 'adwaita)
-    "Deeper-blue"   (load-theme 'deeper-blue)
-    "Dichromacy"    (load-theme 'dichromacy)
-    "Leuven"        (load-theme 'leuven)
-    "light-blue"    (load-theme 'light-blue)
-    )
-
-;;; It expands to:
-
-ELISP> (macroexpand
-'(define-global-menu  "Color Themes"
-    "Adwaita"       (load-theme 'adwaita)
-    "Deeper-blue"   (load-theme 'deeper-blue)
-    "Dichromacy"    (load-theme 'dichromacy)
-    "Leuven"        (load-theme 'leuven)
-    "light-blue"    (load-theme 'light-blue)
-    ))
-(progn
-  (defvar djcb-menu nil "Color Themes")
-  (easy-menu-do-define 'djcb-menu global-map "Color Themes"
-               '("Color Themes"
-             ["Adwaita"
-              (load-theme 'adwaita)]
-             ["Deeper-blue"
-              (load-theme 'deeper-blue)]
-             ["Dichromacy"
-              (load-theme 'dichromacy)]
-             ["Leuven"
-              (load-theme 'leuven)]
-             ["light-blue"
-              (load-theme 'light-blue)])))
-
-#+END_SRC
-
-**  Save and Restore Current Window Configuration
-
-Press <F7> to save the curren window configuration and <F8> to restore. The functions can also be executed with A-x save-view or A-x restore-view.
-
-#+BEGIN_SRC elisp
-
-(defun save-view ()
-  "Save current window configuration"
-  (interactive)
-  (setq winconf  (current-window-configuration))
-  (message "View Saved - Press to restore"))
-
-(defun restore-view ()
-  "Restore saved window configuration"
-  (interactive)
-  (set-window-configuration winconf)
-  (message "View loaded"))
-
-(global-set-key (kbd "<f7>")  #'save-view)
-(global-set-key (kbd "<f8>")  #'restore-view)
-
-#+END_SRC
-
-**  Http and Post Request                            :utils:connections:http:
-
-[[http://qiita.com/sanryuu/items/eed79c7b99616e769e67][Source]]
-#+BEGIN_SRC elisp
-
-
-(defun url-http-post (url args)
-  "Send ARGS to URL as a POST request."
-  (let (
-        (response-string nil)
-        (url-request-method "POST")
-        (url-request-extra-headers
-         '(("Content-Type" . "application/x-www-form-urlencoded")))
-        (url-request-data
-         (mapconcat (lambda (arg)
-                      (concat (url-hexify-string (car arg))
-                              "="
-                              (url-hexify-string (cdr arg))))
-                    args
-                    "&")))
-    (switch-to-buffer
-     (url-retrieve-synchronously url))
-    (goto-char (point-min))
-    (re-search-forward "\n\n")
-    (setq response-string
-          (buffer-substring-no-properties (point) (point-max)))
-    (kill-buffer (current-buffer))
-    response-string))
-
-(defun url-http-get (url args)
-  "Send ARGS to URL as a GET request."
-  (let (
-        (response-string nil)
-        (url-request-method "GET")
-        (url-request-data
-         (mapconcat (lambda (arg)
-                      (concat (url-hexify-string (car arg))
-                              "="
-                              (url-hexify-string (cdr arg))))
-                    args
-                    "&")))
-    (switch-to-buffer
-     (url-retrieve-synchronously
-      (concat url "?" url-request-data)))
-    (goto-char (point-min))
-    (re-search-forward "\n\n")
-    (setq response-string
-          (buffer-substring-no-properties
-           (point) (point-max)))
-    (kill-buffer (current-buffer))
-    response-string))
-
-
-ELISP> (princ (url-http-get "http://httpbin.org/get" nil))
-{
-  "args": {},
-  "headers": {
-    "Accept": "*/*",
-    "Accept-Encoding": "gzip",
-    "Content-Length": "0",
-    "Extension": "Security/Digest Security/SSL",
-    "Host": "httpbin.org",
-    "Mime-Version": "1.0",
-    "User-Agent": "URL/Emacs"
-  },
-  "origin": "167.103.159.147",
-  "url": "http://httpbin.org/get"
-}
-
-
-ELISP> (princ (url-http-post "http://httpbin.org/post" '(("use" . "dummy")  ("pass" . "something else") ("code" . "pxyz0011213"))))
-{
-  "args": {},
-  "data": "",
-  "files": {},
-  "form": {
-    "code": "pxyz0011213",
-    "pass": "something else",
-    "use": "dummy"
-  },
-  "headers": {
-    "Accept": "*/*",
-    "Accept-Encoding": "gzip",
-    "Content-Length": "48",
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Extension": "Security/Digest Security/SSL",
-    "Host": "httpbin.org",
-    "Mime-Version": "1.0",
-    "User-Agent": "URL/Emacs"
-  },
-  "json": null,
-  "origin": "167.103.159.147",
-  "url": "http://httpbin.org/post"
-}
-
-
-#+END_SRC
-
-**  Test internet connection                               :utils:connection:
-
-
-The function =utils/traceroute-connection= runs the program traceroute
-in asynchronous mode. The output (stdout and stderr) is piped to the
-the buffer =*test-connection*=. This buffer is opened in another
-window. The command =utils/ping-connection= runs the command ping.
-
-In Arch Linux it can be installed with: =pacman -S
-core/traceroute=. 
-
-Usage: =M-x utils/traceroute-connection= and =M-x utils/ping-connection=. 
-
-#+BEGIN_SRC emacs-lisp
-
-(defun utils/traceroute-connection ()
-
-  (interactive)
-
-  (let  ((buf           "*test-connection*")
-         (test-address  "46.228.47.114")   ;;; Yahoo IP: www.yahoo.com 
-        )
-
-  (start-process
-   "conn"               ;; Name 
-    buf                 ;; Buffer name
-   "traceroute"         ;; Command to execute 
-    test-address        ;; Google IP (www.google.com)
-   )
-
-  (if (not (equal (buffer-name) buf))
-      (switch-to-buffer-other-window buf))
-  )
-
-  ;;; Go to the end of the buffer 
-  (goto-char (point-max))
-
-  (other-window 0)
-  
-  )
-
-(defun utils/ping-connection ()
-
-  (interactive)
-
-  (let  ((buf           "*test-connection*")
-         (test-address  "46.228.47.114")   ;;; Yahoo IP: www.yahoo.com 
-        )
-
-  (start-process
-   "conn"               ;; Name 
-    buf                 ;; Buffer name
-   "ping"         ;; Command to execute 
-    test-address        ;; Google IP (www.google.com)
-   )
-
-  (if (not (equal (buffer-name) buf))
-      (switch-to-buffer-other-window buf))
-  )
-
-  ;;; Go to the end of the buffer 
-  (goto-char (point-max))
-
-  (other-window 0)
-  
-  )
-
-
-
-#+END_SRC
-
-* Org-Mode                                              :org:mode:data:ideas:
-** Overview
-
-Org-Mode is a mode built-in to Emacs that allows to store structured
-data, information in text format - org-mode markdown that can be
-exported to html, pdf, latex, markdown, github flavoured markdown
-and more file formats.
-
-Features:
-
-  - Everything stored in text format: The most portable format.
-  - Todo List.
-  - It can be used as a personal Wiki.
-  - Table editing, formating, built-in spreadsheet.
-  - Tags, Headlines
-  - Literate programming, Run code blocks, Create Interactive and
-    reproducible software documentation.
-  - Display and export Latex Formulas
-  - Display Pictures
-  - Many link formats
-    - Link to files, web, IRC, Usenet News groups
-    - Link to shell commands
-    - Links to trigger Emacs Functions
-  - Usefulness
-    - Authoring
-    - Write Software documentation with embedded snippets
-    - Literate Programming
-    - Reproducible Research
-    - Wiki
-    - Markdown
-
-Example: this document is now written in org-mode and the exported to
-html and github flavoured markdown.
-
-file:images/document_in_org_mode1.png
-
-It also supports inline code blocks that can be evaluated and the
-result printed in the document or displayed in the minibuffer.
-
-file:images/document_in_org_mode2.png
-
-** Useful Key bindings for org-mode                    :mode:org:key:binding:
-
-Move within headlines:
-
-| Key Binding  | Description                                        |
-|--------------+----------------------------------------------------|
-| M - <return> | Insert headline at same level as the previous one. |
-| C-c C-p      | Move to previous headline                          |
-| C-c C-n      | Move to next headline                              |
-| C-c C-u      | Move to higher headline                            |
-| M-[up]       | Move headline, list row or table row up            |
-| M-[down]     | Move headline, list item or table row down         |
-| M-[left]     | Demote  list item or headline                      |
-| M-[right]    | Promote list item or headline                      |
-
-
-*Buffer Subtree*
-
-| Key Binding | Description                                   |
-|-------------+-----------------------------------------------|
-| shift-tab   | Fold / Unfold headlines                       |
-| C-x n s     | Narrow the buffer subtree to current headline |
-| C-c n w     | Widen the view back                           |
-|             |                                               |
-
-*Table*
-
-| Key Binding | Description                 |
-|-------------+-----------------------------|
-| C-c-!       | Convert region into a table |
-|             |                             |
-
-*Hyperlinks*
-
-| Key Binding | Description         |
-|-------------+---------------------|
-| C-c-C-o     | Open a link         |
-| C-c-C-l     | Insert/ Edit a link |
-|             |                     |
-
-*Markdown*
-
-Text formating
-
-| Markdown      | View        |
-|---------------+-------------|
-| =*bold*=      | *bold*      |
-| =_underline_= | _underline_ |
-| =/italic/=    | /italic/    |
-| =+strike it+= | +strike it+ |
-
-Hyperlinks
-
-| Markdown                         | View                | Description                     |
-|----------------------------------+---------------------+---------------------------------|
-| :http://www.bing.com             | http://www.bing.com | Link to  web page               |
-| :ftp://something.net             |                     | Link to ftp                     |
-| :file:/etc/fstab                 | file:/etc/fstab     | Link to file /{/etc/fstab}/     |
-| :shell:uname%20-a                | shell:uname%20-a    | Execute Shell Command: uname -a |
-| :elisp:(message%20"Hello world") |                     |                                 |
-
-** References
-
-Manual:
-
-    * [[http://orgmode.org/org.html][The Org Manual orgmode.org]]
-    * [[https://www.gnu.org/software/emacs/manual/html_node/org/][Org Mode Manual]]
-    * [[http://orgmode.org/worg/org-glossary.html][Org Glossary: An Explanation of Basic Org-Mode Concepts]]
-
-    * Editing
-      * http://orgmode.org/manual/Structure-editing.html
-
-
-Examples:
-
-    * [[http://home.fnal.gov/~neilsen/notebook/orgExamples/org-examples.html#sec-5][Emacs org-mode examples and cookbook]]
-
-Many examples about literate programming in Org-mode with Python, R,
-java and C. Shows integration of org-mode tables and Python, R ... and
-code blocks.
-
-    * http://gitwiki.org/Tests/org-mode.org
-    * [[https://chopmode.wordpress.com/2011/01/30/my-org-mode-journey-chapter-1/][My Org-mode journey – Chapter 1 | chop-mode]]
-
-
-Reference Cards and Cheat Sheets:
-
-    * [[http://orgmode.org/orgguide.pdf][The Compact Org-Mode Guide]]
-    * [[https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf][Org-Mode Reference Card]]
-
-    * [[https://gist.github.com/wdkrnls/1990839][Markup Cheat sheet for Org-mode]]
-
-Books:
-
-    *  [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
-
-Hacking and Tweaking:
-
-   * [[http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html][Embedding Youtube videos with org-mode links]]
-   * [[http://stackoverflow.com/questions/17435995/paste-an-image-on-clipboard-to-emacs-org-mode-file-without-saving-it][Paste an image on clipboard to Emacs Org mode file without saving it]]
-
-   * [[http://orgmode.org/worg/org-faq.html][Org-mode Frequently Asked Questions]]
-
-   * [[http://oremacs.com/2015/01/07/org-protocol-1/][My org-protocol setup, part 1.]]
-
-   * [[http://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line][Batch export of org-mode files from the command line]]
-
-   * [[http://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-5][Org ad hoc code, quick hacks and workarounds]]
-
-
-
-Cases:
-
-    * [[http://kitchingroup.cheme.cmu.edu/blog/2014/08/08/What-we-are-using-org-mode-for/][What we are using org-mode for]]
-    * [[http://juanreyero.com/article/emacs/org-teams.html][Org-mode tricks for team management]]
-
-Literate Programming:
-
-   * [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Literate DevOps - www.howardism.org]]
-   * [[http://stackoverflow.com/questions/18598870/emacs-org-mode-executing-simple-python-code][Emacs Org Mode: Executing simple python code]]
-   * [[http://blogs.neuwirth.priv.at/software/2012/03/28/r-and-emacs-with-org-mode/][R and Emacs with org mode]]
-   * [[https://github.com/erikriverson/org-mode-R-tutorial/blob/master/org-mode-R-tutorial.org][Org-mode and R: An Introduction Introduction]]
-   * [[http://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]]
-   * [[http://orgmode.org/manual/Results-of-evaluation.html][Results of evaluation / Org-Mode Manual]]
-
-Non Categorized:
-
-   * [[http://www.totherme.org/configs/org-stuff.html][Gareth's Org-Mode Config]]
-
-** Videos
-*** Tutorials
-
-*Org Mode in Depth - by Rick Dillon*
-
-   - [[https://www.youtube.com/watch?v=nsGYet02bEk][Hack Emacs - Org Mode In Depth: Managing Structure - YouTube]]
-
-Description: Part of the Org Mode In Depth series. In this episode, we
-examine methods for exploiting the structure of an Org Mode file to
-focus on specific subtrees, control visibility by folding and
-unfolding headlines, navigate among headlines efficiently and
-reorganize headlines my moving and/or promoting and demoting them.
-
-   - [[https://www.youtube.com/watch?v=fTJVLJd_gz0][Org Mode In Depth: Tables - YouTube]]
-
-Description: Actually recorded a few months back, I never got around
-to uploading this. I give a brief demo of some of the functionality
-Org Mode tables offer, and an explanation of some of the commands that
-enable it.
-
-   - [[https://www.youtube.com/watch?v=VTh_Xgt69-E][Hack Emacs - Org Mode in Depth: Markup and Links - YouTube]]
-
-Description: Part of the Org Mode in Depth series. In this episode, I
-examine ways of marking up text in Org Mode, as well as various link
-types that connect Org headlines and files, as well as links that can
-execute code.
-
- *NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode by Tory S. Anderson*
-
-   - [[https://www.youtube.com/watch?v%3Dnkv8PpxrL3k][Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode]]
-   -
-   -
-
-*** Presentations
-
-     * [[(info "(emacs) Misc Help")][Emacs Org-Mode - A system for note-taking and project planning]] -  Talk given by Carsten Dominik.
-
-     * [[https://www.youtube.com/watch?v=lsYdK0C2RvQ][Embedding Code Snippets In Org Mode]]
-
-     * [[https://www.youtube.com/watch?v=VIuOwIBL-ZU][Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)]]
-
-     * [[https://www.youtube.com/watch?v=fgizHHd7nOo][Org mode is awesome]]
-
-     * [[https://www.youtube.com/watch?v=oJTwQvgfgMM][Emacs Org-mode - a system for note-taking and project planning]]
-
-     * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
-
-     * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]
 

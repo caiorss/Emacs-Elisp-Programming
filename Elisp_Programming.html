@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Programming</title>
-<!-- 2016-11-02 qua 05:34 -->
+<!-- 2016-11-03 qui 05:23 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -319,71 +319,91 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-4-1">4.1. Emacs Terminology</a></li>
 <li><a href="#sec-4-2">4.2. Emacs API</a></li>
-<li><a href="#sec-4-3">4.3. Discoverability / Get Documentation</a>
+<li><a href="#sec-4-3">4.3. Useful Info Pages</a>
 <ul>
-<li><a href="#sec-4-3-1">4.3.1. Describe</a></li>
+<li><a href="#sec-4-3-1">4.3.1. Elisp</a></li>
+<li><a href="#sec-4-3-2">4.3.2. Customization</a></li>
+<li><a href="#sec-4-3-3">4.3.3. Layout</a></li>
+<li><a href="#sec-4-3-4">4.3.4. Syntax Tables</a></li>
+<li><a href="#sec-4-3-5">4.3.5. Environment Variables and OS Detection</a></li>
+<li><a href="#sec-4-3-6">4.3.6. Subprocess Creation</a></li>
+<li><a href="#sec-4-3-7">4.3.7. Keybindings</a></li>
+<li><a href="#sec-4-3-8">4.3.8. Hooks (Events Callbacks)</a></li>
+<li><a href="#sec-4-3-9">4.3.9. Buffer</a></li>
+<li><a href="#sec-4-3-10">4.3.10. Window</a></li>
+<li><a href="#sec-4-3-11">4.3.11. Frame</a></li>
+<li><a href="#sec-4-3-12">4.3.12. Files</a></li>
+<li><a href="#sec-4-3-13">4.3.13. Text Enconding ISO UTF8 &#x2026;</a></li>
+<li><a href="#sec-4-3-14">4.3.14. Loading, Libraries and Packages</a></li>
+<li><a href="#sec-4-3-15">4.3.15. Batch Mode</a></li>
+<li><a href="#sec-4-3-16">4.3.16. Syntax Highlight</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-4">4.4. Buffers</a>
+<li><a href="#sec-4-4">4.4. Discoverability / Get Documentation</a>
 <ul>
-<li><a href="#sec-4-4-1">4.4.1. Buffer Attributes</a></li>
-<li><a href="#sec-4-4-2">4.4.2. Buffer Mode</a></li>
-<li><a href="#sec-4-4-3">4.4.3. Get Buffer Contents / Selection / Line</a></li>
-<li><a href="#sec-4-4-4">4.4.4. Search and Replace in the entire Buffer</a></li>
+<li><a href="#sec-4-4-1">4.4.1. Describe</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-5">4.5. Point, Region, Line and Buffer</a>
+<li><a href="#sec-4-5">4.5. Buffers</a>
 <ul>
-<li><a href="#sec-4-5-1">4.5.1. Point</a></li>
-<li><a href="#sec-4-5-2">4.5.2. Thing at Point API</a></li>
+<li><a href="#sec-4-5-1">4.5.1. Buffer Attributes</a></li>
+<li><a href="#sec-4-5-2">4.5.2. Buffer Mode</a></li>
+<li><a href="#sec-4-5-3">4.5.3. Get Buffer Contents / Selection / Line</a></li>
+<li><a href="#sec-4-5-4">4.5.4. Search and Replace in the entire Buffer</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-6">4.6. Message / Output&#xa0;&#xa0;&#xa0;<span class="tag"><span class="message">message</span>&#xa0;<span class="output">output</span>&#xa0;<span class="dialog">dialog</span></span></a>
+<li><a href="#sec-4-6">4.6. Point, Region, Line and Buffer</a>
 <ul>
-<li><a href="#sec-4-6-1">4.6.1. message</a></li>
-<li><a href="#sec-4-6-2">4.6.2. message-box</a></li>
+<li><a href="#sec-4-6-1">4.6.1. Point</a></li>
+<li><a href="#sec-4-6-2">4.6.2. Thing at Point API</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-7">4.7. Files, Directories and Path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="file">file</span>&#xa0;<span class="os">os</span></span></a>
+<li><a href="#sec-4-7">4.7. Message / Output&#xa0;&#xa0;&#xa0;<span class="tag"><span class="message">message</span>&#xa0;<span class="output">output</span>&#xa0;<span class="dialog">dialog</span></span></a>
 <ul>
-<li><a href="#sec-4-7-1">4.7.1. Basic Functions</a></li>
-<li><a href="#sec-4-7-2">4.7.2. File Name Components</a></li>
-<li><a href="#sec-4-7-3">4.7.3. Read / Write file to a string</a></li>
+<li><a href="#sec-4-7-1">4.7.1. message</a></li>
+<li><a href="#sec-4-7-2">4.7.2. message-box</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-8">4.8. Window Functions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="window">window</span></span></a>
+<li><a href="#sec-4-8">4.8. Files, Directories and Path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="file">file</span>&#xa0;<span class="os">os</span></span></a>
 <ul>
-<li><a href="#sec-4-8-1">4.8.1. Basic Window Functions</a></li>
-<li><a href="#sec-4-8-2">4.8.2. Manipulate Buffer in Another Window</a></li>
-<li><a href="#sec-4-8-3">4.8.3. Window Configuration</a></li>
+<li><a href="#sec-4-8-1">4.8.1. Basic Functions</a></li>
+<li><a href="#sec-4-8-2">4.8.2. File Name Components</a></li>
+<li><a href="#sec-4-8-3">4.8.3. Read / Write file to a string</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-9">4.9. OS Interface</a>
+<li><a href="#sec-4-9">4.9. Window Functions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="window">window</span></span></a>
 <ul>
-<li><a href="#sec-4-9-1">4.9.1. Find the current operating system</a></li>
-<li><a href="#sec-4-9-2">4.9.2. Date and Time</a></li>
-<li><a href="#sec-4-9-3">4.9.3. Call External Commands or Apps</a></li>
-<li><a href="#sec-4-9-4">4.9.4. Environment Variables</a></li>
-<li><a href="#sec-4-9-5">4.9.5. Process Management</a></li>
+<li><a href="#sec-4-9-1">4.9.1. Basic Window Functions</a></li>
+<li><a href="#sec-4-9-2">4.9.2. Manipulate Buffer in Another Window</a></li>
+<li><a href="#sec-4-9-3">4.9.3. Window Configuration</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-10">4.10. Timer</a>
+<li><a href="#sec-4-10">4.10. OS Interface</a>
 <ul>
-<li><a href="#sec-4-10-1">4.10.1. run-with-timer</a></li>
+<li><a href="#sec-4-10-1">4.10.1. Find the current operating system</a></li>
+<li><a href="#sec-4-10-2">4.10.2. Date and Time</a></li>
+<li><a href="#sec-4-10-3">4.10.3. Call External Commands or Apps</a></li>
+<li><a href="#sec-4-10-4">4.10.4. Environment Variables</a></li>
+<li><a href="#sec-4-10-5">4.10.5. Process Management</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-11">4.11. Emacs Modes</a>
+<li><a href="#sec-4-11">4.11. Timer</a>
 <ul>
-<li><a href="#sec-4-11-1">4.11.1. Major Mode</a></li>
-<li><a href="#sec-4-11-2">4.11.2. Minor Modes</a></li>
-<li><a href="#sec-4-11-3">4.11.3. Mode Association with Files</a></li>
-<li><a href="#sec-4-11-4">4.11.4. Mode Specific Key Bindings</a></li>
-<li><a href="#sec-4-11-5">4.11.5. Modes Customization</a></li>
-<li><a href="#sec-4-11-6">4.11.6. Mode Hooks</a></li>
+<li><a href="#sec-4-11-1">4.11.1. run-with-timer</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-12">4.12. Special Variables</a></li>
-<li><a href="#sec-4-13">4.13. Network</a></li>
+<li><a href="#sec-4-12">4.12. Emacs Modes</a>
+<ul>
+<li><a href="#sec-4-12-1">4.12.1. Major Mode</a></li>
+<li><a href="#sec-4-12-2">4.12.2. Minor Modes</a></li>
+<li><a href="#sec-4-12-3">4.12.3. Mode Association with Files</a></li>
+<li><a href="#sec-4-12-4">4.12.4. Mode Specific Key Bindings</a></li>
+<li><a href="#sec-4-12-5">4.12.5. Modes Customization</a></li>
+<li><a href="#sec-4-12-6">4.12.6. Mode Hooks</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-13">4.13. Special Variables</a></li>
+<li><a href="#sec-4-14">4.14. Network</a></li>
 </ul>
 </li>
 <li><a href="#sec-5">5. Regex - Regular Expressions</a>
@@ -425,40 +445,6 @@ for the JavaScript code in this tag.
 </ul>
 </li>
 <li><a href="#sec-8-7">8.7. Elscreen</a></li>
-</ul>
-</li>
-<li><a href="#sec-9">9. Solutions</a>
-<ul>
-<li><a href="#sec-9-1">9.1. Code Navigation with Occur&#xa0;&#xa0;&#xa0;<span class="tag"><span class="edit">edit</span></span></a></li>
-<li><a href="#sec-9-2">9.2. Shell Command Interface</a></li>
-<li><a href="#sec-9-3">9.3. Quick edit and reload Emacs Configuration File.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="customization">customization</span></span></a></li>
-<li><a href="#sec-9-4">9.4. Refresh/ Reload File</a></li>
-<li><a href="#sec-9-5">9.5. Creating Quick Access Menu</a></li>
-<li><a href="#sec-9-6">9.6. Extract Function Documentation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#sec-9-7">9.7. Edit File as Root&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="edit">edit</span></span></a></li>
-<li><a href="#sec-9-8">9.8. Open Current Buffer Directory</a></li>
-<li><a href="#sec-9-9">9.9. Open Current Buffer Directory in File Manager</a></li>
-<li><a href="#sec-9-10">9.10. Open a terminal Emulator in the directory of Current Buffer</a></li>
-<li><a href="#sec-9-11">9.11. Eval String in Clipboard</a></li>
-<li><a href="#sec-9-12">9.12. Save and Reload Current Session</a></li>
-<li><a href="#sec-9-13">9.13. Create a menu with all color themes available</a></li>
-<li><a href="#sec-9-14">9.14. Better Menu Syntax</a></li>
-<li><a href="#sec-9-15">9.15. Save and Restore Current Window Configuration</a></li>
-<li><a href="#sec-9-16">9.16. Http and Post Request&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connections">connections</span>&#xa0;<span class="http">http</span></span></a></li>
-<li><a href="#sec-9-17">9.17. Test internet connection&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connection">connection</span></span></a></li>
-</ul>
-</li>
-<li><a href="#sec-10">10. Org-Mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="org">org</span>&#xa0;<span class="mode">mode</span>&#xa0;<span class="data">data</span>&#xa0;<span class="ideas">ideas</span></span></a>
-<ul>
-<li><a href="#sec-10-1">10.1. Overview</a></li>
-<li><a href="#sec-10-2">10.2. Useful Key bindings for org-mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="mode">mode</span>&#xa0;<span class="org">org</span>&#xa0;<span class="key">key</span>&#xa0;<span class="binding">binding</span></span></a></li>
-<li><a href="#sec-10-3">10.3. References</a></li>
-<li><a href="#sec-10-4">10.4. Videos</a>
-<ul>
-<li><a href="#sec-10-4-1">10.4.1. Tutorials</a></li>
-<li><a href="#sec-10-4-2">10.4.2. Presentations</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -4955,13 +4941,18 @@ ELISP&gt;
 </tr>
 
 <tr>
-<td class="left">Kill</td>
+<td class="left">Kill Region</td>
 <td class="left">Cut</td>
 </tr>
 
 <tr>
 <td class="left">Kill Ring</td>
 <td class="left">Clipboard</td>
+</tr>
+
+<tr>
+<td class="left">Kill Buffer</td>
+<td class="left">Close Buffer</td>
 </tr>
 
 <tr>
@@ -4992,6 +4983,7 @@ See also:
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-4-2" class="outline-3">
 <h3 id="sec-4-2"><span class="section-number-3">4.2</span> Emacs API</h3>
 <div class="outline-text-3" id="text-4-2">
@@ -5122,8 +5114,479 @@ See also, from Emacs Wiki:
 </div>
 
 <div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Discoverability / Get Documentation</h3>
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Useful Info Pages</h3>
 <div class="outline-text-3" id="text-4-3">
+</div><div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> Elisp</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<p>
+Elisp Top Page
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Top"</span>)
+</pre>
+</div>
+
+
+<p>
+Elisp Info Page
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp)"</span>)
+</pre>
+</div>
+
+<p>
+Introduction to programming Elisp
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(eintr)"</span>)
+</pre>
+</div>
+
+<p>
+Tips about documenting Elisp
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp)Documentation Tips"</span>)
+</pre>
+</div>
+
+<p>
+Misc
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Symbols"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Function Cells"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Defining Commands"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Functions"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-2" class="outline-4">
+<h4 id="sec-4-3-2"><span class="section-number-4">4.3.2</span> Customization</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<p>
+<b>Customization:</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(emacs) Customization"</span>)
+</pre>
+</div>
+
+<p>
+<b>Define Customizable Interface</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Customization"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-3" class="outline-4">
+<h4 id="sec-4-3-3"><span class="section-number-4">4.3.3</span> Layout</h4>
+<div class="outline-text-4" id="text-4-3-3">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(emacs) Fonts"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-4" class="outline-4">
+<h4 id="sec-4-3-4"><span class="section-number-4">4.3.4</span> Syntax Tables</h4>
+<div class="outline-text-4" id="text-4-3-4">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Syntax Tables"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-5" class="outline-4">
+<h4 id="sec-4-3-5"><span class="section-number-4">4.3.5</span> Environment Variables and OS Detection</h4>
+<div class="outline-text-4" id="text-4-3-5">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) System Environment"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-3-6" class="outline-4">
+<h4 id="sec-4-3-6"><span class="section-number-4">4.3.6</span> Subprocess Creation</h4>
+<div class="outline-text-4" id="text-4-3-6">
+<ul class="org-ul">
+<li>Creating Subprocesses
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Subprocess Creation"</span>)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Get process output
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Accepting Output"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-7" class="outline-4">
+<h4 id="sec-4-3-7"><span class="section-number-4">4.3.7</span> Keybindings</h4>
+<div class="outline-text-4" id="text-4-3-7">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Function Keys"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Keys in Documentation"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(emacs) Windows Keyboard"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Keymaps"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Key Binding Conventions"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-8" class="outline-4">
+<h4 id="sec-4-3-8"><span class="section-number-4">4.3.8</span> Hooks (Events Callbacks)</h4>
+<div class="outline-text-4" id="text-4-3-8">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Hooks"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Setting Hooks"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Advising Functions"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-9" class="outline-4">
+<h4 id="sec-4-3-9"><span class="section-number-4">4.3.9</span> Buffer</h4>
+<div class="outline-text-4" id="text-4-3-9">
+<p>
+Buffers
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Buffers"</span>)
+</pre>
+</div>
+
+<p>
+Buffer Content
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Buffer Contents"</span>)
+</pre>
+</div>
+
+
+<p>
+Cursor
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Positions"</span>)
+</pre>
+</div>
+
+<p>
+Hooks
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp)Change Hooks"</span>)
+</pre>
+</div>
+
+
+<p>
+Motion
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Motion"</span>)
+</pre>
+</div>
+
+
+<p>
+Text and Strings
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Text"</span>)
+</pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Strings and Characters"</span>)
+</pre>
+</div>
+
+
+
+<p>
+Buffer Local Variable
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(emacs) File Variables"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-10" class="outline-4">
+<h4 id="sec-4-3-10"><span class="section-number-4">4.3.10</span> Window</h4>
+<div class="outline-text-4" id="text-4-3-10">
+<p>
+Frame
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Windows"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-11" class="outline-4">
+<h4 id="sec-4-3-11"><span class="section-number-4">4.3.11</span> Frame</h4>
+<div class="outline-text-4" id="text-4-3-11">
+<p>
+Frame
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Frames"</span>)
+</pre>
+</div>
+
+<p>
+Frame Parameters
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Frame Parameters"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-12" class="outline-4">
+<h4 id="sec-4-3-12"><span class="section-number-4">4.3.12</span> Files</h4>
+<div class="outline-text-4" id="text-4-3-12">
+<p>
+Files
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Files"</span>)
+</pre>
+</div>
+
+<p>
+Change Files
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Changing Files"</span>)
+</pre>
+</div>
+
+<p>
+File Name Components
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) File Name Components"</span>)
+</pre>
+</div>
+
+
+<p>
+Buffer Local Variable
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(emacs) File Variables"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-13" class="outline-4">
+<h4 id="sec-4-3-13"><span class="section-number-4">4.3.13</span> Text Enconding ISO UTF8 &#x2026;</h4>
+<div class="outline-text-4" id="text-4-3-13">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(emacs) International"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-14" class="outline-4">
+<h4 id="sec-4-3-14"><span class="section-number-4">4.3.14</span> Loading, Libraries and Packages</h4>
+<div class="outline-text-4" id="text-4-3-14">
+<p>
+Loading
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) How Programs Do Loading"</span>)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Loading"</span>)
+</pre>
+</div>
+
+<p>
+Libraries
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(emacs) Lisp Libraries"</span>)
+</pre>
+</div>
+
+<p>
+Packages
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Packaging"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-15" class="outline-4">
+<h4 id="sec-4-3-15"><span class="section-number-4">4.3.15</span> Batch Mode</h4>
+<div class="outline-text-4" id="text-4-3-15">
+<p>
+Batch Mode
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Batch Mode"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-16" class="outline-4">
+<h4 id="sec-4-3-16"><span class="section-number-4">4.3.16</span> Syntax Highlight</h4>
+<div class="outline-text-4" id="text-4-3-16">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(elisp) Syntax Class Table"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Discoverability / Get Documentation</h3>
+<div class="outline-text-3" id="text-4-4">
 <p>
 <b>Apropos</b>
 </p>
@@ -5149,9 +5612,9 @@ apropos-value
 
 
 
-<div id="outline-container-sec-4-3-1" class="outline-4">
-<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> Describe</h4>
-<div class="outline-text-4" id="text-4-3-1">
+<div id="outline-container-sec-4-4-1" class="outline-4">
+<h4 id="sec-4-4-1"><span class="section-number-4">4.4.1</span> Describe</h4>
+<div class="outline-text-4" id="text-4-4-1">
 <p>
 See also:
 </p>
@@ -5205,12 +5668,12 @@ C-h v
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-4" class="outline-3">
-<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Buffers</h3>
-<div class="outline-text-3" id="text-4-4">
-</div><div id="outline-container-sec-4-4-1" class="outline-4">
-<h4 id="sec-4-4-1"><span class="section-number-4">4.4.1</span> Buffer Attributes</h4>
-<div class="outline-text-4" id="text-4-4-1">
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Buffers</h3>
+<div class="outline-text-3" id="text-4-5">
+</div><div id="outline-container-sec-4-5-1" class="outline-4">
+<h4 id="sec-4-5-1"><span class="section-number-4">4.5.1</span> Buffer Attributes</h4>
+<div class="outline-text-4" id="text-4-5-1">
 <p>
 <b>List all Buffers</b>
 </p>
@@ -5444,9 +5907,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-4-2" class="outline-4">
-<h4 id="sec-4-4-2"><span class="section-number-4">4.4.2</span> Buffer Mode</h4>
-<div class="outline-text-4" id="text-4-4-2">
+<div id="outline-container-sec-4-5-2" class="outline-4">
+<h4 id="sec-4-5-2"><span class="section-number-4">4.5.2</span> Buffer Mode</h4>
+<div class="outline-text-4" id="text-4-5-2">
 <p>
 <b>Show Buffers Mode</b>
 </p>
@@ -5496,9 +5959,9 @@ ELISP&gt; (mapcar (<span class="org-keyword">lambda</span> (b)(
 </div>
 </div>
 
-<div id="outline-container-sec-4-4-3" class="outline-4">
-<h4 id="sec-4-4-3"><span class="section-number-4">4.4.3</span> Get Buffer Contents / Selection / Line</h4>
-<div class="outline-text-4" id="text-4-4-3">
+<div id="outline-container-sec-4-5-3" class="outline-4">
+<h4 id="sec-4-5-3"><span class="section-number-4">4.5.3</span> Get Buffer Contents / Selection / Line</h4>
+<div class="outline-text-4" id="text-4-5-3">
 <p>
 <b>Get Buffer Content as String</b>
 </p>
@@ -5555,9 +6018,9 @@ To test it: M-x eval-expression and enter (get-current-line)
 </div>
 </div>
 
-<div id="outline-container-sec-4-4-4" class="outline-4">
-<h4 id="sec-4-4-4"><span class="section-number-4">4.4.4</span> Search and Replace in the entire Buffer</h4>
-<div class="outline-text-4" id="text-4-4-4">
+<div id="outline-container-sec-4-5-4" class="outline-4">
+<h4 id="sec-4-5-4"><span class="section-number-4">4.5.4</span> Search and Replace in the entire Buffer</h4>
+<div class="outline-text-4" id="text-4-5-4">
 <p>
 Source: <a href="http://emacs.stackexchange.com/questions/249/how-to-search-and-replace-in-the-entire-buffer">How to search and replace in the entire buffer?</a>
 Usage: A-x replace-regexp-entire-buffer
@@ -5580,12 +6043,12 @@ Usage: A-x replace-regexp-entire-buffer
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-5" class="outline-3">
-<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Point, Region, Line and Buffer</h3>
-<div class="outline-text-3" id="text-4-5">
-</div><div id="outline-container-sec-4-5-1" class="outline-4">
-<h4 id="sec-4-5-1"><span class="section-number-4">4.5.1</span> Point</h4>
-<div class="outline-text-4" id="text-4-5-1">
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Point, Region, Line and Buffer</h3>
+<div class="outline-text-3" id="text-4-6">
+</div><div id="outline-container-sec-4-6-1" class="outline-4">
+<h4 id="sec-4-6-1"><span class="section-number-4">4.6.1</span> Point</h4>
+<div class="outline-text-4" id="text-4-6-1">
 <p>
 <b>Point</b> is the number of characters from the beginning of the buffer to
 the current cursor location, or cursor position for short. To see the
@@ -5795,9 +6258,9 @@ Examples:
 </div>
 </div>
 
-<div id="outline-container-sec-4-5-2" class="outline-4">
-<h4 id="sec-4-5-2"><span class="section-number-4">4.5.2</span> Thing at Point API</h4>
-<div class="outline-text-4" id="text-4-5-2">
+<div id="outline-container-sec-4-6-2" class="outline-4">
+<h4 id="sec-4-6-2"><span class="section-number-4">4.6.2</span> Thing at Point API</h4>
+<div class="outline-text-4" id="text-4-6-2">
 <p>
 See also:
 </p>
@@ -5893,12 +6356,12 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-6" class="outline-3">
-<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Message / Output&#xa0;&#xa0;&#xa0;<span class="tag"><span class="message">message</span>&#xa0;<span class="output">output</span>&#xa0;<span class="dialog">dialog</span></span></h3>
-<div class="outline-text-3" id="text-4-6">
-</div><div id="outline-container-sec-4-6-1" class="outline-4">
-<h4 id="sec-4-6-1"><span class="section-number-4">4.6.1</span> message</h4>
-<div class="outline-text-4" id="text-4-6-1">
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Message / Output&#xa0;&#xa0;&#xa0;<span class="tag"><span class="message">message</span>&#xa0;<span class="output">output</span>&#xa0;<span class="dialog">dialog</span></span></h3>
+<div class="outline-text-3" id="text-4-7">
+</div><div id="outline-container-sec-4-7-1" class="outline-4">
+<h4 id="sec-4-7-1"><span class="section-number-4">4.7.1</span> message</h4>
+<div class="outline-text-4" id="text-4-7-1">
 <p>
 Display a message at the bottom of the screen.
 </p>
@@ -5925,9 +6388,9 @@ Output:
 </div>
 </div>
 
-<div id="outline-container-sec-4-6-2" class="outline-4">
-<h4 id="sec-4-6-2"><span class="section-number-4">4.6.2</span> message-box</h4>
-<div class="outline-text-4" id="text-4-6-2">
+<div id="outline-container-sec-4-7-2" class="outline-4">
+<h4 id="sec-4-7-2"><span class="section-number-4">4.7.2</span> message-box</h4>
+<div class="outline-text-4" id="text-4-7-2">
 <p>
 Display a message, in a dialog box if possible. If a dialog box is not
 available, use the echo area. 
@@ -5953,17 +6416,17 @@ available, use the echo area.
 </div>
 </div>
 
-<div id="outline-container-sec-4-7" class="outline-3">
-<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Files, Directories and Path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="file">file</span>&#xa0;<span class="os">os</span></span></h3>
-<div class="outline-text-3" id="text-4-7">
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Files, Directories and Path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="file">file</span>&#xa0;<span class="os">os</span></span></h3>
+<div class="outline-text-3" id="text-4-8">
 <p>
 <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html">Emacs Manual: Files</a>
 </p>
 </div>
 
-<div id="outline-container-sec-4-7-1" class="outline-4">
-<h4 id="sec-4-7-1"><span class="section-number-4">4.7.1</span> Basic Functions</h4>
-<div class="outline-text-4" id="text-4-7-1">
+<div id="outline-container-sec-4-8-1" class="outline-4">
+<h4 id="sec-4-8-1"><span class="section-number-4">4.8.1</span> Basic Functions</h4>
+<div class="outline-text-4" id="text-4-8-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Get and Set current directory</span>
@@ -6013,9 +6476,9 @@ ELISP&gt; (directory-files <span class="org-string">"/home/tux/PycharmProjects/H
 </div>
 </div>
 
-<div id="outline-container-sec-4-7-2" class="outline-4">
-<h4 id="sec-4-7-2"><span class="section-number-4">4.7.2</span> File Name Components</h4>
-<div class="outline-text-4" id="text-4-7-2">
+<div id="outline-container-sec-4-8-2" class="outline-4">
+<h4 id="sec-4-8-2"><span class="section-number-4">4.8.2</span> File Name Components</h4>
+<div class="outline-text-4" id="text-4-8-2">
 <p>
 <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html">Emacs Manual: File Name Components</a>
 </p>
@@ -6040,9 +6503,9 @@ ELISP&gt; (file-name-base <span class="org-string">"/home/foo/zoo1.c.back"</span
 </div>
 </div>
 
-<div id="outline-container-sec-4-7-3" class="outline-4">
-<h4 id="sec-4-7-3"><span class="section-number-4">4.7.3</span> Read / Write file to a string</h4>
-<div class="outline-text-4" id="text-4-7-3">
+<div id="outline-container-sec-4-8-3" class="outline-4">
+<h4 id="sec-4-8-3"><span class="section-number-4">4.8.3</span> Read / Write file to a string</h4>
+<div class="outline-text-4" id="text-4-8-3">
 <p>
 <b>Read File</b>
 </p>
@@ -6085,12 +6548,12 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-8" class="outline-3">
-<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Window Functions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="window">window</span></span></h3>
-<div class="outline-text-3" id="text-4-8">
-</div><div id="outline-container-sec-4-8-1" class="outline-4">
-<h4 id="sec-4-8-1"><span class="section-number-4">4.8.1</span> Basic Window Functions</h4>
-<div class="outline-text-4" id="text-4-8-1">
+<div id="outline-container-sec-4-9" class="outline-3">
+<h3 id="sec-4-9"><span class="section-number-3">4.9</span> Window Functions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="window">window</span></span></h3>
+<div class="outline-text-3" id="text-4-9">
+</div><div id="outline-container-sec-4-9-1" class="outline-4">
+<h4 id="sec-4-9-1"><span class="section-number-4">4.9.1</span> Basic Window Functions</h4>
+<div class="outline-text-4" id="text-4-9-1">
 <p>
 Original Window before be changed.
 </p>
@@ -6243,9 +6706,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-8-2" class="outline-4">
-<h4 id="sec-4-8-2"><span class="section-number-4">4.8.2</span> Manipulate Buffer in Another Window</h4>
-<div class="outline-text-4" id="text-4-8-2">
+<div id="outline-container-sec-4-9-2" class="outline-4">
+<h4 id="sec-4-9-2"><span class="section-number-4">4.9.2</span> Manipulate Buffer in Another Window</h4>
+<div class="outline-text-4" id="text-4-9-2">
 <p>
 Description: Split window vertically, create a new buffer not associated to a file named dummy, and switch
 to this buffer on the second window and set the current buffer to dummy.
@@ -6375,9 +6838,9 @@ ELISP&gt; (mapcar (<span class="org-keyword">lambda</span> (w)(buffer-name (wind
 </div>
 </div>
 
-<div id="outline-container-sec-4-8-3" class="outline-4">
-<h4 id="sec-4-8-3"><span class="section-number-4">4.8.3</span> Window Configuration</h4>
-<div class="outline-text-4" id="text-4-8-3">
+<div id="outline-container-sec-4-9-3" class="outline-4">
+<h4 id="sec-4-9-3"><span class="section-number-4">4.9.3</span> Window Configuration</h4>
+<div class="outline-text-4" id="text-4-9-3">
 <p>
 The function current-window-configuration returns the current  emacs window configuration.
 </p>
@@ -6501,12 +6964,12 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-9" class="outline-3">
-<h3 id="sec-4-9"><span class="section-number-3">4.9</span> OS Interface</h3>
-<div class="outline-text-3" id="text-4-9">
-</div><div id="outline-container-sec-4-9-1" class="outline-4">
-<h4 id="sec-4-9-1"><span class="section-number-4">4.9.1</span> Find the current operating system</h4>
-<div class="outline-text-4" id="text-4-9-1">
+<div id="outline-container-sec-4-10" class="outline-3">
+<h3 id="sec-4-10"><span class="section-number-3">4.10</span> OS Interface</h3>
+<div class="outline-text-3" id="text-4-10">
+</div><div id="outline-container-sec-4-10-1" class="outline-4">
+<h4 id="sec-4-10-1"><span class="section-number-4">4.10.1</span> Find the current operating system</h4>
+<div class="outline-text-4" id="text-4-10-1">
 <p>
 The variable <span class="underline">system-type</span> indicates the current operating system. 
 </p>
@@ -6585,9 +7048,9 @@ ELISP&gt; (<span class="org-keyword">cl-case</span>  system-type
 </div>
 </div>
 
-<div id="outline-container-sec-4-9-2" class="outline-4">
-<h4 id="sec-4-9-2"><span class="section-number-4">4.9.2</span> Date and Time</h4>
-<div class="outline-text-4" id="text-4-9-2">
+<div id="outline-container-sec-4-10-2" class="outline-4">
+<h4 id="sec-4-10-2"><span class="section-number-4">4.10.2</span> Date and Time</h4>
+<div class="outline-text-4" id="text-4-10-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;;;</span>
@@ -6615,9 +7078,9 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-9-3" class="outline-4">
-<h4 id="sec-4-9-3"><span class="section-number-4">4.9.3</span> Call External Commands or Apps</h4>
-<div class="outline-text-4" id="text-4-9-3">
+<div id="outline-container-sec-4-10-3" class="outline-4">
+<h4 id="sec-4-10-3"><span class="section-number-4">4.10.3</span> Call External Commands or Apps</h4>
+<div class="outline-text-4" id="text-4-10-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;;; </span><span class="org-comment">Call External Command</span>
@@ -6644,9 +7107,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-9-4" class="outline-4">
-<h4 id="sec-4-9-4"><span class="section-number-4">4.9.4</span> Environment Variables</h4>
-<div class="outline-text-4" id="text-4-9-4">
+<div id="outline-container-sec-4-10-4" class="outline-4">
+<h4 id="sec-4-10-4"><span class="section-number-4">4.10.4</span> Environment Variables</h4>
+<div class="outline-text-4" id="text-4-10-4">
 <p>
 <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Environment.html">Emacs Manual: Environment Variables</a>
 </p>
@@ -6738,9 +7201,9 @@ LC_NUMERIC=pt_BR.UTF-8
 </div>
 </div>
 
-<div id="outline-container-sec-4-9-5" class="outline-4">
-<h4 id="sec-4-9-5"><span class="section-number-4">4.9.5</span> Process Management</h4>
-<div class="outline-text-4" id="text-4-9-5">
+<div id="outline-container-sec-4-10-5" class="outline-4">
+<h4 id="sec-4-10-5"><span class="section-number-4">4.10.5</span> Process Management</h4>
+<div class="outline-text-4" id="text-4-10-5">
 <p>
 Documentation:
 </p>
@@ -6882,12 +7345,12 @@ ELISP&gt; (mapcar
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-10" class="outline-3">
-<h3 id="sec-4-10"><span class="section-number-3">4.10</span> Timer</h3>
-<div class="outline-text-3" id="text-4-10">
-</div><div id="outline-container-sec-4-10-1" class="outline-4">
-<h4 id="sec-4-10-1"><span class="section-number-4">4.10.1</span> run-with-timer</h4>
-<div class="outline-text-4" id="text-4-10-1">
+<div id="outline-container-sec-4-11" class="outline-3">
+<h3 id="sec-4-11"><span class="section-number-3">4.11</span> Timer</h3>
+<div class="outline-text-3" id="text-4-11">
+</div><div id="outline-container-sec-4-11-1" class="outline-4">
+<h4 id="sec-4-11-1"><span class="section-number-4">4.11.1</span> run-with-timer</h4>
+<div class="outline-text-4" id="text-4-11-1">
 <p>
 Perform an action after a delay of SECS seconds. Repeat the action
 every REPEAT seconds, if REPEAT is non-nil.  SECS and REPEAT may be
@@ -6952,14 +7415,14 @@ minutes.
 </div>
 </div>
 
-<div id="outline-container-sec-4-11" class="outline-3">
-<h3 id="sec-4-11"><span class="section-number-3">4.11</span> Emacs Modes</h3>
-<div class="outline-text-3" id="text-4-11">
+<div id="outline-container-sec-4-12" class="outline-3">
+<h3 id="sec-4-12"><span class="section-number-3">4.12</span> Emacs Modes</h3>
+<div class="outline-text-3" id="text-4-12">
 </div>
 
-<div id="outline-container-sec-4-11-1" class="outline-4">
-<h4 id="sec-4-11-1"><span class="section-number-4">4.11.1</span> Major Mode</h4>
-<div class="outline-text-4" id="text-4-11-1">
+<div id="outline-container-sec-4-12-1" class="outline-4">
+<h4 id="sec-4-12-1"><span class="section-number-4">4.12.1</span> Major Mode</h4>
+<div class="outline-text-4" id="text-4-12-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -7102,9 +7565,9 @@ Lisp Dialects
 </div>
 </div>
 
-<div id="outline-container-sec-4-11-2" class="outline-4">
-<h4 id="sec-4-11-2"><span class="section-number-4">4.11.2</span> Minor Modes</h4>
-<div class="outline-text-4" id="text-4-11-2">
+<div id="outline-container-sec-4-12-2" class="outline-4">
+<h4 id="sec-4-12-2"><span class="section-number-4">4.12.2</span> Minor Modes</h4>
+<div class="outline-text-4" id="text-4-12-2">
 <p>
 Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 </p>
@@ -7184,9 +7647,9 @@ Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 </div>
 </div>
 
-<div id="outline-container-sec-4-11-3" class="outline-4">
-<h4 id="sec-4-11-3"><span class="section-number-4">4.11.3</span> Mode Association with Files</h4>
-<div class="outline-text-4" id="text-4-11-3">
+<div id="outline-container-sec-4-12-3" class="outline-4">
+<h4 id="sec-4-12-3"><span class="section-number-4">4.12.3</span> Mode Association with Files</h4>
+<div class="outline-text-4" id="text-4-12-3">
 <p>
 The variable auto-mode-alist holds all modes associated with file extension.
 </p>
@@ -7334,9 +7797,9 @@ ELISP&gt; (show-doc #'mode/ftypes)
 </div>
 </div>
 
-<div id="outline-container-sec-4-11-4" class="outline-4">
-<h4 id="sec-4-11-4"><span class="section-number-4">4.11.4</span> Mode Specific Key Bindings</h4>
-<div class="outline-text-4" id="text-4-11-4">
+<div id="outline-container-sec-4-12-4" class="outline-4">
+<h4 id="sec-4-12-4"><span class="section-number-4">4.12.4</span> Mode Specific Key Bindings</h4>
+<div class="outline-text-4" id="text-4-12-4">
 <p>
 The function <b>define-key</b>  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: <code>M-x describe-key</code> and then type the key bind.
 </p>
@@ -7383,9 +7846,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-11-5" class="outline-4">
-<h4 id="sec-4-11-5"><span class="section-number-4">4.11.5</span> Modes Customization</h4>
-<div class="outline-text-4" id="text-4-11-5">
+<div id="outline-container-sec-4-12-5" class="outline-4">
+<h4 id="sec-4-12-5"><span class="section-number-4">4.12.5</span> Modes Customization</h4>
+<div class="outline-text-4" id="text-4-12-5">
 <ul class="org-ul">
 <li><a href="http://www.emacswiki.org/emacs/MinorMode">Minor Mode  - Emacs Wiki</a>
 </li>
@@ -7428,9 +7891,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-11-6" class="outline-4">
-<h4 id="sec-4-11-6"><span class="section-number-4">4.11.6</span> Mode Hooks</h4>
-<div class="outline-text-4" id="text-4-11-6">
+<div id="outline-container-sec-4-12-6" class="outline-4">
+<h4 id="sec-4-12-6"><span class="section-number-4">4.12.6</span> Mode Hooks</h4>
+<div class="outline-text-4" id="text-4-12-6">
 <ul class="org-ul">
 <li><a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html">http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html</a>
 </li>
@@ -7446,9 +7909,9 @@ The following is a list of hook variables that let you provide functions to be c
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-12" class="outline-3">
-<h3 id="sec-4-12"><span class="section-number-3">4.12</span> Special Variables</h3>
-<div class="outline-text-3" id="text-4-12">
+<div id="outline-container-sec-4-13" class="outline-3">
+<h3 id="sec-4-13"><span class="section-number-3">4.13</span> Special Variables</h3>
+<div class="outline-text-3" id="text-4-13">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; emacs-major-version
@@ -7506,9 +7969,9 @@ ELISP&gt; load-path
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-13" class="outline-3">
-<h3 id="sec-4-13"><span class="section-number-3">4.13</span> Network</h3>
-<div class="outline-text-3" id="text-4-13">
+<div id="outline-container-sec-4-14" class="outline-3">
+<h3 id="sec-4-14"><span class="section-number-3">4.14</span> Network</h3>
+<div class="outline-text-3" id="text-4-14">
 <p>
 <b>Links to Inquiry</b>
 </p>
@@ -9104,1668 +9567,10 @@ delimiters at different levels.
 <h3 id="sec-8-7"><span class="section-number-3">8.7</span> Elscreen</h3>
 </div>
 </div>
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> Solutions</h2>
-<div class="outline-text-2" id="text-9">
-</div><div id="outline-container-sec-9-1" class="outline-3">
-<h3 id="sec-9-1"><span class="section-number-3">9.1</span> Code Navigation with Occur&#xa0;&#xa0;&#xa0;<span class="tag"><span class="edit">edit</span></span></h3>
-<div class="outline-text-3" id="text-9-1">
-<p>
-The function <b>occur</b> is useful for code navigation and scan code
-statements, this function is invoked by M-x occur.
-</p>
-
-<p>
-Examples:
-</p>
-
-<p>
-The function python/scan-functions will scan for all lines that starts
-with def statement in a Python code and show the matching lines in the
-right side.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">python/scan-functions</span> ()
-  (<span class="org-keyword">interactive</span>)
-  (split-window-horizontally)
-  (occur <span class="org-string">"def"</span>)
-  )
-</pre>
-</div>
-
-<p>
-Example:
-</p>
-
-
-<div class="figure">
-<p><img src="images/occur_statement_scan.png" alt="occur_statement_scan.png" />
-</p>
-</div>
-
-
-<p>
-It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
-@NOTE. This fuction can be excuted by typing: <code>M-x scan-code-tags</code>
-</p>
-
-<p>
-Example:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">scan-code-tags</span> ()
-     <span class="org-doc">"</span>
-<span class="org-doc">     Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:</span>
-
-<span class="org-doc">     "</span>
-     (<span class="org-keyword">interactive</span>)
-     (split-window-horizontally)
-     (occur <span class="org-string">"@FIXME:</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">@TODO:</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">@BUG:</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">@NOTE:"</span>))
-</pre>
-</div>
-
-
-
-<div class="figure">
-<p><img src="images/scan_code_tags.png" alt="scan_code_tags.png" />
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-9-2" class="outline-3">
-<h3 id="sec-9-2"><span class="section-number-3">9.2</span> Shell Command Interface</h3>
-<div class="outline-text-3" id="text-9-2">
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">shell-command-to-lines</span> (command)
-  (remove-if-not  (<span class="org-keyword">lambda</span> (s) (/= (length s) 0))
-                  (split-string
-                   (shell-command-to-string command) <span class="org-string">"\n"</span>)))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">find-files</span> (directory pattern)
-  (shell-command-to-lines
-   (format <span class="org-string">"find %s -name '%s'"</span>
-           directory
-           pattern)))
-</pre>
-</div>
-
-<p>
-Example:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt; (shell-command-to-lines <span class="org-string">"ls /etc/R"</span>)
-(<span class="org-string">"javaconf"</span> <span class="org-string">"ldpaths"</span> <span class="org-string">"Makeconf"</span> <span class="org-string">"Renviron"</span> <span class="org-string">"repositories"</span>)
-
-
-ELISP&gt; (mapc #'print (shell-command-to-lines <span class="org-string">"ls /etc/R"</span>))
-
-<span class="org-string">"javaconf"</span>
-
-<span class="org-string">"ldpaths"</span>
-
-<span class="org-string">"Makeconf"</span>
-
-<span class="org-string">"Renviron"</span>
-
-<span class="org-string">"repositories"</span>
-
-
-
-ELISP&gt; (mapc #'print (find-files <span class="org-string">"/etc/"</span> <span class="org-string">"*.conf"</span>))
-
-<span class="org-string">"find: &#8216;</span><span class="org-string"><span class="org-constant">/etc/sudoers.d</span></span><span class="org-string">&#8217;: Permission denied"</span>
-
-<span class="org-string">"/etc/security/namespace.conf"</span>
-
-<span class="org-string">"/etc/security/pam_env.conf"</span>
-
-<span class="org-string">"/etc/security/group.conf"</span>
-
-<span class="org-string">"/etc/security/limits.conf"</span>
-...
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-3" class="outline-3">
-<h3 id="sec-9-3"><span class="section-number-3">9.3</span> Quick edit and reload Emacs Configuration File.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="customization">customization</span></span></h3>
-<div class="outline-text-3" id="text-9-3">
-<p>
-It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Usage: M-x reload-init-file</span>
-<span class="org-comment-delimiter">;;</span>
-(<span class="org-keyword">defun</span> <span class="org-function-name">reload-init-file</span> ()
-  <span class="org-doc">"Reload init.el file"</span>
-  (<span class="org-keyword">interactive</span>)
-  (load user-init-file)
-  (message <span class="org-string">"Reloaded init.el OK."</span>)
-)
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Usage: M-x open-init-file</span>
-<span class="org-comment-delimiter">;;</span>
-(<span class="org-keyword">defun</span> <span class="org-function-name">open-init-file</span> ()
-    (<span class="org-keyword">interactive</span>)
-    (find-file user-init-file)
-)
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-4" class="outline-3">
-<h3 id="sec-9-4"><span class="section-number-3">9.4</span> Refresh/ Reload File</h3>
-<div class="outline-text-3" id="text-9-4">
-<p>
-Source: <a href="http://www.emacswiki.org/emacs-en/download/misc-cmds.el">http://www.emacswiki.org/emacs-en/download/misc-cmds.el</a>
-</p>
-
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">refresh</span> ()
-    <span class="org-doc">"Revert buffer without confirmation."</span>
-    (<span class="org-keyword">interactive</span>)
-    (revert-buffer t t))
-</pre>
-</div>
-
-<p>
-Usage:
-</p>
-
-<p>
-#+END<sub>SRC</sub>
-M-x refresh
-#+END<sub>SRC</sub>
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-9-5" class="outline-3">
-<h3 id="sec-9-5"><span class="section-number-3">9.5</span> Creating Quick Access Menu</h3>
-<div class="outline-text-3" id="text-9-5">
-
-<div class="figure">
-<p><img src="images/utils_menu1.png" alt="utils_menu1.png" />
-</p>
-</div>
-
-
-<div class="figure">
-<p><img src="images/utils_menu2.png" alt="utils_menu2.png" />
-</p>
-</div>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">require</span> '<span class="org-constant">easymenu</span>)
-
-(<span class="org-keyword">easy-menu-define</span> djcb-menu global-map <span class="org-string">"Utils"</span>
-  '(<span class="org-string">"Utils"</span>
-
-     (<span class="org-string">"Shells"</span> <span class="org-comment-delimiter">;; </span><span class="org-comment">submenu</span>
-       [<span class="org-string">"Ielm   - Emacs Lisp Shell"</span>       (ielm)]
-       [<span class="org-string">"Eshell - Emacs Buitin Shell"</span>    (eshell)]
-       [<span class="org-string">"Native Shell "</span>                  (shell)]
-      [<span class="org-string">"---------------------"</span> nil]
-      [<span class="org-string">"Edit .bashrc"</span> (find-file  <span class="org-string">"~/.bashrc"</span>)]
-      [<span class="org-string">"Edit .profile"</span> (find-file <span class="org-string">"~/.profile"</span>)]
-      [<span class="org-string">"Edit .Xresources"</span> (find-file <span class="org-string">"~/.Xresources"</span>)]
-      [<span class="org-string">"Edit .xsessin"</span>    (find-file <span class="org-string">"~/.xsession"</span>)]
-      [<span class="org-string">"See all GNU MAN pages"</span> ( info)]
-      [<span class="org-string">"See a specific Man Page"</span> (woman)]
-
-      )<span class="org-comment-delimiter">;; </span><span class="org-comment">End of shells menu</span>
-
-     (<span class="org-string">"Emacs /Elisp"</span>  <span class="org-comment-delimiter">;; </span><span class="org-comment">submenu</span>
-
-      [<span class="org-string">"Ielm   - Emacs Lisp Shell"</span>  (ielm)]
-      [<span class="org-string">"Eval buffer"</span>   ( eval-buffer ) ]
-      [<span class="org-string">"---------------------"</span> nil]
-
-      [<span class="org-string">"Edit  init.el"</span> (find-file  user-init-file)]
-      [<span class="org-string">"Reload init.el"</span> (load-file user-init-file)]
-      [<span class="org-string">"Open .emac.d dir"</span> (find-file <span class="org-string">"~/.emacs.d"</span>)]
-      [<span class="org-string">"List packages"</span>     (list-packages)]
-      [<span class="org-string">"Install package"</span>   (package-install)]
-
-     ) <span class="org-comment-delimiter">;; </span><span class="org-comment">End of Emacs / Elisp submenu</span>
-
- )) <span class="org-comment-delimiter">;; </span><span class="org-comment">End of Custom Menu</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-6" class="outline-3">
-<h3 id="sec-9-6"><span class="section-number-3">9.6</span> Extract Function Documentation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h3>
-<div class="outline-text-3" id="text-9-6">
-<p>
-Source: <a href="http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/">Generate emacs-lisp documentation</a>
-Primitives:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt;
-ELISP&gt; (<span class="org-keyword">defun</span> <span class="org-function-name">sample-function</span> (a b c)
-           <span class="org-doc">"Function Docstring"</span>
-         (+ a (* 5 b) (* 3 c)))
-
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Extract Documentation</span>
-<span class="org-comment-delimiter">;;</span>
-ELISP&gt; (documentation 'sample-function)
-<span class="org-string">"Function Docstring"</span>
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Extract Code</span>
-<span class="org-comment-delimiter">;;</span>
-ELISP&gt; (symbol-function 'sample-function)
-(<span class="org-keyword">lambda</span>
-  (a b c)
-  <span class="org-doc">"Function Docstring"</span>
-  (+ a
-     (* 5 b)
-     (* 3 c)))
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Extract Arguments</span>
-ELISP&gt; (help-function-arglist 'sample-function)
-(a b c)
-</pre>
-</div>
-
-<p>
-Final Code
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(fun2org 'sample-function)
-    <span class="org-string">"** sample-function (a b c)\nFunction Docstring\n\n#+BEGIN_SRC emacs-lisp\n(lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))\n#+END_SRC\n"</span>
-    ELISP&gt;
-    ELISP&gt; (<span class="org-keyword">defun</span> <span class="org-function-name">fun2org</span> (function-symbol)
-      (<span class="org-keyword">let</span> ((args (help-function-arglist function-symbol))
-            (doc  (documentation function-symbol))
-            (code (symbol-function function-symbol)))
-        (print (format <span class="org-string">"** %s %s</span>
-<span class="org-string">    %s</span>
-
-<span class="org-string">    #+BEGIN_SRC emacs-lisp</span>
-<span class="org-string">    %S</span>
-
-<span class="org-string">    "</span> function-symbol args doc code)))) <span class="org-comment-delimiter">;; </span><span class="org-comment">End of fun2org</span>
-</pre>
-</div>
-
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt; (fun2org 'sample-function)
-
-<span class="org-string">"** sample-function (a b c)</span>
-<span class="org-string">Function Docstring</span>
-
-<span class="org-string"> (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))</span>
-<span class="org-string">"</span>
-</pre>
-</div>
-</div>
-</div>
-
-
-
-<div id="outline-container-sec-9-7" class="outline-3">
-<h3 id="sec-9-7"><span class="section-number-3">9.7</span> Edit File as Root&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="edit">edit</span></span></h3>
-<div class="outline-text-3" id="text-9-7">
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">open-as-root</span> (filename)
-  (<span class="org-keyword">interactive</span>)
-  (find-file (concat <span class="org-string">"/sudo:root@localhost:"</span>  filename)))
-
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Example:</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">ELISP&gt; (open-as-root "/etc/host.conf")</span>
-<span class="org-comment-delimiter">;;</span>
-
-
-<span class="org-comment-delimiter">;;</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Open an already opened buffer as root</span>
-<span class="org-comment-delimiter">;;</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">M-x open-buffer-as-root</span>
-<span class="org-comment-delimiter">;;</span>
-(<span class="org-keyword">defun</span> <span class="org-function-name">open-buffer-as-root</span> ()
- (<span class="org-keyword">interactive</span>)
- (<span class="org-keyword">let</span>
-     (
-      <span class="org-comment-delimiter">;; </span><span class="org-comment">Get the current buffer file name</span>
-      (filename (buffer-file-name (current-buffer)))
-      <span class="org-comment-delimiter">;; </span><span class="org-comment">Get the current file name</span>
-      (bufname  (buffer-name (current-buffer)))
-     )
-   (<span class="org-keyword">progn</span>
-  (kill-buffer bufname)         <span class="org-comment-delimiter">;; </span><span class="org-comment">Kill current buffer</span>
-  (open-as-root filename))))    <span class="org-comment-delimiter">;; </span><span class="org-comment">Open File as root</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-8" class="outline-3">
-<h3 id="sec-9-8"><span class="section-number-3">9.8</span> Open Current Buffer Directory</h3>
-<div class="outline-text-3" id="text-9-8">
-<p>
-M-x open-dir
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">open-dir</span> ()
-  <span class="org-doc">"Open directory of current buffer"</span>
-  (<span class="org-keyword">interactive</span>)
-  (find-file (file-name-directory (buffer-file-name))))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-9" class="outline-3">
-<h3 id="sec-9-9"><span class="section-number-3">9.9</span> Open Current Buffer Directory in File Manager</h3>
-<div class="outline-text-3" id="text-9-9">
-<p>
-M-x open-file-manager
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">open-file-manager</span> ()
-  <span class="org-doc">"Open buffer directory in file manager (Linux Only)"</span>
-  (<span class="org-keyword">interactive</span>)
-  (call-process <span class="org-string">"pcmanfm"</span>))
-<span class="org-comment-delimiter">;; </span><span class="org-comment">or on Mac</span>
-(<span class="org-keyword">defun</span> <span class="org-function-name">open-file-manager</span> ()
-  <span class="org-doc">"Open buffer directory in file manager (Mac Only)"</span>
-  (<span class="org-keyword">interactive</span>)
-  (call-process <span class="org-string">"open"</span> nil nil nil <span class="org-string">"."</span>))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-10" class="outline-3">
-<h3 id="sec-9-10"><span class="section-number-3">9.10</span> Open a terminal Emulator in the directory of Current Buffer</h3>
-<div class="outline-text-3" id="text-9-10">
-<p>
-Despite Emacs can run a shell like python, bash, zsh, it cannot run ncurses based applications. In these cases is necessary to launch an external terminal. This command can be added to the menu in the section: <i>Creating Quick Access Menu</i>
-Usage:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-text">M-x open-terminal
-</pre>
-</div>
-
-<p>
-Code:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">open-terminal</span> ()
-  <span class="org-doc">"Open terminal in file directory"</span>
-  (<span class="org-keyword">interactive</span>)
-  (call-process <span class="org-string">"lxterminal"</span>
-                nil
-                (format <span class="org-string">"--working-directory='%s'"</span>
-                        (file-name-directory (buffer-file-name)))))
-<span class="org-comment-delimiter">;; </span><span class="org-comment">or on Mac</span>
-(<span class="org-keyword">defun</span> <span class="org-function-name">open-terminal</span> ()
-  <span class="org-doc">"Open terminal in file directory"</span>
-  (<span class="org-keyword">interactive</span>)
-  (<span class="org-keyword">let</span> ((cmd (format <span class="org-string">"cd %s"</span> default-directory)))
-    (do-applescript
-     (format
-      <span class="org-string">"</span>
-<span class="org-string">  tell application \"iTerm\"</span>
-<span class="org-string">       activate</span>
-<span class="org-string">       set _session to current session of current terminal</span>
-<span class="org-string">       tell _session</span>
-<span class="org-string">            set command to get the clipboard</span>
-<span class="org-string">            write text \"%s\"</span>
-<span class="org-string">       end tell</span>
-<span class="org-string">  end tell</span>
-<span class="org-string">  "</span> cmd))))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-11" class="outline-3">
-<h3 id="sec-9-11"><span class="section-number-3">9.11</span> Eval String in Clipboard</h3>
-<div class="outline-text-3" id="text-9-11">
-<p>
-It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt; (<span class="org-keyword">defun</span> <span class="org-function-name">eval-string</span> (str) (eval (read str)))
-eval-string
-
-ELISP&gt; (<span class="org-keyword">defun</span> <span class="org-function-name">eval-xclip</span> () (eval-string (shell-command-to-string <span class="org-string">"xclip -o"</span>)))
-eval-xclip
-
-<span class="org-comment-delimiter">;;</span>
-<span class="org-comment-delimiter">;;  </span><span class="org-comment">Copy the following line in this comment block</span>
-<span class="org-comment-delimiter">;;</span>
-<span class="org-comment-delimiter">;;      </span><span class="org-comment">(message "Loading my copypaste file...")</span>
-
-ELISP&gt; (eval-xclip)
-<span class="org-string">"Loading my copypaste file..."</span>
-ELISP&gt;
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-12" class="outline-3">
-<h3 id="sec-9-12"><span class="section-number-3">9.12</span> Save and Reload Current Session</h3>
-<div class="outline-text-3" id="text-9-12">
-<p>
-Interactive Developement
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt; (<span class="org-keyword">defun</span> <span class="org-function-name">file-contents</span> (filename)
-  (<span class="org-keyword">interactive</span> <span class="org-string">"fFind file: "</span>)
-  (<span class="org-keyword">with-temp-buffer</span>
-    (insert-file-contents filename)
-    (buffer-substring-no-properties (point-min) (point-max))))
-file-contents
-ELISP&gt;
-
-ELISP&gt; (<span class="org-keyword">defun</span> <span class="org-function-name">write-file</span> (filename content)
-         (append-to-file content nil filename))
-write-file
-ELISP&gt;
-
-ELISP&gt; (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))
-(<span class="org-string">"/home/tux/.emacs.d/init.el"</span> <span class="org-string">"/sudo:root@localhost:/etc/host.conf"</span>)
-
-ELISP&gt; (<span class="org-keyword">setq</span> session-file  <span class="org-string">"~/.emacs.d/lastsession.el"</span>)
-<span class="org-string">"~/.emacs.d/lastsession.el"</span>
-ELISP&gt;
-
-ELISP&gt;
-ELISP&gt; (format <span class="org-string">"(setq last-session-files '%S)"</span> (remove-if 'null (mapcar 'buffer-file-name  (buffer-list))))
-<span class="org-string">"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"</span>
-
-
-ELISP&gt; (<span class="org-keyword">setq</span> code  (format <span class="org-string">"(setq last-session-files '%S)"</span> (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))))
-<span class="org-string">"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"</span>
-ELISP&gt;
-
-ELISP&gt; (<span class="org-keyword">setq</span> session-file <span class="org-string">"~/.emacs.d/lastsession.el"</span>)
-
-ELISP&gt; (delete-file session-file)
-nil
-
-ELISP&gt; (write-file session-file code)
-nil
-ELISP&gt;
-
-ELISP&gt; (file-contents session-file)
-<span class="org-string">"(setq last-session-files '(\"/home/tux/.emacs.d/init.el\" \"/sudo:root@localhost:/etc/host.conf\"))"</span>
-ELISP&gt;
-
-ELISP&gt; (load-file session-file)
-t
-ELISP&gt; last-session-files
-(<span class="org-string">"/home/tux/.emacs.d/init.el"</span> <span class="org-string">"/sudo:root@localhost:/etc/host.conf"</span>)
-
-<span class="org-comment-delimiter">;;; </span><span class="org-comment">Open All files defined in Last Session</span>
-ELISP&gt;
-ELISP&gt; (mapcar 'find-file last-session-files)
-(#&lt;buffer init.el&gt; #&lt;buffer host.conf&gt;)
-
-ELISP&gt;
-</pre>
-</div>
-
-<p>
-Joining Everything
-</p>
-
-
-<p>
-File: sessions.el
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">setq</span> session-file <span class="org-string">"~/.emacs.d/lastsession.el"</span>)
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">write-file</span> (filename content)
-  (append-to-file content nil filename))
-
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">make-session-code</span> ()
-     (<span class="org-keyword">interactive</span>)
-     (format <span class="org-string">"(setq last-session-files '%S)"</span> (remove-if 'null (mapcar 'buffer-file-name  (buffer-list)))))
-
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">save-session</span> ()
-    <span class="org-doc">"Save Current Session"</span>
-    (<span class="org-keyword">interactive</span>)
-    (<span class="org-keyword">when</span> (file-exists-p session-file) (delete-file session-file))
-    (write-file session-file (make-session-code)))
-
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">load-session</span> ()
-  (<span class="org-keyword">interactive</span>)
-  (load-file session-file)
-  (mapcar 'find-file last-session-files)
-)
-
-(message <span class="org-string">"Reloaded"</span>)
-</pre>
-</div>
-
-
-<p>
-To save all bufffers with files:
-</p>
-
-<pre class="example">
-M-x load-file ;; Enter session.el
-M-x save-session
-</pre>
-
-
-<p>
-To reload the files save in the seesion enter:
-</p>
-
-<pre class="example">
-M-x load-file    ;; Enter session.el
-M-x load-session ;; All previous files in the session
-                 ;; saved will be opened
-</pre>
-</div>
-</div>
-
-<div id="outline-container-sec-9-13" class="outline-3">
-<h3 id="sec-9-13"><span class="section-number-3">9.13</span> Create a menu with all color themes available</h3>
-<div class="outline-text-3" id="text-9-13">
-
-<div class="figure">
-<p><img src="images/colortheme_menu.png" alt="colortheme_menu.png" />
-</p>
-</div>
-
-<p>
-<b>Using Eval</b>
-</p>
-
-<p>
-Copy and paste the code below to the scratch buffer and enter M-x eval-buffer. This code can also be put in ~/emacs.d/init.el, in the config file.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">eval-string</span> (str) (eval (read str)))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">make-menu-rows</span> ()
- (mapcar
-   (<span class="org-keyword">lambda</span> (x)
-      (format <span class="org-string">"[\"%s\" (load-theme '%s)]"</span>  (symbol-name x) (symbol-name x) ))
-   (custom-available-themes))
- )
-
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">make-color-menu-code</span> ()
-  (format
-   <span class="org-string">"</span>
-<span class="org-string">   (easy-menu-define djcb-menu global-map \"Color Themes\"</span>
-<span class="org-string">     '(\"Color Themes\"</span>
-<span class="org-string">        %s</span>
-<span class="org-string">      )</span>
-<span class="org-string">   )</span>
-<span class="org-string">   "</span>
-  (mapconcat 'identity (make-menu-rows) <span class="org-string">"\n"</span>)
-
-  ) <span class="org-comment-delimiter">;; </span><span class="org-comment">End of format</span>
-) <span class="org-comment-delimiter">;; </span><span class="org-comment">End of make-color-menu</span>
-
-
-
-<span class="org-comment-delimiter">;;</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">"Eval is evil". It must be avoided, because, it is hard to refactor,</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">hard to debug and vulnerable to code injection on Web Apps, so a better</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">way to write it is to use Elisp macros.</span>
-<span class="org-comment-delimiter">;;</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">@DONE: Change eval-string to an Elisp macro.</span>
-<span class="org-comment-delimiter">;;</span>
-(eval-string (make-color-menu-code))
-</pre>
-</div>
-
-<p>
-<b>Using Macros</b>
-</p>
-
-<p>
-Developement:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">ELISP&gt; (custom-available-themes)
-(cyberpunk adwaita deeper-blue dichromacy leuven light-blue manoj-dark misterioso tango-dark tango tsdh-dark tsdh-light wheatgrass whiteboard wombat)
-
-ELISP&gt; (mapcar
-        (<span class="org-keyword">lambda</span> (sym) `[,(symbol-name sym) (load-theme (<span class="org-keyword">quote</span> ,sym))])
-        (custom-available-themes)
-    )
-([<span class="org-string">"adwaita"</span>
-  (load-theme 'adwaita)]
- [<span class="org-string">"deeper-blue"</span>
-  (load-theme 'deeper-blue)]
- [<span class="org-string">"dichromacy"</span>
-  (load-theme 'dichromacy)]
- [<span class="org-string">"leuven"</span>
-  (load-theme 'leuven)]
- [<span class="org-string">"light-blue"</span>
-  (load-theme 'light-blue)]
- [<span class="org-string">"manoj-dark"</span>
-  (load-theme 'manoj-dark)]
- [<span class="org-string">"misterioso"</span>
-  (load-theme 'misterioso)]
- [<span class="org-string">"tango-dark"</span>
-  (load-theme 'tango-dark)]
-  ...
-
-ELISP&gt;  (<span class="org-keyword">defun</span> <span class="org-function-name">make-menu-rows</span> ()
-          (mapcar
-        (<span class="org-keyword">lambda</span> (sym) `[,(symbol-name sym) (load-theme (<span class="org-keyword">quote</span> ,sym))])
-        (custom-available-themes)))
-make-menu-rows
-ELISP&gt;
-ELISP&gt; (make-menu-rows)
-([<span class="org-string">"adwaita"</span>
-  (load-theme 'adwaita)]
- [<span class="org-string">"deeper-blue"</span>
-  (load-theme 'deeper-blue)]
- [<span class="org-string">"dichromacy"</span>
-  (load-theme 'dichromacy)]
- [<span class="org-string">"leuven"</span>
-  (load-theme 'leuven)]
-  ...
-
-
-ELISP&gt; `(<span class="org-keyword">easy-menu-define</span> djcb-menu global-map <span class="org-string">"Color Themes"</span>
-          '(<span class="org-string">"Color Themes"</span>
-           ,@(make-menu-rows)))
-(<span class="org-keyword">easy-menu-define</span> djcb-menu global-map <span class="org-string">"Color Themes"</span>
-  '(<span class="org-string">"Color Themes"</span>
-    [<span class="org-string">"adwaita"</span>
-     (load-theme 'adwaita)]
-    [<span class="org-string">"deeper-blue"</span>
-     (load-theme 'deeper-blue)]
-    [<span class="org-string">"dichromacy"</span>
-     (load-theme 'dichromacy)]
-    [<span class="org-string">"leuven"</span>
-     (load-theme 'leuven)]
-    [<span class="org-string">"light-blue"</span>
-     (load-theme 'light-blue)]
-     ...
-
-<span class="org-comment-delimiter">;;; </span><span class="org-comment">Now execute the generated code, the menu will pop up.</span>
-<span class="org-comment-delimiter">;;;</span>
-
-ELISP&gt; (eval `(<span class="org-keyword">easy-menu-define</span> djcb-menu global-map <span class="org-string">"Color Themes"</span>
-          '(<span class="org-string">"Color Themes"</span>
-           ,@(make-menu-rows))))
-nil
-</pre>
-</div>
-
-<p>
-Final code
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">make-menu-rows</span> ()
-          (mapcar
-        (<span class="org-keyword">lambda</span> (sym) `[,(symbol-name sym) (load-theme (<span class="org-keyword">quote</span> ,sym))])
-        (custom-available-themes)))
-
-
-(<span class="org-keyword">defmacro</span> <span class="org-function-name">make-color-menu</span> ()
-  `(<span class="org-keyword">easy-menu-define</span> djcb-menu global-map <span class="org-string">"Color Themes"</span>
-     '(<span class="org-string">"Color Themes"</span>
-       ,@(make-menu-rows))))
-
-(make-color-menu)
-
-<span class="org-comment-delimiter">;;;;; </span><span class="org-comment">Or copy and paste the following  block on IELM shell</span>
-
-(<span class="org-keyword">progn</span>
-    (<span class="org-keyword">defun</span> <span class="org-function-name">make-menu-rows</span> ()
-              (mapcar
-            (<span class="org-keyword">lambda</span> (sym) `[,(symbol-name sym) (load-theme (<span class="org-keyword">quote</span> ,sym))])
-            (custom-available-themes)))
-
-
-    (<span class="org-keyword">defmacro</span> <span class="org-function-name">make-color-menu</span> ()
-      `(<span class="org-keyword">easy-menu-define</span> djcb-menu global-map <span class="org-string">"Color Themes"</span>
-         '(<span class="org-string">"Color Themes"</span>
-           ,@(make-menu-rows))))
-
-    (make-color-menu)
-)
-
-
-<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Testing the macro expansion</span>
-
-ELISP&gt; (macroexpand '(make-color-menu))
-(<span class="org-keyword">progn</span>
-  (<span class="org-keyword">defvar</span> <span class="org-variable-name">djcb-menu</span> nil <span class="org-doc">"Color Themes"</span>)
-  (easy-menu-do-define 'djcb-menu global-map <span class="org-string">"Color Themes"</span>
-               '(<span class="org-string">"Color Themes"</span>
-             [<span class="org-string">"adwaita"</span>
-              (load-theme 'adwaita)]
-             [<span class="org-string">"deeper-blue"</span>
-              (load-theme 'deeper-blue)]
-             [<span class="org-string">"dichromacy"</span>
-              (load-theme 'dichromacy)]
-             [<span class="org-string">"leuven"</span>
-              (load-theme 'leuven)]
-             [<span class="org-string">"light-blue"</span>
-              (load-theme 'light-blue)]
-            ...
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-14" class="outline-3">
-<h3 id="sec-9-14"><span class="section-number-3">9.14</span> Better Menu Syntax</h3>
-<div class="outline-text-3" id="text-9-14">
-<p>
-This macro defines a more readable menu syntax.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">map-apply</span> (fun xss)
-  (mapcar (<span class="org-keyword">lambda</span> (xs) (apply fun xs)) xss))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">plist-&gt;alist</span> (plist)
-  (<span class="org-keyword">if</span> (null plist)
-      '()
-      (cons
-       (list (car plist) (cadr plist))
-       (plist-&gt;alist (cddr plist)))))
-
-
-(<span class="org-keyword">defmacro</span> <span class="org-function-name">define-global-menu</span> (menu-name <span class="org-type">&amp;rest</span> label-actions-plist)
-  `(<span class="org-keyword">easy-menu-define</span> djcb-menu global-map ,menu-name
-     (<span class="org-keyword">quote</span> (,menu-name
-      ,@(map-apply #'vector
-           (plist-&gt;alist label-actions-plist))))))
-
-<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Example</span>
-
-  (define-global-menu  <span class="org-string">"Color Themes"</span>
-    <span class="org-string">"Adwaita"</span>       (load-theme 'adwaita)
-    <span class="org-string">"Deeper-blue"</span>   (load-theme 'deeper-blue)
-    <span class="org-string">"Dichromacy"</span>    (load-theme 'dichromacy)
-    <span class="org-string">"Leuven"</span>        (load-theme 'leuven)
-    <span class="org-string">"light-blue"</span>    (load-theme 'light-blue)
-    )
-
-<span class="org-comment-delimiter">;;; </span><span class="org-comment">It expands to:</span>
-
-ELISP&gt; (macroexpand
-'(define-global-menu  <span class="org-string">"Color Themes"</span>
-    <span class="org-string">"Adwaita"</span>       (load-theme 'adwaita)
-    <span class="org-string">"Deeper-blue"</span>   (load-theme 'deeper-blue)
-    <span class="org-string">"Dichromacy"</span>    (load-theme 'dichromacy)
-    <span class="org-string">"Leuven"</span>        (load-theme 'leuven)
-    <span class="org-string">"light-blue"</span>    (load-theme 'light-blue)
-    ))
-(<span class="org-keyword">progn</span>
-  (<span class="org-keyword">defvar</span> <span class="org-variable-name">djcb-menu</span> nil <span class="org-doc">"Color Themes"</span>)
-  (easy-menu-do-define 'djcb-menu global-map <span class="org-string">"Color Themes"</span>
-               '(<span class="org-string">"Color Themes"</span>
-             [<span class="org-string">"Adwaita"</span>
-              (load-theme 'adwaita)]
-             [<span class="org-string">"Deeper-blue"</span>
-              (load-theme 'deeper-blue)]
-             [<span class="org-string">"Dichromacy"</span>
-              (load-theme 'dichromacy)]
-             [<span class="org-string">"Leuven"</span>
-              (load-theme 'leuven)]
-             [<span class="org-string">"light-blue"</span>
-              (load-theme 'light-blue)])))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-15" class="outline-3">
-<h3 id="sec-9-15"><span class="section-number-3">9.15</span> Save and Restore Current Window Configuration</h3>
-<div class="outline-text-3" id="text-9-15">
-<p>
-Press &lt;F7&gt; to save the curren window configuration and &lt;F8&gt; to restore. The functions can also be executed with A-x save-view or A-x restore-view.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">save-view</span> ()
-  <span class="org-doc">"Save current window configuration"</span>
-  (<span class="org-keyword">interactive</span>)
-  (<span class="org-keyword">setq</span> winconf  (current-window-configuration))
-  (message <span class="org-string">"View Saved - Press to restore"</span>))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">restore-view</span> ()
-  <span class="org-doc">"Restore saved window configuration"</span>
-  (<span class="org-keyword">interactive</span>)
-  (set-window-configuration winconf)
-  (message <span class="org-string">"View loaded"</span>))
-
-(global-set-key (kbd <span class="org-string">"&lt;f7&gt;"</span>)  #'save-view)
-(global-set-key (kbd <span class="org-string">"&lt;f8&gt;"</span>)  #'restore-view)
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-16" class="outline-3">
-<h3 id="sec-9-16"><span class="section-number-3">9.16</span> Http and Post Request&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connections">connections</span>&#xa0;<span class="http">http</span></span></h3>
-<div class="outline-text-3" id="text-9-16">
-<p>
-<a href="http://qiita.com/sanryuu/items/eed79c7b99616e769e67">Source</a>
-</p>
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">url-http-post</span> (url args)
-  <span class="org-doc">"Send ARGS to URL as a POST request."</span>
-  (<span class="org-keyword">let</span> (
-        (response-string nil)
-        (url-request-method <span class="org-string">"POST"</span>)
-        (url-request-extra-headers
-         '((<span class="org-string">"Content-Type"</span> . <span class="org-string">"application/x-www-form-urlencoded"</span>)))
-        (url-request-data
-         (mapconcat (<span class="org-keyword">lambda</span> (arg)
-                      (concat (url-hexify-string (car arg))
-                              <span class="org-string">"="</span>
-                              (url-hexify-string (cdr arg))))
-                    args
-                    <span class="org-string">"&amp;"</span>)))
-    (switch-to-buffer
-     (url-retrieve-synchronously url))
-    (goto-char (point-min))
-    (re-search-forward <span class="org-string">"\n\n"</span>)
-    (<span class="org-keyword">setq</span> response-string
-          (buffer-substring-no-properties (point) (point-max)))
-    (kill-buffer (current-buffer))
-    response-string))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">url-http-get</span> (url args)
-  <span class="org-doc">"Send ARGS to URL as a GET request."</span>
-  (<span class="org-keyword">let</span> (
-        (response-string nil)
-        (url-request-method <span class="org-string">"GET"</span>)
-        (url-request-data
-         (mapconcat (<span class="org-keyword">lambda</span> (arg)
-                      (concat (url-hexify-string (car arg))
-                              <span class="org-string">"="</span>
-                              (url-hexify-string (cdr arg))))
-                    args
-                    <span class="org-string">"&amp;"</span>)))
-    (switch-to-buffer
-     (url-retrieve-synchronously
-      (concat url <span class="org-string">"?"</span> url-request-data)))
-    (goto-char (point-min))
-    (re-search-forward <span class="org-string">"\n\n"</span>)
-    (<span class="org-keyword">setq</span> response-string
-          (buffer-substring-no-properties
-           (point) (point-max)))
-    (kill-buffer (current-buffer))
-    response-string))
-
-
-ELISP&gt; (princ (url-http-get <span class="org-string">"http://httpbin.org/get"</span> nil))
-{
-  <span class="org-string">"args"</span>: {},
-  <span class="org-string">"headers"</span>: {
-    <span class="org-string">"Accept"</span>: <span class="org-string">"*/*"</span>,
-    <span class="org-string">"Accept-Encoding"</span>: <span class="org-string">"gzip"</span>,
-    <span class="org-string">"Content-Length"</span>: <span class="org-string">"0"</span>,
-    <span class="org-string">"Extension"</span>: <span class="org-string">"Security/Digest Security/SSL"</span>,
-    <span class="org-string">"Host"</span>: <span class="org-string">"httpbin.org"</span>,
-    <span class="org-string">"Mime-Version"</span>: <span class="org-string">"1.0"</span>,
-    <span class="org-string">"User-Agent"</span>: <span class="org-string">"URL/Emacs"</span>
-  },
-  <span class="org-string">"origin"</span>: <span class="org-string">"167.103.159.147"</span>,
-  <span class="org-string">"url"</span>: <span class="org-string">"http://httpbin.org/get"</span>
-}
-
-
-ELISP&gt; (princ (url-http-post <span class="org-string">"http://httpbin.org/post"</span> '((<span class="org-string">"use"</span> . <span class="org-string">"dummy"</span>)  (<span class="org-string">"pass"</span> . <span class="org-string">"something else"</span>) (<span class="org-string">"code"</span> . <span class="org-string">"pxyz0011213"</span>))))
-{
-  <span class="org-string">"args"</span>: {},
-  <span class="org-string">"data"</span>: <span class="org-string">""</span>,
-  <span class="org-string">"files"</span>: {},
-  <span class="org-string">"form"</span>: {
-    <span class="org-string">"code"</span>: <span class="org-string">"pxyz0011213"</span>,
-    <span class="org-string">"pass"</span>: <span class="org-string">"something else"</span>,
-    <span class="org-string">"use"</span>: <span class="org-string">"dummy"</span>
-  },
-  <span class="org-string">"headers"</span>: {
-    <span class="org-string">"Accept"</span>: <span class="org-string">"*/*"</span>,
-    <span class="org-string">"Accept-Encoding"</span>: <span class="org-string">"gzip"</span>,
-    <span class="org-string">"Content-Length"</span>: <span class="org-string">"48"</span>,
-    <span class="org-string">"Content-Type"</span>: <span class="org-string">"application/x-www-form-urlencoded"</span>,
-    <span class="org-string">"Extension"</span>: <span class="org-string">"Security/Digest Security/SSL"</span>,
-    <span class="org-string">"Host"</span>: <span class="org-string">"httpbin.org"</span>,
-    <span class="org-string">"Mime-Version"</span>: <span class="org-string">"1.0"</span>,
-    <span class="org-string">"User-Agent"</span>: <span class="org-string">"URL/Emacs"</span>
-  },
-  <span class="org-string">"json"</span>: null,
-  <span class="org-string">"origin"</span>: <span class="org-string">"167.103.159.147"</span>,
-  <span class="org-string">"url"</span>: <span class="org-string">"http://httpbin.org/post"</span>
-}
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-9-17" class="outline-3">
-<h3 id="sec-9-17"><span class="section-number-3">9.17</span> Test internet connection&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connection">connection</span></span></h3>
-<div class="outline-text-3" id="text-9-17">
-<p>
-The function <code>utils/traceroute-connection</code> runs the program traceroute
-in asynchronous mode. The output (stdout and stderr) is piped to the
-the buffer <code>*test-connection*</code>. This buffer is opened in another
-window. The command <code>utils/ping-connection</code> runs the command ping.
-</p>
-
-<p>
-In Arch Linux it can be installed with: <code>pacman -S
-core/traceroute</code>. 
-</p>
-
-<p>
-Usage: <code>M-x utils/traceroute-connection</code> and <code>M-x utils/ping-connection</code>. 
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">utils/traceroute-connection</span> ()
-
-  (<span class="org-keyword">interactive</span>)
-
-  (<span class="org-keyword">let</span>  ((buf           <span class="org-string">"*test-connection*"</span>)
-         (test-address  <span class="org-string">"46.228.47.114"</span>)   <span class="org-comment-delimiter">;;; </span><span class="org-comment">Yahoo IP: www.yahoo.com </span>
-        )
-
-  (start-process
-   <span class="org-string">"conn"</span>               <span class="org-comment-delimiter">;; </span><span class="org-comment">Name </span>
-    buf                 <span class="org-comment-delimiter">;; </span><span class="org-comment">Buffer name</span>
-   <span class="org-string">"traceroute"</span>         <span class="org-comment-delimiter">;; </span><span class="org-comment">Command to execute </span>
-    test-address        <span class="org-comment-delimiter">;; </span><span class="org-comment">Google IP (www.google.com)</span>
-   )
-
-  (<span class="org-keyword">if</span> (not (equal (buffer-name) buf))
-      (switch-to-buffer-other-window buf))
-  )
-
-  <span class="org-comment-delimiter">;;; </span><span class="org-comment">Go to the end of the buffer </span>
-  (goto-char (point-max))
-
-  (other-window 0)
-
-  )
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">utils/ping-connection</span> ()
-
-  (<span class="org-keyword">interactive</span>)
-
-  (<span class="org-keyword">let</span>  ((buf           <span class="org-string">"*test-connection*"</span>)
-         (test-address  <span class="org-string">"46.228.47.114"</span>)   <span class="org-comment-delimiter">;;; </span><span class="org-comment">Yahoo IP: www.yahoo.com </span>
-        )
-
-  (start-process
-   <span class="org-string">"conn"</span>               <span class="org-comment-delimiter">;; </span><span class="org-comment">Name </span>
-    buf                 <span class="org-comment-delimiter">;; </span><span class="org-comment">Buffer name</span>
-   <span class="org-string">"ping"</span>         <span class="org-comment-delimiter">;; </span><span class="org-comment">Command to execute </span>
-    test-address        <span class="org-comment-delimiter">;; </span><span class="org-comment">Google IP (www.google.com)</span>
-   )
-
-  (<span class="org-keyword">if</span> (not (equal (buffer-name) buf))
-      (switch-to-buffer-other-window buf))
-  )
-
-  <span class="org-comment-delimiter">;;; </span><span class="org-comment">Go to the end of the buffer </span>
-  (goto-char (point-max))
-
-  (other-window 0)
-
-  )
-</pre>
-</div>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> Org-Mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="org">org</span>&#xa0;<span class="mode">mode</span>&#xa0;<span class="data">data</span>&#xa0;<span class="ideas">ideas</span></span></h2>
-<div class="outline-text-2" id="text-10">
-</div><div id="outline-container-sec-10-1" class="outline-3">
-<h3 id="sec-10-1"><span class="section-number-3">10.1</span> Overview</h3>
-<div class="outline-text-3" id="text-10-1">
-<p>
-Org-Mode is a mode built-in to Emacs that allows to store structured
-data, information in text format - org-mode markdown that can be
-exported to html, pdf, latex, markdown, github flavoured markdown
-and more file formats.
-</p>
-
-<p>
-Features:
-</p>
-
-<ul class="org-ul">
-<li>Everything stored in text format: The most portable format.
-</li>
-<li>Todo List.
-</li>
-<li>It can be used as a personal Wiki.
-</li>
-<li>Table editing, formating, built-in spreadsheet.
-</li>
-<li>Tags, Headlines
-</li>
-<li>Literate programming, Run code blocks, Create Interactive and
-reproducible software documentation.
-</li>
-<li>Display and export Latex Formulas
-</li>
-<li>Display Pictures
-</li>
-<li>Many link formats
-<ul class="org-ul">
-<li>Link to files, web, IRC, Usenet News groups
-</li>
-<li>Link to shell commands
-</li>
-<li>Links to trigger Emacs Functions
-</li>
-</ul>
-</li>
-<li>Usefulness
-<ul class="org-ul">
-<li>Authoring
-</li>
-<li>Write Software documentation with embedded snippets
-</li>
-<li>Literate Programming
-</li>
-<li>Reproducible Research
-</li>
-<li>Wiki
-</li>
-<li>Markdown
-</li>
-</ul>
-</li>
-</ul>
-
-<p>
-Example: this document is now written in org-mode and the exported to
-html and github flavoured markdown.
-</p>
-
-
-<div class="figure">
-<p><img src="images/document_in_org_mode1.png" alt="document_in_org_mode1.png" />
-</p>
-</div>
-
-<p>
-It also supports inline code blocks that can be evaluated and the
-result printed in the document or displayed in the minibuffer.
-</p>
-
-
-<div class="figure">
-<p><img src="images/document_in_org_mode2.png" alt="document_in_org_mode2.png" />
-</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-10-2" class="outline-3">
-<h3 id="sec-10-2"><span class="section-number-3">10.2</span> Useful Key bindings for org-mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="mode">mode</span>&#xa0;<span class="org">org</span>&#xa0;<span class="key">key</span>&#xa0;<span class="binding">binding</span></span></h3>
-<div class="outline-text-3" id="text-10-2">
-<p>
-Move within headlines:
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Key Binding</th>
-<th scope="col" class="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left">M - &lt;return&gt;</td>
-<td class="left">Insert headline at same level as the previous one.</td>
-</tr>
-
-<tr>
-<td class="left">C-c C-p</td>
-<td class="left">Move to previous headline</td>
-</tr>
-
-<tr>
-<td class="left">C-c C-n</td>
-<td class="left">Move to next headline</td>
-</tr>
-
-<tr>
-<td class="left">C-c C-u</td>
-<td class="left">Move to higher headline</td>
-</tr>
-
-<tr>
-<td class="left">M-[up]</td>
-<td class="left">Move headline, list row or table row up</td>
-</tr>
-
-<tr>
-<td class="left">M-[down]</td>
-<td class="left">Move headline, list item or table row down</td>
-</tr>
-
-<tr>
-<td class="left">M-[left]</td>
-<td class="left">Demote  list item or headline</td>
-</tr>
-
-<tr>
-<td class="left">M-[right]</td>
-<td class="left">Promote list item or headline</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>
-<b>Buffer Subtree</b>
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Key Binding</th>
-<th scope="col" class="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left">shift-tab</td>
-<td class="left">Fold / Unfold headlines</td>
-</tr>
-
-<tr>
-<td class="left">C-x n s</td>
-<td class="left">Narrow the buffer subtree to current headline</td>
-</tr>
-
-<tr>
-<td class="left">C-c n w</td>
-<td class="left">Widen the view back</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-<b>Table</b>
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Key Binding</th>
-<th scope="col" class="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left">C-c-!</td>
-<td class="left">Convert region into a table</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-<b>Hyperlinks</b>
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Key Binding</th>
-<th scope="col" class="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left">C-c-C-o</td>
-<td class="left">Open a link</td>
-</tr>
-
-<tr>
-<td class="left">C-c-C-l</td>
-<td class="left">Insert/ Edit a link</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-<b>Markdown</b>
-</p>
-
-<p>
-Text formating
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Markdown</th>
-<th scope="col" class="left">View</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left"><code>*bold*</code></td>
-<td class="left"><b>bold</b></td>
-</tr>
-
-<tr>
-<td class="left"><code>_underline_</code></td>
-<td class="left"><span class="underline">underline</span></td>
-</tr>
-
-<tr>
-<td class="left"><code>/italic/</code></td>
-<td class="left"><i>italic</i></td>
-</tr>
-
-<tr>
-<td class="left"><code>+strike it+</code></td>
-<td class="left"><del>strike it</del></td>
-</tr>
-</tbody>
-</table>
-
-<p>
-Hyperlinks
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Markdown</th>
-<th scope="col" class="left">View</th>
-<th scope="col" class="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left">:<a href="http://www.bing.com">http://www.bing.com</a></td>
-<td class="left"><a href="http://www.bing.com">http://www.bing.com</a></td>
-<td class="left">Link to  web page</td>
-</tr>
-
-<tr>
-<td class="left">:<a href="ftp://something.net">ftp://something.net</a></td>
-<td class="left">&#xa0;</td>
-<td class="left">Link to ftp</td>
-</tr>
-
-<tr>
-<td class="left">:<a href="file:///etc/fstab">file:///etc/fstab</a></td>
-<td class="left"><a href="file:///etc/fstab">file:///etc/fstab</a></td>
-<td class="left">Link to file <i>{/etc/fstab}</i></td>
-</tr>
-
-<tr>
-<td class="left">:<a href="uname%20-a">uname%20-a</a></td>
-<td class="left"><a href="uname%20-a">uname%20-a</a></td>
-<td class="left">Execute Shell Command: uname -a</td>
-</tr>
-
-<tr>
-<td class="left">:elisp:(message%20"Hello world")</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-<div id="outline-container-sec-10-3" class="outline-3">
-<h3 id="sec-10-3"><span class="section-number-3">10.3</span> References</h3>
-<div class="outline-text-3" id="text-10-3">
-<p>
-Manual:
-</p>
-
-<ul class="org-ul">
-<li><a href="http://orgmode.org/org.html">The Org Manual orgmode.org</a>
-</li>
-<li><a href="https://www.gnu.org/software/emacs/manual/html_node/org/">Org Mode Manual</a>
-</li>
-<li><a href="http://orgmode.org/worg/org-glossary.html">Org Glossary: An Explanation of Basic Org-Mode Concepts</a>
-</li>
-
-<li>Editing
-<ul class="org-ul">
-<li><a href="http://orgmode.org/manual/Structure-editing.html">http://orgmode.org/manual/Structure-editing.html</a>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<p>
-Examples:
-</p>
-
-<ul class="org-ul">
-<li><a href="http://home.fnal.gov/~neilsen/notebook/orgExamples/org-examples.html#sec-5">Emacs org-mode examples and cookbook</a>
-</li>
-</ul>
-
-<p>
-Many examples about literate programming in Org-mode with Python, R,
-java and C. Shows integration of org-mode tables and Python, R &#x2026; and
-code blocks.
-</p>
-
-<ul class="org-ul">
-<li><a href="http://gitwiki.org/Tests/org-mode.org">http://gitwiki.org/Tests/org-mode.org</a>
-</li>
-<li><a href="https://chopmode.wordpress.com/2011/01/30/my-org-mode-journey-chapter-1/">My Org-mode journey – Chapter 1 | chop-mode</a>
-</li>
-</ul>
-
-
-<p>
-Reference Cards and Cheat Sheets:
-</p>
-
-<ul class="org-ul">
-<li><a href="http://orgmode.org/orgguide.pdf">The Compact Org-Mode Guide</a>
-</li>
-<li><a href="https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf">Org-Mode Reference Card</a>
-</li>
-
-<li><a href="https://gist.github.com/wdkrnls/1990839">Markup Cheat sheet for Org-mode</a>
-</li>
-</ul>
-
-<p>
-Books:
-</p>
-
-<ul class="org-ul">
-<li><a href="http://doc.norang.ca/org-mode.html">Org Mode - Organize Your Life In Plain Text!</a>
-</li>
-</ul>
-
-<p>
-Hacking and Tweaking:
-</p>
-
-<ul class="org-ul">
-<li><a href="http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html">Embedding Youtube videos with org-mode links</a>
-</li>
-<li><a href="http://stackoverflow.com/questions/17435995/paste-an-image-on-clipboard-to-emacs-org-mode-file-without-saving-it">Paste an image on clipboard to Emacs Org mode file without saving it</a>
-</li>
-
-<li><a href="http://orgmode.org/worg/org-faq.html">Org-mode Frequently Asked Questions</a>
-</li>
-
-<li><a href="http://oremacs.com/2015/01/07/org-protocol-1/">My org-protocol setup, part 1.</a>
-</li>
-
-<li><a href="http://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line">Batch export of org-mode files from the command line</a>
-</li>
-
-<li><a href="http://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-5">Org ad hoc code, quick hacks and workarounds</a>
-</li>
-</ul>
-
-
-
-<p>
-Cases:
-</p>
-
-<ul class="org-ul">
-<li><a href="http://kitchingroup.cheme.cmu.edu/blog/2014/08/08/What-we-are-using-org-mode-for/">What we are using org-mode for</a>
-</li>
-<li><a href="http://juanreyero.com/article/emacs/org-teams.html">Org-mode tricks for team management</a>
-</li>
-</ul>
-
-<p>
-Literate Programming:
-</p>
-
-<ul class="org-ul">
-<li><a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">Literate DevOps - www.howardism.org</a>
-</li>
-<li><a href="http://stackoverflow.com/questions/18598870/emacs-org-mode-executing-simple-python-code">Emacs Org Mode: Executing simple python code</a>
-</li>
-<li><a href="http://blogs.neuwirth.priv.at/software/2012/03/28/r-and-emacs-with-org-mode/">R and Emacs with org mode</a>
-</li>
-<li><a href="https://github.com/erikriverson/org-mode-R-tutorial/blob/master/org-mode-R-tutorial.org">Org-mode and R: An Introduction Introduction</a>
-</li>
-<li><a href="http://orgmode.org/worg/org-contrib/babel/intro.html">Babel: Introduction</a>
-</li>
-<li><a href="http://orgmode.org/manual/Results-of-evaluation.html">Results of evaluation / Org-Mode Manual</a>
-</li>
-</ul>
-
-<p>
-Non Categorized:
-</p>
-
-<ul class="org-ul">
-<li><a href="http://www.totherme.org/configs/org-stuff.html">Gareth's Org-Mode Config</a>
-</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-sec-10-4" class="outline-3">
-<h3 id="sec-10-4"><span class="section-number-3">10.4</span> Videos</h3>
-<div class="outline-text-3" id="text-10-4">
-</div><div id="outline-container-sec-10-4-1" class="outline-4">
-<h4 id="sec-10-4-1"><span class="section-number-4">10.4.1</span> Tutorials</h4>
-<div class="outline-text-4" id="text-10-4-1">
-<p>
-<b>Org Mode in Depth - by Rick Dillon</b>
-</p>
-
-<ul class="org-ul">
-<li><a href="https://www.youtube.com/watch?v=nsGYet02bEk">Hack Emacs - Org Mode In Depth: Managing Structure - YouTube</a>
-</li>
-</ul>
-
-<p>
-Description: Part of the Org Mode In Depth series. In this episode, we
-examine methods for exploiting the structure of an Org Mode file to
-focus on specific subtrees, control visibility by folding and
-unfolding headlines, navigate among headlines efficiently and
-reorganize headlines my moving and/or promoting and demoting them.
-</p>
-
-<ul class="org-ul">
-<li><a href="https://www.youtube.com/watch?v=fTJVLJd_gz0">Org Mode In Depth: Tables - YouTube</a>
-</li>
-</ul>
-
-<p>
-Description: Actually recorded a few months back, I never got around
-to uploading this. I give a brief demo of some of the functionality
-Org Mode tables offer, and an explanation of some of the commands that
-enable it.
-</p>
-
-<ul class="org-ul">
-<li><a href="https://www.youtube.com/watch?v=VTh_Xgt69-E">Hack Emacs - Org Mode in Depth: Markup and Links - YouTube</a>
-</li>
-</ul>
-
-<p>
-Description: Part of the Org Mode in Depth series. In this episode, I
-examine ways of marking up text in Org Mode, as well as various link
-types that connect Org headlines and files, as well as links that can
-execute code.
-</p>
-
-<p>
-<b>NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode by Tory S. Anderson</b>
-</p>
-
-<ul class="org-ul">
-<li><a href="https://www.youtube.com/watch?v=nkv8PpxrL3k">Non-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode</a>
-</li>
-<li></li>
-<li></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-sec-10-4-2" class="outline-4">
-<h4 id="sec-10-4-2"><span class="section-number-4">10.4.2</span> Presentations</h4>
-<div class="outline-text-4" id="text-10-4-2">
-<ul class="org-ul">
-<li><a href="#coderef-info "(emacs) Misc Help""class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-info "(emacs) Misc Help"');" onmouseout="CodeHighlightOff(this, 'coderef-info "(emacs) Misc Help"');">Emacs Org-Mode - A system for note-taking and project planning</a> -  Talk given by Carsten Dominik.
-</li>
-
-<li><a href="https://www.youtube.com/watch?v=lsYdK0C2RvQ">Embedding Code Snippets In Org Mode</a>
-</li>
-
-<li><a href="https://www.youtube.com/watch?v=VIuOwIBL-ZU">Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)</a>
-</li>
-
-<li><a href="https://www.youtube.com/watch?v=fgizHHd7nOo">Org mode is awesome</a>
-</li>
-
-<li><a href="https://www.youtube.com/watch?v=oJTwQvgfgMM">Emacs Org-mode - a system for note-taking and project planning</a>
-</li>
-
-<li><a href="https://youtu.be/6W82EdwQhxU">Hack-Emacs an Overview of Org-Mode</a>
-</li>
-
-<li><a href="https://www.youtube.com/watch?v=cRUCiF2MwP4">Teaching with Emacs+org-mode - YouTube</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-11-02 qua 05:34</p>
+<p class="date">Created: 2016-11-03 qui 05:23</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
