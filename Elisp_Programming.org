@@ -3880,7 +3880,6 @@ See also:
 
 file:images/Emacs_terminology.png
 
-
 **  Emacs API
 
 *Emacs API Objects*
@@ -6902,8 +6901,6 @@ Function Docstring
  (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
 "
  #+END_SRC
-
-
 
 **  Edit File as Root                                            :utils:edit:
 
