@@ -1,5 +1,7 @@
 #+INCLUDE: theme/style.org
+#+STARTUP: content 
 #+TITLE: Emacs key bindings for Elisp programming
+
 
 * Emacs key bindings for Elisp programming
 ** Elisp Evaluation

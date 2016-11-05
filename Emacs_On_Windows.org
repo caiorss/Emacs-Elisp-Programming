@@ -2,6 +2,7 @@
 #+INCLUDE: theme/style.org 
 #+TITLE: Emacs on Microsoft Windows 
 #+KEYWORDS: emacs, shell, eshell, windows, microsoft, cmd.exe 
+#+STARTUP: content 
 
 * Emacs on Microsoft Windows 
 ** Set HOME variable 

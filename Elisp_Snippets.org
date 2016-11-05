@@ -3,6 +3,7 @@
 #+TITLE: Elisp Snippets
 #+DESCRIPTION: Lots of ELisp examples categorized by task.
 #+KEYWORDS: emacs, elisp, lisp, programming, snippets, examples, code, utilities
+#+STARTUP: content 
 
 * Elisp Snippets
 ** Strings
@@ -3009,7 +3010,6 @@ ELISP> (macroexpand '(make-color-menu))
             ...
 
 #+END_SRC
-
 
 
 * IELM - Inferior Emacs Lisp Mode
