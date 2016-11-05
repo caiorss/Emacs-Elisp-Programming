@@ -3383,7 +3383,8 @@ Disable Security confirmation:
         )
 #+END_SRC
 
-* Selected Gists
+* Selected Gists and Source Codes 
+** Gists 
 
  - [[https://gist.github.com/justinabrahms/1390864][extract archives from eshell]]
 
@@ -3398,4 +3399,8 @@ Disable Security confirmation:
  - [[https://gist.github.com/TikhonJelvis/b921933b437d6502c3ff][TikhonJelvis/epage]] - "A little pager script I wrote that calls out to emacsclient."
 
 
- - [[https://gist.github.com/rosarinjroy/2417726][Elisp code to create a rails console ]]
+ - [[https://gist.github.com/rosarinjroy/2417726][Elisp code to create
+   a rails console ]]
+** Source Codes 
+
+ - https://www.emacswiki.org/emacs/download/install-elisp.el
