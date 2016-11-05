@@ -1,6 +1,7 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org
 #+TITLE: Emacs Utilities 
+#+STARTUP: content
 
 * Emacs Utilities 
 ** Overview

@@ -2,6 +2,7 @@
 #+INCLUDE: theme/style.org
 #+TITLE: Emacs Resources 
 #+KEYWORDS: emacs, links, resourse, utils, hyperlinks
+#+STARTUP: content 
 
 * Resources
 ** Motivation

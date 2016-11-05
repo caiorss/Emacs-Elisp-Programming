@@ -2,6 +2,7 @@
 #+INCLUDE: theme/style.org
 #+TITLE: Development Environment
 #+KEYWORDS: emacs, development, environment, programming, settings, languages
+#+STARTUP: content 
 
 * Development Environment
 ** Overview 

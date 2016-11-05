@@ -2,6 +2,7 @@
 #+INCLUDE: theme/style.org
 #+TITLE: Customization
 #+KEYWORDS: emacs, elisp, init.el, .emacs, dotfile, configuration, settings
+#+STARTUP: content 
 
 * Customization
 ** Basic Settings

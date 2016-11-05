@@ -2,6 +2,7 @@
 #+INCLUDE: theme/style.org 
 #+TITLE: Emacs In a Box
 #+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor
+#+STARTUP: content
 
 * Emacs - Programming and Customization
 ** Overview
