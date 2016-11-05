@@ -577,12 +577,45 @@ See also
  |       |                                               |
 ** Helm utilities 
 
-- M-x helm-M-x - Show all M-x commands
+| Command                         | Description                             |
+|---------------------------------+-----------------------------------------|
+| *Elisp Programming*             |                                         |
+|---------------------------------+-----------------------------------------|
+| M-x helm-M-x                    | Show all M-x commands                   |
+| M-x helm-apropos                | Apropos with helm interface.            |
+|                                 |                                         |
+| *Search Documentation*          |                                         |
+|---------------------------------+-----------------------------------------|
+| M-x helm-info                   | Search Info pages.                      |
+| M-x helm-man-woman              | Search man pages.                       |
+|                                 |                                         |
+| *Files and buffer*              |                                         |
+|---------------------------------+-----------------------------------------|
+| M-x helm-buffers-list           | Switch buffers                          |
+| M-x helm-find-files             | Helm equivalent of M-x find-files       |
+|                                 |                                         |
+| *Search*                        |                                         |
+|---------------------------------+-----------------------------------------|
+| M-x helm-occur                  | Occur-like command with helm interface. |
+|                                 |                                         |
+| *Org-mode*                      |                                         |
+|---------------------------------+-----------------------------------------|
+| M-x helm-org-in-buffer-headings | Filter org-mode files by headlines.     |
+|                                 |                                         |
+| *Code Navigation*               |                                         |
+|---------------------------------+-----------------------------------------|
+| M-x helm-imenu                  | Code navigation with Imenu              |
+|                                 |                                         |
+| *Process Manager*               |                                         |
+|---------------------------------+-----------------------------------------|
+| M-x helm-top                    | Task/Process manager like M-x proced    |
+|                                 |                                         |
+| *Color Pallete*                 |                                         |
+|---------------------------------+-----------------------------------------|
+| M-x helm-colors                 | Select a color and copy to clipboard    |
+|                                 |                                         |
 
-- M-x helm-buffers-list  - Switch buffers
 
-- M-x helm-find-files  - Helm equivalent of M-x find-files
 
-- M-x helm-show-kill-ring
 
-- M-x helm-info  - Search Info pages. 
+
