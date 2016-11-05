@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Key Bindings</title>
-<!-- 2016-11-05 sáb 02:11 -->
+<!-- 2016-11-05 sáb 02:25 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Caio Rodrigues" />
@@ -236,15 +236,15 @@ for the JavaScript code in this tag.
 </ul>
 </li>
 <li><a href="#sec-1-3">1.3. Key bindings for all Lisp dialects</a></li>
-<li><a href="#sec-1-4">1.4. Useful Commands</a>
+</ul>
+</li>
+<li><a href="#sec-2">2. Useful Commands</a>
 <ul>
-<li><a href="#sec-1-4-1">1.4.1. Misc commands</a></li>
-<li><a href="#sec-1-4-2">1.4.2. Change current buffer mode</a></li>
+<li><a href="#sec-2-1">2.1. Misc commands</a></li>
+<li><a href="#sec-2-2">2.2. Change current buffer mode</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#sec-2">2. Evil Mode - VIM Emulation Mode</a></li>
+<li><a href="#sec-3">3. Evil Mode - VIM Emulation Mode</a></li>
 </ul>
 </div>
 </div>
@@ -2381,13 +2381,14 @@ Useful lisp key bindings to edit and navigate Lisp code.
 </table>
 </div>
 </div>
+</div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Useful Commands</h3>
-<div class="outline-text-3" id="text-1-4">
-</div><div id="outline-container-sec-1-4-1" class="outline-4">
-<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Misc commands</h4>
-<div class="outline-text-4" id="text-1-4-1">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Useful Commands</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Misc commands</h3>
+<div class="outline-text-3" id="text-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -2406,6 +2407,18 @@ Useful lisp key bindings to edit and navigate Lisp code.
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="left"><b>General</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
 <tr>
 <td class="left">M-x kill-emacs</td>
 <td class="left">-</td>
@@ -2458,6 +2471,48 @@ Useful lisp key bindings to edit and navigate Lisp code.
 <td class="left">M-x quit-window</td>
 <td class="left">&#xa0;</td>
 <td class="left">Quit Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>Key bindings</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">global-set-key</td>
+<td class="left">&#xa0;</td>
+<td class="left">Define a global key interactively.</td>
+</tr>
+
+<tr>
+<td class="left">global-unset-key</td>
+<td class="left">&#xa0;</td>
+<td class="left">Unset a global key interactively.</td>
+</tr>
+
+<tr>
+<td class="left">local-set-key</td>
+<td class="left">&#xa0;</td>
+<td class="left">Define a key binding to current major mode.</td>
+</tr>
+
+<tr>
+<td class="left">local-unset-key</td>
+<td class="left">&#xa0;</td>
+<td class="left">Unset a key defined locally.</td>
 </tr>
 
 <tr>
@@ -2641,9 +2696,9 @@ accidentally hit and exit Emacs.
 </div>
 </div>
 
-<div id="outline-container-sec-1-4-2" class="outline-4">
-<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Change current buffer mode</h4>
-<div class="outline-text-4" id="text-1-4-2">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Change current buffer mode</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 it is useful to tell Emacs the file format to enable syntax highlight
 and mode functions when editing a script or configuration file without
@@ -2661,11 +2716,10 @@ file extension like .gitconfig or python script without it.
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Evil Mode - VIM Emulation Mode</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Evil Mode - VIM Emulation Mode</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 Note: <span class="underline">EVIL</span> - Is not what it seems. It stands for <span class="underline">Extensible VI
 Layer</span>. I this case "evil is good". It is an Emacs mode to emulate VI
@@ -3265,7 +3319,7 @@ Evil Mode Manual:
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-11-05 sáb 02:11</p>
+<p class="date">Created: 2016-11-05 sáb 02:25</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

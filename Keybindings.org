@@ -473,11 +473,13 @@ Useful lisp key bindings to edit and navigate Lisp code.
 | C-M-a | Move to the beggining of current function |
 | C-M-e | Move to the end of current function       |
 
-** Useful Commands
-*** Misc commands 
+* Useful Commands
+** Misc commands 
 
 | Command                        | Key bindings | Description                                                                            |
 |--------------------------------+--------------+----------------------------------------------------------------------------------------|
+| *General*                      |              |                                                                                        |
+|                                |              |                                                                                        |
 | M-x kill-emacs                 | -            | Exit Emacs.                                                                            |
 | M-x save-buffers-kill-terminal | C-x C-c      | Eixt Emacs and asks to save bufers.                                                    |
 | M-x help-with-tutorial         | C-h t        | Open Emacs built in tutorial                                                           |
@@ -487,6 +489,13 @@ Useful lisp key bindings to edit and navigate Lisp code.
 |                                |              | type fg  to return to Emacs.                                                           |
 |                                |              |                                                                                        |
 | M-x quit-window                |              | Quit Emacs.                                                                            |
+|                                |              |                                                                                        |
+| *Key bindings*                 |              |                                                                                        |
+|                                |              |                                                                                        |
+| global-set-key                 |              | Define a global key interactively.                                                     |
+| global-unset-key               |              | Unset a global key interactively.                                                      |
+| local-set-key                  |              | Define a key binding to current major mode.                                            |
+| local-unset-key                |              | Unset a key defined locally.                                                           |
 |                                |              |                                                                                        |
 | *Edit*                         |              |                                                                                        |
 |                                |              |                                                                                        |
@@ -524,7 +533,7 @@ Notes:
  - It may be better to disable C-x C-c, since it is easy to
    accidentally hit and exit Emacs.
 
-*** Change current buffer mode
+** Change current buffer mode
 
 it is useful to tell Emacs the file format to enable syntax highlight
 and mode functions when editing a script or configuration file without
