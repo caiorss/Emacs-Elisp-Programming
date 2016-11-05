@@ -73,12 +73,27 @@ Search Python Documentation:
 
 
     * [[http://wikemacs.org/wiki/Python][Python Settings]]
+
+
     * [[http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/][Setting up Emacs to Support both Python 2 and Python 3]]
+
+
     * [[https://github.com/proofit404/pyenv-mode][Pyenv Mode]]
+
+
     * [[http://www.johndcook.com/blog/2012/02/09/python-org-mode/][Running Python and R inside Emacs by John D. Cook]]
+
+
     * [[http://www.emacswiki.org/emacs/PythonProgrammingInEmacs][EmacsWiki: Python Programming In Emacs]]
+
+
     * [[http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/][Emacs as a Python IDE - Jessica Hamrick]]
+
+
     * [[http://planspace.org/20141007-emacs_python/][Emacs and Python]]
+
+
+    * [[http://wenshanren.org/?p=351][Emacs: Python Debugging, Send Code to an Arbitrary Buffer | 肉山博客 (Wenshan's Blog)]]
 
 ** JavaScript
 
@@ -109,9 +124,15 @@ Find Javascript package:
 
 ** C / C++
 
-    * [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]
-    * [[https://github.com/atilaneves/cmake-ide][C make IDE]]
+    - [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]
 
+    - [[https://github.com/atilaneves/cmake-ide][C make IDE]]
+
+    - [[https://kb.iu.edu/d/aqsy][Step-by-step example for using GDB within Emacs to debug a C or C++ program]]
+
+    - [[http://tedlab.mit.edu/~dr/gdbintro.html][Intro to GDB under Emacs]]
+ 
+ 
 ** Ocaml
 
  - [[http://wikemacs.org/wiki/OCaml][Ocaml]]
