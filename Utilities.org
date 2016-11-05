@@ -64,6 +64,18 @@ Note:
  - M-x ifconfig - runs ipconfig on Windows and ifconfig or ip on
    Linux. It is platform agnostic.
 
+*Fun*
+
+| Command                 | Description                               |
+|-------------------------+-------------------------------------------|
+| M-x doctor              | If you fell bad, lost your girlfriend ... |
+| M-x life                | Run Conway's Life simulation.             |
+| M-x dunnet              | Text based adventure game                 |
+| M-x tetris              | Play Tetris.                              |
+| M-x hanoi               | Towers of Hanoi.                          |
+| M-x zone                | Make buffers go crazy!!                   |
+| M-x zone-leave-me-alone | Stop zoning out.                          |
+
 ** Shells 
 
 Emacs have built-in commands to run shells. 

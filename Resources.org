@@ -149,19 +149,6 @@ Emacs configuration file with many packages already enabled and a more pleasant 
 
 [[http://kieranhealy.org/resources/emacs-starter-kit/][Link]]
 
-** Fun
-
-
-| Command                 | Description                               |
-|-------------------------+-------------------------------------------|
-| M-x doctor              | If you fell bad, lost your girlfriend ... |
-| M-x life                | Run Conway's Life simulation.             |
-| M-x dunnet              | Text based adventure game                 |
-| M-x tetris              | Play Tetris.                              |
-| M-x hanoi               | Towers of Hanoi.                          |
-| M-x zone                | Make buffers go crazy!!                   |
-| M-x zone-leave-me-alone | Stop zoning out.                          |
-
 ** Books
 
     - [[https://www.gnu.org/software/emacs/manual/pdf/eintr.pdf][An Introduction to Programming in Emacs Lisp]] by Robert J. Chassell
