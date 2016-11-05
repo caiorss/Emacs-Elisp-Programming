@@ -53,6 +53,51 @@ app. Example:
 _M-x search-my-dir system.windows_ will search all *.org files containing
 the line that matches system.windows in the directory ~/Documents/wiki.
 
+** Elisp Debugger / Edebug
+
+This video shows how to use Edebugger to debug Elisp functions and
+code: 
+
+
+| Keybinding      | M-x command       | Description                           |
+|-----------------+-------------------+---------------------------------------|
+| *Emacs*         |                   |                                       |
+|                 |                   |                                       |
+| C-u C-M-x       | edebug-defun      | Instrumment function for debugging.   |
+|                 |                   |                                       |
+|                 |                   |                                       |
+| *Inside Edebug* |                   |                                       |
+| q               |                   | Abort execution                       |
+| space           |                   | Setep through, single step.           |
+| b               |                   | Insert breakpoint                     |
+| u               |                   | Unset breakpoint.                     |
+| shift-G         |                   | Continue beyond breakpoint            |
+| i               |                   | Jump to definition of defunction      |
+| M-:             |                   | Prompt for an expression to evaluate. |
+| c               |                   | Continue execution                    |
+| x               |                   | Set a conditional breakpoint          |
+|                 |                   |                                       |
+|                 |                   |                                       |
+
+Edebug info nodes documentation: 
+
+#+BEGIN_SRC elisp 
+  (info "(elisp) Edebug Execution Modes")
+
+  (info "(elisp) Instrumenting")
+#+END_SRC
+
+
+See also: 
+
+ - [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Edebug.html#Edebug][GNU Emacs Lisp Reference Manual: Edebug]]
+
+
+ - [[https://www.youtube.com/watch?v=odkYXXYOxpo][Debugging basics by Nic Ferrier]] - Edebug, instrumenting and
+   stepping and breakpoints. Also macroexpand and how it helps with
+   debugging.
+
+ 
 ** Useful Commands
 
 | Command: M-x [command]   | Key Binding | Description                                                                       |
