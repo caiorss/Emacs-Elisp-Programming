@@ -340,8 +340,6 @@ Function Docstring
 "
  #+END_SRC
 
-
-
 ** Common Lisp Emulation Library
 *** Reduce (fold left) function
 **** Build a number from a list of digits
@@ -2190,7 +2188,7 @@ file:images/utils_menu2.png
 
 #+END_SRC
 
-** Packages
+** Packages                                         :package:install:library:
 *** Test if package is installed
 
 If the package is installed returns t (true) and nil otherwise.
@@ -2204,6 +2202,40 @@ If the package is installed returns t (true) and nil otherwise.
 
 *** Install a package if it is not installed
 *** Install a single-file package from URL 
+
+This command install a single-file elisp package from a given URL to
+source file.
+
+Usage: 
+
+ 1. Copy the url of the package file to be installed like
+    http://mumble.net/~campbell/emacs/paredit-beta.el from [[https://www.emacswiki.org/emacs/ParEdit][EmacsWiki:Par Edit]].
+
+ 2. Type M-x package-install-url It will ask to confirm the URL. Then
+    type return and the package will be installed. 
+
+To find where the package was intalled type M-x find-library <library-name>.
+
+#+BEGIN_SRC elisp 
+  (defun package-install-url ()
+    "Install a single-file package *.el file from Url."
+    (interactive)
+    (let* (
+           ;; Suggest the URL stored in the clipboard
+           (clipboard (with-temp-buffer
+                        (clipboard-yank)
+                        (buffer-substring-no-properties (point-min) (point-max))))
+           ;; Ask the user to confirm the url 
+           (url (read-string "Url: " clipboard))
+           )
+      
+       (with-current-buffer (url-retrieve-synchronously url)
+         (goto-char (point-min))
+         (re-search-forward "^$")
+         (delete-region (point) (point-min))
+         (kill-whole-line)
+        (package-install-from-buffer))))
+#+END_SRC
 ** Helm Snippets                                     :framework:library:helm:
 *** Browser Recent files
 
@@ -3011,7 +3043,6 @@ ELISP> (macroexpand '(make-color-menu))
 
 #+END_SRC
 
-
 * IELM - Inferior Emacs Lisp Mode
 ** Change Prompt
 
@@ -3352,7 +3383,8 @@ Disable Security confirmation:
         )
 #+END_SRC
 
-* Selected Gists
+* Selected Gists and Source Codes 
+** Gists 
 
  - [[https://gist.github.com/justinabrahms/1390864][extract archives from eshell]]
 
@@ -3367,4 +3399,8 @@ Disable Security confirmation:
  - [[https://gist.github.com/TikhonJelvis/b921933b437d6502c3ff][TikhonJelvis/epage]] - "A little pager script I wrote that calls out to emacsclient."
 
 
- - [[https://gist.github.com/rosarinjroy/2417726][Elisp code to create a rails console ]]
+ - [[https://gist.github.com/rosarinjroy/2417726][Elisp code to create
+   a rails console ]]
+** Source Codes 
+
+ - https://www.emacswiki.org/emacs/download/install-elisp.el

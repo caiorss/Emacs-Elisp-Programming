@@ -81,6 +81,11 @@ Emacs standard keybindings and useful commands.
 
 Emacs key bindings and commands for Elisp (Emacs' lisp) development. 
 
+
+ - [[file:Command_Line_and_Scripting.org][Command Line and Scripting]]
+
+Command line interaction with Emacs.
+
  - [[file:Customization.org][Customization]] 
 
 Emacs settings and customization.
