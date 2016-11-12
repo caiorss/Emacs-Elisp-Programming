@@ -479,7 +479,7 @@ Useful lisp key bindings to edit and navigate Lisp code.
 | Command                        | Key bindings | Description                                                                            |
 |--------------------------------+--------------+----------------------------------------------------------------------------------------|
 | *General*                      |              |                                                                                        |
-|                                |              |                                                                                        |
+|--------------------------------+--------------+----------------------------------------------------------------------------------------|
 | M-x kill-emacs                 | -            | Exit Emacs.                                                                            |
 | M-x save-buffers-kill-terminal | C-x C-c      | Eixt Emacs and asks to save bufers.                                                    |
 | M-x help-with-tutorial         | C-h t        | Open Emacs built in tutorial                                                           |
@@ -491,29 +491,31 @@ Useful lisp key bindings to edit and navigate Lisp code.
 | M-x quit-window                |              | Quit Emacs.                                                                            |
 |                                |              |                                                                                        |
 | *Key bindings*                 |              |                                                                                        |
-|                                |              |                                                                                        |
+|--------------------------------+--------------+----------------------------------------------------------------------------------------|
 | global-set-key                 |              | Define a global key interactively.                                                     |
 | global-unset-key               |              | Unset a global key interactively.                                                      |
 | local-set-key                  |              | Define a key binding to current major mode.                                            |
 | local-unset-key                |              | Unset a key defined locally.                                                           |
 |                                |              |                                                                                        |
 | *Edit*                         |              |                                                                                        |
-|                                |              |                                                                                        |
+|--------------------------------+--------------+----------------------------------------------------------------------------------------|
 | M-x delete-trailing-whitespace |              | Delete trailing Whistespace and ^M characters or ~\r~ from Dos or Windows.             |
 | M-x tabify                     |              | Converts all spaces to tab                                                             |
 | M-x untabify                   |              | Converts all tabs to spaces.                                                           |
 | M-x whitespace-mode            |              | Toggle white space view.                                                               |
 |                                |              |                                                                                        |
 | *Bufferf*                      |              |                                                                                        |
-|                                |              |                                                                                        |
+|--------------------------------+--------------+----------------------------------------------------------------------------------------|
+| M-x linum-mode                 |              | Toggle line numbers                                                                    |
 | M-x revert-file                |              | Update buffer when file is changed externally.                                         |
 | M-x auto-revert-mode           |              | Auto update the current file when its changed externally.                              |
 | M-x auto-revert-tail-mode      |              | Useful to watch log files. Follows tail of file. Equivalent to $ tail -f [file]        |
 | M-x rename-buffer              |              | Rename current buffer.                                                                 |
 | M-x read-only                  | C-x C-q      | Toggle the current buffer read only.                                                   |
+| M-x auto-fill-mode             |              | Automatically format paragraphs. It works like M-q, but automatically.                 |
 |                                |              |                                                                                        |
 | *Operating System*             |              |                                                                                        |
-|                                |              |                                                                                        |
+|--------------------------------+--------------+----------------------------------------------------------------------------------------|
 | M-x shell-command              | M-!          | Run a shell command and displays the output in a buffer.                               |
 |                                |              |                                                                                        |
 | M-x async-shell-command        | M-&          | Run asynchronous command like shells (python, ghci, scala ...) and long running        |
