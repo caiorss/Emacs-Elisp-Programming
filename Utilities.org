@@ -274,9 +274,9 @@ file:images/utilities-manpage.png
 
 Example: Top info page.
 
-file:images/utilities-infopage-root.png
+file:images/utilities_infopage_root.png
 
-file:images/utilities-infopage-tramp.png
+file:images/utilities_infopage_tramp.png
 
 ** Calculator - M-x calc 
 
