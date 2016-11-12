@@ -264,7 +264,7 @@ To read manpages enter =M-x woman=.
 
 Example: Rsync manpage.
 
-file:images/utilities-manpage.png
+file:images/utilities_manpage.png
 
 ** Info Page Reader 
 
