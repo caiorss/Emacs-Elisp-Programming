@@ -1,5 +1,5 @@
-#+AUTHOR: Caio Rodrigues
-#+EMAIL: <caiorss.rodrigues@gmail.com>
+#+AUTHOR: 
+#+EMAIL: 
 #+LANGUAGE: en
 #+DESCRIPTION: Emacs programming and customization.
 #+URL:  http://tinyurl.com/emacsinabox
