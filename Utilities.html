@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Utilities</title>
-<!-- 2016-11-05 sáb 02:25 -->
+<!-- 2016-11-12 sáb 02:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Caio Rodrigues" />
 <meta  name="description" content="Emacs programming and customization."
  />
 <style type="text/css">
@@ -222,13 +221,14 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-1">1.1. Overview</a></li>
 <li><a href="#sec-1-2">1.2. Shells</a></li>
 <li><a href="#sec-1-3">1.3. Async Shell Command</a></li>
-<li><a href="#sec-1-4">1.4. Emacs in Terminal</a></li>
-<li><a href="#sec-1-5">1.5. Manpage Reader</a></li>
-<li><a href="#sec-1-6">1.6. Info Page Reader</a></li>
-<li><a href="#sec-1-7">1.7. Spell Checker</a></li>
+<li><a href="#sec-1-4">1.4. Compiling in Emacs - M-x compile</a></li>
+<li><a href="#sec-1-5">1.5. Emacs in Terminal</a></li>
+<li><a href="#sec-1-6">1.6. Manpage Reader</a></li>
+<li><a href="#sec-1-7">1.7. Info Page Reader</a></li>
 <li><a href="#sec-1-8">1.8. Calculator - M-x calc</a></li>
 <li><a href="#sec-1-9">1.9. Magit - Emacs Interface to GIT</a></li>
 <li><a href="#sec-1-10">1.10. Helm utilities</a></li>
+<li><a href="#sec-1-11">1.11. Spell Checker</a></li>
 </ul>
 </li>
 </ul>
@@ -882,12 +882,112 @@ Defining a command:
     (async-shell-command <span class="org-string">"java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"</span>))
 </pre>
 </div>
+
+
+<p>
+Example: Running Haskell REPL.
+</p>
+
+
+<div class="figure">
+<p><img src="http://i.imgur.com/I90yeoX.gif" alt="I90yeoX.gif" />
+</p>
+</div>
+
+<p>
+Example: Install a Haskell package 
+</p>
+
+
+<div class="figure">
+<p><img src="http://i.imgur.com/btfaK3k.gif" alt="btfaK3k.gif" />
+</p>
+</div>
+
+<p>
+Example: Running Fsharp REPL 
+</p>
+
+
+<div class="figure">
+<p><img src="http://i.imgur.com/tRKPfXG.gif" alt="tRKPfXG.gif" />
+</p>
+</div>
+
+<p>
+Example: Ping a server to test connection 8.8.8.8 (Google's DNS)
+</p>
+
+
+<div class="figure">
+<p><img src="http://i.imgur.com/3OeuGNj.gif" alt="3OeuGNj.gif" />
+</p>
+</div>
 </div>
 </div>
 
+
 <div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Emacs in Terminal</h3>
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Compiling in Emacs - M-x compile</h3>
 <div class="outline-text-3" id="text-1-4">
+<p>
+Example: Compiling and running a F# script. To see the image
+fullscreen open: <a href="http://imgur.com/a/7Hvrz">http://imgur.com/a/7Hvrz</a> and click at the image.
+</p>
+
+
+<div class="figure">
+<p><img src="http://i.imgur.com/mBMJmqp.gif" alt="mBMJmqp.gif" />
+</p>
+</div>
+
+<p>
+To compile any code use: 
+</p>
+
+<ul class="org-ul">
+<li>To compile:   <code>M-x compile &lt;compilation command&gt;</code>
+</li>
+
+<li>To recompile: <code>M-x recompile</code> or type g at the compilation buffer.
+</li>
+</ul>
+
+<p>
+In this case was used the command <span class="underline">M-x compile fsi helloWinform.fsx</span>.
+That runs a F# script performing a syntax check before run, therefore
+as it is compiled language all syntax errors and value errors will
+appear at the compilation buffer.
+</p>
+
+<p>
+Code used in this example: File - helloWinform.fsx 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-fsharp"><span class="org-keyword">open</span> <span class="org-type">System.Windows.Forms</span>
+<span class="org-keyword">open</span> <span class="org-type">System.Drawing</span> 
+
+<span class="org-keyword">let</span> <span class="org-variable-name">f</span> = <span class="org-keyword">new</span> Form () 
+f.Text &lt;- <span class="org-string">"Hello world"</span>
+f.Name &lt;- <span class="org-string">"Form1"</span>
+f.BackColor &lt;- Color.Blue
+
+<span class="org-keyword">let</span> <span class="org-variable-name">btn</span> = <span class="org-keyword">new</span> Button (Text= <span class="org-string">"Click Me"</span>, BackColor = Color.Green)
+f.Controls.Add(btn)
+btn.Click.Subscribe(<span class="org-keyword">fun</span> <span class="org-variable-name">_</span> -&gt; printfn <span class="org-string">"Click me again"</span>)
+
+Application.Run(f)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Emacs in Terminal</h3>
+<div class="outline-text-3" id="text-1-5">
 <p>
 Running Emacs in terminal: 
 </p>
@@ -974,194 +1074,23 @@ Unix &amp; Linux Stack Exchange</a>
 </div>
 </div>
 
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Manpage Reader</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Manpage Reader</h3>
+<div class="outline-text-3" id="text-1-6">
 <p>
 To read manpages enter <code>M-x woman</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Info Page Reader</h3>
-<div class="outline-text-3" id="text-1-6">
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Info Page Reader</h3>
+<div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>To Browser info pages and also the Emacs documentation. <code>M-x info</code>
 </li>
 
 <li>Search Info pages. <code>M-x info-apropos</code>
-</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-sec-1-7" class="outline-3">
-<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Spell Checker</h3>
-<div class="outline-text-3" id="text-1-7">
-<p>
-Emacs uses external programs to check the spell. It supports <span class="underline">ispell</span>,
-<span class="underline">aspell</span> and <span class="underline">hunspell</span>. The variable <code>ispell-program-name</code> sets the
-spell check software used by Emacs. The default dictionary used by
-Emacs is US English, but it can be changed with the command
-<code>M-x ispell-change-dicitonary</code>.
-</p>
-
-<p>
-Spell check interface commands:
-</p>
-
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Command</th>
-<th scope="col" class="left">Default Key Bind</th>
-<th scope="col" class="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left"><code>M-x ispell-buffer</code></td>
-<td class="left">&#xa0;</td>
-<td class="left">Check the spelling of all buffer.</td>
-</tr>
-
-<tr>
-<td class="left"><code>M-x ispell-word</code></td>
-<td class="left"><code>M-$</code></td>
-<td class="left">Check the spell of word at cursor position.</td>
-</tr>
-
-<tr>
-<td class="left"><code>M-x ispell-region</code></td>
-<td class="left">&#xa0;</td>
-<td class="left">Check the spell of selected text.</td>
-</tr>
-
-<tr>
-<td class="left"><code>M-x ispell-change-dictionary</code></td>
-<td class="left">&#xa0;</td>
-<td class="left">Change the language of dictionary used by the spell check.</td>
-</tr>
-
-<tr>
-<td class="left"><code>M-x flyspell-mode</code></td>
-<td class="left">&#xa0;</td>
-<td class="left">Toggle flyspell mode. When active, it will highlight all misspelled .</td>
-</tr>
-
-<tr>
-<td class="left"><code>M-x flyspell-buffer</code></td>
-<td class="left">&#xa0;</td>
-<td class="left">Check the hole buffer in flyspell minor mode.</td>
-</tr>
-
-<tr>
-<td class="left"><code>M-x ispell-kill-ispell</code></td>
-<td class="left">&#xa0;</td>
-<td class="left">Kill the Ispell subprocess.</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-Set the default Spell checker:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"aspell"</span>)
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">or</span>
-(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"ispell"</span>)
-
-<span class="org-comment-delimiter">;;</span>
-(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"hunspell"</span>)
-</pre>
-</div>
-
-
-<p>
-The dictionary can be changed with the Elisp code:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(ispell-chage-dictionary <span class="org-string">"en"</span>)
-(ispell-chage-dictionary <span class="org-string">"castellano"</span>)
-(ispell-chage-dictionary <span class="org-string">"german"</span>)
-
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">M-x ispell-spanish</span>
-<span class="org-comment-delimiter">;;</span>
-(<span class="org-keyword">defun</span> <span class="org-function-name">ispell-spanish</span> ()
- (<span class="org-keyword">interactive</span>)
- (ispell-change-diciontary <span class="org-string">"castellano"</span>))
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">M-x ispell-en</span>
-<span class="org-comment-delimiter">;;</span>
-(<span class="org-keyword">defun</span> <span class="org-function-name">ispell-en</span> ()
-  (<span class="org-keyword">interactive</span>)
-   (ispell-change-diciontary <span class="org-string">"en"</span>))
-</pre>
-</div>
-
-
-<p>
-To right click in the word and get suggestions use:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(eval-after-load <span class="org-string">"flyspell"</span>
-  '(<span class="org-keyword">progn</span>
-     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
-     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
-</pre>
-</div>
-
-
-<p>
-The ispell doesn't check the spell of comments and strings. This
-behavior can be changed with the code below that allows it to check
-the spell in all programming modes like python-mode, haskell-mode and
-so on.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-</pre>
-</div>
-
-
-
-<p>
-See also:
-</p>
-
-<ul class="org-ul">
-<li><a href="https://joelkuiper.eu/spellcheck_emacs">Spell checking in Emacs</a>
-</li>
-<li><a href="http://www.emacswiki.org/emacs/FlySpell">FlySpell - Emacs Wiki.org</a>
-</li>
-<li><a href="http://www.emacswiki.org/emacs/InteractiveSpell">InteractiveSpell</a>
-</li>
-<li><a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">Emacs Manual - Check and Correcting Spelling</a>
-</li>
-<li><a href="http://ergoemacs.org/emacs/emacs_spell_checker_problems.html">Emacs Spell Checker Problems</a>
-</li>
-<li><a href="http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html">What's the best spell check setup in emacs</a>
 </li>
 </ul>
 </div>
@@ -2476,11 +2405,181 @@ Branch
 </table>
 </div>
 </div>
+
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> Spell Checker</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Emacs uses external programs to check the spell. It supports <span class="underline">ispell</span>,
+<span class="underline">aspell</span> and <span class="underline">hunspell</span>. The variable <code>ispell-program-name</code> sets the
+spell check software used by Emacs. The default dictionary used by
+Emacs is US English, but it can be changed with the command
+<code>M-x ispell-change-dicitonary</code>.
+</p>
+
+<p>
+Spell check interface commands:
+</p>
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Default Key Bind</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>M-x ispell-buffer</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the spelling of all buffer.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x ispell-word</code></td>
+<td class="left"><code>M-$</code></td>
+<td class="left">Check the spell of word at cursor position.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x ispell-region</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the spell of selected text.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x ispell-change-dictionary</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Change the language of dictionary used by the spell check.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x flyspell-mode</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Toggle flyspell mode. When active, it will highlight all misspelled .</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x flyspell-buffer</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Check the hole buffer in flyspell minor mode.</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-x ispell-kill-ispell</code></td>
+<td class="left">&#xa0;</td>
+<td class="left">Kill the Ispell subprocess.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Set the default Spell checker:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"aspell"</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">or</span>
+(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"ispell"</span>)
+
+<span class="org-comment-delimiter">;;</span>
+(<span class="org-keyword">setq</span> ispell-program-name <span class="org-string">"hunspell"</span>)
+</pre>
+</div>
+
+
+<p>
+The dictionary can be changed with the Elisp code:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(ispell-chage-dictionary <span class="org-string">"en"</span>)
+(ispell-chage-dictionary <span class="org-string">"castellano"</span>)
+(ispell-chage-dictionary <span class="org-string">"german"</span>)
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">M-x ispell-spanish</span>
+<span class="org-comment-delimiter">;;</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">ispell-spanish</span> ()
+ (<span class="org-keyword">interactive</span>)
+ (ispell-change-diciontary <span class="org-string">"castellano"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">M-x ispell-en</span>
+<span class="org-comment-delimiter">;;</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">ispell-en</span> ()
+  (<span class="org-keyword">interactive</span>)
+   (ispell-change-diciontary <span class="org-string">"en"</span>))
+</pre>
+</div>
+
+
+<p>
+To right click in the word and get suggestions use:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(eval-after-load <span class="org-string">"flyspell"</span>
+  '(<span class="org-keyword">progn</span>
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+</pre>
+</div>
+
+
+<p>
+The ispell doesn't check the spell of comments and strings. This
+behavior can be changed with the code below that allows it to check
+the spell in all programming modes like python-mode, haskell-mode and
+so on.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+</pre>
+</div>
+
+
+
+<p>
+See also:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://joelkuiper.eu/spellcheck_emacs">Spell checking in Emacs</a>
+</li>
+<li><a href="http://www.emacswiki.org/emacs/FlySpell">FlySpell - Emacs Wiki.org</a>
+</li>
+<li><a href="http://www.emacswiki.org/emacs/InteractiveSpell">InteractiveSpell</a>
+</li>
+<li><a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">Emacs Manual - Check and Correcting Spelling</a>
+</li>
+<li><a href="http://ergoemacs.org/emacs/emacs_spell_checker_problems.html">Emacs Spell Checker Problems</a>
+</li>
+<li><a href="http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html">What's the best spell check setup in emacs</a>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Caio Rodrigues</p>
-<p class="date">Created: 2016-11-05 sáb 02:25</p>
+<p class="date">Created: 2016-11-12 sáb 02:22</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

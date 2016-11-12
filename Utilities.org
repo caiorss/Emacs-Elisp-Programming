@@ -157,6 +157,61 @@ Defining a command:
     (async-shell-command "java -cp ~/opt/bsh-2.0b4.jar bsh.Interpreter"))
 #+END_SRC
 
+
+Example: Running Haskell REPL.
+
+http://i.imgur.com/I90yeoX.gif
+
+Example: Install a Haskell package 
+
+http://i.imgur.com/btfaK3k.gif
+
+Example: Running Fsharp REPL 
+
+http://i.imgur.com/tRKPfXG.gif
+
+Example: Ping a server to test connection 8.8.8.8 (Google's DNS)
+
+http://i.imgur.com/3OeuGNj.gif
+
+
+** Compiling in Emacs - M-x compile
+
+Example: Compiling and running a F# script. To see the image
+fullscreen open: http://imgur.com/a/7Hvrz and click at the image.
+
+http://i.imgur.com/mBMJmqp.gif
+
+To compile any code use: 
+
+ - To compile:   =M-x compile <compilation command>=
+
+ - To recompile: =M-x recompile= or type g at the compilation buffer.
+
+In this case was used the command _M-x compile fsi helloWinform.fsx_.
+That runs a F# script performing a syntax check before run, therefore
+as it is compiled language all syntax errors and value errors will
+appear at the compilation buffer.
+
+Code used in this example: File - helloWinform.fsx 
+
+#+BEGIN_SRC fsharp
+  open System.Windows.Forms
+  open System.Drawing 
+
+  let f = new Form () 
+  f.Text <- "Hello world"
+  f.Name <- "Form1"
+  f.BackColor <- Color.Blue
+
+  let btn = new Button (Text= "Click Me", BackColor = Color.Green)
+  f.Controls.Add(btn)
+  btn.Click.Subscribe(fun _ -> printfn "Click me again")
+
+  Application.Run(f)
+#+END_SRC
+
+
 ** Emacs in Terminal
 
 Running Emacs in terminal: 
@@ -213,93 +268,6 @@ To read manpages enter =M-x woman=.
  - To Browser info pages and also the Emacs documentation. =M-x info=
 
  - Search Info pages. =M-x info-apropos=
-
-** Spell Checker
-
-Emacs uses external programs to check the spell. It supports _ispell_,
-_aspell_ and _hunspell_. The variable =ispell-program-name= sets the
-spell check software used by Emacs. The default dictionary used by
-Emacs is US English, but it can be changed with the command
-=M-x ispell-change-dicitonary=.
-
-Spell check interface commands:
-
-
-| Command                        | Default Key Bind | Description                                                           |
-|--------------------------------+------------------+-----------------------------------------------------------------------|
-| =M-x ispell-buffer=            |                  | Check the spelling of all buffer.                                     |
-| =M-x ispell-word=              | =M-$=            | Check the spell of word at cursor position.                           |
-| =M-x ispell-region=            |                  | Check the spell of selected text.                                     |
-| =M-x ispell-change-dictionary= |                  | Change the language of dictionary used by the spell check.            |
-| =M-x flyspell-mode=            |                  | Toggle flyspell mode. When active, it will highlight all misspelled . |
-| =M-x flyspell-buffer=          |                  | Check the hole buffer in flyspell minor mode.                         |
-| =M-x ispell-kill-ispell=       |                  | Kill the Ispell subprocess.                                           |
-
-Set the default Spell checker:
-
-#+BEGIN_SRC elisp
-(setq ispell-program-name "aspell")
-
-;; or
-(setq ispell-program-name "ispell")
-
-;;
-(setq ispell-program-name "hunspell")
-#+END_SRC
-
-
-The dictionary can be changed with the Elisp code:
-
-#+BEGIN_SRC elisp
-
-(ispell-chage-dictionary "en")
-(ispell-chage-dictionary "castellano")
-(ispell-chage-dictionary "german")
-
-
-;; M-x ispell-spanish
-;;
-(defun ispell-spanish ()
- (interactive)
- (ispell-change-diciontary "castellano"))
-
-;; M-x ispell-en
-;;
-(defun ispell-en ()
-  (interactive)
-   (ispell-change-diciontary "en"))
-#+END_SRC
-
-
-To right click in the word and get suggestions use:
-
-#+BEGIN_SRC elisp
-(eval-after-load "flyspell"
-  '(progn
-     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
-     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
-#+END_SRC
-
-
-The ispell doesn't check the spell of comments and strings. This
-behavior can be changed with the code below that allows it to check
-the spell in all programming modes like python-mode, haskell-mode and
-so on.
-
-#+BEGIN_SRC elisp
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-#+END_SRC
-
-
-
-See also:
-
-  - [[https://joelkuiper.eu/spellcheck_emacs][Spell checking in Emacs]]
-  - [[http://www.emacswiki.org/emacs/FlySpell][FlySpell - Emacs Wiki.org]]
-  - [[http://www.emacswiki.org/emacs/InteractiveSpell][InteractiveSpell]]
-  - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][Emacs Manual - Check and Correcting Spelling]]
-  - [[http://ergoemacs.org/emacs/emacs_spell_checker_problems.html][Emacs Spell Checker Problems]]
-  - [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][What's the best spell check setup in emacs]]
 ** Calculator - M-x calc 
 
 *Overview:*
@@ -626,6 +594,93 @@ See also
 |---------------------------------+-----------------------------------------|
 | M-x helm-colors                 | Select a color and copy to clipboard    |
 |                                 |                                         |
+
+** Spell Checker
+
+Emacs uses external programs to check the spell. It supports _ispell_,
+_aspell_ and _hunspell_. The variable =ispell-program-name= sets the
+spell check software used by Emacs. The default dictionary used by
+Emacs is US English, but it can be changed with the command
+=M-x ispell-change-dicitonary=.
+
+Spell check interface commands:
+
+
+| Command                        | Default Key Bind | Description                                                           |
+|--------------------------------+------------------+-----------------------------------------------------------------------|
+| =M-x ispell-buffer=            |                  | Check the spelling of all buffer.                                     |
+| =M-x ispell-word=              | =M-$=            | Check the spell of word at cursor position.                           |
+| =M-x ispell-region=            |                  | Check the spell of selected text.                                     |
+| =M-x ispell-change-dictionary= |                  | Change the language of dictionary used by the spell check.            |
+| =M-x flyspell-mode=            |                  | Toggle flyspell mode. When active, it will highlight all misspelled . |
+| =M-x flyspell-buffer=          |                  | Check the hole buffer in flyspell minor mode.                         |
+| =M-x ispell-kill-ispell=       |                  | Kill the Ispell subprocess.                                           |
+
+Set the default Spell checker:
+
+#+BEGIN_SRC elisp
+(setq ispell-program-name "aspell")
+
+;; or
+(setq ispell-program-name "ispell")
+
+;;
+(setq ispell-program-name "hunspell")
+#+END_SRC
+
+
+The dictionary can be changed with the Elisp code:
+
+#+BEGIN_SRC elisp
+
+(ispell-chage-dictionary "en")
+(ispell-chage-dictionary "castellano")
+(ispell-chage-dictionary "german")
+
+
+;; M-x ispell-spanish
+;;
+(defun ispell-spanish ()
+ (interactive)
+ (ispell-change-diciontary "castellano"))
+
+;; M-x ispell-en
+;;
+(defun ispell-en ()
+  (interactive)
+   (ispell-change-diciontary "en"))
+#+END_SRC
+
+
+To right click in the word and get suggestions use:
+
+#+BEGIN_SRC elisp
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+#+END_SRC
+
+
+The ispell doesn't check the spell of comments and strings. This
+behavior can be changed with the code below that allows it to check
+the spell in all programming modes like python-mode, haskell-mode and
+so on.
+
+#+BEGIN_SRC elisp
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+END_SRC
+
+
+
+See also:
+
+  - [[https://joelkuiper.eu/spellcheck_emacs][Spell checking in Emacs]]
+  - [[http://www.emacswiki.org/emacs/FlySpell][FlySpell - Emacs Wiki.org]]
+  - [[http://www.emacswiki.org/emacs/InteractiveSpell][InteractiveSpell]]
+  - [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][Emacs Manual - Check and Correcting Spelling]]
+  - [[http://ergoemacs.org/emacs/emacs_spell_checker_problems.html][Emacs Spell Checker Problems]]
+  - [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][What's the best spell check setup in emacs]]
 
 
 
