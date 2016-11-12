@@ -276,7 +276,6 @@ Example: Top info page.
 
 file:images/utilities-infopage-root.png
 
-
 file:images/utilities-infopage-tramp.png
 
 ** Calculator - M-x calc 
