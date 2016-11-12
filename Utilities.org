@@ -2,6 +2,7 @@
 #+INCLUDE: theme/style.org
 #+TITLE: Emacs Utilities 
 #+STARTUP: content
+#+KEYWORDS: emacs programming shell eshell utilities calculator compilation gifs examples
 
 * Emacs Utilities 
 ** Overview
@@ -174,7 +175,6 @@ Example: Ping a server to test connection 8.8.8.8 (Google's DNS)
 
 http://i.imgur.com/3OeuGNj.gif
 
-
 ** Compiling in Emacs - M-x compile
 
 Example: Compiling and running a F# script. To see the image
@@ -210,7 +210,6 @@ Code used in this example: File - helloWinform.fsx
 
   Application.Run(f)
 #+END_SRC
-
 
 ** Emacs in Terminal
 
@@ -263,11 +262,23 @@ See also:
 
 To read manpages enter =M-x woman=.
 
+Example: Rsync manpage.
+
+file:images/utilities-manpage.png
+
 ** Info Page Reader 
 
  - To Browser info pages and also the Emacs documentation. =M-x info=
 
  - Search Info pages. =M-x info-apropos=
+
+Example: Top info page.
+
+file:images/utilities-infopage-root.png
+
+
+file:images/utilities-infopage-tramp.png
+
 ** Calculator - M-x calc 
 
 *Overview:*
