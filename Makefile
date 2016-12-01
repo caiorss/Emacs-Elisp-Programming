@@ -7,6 +7,7 @@ html:
 	mv dist/README.html dist/index.html
 	cp -r -v images dist/images
 	cp -r *.org  dist/
+	cp -r -v codes dist/codes
 
 browse:
 	firefox dist/index.html
