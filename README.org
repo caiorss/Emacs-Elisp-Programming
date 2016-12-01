@@ -119,7 +119,11 @@ Emacs Resources.
 
 ** Download this content
 
-You can download all the pages of this repository with following commands. 
+*Download manually*
+
+ - https://github.com/caiorss/Emacs-Elisp-Programming/archive/gh-pages.zip
+
+*Automated download*
 
 #+BEGIN_SRC sh
 curl -L https://github.com/caiorss/Emacs-Elisp-Programming/archive/gh-pages.zip -o elisp.zip

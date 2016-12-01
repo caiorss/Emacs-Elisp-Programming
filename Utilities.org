@@ -264,7 +264,7 @@ bellow that will produce the executable myApp.bin.
 
 The command =M-x compile-haskell-run= compiles the code and runs the app.  
 
-File: myApp.hs 
+File: file:codes/myApp.hs 
 
 #+BEGIN_SRC haskell :tangle codes/myApp.hs
   import qualified System.Directory as D
