@@ -176,11 +176,7 @@ Example: Ping a server to test connection 8.8.8.8 (Google's DNS)
 http://i.imgur.com/3OeuGNj.gif
 
 ** Compiling in Emacs - M-x compile
-
-Example: Compiling and running a F# script. To see the image
-fullscreen open: http://imgur.com/a/7Hvrz and click at the image.
-
-http://i.imgur.com/mBMJmqp.gif
+*** Compilation Commands 
 
 To compile any code use: 
 
@@ -188,10 +184,153 @@ To compile any code use:
 
  - To recompile: =M-x recompile= or type g at the compilation buffer.
 
+*Compilation Commands*
+
+| Command                        | Key binding                    | Description                      |
+|--------------------------------+--------------------------------+----------------------------------|
+| M-x compile                    |                                | Run a compilation command        |
+| M-x recompile                  | g        (compilation buffer)  | Run a compilation command again. |
+| M-x kill-compilation           | C-c C-k  (compilation bufffer) | Stop compilation process.        |
+| M-x compilation-next-error     | M-n                            | Go to next error                 |
+| M-x compilation-previous-error | M-p                            | Go to previous error             |
+|                                |                                |                                  |
+|                                |                                |                                  |
+
+*Compilation Buffer Key bindings*
+
+| Command              | Key binding | Description                                                |
+|----------------------+-------------+------------------------------------------------------------|
+| M-x recompile        | g           | Compile again running same compilation command.            |
+| M-x quit-window      | q           | Quit compilation buffer                                    |
+| M-x kill-compilation | C-c C-k     | Stop compilation process                                   |
+|                      | <           | Go to beginning of compilation buffer.                     |
+|                      | >           | Go to end of compilation buffer.                           |
+| M-x describe-mode    | h           |                                                            |
+|                      | RET         | Typing Return at compilation error goes to error location. |
+|                      |             |                                                            |
+|                      |             |                                                            |
+
+Note: The command =M-x compile= provides completion for Makefile
+targets by typing =M-x compile make <tab>=.
+
+*** Setting compilation key bindings
+
+#+BEGIN_SRC elisp
+  (global-set-key [f9]    #'compile)
+  (global-set-key [s-f9]  #'recompile)
+
+  (global-set-key (kbd "M-[") #'compilation-previous-error)
+  (global-set-key (kbd "M-]") #'compilation-next-error)
+
+  (define-key compilation-mode-map "c" #'compile)
+  (define-key compilation-mode-map "k" #'kill-compilation)
+#+END_SRC
+
+*** Creating a custom compilation commands
+    :PROPERTIES:
+    :ID:       74a646ea-a275-4b82-9677-6e4ed7c09462
+    :END:
+**** Compile Haskell
+     :PROPERTIES:
+     :ID:       426d6338-0bd3-4638-be57-4111e1b4f331
+     :END:
+
+Compile single-file haskell apps with stack:
+
+#+BEGIN_SRC elisp
+  (defun compile-haskell ()
+    "Compile a haskell .hs file."
+    (interactive)
+    (save-buffer)
+    (compile (format "stack exec -- ghc %s -o %s.bin"
+                     (buffer-file-name)
+                     (file-name-base (buffer-file-name))
+                     )))
+
+
+  (defun compile-haskell-run ()
+    "Compile a haskell .hs file and runs the executable."
+    (interactive)
+    (save-buffer)
+    (compile (format "stack exec -- ghc %s -o %s.bin && ./%s.bin"
+                     (buffer-file-name)
+                     (file-name-base (buffer-file-name))
+                     (file-name-base (buffer-file-name))
+                     )))
+#+END_SRC
+
+The command M-x compile-haskell can be used to compile this code
+bellow that will produce the executable myApp.bin. 
+
+The command =M-x compile-haskell-run= compiles the code and runs the app.  
+
+File: file:codes/myApp.hs 
+
+#+BEGIN_SRC haskell :tangle codes/myApp.hs
+  import qualified System.Directory as D
+
+  main :: IO ()
+  main = do 
+    putStrLn "Hello World Haskell!"
+    D.getDirectoryContents "/" >>= mapM_ putStrLn    
+#+END_SRC
+
+**** Compile F# (Fsharp)
+     :PROPERTIES:
+     :ID:       8ad99976-fca6-4d4b-ab0c-3656887236f8
+     :END:
+
+The command =M-x compile-fsharp-run= compiles a F# app .fsx to .exe
+and runs it with mono. 
+
+#+BEGIN_SRC elisp 
+  (defun compile-fsharp-run ()
+    "Compile a Fhsarp .fsx file to .exe .NET executable."
+    (interactive)
+    (save-buffer)
+    (compile (format "fsc --target:winexe --platform:anycpu --standalone %s --out:%s.exe && mono %s.exe"
+                     (buffer-file-name)
+                     (file-name-base (buffer-file-name))
+                     (file-name-base (buffer-file-name))                   
+                     )))
+
+#+END_SRC
+
+This command can be used to compile the file helloWinform.fsx to
+helloWinform.exe and run it.
+
+File: file:codes/helloWinform.fsx
+
+#+BEGIN_SRC fsharp :tangle codes/helloWinform.fsx
+  open System.Windows.Forms
+  open System.Drawing 
+
+  let f = new Form () 
+  f.Text <- "Hello world"
+  f.Name <- "Form1"
+  f.BackColor <- Color.Blue
+
+  let btn = new Button (Text= "Click Me", BackColor = Color.Green)
+  f.Controls.Add(btn)
+  btn.Click.Subscribe(fun _ -> printfn "Click me again")
+
+  Application.Run(f)
+#+END_SRC
+
+*** Example
+
+Example: Running a F# script. To see the image fullscreen open:
+http://imgur.com/a/7Hvrz and click at the image.
+
+http://i.imgur.com/mBMJmqp.gif
+
 In this case was used the command _M-x compile fsi helloWinform.fsx_.
-That runs a F# script performing a syntax check before run, therefore
-as it is compiled language all syntax errors and value errors will
-appear at the compilation buffer.
+That runs a F# script performing and all syntax errors and value
+errors will be shown at the compilation buffer. 
+
+Note: This code also works in Linux or OSX. It was recorded in Windows
+because there was no good GIF recording apps available for Linux at
+the time this was recorded.
 
 Code used in this example: File - helloWinform.fsx 
 

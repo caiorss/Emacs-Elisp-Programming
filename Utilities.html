@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Utilities</title>
-<!-- 2016-11-12 sáb 03:22 -->
+<!-- 2016-12-01 qui 06:02 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization."
@@ -222,7 +222,14 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-1">1.1. Overview</a></li>
 <li><a href="#sec-1-2">1.2. Shells</a></li>
 <li><a href="#sec-1-3">1.3. Async Shell Command</a></li>
-<li><a href="#sec-1-4">1.4. Compiling in Emacs - M-x compile</a></li>
+<li><a href="#sec-1-4">1.4. Compiling in Emacs - M-x compile</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. Compilation Commands</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Setting compilation key bindings</a></li>
+<li><a href="#sec-1-4-3">1.4.3. Creating a custom compilation commands</a></li>
+<li><a href="#sec-1-4-4">1.4.4. Example</a></li>
+</ul>
+</li>
 <li><a href="#sec-1-5">1.5. Emacs in Terminal</a></li>
 <li><a href="#sec-1-6">1.6. Manpage Reader</a></li>
 <li><a href="#sec-1-7">1.7. Info Page Reader</a></li>
@@ -930,17 +937,9 @@ Example: Ping a server to test connection 8.8.8.8 (Google's DNS)
 <div id="outline-container-sec-1-4" class="outline-3">
 <h3 id="sec-1-4"><span class="section-number-3">1.4</span> Compiling in Emacs - M-x compile</h3>
 <div class="outline-text-3" id="text-1-4">
-<p>
-Example: Compiling and running a F# script. To see the image
-fullscreen open: <a href="http://imgur.com/a/7Hvrz">http://imgur.com/a/7Hvrz</a> and click at the image.
-</p>
-
-
-<div class="figure">
-<p><img src="http://i.imgur.com/mBMJmqp.gif" alt="mBMJmqp.gif" />
-</p>
-</div>
-
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Compilation Commands</h4>
+<div class="outline-text-4" id="text-1-4-1">
 <p>
 To compile any code use: 
 </p>
@@ -954,10 +953,309 @@ To compile any code use:
 </ul>
 
 <p>
+<b>Compilation Commands</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Key binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-x compile</td>
+<td class="left">&#xa0;</td>
+<td class="left">Run a compilation command</td>
+</tr>
+
+<tr>
+<td class="left">M-x recompile</td>
+<td class="left">g        (compilation buffer)</td>
+<td class="left">Run a compilation command again.</td>
+</tr>
+
+<tr>
+<td class="left">M-x kill-compilation</td>
+<td class="left">C-c C-k  (compilation bufffer)</td>
+<td class="left">Stop compilation process.</td>
+</tr>
+
+<tr>
+<td class="left">M-x compilation-next-error</td>
+<td class="left">M-n</td>
+<td class="left">Go to next error</td>
+</tr>
+
+<tr>
+<td class="left">M-x compilation-previous-error</td>
+<td class="left">M-p</td>
+<td class="left">Go to previous error</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Compilation Buffer Key bindings</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Key binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-x recompile</td>
+<td class="left">g</td>
+<td class="left">Compile again running same compilation command.</td>
+</tr>
+
+<tr>
+<td class="left">M-x quit-window</td>
+<td class="left">q</td>
+<td class="left">Quit compilation buffer</td>
+</tr>
+
+<tr>
+<td class="left">M-x kill-compilation</td>
+<td class="left">C-c C-k</td>
+<td class="left">Stop compilation process</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&lt;</td>
+<td class="left">Go to beginning of compilation buffer.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&gt;</td>
+<td class="left">Go to end of compilation buffer.</td>
+</tr>
+
+<tr>
+<td class="left">M-x describe-mode</td>
+<td class="left">h</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">RET</td>
+<td class="left">Typing Return at compilation error goes to error location.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Note: The command <code>M-x compile</code> provides completion for Makefile
+targets by typing <code>M-x compile make &lt;tab&gt;</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Setting compilation key bindings</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(global-set-key [f9]    #'compile)
+(global-set-key [s-f9]  #'recompile)
+
+(global-set-key (kbd <span class="org-string">"M-["</span>) #'compilation-previous-error)
+(global-set-key (kbd <span class="org-string">"M-]"</span>) #'compilation-next-error)
+
+(define-key compilation-mode-map <span class="org-string">"c"</span> #'compile)
+(define-key compilation-mode-map <span class="org-string">"k"</span> #'kill-compilation)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><a id="ID-74a646ea-a275-4b82-9677-6e4ed7c09462" name="ID-74a646ea-a275-4b82-9677-6e4ed7c09462"></a><span class="section-number-4">1.4.3</span> Creating a custom compilation commands</h4>
+<div class="outline-text-4" id="text-1-4-3">
+</div>
+<ol class="org-ol"><li><a id="sec-1-4-3-1" name="sec-1-4-3-1"></a><a id="ID-426d6338-0bd3-4638-be57-4111e1b4f331" name="ID-426d6338-0bd3-4638-be57-4111e1b4f331"></a>Compile Haskell<br  /><div class="outline-text-5" id="text-1-4-3-1">
+
+<p>
+Compile single-file haskell apps with stack:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">compile-haskell</span> ()
+  <span class="org-doc">"Compile a haskell .hs file."</span>
+  (<span class="org-keyword">interactive</span>)
+  (save-buffer)
+  (compile (format <span class="org-string">"stack exec -- ghc %s -o %s.bin"</span>
+                   (buffer-file-name)
+                   (file-name-base (buffer-file-name))
+                   )))
+
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">compile-haskell-run</span> ()
+  <span class="org-doc">"Compile a haskell .hs file and runs the executable."</span>
+  (<span class="org-keyword">interactive</span>)
+  (save-buffer)
+  (compile (format <span class="org-string">"stack exec -- ghc %s -o %s.bin &amp;&amp; ./%s.bin"</span>
+                   (buffer-file-name)
+                   (file-name-base (buffer-file-name))
+                   (file-name-base (buffer-file-name))
+                   )))
+</pre>
+</div>
+
+<p>
+The command M-x compile-haskell can be used to compile this code
+bellow that will produce the executable myApp.bin. 
+</p>
+
+<p>
+The command <code>M-x compile-haskell-run</code> compiles the code and runs the app.  
+</p>
+
+<p>
+File: <a href="codes/myApp.hs">codes/myApp.hs</a> 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span class="org-haskell-keyword">import</span> <span class="org-haskell-keyword">qualified</span> <span class="org-haskell-constructor">System.Directory</span> <span class="org-haskell-keyword">as</span> <span class="org-haskell-constructor">D</span>
+
+<span class="org-haskell-definition">main</span> <span class="org-haskell-operator">::</span> <span class="org-haskell-type">IO</span> <span class="org-haskell-constructor">()</span>
+<span class="org-haskell-definition">main</span> <span class="org-haskell-operator">=</span> <span class="org-haskell-keyword">do</span> 
+  putStrLn <span class="org-string">"Hello World Haskell!"</span>
+  D.getDirectoryContents <span class="org-string">"/"</span> <span class="org-haskell-operator">&gt;&gt;=</span> mapM_ putStrLn
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-1-4-3-2" name="sec-1-4-3-2"></a><a id="ID-8ad99976-fca6-4d4b-ab0c-3656887236f8" name="ID-8ad99976-fca6-4d4b-ab0c-3656887236f8"></a>Compile F# (Fsharp)<br  /><div class="outline-text-5" id="text-1-4-3-2">
+
+<p>
+The command <code>M-x compile-fsharp-run</code> compiles a F# app .fsx to .exe
+and runs it with mono. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">compile-fsharp-run</span> ()
+  <span class="org-doc">"Compile a Fhsarp .fsx file to .exe .NET executable."</span>
+  (<span class="org-keyword">interactive</span>)
+  (save-buffer)
+  (compile (format <span class="org-string">"fsc --target:winexe --platform:anycpu --standalone %s --out:%s.exe &amp;&amp; mono %s.exe"</span>
+                   (buffer-file-name)
+                   (file-name-base (buffer-file-name))
+                   (file-name-base (buffer-file-name))                   
+                   )))
+</pre>
+</div>
+
+<p>
+This command can be used to compile the file helloWinform.fsx to
+helloWinform.exe and run it.
+</p>
+
+<p>
+File: <a href="codes/helloWinform.fsx">codes/helloWinform.fsx</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-fsharp"><span class="org-keyword">open</span> <span class="org-type">System.Windows.Forms</span>
+<span class="org-keyword">open</span> <span class="org-type">System.Drawing</span> 
+
+<span class="org-keyword">let</span> <span class="org-variable-name">f</span> = <span class="org-keyword">new</span> Form () 
+f.Text &lt;- <span class="org-string">"Hello world"</span>
+f.Name &lt;- <span class="org-string">"Form1"</span>
+f.BackColor &lt;- Color.Blue
+
+<span class="org-keyword">let</span> <span class="org-variable-name">btn</span> = <span class="org-keyword">new</span> Button (Text= <span class="org-string">"Click Me"</span>, BackColor = Color.Green)
+f.Controls.Add(btn)
+btn.Click.Subscribe(<span class="org-keyword">fun</span> <span class="org-variable-name">_</span> -&gt; printfn <span class="org-string">"Click me again"</span>)
+
+Application.Run(f)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> Example</h4>
+<div class="outline-text-4" id="text-1-4-4">
+<p>
+Example: Running a F# script. To see the image fullscreen open:
+<a href="http://imgur.com/a/7Hvrz">http://imgur.com/a/7Hvrz</a> and click at the image.
+</p>
+
+
+<div class="figure">
+<p><img src="http://i.imgur.com/mBMJmqp.gif" alt="mBMJmqp.gif" />
+</p>
+</div>
+
+<p>
 In this case was used the command <span class="underline">M-x compile fsi helloWinform.fsx</span>.
-That runs a F# script performing a syntax check before run, therefore
-as it is compiled language all syntax errors and value errors will
-appear at the compilation buffer.
+That runs a F# script performing and all syntax errors and value
+errors will be shown at the compilation buffer. 
+</p>
+
+<p>
+Note: This code also works in Linux or OSX. It was recorded in Windows
+because there was no good GIF recording apps available for Linux at
+the time this was recorded.
 </p>
 
 <p>
@@ -980,6 +1278,7 @@ btn.Click.Subscribe(<span class="org-keyword">fun</span> <span class="org-variab
 
 Application.Run(f)
 </pre>
+</div>
 </div>
 </div>
 </div>
@@ -2605,7 +2904,7 @@ See also:
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-11-12 sáb 03:22</p>
+<p class="date">Created: 2016-12-01 qui 06:02</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
