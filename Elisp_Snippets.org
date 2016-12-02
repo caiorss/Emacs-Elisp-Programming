@@ -2237,6 +2237,47 @@ To find where the package was intalled type M-x find-library <library-name>.
         (package-install-from-buffer))))
 #+END_SRC
 ** Helm Snippets                                     :framework:library:helm:
+*** Switch between buffers in same directory
+
+Usage: M-x buffer/switch-in-directory
+
+This command switches between buffer with files that are in current directory.
+
+#+BEGIN_SRC elisp
+  (defun buffer/with-file-in-directory-p (directory buf)
+    "Check if a buffer has file associated and is is in DIRECTORY.
+  Parameters:
+  - directory  string         - root directory 
+  - buf        buffer object  - buffer object"
+    (and (buffer-file-name buf) ;; check if buffer has a file associated 
+         (string-prefix-p (expand-file-name directory)
+                          (expand-file-name (buffer-file-name buf)
+                                              ))))
+
+
+  (defun buffer/switch-in-directory ()
+    "Switch between buffers in same directory."
+    (interactive)
+    (helm
+     :prompt "Buffer switch: "
+     :sources  `((
+                  (name       . "Dir: ")                                 
+                  (candidates . ,(mapcar (lambda (b) (cons (buffer-name b) b))
+                                         ;; filter buffers not in this directory (code bellow)
+                                         (remove-if-not  (lambda (b)
+                                                           (buffer/with-file-in-directory-p
+                                                            (or (file-name-directory (buffer-file-name))
+                                                                default-directory
+                                                                )
+                                                            b
+                                                            ))
+                                                    (buffer-list)
+                                                    )))
+                  (action     . switch-to-buffer)
+                  ))))
+
+#+END_SRC
+
 *** Browser Recent files
 
 Usage: M-x helm-recent-files
