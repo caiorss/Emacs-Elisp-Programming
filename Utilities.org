@@ -215,8 +215,39 @@ targets by typing =M-x compile make <tab>=.
 
 *** Setting compilation key bindings
 
+The code block bellow will set the key bindings as shown in the
+following tables:
+
+Key bindings for outside compilation buffer.
+
+| Key binding          | Description                     |
+|----------------------+---------------------------------|
+| f9                   | Run M-x compile                 |
+| Windows-Key/Super-f9 | Run M-x                         |
+| M-[                  | Go to next compilation error    |
+| M-]                  | Go to previous compilation erro |
+|                      |                                 |
+|                      |                                 |
+
+Key bindings for compilation buffer
+
+| Key binding | Description                               |
+|-------------+-------------------------------------------|
+| q           | Quit compilation buffer (default)         |
+| g           | Run M-x recompile (default)               |
+| c           | Run a new compilation command             |
+| k           | Kill compilation                          |
+| mm          | Run make - M-x compile 'make'             |
+| mc          | Run make clean - M-x compile 'make clean' |
+| mp          | Run make clean and make again.            |
+|             |                                           |
+
+
+
 #+BEGIN_SRC elisp
   (global-set-key [f9]    #'compile)
+
+  ;; Not s-f9 means Windows Key/f9
   (global-set-key [s-f9]  #'recompile)
 
   (global-set-key (kbd "M-[") #'compilation-previous-error)
@@ -224,6 +255,16 @@ targets by typing =M-x compile make <tab>=.
 
   (define-key compilation-mode-map "c" #'compile)
   (define-key compilation-mode-map "k" #'kill-compilation)
+
+  (define-key compilation-mode-map "mm" (lambda () (interactive)
+                                          (compile "make")))
+
+  (define-key compilation-mode-map "mc" (lambda () (interactive)
+                                          (compile "make clean")))
+
+  (define-key compilation-mode-map "mp" (lambda () (interactive)
+                                          (compile "make clean && make")))
+
 #+END_SRC
 
 *** Creating a custom compilation commands
