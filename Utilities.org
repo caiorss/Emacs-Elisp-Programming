@@ -11,6 +11,8 @@ Some Emacs utilities and goodness.
 
 | Feature                       | Entry Point             | Description                                                  |
 |-------------------------------+-------------------------+--------------------------------------------------------------|
+| Emacs interal tutorial        | help-with-tutorial      | Open Emacs tutorial.                                         |
+|                               |                         |                                                              |
 | Package Manager               | M-x list-packages       | List all packages available.                                 |
 |                               | M-x package-insstall    | Install some package                                         |
 |                               |                         |                                                              |
@@ -55,9 +57,9 @@ Some Emacs utilities and goodness.
 |                               |                         |                                                              |
 | Color Pallete                 | M-x list-colors-display | Display a collor pallete.                                    |
 |                               |                         |                                                              |
-| GNU Debugger Interface        | M-x gdb                 |                                                              |
-|                               |                         |                                                              |
 | VIM Emulation                 | M-x evil-mode           | It provided by the evil package.                             |
+|                               |                         |                                                              |
+| GNU Debugger Interface        | M-x gdb                 |                                                              |
 |                               |                         |                                                              |
 
 Note: 
@@ -65,17 +67,20 @@ Note:
  - M-x ifconfig - runs ipconfig on Windows and ifconfig or ip on
    Linux. It is platform agnostic.
 
+ - To Emacs' tutorial (help-with-tutorial) work the cua-mode must be
+   disabled (M-x cua-mode to disable it).
+
 *Fun*
 
-| Command                 | Description                               |
-|-------------------------+-------------------------------------------|
-| M-x doctor              | If you fell bad, lost your girlfriend ... |
-| M-x life                | Run Conway's Life simulation.             |
-| M-x dunnet              | Text based adventure game                 |
-| M-x tetris              | Play Tetris.                              |
-| M-x hanoi               | Towers of Hanoi.                          |
-| M-x zone                | Make buffers go crazy!!                   |
-| M-x zone-leave-me-alone | Stop zoning out.                          |
+| Command                 | Description                                                 |
+|-------------------------+-------------------------------------------------------------|
+| M-x doctor              | If you fell bad, your country is in a endless recession ... |
+| M-x life                | Run Conway's Life simulation.                               |
+| M-x dunnet              | Text based adventure game                                   |
+| M-x tetris              | Play Tetris.                                                |
+| M-x hanoi               | Towers of Hanoi.                                            |
+| M-x zone                | Make buffers go crazy!!                                     |
+| M-x zone-leave-me-alone | Stop zoning out.                                            |
 
 ** Shells 
 
@@ -215,8 +220,39 @@ targets by typing =M-x compile make <tab>=.
 
 *** Setting compilation key bindings
 
+The code block bellow will set the key bindings as shown in the
+following tables:
+
+Key bindings for outside compilation buffer.
+
+| Key binding          | Description                     |
+|----------------------+---------------------------------|
+| f9                   | Run M-x compile                 |
+| Windows-Key/Super-f9 | Run M-x                         |
+| M-[                  | Go to next compilation error    |
+| M-]                  | Go to previous compilation erro |
+|                      |                                 |
+|                      |                                 |
+
+Key bindings for compilation buffer
+
+| Key binding | Description                               |
+|-------------+-------------------------------------------|
+| q           | Quit compilation buffer (default)         |
+| g           | Run M-x recompile (default)               |
+| c           | Run a new compilation command             |
+| k           | Kill compilation                          |
+| mm          | Run make - M-x compile 'make'             |
+| mc          | Run make clean - M-x compile 'make clean' |
+| mp          | Run make clean and make again.            |
+|             |                                           |
+
+
+
 #+BEGIN_SRC elisp
   (global-set-key [f9]    #'compile)
+
+  ;; Not s-f9 means Windows Key/f9
   (global-set-key [s-f9]  #'recompile)
 
   (global-set-key (kbd "M-[") #'compilation-previous-error)
@@ -224,6 +260,16 @@ targets by typing =M-x compile make <tab>=.
 
   (define-key compilation-mode-map "c" #'compile)
   (define-key compilation-mode-map "k" #'kill-compilation)
+
+  (define-key compilation-mode-map "mm" (lambda () (interactive)
+                                          (compile "make")))
+
+  (define-key compilation-mode-map "mc" (lambda () (interactive)
+                                          (compile "make clean")))
+
+  (define-key compilation-mode-map "mp" (lambda () (interactive)
+                                          (compile "make clean && make")))
+
 #+END_SRC
 
 *** Creating a custom compilation commands

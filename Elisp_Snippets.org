@@ -428,6 +428,57 @@ Returns the selected text of the current buffer.
   (buffer-substring-no-properties (region-beginning) (region-end)))
 #+END_SRC
 
+*** Creating a scratch buffer for Programming Languages 
+
+This function creates a Python scratch buffer like elisp ~*scratch*~
+which allows the user to play with Python without creating any
+file. It is possible to run 
+
+It can be easily changed to work with other languages like ruby by
+replacing python-mode to ruby-mode.
+
+*Python Scratch buffer*
+
+Usage: _M-x python/scratch_
+
+#+BEGIN_SRC elisp
+  (defun python/scratch ()
+    (interactive)
+      (let (
+            ;; Creates a new buffer object.    
+           (buf (get-buffer-create "*python-scratch*"))
+           )
+        ;; Executes functions that would change the current buffer at
+        ;; buffer buf 
+       (with-current-buffer buf
+         ;;; Set the new buffer to scratch mode 
+         (python-mode)
+         ;;; Pop to scratch buffer 
+         (pop-to-buffer buf)
+         )))
+#+END_SRC
+
+*Shell (bash, sh) scratch buffer*
+
+Usage: M-x sh/scratch
+
+ #+BEGIN_SRC elisp 
+   (defun sh/scratch ()
+     (interactive)
+       (let (
+             ;; Creates a new buffer object.    
+            (buf (get-buffer-create "*sh-scratch*"))
+            )
+         ;; Executes functions that would change the current buffer at
+         ;; buffer buf 
+        (with-current-buffer buf
+          ;;; Set the new buffer to scratch mode 
+          (sh-mode) 
+          ;;; Pop to scratch buffer 
+          (pop-to-buffer buf)
+          ))) 
+ #+END_SRC
+
 ** IO - Input and Output
 *** Input - Read User Input
 **** Prompt functions
@@ -1023,6 +1074,134 @@ bidns the key combination SUPER (Windows Key) + 8.
 #+BEGIN_SRC elisp 
 (global-set-key (kbd "s-8") #'shell-launch)
 #+END_SRC
+
+*** Send regions, commands and buffer to M-x shell repl.
+
+ - _M-x shell/buffer-repl_ This command deletes all other windows and
+   splits the current frame into two windows one containing a M-x
+   shell (bash) repl and the other a shell-script scratch buffer
+   (sh-mode).
+
+ - _M-x shell/buffer-repl-frame_ Like the shell/buffer-repl, but shell
+   and the scratch buffer are displayed in new frame.
+
+
+#+BEGIN_SRC elisp
+
+(defun shell/buffer-repl ()
+  "Create "
+  (interactive)
+
+  (delete-other-windows)
+
+  ;; Split window vertically
+  (split-window-right)
+
+  ;;; Run shell (bash on Linux)
+  (shell)
+
+  ;;; Creates a scratch-shell buffer on other half of window
+  (let ((buf (get-buffer-create "*shell-buffer*")))
+    (with-current-buffer buf
+      (sh-mode)
+      (pop-to-buffer buf))))
+
+(defun shell/buffer-repl-frame ()
+  (interactive)
+  (with-selected-frame (make-frame)
+    (shell/buffer-repl)))
+#+END_SRC
+
+
+This functions are useful to send regions, lines and regions to =M-x shell= repl
+from a shell-buffer or shell scratch buffer to the repl.
+
+#+BEGIN_SRC elisp
+
+  (defun shell/send-region ()
+    "Send selected text to M-x shell repl."
+    (interactive)
+    (comint-send-region (get-buffer-process "*shell*" )
+                        (region-beginning) (region-end))
+    (comint-send-string (get-buffer-process "*shell*" ) "\n"))
+
+  (defun shell/insert-region ()
+    "Insert selected text into M-x shell repl and run it."
+    (interactive)
+    (let ((text (buffer-substring-no-properties (region-beginning)
+                                                (region-end)
+                                                )))
+    (with-current-buffer "*shell*"
+      (insert text)
+      (comint-send-input)
+      )))
+
+
+  (defun shell/send-line ()
+    "Send current line to M-x shell repl."
+    (interactive)
+    (comint-send-region (get-buffer-process "*shell*")
+                        (line-beginning-position)
+                        (line-end-position)
+                        )
+    (comint-send-string (get-buffer-process "*shell*" ) "\n"))
+
+
+  (defun shell/insert-line ()
+    "Insert current line to M-x shell repl."
+    (interactive)
+    (let ((line (buffer-substring-no-properties
+                 (line-beginning-position)
+                 (line-end-position)
+                 )))
+    (with-current-buffer "*shell*"
+      (insert line)
+      (comint-send-input)
+      )))
+
+
+  (defun shell/execute-line ()
+    "Execute current line as shell command."
+    (interactive)
+    (shell-command
+     (buffer-substring (line-beginning-position)
+                       (line-end-position))))
+
+  (defun shell/execute-region ()
+    "Execute current region as shell command."
+    (interactive)
+    (shell-command
+     (buffer-substring (region-beginning)
+                       (region-end))))
+
+  (defun shell/insert-buffer ()
+    "Insert all buffer content into M-x shell repl and run it."
+    (interactive)
+    (let ((text (buffer-substring-no-properties (point-min)
+                                                (point-max)
+                                                )))
+    (with-current-buffer "*shell*"
+      (insert text)
+      (comint-send-input)
+      )))
+#+END_SRC
+
+
+Example:
+
+ 1. User runs M-x shell/buffer-repl-frame. It will open a frame like
+    in the picture bellow.
+
+
+ 2. User select the region with some code and runs _M-x shell/insert-region_.
+    It will send the current region to the shell repl and display the
+    output, in this case the content of root directory.
+
+#+CAPTION: Example of M-x shell/buffer-repl-frame.
+file:images/faf2389f-7c67-43fb-af0a-125f1c1d28eb.png
+
+#+CAPTION: Demonstration of M-x shell/buffer-repl-frame and shell/insert-region
+file:images/shell-demo2.gif
 
 ** File
 *** Test if file or directory exists
@@ -2237,6 +2416,47 @@ To find where the package was intalled type M-x find-library <library-name>.
         (package-install-from-buffer))))
 #+END_SRC
 ** Helm Snippets                                     :framework:library:helm:
+*** Switch between buffers in same directory
+
+Usage: M-x buffer/switch-in-directory
+
+This command switches between buffer with files that are in current directory.
+
+#+BEGIN_SRC elisp
+  (defun buffer/with-file-in-directory-p (directory buf)
+    "Check if a buffer has file associated and is is in DIRECTORY.
+  Parameters:
+  - directory  string         - root directory 
+  - buf        buffer object  - buffer object"
+    (and (buffer-file-name buf) ;; check if buffer has a file associated 
+         (string-prefix-p (expand-file-name directory)
+                          (expand-file-name (buffer-file-name buf)
+                                              ))))
+
+
+  (defun buffer/switch-in-directory ()
+    "Switch between buffers in same directory."
+    (interactive)
+    (helm
+     :prompt "Buffer switch: "
+     :sources  `((
+                  (name       . "Dir: ")                                 
+                  (candidates . ,(mapcar (lambda (b) (cons (buffer-name b) b))
+                                         ;; filter buffers not in this directory (code bellow)
+                                         (remove-if-not  (lambda (b)
+                                                           (buffer/with-file-in-directory-p
+                                                            (or (file-name-directory (buffer-file-name))
+                                                                default-directory
+                                                                )
+                                                            b
+                                                            ))
+                                                    (buffer-list)
+                                                    )))
+                  (action     . switch-to-buffer)
+                  ))))
+
+#+END_SRC
+
 *** Browser Recent files
 
 Usage: M-x helm-recent-files
@@ -2843,7 +3063,6 @@ It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. T
     (find-file user-init-file)
 )
 #+END_SRC
-
 
 *** Refresh / Revert buffer without confirmation.
 
