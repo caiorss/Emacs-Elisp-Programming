@@ -428,6 +428,57 @@ Returns the selected text of the current buffer.
   (buffer-substring-no-properties (region-beginning) (region-end)))
 #+END_SRC
 
+*** Creating a scratch buffer for Programming Languages 
+
+This function creates a Python scratch buffer like elisp ~*scratch*~
+which allows the user to play with Python without creating any
+file. It is possible to run 
+
+It can be easily changed to work with other languages like ruby by
+replacing python-mode to ruby-mode.
+
+*Python Scratch buffer*
+
+Usage: _M-x python/scratch_
+
+#+BEGIN_SRC elisp
+  (defun python/scratch ()
+    (interactive)
+      (let (
+            ;; Creates a new buffer object.    
+           (buf (get-buffer-create "*python-scratch*"))
+           )
+        ;; Executes functions that would change the current buffer at
+        ;; buffer buf 
+       (with-current-buffer buf
+         ;;; Set the new buffer to scratch mode 
+         (python-mode)
+         ;;; Pop to scratch buffer 
+         (pop-to-buffer buf)
+         )))
+#+END_SRC
+
+*Shell (bash, sh) scratch buffer*
+
+Usage: M-x sh/scratch
+
+ #+BEGIN_SRC elisp 
+   (defun sh/scratch ()
+     (interactive)
+       (let (
+             ;; Creates a new buffer object.    
+            (buf (get-buffer-create "*sh-scratch*"))
+            )
+         ;; Executes functions that would change the current buffer at
+         ;; buffer buf 
+        (with-current-buffer buf
+          ;;; Set the new buffer to scratch mode 
+          (sh-mode) 
+          ;;; Pop to scratch buffer 
+          (pop-to-buffer buf)
+          ))) 
+ #+END_SRC
+
 ** IO - Input and Output
 *** Input - Read User Input
 **** Prompt functions
