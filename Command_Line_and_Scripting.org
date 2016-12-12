@@ -1,2 +1,39 @@
 * Command Line and Scripting 
 
+Start emacs ignoring the file:~/.emacs.d/init.el or file:~/.emacs configuration file.
+
+#+BEGIN_SRC sh
+
+$ emacs --no-init-file
+
+or
+
+$ emacs -q
+
+#+END_SRC
+
+Start Emacs with a custom configuration file:
+
+#+BEGIN_SRC sh
+
+$ emacs -q -l customstart.el
+#+END_SRC
+
+Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
+
+#+BEGIN_SRC sh
+
+$ emacs  --debug-init
+
+#+END_SRC
+
+To keep multiple configurations files see: [[https://github.com/caiorss/Emacs-Bootstrap][Emacs Bootstrap]]
+Show Emacs version
+
+#+BEGIN_SRC sh
+
+$ emacs --version
+
+#+END_SRC
+
+
