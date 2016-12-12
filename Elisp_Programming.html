@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Programming</title>
-<!-- 2016-12-10 sáb 04:38 -->
+<!-- 2016-12-12 seg 02:52 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization."
@@ -259,191 +259,192 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Command Line Options</a></li>
-<li><a href="#sec-2">2. Elisp</a>
+<li><a href="#sec-1">1. Elisp</a>
 <ul>
-<li><a href="#sec-2-1">2.1. Overview</a>
+<li><a href="#sec-1-1">1.1. Overview</a>
 <ul>
-<li><a href="#sec-2-1-1">2.1.1. Using the Scratch Buffer and Interpreter</a></li>
-<li><a href="#sec-2-1-2">2.1.2. Creating Commands (Interactive Functions)</a></li>
-<li><a href="#sec-2-1-3">2.1.3. Exploring Emacs</a></li>
+<li><a href="#sec-1-1-1">1.1.1. Using the Scratch Buffer and Interpreter</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Creating Commands (Interactive Functions)</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Exploring Emacs</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-2">2.2. Basic Operations</a></li>
-<li><a href="#sec-2-3">2.3. Type Predicates and Literals</a>
+<li><a href="#sec-1-2">1.2. Basic settings for Elisp Programming</a></li>
+<li><a href="#sec-1-3">1.3. Basic Operations</a></li>
+<li><a href="#sec-1-4">1.4. Type Predicates and Literals</a>
 <ul>
-<li><a href="#sec-2-3-1">2.3.1. Emacs Literals</a></li>
-<li><a href="#sec-2-3-2">2.3.2. Basic Types Predicate</a></li>
-<li><a href="#sec-2-3-3">2.3.3. Get Object Type</a></li>
+<li><a href="#sec-1-4-1">1.4.1. Emacs Literals</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Basic Types Predicate</a></li>
+<li><a href="#sec-1-4-3">1.4.3. Get Object Type</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-4">2.4. Defining Variables</a></li>
-<li><a href="#sec-2-5">2.5. Defining Functions</a>
+<li><a href="#sec-1-5">1.5. Defining Variables</a></li>
+<li><a href="#sec-1-6">1.6. Defining Functions</a>
 <ul>
-<li><a href="#sec-2-5-1">2.5.1. Define Simple Function</a></li>
-<li><a href="#sec-2-5-2">2.5.2. Anonymous Functions / Lambda Functions</a></li>
-<li><a href="#sec-2-5-3">2.5.3. Passing Functions as Arguments</a></li>
-<li><a href="#sec-2-5-4">2.5.4. Variadic Functions</a></li>
-<li><a href="#sec-2-5-5">2.5.5. Function with optional argument</a></li>
-<li><a href="#sec-2-5-6">2.5.6. Functions with Property List argument</a></li>
-<li><a href="#sec-2-5-7">2.5.7. Closures</a></li>
+<li><a href="#sec-1-6-1">1.6.1. Define Simple Function</a></li>
+<li><a href="#sec-1-6-2">1.6.2. Anonymous Functions / Lambda Functions</a></li>
+<li><a href="#sec-1-6-3">1.6.3. Passing Functions as Arguments</a></li>
+<li><a href="#sec-1-6-4">1.6.4. Variadic Functions</a></li>
+<li><a href="#sec-1-6-5">1.6.5. Function with optional argument</a></li>
+<li><a href="#sec-1-6-6">1.6.6. Functions with Property List argument</a></li>
+<li><a href="#sec-1-6-7">1.6.7. Closures</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-6">2.6. List Operations</a></li>
-<li><a href="#sec-2-7">2.7. Association Lists and Property Lists</a>
+<li><a href="#sec-1-7">1.7. List Operations</a></li>
+<li><a href="#sec-1-8">1.8. Association Lists and Property Lists</a>
 <ul>
-<li><a href="#sec-2-7-1">2.7.1. Overview</a></li>
-<li><a href="#sec-2-7-2">2.7.2. Association List / Alist</a></li>
-<li><a href="#sec-2-7-3">2.7.3. Property Lists</a></li>
-<li><a href="#sec-2-7-4">2.7.4. Converting Alists to Plists and vice-versa</a></li>
+<li><a href="#sec-1-8-1">1.8.1. Overview</a></li>
+<li><a href="#sec-1-8-2">1.8.2. Association List / Alist</a></li>
+<li><a href="#sec-1-8-3">1.8.3. Property Lists</a></li>
+<li><a href="#sec-1-8-4">1.8.4. Converting Alists to Plists and vice-versa</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-8">2.8. Strings</a></li>
-<li><a href="#sec-2-9">2.9. Symbols</a></li>
-<li><a href="#sec-2-10">2.10. Types Conversion</a></li>
-<li><a href="#sec-2-11">2.11. Eval</a></li>
-<li><a href="#sec-2-12">2.12. Defalias</a></li>
-<li><a href="#sec-2-13">2.13. Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></a></li>
-<li><a href="#sec-2-14">2.14. Functional Programming</a></li>
-<li><a href="#sec-2-15">2.15. Structures</a></li>
+<li><a href="#sec-1-9">1.9. Strings</a></li>
+<li><a href="#sec-1-10">1.10. Symbols</a></li>
+<li><a href="#sec-1-11">1.11. Types Conversion</a></li>
+<li><a href="#sec-1-12">1.12. Eval</a></li>
+<li><a href="#sec-1-13">1.13. Defalias</a></li>
+<li><a href="#sec-1-14">1.14. Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></a></li>
+<li><a href="#sec-1-15">1.15. Functional Programming</a></li>
+<li><a href="#sec-1-16">1.16. Structures</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3. Macros and Metaprogramming&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macro">macro</span>&#xa0;<span class="metaprogramming">metaprogramming</span>&#xa0;<span class="lisp">lisp</span></span></a>
+<li><a href="#sec-2">2. Macros and Metaprogramming&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macro">macro</span>&#xa0;<span class="metaprogramming">metaprogramming</span>&#xa0;<span class="lisp">lisp</span></span></a>
 <ul>
-<li><a href="#sec-3-1">3.1. Quasi-quote</a></li>
-<li><a href="#sec-3-2">3.2. Macros</a></li>
+<li><a href="#sec-2-1">2.1. Overview</a></li>
+<li><a href="#sec-2-2">2.2. Quasi-quote</a></li>
+<li><a href="#sec-2-3">2.3. Macros</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">4. Emacs API</a>
+<li><a href="#sec-3">3. Emacs API</a>
 <ul>
-<li><a href="#sec-4-1">4.1. Emacs Terminology</a></li>
-<li><a href="#sec-4-2">4.2. Emacs API</a></li>
-<li><a href="#sec-4-3">4.3. Useful Info Pages</a>
+<li><a href="#sec-3-1">3.1. Emacs Terminology</a></li>
+<li><a href="#sec-3-2">3.2. Emacs API</a></li>
+<li><a href="#sec-3-3">3.3. Useful Info Pages</a>
 <ul>
-<li><a href="#sec-4-3-1">4.3.1. Elisp</a></li>
-<li><a href="#sec-4-3-2">4.3.2. Customization</a></li>
-<li><a href="#sec-4-3-3">4.3.3. Layout</a></li>
-<li><a href="#sec-4-3-4">4.3.4. Syntax Tables</a></li>
-<li><a href="#sec-4-3-5">4.3.5. Environment Variables and OS Detection</a></li>
-<li><a href="#sec-4-3-6">4.3.6. Subprocess Creation</a></li>
-<li><a href="#sec-4-3-7">4.3.7. Keybindings</a></li>
-<li><a href="#sec-4-3-8">4.3.8. Hooks (Events Callbacks)</a></li>
-<li><a href="#sec-4-3-9">4.3.9. Buffer</a></li>
-<li><a href="#sec-4-3-10">4.3.10. Window</a></li>
-<li><a href="#sec-4-3-11">4.3.11. Frame</a></li>
-<li><a href="#sec-4-3-12">4.3.12. Files</a></li>
-<li><a href="#sec-4-3-13">4.3.13. Text Enconding ISO UTF8 &#x2026;</a></li>
-<li><a href="#sec-4-3-14">4.3.14. Loading, Libraries and Packages</a></li>
-<li><a href="#sec-4-3-15">4.3.15. Batch Mode</a></li>
-<li><a href="#sec-4-3-16">4.3.16. Syntax Highlight</a></li>
+<li><a href="#sec-3-3-1">3.3.1. Elisp</a></li>
+<li><a href="#sec-3-3-2">3.3.2. Customization</a></li>
+<li><a href="#sec-3-3-3">3.3.3. Layout</a></li>
+<li><a href="#sec-3-3-4">3.3.4. Syntax Tables</a></li>
+<li><a href="#sec-3-3-5">3.3.5. Environment Variables and OS Detection</a></li>
+<li><a href="#sec-3-3-6">3.3.6. Subprocess Creation</a></li>
+<li><a href="#sec-3-3-7">3.3.7. Keybindings</a></li>
+<li><a href="#sec-3-3-8">3.3.8. Hooks (Events Callbacks)</a></li>
+<li><a href="#sec-3-3-9">3.3.9. Buffer</a></li>
+<li><a href="#sec-3-3-10">3.3.10. Window</a></li>
+<li><a href="#sec-3-3-11">3.3.11. Frame</a></li>
+<li><a href="#sec-3-3-12">3.3.12. Files</a></li>
+<li><a href="#sec-3-3-13">3.3.13. Text Enconding ISO UTF8 &#x2026;</a></li>
+<li><a href="#sec-3-3-14">3.3.14. Loading, Libraries and Packages</a></li>
+<li><a href="#sec-3-3-15">3.3.15. Batch Mode</a></li>
+<li><a href="#sec-3-3-16">3.3.16. Syntax Highlight</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-4">4.4. Discoverability / Get Documentation</a>
+<li><a href="#sec-3-4">3.4. Discoverability / Get Documentation</a>
 <ul>
-<li><a href="#sec-4-4-1">4.4.1. Describe</a></li>
+<li><a href="#sec-3-4-1">3.4.1. Describe</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-5">4.5. Buffers</a>
+<li><a href="#sec-3-5">3.5. Buffers</a>
 <ul>
-<li><a href="#sec-4-5-1">4.5.1. Buffer Attributes</a></li>
-<li><a href="#sec-4-5-2">4.5.2. Buffer Mode</a></li>
-<li><a href="#sec-4-5-3">4.5.3. Get Buffer Contents / Selection / Line</a></li>
-<li><a href="#sec-4-5-4">4.5.4. Search and Replace in the entire Buffer</a></li>
+<li><a href="#sec-3-5-1">3.5.1. Buffer Attributes</a></li>
+<li><a href="#sec-3-5-2">3.5.2. Buffer Mode</a></li>
+<li><a href="#sec-3-5-3">3.5.3. Get Buffer Contents / Selection / Line</a></li>
+<li><a href="#sec-3-5-4">3.5.4. Search and Replace in the entire Buffer</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-6">4.6. Point, Region, Line and Buffer</a>
+<li><a href="#sec-3-6">3.6. Point, Region, Line and Buffer</a>
 <ul>
-<li><a href="#sec-4-6-1">4.6.1. Point</a></li>
-<li><a href="#sec-4-6-2">4.6.2. Thing at Point API</a></li>
+<li><a href="#sec-3-6-1">3.6.1. Point</a></li>
+<li><a href="#sec-3-6-2">3.6.2. Thing at Point API</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-7">4.7. Message / Output&#xa0;&#xa0;&#xa0;<span class="tag"><span class="message">message</span>&#xa0;<span class="output">output</span>&#xa0;<span class="dialog">dialog</span></span></a>
+<li><a href="#sec-3-7">3.7. Message / Output&#xa0;&#xa0;&#xa0;<span class="tag"><span class="message">message</span>&#xa0;<span class="output">output</span>&#xa0;<span class="dialog">dialog</span></span></a>
 <ul>
-<li><a href="#sec-4-7-1">4.7.1. message</a></li>
-<li><a href="#sec-4-7-2">4.7.2. message-box</a></li>
+<li><a href="#sec-3-7-1">3.7.1. message</a></li>
+<li><a href="#sec-3-7-2">3.7.2. message-box</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-8">4.8. Files, Directories and Path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="file">file</span>&#xa0;<span class="os">os</span></span></a>
+<li><a href="#sec-3-8">3.8. Files, Directories and Path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="file">file</span>&#xa0;<span class="os">os</span></span></a>
 <ul>
-<li><a href="#sec-4-8-1">4.8.1. Basic Functions</a></li>
-<li><a href="#sec-4-8-2">4.8.2. File Name Components</a></li>
-<li><a href="#sec-4-8-3">4.8.3. Read / Write file to a string</a></li>
+<li><a href="#sec-3-8-1">3.8.1. Basic Functions</a></li>
+<li><a href="#sec-3-8-2">3.8.2. File Name Components</a></li>
+<li><a href="#sec-3-8-3">3.8.3. Read / Write file to a string</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-9">4.9. Window Functions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="window">window</span></span></a>
+<li><a href="#sec-3-9">3.9. Window Functions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="window">window</span></span></a>
 <ul>
-<li><a href="#sec-4-9-1">4.9.1. Basic Window Functions</a></li>
-<li><a href="#sec-4-9-2">4.9.2. Manipulate Buffer in Another Window</a></li>
-<li><a href="#sec-4-9-3">4.9.3. Window Configuration</a></li>
+<li><a href="#sec-3-9-1">3.9.1. Basic Window Functions</a></li>
+<li><a href="#sec-3-9-2">3.9.2. Manipulate Buffer in Another Window</a></li>
+<li><a href="#sec-3-9-3">3.9.3. Window Configuration</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-10">4.10. OS Interface</a>
+<li><a href="#sec-3-10">3.10. OS Interface</a>
 <ul>
-<li><a href="#sec-4-10-1">4.10.1. Find the current operating system</a></li>
-<li><a href="#sec-4-10-2">4.10.2. Date and Time</a></li>
-<li><a href="#sec-4-10-3">4.10.3. Call External Commands or Apps</a></li>
-<li><a href="#sec-4-10-4">4.10.4. Environment Variables</a></li>
-<li><a href="#sec-4-10-5">4.10.5. Process Management</a></li>
+<li><a href="#sec-3-10-1">3.10.1. Find the current operating system</a></li>
+<li><a href="#sec-3-10-2">3.10.2. Date and Time</a></li>
+<li><a href="#sec-3-10-3">3.10.3. Call External Commands or Apps</a></li>
+<li><a href="#sec-3-10-4">3.10.4. Environment Variables</a></li>
+<li><a href="#sec-3-10-5">3.10.5. Process Management</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-11">4.11. Timer</a>
+<li><a href="#sec-3-11">3.11. Timer</a>
 <ul>
-<li><a href="#sec-4-11-1">4.11.1. run-with-timer</a></li>
+<li><a href="#sec-3-11-1">3.11.1. run-with-timer</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-12">4.12. Emacs Modes</a>
+<li><a href="#sec-3-12">3.12. Emacs Modes</a>
 <ul>
-<li><a href="#sec-4-12-1">4.12.1. Major Mode</a></li>
-<li><a href="#sec-4-12-2">4.12.2. Minor Modes</a></li>
-<li><a href="#sec-4-12-3">4.12.3. Mode Association with Files</a></li>
-<li><a href="#sec-4-12-4">4.12.4. Mode Specific Key Bindings</a></li>
-<li><a href="#sec-4-12-5">4.12.5. Modes Customization</a></li>
-<li><a href="#sec-4-12-6">4.12.6. Mode Hooks</a></li>
+<li><a href="#sec-3-12-1">3.12.1. Major Mode</a></li>
+<li><a href="#sec-3-12-2">3.12.2. Minor Modes</a></li>
+<li><a href="#sec-3-12-3">3.12.3. Mode Association with Files</a></li>
+<li><a href="#sec-3-12-4">3.12.4. Mode Specific Key Bindings</a></li>
+<li><a href="#sec-3-12-5">3.12.5. Modes Customization</a></li>
+<li><a href="#sec-3-12-6">3.12.6. Mode Hooks</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-13">4.13. Special Variables</a></li>
-<li><a href="#sec-4-14">4.14. Network</a></li>
+<li><a href="#sec-3-13">3.13. Special Variables</a></li>
+<li><a href="#sec-3-14">3.14. Network</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">5. Regex - Regular Expressions</a>
+<li><a href="#sec-4">4. Regex - Regular Expressions</a>
 <ul>
-<li><a href="#sec-5-1">5.1. Overview</a></li>
-<li><a href="#sec-5-2">5.2. Emacs Regex</a></li>
-<li><a href="#sec-5-3">5.3. Regex Commands</a></li>
-<li><a href="#sec-5-4">5.4. Regex Functions</a></li>
-<li><a href="#sec-5-5">5.5. Build regex interactively</a></li>
-<li><a href="#sec-5-6">5.6. Emacs Regex rx-notation</a></li>
-<li><a href="#sec-5-7">5.7. See also</a></li>
+<li><a href="#sec-4-1">4.1. Overview</a></li>
+<li><a href="#sec-4-2">4.2. Emacs Regex</a></li>
+<li><a href="#sec-4-3">4.3. Regex Commands</a></li>
+<li><a href="#sec-4-4">4.4. Regex Functions</a></li>
+<li><a href="#sec-4-5">4.5. Build regex interactively</a></li>
+<li><a href="#sec-4-6">4.6. Emacs Regex rx-notation</a></li>
+<li><a href="#sec-4-7">4.7. See also</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">6. Color Scheme</a></li>
-<li><a href="#sec-7">7. Key Bindings</a>
+<li><a href="#sec-5">5. Color Scheme</a></li>
+<li><a href="#sec-6">6. Key Bindings</a>
 <ul>
-<li><a href="#sec-7-1">7.1. Global Key Bindings</a>
+<li><a href="#sec-6-1">6.1. Global Key Bindings</a>
 <ul>
-<li><a href="#sec-7-1-1">7.1.1. Smart window switch</a></li>
-<li><a href="#sec-7-1-2">7.1.2. Define Global Key-bindings</a></li>
-<li><a href="#sec-7-1-3">7.1.3. Define Mode Specific Key-bindings</a></li>
-<li><a href="#sec-7-1-4">7.1.4. Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)</a></li>
+<li><a href="#sec-6-1-1">6.1.1. Smart window switch</a></li>
+<li><a href="#sec-6-1-2">6.1.2. Define Global Key-bindings</a></li>
+<li><a href="#sec-6-1-3">6.1.3. Define Mode Specific Key-bindings</a></li>
+<li><a href="#sec-6-1-4">6.1.4. Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)</a></li>
 </ul>
 </li>
-<li><a href="#sec-7-2">7.2. Mode Key Bindings</a></li>
+<li><a href="#sec-6-2">6.2. Mode Key Bindings</a></li>
 </ul>
 </li>
-<li><a href="#sec-8">8. Emacs Packages</a>
+<li><a href="#sec-7">7. Emacs Packages</a>
 <ul>
-<li><a href="#sec-8-1">8.1. El-get</a></li>
-<li><a href="#sec-8-2">8.2. VIM Emulation - EVIL</a></li>
-<li><a href="#sec-8-3">8.3. Ibuffer</a></li>
-<li><a href="#sec-8-4">8.4. Navbar</a></li>
-<li><a href="#sec-8-5">8.5. Speedbar</a></li>
-<li><a href="#sec-8-6">8.6. Packages for Lisp Dialects</a>
+<li><a href="#sec-7-1">7.1. El-get</a></li>
+<li><a href="#sec-7-2">7.2. VIM Emulation - EVIL</a></li>
+<li><a href="#sec-7-3">7.3. Ibuffer</a></li>
+<li><a href="#sec-7-4">7.4. Navbar</a></li>
+<li><a href="#sec-7-5">7.5. Speedbar</a></li>
+<li><a href="#sec-7-6">7.6. Packages for Lisp Dialects</a>
 <ul>
-<li><a href="#sec-8-6-1">8.6.1. Rainbow delimiters</a></li>
-<li><a href="#sec-8-6-2">8.6.2. Paredit</a></li>
+<li><a href="#sec-7-6-1">7.6.1. Rainbow delimiters</a></li>
+<li><a href="#sec-7-6-2">7.6.2. Paredit</a></li>
 </ul>
 </li>
-<li><a href="#sec-8-7">8.7. Elscreen</a></li>
+<li><a href="#sec-7-7">7.7. Elscreen</a></li>
 </ul>
 </li>
 </ul>
@@ -452,61 +453,11 @@ for the JavaScript code in this tag.
 <a href="index.html">Top</a>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Command Line Options</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> Elisp</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-Start emacs ignoring the <a href="file:///home/arch/.emacs.d/init.el">file:///home/arch/.emacs.d/init.el</a> or <a href="file:///home/arch/.emacs">file:///home/arch/.emacs</a> configuration file.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">$ emacs --no-init-file
-
-or
-
-$ emacs -q
-</pre>
-</div>
-
-<p>
-Start Emacs with a custom configuration file:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">$ emacs -q -l customstart.el
-</pre>
-</div>
-
-<p>
-Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">$ emacs  --debug-init
-</pre>
-</div>
-
-<p>
-To keep multiple configurations files see: <a href="https://github.com/caiorss/Emacs-Bootstrap">Emacs Bootstrap</a>
-Show Emacs version
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">$ emacs --version
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Elisp</h2>
-<div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Overview</h3>
-<div class="outline-text-3" id="text-2-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Overview</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 This section will use the Emacs interactive elisp shell IELM that can
 be accessed by typing <b>M-x ielm</b>. You can also use the scratch buffer
@@ -521,13 +472,13 @@ remove-if-not, cl-case and so on.
 </p>
 
 <p>
-See also: <a href="http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html">Common Lisp Extensions - Common Lisp Extensions</a>
+See also: <a href="http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html">Common Lisp Extensions</a>
 </p>
 </div>
 
-<div id="outline-container-sec-2-1-1" class="outline-4">
-<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Using the Scratch Buffer and Interpreter</h4>
-<div class="outline-text-4" id="text-2-1-1">
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Using the Scratch Buffer and Interpreter</h4>
+<div class="outline-text-4" id="text-1-1-1">
 <p>
 The scratch buffer is useful to evaluate Emacs lisp commands, test new
 features and test new Emacs configurations and dot emacs without need
@@ -605,9 +556,9 @@ Example:
 </div>
 </div>
 
-<div id="outline-container-sec-2-1-2" class="outline-4">
-<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Creating Commands (Interactive Functions)</h4>
-<div class="outline-text-4" id="text-2-1-2">
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Creating Commands (Interactive Functions)</h4>
+<div class="outline-text-4" id="text-1-1-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">buffer/insert-filename</span> ()
@@ -640,10 +591,10 @@ After:
 </div>
 </div>
 
-<div id="outline-container-sec-2-1-3" class="outline-4">
-<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Exploring Emacs</h4>
-<div class="outline-text-4" id="text-2-1-3">
-</div><ol class="org-ol"><li><a id="sec-2-1-3-1" name="sec-2-1-3-1"></a>Function Bound to Key Binding<br  /><div class="outline-text-5" id="text-2-1-3-1">
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Exploring Emacs</h4>
+<div class="outline-text-4" id="text-1-1-3">
+</div><ol class="org-ol"><li><a id="sec-1-1-3-1" name="sec-1-1-3-1"></a>Function Bound to Key Binding<br  /><div class="outline-text-5" id="text-1-1-3-1">
 <p>
 Emacs is almost a "Functional Programming editor", to every key bind,
 menu action, interactive command or mouse action is bound a
@@ -670,7 +621,7 @@ key combination.
 </div>
 </li>
 
-<li><a id="sec-2-1-3-2" name="sec-2-1-3-2"></a>List All Defined Key Bindings<br  /><div class="outline-text-5" id="text-2-1-3-2">
+<li><a id="sec-1-1-3-2" name="sec-1-1-3-2"></a>List All Defined Key Bindings<br  /><div class="outline-text-5" id="text-1-1-3-2">
 <p>
 The command <code>M-x describe-bindings</code> or the key binding <code>C-h b</code> shows a
 list of all defined keys and all functions that are associated to them
@@ -724,7 +675,7 @@ the function documentation or what the key combination does.
 </div>
 </li>
 
-<li><a id="sec-2-1-3-3" name="sec-2-1-3-3"></a>Function Documentation<br  /><div class="outline-text-5" id="text-2-1-3-3">
+<li><a id="sec-1-1-3-3" name="sec-1-1-3-3"></a>Function Documentation<br  /><div class="outline-text-5" id="text-1-1-3-3">
 <p>
 Emacs keeps an in-memory documentation of all functions. To see the documentation type <code>M-x describe-function</code> or <code>C h k</code> and type the function name
 or put the cursor at the beggining of the function name and type <code>M-x describe-function</code>.
@@ -754,9 +705,237 @@ This can also be invoked with:
 </div>
 </div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Basic Operations</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Basic settings for Elisp Programming</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The packages paredit, rainbow-delimiters and company gives a better
+user experience when programming Elisp. The package <a href="https://www.emacswiki.org/emacs/RainbowDelimiters">rainbow-delimiters</a>
+provides different colors for parenthesis at different levels making
+easier to spot errors and s-expression, the package <a href="https://www.emacswiki.org/emacs/ParEdit">paredit</a> allows
+structured and fast editing of s-expressions and <a href="https://www.emacswiki.org/emacs/CompanyMode">company</a> provides
+completion for Emacs-lisp statements like functions and variables.
+</p>
+
+<p>
+Paredit and rainbow-delimiters are not only useful for Elisp, they are
+also invaluable for other lisp dialects like Scheme, Common Lisp and
+Clojure.
+</p>
+
+<p>
+See also: 
+</p>
+
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=D6h5dFyyUX0">Emacs Rocks! Episode 14: Paredit - YouTube</a>
+</li>
+
+<li><a href="https://www.youtube.com/watch?v=hiwEm88xaxM">26 Emacs - Paredit: little known features (Programothesis by emailatask.com) - YouTube</a>
+</li>
+</ul>
+
+<p>
+This packages can be installed by using this commands:
+</p>
+
+<ul class="org-ul">
+<li>M-x package-install paredit
+</li>
+<li>M-x package-install rainbow-delimiters
+</li>
+<li>M-x package-install company
+</li>
+</ul>
+
+<p>
+Settings ~/.emacs.d/init.el 
+</p>
+
+<ul class="org-ul">
+<li>Install the packages if they are not installed yet.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">setq</span> package-archives
+ '( 
+    (<span class="org-string">"melpa"</span> . <span class="org-string">"https://melpa.org/packages/"</span>)
+
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">("org"       . "http://orgmode.org/elpa/")</span>
+    (<span class="org-string">"gnu"</span>       . <span class="org-string">"http://elpa.gnu.org/packages/"</span>)
+
+    (<span class="org-string">"marmalade"</span> .  <span class="org-string">"http://marmalade-repo.org/packages/"</span>))
+  )
+
+(package-initialize)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">packages-require</span> (<span class="org-type">&amp;rest</span> packs)
+  <span class="org-doc">"Install and load a package. If the package is not available</span>
+<span class="org-doc">   installs it automaticaly."</span>
+  (mapc  (<span class="org-keyword">lambda</span> (package)
+           (<span class="org-keyword">unless</span> (package-installed-p package)
+                   (package-install package)    
+                   <span class="org-comment-delimiter">;;</span><span class="org-comment">#'package-require</span>
+                   ))
+
+         packs
+
+         ))
+
+
+(packages-require
+ 'paredit
+ 'rainbow-delimiters
+ 'company
+ )
+</pre>
+</div>
+
+
+<ul class="org-ul">
+<li>Enable paredit, rainbow-delimiters and show-paren-mode for Emacs
+lisp mode (mode to edit Emacs files *.el) and lisp-interaction-mode
+(mode to edit <code>*scratch*</code> buffer). 
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(add-hook 'after-init-hook 'global-company-mode)
+
+(add-hook 'emacs-lisp-mode-hook          
+          (<span class="org-keyword">lambda</span> ()
+            (paredit-mode t)
+            (rainbow-delimiters-mode t)
+            (show-paren-mode 1)
+            ))
+
+(add-hook 'lisp-interaction-mode
+          (<span class="org-keyword">lambda</span> ()
+            (paredit-mode t)
+            (rainbow-delimiters-mode t)
+            (show-paren-mode 1)
+            ))
+</pre>
+</div>
+
+<p>
+Set useful key bindings for IELM (Emacs-lisp interactive shell). 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">M-RET</td>
+<td class="left">Execute S-expression</td>
+</tr>
+
+<tr>
+<td class="left">C-j</td>
+<td class="left">Execute S-expression</td>
+</tr>
+
+<tr>
+<td class="left">RET</td>
+<td class="left">Insert a new line, but doesn't send to the IELM process.</td>
+</tr>
+
+<tr>
+<td class="left">up</td>
+<td class="left">Move cursor to previous line</td>
+</tr>
+
+<tr>
+<td class="left">down</td>
+<td class="left">Move cursor to next line</td>
+</tr>
+
+<tr>
+<td class="left">C-up</td>
+<td class="left">Select previous input</td>
+</tr>
+
+<tr>
+<td class="left">C-down</td>
+<td class="left">Select next input</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-l</td>
+<td class="left">Show history</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-q</td>
+<td class="left">Clear repl</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+This setting allows multiline input and by typing M-RET (Alt + Return)
+sends the current input to IELM process.
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">require</span> '<span class="org-constant">ielm</span>)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">ielm/clear-repl</span> ()
+  <span class="org-doc">"Clear current REPL buffer."</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let</span> ((inhibit-read-only t))
+      (erase-buffer)     
+      (ielm-send-input)))
+
+(define-key inferior-emacs-lisp-mode-map
+  (kbd <span class="org-string">"M-RET"</span>)
+  #'ielm-return)
+
+(define-key inferior-emacs-lisp-mode-map
+  (kbd <span class="org-string">"C-j"</span>)
+  #'ielm-return)
+
+(define-key inferior-emacs-lisp-mode-map
+  (kbd <span class="org-string">"RET"</span>)
+  #'electric-newline-and-maybe-indent)
+
+(define-key inferior-emacs-lisp-mode-map
+  (kbd <span class="org-string">"&lt;up&gt;"</span>)
+  #'previous-line)
+
+(define-key inferior-emacs-lisp-mode-map
+  (kbd <span class="org-string">"&lt;down&gt;"</span>)
+  #'next-line)
+
+(define-key inferior-emacs-lisp-mode-map
+  (kbd <span class="org-string">"C-c C-q"</span>)
+  #'ielm/clear-repl
+  )
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Basic Operations</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
 <b>Arithmetic</b>
 </p>
@@ -861,12 +1040,12 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Type Predicates and Literals</h3>
-<div class="outline-text-3" id="text-2-3">
-</div><div id="outline-container-sec-2-3-1" class="outline-4">
-<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Emacs Literals</h4>
-<div class="outline-text-4" id="text-2-3-1">
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Type Predicates and Literals</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Emacs Literals</h4>
+<div class="outline-text-4" id="text-1-4-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;;; </span><span class="org-comment">Numbers</span>
@@ -951,9 +1130,9 @@ ELISP&gt; [1 2 3 4 (+ 1 2 3 54)]
 </div>
 </div>
 
-<div id="outline-container-sec-2-3-2" class="outline-4">
-<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Basic Types Predicate</h4>
-<div class="outline-text-4" id="text-2-3-2">
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Basic Types Predicate</h4>
+<div class="outline-text-4" id="text-1-4-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1114,9 +1293,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-3-3" class="outline-4">
-<h4 id="sec-2-3-3"><span class="section-number-4">2.3.3</span> Get Object Type</h4>
-<div class="outline-text-4" id="text-2-3-3">
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> Get Object Type</h4>
+<div class="outline-text-4" id="text-1-4-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (type-of (current-buffer))
@@ -1137,9 +1316,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Defining Variables</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Defining Variables</h3>
+<div class="outline-text-3" id="text-1-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;;; </span><span class="org-comment">Constants</span>
@@ -1212,12 +1391,12 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-5" class="outline-3">
-<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Defining Functions</h3>
-<div class="outline-text-3" id="text-2-5">
-</div><div id="outline-container-sec-2-5-1" class="outline-4">
-<h4 id="sec-2-5-1"><span class="section-number-4">2.5.1</span> Define Simple Function</h4>
-<div class="outline-text-4" id="text-2-5-1">
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Defining Functions</h3>
+<div class="outline-text-3" id="text-1-6">
+</div><div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> Define Simple Function</h4>
+<div class="outline-text-4" id="text-1-6-1">
 <p>
 Syntax:
 </p>
@@ -1271,9 +1450,9 @@ ELISP
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-2" class="outline-4">
-<h4 id="sec-2-5-2"><span class="section-number-4">2.5.2</span> Anonymous Functions / Lambda Functions</h4>
-<div class="outline-text-4" id="text-2-5-2">
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> Anonymous Functions / Lambda Functions</h4>
+<div class="outline-text-4" id="text-1-6-2">
 <p>
 Syntax:
 </p>
@@ -1330,9 +1509,9 @@ ELISP&gt; (mapcar (<span class="org-keyword">lambda</span> (x) (+ x 3))  '(1 2 3
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-3" class="outline-4">
-<h4 id="sec-2-5-3"><span class="section-number-4">2.5.3</span> Passing Functions as Arguments</h4>
-<div class="outline-text-4" id="text-2-5-3">
+<div id="outline-container-sec-1-6-3" class="outline-4">
+<h4 id="sec-1-6-3"><span class="section-number-4">1.6.3</span> Passing Functions as Arguments</h4>
+<div class="outline-text-4" id="text-1-6-3">
 <p>
 Functions must be passed with
 </p>
@@ -1398,9 +1577,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-4" class="outline-4">
-<h4 id="sec-2-5-4"><span class="section-number-4">2.5.4</span> Variadic Functions</h4>
-<div class="outline-text-4" id="text-2-5-4">
+<div id="outline-container-sec-1-6-4" class="outline-4">
+<h4 id="sec-1-6-4"><span class="section-number-4">1.6.4</span> Variadic Functions</h4>
+<div class="outline-text-4" id="text-1-6-4">
 <p>
 Functions with many arguments
 </p>
@@ -1445,9 +1624,9 @@ ELISP&gt; (sum-prod 1 1 2 3 4 5)
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-5" class="outline-4">
-<h4 id="sec-2-5-5"><span class="section-number-4">2.5.5</span> Function with optional argument</h4>
-<div class="outline-text-4" id="text-2-5-5">
+<div id="outline-container-sec-1-6-5" class="outline-4">
+<h4 id="sec-1-6-5"><span class="section-number-4">1.6.5</span> Function with optional argument</h4>
+<div class="outline-text-4" id="text-1-6-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">test-optional</span> (a <span class="org-type">&amp;optional</span> b)
@@ -1503,9 +1682,9 @@ ELISP&gt; (test-optional-default-b 1 nil)
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-6" class="outline-4">
-<h4 id="sec-2-5-6"><span class="section-number-4">2.5.6</span> Functions with Property List argument</h4>
-<div class="outline-text-4" id="text-2-5-6">
+<div id="outline-container-sec-1-6-6" class="outline-4">
+<h4 id="sec-1-6-6"><span class="section-number-4">1.6.6</span> Functions with Property List argument</h4>
+<div class="outline-text-4" id="text-1-6-6">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">make-shell-interface</span> (<span class="org-type">&amp;rest</span> params)
@@ -1578,9 +1757,9 @@ ELISP&gt; (make-shell-interface <span class="org-builtin">:buffer</span> <span c
 </div>
 </div>
 
-<div id="outline-container-sec-2-5-7" class="outline-4">
-<h4 id="sec-2-5-7"><span class="section-number-4">2.5.7</span> Closures</h4>
-<div class="outline-text-4" id="text-2-5-7">
+<div id="outline-container-sec-1-6-7" class="outline-4">
+<h4 id="sec-1-6-7"><span class="section-number-4">1.6.7</span> Closures</h4>
+<div class="outline-text-4" id="text-1-6-7">
 <p>
 Emacs lisp dialect doesn't have closure by default, so the code below won't work like in Scheme and Common Lisp:
 </p>
@@ -1691,9 +1870,9 @@ To enable closures put the expression below the ~/.emacs.d/init.el file.
 </div>
 </div>
 
-<div id="outline-container-sec-2-6" class="outline-3">
-<h3 id="sec-2-6"><span class="section-number-3">2.6</span> List Operations</h3>
-<div class="outline-text-3" id="text-2-6">
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> List Operations</h3>
+<div class="outline-text-3" id="text-1-7">
 <p>
 See also:
 </p>
@@ -1925,12 +2104,12 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-7" class="outline-3">
-<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Association Lists and Property Lists</h3>
-<div class="outline-text-3" id="text-2-7">
-</div><div id="outline-container-sec-2-7-1" class="outline-4">
-<h4 id="sec-2-7-1"><span class="section-number-4">2.7.1</span> Overview</h4>
-<div class="outline-text-4" id="text-2-7-1">
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Association Lists and Property Lists</h3>
+<div class="outline-text-3" id="text-1-8">
+</div><div id="outline-container-sec-1-8-1" class="outline-4">
+<h4 id="sec-1-8-1"><span class="section-number-4">1.8.1</span> Overview</h4>
+<div class="outline-text-4" id="text-1-8-1">
 <p>
 An association list is a list of cons pairs, that will be called here
 of <b>clist</b> or a list of lists of two elements each that will be called
@@ -2026,9 +2205,9 @@ ELISP&gt; '(<span class="org-builtin">:key1</span> value1 <span class="org-built
 </div>
 </div>
 
-<div id="outline-container-sec-2-7-2" class="outline-4">
-<h4 id="sec-2-7-2"><span class="section-number-4">2.7.2</span> Association List / Alist</h4>
-<div class="outline-text-4" id="text-2-7-2">
+<div id="outline-container-sec-1-8-2" class="outline-4">
+<h4 id="sec-1-8-2"><span class="section-number-4">1.8.2</span> Association List / Alist</h4>
+<div class="outline-text-4" id="text-1-8-2">
 <p>
 Reference: <a href="http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_89.html">Emacs Manual / Association Lists</a>
 </p>
@@ -2281,9 +2460,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-7-3" class="outline-4">
-<h4 id="sec-2-7-3"><span class="section-number-4">2.7.3</span> Property Lists</h4>
-<div class="outline-text-4" id="text-2-7-3">
+<div id="outline-container-sec-1-8-3" class="outline-4">
+<h4 id="sec-1-8-3"><span class="section-number-4">1.8.3</span> Property Lists</h4>
+<div class="outline-text-4" id="text-1-8-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (<span class="org-keyword">defvar</span> <span class="org-variable-name">plst</span> (list <span class="org-builtin">:buffer</span> (current-buffer) <span class="org-builtin">:line</span> 10 <span class="org-builtin">:pos</span> 2000))
@@ -2324,9 +2503,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-7-4" class="outline-4">
-<h4 id="sec-2-7-4"><span class="section-number-4">2.7.4</span> Converting Alists to Plists and vice-versa</h4>
-<div class="outline-text-4" id="text-2-7-4">
+<div id="outline-container-sec-1-8-4" class="outline-4">
+<h4 id="sec-1-8-4"><span class="section-number-4">1.8.4</span> Converting Alists to Plists and vice-versa</h4>
+<div class="outline-text-4" id="text-1-8-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Alist to plist</span>
@@ -2414,9 +2593,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-8" class="outline-3">
-<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Strings</h3>
-<div class="outline-text-3" id="text-2-8">
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Strings</h3>
+<div class="outline-text-3" id="text-1-9">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Split String</span>
@@ -2533,9 +2712,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-9" class="outline-3">
-<h3 id="sec-2-9"><span class="section-number-3">2.9</span> Symbols</h3>
-<div class="outline-text-3" id="text-2-9">
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Symbols</h3>
+<div class="outline-text-3" id="text-1-10">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;;; </span><span class="org-comment">Convert a string to symbol</span>
@@ -2645,9 +2824,9 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-2-10" class="outline-3">
-<h3 id="sec-2-10"><span class="section-number-3">2.10</span> Types Conversion</h3>
-<div class="outline-text-3" id="text-2-10">
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> Types Conversion</h3>
+<div class="outline-text-3" id="text-1-11">
 <p>
 <b>Query Types</b>
 </p>
@@ -2841,9 +3020,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-11" class="outline-3">
-<h3 id="sec-2-11"><span class="section-number-3">2.11</span> Eval</h3>
-<div class="outline-text-3" id="text-2-11">
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> Eval</h3>
+<div class="outline-text-3" id="text-1-12">
 <p>
 <b>Eval Sexp or S-expressions</b>
 </p>
@@ -3006,9 +3185,9 @@ or
 </div>
 </div>
 
-<div id="outline-container-sec-2-12" class="outline-3">
-<h3 id="sec-2-12"><span class="section-number-3">2.12</span> Defalias</h3>
-<div class="outline-text-3" id="text-2-12">
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> Defalias</h3>
+<div class="outline-text-3" id="text-1-13">
 <p>
 The built-in macro defalias allows to define short and convenient
 names for Emacs functions.
@@ -3080,9 +3259,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-2-13" class="outline-3">
-<h3 id="sec-2-13"><span class="section-number-3">2.13</span> Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></h3>
-<div class="outline-text-3" id="text-2-13">
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14"><span class="section-number-3">1.14</span> Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></h3>
+<div class="outline-text-3" id="text-1-14">
 <p>
 See also:
 </p>
@@ -3097,7 +3276,7 @@ See also:
 </ul>
 </div>
 
-<ol class="org-ol"><li><a id="sec-2-13-0-0-1" name="sec-2-13-0-0-1"></a>Conditional Statement<br  /><div class="outline-text-6" id="text-2-13-0-0-1">
+<ol class="org-ol"><li><a id="sec-1-14-0-0-1" name="sec-1-14-0-0-1"></a>Conditional Statement<br  /><div class="outline-text-6" id="text-1-14-0-0-1">
 <p>
 <b>If Else Statement</b>
 </p>
@@ -3220,7 +3399,7 @@ ELISP&gt;
 </div>
 </li>
 
-<li><a id="sec-2-13-0-0-2" name="sec-2-13-0-0-2"></a>Cond - Case Switch<br  /><div class="outline-text-6" id="text-2-13-0-0-2">
+<li><a id="sec-1-14-0-0-2" name="sec-1-14-0-0-2"></a>Cond - Case Switch<br  /><div class="outline-text-6" id="text-1-14-0-0-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (<span class="org-keyword">setq</span> a 3)       <span class="org-comment-delimiter">;; </span><span class="org-comment">a = 3</span>
@@ -3240,7 +3419,7 @@ ELISP&gt;
 </div>
 </li>
 
-<li><a id="sec-2-13-0-0-3" name="sec-2-13-0-0-3"></a>CL-Case - Case Switch<br  /><div class="outline-text-6" id="text-2-13-0-0-3">
+<li><a id="sec-1-14-0-0-3" name="sec-1-14-0-0-3"></a>CL-Case - Case Switch<br  /><div class="outline-text-6" id="text-1-14-0-0-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">test-cl-case</span> (operation x y)
@@ -3269,7 +3448,7 @@ nil
 </div>
 </li>
 
-<li><a id="sec-2-13-0-0-4" name="sec-2-13-0-0-4"></a>Loops<br  /><div class="outline-text-6" id="text-2-13-0-0-4">
+<li><a id="sec-1-14-0-0-4" name="sec-1-14-0-0-4"></a>Loops<br  /><div class="outline-text-6" id="text-1-14-0-0-4">
 <p>
 <b>Dolist</b>
 </p>
@@ -3497,16 +3676,16 @@ nil
 </div>
 </li></ol>
 </div>
-<div id="outline-container-sec-2-14" class="outline-3">
-<h3 id="sec-2-14"><span class="section-number-3">2.14</span> Functional Programming</h3>
-<div class="outline-text-3" id="text-2-14">
+<div id="outline-container-sec-1-15" class="outline-3">
+<h3 id="sec-1-15"><span class="section-number-3">1.15</span> Functional Programming</h3>
+<div class="outline-text-3" id="text-1-15">
 <p>
 See also: <a href="https://github.com/magnars/dash.el">Dash Library Github repository</a>
 Dash is functional programming library to Emacs with many useful higher order functions.
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="sec-2-14-0-1" name="sec-2-14-0-1"></a>Map and Filter<br  /><div class="outline-text-5" id="text-2-14-0-1">
+<ol class="org-ol"><li><a id="sec-1-15-0-1" name="sec-1-15-0-1"></a>Map and Filter<br  /><div class="outline-text-5" id="text-1-15-0-1">
 <p>
 <b>Mapcar / Equivalent to map</b>
 </p>
@@ -3603,7 +3782,7 @@ ELISP&gt;
 </div>
 </li>
 
-<li><a id="sec-2-14-0-2" name="sec-2-14-0-2"></a>Anonymous functions/ Lambda functions<br  /><div class="outline-text-5" id="text-2-14-0-2">
+<li><a id="sec-1-15-0-2" name="sec-1-15-0-2"></a>Anonymous functions/ Lambda functions<br  /><div class="outline-text-5" id="text-1-15-0-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (<span class="org-keyword">lambda</span> (x)(* x 10))
@@ -3672,7 +3851,7 @@ ELISP&gt; (mapcar (<span class="org-keyword">lambda</span> (x) (apply 'f x)) '( 
 </div>
 </li>
 
-<li><a id="sec-2-14-0-3" name="sec-2-14-0-3"></a>Function Composition<br  /><div class="outline-text-5" id="text-2-14-0-3">
+<li><a id="sec-1-15-0-3" name="sec-1-15-0-3"></a>Function Composition<br  /><div class="outline-text-5" id="text-1-15-0-3">
 <p>
 Credits: <a href="http://nullprogram.com/blog/2010/11/15/">Elisp Function Composition</a>
 </p>
@@ -3697,7 +3876,7 @@ ELISP&gt;
 </div>
 </li>
 
-<li><a id="sec-2-14-0-4" name="sec-2-14-0-4"></a>Interactive Functions<br  /><div class="outline-text-5" id="text-2-14-0-4">
+<li><a id="sec-1-15-0-4" name="sec-1-15-0-4"></a>Interactive Functions<br  /><div class="outline-text-5" id="text-1-15-0-4">
 <p>
 Interactive functions can be called using: M-x &lt;function&gt;. The user can create custom emacs commands with interactive functions.
 </p>
@@ -3721,7 +3900,7 @@ Execute the function
 </div>
 </li>
 
-<li><a id="sec-2-14-0-5" name="sec-2-14-0-5"></a>List Recursive Functions<br  /><div class="outline-text-5" id="text-2-14-0-5">
+<li><a id="sec-1-15-0-5" name="sec-1-15-0-5"></a>List Recursive Functions<br  /><div class="outline-text-5" id="text-1-15-0-5">
 <p>
 <b>Map</b>
 </p>
@@ -4163,9 +4342,9 @@ ELISP&gt;
 </div>
 </li></ol>
 </div>
-<div id="outline-container-sec-2-15" class="outline-3">
-<h3 id="sec-2-15"><span class="section-number-3">2.15</span> Structures</h3>
-<div class="outline-text-3" id="text-2-15">
+<div id="outline-container-sec-1-16" class="outline-3">
+<h3 id="sec-1-16"><span class="section-number-3">1.16</span> Structures</h3>
+<div class="outline-text-3" id="text-1-16">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (<span class="org-keyword">defstruct</span> account id name balance)
@@ -4285,10 +4464,12 @@ ELISP&gt;
 </div>
 </div>
 </div>
-
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Macros and Metaprogramming&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macro">macro</span>&#xa0;<span class="metaprogramming">metaprogramming</span>&#xa0;<span class="lisp">lisp</span></span></h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Macros and Metaprogramming&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macro">macro</span>&#xa0;<span class="metaprogramming">metaprogramming</span>&#xa0;<span class="lisp">lisp</span></span></h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Overview</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 Macros are useful to create new lisp special forms like if and when,
 create new control structures, domain specific languages, eliminate
@@ -4296,10 +4477,11 @@ boilerplate code, automate code  and redefine syntax.
 Elisp macro constructs has the same syntax of Common Lisp.
 </p>
 </div>
+</div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Quasi-quote</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Quasi-quote</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 Quasi-quote is useful to create s-expression templates, data structure
 templates and lisp macros.
@@ -4429,9 +4611,9 @@ my-symbol
 </div>
 </div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Macros</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Macros</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 <b>Redefine lambda syntax to λ</b>
 </p>
@@ -4878,12 +5060,12 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Emacs API</h2>
-<div class="outline-text-2" id="text-4">
-</div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Emacs Terminology</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Emacs API</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Emacs Terminology</h3>
+<div class="outline-text-3" id="text-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -4983,9 +5165,9 @@ See also:
 </div>
 </div>
 
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Emacs API</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Emacs API</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 <b>Emacs API Objects</b>
 </p>
@@ -5112,12 +5294,12 @@ See also, from Emacs Wiki:
 </div>
 </div>
 
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Useful Info Pages</h3>
-<div class="outline-text-3" id="text-4-3">
-</div><div id="outline-container-sec-4-3-1" class="outline-4">
-<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> Elisp</h4>
-<div class="outline-text-4" id="text-4-3-1">
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Useful Info Pages</h3>
+<div class="outline-text-3" id="text-3-3">
+</div><div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Elisp</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <p>
 Elisp Top Page
 </p>
@@ -5190,9 +5372,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-2" class="outline-4">
-<h4 id="sec-4-3-2"><span class="section-number-4">4.3.2</span> Customization</h4>
-<div class="outline-text-4" id="text-4-3-2">
+<div id="outline-container-sec-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> Customization</h4>
+<div class="outline-text-4" id="text-3-3-2">
 <p>
 <b>Customization:</b>
 </p>
@@ -5215,9 +5397,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-3" class="outline-4">
-<h4 id="sec-4-3-3"><span class="section-number-4">4.3.3</span> Layout</h4>
-<div class="outline-text-4" id="text-4-3-3">
+<div id="outline-container-sec-3-3-3" class="outline-4">
+<h4 id="sec-3-3-3"><span class="section-number-4">3.3.3</span> Layout</h4>
+<div class="outline-text-4" id="text-3-3-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(emacs) Fonts"</span>)
@@ -5226,9 +5408,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-4" class="outline-4">
-<h4 id="sec-4-3-4"><span class="section-number-4">4.3.4</span> Syntax Tables</h4>
-<div class="outline-text-4" id="text-4-3-4">
+<div id="outline-container-sec-3-3-4" class="outline-4">
+<h4 id="sec-3-3-4"><span class="section-number-4">3.3.4</span> Syntax Tables</h4>
+<div class="outline-text-4" id="text-3-3-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) Syntax Tables"</span>)
@@ -5237,9 +5419,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-5" class="outline-4">
-<h4 id="sec-4-3-5"><span class="section-number-4">4.3.5</span> Environment Variables and OS Detection</h4>
-<div class="outline-text-4" id="text-4-3-5">
+<div id="outline-container-sec-3-3-5" class="outline-4">
+<h4 id="sec-3-3-5"><span class="section-number-4">3.3.5</span> Environment Variables and OS Detection</h4>
+<div class="outline-text-4" id="text-3-3-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) System Environment"</span>)
@@ -5247,9 +5429,9 @@ Misc
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-3-6" class="outline-4">
-<h4 id="sec-4-3-6"><span class="section-number-4">4.3.6</span> Subprocess Creation</h4>
-<div class="outline-text-4" id="text-4-3-6">
+<div id="outline-container-sec-3-3-6" class="outline-4">
+<h4 id="sec-3-3-6"><span class="section-number-4">3.3.6</span> Subprocess Creation</h4>
+<div class="outline-text-4" id="text-3-3-6">
 <ul class="org-ul">
 <li>Creating Subprocesses
 </li>
@@ -5274,9 +5456,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-7" class="outline-4">
-<h4 id="sec-4-3-7"><span class="section-number-4">4.3.7</span> Keybindings</h4>
-<div class="outline-text-4" id="text-4-3-7">
+<div id="outline-container-sec-3-3-7" class="outline-4">
+<h4 id="sec-3-3-7"><span class="section-number-4">3.3.7</span> Keybindings</h4>
+<div class="outline-text-4" id="text-3-3-7">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) Function Keys"</span>)
@@ -5309,9 +5491,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-8" class="outline-4">
-<h4 id="sec-4-3-8"><span class="section-number-4">4.3.8</span> Hooks (Events Callbacks)</h4>
-<div class="outline-text-4" id="text-4-3-8">
+<div id="outline-container-sec-3-3-8" class="outline-4">
+<h4 id="sec-3-3-8"><span class="section-number-4">3.3.8</span> Hooks (Events Callbacks)</h4>
+<div class="outline-text-4" id="text-3-3-8">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) Hooks"</span>)
@@ -5332,9 +5514,9 @@ Misc
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-9" class="outline-4">
-<h4 id="sec-4-3-9"><span class="section-number-4">4.3.9</span> Buffer</h4>
-<div class="outline-text-4" id="text-4-3-9">
+<div id="outline-container-sec-3-3-9" class="outline-4">
+<h4 id="sec-3-3-9"><span class="section-number-4">3.3.9</span> Buffer</h4>
+<div class="outline-text-4" id="text-3-3-9">
 <p>
 Buffers
 </p>
@@ -5419,9 +5601,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-10" class="outline-4">
-<h4 id="sec-4-3-10"><span class="section-number-4">4.3.10</span> Window</h4>
-<div class="outline-text-4" id="text-4-3-10">
+<div id="outline-container-sec-3-3-10" class="outline-4">
+<h4 id="sec-3-3-10"><span class="section-number-4">3.3.10</span> Window</h4>
+<div class="outline-text-4" id="text-3-3-10">
 <p>
 Frame
 </p>
@@ -5434,9 +5616,9 @@ Frame
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-11" class="outline-4">
-<h4 id="sec-4-3-11"><span class="section-number-4">4.3.11</span> Frame</h4>
-<div class="outline-text-4" id="text-4-3-11">
+<div id="outline-container-sec-3-3-11" class="outline-4">
+<h4 id="sec-3-3-11"><span class="section-number-4">3.3.11</span> Frame</h4>
+<div class="outline-text-4" id="text-3-3-11">
 <p>
 Frame
 </p>
@@ -5459,9 +5641,9 @@ Frame Parameters
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-12" class="outline-4">
-<h4 id="sec-4-3-12"><span class="section-number-4">4.3.12</span> Files</h4>
-<div class="outline-text-4" id="text-4-3-12">
+<div id="outline-container-sec-3-3-12" class="outline-4">
+<h4 id="sec-3-3-12"><span class="section-number-4">3.3.12</span> Files</h4>
+<div class="outline-text-4" id="text-3-3-12">
 <p>
 Files
 </p>
@@ -5505,9 +5687,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-13" class="outline-4">
-<h4 id="sec-4-3-13"><span class="section-number-4">4.3.13</span> Text Enconding ISO UTF8 &#x2026;</h4>
-<div class="outline-text-4" id="text-4-3-13">
+<div id="outline-container-sec-3-3-13" class="outline-4">
+<h4 id="sec-3-3-13"><span class="section-number-4">3.3.13</span> Text Enconding ISO UTF8 &#x2026;</h4>
+<div class="outline-text-4" id="text-3-3-13">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(emacs) International"</span>)
@@ -5516,9 +5698,9 @@ Buffer Local Variable
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-14" class="outline-4">
-<h4 id="sec-4-3-14"><span class="section-number-4">4.3.14</span> Loading, Libraries and Packages</h4>
-<div class="outline-text-4" id="text-4-3-14">
+<div id="outline-container-sec-3-3-14" class="outline-4">
+<h4 id="sec-3-3-14"><span class="section-number-4">3.3.14</span> Loading, Libraries and Packages</h4>
+<div class="outline-text-4" id="text-3-3-14">
 <p>
 Loading
 </p>
@@ -5557,9 +5739,9 @@ Packages
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-15" class="outline-4">
-<h4 id="sec-4-3-15"><span class="section-number-4">4.3.15</span> Batch Mode</h4>
-<div class="outline-text-4" id="text-4-3-15">
+<div id="outline-container-sec-3-3-15" class="outline-4">
+<h4 id="sec-3-3-15"><span class="section-number-4">3.3.15</span> Batch Mode</h4>
+<div class="outline-text-4" id="text-3-3-15">
 <p>
 Batch Mode
 </p>
@@ -5572,9 +5754,9 @@ Batch Mode
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-16" class="outline-4">
-<h4 id="sec-4-3-16"><span class="section-number-4">4.3.16</span> Syntax Highlight</h4>
-<div class="outline-text-4" id="text-4-3-16">
+<div id="outline-container-sec-3-3-16" class="outline-4">
+<h4 id="sec-3-3-16"><span class="section-number-4">3.3.16</span> Syntax Highlight</h4>
+<div class="outline-text-4" id="text-3-3-16">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(info <span class="org-string">"(elisp) Syntax Class Table"</span>)
@@ -5583,9 +5765,9 @@ Batch Mode
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-4" class="outline-3">
-<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Discoverability / Get Documentation</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Discoverability / Get Documentation</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
 <b>Apropos</b>
 </p>
@@ -5611,9 +5793,9 @@ apropos-value
 
 
 
-<div id="outline-container-sec-4-4-1" class="outline-4">
-<h4 id="sec-4-4-1"><span class="section-number-4">4.4.1</span> Describe</h4>
-<div class="outline-text-4" id="text-4-4-1">
+<div id="outline-container-sec-3-4-1" class="outline-4">
+<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> Describe</h4>
+<div class="outline-text-4" id="text-3-4-1">
 <p>
 See also:
 </p>
@@ -5667,12 +5849,12 @@ C-h v
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-5" class="outline-3">
-<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Buffers</h3>
-<div class="outline-text-3" id="text-4-5">
-</div><div id="outline-container-sec-4-5-1" class="outline-4">
-<h4 id="sec-4-5-1"><span class="section-number-4">4.5.1</span> Buffer Attributes</h4>
-<div class="outline-text-4" id="text-4-5-1">
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Buffers</h3>
+<div class="outline-text-3" id="text-3-5">
+</div><div id="outline-container-sec-3-5-1" class="outline-4">
+<h4 id="sec-3-5-1"><span class="section-number-4">3.5.1</span> Buffer Attributes</h4>
+<div class="outline-text-4" id="text-3-5-1">
 <p>
 <b>List all Buffers</b>
 </p>
@@ -5906,9 +6088,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-5-2" class="outline-4">
-<h4 id="sec-4-5-2"><span class="section-number-4">4.5.2</span> Buffer Mode</h4>
-<div class="outline-text-4" id="text-4-5-2">
+<div id="outline-container-sec-3-5-2" class="outline-4">
+<h4 id="sec-3-5-2"><span class="section-number-4">3.5.2</span> Buffer Mode</h4>
+<div class="outline-text-4" id="text-3-5-2">
 <p>
 <b>Show Buffers Mode</b>
 </p>
@@ -5958,9 +6140,9 @@ ELISP&gt; (mapcar (<span class="org-keyword">lambda</span> (b)(
 </div>
 </div>
 
-<div id="outline-container-sec-4-5-3" class="outline-4">
-<h4 id="sec-4-5-3"><span class="section-number-4">4.5.3</span> Get Buffer Contents / Selection / Line</h4>
-<div class="outline-text-4" id="text-4-5-3">
+<div id="outline-container-sec-3-5-3" class="outline-4">
+<h4 id="sec-3-5-3"><span class="section-number-4">3.5.3</span> Get Buffer Contents / Selection / Line</h4>
+<div class="outline-text-4" id="text-3-5-3">
 <p>
 <b>Get Buffer Content as String</b>
 </p>
@@ -6017,9 +6199,9 @@ To test it: M-x eval-expression and enter (get-current-line)
 </div>
 </div>
 
-<div id="outline-container-sec-4-5-4" class="outline-4">
-<h4 id="sec-4-5-4"><span class="section-number-4">4.5.4</span> Search and Replace in the entire Buffer</h4>
-<div class="outline-text-4" id="text-4-5-4">
+<div id="outline-container-sec-3-5-4" class="outline-4">
+<h4 id="sec-3-5-4"><span class="section-number-4">3.5.4</span> Search and Replace in the entire Buffer</h4>
+<div class="outline-text-4" id="text-3-5-4">
 <p>
 Source: <a href="http://emacs.stackexchange.com/questions/249/how-to-search-and-replace-in-the-entire-buffer">How to search and replace in the entire buffer?</a>
 Usage: A-x replace-regexp-entire-buffer
@@ -6042,12 +6224,12 @@ Usage: A-x replace-regexp-entire-buffer
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-6" class="outline-3">
-<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Point, Region, Line and Buffer</h3>
-<div class="outline-text-3" id="text-4-6">
-</div><div id="outline-container-sec-4-6-1" class="outline-4">
-<h4 id="sec-4-6-1"><span class="section-number-4">4.6.1</span> Point</h4>
-<div class="outline-text-4" id="text-4-6-1">
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Point, Region, Line and Buffer</h3>
+<div class="outline-text-3" id="text-3-6">
+</div><div id="outline-container-sec-3-6-1" class="outline-4">
+<h4 id="sec-3-6-1"><span class="section-number-4">3.6.1</span> Point</h4>
+<div class="outline-text-4" id="text-3-6-1">
 <p>
 <b>Point</b> is the number of characters from the beginning of the buffer to
 the current cursor location, or cursor position for short. To see the
@@ -6257,9 +6439,9 @@ Examples:
 </div>
 </div>
 
-<div id="outline-container-sec-4-6-2" class="outline-4">
-<h4 id="sec-4-6-2"><span class="section-number-4">4.6.2</span> Thing at Point API</h4>
-<div class="outline-text-4" id="text-4-6-2">
+<div id="outline-container-sec-3-6-2" class="outline-4">
+<h4 id="sec-3-6-2"><span class="section-number-4">3.6.2</span> Thing at Point API</h4>
+<div class="outline-text-4" id="text-3-6-2">
 <p>
 See also:
 </p>
@@ -6355,12 +6537,12 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-7" class="outline-3">
-<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Message / Output&#xa0;&#xa0;&#xa0;<span class="tag"><span class="message">message</span>&#xa0;<span class="output">output</span>&#xa0;<span class="dialog">dialog</span></span></h3>
-<div class="outline-text-3" id="text-4-7">
-</div><div id="outline-container-sec-4-7-1" class="outline-4">
-<h4 id="sec-4-7-1"><span class="section-number-4">4.7.1</span> message</h4>
-<div class="outline-text-4" id="text-4-7-1">
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Message / Output&#xa0;&#xa0;&#xa0;<span class="tag"><span class="message">message</span>&#xa0;<span class="output">output</span>&#xa0;<span class="dialog">dialog</span></span></h3>
+<div class="outline-text-3" id="text-3-7">
+</div><div id="outline-container-sec-3-7-1" class="outline-4">
+<h4 id="sec-3-7-1"><span class="section-number-4">3.7.1</span> message</h4>
+<div class="outline-text-4" id="text-3-7-1">
 <p>
 Display a message at the bottom of the screen.
 </p>
@@ -6387,9 +6569,9 @@ Output:
 </div>
 </div>
 
-<div id="outline-container-sec-4-7-2" class="outline-4">
-<h4 id="sec-4-7-2"><span class="section-number-4">4.7.2</span> message-box</h4>
-<div class="outline-text-4" id="text-4-7-2">
+<div id="outline-container-sec-3-7-2" class="outline-4">
+<h4 id="sec-3-7-2"><span class="section-number-4">3.7.2</span> message-box</h4>
+<div class="outline-text-4" id="text-3-7-2">
 <p>
 Display a message, in a dialog box if possible. If a dialog box is not
 available, use the echo area. 
@@ -6415,17 +6597,17 @@ available, use the echo area.
 </div>
 </div>
 
-<div id="outline-container-sec-4-8" class="outline-3">
-<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Files, Directories and Path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="file">file</span>&#xa0;<span class="os">os</span></span></h3>
-<div class="outline-text-3" id="text-4-8">
+<div id="outline-container-sec-3-8" class="outline-3">
+<h3 id="sec-3-8"><span class="section-number-3">3.8</span> Files, Directories and Path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="file">file</span>&#xa0;<span class="os">os</span></span></h3>
+<div class="outline-text-3" id="text-3-8">
 <p>
 <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Files.html">Emacs Manual: Files</a>
 </p>
 </div>
 
-<div id="outline-container-sec-4-8-1" class="outline-4">
-<h4 id="sec-4-8-1"><span class="section-number-4">4.8.1</span> Basic Functions</h4>
-<div class="outline-text-4" id="text-4-8-1">
+<div id="outline-container-sec-3-8-1" class="outline-4">
+<h4 id="sec-3-8-1"><span class="section-number-4">3.8.1</span> Basic Functions</h4>
+<div class="outline-text-4" id="text-3-8-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Get and Set current directory</span>
@@ -6475,9 +6657,9 @@ ELISP&gt; (directory-files <span class="org-string">"/home/tux/PycharmProjects/H
 </div>
 </div>
 
-<div id="outline-container-sec-4-8-2" class="outline-4">
-<h4 id="sec-4-8-2"><span class="section-number-4">4.8.2</span> File Name Components</h4>
-<div class="outline-text-4" id="text-4-8-2">
+<div id="outline-container-sec-3-8-2" class="outline-4">
+<h4 id="sec-3-8-2"><span class="section-number-4">3.8.2</span> File Name Components</h4>
+<div class="outline-text-4" id="text-3-8-2">
 <p>
 <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html">Emacs Manual: File Name Components</a>
 </p>
@@ -6502,9 +6684,9 @@ ELISP&gt; (file-name-base <span class="org-string">"/home/foo/zoo1.c.back"</span
 </div>
 </div>
 
-<div id="outline-container-sec-4-8-3" class="outline-4">
-<h4 id="sec-4-8-3"><span class="section-number-4">4.8.3</span> Read / Write file to a string</h4>
-<div class="outline-text-4" id="text-4-8-3">
+<div id="outline-container-sec-3-8-3" class="outline-4">
+<h4 id="sec-3-8-3"><span class="section-number-4">3.8.3</span> Read / Write file to a string</h4>
+<div class="outline-text-4" id="text-3-8-3">
 <p>
 <b>Read File</b>
 </p>
@@ -6547,12 +6729,12 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-9" class="outline-3">
-<h3 id="sec-4-9"><span class="section-number-3">4.9</span> Window Functions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="window">window</span></span></h3>
-<div class="outline-text-3" id="text-4-9">
-</div><div id="outline-container-sec-4-9-1" class="outline-4">
-<h4 id="sec-4-9-1"><span class="section-number-4">4.9.1</span> Basic Window Functions</h4>
-<div class="outline-text-4" id="text-4-9-1">
+<div id="outline-container-sec-3-9" class="outline-3">
+<h3 id="sec-3-9"><span class="section-number-3">3.9</span> Window Functions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="api">api</span>&#xa0;<span class="system">system</span>&#xa0;<span class="window">window</span></span></h3>
+<div class="outline-text-3" id="text-3-9">
+</div><div id="outline-container-sec-3-9-1" class="outline-4">
+<h4 id="sec-3-9-1"><span class="section-number-4">3.9.1</span> Basic Window Functions</h4>
+<div class="outline-text-4" id="text-3-9-1">
 <p>
 Original Window before be changed.
 </p>
@@ -6705,9 +6887,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-9-2" class="outline-4">
-<h4 id="sec-4-9-2"><span class="section-number-4">4.9.2</span> Manipulate Buffer in Another Window</h4>
-<div class="outline-text-4" id="text-4-9-2">
+<div id="outline-container-sec-3-9-2" class="outline-4">
+<h4 id="sec-3-9-2"><span class="section-number-4">3.9.2</span> Manipulate Buffer in Another Window</h4>
+<div class="outline-text-4" id="text-3-9-2">
 <p>
 Description: Split window vertically, create a new buffer not associated to a file named dummy, and switch
 to this buffer on the second window and set the current buffer to dummy.
@@ -6837,9 +7019,9 @@ ELISP&gt; (mapcar (<span class="org-keyword">lambda</span> (w)(buffer-name (wind
 </div>
 </div>
 
-<div id="outline-container-sec-4-9-3" class="outline-4">
-<h4 id="sec-4-9-3"><span class="section-number-4">4.9.3</span> Window Configuration</h4>
-<div class="outline-text-4" id="text-4-9-3">
+<div id="outline-container-sec-3-9-3" class="outline-4">
+<h4 id="sec-3-9-3"><span class="section-number-4">3.9.3</span> Window Configuration</h4>
+<div class="outline-text-4" id="text-3-9-3">
 <p>
 The function current-window-configuration returns the current  emacs window configuration.
 </p>
@@ -6963,12 +7145,12 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-10" class="outline-3">
-<h3 id="sec-4-10"><span class="section-number-3">4.10</span> OS Interface</h3>
-<div class="outline-text-3" id="text-4-10">
-</div><div id="outline-container-sec-4-10-1" class="outline-4">
-<h4 id="sec-4-10-1"><span class="section-number-4">4.10.1</span> Find the current operating system</h4>
-<div class="outline-text-4" id="text-4-10-1">
+<div id="outline-container-sec-3-10" class="outline-3">
+<h3 id="sec-3-10"><span class="section-number-3">3.10</span> OS Interface</h3>
+<div class="outline-text-3" id="text-3-10">
+</div><div id="outline-container-sec-3-10-1" class="outline-4">
+<h4 id="sec-3-10-1"><span class="section-number-4">3.10.1</span> Find the current operating system</h4>
+<div class="outline-text-4" id="text-3-10-1">
 <p>
 The variable <span class="underline">system-type</span> indicates the current operating system. 
 </p>
@@ -7047,9 +7229,9 @@ ELISP&gt; (<span class="org-keyword">cl-case</span>  system-type
 </div>
 </div>
 
-<div id="outline-container-sec-4-10-2" class="outline-4">
-<h4 id="sec-4-10-2"><span class="section-number-4">4.10.2</span> Date and Time</h4>
-<div class="outline-text-4" id="text-4-10-2">
+<div id="outline-container-sec-3-10-2" class="outline-4">
+<h4 id="sec-3-10-2"><span class="section-number-4">3.10.2</span> Date and Time</h4>
+<div class="outline-text-4" id="text-3-10-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;;;</span>
@@ -7077,9 +7259,9 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-10-3" class="outline-4">
-<h4 id="sec-4-10-3"><span class="section-number-4">4.10.3</span> Call External Commands or Apps</h4>
-<div class="outline-text-4" id="text-4-10-3">
+<div id="outline-container-sec-3-10-3" class="outline-4">
+<h4 id="sec-3-10-3"><span class="section-number-4">3.10.3</span> Call External Commands or Apps</h4>
+<div class="outline-text-4" id="text-3-10-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;;; </span><span class="org-comment">Call External Command</span>
@@ -7106,9 +7288,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-10-4" class="outline-4">
-<h4 id="sec-4-10-4"><span class="section-number-4">4.10.4</span> Environment Variables</h4>
-<div class="outline-text-4" id="text-4-10-4">
+<div id="outline-container-sec-3-10-4" class="outline-4">
+<h4 id="sec-3-10-4"><span class="section-number-4">3.10.4</span> Environment Variables</h4>
+<div class="outline-text-4" id="text-3-10-4">
 <p>
 <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Environment.html">Emacs Manual: Environment Variables</a>
 </p>
@@ -7200,9 +7382,9 @@ LC_NUMERIC=pt_BR.UTF-8
 </div>
 </div>
 
-<div id="outline-container-sec-4-10-5" class="outline-4">
-<h4 id="sec-4-10-5"><span class="section-number-4">4.10.5</span> Process Management</h4>
-<div class="outline-text-4" id="text-4-10-5">
+<div id="outline-container-sec-3-10-5" class="outline-4">
+<h4 id="sec-3-10-5"><span class="section-number-4">3.10.5</span> Process Management</h4>
+<div class="outline-text-4" id="text-3-10-5">
 <p>
 Documentation:
 </p>
@@ -7344,12 +7526,12 @@ ELISP&gt; (mapcar
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-11" class="outline-3">
-<h3 id="sec-4-11"><span class="section-number-3">4.11</span> Timer</h3>
-<div class="outline-text-3" id="text-4-11">
-</div><div id="outline-container-sec-4-11-1" class="outline-4">
-<h4 id="sec-4-11-1"><span class="section-number-4">4.11.1</span> run-with-timer</h4>
-<div class="outline-text-4" id="text-4-11-1">
+<div id="outline-container-sec-3-11" class="outline-3">
+<h3 id="sec-3-11"><span class="section-number-3">3.11</span> Timer</h3>
+<div class="outline-text-3" id="text-3-11">
+</div><div id="outline-container-sec-3-11-1" class="outline-4">
+<h4 id="sec-3-11-1"><span class="section-number-4">3.11.1</span> run-with-timer</h4>
+<div class="outline-text-4" id="text-3-11-1">
 <p>
 Perform an action after a delay of SECS seconds. Repeat the action
 every REPEAT seconds, if REPEAT is non-nil.  SECS and REPEAT may be
@@ -7414,14 +7596,14 @@ minutes.
 </div>
 </div>
 
-<div id="outline-container-sec-4-12" class="outline-3">
-<h3 id="sec-4-12"><span class="section-number-3">4.12</span> Emacs Modes</h3>
-<div class="outline-text-3" id="text-4-12">
+<div id="outline-container-sec-3-12" class="outline-3">
+<h3 id="sec-3-12"><span class="section-number-3">3.12</span> Emacs Modes</h3>
+<div class="outline-text-3" id="text-3-12">
 </div>
 
-<div id="outline-container-sec-4-12-1" class="outline-4">
-<h4 id="sec-4-12-1"><span class="section-number-4">4.12.1</span> Major Mode</h4>
-<div class="outline-text-4" id="text-4-12-1">
+<div id="outline-container-sec-3-12-1" class="outline-4">
+<h4 id="sec-3-12-1"><span class="section-number-4">3.12.1</span> Major Mode</h4>
+<div class="outline-text-4" id="text-3-12-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -7564,9 +7746,9 @@ Lisp Dialects
 </div>
 </div>
 
-<div id="outline-container-sec-4-12-2" class="outline-4">
-<h4 id="sec-4-12-2"><span class="section-number-4">4.12.2</span> Minor Modes</h4>
-<div class="outline-text-4" id="text-4-12-2">
+<div id="outline-container-sec-3-12-2" class="outline-4">
+<h4 id="sec-3-12-2"><span class="section-number-4">3.12.2</span> Minor Modes</h4>
+<div class="outline-text-4" id="text-3-12-2">
 <p>
 Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 </p>
@@ -7646,9 +7828,9 @@ Inferior Modes are modes that runs as Emacs subprocess (generally a shell).
 </div>
 </div>
 
-<div id="outline-container-sec-4-12-3" class="outline-4">
-<h4 id="sec-4-12-3"><span class="section-number-4">4.12.3</span> Mode Association with Files</h4>
-<div class="outline-text-4" id="text-4-12-3">
+<div id="outline-container-sec-3-12-3" class="outline-4">
+<h4 id="sec-3-12-3"><span class="section-number-4">3.12.3</span> Mode Association with Files</h4>
+<div class="outline-text-4" id="text-3-12-3">
 <p>
 The variable auto-mode-alist holds all modes associated with file extension.
 </p>
@@ -7796,9 +7978,9 @@ ELISP&gt; (show-doc #'mode/ftypes)
 </div>
 </div>
 
-<div id="outline-container-sec-4-12-4" class="outline-4">
-<h4 id="sec-4-12-4"><span class="section-number-4">4.12.4</span> Mode Specific Key Bindings</h4>
-<div class="outline-text-4" id="text-4-12-4">
+<div id="outline-container-sec-3-12-4" class="outline-4">
+<h4 id="sec-3-12-4"><span class="section-number-4">3.12.4</span> Mode Specific Key Bindings</h4>
+<div class="outline-text-4" id="text-3-12-4">
 <p>
 The function <b>define-key</b>  associates a key bind to function that will be called in a specific mode. To see what function is associated with a key bind type: <code>M-x describe-key</code> and then type the key bind.
 </p>
@@ -7845,9 +8027,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-12-5" class="outline-4">
-<h4 id="sec-4-12-5"><span class="section-number-4">4.12.5</span> Modes Customization</h4>
-<div class="outline-text-4" id="text-4-12-5">
+<div id="outline-container-sec-3-12-5" class="outline-4">
+<h4 id="sec-3-12-5"><span class="section-number-4">3.12.5</span> Modes Customization</h4>
+<div class="outline-text-4" id="text-3-12-5">
 <ul class="org-ul">
 <li><a href="http://www.emacswiki.org/emacs/MinorMode">Minor Mode  - Emacs Wiki</a>
 </li>
@@ -7890,9 +8072,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-4-12-6" class="outline-4">
-<h4 id="sec-4-12-6"><span class="section-number-4">4.12.6</span> Mode Hooks</h4>
-<div class="outline-text-4" id="text-4-12-6">
+<div id="outline-container-sec-3-12-6" class="outline-4">
+<h4 id="sec-3-12-6"><span class="section-number-4">3.12.6</span> Mode Hooks</h4>
+<div class="outline-text-4" id="text-3-12-6">
 <ul class="org-ul">
 <li><a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html">http://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html</a>
 </li>
@@ -7908,9 +8090,9 @@ The following is a list of hook variables that let you provide functions to be c
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-13" class="outline-3">
-<h3 id="sec-4-13"><span class="section-number-3">4.13</span> Special Variables</h3>
-<div class="outline-text-3" id="text-4-13">
+<div id="outline-container-sec-3-13" class="outline-3">
+<h3 id="sec-3-13"><span class="section-number-3">3.13</span> Special Variables</h3>
+<div class="outline-text-3" id="text-3-13">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; emacs-major-version
@@ -7968,9 +8150,9 @@ ELISP&gt; load-path
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-14" class="outline-3">
-<h3 id="sec-4-14"><span class="section-number-3">4.14</span> Network</h3>
-<div class="outline-text-3" id="text-4-14">
+<div id="outline-container-sec-3-14" class="outline-3">
+<h3 id="sec-3-14"><span class="section-number-3">3.14</span> Network</h3>
+<div class="outline-text-3" id="text-3-14">
 <p>
 <b>Links to Inquiry</b>
 </p>
@@ -8014,12 +8196,12 @@ Emacs tools and codes that can be useful as implementation references and proof 
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Regex - Regular Expressions</h2>
-<div class="outline-text-2" id="text-5">
-</div><div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Overview</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Regex - Regular Expressions</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Overview</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 The Emacs regular expressions are different from the standard Perl
 regular expressions that are used by most languages. 
@@ -8067,9 +8249,9 @@ To see Emacs regex manual evaluate the s-expression:
 </div>
 </div>
 
-<div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Emacs Regex</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Emacs Regex</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 <b>Special characters</b>
 </p>
@@ -8411,9 +8593,9 @@ To see Emacs regex manual evaluate the s-expression:
 </div>
 </div>
 
-<div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Regex Commands</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Regex Commands</h3>
+<div class="outline-text-3" id="text-4-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -8562,9 +8744,9 @@ Line Commands
 </div>
 </div>
 
-<div id="outline-container-sec-5-4" class="outline-3">
-<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Regex Functions</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Regex Functions</h3>
+<div class="outline-text-3" id="text-4-4">
 <ul class="org-ul">
 <li>match-string
 </li>
@@ -8584,9 +8766,9 @@ Line Commands
 </div>
 </div>
 
-<div id="outline-container-sec-5-5" class="outline-3">
-<h3 id="sec-5-5"><span class="section-number-3">5.5</span> Build regex interactively</h3>
-<div class="outline-text-3" id="text-5-5">
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Build regex interactively</h3>
+<div class="outline-text-3" id="text-4-5">
 <p>
 <code>M-x re-builder</code> 
 </p>
@@ -8598,9 +8780,9 @@ Line Commands
 </div>
 </div>
 
-<div id="outline-container-sec-5-6" class="outline-3">
-<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Emacs Regex rx-notation</h3>
-<div class="outline-text-3" id="text-5-6">
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Emacs Regex rx-notation</h3>
+<div class="outline-text-3" id="text-4-6">
 <p>
 rx is an emacs built-in macro inspired by Olin Shivers' Scheme Shell:
 schsh rx-notation that allows to encode regular expressions in
@@ -8902,9 +9084,9 @@ ELISP&gt; (<span class="org-keyword">rx</span> (submatch bow (<span class="org-k
 </div>
 </div>
 
-<div id="outline-container-sec-5-7" class="outline-3">
-<h3 id="sec-5-7"><span class="section-number-3">5.7</span> See also</h3>
-<div class="outline-text-3" id="text-5-7">
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> See also</h3>
+<div class="outline-text-3" id="text-4-7">
 <ul class="org-ul">
 <li><a href="https://www.emacswiki.org/emacs/rx">EmacsWiki: rx</a>
 </li>
@@ -8931,9 +9113,9 @@ ELISP&gt; (<span class="org-keyword">rx</span> (submatch bow (<span class="org-k
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Color Scheme</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Color Scheme</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 <b>Show All Colors Available</b>
 </p>
@@ -9091,15 +9273,15 @@ Color Themes:
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Key Bindings</h2>
-<div class="outline-text-2" id="text-7">
-</div><div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Global Key Bindings</h3>
-<div class="outline-text-3" id="text-7-1">
-</div><div id="outline-container-sec-7-1-1" class="outline-4">
-<h4 id="sec-7-1-1"><span class="section-number-4">7.1.1</span> Smart window switch</h4>
-<div class="outline-text-4" id="text-7-1-1">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Key Bindings</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Global Key Bindings</h3>
+<div class="outline-text-3" id="text-6-1">
+</div><div id="outline-container-sec-6-1-1" class="outline-4">
+<h4 id="sec-6-1-1"><span class="section-number-4">6.1.1</span> Smart window switch</h4>
+<div class="outline-text-4" id="text-6-1-1">
 <p>
 The traditional window switch with C-x o can be cumbersome to use in the long run. The windmove commands provide a more convenient way to do this. All you have to do is to hold down Shift while pointing at a window with the arrow keys.  <a href="https://wiki.archlinux.org/index.php/Emacs#Modes">Source</a>
 </p>
@@ -9113,9 +9295,9 @@ The traditional window switch with C-x o can be cumbersome to use in the long ru
 </div>
 </div>
 
-<div id="outline-container-sec-7-1-2" class="outline-4">
-<h4 id="sec-7-1-2"><span class="section-number-4">7.1.2</span> Define Global Key-bindings</h4>
-<div class="outline-text-4" id="text-7-1-2">
+<div id="outline-container-sec-6-1-2" class="outline-4">
+<h4 id="sec-6-1-2"><span class="section-number-4">6.1.2</span> Define Global Key-bindings</h4>
+<div class="outline-text-4" id="text-6-1-2">
 <p>
 See also:
 </p>
@@ -9445,13 +9627,13 @@ Ctrl-d will delete the entire word under the cursor.
 </div>
 </div>
 
-<div id="outline-container-sec-7-1-3" class="outline-4">
-<h4 id="sec-7-1-3"><span class="section-number-4">7.1.3</span> Define Mode Specific Key-bindings</h4>
+<div id="outline-container-sec-6-1-3" class="outline-4">
+<h4 id="sec-6-1-3"><span class="section-number-4">6.1.3</span> Define Mode Specific Key-bindings</h4>
 </div>
 
-<div id="outline-container-sec-7-1-4" class="outline-4">
-<h4 id="sec-7-1-4"><span class="section-number-4">7.1.4</span> Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)</h4>
-<div class="outline-text-4" id="text-7-1-4">
+<div id="outline-container-sec-6-1-4" class="outline-4">
+<h4 id="sec-6-1-4"><span class="section-number-4">6.1.4</span> Enable Ctrl+V / Ctrl+C shortcuts (Cua-mode)</h4>
+<div class="outline-text-4" id="text-6-1-4">
 <p>
 The popular key-bindings Ctrl+V (cut), Ctrl+C (copy), Ctrl+X (paste) can be enable by typing:
 </p>
@@ -9475,17 +9657,17 @@ or by entering the command below in the shell IELM or by putting it in the confi
 </div>
 </div>
 
-<div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Mode Key Bindings</h3>
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Mode Key Bindings</h3>
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Emacs Packages</h2>
-<div class="outline-text-2" id="text-8">
-</div><div id="outline-container-sec-8-1" class="outline-3">
-<h3 id="sec-8-1"><span class="section-number-3">8.1</span> El-get</h3>
-<div class="outline-text-3" id="text-8-1">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Emacs Packages</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> El-get</h3>
+<div class="outline-text-3" id="text-7-1">
 <ul class="org-ul">
 <li><a href="https://github.com/dimitri/el-get">Github: el-get</a>
 </li>
@@ -9520,24 +9702,24 @@ Features:
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-8-2" class="outline-3">
-<h3 id="sec-8-2"><span class="section-number-3">8.2</span> VIM Emulation - EVIL</h3>
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> VIM Emulation - EVIL</h3>
 </div>
-<div id="outline-container-sec-8-3" class="outline-3">
-<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Ibuffer</h3>
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> Ibuffer</h3>
 </div>
-<div id="outline-container-sec-8-4" class="outline-3">
-<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Navbar</h3>
+<div id="outline-container-sec-7-4" class="outline-3">
+<h3 id="sec-7-4"><span class="section-number-3">7.4</span> Navbar</h3>
 </div>
-<div id="outline-container-sec-8-5" class="outline-3">
-<h3 id="sec-8-5"><span class="section-number-3">8.5</span> Speedbar</h3>
+<div id="outline-container-sec-7-5" class="outline-3">
+<h3 id="sec-7-5"><span class="section-number-3">7.5</span> Speedbar</h3>
 </div>
-<div id="outline-container-sec-8-6" class="outline-3">
-<h3 id="sec-8-6"><span class="section-number-3">8.6</span> Packages for Lisp Dialects</h3>
-<div class="outline-text-3" id="text-8-6">
-</div><div id="outline-container-sec-8-6-1" class="outline-4">
-<h4 id="sec-8-6-1"><span class="section-number-4">8.6.1</span> Rainbow delimiters</h4>
-<div class="outline-text-4" id="text-8-6-1">
+<div id="outline-container-sec-7-6" class="outline-3">
+<h3 id="sec-7-6"><span class="section-number-3">7.6</span> Packages for Lisp Dialects</h3>
+<div class="outline-text-3" id="text-7-6">
+</div><div id="outline-container-sec-7-6-1" class="outline-4">
+<h4 id="sec-7-6-1"><span class="section-number-4">7.6.1</span> Rainbow delimiters</h4>
+<div class="outline-text-4" id="text-7-6-1">
 <p>
 Rainbow delimiters is useful for all Lisps dialects like Elisp,
 Clojure, Scheme and etc. It also makes easier to match and spot
@@ -9557,18 +9739,18 @@ delimiters at different levels.
 </div>
 </div>
 
-<div id="outline-container-sec-8-6-2" class="outline-4">
-<h4 id="sec-8-6-2"><span class="section-number-4">8.6.2</span> Paredit</h4>
+<div id="outline-container-sec-7-6-2" class="outline-4">
+<h4 id="sec-7-6-2"><span class="section-number-4">7.6.2</span> Paredit</h4>
 </div>
 </div>
 
-<div id="outline-container-sec-8-7" class="outline-3">
-<h3 id="sec-8-7"><span class="section-number-3">8.7</span> Elscreen</h3>
+<div id="outline-container-sec-7-7" class="outline-3">
+<h3 id="sec-7-7"><span class="section-number-3">7.7</span> Elscreen</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-10 sáb 04:38</p>
+<p class="date">Created: 2016-12-12 seg 02:52</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

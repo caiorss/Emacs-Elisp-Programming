@@ -203,20 +203,22 @@ To compile any code use:
 
 *Compilation Buffer Key bindings*
 
-| Command              | Key binding | Description                                                |
-|----------------------+-------------+------------------------------------------------------------|
-| M-x recompile        | g           | Compile again running same compilation command.            |
-| M-x quit-window      | q           | Quit compilation buffer                                    |
-| M-x kill-compilation | C-c C-k     | Stop compilation process                                   |
-|                      | <           | Go to beginning of compilation buffer.                     |
-|                      | >           | Go to end of compilation buffer.                           |
-| M-x describe-mode    | h           |                                                            |
-|                      | RET         | Typing Return at compilation error goes to error location. |
-|                      |             |                                                            |
-|                      |             |                                                            |
+| Command              | Key binding | Description                                                       |
+|----------------------+-------------+-------------------------------------------------------------------|
+| M-x recompile        | g           | Compile again running same compilation command.                   |
+| M-x quit-window      | q           | Quit compilation buffer                                           |
+| M-x kill-compilation | C-c C-k     | Stop compilation process                                          |
+|                      | <           | Go to beginning of compilation buffer.                            |
+|                      | >           | Go to end of compilation buffer.                                  |
+| M-x describe-mode    | h           |                                                                   |
+|                      | RET         | Typing Return at compilation error goes to error location.        |
+|                      |             |                                                                   |
+|                      |             |                                                                   |
+| M-x rename-buffer    |             | To use multiple compilation buffers, rename it with this command. |
+|                      |             |                                                                   |
 
-Note: The command =M-x compile= provides completion for Makefile
-targets by typing =M-x compile make <tab>=.
+ - Note: The command =M-x compile= provides completion for Makefile
+   targets by typing =M-x compile make <tab>=.
 
 *** Setting compilation key bindings
 
@@ -272,7 +274,7 @@ Key bindings for compilation buffer
 
 #+END_SRC
 
-*** Creating a custom compilation commands
+*** Creating custom compilation commands
     :PROPERTIES:
     :ID:       74a646ea-a275-4b82-9677-6e4ed7c09462
     :END:

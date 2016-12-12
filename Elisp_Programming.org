@@ -3,44 +3,6 @@
 #+TITLE: Elisp Programming
 #+KEYWORDS: emacs, api, elisp, lisp, programming, customize, functions, shell
 
-* Command Line Options
-
-Start emacs ignoring the file:~/.emacs.d/init.el or file:~/.emacs configuration file.
-
-#+BEGIN_SRC sh
-
-$ emacs --no-init-file
-
-or
-
-$ emacs -q
-
-#+END_SRC
-
-Start Emacs with a custom configuration file:
-
-#+BEGIN_SRC sh
-
-$ emacs -q -l customstart.el
-#+END_SRC
-
-Debug Emacs configuration file: ~/.emacs.d/init.el or ~/.emacs
-
-#+BEGIN_SRC sh
-
-$ emacs  --debug-init
-
-#+END_SRC
-
-To keep multiple configurations files see: [[https://github.com/caiorss/Emacs-Bootstrap][Emacs Bootstrap]]
-Show Emacs version
-
-#+BEGIN_SRC sh
-
-$ emacs --version
-
-#+END_SRC
-
 * Elisp
 ** Overview
 
@@ -53,7 +15,7 @@ that loads the library cl - Common Lisp Extension Library, that
 provides many useful common lisp functions and macros like remove-if,
 remove-if-not, cl-case and so on.
 
-See also: [[http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html][Common Lisp Extensions - Common Lisp Extensions]]
+See also: [[http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html][Common Lisp Extensions]]
 
 *** Using the Scratch Buffer and Interpreter
 
@@ -173,6 +135,147 @@ This can also be invoked with:
 #+END_SRC
 
 file:images/function-documentation-describe.png
+
+** Basic settings for Elisp Programming 
+
+The packages paredit, rainbow-delimiters and company gives a better
+user experience when programming Elisp. The package [[https://www.emacswiki.org/emacs/RainbowDelimiters][rainbow-delimiters]]
+provides different colors for parenthesis at different levels making
+easier to spot errors and s-expression, the package [[https://www.emacswiki.org/emacs/ParEdit][paredit]] allows
+structured and fast editing of s-expressions and [[https://www.emacswiki.org/emacs/CompanyMode][company]] provides
+completion for Emacs-lisp statements like functions and variables.
+
+Paredit and rainbow-delimiters are not only useful for Elisp, they are
+also invaluable for other lisp dialects like Scheme, Common Lisp and
+Clojure.
+
+See also: 
+
+ - [[https://www.youtube.com/watch?v=D6h5dFyyUX0][Emacs Rocks! Episode 14: Paredit - YouTube]]
+
+ - [[https://www.youtube.com/watch?v=hiwEm88xaxM][26 Emacs - Paredit: little known features (Programothesis by emailatask.com) - YouTube]]
+
+This packages can be installed by using this commands:
+
+ - M-x package-install paredit
+ - M-x package-install rainbow-delimiters
+ - M-x package-install company
+
+Settings ~/.emacs.d/init.el 
+
+ - Install the packages if they are not installed yet.
+
+#+BEGIN_SRC elisp 
+    (setq package-archives
+     '( 
+        ("melpa" . "https://melpa.org/packages/")
+        
+        ;; ("org"       . "http://orgmode.org/elpa/")
+        ("gnu"       . "http://elpa.gnu.org/packages/")
+
+        ("marmalade" .  "http://marmalade-repo.org/packages/"))
+      )
+
+    (package-initialize)
+
+    (defun packages-require (&rest packs)
+      "Install and load a package. If the package is not available
+       installs it automaticaly."
+      (mapc  (lambda (package)
+               (unless (package-installed-p package)
+                       (package-install package)    
+                       ;;#'package-require
+                       ))
+
+             packs
+             
+             ))
+
+
+    (packages-require
+     'paredit
+     'rainbow-delimiters
+     'company
+     )
+#+END_SRC
+
+
+ - Enable paredit, rainbow-delimiters and show-paren-mode for Emacs
+   lisp mode (mode to edit Emacs files *.el) and lisp-interaction-mode
+   (mode to edit ~*scratch*~ buffer). 
+
+#+BEGIN_SRC elisp 
+
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  (add-hook 'emacs-lisp-mode-hook          
+            (lambda ()
+              (paredit-mode t)
+              (rainbow-delimiters-mode t)
+              (show-paren-mode 1)
+              ))
+
+  (add-hook 'lisp-interaction-mode
+            (lambda ()
+              (paredit-mode t)
+              (rainbow-delimiters-mode t)
+              (show-paren-mode 1)
+              ))
+#+END_SRC
+
+Set useful key bindings for IELM (Emacs-lisp interactive shell). 
+
+| Key Binding | Description                                              |
+|-------------+----------------------------------------------------------|
+| M-RET       | Execute S-expression                                     |
+| C-j         | Execute S-expression                                     |
+| RET         | Insert a new line, but doesn't send to the IELM process. |
+| up          | Move cursor to previous line                             |
+| down        | Move cursor to next line                                 |
+| C-up        | Select previous input                                    |
+| C-down      | Select next input                                        |
+| C-c C-l     | Show history                                             |
+| C-c C-q     | Clear repl                                               |
+
+This setting allows multiline input and by typing M-RET (Alt + Return)
+sends the current input to IELM process.
+
+
+#+BEGIN_SRC elisp 
+  (require 'ielm)
+
+  (defun ielm/clear-repl ()
+    "Clear current REPL buffer."
+    (interactive)
+    (let ((inhibit-read-only t))
+        (erase-buffer)     
+        (ielm-send-input)))
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "M-RET")
+    #'ielm-return)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "C-j")
+    #'ielm-return)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "RET")
+    #'electric-newline-and-maybe-indent)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "<up>")
+    #'previous-line)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "<down>")
+    #'next-line)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "C-c C-q")
+    #'ielm/clear-repl
+    )
+#+END_SRC
 
 ** Basic Operations
 
@@ -3318,8 +3421,8 @@ ELISP> (mapcar #'account-balance accounts)
 ELISP>
 
 #+END_SRC
-
 * Macros and Metaprogramming                  :macro:metaprogramming:lisp:
+** Overview 
 
 Macros are useful to create new lisp special forms like if and when,
 create new control structures, domain specific languages, eliminate
