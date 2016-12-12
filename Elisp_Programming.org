@@ -3,542 +3,6 @@
 #+TITLE: Elisp Programming
 #+KEYWORDS: emacs, api, elisp, lisp, programming, customize, functions, shell
 
-* Macros and Metaprogramming                  :macro:metaprogramming:lisp:
-
-Macros are useful to create new lisp special forms like if and when,
-create new control structures, domain specific languages, eliminate
-boilerplate code, automate code  and redefine syntax.
-Elisp macro constructs has the same syntax of Common Lisp.
-
-** Quasi-quote
-
-Quasi-quote is useful to create s-expression templates, data structure
-templates and lisp macros.
-
-#+BEGIN_SRC elisp
-
-
-> (setq a 10)
-10
-
-> (setq b 20)
-20
-
-> (setq c 'my-symbol)
-my-symbol
-
-> (setq d "a string")
-"a string"
-
-
-;;;; List of Symbols
-> '(a b c d)
-(a b c d)
-
-> (list 'a 'b 'c 'd )
-(a b c d)
-
-;;;; List of numbers
-
-> '(1 2.232 3523 23)
-(1 2.232 3523 23)
-
-> (list 1 2.232 3523 23)
-(1 2.232 3523 23)
-
-
-;;;; List of symbol and numbers
-
-> '(1 2.232 3523 23 a b c d)
-(1 2.232 3523 23 a b c d)
-
-> (list 1 2.232 3523 23 'a 'b 'c 'd)
-(1 2.232 3523 23 a b c d)
-
-> (list 1 2.232 3523 23 a b c d)
-(1 2.232 3523 23 10 20 my-symbol "a string")
-
-;;;; List with the variables a b c d
-> (list a b c d)
-(10 20 my-symbol "a string")
-
-;;;;  List with variables and symbols
-> (list 'a a 'b b 'c c 'd d)
-(a 10 b 20 c my-symbol d "a string")
-
-;;;; Asssociaiton List
-> (list (cons 'a  a) (cons 'b b) (cons 'c c) (cons 'd  d))
-((a . 10)
- (b . 20)
- (c . my-symbol)
- (d . "a string"))
-
-
-;;;; Quasiquote
-
-> `(the product of 3 and 4 is ,(* 3 4))
-(the product of 3 and 4 is 12)
-
-> `("the product of 3 and 4 is" ,(* 3 4))
-("the product of 3 and 4 is" 12)
-
-> `("the value of (exp 3) is " ,(exp 3) "the value of (sqrt 100) is" ,(sqrt 100))
-("the value of (exp 3) is " 20.085536923187668 "the value of (sqrt 100) is" 10.0)
-
-> `(a ,a b ,b c ,c d ,d)
-(a 10 b 20 c my-symbol d "a string")
-
-> `((a . ,a) (b . ,b) (c . ,c) (d . ,d))
-((a . 10)
- (b . 20)
- (c . my-symbol)
- (d . "a string"))
-
-> (setq xs '(sym1 sym2 sym3))
-(sym1 sym2 sym3)
-
-> xs
-(sym1 sym2 sym3)
-
-> `(xs ,xs)
-(xs
- (sym1 sym2 sym3))
-
-> `(xs ,@xs)
-(xs sym1 sym2 sym3)
-
-> `(if (< ,a ,b) ,(+ a 4) ,d)
-(if
-    (< 10 20)
-    14 "a string")
-
-> (eval `(if (< ,a ,b) ,(+ a 4) ,d))
-14
->
-
-> (eval `(if (> ,a ,b) ,(+ a 4) ,d))
-"a string"
-
-;;------------------
-
-> (setq xlist '(1 2 3 4))
-(1 2 3 4)
-
-> (setq ylist '(a b c d e))
-(a b c d e)
-
-> `(xs ,xlist ys ,ylist)
-(xs
- (1 2 3 4)
- ys
- (a b c d e))
-
-> `(xs ,@xlist ys ,@ylist)
-(xs 1 2 3 4 ys a b c d e)
-#+END_SRC
-
-** Macros
-
-*Redefine lambda syntax to λ*
-
-#+BEGIN_SRC elisp
-
-(defmacro λ (args body)
- `(lambda ,args ,body))
-
-ELISP> (λ (x) (+ x 3))
-(lambda
-  (x)
-  (+ x 3))
-ELISP> (mapcar (λ (x) (+ x 3)) '(1 2 3 4 5 6))
-(4 5 6 7 8 9)
-#+END_SRC
-
-*Set variable to nil*
-
-#+BEGIN_SRC elisp
-
-(defmacro nil! (var)
-  `(setq ,var nil))
-
-
-ELISP> (setq x 10)
-10
-ELISP> x
-10
-ELISP>
-
-ELISP> (nil! x)
-nil
-ELISP> x
-nil
-ELISP>
-
-ELISP> (nil! z)
-nil
-ELISP> z
-nil
-ELISP>
-#+END_SRC
-
-*Create Clojure def, defn and fn special forms*
-
- - [[https://clojuredocs.org/clojure.core/fn][Special form - fn]]
- - [[https://clojuredocs.org/clojure.core/def][Special form - def]]
- - [[https://clojuredocs.org/clojure.core/defn][Special form - defn]]
-
-#+BEGIN_SRC elisp
-
-(defmacro fn (args body)
- `(lambda ,args ,body))
-
-(defmacro def (name value)
-   `(setq ,name ,value))
-
-(defmacro defn (name args body)
-   `(defun ,name ,args ,body))
-
-ELISP> (fn (x) (* x x))
-(lambda
-  (x)
-  (* x x))
-
-ELISP> (mapcar (fn (x) (* x x)) '(1 2 3 4 5))
-(1 4 9 16 25)
-
-ELISP> (def x 1000)
-1000
-ELISP> x
-1000
-ELISP>
-
-ELISP> (defn f (x y z) (+ (* 3 x) (* -4 y) (* 5 z)))
-f
-ELISP> (f 4 5 6)
-22
-ELISP>
-
-#+END_SRC
-
-*Clojure - Thread-First Macro*
-
-See also:
-
-    * [[https://clojuredocs.org/clojure.core/-%3E][Clojure Docs (-> x & forms)]]
-    * [[http://www.greghendershott.com/2013/05/the-threading-macro.html][The ~> Threading Macro]]
-
-#+BEGIN_SRC elisp
-
-(defun foldl (f acc xss)
-  (if (null xss)
-      acc
-      (foldl f (funcall f acc (car xss)) (cdr xss))))
-
-(defun pass-result (x sexp)
-  (if (listp sexp)
-      `(,(car sexp) ,x ,@(cdr sexp))
-      `(,sexp ,x)))
-
-(defmacro -> (x &rest exprs)
-  (foldl #'pass-result x exprs))
-
-;; The expression below is expanded to:
-;;
-(->
-    5
-    exp
-    (/ 20)
-    (+ 10 20)
-    (- 3)
-    log10)
-
-ELISP> (macroexpand
-    '(->
-    5
-    exp
-    (/ 20)
-    (+ 10 20)
-    (- 3)
-    log10))
-
-(log10
- (-
-  (+
-   (/
-    (exp 5)
-    20)
-   10 20)
-  3))
-
-Or
-
-(log10 (- (+ (/ (exp 5) 20) 10 20) 3))
-
-;;; How does the macro work ?
-
-ELISP> (pass-result 5 'exp)
-(exp 5)
-
-ELISP> (pass-result (pass-result 5 'exp) '(/ 20))
-(/
- (exp 5)
- 20)
-
-ELISP> (pass-result (pass-result (pass-result 5 'exp) '(/ 20)) '(+ 10 20))
-(+
- (/
-  (exp 5)
-  20)
- 10 20)
-
-ELISP>
-
-#+END_SRC
-
-*Clojure - Thread-Last Macro*
-
-See:  [[https://clojuredocs.org/clojure.core/-%3E%3E][(->> x & forms)]]
-
-#+BEGIN_SRC elisp
-
-(defun pass-result-last (x sexp)
-  (if (listp sexp)
-    `(,(car sexp) ,@(cdr sexp) ,x)
-    `(,sexp ,x)))
-
-(defmacro --> (x &rest exprs)
-  (foldl #'pass-result-last x exprs))
-
-
-(-->
-    5
-    (/ 20)
-    (+ 10 20)
-    (- 16))
-
-;; Macro expansion
-;;;(- 16 (+ 10 20 (/ 20 5)))
-
-
-ELISP> (-->
-    5
-    (/ 20)
-    (+ 10 20)
-    (- 16))
--18
-ELISP
-#+END_SRC
-
-
-*Thread-Substitute Macro*
-
-#+BEGIN_SRC elisp
-
-
-(defun replace (targ subst lst)
-  (if (null lst)
-      '()
-    (let ((hd (car lst))
-      (tl (cdr lst)))
-      (if (equal targ hd)
-      (cons subst (replace targ subst tl))
-    (cons (if (listp hd) (replace targ subst hd) hd)
-          (replace targ subst tl))))))
-
-(defun pass-result-subst (x sexp)
-  (if (listp sexp)
-     (replace '$ x sexp)
-    `(,sexp ,x)))
-
-(defmacro $-> (x &rest exprs)
-  (foldl #'pass-result-subst x exprs))
-
-
-;;------------------------------------;;
-
-ELISP> (replace '$ 10 '(20 + $ * ( 3 + $ + 5 * (sqrt ($ - 5)))))
-(20 + 10 *
-    (3 + 10 + 5 *
-       (sqrt
-    (10 - 5))))
-
-ELISP> (macroexpand
-  '($->
-    500
-    (/ $ 20 )
-    (- 40 $)
-    sqrt))
-(sqrt
- (- 40
-    (/ 500 20)))
-
-ELISP>
-  ($->
-    500
-    (/ $ 20 )
-    (- 40 $)
-    sqrt)
-3.872983346207417
-ELISP>
-
-#+END_SRC
-
-
-*Clojure Let*
-
-#+BEGIN_SRC elisp
-
-
-
-(defmacro letc (bindings &rest body)
-  `(let*
-       ,(plist->alist bindings)
-     ,@body))
-
-ELISP>
-        (letc
-         (
-          a 10
-          b (+ a 3)
-          c (+ a b)
-          )
-         (list a b c))
-(10 13 23)
-
-ELISP>
-
-ELISP> (macroexpand
-        '(letc
-         (
-          a 10
-          b (+ a 3)
-          c (+ a b)
-          )
-         (list a b c)))
-(let*
-    ((a 10)
-     (b
-      (+ a 3))
-     (c
-      (+ a b)))
-  (list a b c))
-
-ELISP>
-#+END_SRC
-
-*Create Scheme Syntax define*
-
-#+BEGIN_SRC elisp
-
-(defmacro define (args body)
- (if (listp args)
-     `(defun ,(car args) ,(cdr args) ,body)
-     `(setq  ,args ,body)))
-define
-ELISP>
-ELISP> (define x 50)
-50
-ELISP> x
-50
-ELISP>
-ELISP> (define (f x y) (+ (* 3 x) (* -4 y)))
-f
-ELISP> (f 5 6)
--9
-ELISP>
-#+END_SRC
-
-*Rebind Elisp functions*
-
-Bind new names to existing elisp functions in order to create user friendly identifiers, for example, bind the symbol map to the function mapcar.
-
-#+BEGIN_SRC elisp
-
-(defmacro rebindfun (new-name old-name)
-   `(setf (symbol-function ,new-name) ,old-name))
-
-ELISP> (rebindfun 'map #'mapcar)
-mapcar
-ELISP>
-
-ELISP> (map (lambda (x) (+ x 5)) '(1 2 3 4 5 6 7 8))
-(6 7 8 9 10 11 12 13)
-
-ELISP> (rebindfun 'filter #'remove-if-not)
-remove-if-not
-ELISP>
-
-ELISP> (filter (lambda (x) (< x  10)) '(1 20 30 4 6 89 3 2 9 100))
-(1 4 6 3 2 9)
-
-ELISP> (filter 'evenp  '(1 2 3 4 5 6 7 8))
-(2 4 6 8)
-
-ELISP> (filter 'oddp  '(1 2 3 4 5 6 7 8))
-(1 3 5 7
-
-;;; Commmon Lisp Way
-
-ELISP> (filter #'evenp  '(1 2 3 4 5 6 7 8))
-(2 4 6 8)
-
-ELISP> (filter #'oddp  '(1 2 3 4 5 6 7 8))
-(1 3 5 7)
-#+END_SRC
-
-*Convert Infix Operator to prefix operator*
-
-#+BEGIN_SRC elisp
-
-(defmacro $ (a op b)
-  `(,op ,a ,b))
-
-ELISP>
-ELISP> ($ 1 < 10)
-t
-ELISP> ($ 1 > 10)
-nil
-ELISP>
-
-ELISP> (macroexpand '($ 1 > 10))
-(> 1 10)
-
-ELISP> (if ($ 4 < 10) "Less than 10" "Greater than 10")
-"Less than 10"
-ELISP>
-ELISP> (if ($ 1444 < 10) "Less than 10" "Greater than 10")
-"Greater than 10"
-ELISP>
-#+END_SRC
-
-*Debug Injection Macro*
-
-The function print can be replaced by message to display the debug message in the minibuffer. It is useful to debug callbacks.
-
-#+BEGIN_SRC elisp
-
-(defmacro $debug (func &rest params)
-  `(let
-      ((__r (,func ,@params)))
-       (progn
-     (print (format "%s = %s"
-      (quote (,func ,@params))
-       __r))
-     __r)))
-
-;;; Usage:
-
-ELISP> ($debug + 10 ($debug * 10 30))
-
-"(* 10 30) = 300"
-
-"(+ 10 ($debug * 10 30)) = 310"
-
-310
-ELISP>
-
-#+END_SRC
-
 * Elisp
 ** Overview
 
@@ -551,7 +15,7 @@ that loads the library cl - Common Lisp Extension Library, that
 provides many useful common lisp functions and macros like remove-if,
 remove-if-not, cl-case and so on.
 
-See also: [[http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html][Common Lisp Extensions - Common Lisp Extensions]]
+See also: [[http://www.fnal.gov/docs/products/emacs/emacs/cl_1.html][Common Lisp Extensions]]
 
 *** Using the Scratch Buffer and Interpreter
 
@@ -673,6 +137,146 @@ This can also be invoked with:
 file:images/function-documentation-describe.png
 
 ** Basic settings for Elisp Programming 
+
+The packages paredit, rainbow-delimiters and company gives a better
+user experience when programming Elisp. The package [[https://www.emacswiki.org/emacs/RainbowDelimiters][rainbow-delimiters]]
+provides different colors for parenthesis at different levels making
+easier to spot errors and s-expression, the package [[https://www.emacswiki.org/emacs/ParEdit][paredit]] allows
+structured and fast editing of s-expressions and [[https://www.emacswiki.org/emacs/CompanyMode][company]] provides
+completion for Emacs-lisp statements like functions and variables.
+
+Paredit and rainbow-delimiters are not only useful for Elisp, they are
+also invaluable for other lisp dialects like Scheme, Common Lisp and
+Clojure.
+
+See also: 
+
+ - [[https://www.youtube.com/watch?v=D6h5dFyyUX0][Emacs Rocks! Episode 14: Paredit - YouTube]]
+
+ - [[https://www.youtube.com/watch?v=hiwEm88xaxM][26 Emacs - Paredit: little known features (Programothesis by emailatask.com) - YouTube]]
+
+This packages can be installed by using this commands:
+
+ - M-x package-install paredit
+ - M-x package-install rainbow-delimiters
+ - M-x package-install company
+
+Settings ~/.emacs.d/init.el 
+
+ - Install the packages if they are not installed yet.
+
+#+BEGIN_SRC elisp 
+    (setq package-archives
+     '( 
+        ("melpa" . "https://melpa.org/packages/")
+        
+        ;; ("org"       . "http://orgmode.org/elpa/")
+        ("gnu"       . "http://elpa.gnu.org/packages/")
+
+        ("marmalade" .  "http://marmalade-repo.org/packages/"))
+      )
+
+    (package-initialize)
+
+    (defun packages-require (&rest packs)
+      "Install and load a package. If the package is not available
+       installs it automaticaly."
+      (mapc  (lambda (package)
+               (unless (package-installed-p package)
+                       (package-install package)    
+                       ;;#'package-require
+                       ))
+
+             packs
+             
+             ))
+
+
+    (packages-require
+     'paredit
+     'rainbow-delimiters
+     'company
+     )
+#+END_SRC
+
+
+ - Enable paredit, rainbow-delimiters and show-paren-mode for Emacs
+   lisp mode (mode to edit Emacs files *.el) and lisp-interaction-mode
+   (mode to edit ~*scratch*~ buffer). 
+
+#+BEGIN_SRC elisp 
+
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  (add-hook 'emacs-lisp-mode-hook          
+            (lambda ()
+              (paredit-mode t)
+              (rainbow-delimiters-mode t)
+              (show-paren-mode 1)
+              ))
+
+  (add-hook 'lisp-interaction-mode
+            (lambda ()
+              (paredit-mode t)
+              (rainbow-delimiters-mode t)
+              (show-paren-mode 1)
+              ))
+#+END_SRC
+
+Set useful key bindings for IELM (Emacs-lisp interactive shell). 
+
+| Key Binding | Description                                              |
+|-------------+----------------------------------------------------------|
+| M-RET       | Execute S-expression                                     |
+| C-j         | Execute S-expression                                     |
+| RET         | Insert a new line, but doesn't send to the IELM process. |
+| up          | Move cursor to previous line                             |
+| down        | Move cursor to next line                                 |
+| C-up        | Select previous input                                    |
+| C-down      | Select next input                                        |
+| C-c C-l     | Show history                                             |
+| C-c C-q     | Clear repl                                               |
+
+This setting allows multiline input and by typing M-RET (Alt + Return)
+sends the current input to IELM process.
+
+
+#+BEGIN_SRC elisp 
+  (require 'ielm)
+
+  (defun ielm/clear-repl ()
+    "Clear current REPL buffer."
+    (interactive)
+    (let ((inhibit-read-only t))
+        (erase-buffer)     
+        (ielm-send-input)))
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "M-RET")
+    #'ielm-return)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "C-j")
+    #'ielm-return)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "RET")
+    #'electric-newline-and-maybe-indent)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "<up>")
+    #'previous-line)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "<down>")
+    #'next-line)
+
+  (define-key inferior-emacs-lisp-mode-map
+    (kbd "C-c C-q")
+    #'ielm/clear-repl
+    )
+#+END_SRC
+
 ** Basic Operations
 
 *Arithmetic*
@@ -3814,6 +3418,542 @@ ELISP>
 ELISP> (mapcar #'account-balance accounts)
 (23.2323 1002323.23 2323241.2323 9823)
 
+ELISP>
+
+#+END_SRC
+* Macros and Metaprogramming                  :macro:metaprogramming:lisp:
+** Overview 
+
+Macros are useful to create new lisp special forms like if and when,
+create new control structures, domain specific languages, eliminate
+boilerplate code, automate code  and redefine syntax.
+Elisp macro constructs has the same syntax of Common Lisp.
+
+** Quasi-quote
+
+Quasi-quote is useful to create s-expression templates, data structure
+templates and lisp macros.
+
+#+BEGIN_SRC elisp
+
+
+> (setq a 10)
+10
+
+> (setq b 20)
+20
+
+> (setq c 'my-symbol)
+my-symbol
+
+> (setq d "a string")
+"a string"
+
+
+;;;; List of Symbols
+> '(a b c d)
+(a b c d)
+
+> (list 'a 'b 'c 'd )
+(a b c d)
+
+;;;; List of numbers
+
+> '(1 2.232 3523 23)
+(1 2.232 3523 23)
+
+> (list 1 2.232 3523 23)
+(1 2.232 3523 23)
+
+
+;;;; List of symbol and numbers
+
+> '(1 2.232 3523 23 a b c d)
+(1 2.232 3523 23 a b c d)
+
+> (list 1 2.232 3523 23 'a 'b 'c 'd)
+(1 2.232 3523 23 a b c d)
+
+> (list 1 2.232 3523 23 a b c d)
+(1 2.232 3523 23 10 20 my-symbol "a string")
+
+;;;; List with the variables a b c d
+> (list a b c d)
+(10 20 my-symbol "a string")
+
+;;;;  List with variables and symbols
+> (list 'a a 'b b 'c c 'd d)
+(a 10 b 20 c my-symbol d "a string")
+
+;;;; Asssociaiton List
+> (list (cons 'a  a) (cons 'b b) (cons 'c c) (cons 'd  d))
+((a . 10)
+ (b . 20)
+ (c . my-symbol)
+ (d . "a string"))
+
+
+;;;; Quasiquote
+
+> `(the product of 3 and 4 is ,(* 3 4))
+(the product of 3 and 4 is 12)
+
+> `("the product of 3 and 4 is" ,(* 3 4))
+("the product of 3 and 4 is" 12)
+
+> `("the value of (exp 3) is " ,(exp 3) "the value of (sqrt 100) is" ,(sqrt 100))
+("the value of (exp 3) is " 20.085536923187668 "the value of (sqrt 100) is" 10.0)
+
+> `(a ,a b ,b c ,c d ,d)
+(a 10 b 20 c my-symbol d "a string")
+
+> `((a . ,a) (b . ,b) (c . ,c) (d . ,d))
+((a . 10)
+ (b . 20)
+ (c . my-symbol)
+ (d . "a string"))
+
+> (setq xs '(sym1 sym2 sym3))
+(sym1 sym2 sym3)
+
+> xs
+(sym1 sym2 sym3)
+
+> `(xs ,xs)
+(xs
+ (sym1 sym2 sym3))
+
+> `(xs ,@xs)
+(xs sym1 sym2 sym3)
+
+> `(if (< ,a ,b) ,(+ a 4) ,d)
+(if
+    (< 10 20)
+    14 "a string")
+
+> (eval `(if (< ,a ,b) ,(+ a 4) ,d))
+14
+>
+
+> (eval `(if (> ,a ,b) ,(+ a 4) ,d))
+"a string"
+
+;;------------------
+
+> (setq xlist '(1 2 3 4))
+(1 2 3 4)
+
+> (setq ylist '(a b c d e))
+(a b c d e)
+
+> `(xs ,xlist ys ,ylist)
+(xs
+ (1 2 3 4)
+ ys
+ (a b c d e))
+
+> `(xs ,@xlist ys ,@ylist)
+(xs 1 2 3 4 ys a b c d e)
+#+END_SRC
+
+** Macros
+
+*Redefine lambda syntax to λ*
+
+#+BEGIN_SRC elisp
+
+(defmacro λ (args body)
+ `(lambda ,args ,body))
+
+ELISP> (λ (x) (+ x 3))
+(lambda
+  (x)
+  (+ x 3))
+ELISP> (mapcar (λ (x) (+ x 3)) '(1 2 3 4 5 6))
+(4 5 6 7 8 9)
+#+END_SRC
+
+*Set variable to nil*
+
+#+BEGIN_SRC elisp
+
+(defmacro nil! (var)
+  `(setq ,var nil))
+
+
+ELISP> (setq x 10)
+10
+ELISP> x
+10
+ELISP>
+
+ELISP> (nil! x)
+nil
+ELISP> x
+nil
+ELISP>
+
+ELISP> (nil! z)
+nil
+ELISP> z
+nil
+ELISP>
+#+END_SRC
+
+*Create Clojure def, defn and fn special forms*
+
+ - [[https://clojuredocs.org/clojure.core/fn][Special form - fn]]
+ - [[https://clojuredocs.org/clojure.core/def][Special form - def]]
+ - [[https://clojuredocs.org/clojure.core/defn][Special form - defn]]
+
+#+BEGIN_SRC elisp
+
+(defmacro fn (args body)
+ `(lambda ,args ,body))
+
+(defmacro def (name value)
+   `(setq ,name ,value))
+
+(defmacro defn (name args body)
+   `(defun ,name ,args ,body))
+
+ELISP> (fn (x) (* x x))
+(lambda
+  (x)
+  (* x x))
+
+ELISP> (mapcar (fn (x) (* x x)) '(1 2 3 4 5))
+(1 4 9 16 25)
+
+ELISP> (def x 1000)
+1000
+ELISP> x
+1000
+ELISP>
+
+ELISP> (defn f (x y z) (+ (* 3 x) (* -4 y) (* 5 z)))
+f
+ELISP> (f 4 5 6)
+22
+ELISP>
+
+#+END_SRC
+
+*Clojure - Thread-First Macro*
+
+See also:
+
+    * [[https://clojuredocs.org/clojure.core/-%3E][Clojure Docs (-> x & forms)]]
+    * [[http://www.greghendershott.com/2013/05/the-threading-macro.html][The ~> Threading Macro]]
+
+#+BEGIN_SRC elisp
+
+(defun foldl (f acc xss)
+  (if (null xss)
+      acc
+      (foldl f (funcall f acc (car xss)) (cdr xss))))
+
+(defun pass-result (x sexp)
+  (if (listp sexp)
+      `(,(car sexp) ,x ,@(cdr sexp))
+      `(,sexp ,x)))
+
+(defmacro -> (x &rest exprs)
+  (foldl #'pass-result x exprs))
+
+;; The expression below is expanded to:
+;;
+(->
+    5
+    exp
+    (/ 20)
+    (+ 10 20)
+    (- 3)
+    log10)
+
+ELISP> (macroexpand
+    '(->
+    5
+    exp
+    (/ 20)
+    (+ 10 20)
+    (- 3)
+    log10))
+
+(log10
+ (-
+  (+
+   (/
+    (exp 5)
+    20)
+   10 20)
+  3))
+
+Or
+
+(log10 (- (+ (/ (exp 5) 20) 10 20) 3))
+
+;;; How does the macro work ?
+
+ELISP> (pass-result 5 'exp)
+(exp 5)
+
+ELISP> (pass-result (pass-result 5 'exp) '(/ 20))
+(/
+ (exp 5)
+ 20)
+
+ELISP> (pass-result (pass-result (pass-result 5 'exp) '(/ 20)) '(+ 10 20))
+(+
+ (/
+  (exp 5)
+  20)
+ 10 20)
+
+ELISP>
+
+#+END_SRC
+
+*Clojure - Thread-Last Macro*
+
+See:  [[https://clojuredocs.org/clojure.core/-%3E%3E][(->> x & forms)]]
+
+#+BEGIN_SRC elisp
+
+(defun pass-result-last (x sexp)
+  (if (listp sexp)
+    `(,(car sexp) ,@(cdr sexp) ,x)
+    `(,sexp ,x)))
+
+(defmacro --> (x &rest exprs)
+  (foldl #'pass-result-last x exprs))
+
+
+(-->
+    5
+    (/ 20)
+    (+ 10 20)
+    (- 16))
+
+;; Macro expansion
+;;;(- 16 (+ 10 20 (/ 20 5)))
+
+
+ELISP> (-->
+    5
+    (/ 20)
+    (+ 10 20)
+    (- 16))
+-18
+ELISP
+#+END_SRC
+
+
+*Thread-Substitute Macro*
+
+#+BEGIN_SRC elisp
+
+
+(defun replace (targ subst lst)
+  (if (null lst)
+      '()
+    (let ((hd (car lst))
+      (tl (cdr lst)))
+      (if (equal targ hd)
+      (cons subst (replace targ subst tl))
+    (cons (if (listp hd) (replace targ subst hd) hd)
+          (replace targ subst tl))))))
+
+(defun pass-result-subst (x sexp)
+  (if (listp sexp)
+     (replace '$ x sexp)
+    `(,sexp ,x)))
+
+(defmacro $-> (x &rest exprs)
+  (foldl #'pass-result-subst x exprs))
+
+
+;;------------------------------------;;
+
+ELISP> (replace '$ 10 '(20 + $ * ( 3 + $ + 5 * (sqrt ($ - 5)))))
+(20 + 10 *
+    (3 + 10 + 5 *
+       (sqrt
+    (10 - 5))))
+
+ELISP> (macroexpand
+  '($->
+    500
+    (/ $ 20 )
+    (- 40 $)
+    sqrt))
+(sqrt
+ (- 40
+    (/ 500 20)))
+
+ELISP>
+  ($->
+    500
+    (/ $ 20 )
+    (- 40 $)
+    sqrt)
+3.872983346207417
+ELISP>
+
+#+END_SRC
+
+
+*Clojure Let*
+
+#+BEGIN_SRC elisp
+
+
+
+(defmacro letc (bindings &rest body)
+  `(let*
+       ,(plist->alist bindings)
+     ,@body))
+
+ELISP>
+        (letc
+         (
+          a 10
+          b (+ a 3)
+          c (+ a b)
+          )
+         (list a b c))
+(10 13 23)
+
+ELISP>
+
+ELISP> (macroexpand
+        '(letc
+         (
+          a 10
+          b (+ a 3)
+          c (+ a b)
+          )
+         (list a b c)))
+(let*
+    ((a 10)
+     (b
+      (+ a 3))
+     (c
+      (+ a b)))
+  (list a b c))
+
+ELISP>
+#+END_SRC
+
+*Create Scheme Syntax define*
+
+#+BEGIN_SRC elisp
+
+(defmacro define (args body)
+ (if (listp args)
+     `(defun ,(car args) ,(cdr args) ,body)
+     `(setq  ,args ,body)))
+define
+ELISP>
+ELISP> (define x 50)
+50
+ELISP> x
+50
+ELISP>
+ELISP> (define (f x y) (+ (* 3 x) (* -4 y)))
+f
+ELISP> (f 5 6)
+-9
+ELISP>
+#+END_SRC
+
+*Rebind Elisp functions*
+
+Bind new names to existing elisp functions in order to create user friendly identifiers, for example, bind the symbol map to the function mapcar.
+
+#+BEGIN_SRC elisp
+
+(defmacro rebindfun (new-name old-name)
+   `(setf (symbol-function ,new-name) ,old-name))
+
+ELISP> (rebindfun 'map #'mapcar)
+mapcar
+ELISP>
+
+ELISP> (map (lambda (x) (+ x 5)) '(1 2 3 4 5 6 7 8))
+(6 7 8 9 10 11 12 13)
+
+ELISP> (rebindfun 'filter #'remove-if-not)
+remove-if-not
+ELISP>
+
+ELISP> (filter (lambda (x) (< x  10)) '(1 20 30 4 6 89 3 2 9 100))
+(1 4 6 3 2 9)
+
+ELISP> (filter 'evenp  '(1 2 3 4 5 6 7 8))
+(2 4 6 8)
+
+ELISP> (filter 'oddp  '(1 2 3 4 5 6 7 8))
+(1 3 5 7
+
+;;; Commmon Lisp Way
+
+ELISP> (filter #'evenp  '(1 2 3 4 5 6 7 8))
+(2 4 6 8)
+
+ELISP> (filter #'oddp  '(1 2 3 4 5 6 7 8))
+(1 3 5 7)
+#+END_SRC
+
+*Convert Infix Operator to prefix operator*
+
+#+BEGIN_SRC elisp
+
+(defmacro $ (a op b)
+  `(,op ,a ,b))
+
+ELISP>
+ELISP> ($ 1 < 10)
+t
+ELISP> ($ 1 > 10)
+nil
+ELISP>
+
+ELISP> (macroexpand '($ 1 > 10))
+(> 1 10)
+
+ELISP> (if ($ 4 < 10) "Less than 10" "Greater than 10")
+"Less than 10"
+ELISP>
+ELISP> (if ($ 1444 < 10) "Less than 10" "Greater than 10")
+"Greater than 10"
+ELISP>
+#+END_SRC
+
+*Debug Injection Macro*
+
+The function print can be replaced by message to display the debug message in the minibuffer. It is useful to debug callbacks.
+
+#+BEGIN_SRC elisp
+
+(defmacro $debug (func &rest params)
+  `(let
+      ((__r (,func ,@params)))
+       (progn
+     (print (format "%s = %s"
+      (quote (,func ,@params))
+       __r))
+     __r)))
+
+;;; Usage:
+
+ELISP> ($debug + 10 ($debug * 10 30))
+
+"(* 10 30) = 300"
+
+"(+ 10 ($debug * 10 30)) = 310"
+
+310
 ELISP>
 
 #+END_SRC
