@@ -5,6 +5,35 @@
 #+STARTUP: content 
 
 * Emacs on Microsoft Windows 
+** Overview 
+
+*Why Emacs ?* 
+
+Emacs provides many useful tools for Windows developers or anyone that
+have to use Windows for professional reasons or use Windows at work
+such as:
+
+ - _Powerful terminal emulator_: Emacs can be a powerful terminal
+   emulator for Windows and a outstanding replacement for cmd.exe
+   terminal emulator because it has history, multi line history and
+   multi line input and tiling windows where it is possible to split
+   the Emacs window and run a repl and edit a file on the same
+   window. Unlike cmd.exe Emacs can also run multiple REPLs in the
+   same window.
+
+ - _Run any shell_: Emacs can run any shell application like Python,
+   IPython, Powershell, cmd.exe, bash, C# shell, F# and so on.
+
+ - _Eshell_: Eshell is unix-like shell implemented in Elisp providing
+   many unix commands like ls, mv, cp, rm without any external
+   dependencies and it is also highly integrated to Emacs allowing the
+   user to call elisp functions, browser directories, open files
+   (visit buffer).
+
+ - _Dired mode_: Dired mode allows fast directory navigation and to
+   run commands or apply shell commands on files like md5sum, rm -rf,
+   git add and so on.
+
 ** Set HOME variable 
 
 The HOME environment variable that has the default value
@@ -180,7 +209,6 @@ to handle clipboard.
 #+END_SRC
 
 *Show clibpoard content*
-
 
 
 **** Shell Commands mixed with Emacs commands 
