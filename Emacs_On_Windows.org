@@ -34,7 +34,8 @@ such as:
    run commands or apply shell commands on files like md5sum, rm -rf,
    git add and so on.
 
-** Set HOME variable 
+** Set Environments Variables 
+*** Set HOME 
 
 The HOME environment variable that has the default value
 _/home/<username>)_ on Linux sets the user's directory path.
@@ -79,6 +80,32 @@ To open directory (C:\Users\arch\Desktop)
 
  - C-x C-d ~/Desktop 
 
+*** Set PATH
+
+Executables located in directories listed in PATH environment variable
+can be invoked without its full path like ls, echo and who in Unix-like
+OS or ipconfig, arp and whoami in Windows. 
+
+#+BEGIN_SRC bat
+C:\Users\arch\bin>echo %PATH%
+C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem...
+#+END_SRC
+
+By adding the directory ~/bin or C:\Users\<user>\bin to PATH variable
+it makes easir to call command line applications from this directory
+without specifing its full path from Emacs or shell (cmd.exe). It can
+be done with:
+
+ - Add the directory C:\Users\<user>\bin to %PATH% enviroment variable: 
+
+#+BEGIN_SRC bat 
+ setx PATH "%PATH%;%USERPROFILE%\bin"
+#+END_SRC 
+
+It makes easeir to call C:\Users\<user>\bin\curl.exe from any
+directory. Instead of write its full path the user can just run =$ curl.exe= 
+or =$ curl=.
+
 ** Unix utilities 
 
 You can bash install with Chocolately package manager or download GIT
@@ -104,7 +131,7 @@ Command to run cmd.exe. Usage: M-x run-cmdexe
             (shell "*cmd.exe*")))
 #+END_SRC
 
-** Path Environment Variables 
+** Environment Variables in Emacs
 
 To run Unix utilities and other command lines apps in Emacs add to the
 PATH system environment variable the path to their directories like this:
@@ -164,7 +191,7 @@ file:images/eshell-windows-demo1.gif
 
 **** Emacs Integration 
 
-http://i.imgur.com/0kVYnXO.gif
+# http://i.imgur.com/0kVYnXO.gif
 
 Eshell can run Emacs elisp commands (interactive functions) like
 find-file, dired as ordinary shell commands like is shown above. 
@@ -209,7 +236,6 @@ to handle clipboard.
 #+END_SRC
 
 *Show clibpoard content*
-
 
 **** Shell Commands mixed with Emacs commands 
 
