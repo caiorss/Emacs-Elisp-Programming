@@ -34,6 +34,81 @@ such as:
    run commands or apply shell commands on files like md5sum, rm -rf,
    git add and so on.
 
+** Getting Emacs and Useful tools
+*** Getting Emacs
+
+Emacs 32 bits
+
+ - https://ftp.gnu.org/gnu/emacs/windows/
+
+Emacs 64 bits - 64-Bit GNU Emacs for MS Windows with optimization. 
+
+ - https://sourceforge.net/projects/emacsbinw64/
+
+Install using Chocolately Package Manager 
+
+ - https://chocolatey.org/packages?q=emacs 
+
+Emacs 64 bits unnoficial
+
+ - https://chocolatey.org/packages/emacs64
+
+#+BEGIN_SRC sh
+choco install emacs64
+#+END_SRC
+
+*** Getting Unix utilities 
+
+Git for Windows provides many Unix utilities ported for Windows like
+awk, cat, ls, chown, grep, find and etc.
+
+ - https://git-scm.com/download/win
+
+#+BEGIN_SRC 
+c:/Program Files/Git/usr/bin $ ls -l *.exe
+-rwxrwxrwx   1 Administrators None        65017 2016-03-18 16:40 [.exe
+-rwxrwxrwx   1 Administrators None        28991 2016-03-18 16:40 arch.exe
+-rwxrwxrwx   1 Administrators None       581408 2015-05-21  2015 awk.exe
+-rwxrwxrwx   1 Administrators None        37712 2016-03-18 16:40 base32.exe
+-rwxrwxrwx   1 Administrators None        37712 2016-03-18 16:40 base64.exe
+-rwxrwxrwx   1 Administrators None        30078 2016-03-18 16:40 basename.exe
+-rwxrwxrwx   1 Administrators None      2063362 2016-07-13 16:00 bash.exe
+-rwxrwxrwx   1 Administrators None        89618 2014-11-04  2014 bunzip2.exe
+-rwxrwxrwx   1 Administrators None        89618 2014-11-04  2014 bzcat.exe
+-rwxrwxrwx   1 Administrators None        89618 2014-11-04  2014 bzip2.exe
+-rwxrwxrwx   1 Administrators None        14686 2014-11-04  2014 bzip2recover.exe
+-rwxrwxrwx   1 Administrators None        74003 2016-03-01 17:15 captoinfo.exe
+-rwxrwxrwx   1 Administrators None        51896 2016-03-18 16:40 cat.exe
+-rwxrwxrwx   1 Administrators None        55848 2016-03-18 16:40 chcon.exe
+
+...
+
+-rwxrwxrwx   1 Administrators None       128615 2016-03-18 16:40 vdir.exe
+-rwxrwxrwx   1 Administrators None      2335971 2016-04-09 11:08 view.exe
+-rwxrwxrwx   1 Administrators None      2335971 2016-04-09 11:08 vim.exe
+-rwxrwxrwx   1 Administrators None      2335971 2016-04-09 11:08 vimdiff.exe
+-rwxrwxrwx   1 Administrators None        42100 2016-03-18 16:40 wc.exe
+-rwxrwxrwx   1 Administrators None        29553 2015-07-20  2015 which.exe
+-rwxrwxrwx   1 Administrators None        63429 2016-03-18 16:40 who.exe
+-rwxrwxrwx   1 Administrators None        28054 2016-03-18 16:40 whoami.exe
+-rwxrwxrwx   1 Administrators None       975360 2016-05-16 14:32 winpty-agent.exe
+-rwxrwxrwx   1 Administrators None        41984 2016-05-16 14:32 winpty-debugserver.exe
+-rwxrwxrwx   1 Administrators None       747008 2016-05-16 14:32 winpty.exe
+-rwxrwxrwx   1 Administrators None        64058 2016-01-20 15:17 xargs.exe
+-rwxrwxrwx   1 Administrators None        25299 2016-03-29 14:28 xmlwf.exe
+-rwxrwxrwx   1 Administrators None        18954 2016-04-09 11:08 xxd.exe
+-rwxrwxrwx   1 Administrators None        28580 2016-03-18 16:40 yes.exe
+-rwxrwxrwx   1 Administrators None       173708 2014-11-04  2014 zipinfo.exe
+#+END_SRC
+
+GNU Make is an useful build-automation tool and can be got from:
+
+ - https://chocolatey.org/packages/make/3.81.4
+ 
+#+BEGIN_SRC 
+$ choco install make
+#+END_SRC
+
 ** Set Environments Variables 
 *** Set HOME 
 
@@ -83,8 +158,8 @@ To open directory (C:\Users\arch\Desktop)
 *** Set PATH
 
 Executables located in directories listed in PATH environment variable
-can be invoked without its full path like ls, echo and who in Unix-like
-OS or ipconfig, arp and whoami in Windows. 
+can be invoked without its full path like ls, echo and who in
+Unix-like OS or ipconfig, arp and whoami in Windows.
 
 #+BEGIN_SRC bat
 C:\Users\arch\bin>echo %PATH%
@@ -103,8 +178,8 @@ be done with:
 #+END_SRC 
 
 It makes easeir to call C:\Users\<user>\bin\curl.exe from any
-directory. Instead of write its full path the user can just run =$ curl.exe= 
-or =$ curl=.
+directory. Instead of write its full path the user can just run =$
+curl.exe= or =$ curl=.
 
 ** Unix utilities 
 
