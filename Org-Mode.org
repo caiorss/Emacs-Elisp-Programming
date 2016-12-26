@@ -272,19 +272,22 @@ x^2 + \left(\frac{y}{z}\right)^4 = 0
     
 ** Useful Commands 
 
-| Command                       | Description                   |
-|-------------------------------+-------------------------------|
-|                               |                               |
-| *Display*                     |                               |
-| M-x org-toggle-inline-images  | Toggle images display         |
-| M-x org-toggle-latex-fragment | Toggle latex formulas display |
-| M-x org-toggle-link-display   | Toggle hyperlink display      |
-|                               |                               |
-| *Export*                      |                               |
-| M-x org-html-export-to-html   | Export buffer to html file.   |
-| M-x org-latex-export-to-pdf   | Export buffer to pdf file.    |
-|                               |                               |
-|                               |                               |
+| Command                       | Description                         |
+|-------------------------------+-------------------------------------|
+|                               |                                     |
+| *Display*                     |                                     |
+| M-x org-toggle-inline-images  | Toggle images display               |
+| M-x org-toggle-latex-fragment | Toggle latex formulas display       |
+| M-x org-toggle-link-display   | Toggle hyperlink display            |
+|                               |                                     |
+| *Export*                      |                                     |
+| M-x org-html-export-to-html   | Export buffer to html file.         |
+| M-x org-latex-export-to-pdf   | Export buffer to pdf file.          |
+|                               |                                     |
+| *Search*                      |                                     |
+| heml-occur                    | Useful quick search and navigation. |
+| helm-org-in-buffer-headings   | Filter org-mode files by headlines. |
+|                               |                                     |
 
 ** Relevant Info nodes
 
