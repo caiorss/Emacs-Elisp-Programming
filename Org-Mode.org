@@ -46,7 +46,16 @@ file:images/document_in_org_mode2.png
 
 ** Useful Key bindings for org-mode                    :mode:org:key:binding:
 
-Move within headlines:
+*Hyperlink*
+
+| Key binding | Description               |
+|-------------+---------------------------|
+| C-c C-l     | Insert hyperlink at point |
+| C-c C-o     | Open hyperlink at point   |
+|             |                           |
+
+
+*Move within headlines*
 
 | Key Binding  | Description                                        |
 |--------------+----------------------------------------------------|
@@ -104,6 +113,195 @@ Hyperlinks
 | :file:/etc/fstab                 | file:/etc/fstab     | Link to file /{/etc/fstab}/     |
 | :shell:uname%20-a                | shell:uname%20-a    | Execute Shell Command: uname -a |
 | :elisp:(message%20"Hello world") |                     |                                 |
+
+** Markdown Summary 
+*** Text Formatting
+
+| Example          | Code               |
+|------------------+--------------------|
+| *bold*           | =*bold*=           |
+| /italics/        | =/italics/=        |
+| */very strong/*  | =*/very strong/*=  |
+| _underline_      | =_underline_=      |
+| ~verbatim~       | =~verbatim~=       |
+| +strike through+ | =+strike through+= |
+| =inline code=    | ==inline code==    |
+|                  |                    |
+
+*** Hyperlinks 
+
+
+| Description                     | Formatting                    | Output                      |
+|---------------------------------+-------------------------------+-----------------------------|
+| Link to a file                  | =file:/etc/fstab=             | file:/etc/fstab             |
+| Link to a web page              | =http://www.httpbing.org/get= | http://www.httpbing.org/get |
+| Email                           | =mailto:dummy@gmail.com=      | mailto:dummy@gmail.com      |
+| Usenet Link                     | =news:comp.emacs=             | news:comp.emacs             |
+| Info - Documentation            | =info:gcc=                    | info:gcc                    |
+| Shell Command                   | =shell:uname%20-a=            | shell:uname%20-a            |
+| Elisp code                      | =elisp:(info%20"gcc")=        | [[elisp:(info%20"gcc")]]        |
+| Doi - Digital object identifier | =doi:10.1000/182=             | doi:10.1000/182             |
+|                                 |                               |                             |
+
+Hyperlinks from org-contrib:
+
+| Description     | Example    |                    |
+|-----------------+------------+--------------------|
+| Link to manpage | =man:sed=  | (require 'org-man) |
+
+
+*** Blocks 
+**** Summary 
+
+| Description        | Shortcut | Code                                |
+|--------------------+----------+-------------------------------------|
+| Soource code block | <s       | =#+BEGIN_SRC ... #+END_SRC=         |
+| Example            | <e       | =#+BEGIN_EXAMPLE ... #+END_EXAMPLE= |
+| Quote              | <q       | =#+BEGIN_QUOTE ... #+END_QUOTE=     |
+| Verse              | <v       | =#+BEGIN_VERSE ... #+END_VERSE=     |
+| Center             | <c       | =#+BEGIN_CENTER ... #+END_CENTER=   |
+| Latex              | <l       | =#+BEGIN_LaTeX ... #+END_LaTeX=     |
+| Html               | <h       | =#+BEGIN_HTML ... #+END_HTML=       |
+| Ascii              | <a       | =#+BEGIN_ASCII ... #+END_ASCII=     |
+|                    |          | 
+
+**** Quote Block 
+
+Literal:
+
+#+BEGIN_SRC org
+,#+BEGIN_QUOTE
+This block encloses text that you want to appear as a quotation.
+,#+END_QUOTE
+#+END_SRC
+
+Output:
+
+#+BEGIN_QUOTE
+This block encloses text that you want to appear as a quotation.
+#+END_QUOTE
+
+**** Text Position 
+***** Center 
+
+Output:
+
+#+begin_center
+This text is  
+centered!
+#+end_center
+
+Literal:
+
+#+BEGIN_SRC org
+,#+begin_center
+This text is  
+centered!
+,#+end_center
+#+END_SRC
+
+***** Left 
+
+Output:
+
+#+begin_left
+This text is \\
+aligned to the left!
+#+end_left
+
+Literal:
+
+
+#+BEGIN_SRC org 
+,#+begin_left
+This text is \\
+aligned to the left!
+,#+end_left
+#+END_SRC
+
+***** Right 
+
+Output:
+
+#+begin_right
+This text is 
+aligned to the right!
+#+end_right
+
+Literal:
+
+#+BEGIN_SRC org 
+,#+begin_right
+This text is 
+aligned to the right!
+,#+end_right
+#+END_SRC
+
+
+**** Latex Code Block 
+
+*Example1*
+
+#+BEGIN_SRC tex
+\begin{equation}
+\begin{align}
+\mbox{Union: }  A\cup B = \{x\mid x\in A \mbox{ or } x\in B\} \newline
+\mbox{Concatenation: } A\circ B  = \{xy\mid x\in A \mbox{ and } y\in B\} \\
+\mbox{Star: } A^\star  = \{x_1x_2\ldots x_k \mid  k\geq 0 \mbox{ and each } x_i\in A\} \\
+\end{align}
+\end{equation}
+#+END_SRC
+
+Output:
+
+\begin{equation}
+\begin{align}
+\mbox{Union: }  A\cup B = \{x\mid x\in A \mbox{ or } x\in B\} \newline
+\mbox{Concatenation: } A\circ B  = \{xy\mid x\in A \mbox{ and } y\in B\} \\
+\mbox{Star: } A^\star  = \{x_1x_2\ldots x_k \mid  k\geq 0 \mbox{ and each } x_i\in A\} \\
+\end{align}
+\end{equation}
+
+*Example2*
+
+#+BEGIN_LaTex
+\begin{eqnarray}
+x^2 + \left(\frac{y}{z}\right)^4 = 0
+\end{eqnarray}
+#+END_LaTeX
+    
+** Useful Commands 
+
+| Command                       | Description                         |
+|-------------------------------+-------------------------------------|
+|                               |                                     |
+| *Display*                     |                                     |
+| M-x org-toggle-inline-images  | Toggle images display               |
+| M-x org-toggle-latex-fragment | Toggle latex formulas display       |
+| M-x org-toggle-link-display   | Toggle hyperlink display            |
+|                               |                                     |
+| *Export*                      |                                     |
+| M-x org-html-export-to-html   | Export buffer to html file.         |
+| M-x org-latex-export-to-pdf   | Export buffer to pdf file.          |
+|                               |                                     |
+| *Search*                      |                                     |
+| heml-occur                    | Useful quick search and navigation. |
+| helm-org-in-buffer-headings   | Filter org-mode files by headlines. |
+|                               |                                     |
+
+** Relevant Info nodes
+
+#+BEGIN_SRC elisp 
+(info "(org)Library of Babel") 
+
+(info "(org)Previewing LaTeX fragments")
+
+(info "(org)Exporting code blocks") 
+
+(info "(org)The export dispatcher") 
+
+(info "(org)noweb") 
+#+END_SRC
 
 ** References
 

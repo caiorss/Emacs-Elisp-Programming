@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Org-mode</title>
-<!-- 2016-12-20 ter 12:48 -->
+<!-- 2016-12-25 dom 21:41 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization."
@@ -208,6 +208,48 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="content">
@@ -220,11 +262,20 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1-1">1.1. Overview</a></li>
 <li><a href="#sec-1-2">1.2. Useful Key bindings for org-mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="mode">mode</span>&#xa0;<span class="org">org</span>&#xa0;<span class="key">key</span>&#xa0;<span class="binding">binding</span></span></a></li>
-<li><a href="#sec-1-3">1.3. References</a></li>
-<li><a href="#sec-1-4">1.4. Videos</a>
+<li><a href="#sec-1-3">1.3. Markdown Summary</a>
 <ul>
-<li><a href="#sec-1-4-1">1.4.1. Tutorials</a></li>
-<li><a href="#sec-1-4-2">1.4.2. Presentations</a></li>
+<li><a href="#sec-1-3-1">1.3.1. Text Formatting</a></li>
+<li><a href="#sec-1-3-2">1.3.2. Hyperlinks</a></li>
+<li><a href="#sec-1-3-3">1.3.3. Blocks</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. Useful Commands</a></li>
+<li><a href="#sec-1-5">1.5. Relevant Info nodes</a></li>
+<li><a href="#sec-1-6">1.6. References</a></li>
+<li><a href="#sec-1-7">1.7. Videos</a>
+<ul>
+<li><a href="#sec-1-7-1">1.7.1. Tutorials</a></li>
+<li><a href="#sec-1-7-2">1.7.2. Presentations</a></li>
 </ul>
 </li>
 </ul>
@@ -325,7 +376,44 @@ result printed in the document or displayed in the minibuffer.
 <h3 id="sec-1-2"><span class="section-number-3">1.2</span> Useful Key bindings for org-mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="mode">mode</span>&#xa0;<span class="org">org</span>&#xa0;<span class="key">key</span>&#xa0;<span class="binding">binding</span></span></h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-Move within headlines:
+<b>Hyperlink</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key binding</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-c C-l</td>
+<td class="left">Insert hyperlink at point</td>
+</tr>
+
+<tr>
+<td class="left">C-c C-o</td>
+<td class="left">Open hyperlink at point</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+<b>Move within headlines</b>
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -596,8 +684,521 @@ Hyperlinks
 </div>
 
 <div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> References</h3>
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Markdown Summary</h3>
 <div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Text Formatting</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Example</th>
+<th scope="col" class="left">Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>bold</b></td>
+<td class="left"><code>*bold*</code></td>
+</tr>
+
+<tr>
+<td class="left"><i>italics</i></td>
+<td class="left"><code>/italics/</code></td>
+</tr>
+
+<tr>
+<td class="left"><b><i>very strong</i></b></td>
+<td class="left"><code>*/very strong/*</code></td>
+</tr>
+
+<tr>
+<td class="left"><span class="underline">underline</span></td>
+<td class="left"><code>_underline_</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>verbatim</code></td>
+<td class="left"><code>~verbatim~</code></td>
+</tr>
+
+<tr>
+<td class="left"><del>strike through</del></td>
+<td class="left"><code>+strike through+</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>inline code</code></td>
+<td class="left"><code>=inline code=</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> Hyperlinks</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="left">Formatting</th>
+<th scope="col" class="left">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Link to a file</td>
+<td class="left"><code>file:/etc/fstab</code></td>
+<td class="left"><a href="file:///etc/fstab">file:///etc/fstab</a></td>
+</tr>
+
+<tr>
+<td class="left">Link to a web page</td>
+<td class="left"><code>http://www.httpbing.org/get</code></td>
+<td class="left"><a href="http://www.httpbing.org/get">http://www.httpbing.org/get</a></td>
+</tr>
+
+<tr>
+<td class="left">Email</td>
+<td class="left"><code>mailto:dummy@gmail.com</code></td>
+<td class="left"><a href="mailto:dummy@gmail.com">mailto:dummy@gmail.com</a></td>
+</tr>
+
+<tr>
+<td class="left">Usenet Link</td>
+<td class="left"><code>news:comp.emacs</code></td>
+<td class="left"><a href="comp.emacs">comp.emacs</a></td>
+</tr>
+
+<tr>
+<td class="left">Info - Documentation</td>
+<td class="left"><code>info:gcc</code></td>
+<td class="left"><a href="gcc">gcc</a></td>
+</tr>
+
+<tr>
+<td class="left">Shell Command</td>
+<td class="left"><code>shell:uname%20-a</code></td>
+<td class="left"><a href="uname%20-a">uname%20-a</a></td>
+</tr>
+
+<tr>
+<td class="left">Elisp code</td>
+<td class="left"><code>elisp:(info%20"gcc")</code></td>
+<td class="left"><a href="(info%20"gcc")">(info%20"gcc")</a></td>
+</tr>
+
+<tr>
+<td class="left">Doi - Digital object identifier</td>
+<td class="left"><code>doi:10.1000/182</code></td>
+<td class="left"><a href="10.1000/182">10.1000/182</a></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Hyperlinks from org-contrib:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="left">Example</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Link to manpage</td>
+<td class="left"><code>man:sed</code></td>
+<td class="left">(require 'org-man)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-3-3" class="outline-4">
+<h4 id="sec-1-3-3"><span class="section-number-4">1.3.3</span> Blocks</h4>
+<div class="outline-text-4" id="text-1-3-3">
+</div><ol class="org-ol"><li><a id="sec-1-3-3-1" name="sec-1-3-3-1"></a>Summary<br  /><div class="outline-text-5" id="text-1-3-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="left">Shortcut</th>
+<th scope="col" class="left">Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Soource code block</td>
+<td class="left">&lt;s</td>
+<td class="left"><code>#+BEGIN_SRC ... #+END_SRC</code></td>
+</tr>
+
+<tr>
+<td class="left">Example</td>
+<td class="left">&lt;e</td>
+<td class="left"><code>#+BEGIN_EXAMPLE ... #+END_EXAMPLE</code></td>
+</tr>
+
+<tr>
+<td class="left">Quote</td>
+<td class="left">&lt;q</td>
+<td class="left"><code>#+BEGIN_QUOTE ... #+END_QUOTE</code></td>
+</tr>
+
+<tr>
+<td class="left">Verse</td>
+<td class="left">&lt;v</td>
+<td class="left"><code>#+BEGIN_VERSE ... #+END_VERSE</code></td>
+</tr>
+
+<tr>
+<td class="left">Center</td>
+<td class="left">&lt;c</td>
+<td class="left"><code>#+BEGIN_CENTER ... #+END_CENTER</code></td>
+</tr>
+
+<tr>
+<td class="left">Latex</td>
+<td class="left">&lt;l</td>
+<td class="left"><code>#+BEGIN_LaTeX ... #+END_LaTeX</code></td>
+</tr>
+
+<tr>
+<td class="left">Html</td>
+<td class="left">&lt;h</td>
+<td class="left"><code>#+BEGIN_HTML ... #+END_HTML</code></td>
+</tr>
+
+<tr>
+<td class="left">Ascii</td>
+<td class="left">&lt;a</td>
+<td class="left"><code>#+BEGIN_ASCII ... #+END_ASCII</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="sec-1-3-3-2" name="sec-1-3-3-2"></a>Quote Block<br  /><div class="outline-text-5" id="text-1-3-3-2">
+<p>
+Literal:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+BEGIN_QUOTE</span>
+This block encloses text that you want to appear as a quotation.
+<span class="org-org-block-end-line">#+END_QUOTE</span>
+</pre>
+</div>
+
+<p>
+Output:
+</p>
+
+<blockquote>
+<p>
+This block encloses text that you want to appear as a quotation.
+</p>
+</blockquote>
+</div>
+</li>
+
+<li><a id="sec-1-3-3-3" name="sec-1-3-3-3"></a>Text Position<br  /><ol class="org-ol"><li><a id="sec-1-3-3-3-1" name="sec-1-3-3-3-1"></a>Center<br  /><div class="outline-text-6" id="text-1-3-3-3-1">
+<p>
+Output:
+</p>
+
+<div class="center">
+<p>
+This text is  
+centered!
+</p>
+</div>
+
+<p>
+Literal:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+begin_center</span>
+This text is  
+centered!
+<span class="org-org-block-end-line">#+end_center</span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-1-3-3-3-2" name="sec-1-3-3-3-2"></a>Left<br  /><div class="outline-text-6" id="text-1-3-3-3-2">
+<p>
+Output:
+</p>
+
+<div class="left">
+<p>
+This text is <br  />
+aligned to the left!
+</p>
+
+</div>
+
+<p>
+Literal:
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+begin_left</span>
+This text is \\
+aligned to the left!
+<span class="org-org-block-end-line">#+end_left</span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-1-3-3-3-3" name="sec-1-3-3-3-3"></a>Right<br  /><div class="outline-text-6" id="text-1-3-3-3-3">
+<p>
+Output:
+</p>
+
+<div class="right">
+<p>
+This text is 
+aligned to the right!
+</p>
+
+</div>
+
+<p>
+Literal:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+begin_right</span>
+This text is 
+aligned to the right!
+<span class="org-org-block-end-line">#+end_right</span>
+</pre>
+</div>
+</div>
+</li></ol>
+</li>
+
+
+<li><a id="sec-1-3-3-4" name="sec-1-3-3-4"></a>Latex Code Block<br  /><div class="outline-text-5" id="text-1-3-3-4">
+<p>
+<b>Example1</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-tex"><span class="org-keyword">\begin</span>{<span class="org-function-name">equation</span>}
+<span class="org-keyword">\begin</span>{<span class="org-function-name">align</span>}
+<span class="org-keyword">\mbox</span>{Union: }  A<span class="org-keyword">\cup</span> B = <span class="org-keyword">\{</span>x<span class="org-keyword">\mid</span> x<span class="org-keyword">\in</span> A <span class="org-keyword">\mbox</span>{ or } x<span class="org-keyword">\in</span> B<span class="org-keyword">\}</span> <span class="org-warning">\newline</span>
+<span class="org-keyword">\mbox</span>{Concatenation: } A<span class="org-keyword">\circ</span> B  = <span class="org-keyword">\{</span>xy<span class="org-keyword">\mid</span> x<span class="org-keyword">\in</span> A <span class="org-keyword">\mbox</span>{ and } y<span class="org-keyword">\in</span> B<span class="org-keyword">\}</span> <span class="org-warning">\\</span>
+<span class="org-keyword">\mbox</span>{Star: } A^\star  = <span class="org-keyword">\{</span>x_1x_2<span class="org-keyword">\ldots</span> x_k <span class="org-keyword">\mid</span>  k<span class="org-keyword">\geq</span> 0 <span class="org-keyword">\mbox</span>{ and each } x_i<span class="org-keyword">\in</span> A<span class="org-keyword">\}</span> <span class="org-warning">\\</span>
+<span class="org-keyword">\end</span>{<span class="org-function-name">align</span>}
+<span class="org-keyword">\end</span>{<span class="org-function-name">equation</span>}
+</pre>
+</div>
+
+<p>
+Output:
+</p>
+
+\begin{equation}
+\begin{align}
+\mbox{Union: }  A\cup B = \{x\mid x\in A \mbox{ or } x\in B\} \newline
+\mbox{Concatenation: } A\circ B  = \{xy\mid x\in A \mbox{ and } y\in B\} \\
+\mbox{Star: } A^\star  = \{x_1x_2\ldots x_k \mid  k\geq 0 \mbox{ and each } x_i\in A\} \\
+\end{align}
+\end{equation}
+
+<p>
+<b>Example2</b>
+</p>
+</div>
+</li></ol>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Useful Commands</h3>
+<div class="outline-text-3" id="text-1-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>Display</b></td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x org-toggle-inline-images</td>
+<td class="left">Toggle images display</td>
+</tr>
+
+<tr>
+<td class="left">M-x org-toggle-latex-fragment</td>
+<td class="left">Toggle latex formulas display</td>
+</tr>
+
+<tr>
+<td class="left">M-x org-toggle-link-display</td>
+<td class="left">Toggle hyperlink display</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>Export</b></td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">M-x org-html-export-to-html</td>
+<td class="left">Export buffer to html file.</td>
+</tr>
+
+<tr>
+<td class="left">M-x org-latex-export-to-pdf</td>
+<td class="left">Export buffer to pdf file.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>Search</b></td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">heml-occur</td>
+<td class="left">Useful quick search and navigation.</td>
+</tr>
+
+<tr>
+<td class="left">helm-org-in-buffer-headings</td>
+<td class="left">Filter org-mode files by headlines.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Relevant Info nodes</h3>
+<div class="outline-text-3" id="text-1-5">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(info <span class="org-string">"(org)Library of Babel"</span>) 
+
+(info <span class="org-string">"(org)Previewing LaTeX fragments"</span>)
+
+(info <span class="org-string">"(org)Exporting code blocks"</span>) 
+
+(info <span class="org-string">"(org)The export dispatcher"</span>) 
+
+(info <span class="org-string">"(org)noweb"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> References</h3>
+<div class="outline-text-3" id="text-1-6">
 <p>
 Manual:
 </p>
@@ -731,12 +1332,12 @@ Non Categorized:
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Videos</h3>
-<div class="outline-text-3" id="text-1-4">
-</div><div id="outline-container-sec-1-4-1" class="outline-4">
-<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Tutorials</h4>
-<div class="outline-text-4" id="text-1-4-1">
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Videos</h3>
+<div class="outline-text-3" id="text-1-7">
+</div><div id="outline-container-sec-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> Tutorials</h4>
+<div class="outline-text-4" id="text-1-7-1">
 <p>
 <b>Org Mode in Depth - by Rick Dillon</b>
 </p>
@@ -791,9 +1392,9 @@ execute code.
 </div>
 </div>
 
-<div id="outline-container-sec-1-4-2" class="outline-4">
-<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Presentations</h4>
-<div class="outline-text-4" id="text-1-4-2">
+<div id="outline-container-sec-1-7-2" class="outline-4">
+<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> Presentations</h4>
+<div class="outline-text-4" id="text-1-7-2">
 <ul class="org-ul">
 <li><a href="#coderef-info "(emacs) Misc Help""class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-info "(emacs) Misc Help"');" onmouseout="CodeHighlightOff(this, 'coderef-info "(emacs) Misc Help"');">Emacs Org-Mode - A system for note-taking and project planning</a> -  Talk given by Carsten Dominik.
 </li>
@@ -822,7 +1423,7 @@ execute code.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-20 ter 12:48</p>
+<p class="date">Created: 2016-12-25 dom 21:41</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
