@@ -9,58 +9,62 @@
 
 Some Emacs utilities and goodness.
 
-| Feature                       | Entry Point             | Description                                                  |
-|-------------------------------+-------------------------+--------------------------------------------------------------|
-| Emacs interal tutorial        | help-with-tutorial      | Open Emacs tutorial.                                         |
-|                               |                         |                                                              |
-| Package Manager               | M-x list-packages       | List all packages available.                                 |
-|                               | M-x package-insstall    | Install some package                                         |
-|                               |                         |                                                              |
-| Info page                     | M-x info                | Info page reader                                             |
-|                               |                         |                                                              |
-| Manpage                       | M-x woman               | Manpage Reader                                               |
-|                               |                         |                                                              |
-| Diff files                    | M-x ediff               | File diff viwer                                              |
-|                               |                         |                                                              |
-| Diff buffers                  | M-x ediff-buffers       | Buffers diff viewer like ediff                               |
-|                               |                         |                                                              |
-| File manager                  | M-x dired or C-x d      | File manager and directory editor                            |
-|                               |                         |                                                              |
-| Shell Command                 | M-x shell-command       | Run a batch shell command like ifconfig or dmesg (Linux)     |
-|                               |                         |                                                              |
-| Async shell command           | M-x async-shell-command | Run any shell command asynchronously. It is useful to        |
-|                               |                         | run REPLs like database shells, shells, interactive CLI apps |
-|                               |                         | and launch apps.                                             |
-|                               |                         |                                                              |
-| Eshel                         | M-x eshell              | Multi platform shell written in Elisp and                    |
-|                               |                         | highly integrated to Emacs.                                  |
-|                               |                         |                                                              |
-| Ielm                          | M-x ielm                | Elisp Interactive shell to control and Debug Emacs           |
-|                               |                         |                                                              |
-| Tramp mode                    |                         | Tramp mode - edit remote files, edit as super user and open  |
-|                               |                         | remote directories through ssh, sftp, telnet and ftp         |
-|                               |                         |                                                              |
-| Compile mode                  | M-x compile             | Integrate Emacs to any build automation tool like make.      |
-|                               |                         | It can extract compilation targets from Makefile.            |
-|                               |                         |                                                              |
-| Calculator                    | M-x calc                | RPN (Reverse Polish Notation) calculator like HP-48g         |
-|                               |                         | series calculator with features like unit conversion,        |
-|                               |                         | financial functions, integration, differentiation and        |
-|                               |                         | symbolic math.                                               |
-|                               |                         |                                                              |
-| Git                           | M-x magit-status        | Git user interface provided by the magit package.            |
-|                               |                         |                                                              |
-|                               |                         |                                                              |
-| Task manager/ Process manager | M-x proced              | Htop like multi platform task manager.                       |
-|                               |                         |                                                              |
-| Network information           | M-x ifconfig            | Show iformation about network interfaces                     |
-|                               |                         |                                                              |
-| Color Pallete                 | M-x list-colors-display | Display a collor pallete.                                    |
-|                               |                         |                                                              |
-| VIM Emulation                 | M-x evil-mode           | It provided by the evil package.                             |
-|                               |                         |                                                              |
-| GNU Debugger Interface        | M-x gdb                 |                                                              |
-|                               |                         |                                                              |
+| Feature                           | Entry Point                          | Description                                                            |
+|-----------------------------------+--------------------------------------+------------------------------------------------------------------------|
+| Help for all help commads         | M-x help-for-help                    |                                                                        |
+|                                   |                                      |                                                                        |
+| Emacs built-in tutorial           | M-x help-with-tutorial               | Open Emacs tutorial.                                                   |
+|                                   |                                      |                                                                        |
+| Emacs built-in localized tutorial | M-x help-with-tutorial-spec-language | Emacs built-in tutorial in many languages like Russian, Portuguese ... |
+|                                   |                                      |                                                                        |
+| Package Manager                   | M-x list-packages                    | List all packages available.                                           |
+|                                   | M-x package-insstall                 | Install some package                                                   |
+|                                   |                                      |                                                                        |
+| Info page                         | M-x info                             | Info page reader                                                       |
+|                                   |                                      |                                                                        |
+| Manpage                           | M-x woman                            | Manpage Reader                                                         |
+|                                   |                                      |                                                                        |
+| Diff files                        | M-x ediff                            | File diff viwer                                                        |
+|                                   |                                      |                                                                        |
+| Diff buffers                      | M-x ediff-buffers                    | Buffers diff viewer like ediff                                         |
+|                                   |                                      |                                                                        |
+| File manager                      | M-x dired or C-x d                   | File manager and directory editor                                      |
+|                                   |                                      |                                                                        |
+| Shell Command                     | M-x shell-command                    | Run a batch shell command like ifconfig or dmesg (Linux)               |
+|                                   |                                      |                                                                        |
+| Async shell command               | M-x async-shell-command              | Run any shell command asynchronously. It is useful to                  |
+|                                   |                                      | run REPLs like database shells, shells, interactive CLI apps           |
+|                                   |                                      | and launch apps.                                                       |
+|                                   |                                      |                                                                        |
+| Eshel                             | M-x eshell                           | Multi platform shell written in Elisp and                              |
+|                                   |                                      | highly integrated to Emacs.                                            |
+|                                   |                                      |                                                                        |
+| Ielm                              | M-x ielm                             | Elisp Interactive shell to control and Debug Emacs                     |
+|                                   |                                      |                                                                        |
+| Tramp mode                        |                                      | Tramp mode - edit remote files, edit as super user and open            |
+|                                   |                                      | remote directories through ssh, sftp, telnet and ftp                   |
+|                                   |                                      |                                                                        |
+| Compile mode                      | M-x compile                          | Integrate Emacs to any build automation tool like make.                |
+|                                   |                                      | It can extract compilation targets from Makefile.                      |
+|                                   |                                      |                                                                        |
+| Calculator                        | M-x calc                             | RPN (Reverse Polish Notation) calculator like HP-48g                   |
+|                                   |                                      | series calculator with features like unit conversion,                  |
+|                                   |                                      | financial functions, integration, differentiation and                  |
+|                                   |                                      | symbolic math.                                                         |
+|                                   |                                      |                                                                        |
+| Git                               | M-x magit-status                     | Git user interface provided by the magit package.                      |
+|                                   |                                      |                                                                        |
+|                                   |                                      |                                                                        |
+| Task manager/ Process manager     | M-x proced                           | Htop like multi platform task manager.                                 |
+|                                   |                                      |                                                                        |
+| Network information               | M-x ifconfig                         | Show iformation about network interfaces                               |
+|                                   |                                      |                                                                        |
+| Color Pallete                     | M-x list-colors-display              | Display a collor pallete.                                              |
+|                                   |                                      |                                                                        |
+| VIM Emulation                     | M-x evil-mode                        | It provided by the evil package.                                       |
+|                                   |                                      |                                                                        |
+| GNU Debugger Interface            | M-x gdb                              |                                                                        |
+|                                   |                                      |                                                                        |
 
 Note: 
 
