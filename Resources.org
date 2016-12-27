@@ -88,7 +88,14 @@ technical details involved."
 *** Manual and References
 
     * [[http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_toc.html#SEC_Contents][GNU Emacs Lisp Reference Manual]]
+
+
+    * Emacs Manual in Spanish: [[http://www.nongnu.org/emacs-man-es/index.html#SEC_Top][Manual del usuario de GNU Emacs: El editor Emacs]]     
+
+
     * [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Index.html][Command and Function Index]]
+
+
     * http://blog.gnumonk.com/2012/07/effective-emacs-part1.html
 
 *** Wikis
