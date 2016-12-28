@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Programming</title>
-<!-- 2016-12-28 qua 13:15 -->
+<!-- 2016-12-28 qua 14:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization."
@@ -7816,6 +7816,82 @@ open a org-file.
 <p><span class="figure-number">Figure 42:</span> Example 2 -  Toolbar for org-mode removing buttons from tool-bar-map</p>
 </div>
 </div>
+</li>
+
+<li><a id="sec-3-11-2-4" name="sec-3-11-2-4"></a>Utilities toolbar demonstration<br  /><div class="outline-text-5" id="text-3-11-2-4">
+<p>
+Demonstration of toolbar with three utilities: 
+</p>
+
+<ul class="org-ul">
+<li>button to call M-x compile
+</li>
+<li>button to call M-x magit-status
+</li>
+<li>button to open project directory
+</li>
+<li>button to launch terminal.
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="images/toolbar-demo1.gif" alt="toolbar-demo1.gif" />
+</p>
+</div>
+
+<p>
+The icons were created using ImageMagick to convert png images to xpm.
+It can be download from: <a href="https://github.com/caiorss/Emacs-Elisp-Programming/raw/gh-pages/icons.zip">Download icons.zip</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'image-load-path <span class="org-string">"~/.emacs.d/icons"</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">/home/arch/.emacs.d/icons/tools-build.xpm</span>
+(tool-bar-add-item  <span class="org-string">"tools-build"</span>                         <span class="org-comment-delimiter">;; </span><span class="org-comment">File name without extension</span>
+                    #'compile                             <span class="org-comment-delimiter">;; </span><span class="org-comment">callback function that will run when user click.</span>
+                    'toolbar-compile-button                       <span class="org-comment-delimiter">;; </span><span class="org-comment">unique name </span>
+                    <span class="org-builtin">:help</span> <span class="org-string">"Run compilation command"</span>       <span class="org-comment-delimiter">;; </span>
+                    <span class="org-builtin">:label</span> <span class="org-string">""</span>                             <span class="org-comment-delimiter">;; </span>
+                    )
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">File /home/arch/.emacs.d/icons/tools-git.xpm</span>
+(tool-bar-add-item  <span class="org-string">"tools-git"</span>        
+                    #'magit-status     
+                    'toolbar-magit-button      
+                    <span class="org-builtin">:help</span> <span class="org-string">"Magit status"</span> 
+                    <span class="org-builtin">:label</span> <span class="org-string">""</span>            
+                    )
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">File /home/arch/.emacs.d/icons/tools-projects-folder.xpm</span>
+(tool-bar-add-item  <span class="org-string">"tools-projects-folder"</span>        
+                    (<span class="org-keyword">lambda</span> () (<span class="org-keyword">interactive</span>) (dired <span class="org-string">"~/Documents/projects"</span>))
+                    'toolbar-project-button      
+                    <span class="org-builtin">:help</span> <span class="org-string">"Open project directory"</span> 
+                    <span class="org-builtin">:label</span> <span class="org-string">""</span>            
+                    )
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">File /home/arch/.emacs.d/icons/tools-projects-folder.xpm</span>
+(tool-bar-add-item  <span class="org-string">"tools-terminal"</span>        
+                    #'terminal/run
+                    'toolbar-terminal-button      
+                    <span class="org-builtin">:help</span> <span class="org-string">"Launch Xfce4 terminal emulator."</span> 
+                    <span class="org-builtin">:label</span> <span class="org-string">""</span>            
+                    )
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">terminal/run</span> ()
+  <span class="org-doc">"Run xfce4 terminal"</span>
+  (<span class="org-keyword">interactive</span>)
+  (start-process <span class="org-string">"proc"</span>
+                 nil
+                 <span class="org-string">"xfce4-terminal"</span>
+                 ))
+</pre>
+</div>
+</div>
 </li></ol>
 </div>
 </div>
@@ -10044,7 +10120,7 @@ delimiters at different levels.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-28 qua 13:15</p>
+<p class="date">Created: 2016-12-28 qua 14:51</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
