@@ -5822,6 +5822,66 @@ open a org-file.
 #+CAPTION: Example 2 -  Toolbar for org-mode removing buttons from tool-bar-map
 file:images/7e920a98-0161-4f4a-b83a-74105eb5ce87.png
 
+**** Utilities toolbar demonstration 
+
+Demonstration of toolbar with three utilities: 
+
+ - button to call M-x compile
+ - button to call M-x magit-status
+ - button to open project directory
+ - button to launch terminal.
+
+file:images/toolbar-demo1.gif
+
+The icons were created using ImageMagick to convert png images to xpm.
+It can be download from: [[https://github.com/caiorss/Emacs-Elisp-Programming/raw/gh-pages/icons.zip][Download icons.zip]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'image-load-path "~/.emacs.d/icons")
+
+  ;; /home/arch/.emacs.d/icons/tools-build.xpm
+  (tool-bar-add-item  "tools-build"                         ;; File name without extension
+                      #'compile                             ;; callback function that will run when user click.
+                      'toolbar-compile-button                       ;; unique name 
+                      :help "Run compilation command"       ;; 
+                      :label ""                             ;; 
+                      )
+
+  ;; File /home/arch/.emacs.d/icons/tools-git.xpm
+  (tool-bar-add-item  "tools-git"        
+                      #'magit-status     
+                      'toolbar-magit-button      
+                      :help "Magit status" 
+                      :label ""            
+                      )
+
+
+  ;; File /home/arch/.emacs.d/icons/tools-projects-folder.xpm
+  (tool-bar-add-item  "tools-projects-folder"        
+                      (lambda () (interactive) (dired "~/Documents/projects"))
+                      'toolbar-project-button      
+                      :help "Open project directory" 
+                      :label ""            
+                      )
+
+  ;; File /home/arch/.emacs.d/icons/tools-projects-folder.xpm
+  (tool-bar-add-item  "tools-terminal"        
+                      #'terminal/run
+                      'toolbar-terminal-button      
+                      :help "Launch Xfce4 terminal emulator." 
+                      :label ""            
+                      )
+
+  (defun terminal/run ()
+    "Run xfce4 terminal"
+    (interactive)
+    (start-process "proc"
+                   nil
+                   "xfce4-terminal"
+                   ))
+
+#+END_SRC
+
 **  Timer 
 *** run-with-timer 
 
