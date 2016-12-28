@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Snippets</title>
-<!-- 2016-12-27 ter 20:22 -->
+<!-- 2016-12-28 qua 03:38 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization.
@@ -352,9 +352,10 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-15-5">1.15.5. Http and Post Request&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connections">connections</span>&#xa0;<span class="http">http</span></span></a></li>
 </ul>
 </li>
-<li><a href="#sec-1-16">1.16. Interface</a>
+<li><a href="#sec-1-16">1.16. Interface&#xa0;&#xa0;&#xa0;<span class="tag"><span class="interface">interface</span>&#xa0;<span class="toolbar">toolbar</span>&#xa0;<span class="menu">menu</span>&#xa0;<span class="icon">icon</span></span></a>
 <ul>
 <li><a href="#sec-1-16-1">1.16.1. Creating Quick Access Menu</a></li>
+<li><a href="#sec-1-16-2">1.16.2. Add Icons to toolbar</a></li>
 </ul>
 </li>
 <li><a href="#sec-1-17">1.17. Packages&#xa0;&#xa0;&#xa0;<span class="tag"><span class="package">package</span>&#xa0;<span class="install">install</span>&#xa0;<span class="library">library</span></span></a>
@@ -3681,20 +3682,20 @@ ELISP&gt; (princ (url-http-post <span class="org-string">"http://httpbin.org/pos
 </div>
 </div>
 <div id="outline-container-sec-1-16" class="outline-3">
-<h3 id="sec-1-16"><span class="section-number-3">1.16</span> Interface</h3>
+<h3 id="sec-1-16"><span class="section-number-3">1.16</span> Interface&#xa0;&#xa0;&#xa0;<span class="tag"><span class="interface">interface</span>&#xa0;<span class="toolbar">toolbar</span>&#xa0;<span class="menu">menu</span>&#xa0;<span class="icon">icon</span></span></h3>
 <div class="outline-text-3" id="text-1-16">
 </div><div id="outline-container-sec-1-16-1" class="outline-4">
 <h4 id="sec-1-16-1"><span class="section-number-4">1.16.1</span> Creating Quick Access Menu</h4>
 <div class="outline-text-4" id="text-1-16-1">
 
 <div class="figure">
-<p><img src="images/utils_menu1.png" alt="utils_menu1.png" />
+<p><img src="images/utils_menu1.png" alt="utils_menu1.png" /> 
 </p>
 </div>
 
 
 <div class="figure">
-<p><img src="images/utils_menu2.png" alt="utils_menu2.png" />
+<p><img src="images/utils_menu2.png" alt="utils_menu2.png" /> 
 </p>
 </div>
 
@@ -3737,6 +3738,234 @@ ELISP&gt; (princ (url-http-post <span class="org-string">"http://httpbin.org/pos
 </pre>
 </div>
 </div>
+</div>
+
+<div id="outline-container-sec-1-16-2" class="outline-4">
+<h4 id="sec-1-16-2"><span class="section-number-4">1.16.2</span> Add Icons to toolbar</h4>
+<div class="outline-text-4" id="text-1-16-2">
+</div><ol class="org-ol"><li><a id="sec-1-16-2-1" name="sec-1-16-2-1"></a>Image search path<br  /><div class="outline-text-5" id="text-1-16-2-1">
+<p>
+Emacs will search for images *.xpm or *.xbm in all directories listed
+in the variable <span class="underline">image-load-path</span>. Emacs search for images by default
+at <a href="file:///usr/share/emacs/25.1/etc/images/">file:///usr/share/emacs/25.1/etc/images/</a> (Linux) directory that can
+change depending on current Emacs version and operating system.
+</p>
+
+<p>
+To add a dictory with icons to this variable use:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(add-to-list 'image-load-path <span class="org-string">"/home/arch/icons"</span>)
+</pre>
+</div>
+
+<p>
+The program <a href="https://www.imagemagick.org/script/index.php">ImageMagick</a> can be used to create Emacs-compatible icons
+that must have *.xpm or .xbm extension and have size 24x24 of pixels.
+</p>
+
+<p>
+Example: 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ cd ~/icons
+$ convert icon.png -resize 24x24 icon.xbm
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-1-16-2-2" name="sec-1-16-2-2"></a>Add icons to global toolbar ( tool-bar-map )<br  /><div class="outline-text-5" id="text-1-16-2-2">
+<p>
+Example 1: Add the icon index.xpm ( <i>usr/share/emacs/25.1/etc/images</i> )
+to toolbar that when clicked call the command  M-x compile or function compile.
+</p>
+
+<p>
+Label and help parameters are optional. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(tool-bar-add-item 
+           <span class="org-string">"index"</span>                               <span class="org-comment-delimiter">;; </span><span class="org-comment">icon .xpm or .xbm</span>
+           #'compile                             <span class="org-comment-delimiter">;; </span><span class="org-comment">callback function that will run when user click.</span>
+           'compile-button                       <span class="org-comment-delimiter">;; </span><span class="org-comment">unique name </span>
+           <span class="org-builtin">:help</span> <span class="org-string">"Run compilation command"</span>       <span class="org-comment-delimiter">;; </span>
+           <span class="org-comment-delimiter">;; </span><span class="org-comment">:label "Compile"                   ;; </span>
+           )
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="images/ae004dbd-be07-4faf-bca9-5a8f627215b0.png" alt="ae004dbd-be07-4faf-bca9-5a8f627215b0.png" />
+</p>
+</div>
+
+
+<p>
+Example 2: Add the icon compile.xpm to toolbar and invoke the command
+M-x compile when clicked.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(add-to-list 'image-load-path <span class="org-string">"/home/arch/icons"</span>)
+
+(tool-bar-add-item 
+           <span class="org-string">"hammer2"</span>                             <span class="org-comment-delimiter">;; </span><span class="org-comment">/home/arch/hammer2.xpm - icon .xpm or .xbm</span>
+           #'recompile                           <span class="org-comment-delimiter">;; </span><span class="org-comment">callback function that will run when user click.</span>
+           'recompile
+           <span class="org-builtin">:help</span> <span class="org-string">"Run recompile"</span>                 <span class="org-comment-delimiter">;; </span>
+           <span class="org-builtin">:label</span> <span class="org-string">"Recompile"</span>
+           )
+</pre>
+</div>
+
+
+
+<div class="figure">
+<p><img src="images/bfe10437-40dd-4569-9a17-5ef6ddd07c28.png" alt="bfe10437-40dd-4569-9a17-5ef6ddd07c28.png" />
+</p>
+</div>
+</div>
+</li>
+
+<li><a id="sec-1-16-2-3" name="sec-1-16-2-3"></a>Add icons to mode-specific toolbar<br  /><div class="outline-text-5" id="text-1-16-2-3">
+<p>
+Example 1: Create a menubar to org-mode with only two buttons. It will
+only be shown in org-mode.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(add-to-list 'image-load-path <span class="org-string">"/home/arch/icons"</span>)
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">org-mode-toolbar-map</span>
+  (<span class="org-keyword">let</span> ((map (copy-keymap tool-bar-map)))
+       map))
+
+
+(add-to-list 'image-load-path <span class="org-string">"/home/arch/icons"</span>)
+
+
+(tool-bar-local-item
+             <span class="org-string">"compile"</span>                          <span class="org-comment-delimiter">;; </span><span class="org-comment">Icon compile.xpm  - Icon located at /home/arch/icon/compile.xpm</span>
+             'org-html-export-to-html           <span class="org-comment-delimiter">;; </span><span class="org-comment">Callback function that will be invoked when user click.</span>
+             'org--export-to-html
+              org-mode-toolbar-map              <span class="org-comment-delimiter">;; </span><span class="org-comment">key map that the button/icon will be added</span>
+             <span class="org-builtin">:help</span> <span class="org-string">"Export org-file to html"</span>    <span class="org-comment-delimiter">;; </span><span class="org-comment">Tooltip text  (Optional)</span>
+             <span class="org-builtin">:label</span> <span class="org-string">"Export html"</span>               <span class="org-comment-delimiter">;; </span><span class="org-comment">Label         (Optional)</span>
+             )
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Icon located at /usr/share/emacs/25.1/etc/images/index.xpm</span>
+(tool-bar-local-item <span class="org-string">"index"</span>
+             'read-only-mode
+             'org-read-only-mode
+              org-mode-toolbar-map
+             <span class="org-builtin">:help</span> <span class="org-string">"Toggle read-only mode"</span>
+             <span class="org-builtin">:label</span> <span class="org-string">""</span>
+             )
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">install-org-toolbar</span> ()
+  (<span class="org-keyword">interactive</span>)
+  <span class="org-comment-delimiter">;;; </span><span class="org-comment">Make the variable tool-bar-map local in org-mode </span>
+  (set (make-local-variable 'tool-bar-map) org-mode-toolbar-map)
+
+  <span class="org-comment-delimiter">;;; </span><span class="org-comment">Debugging message that will be printed every time this function is</span>
+  <span class="org-comment-delimiter">;;; </span><span class="org-comment">called.</span>
+  (message <span class="org-string">"Org-toolbar installed"</span>)
+  )
+
+(<span class="org-keyword">require</span> '<span class="org-constant">org</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">org-mode-hook is a list of functions that will be called when org-mode starts</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">It is like a GUI-callback or a javascript callback. It will register the function</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">install-org-toolbar</span>
+<span class="org-comment-delimiter">;;</span>
+(add-hook 'org-mode-hook #'install-org-toolbar)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="images/6e3504f3-12f7-4b3e-85a4-4233aed0e293.png" alt="6e3504f3-12f7-4b3e-85a4-4233aed0e293.png" />
+</p>
+<p><span class="figure-number">Figure 19:</span> Example 1 - Toolbar for org-mode keeping buttons from tool-bar-map</p>
+</div>
+
+
+<p>
+Example 2: Create a menubar to org-mode with only two buttons removing
+the ones from tool-bar-map. The toolbar only will shown if the user
+open a org-file.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(add-to-list 'image-load-path <span class="org-string">"/home/arch/icons"</span>)
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">org-mode-toolbar-map</span>
+  (<span class="org-keyword">let</span> ((map (make-sparse-keymap)))
+       map))
+
+
+(add-to-list 'image-load-path <span class="org-string">"/home/arch/icons"</span>)
+
+
+(tool-bar-local-item
+             <span class="org-string">"compile"</span>                          <span class="org-comment-delimiter">;; </span><span class="org-comment">Icon compile.xpm  - Icon located at /home/arch/icon/compile.xpm</span>
+             'org-html-export-to-html           <span class="org-comment-delimiter">;; </span><span class="org-comment">Callback function that will be invoked when user click.</span>
+             'org--export-to-html
+              org-mode-toolbar-map              <span class="org-comment-delimiter">;; </span><span class="org-comment">key map that the button/icon will be added</span>
+             <span class="org-builtin">:help</span> <span class="org-string">"Export org-file to html"</span>    <span class="org-comment-delimiter">;; </span><span class="org-comment">Tooltip text  (Optional)</span>
+             <span class="org-builtin">:label</span> <span class="org-string">"Export html"</span>               <span class="org-comment-delimiter">;; </span><span class="org-comment">Label         (Optional)</span>
+             )
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Icon located at /usr/share/emacs/25.1/etc/images/index.xpm</span>
+(tool-bar-local-item <span class="org-string">"index"</span>
+             'read-only-mode
+             'org-read-only-mode
+              org-mode-toolbar-map
+             <span class="org-builtin">:help</span> <span class="org-string">"Toggle read-only mode"</span>
+             <span class="org-builtin">:label</span> <span class="org-string">""</span>
+             )
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">install-org-toolbar</span> ()
+  (<span class="org-keyword">interactive</span>)
+  <span class="org-comment-delimiter">;;; </span><span class="org-comment">Make the variable tool-bar-map local in org-mode </span>
+  (set (make-local-variable 'tool-bar-map) org-mode-toolbar-map)
+
+  <span class="org-comment-delimiter">;;; </span><span class="org-comment">Debugging message that will be printed every time this function is</span>
+  <span class="org-comment-delimiter">;;; </span><span class="org-comment">called.</span>
+  (message <span class="org-string">"Org-toolbar installed"</span>)
+  )
+
+(<span class="org-keyword">require</span> '<span class="org-constant">org</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">org-mode-hook is a list of functions that will be called when org-mode starts</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">It is like a GUI-callback or a javascript callback. It will register the function</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">install-org-toolbar</span>
+<span class="org-comment-delimiter">;;</span>
+(add-hook 'org-mode-hook #'install-org-toolbar)
+
+(find-file <span class="org-string">"~/.emacs.d/settings.org"</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="images/7e920a98-0161-4f4a-b83a-74105eb5ce87.png" alt="7e920a98-0161-4f4a-b83a-74105eb5ce87.png" />
+</p>
+<p><span class="figure-number">Figure 20:</span> Example 2 -  Toolbar for org-mode removing buttons from tool-bar-map</p>
+</div>
+</div>
+</li></ol>
 </div>
 </div>
 
@@ -5394,7 +5623,7 @@ a rails console </a>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-27 ter 20:22</p>
+<p class="date">Created: 2016-12-28 qua 03:38</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

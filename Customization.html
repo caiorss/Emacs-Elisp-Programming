@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Customization</title>
-<!-- 2016-12-27 ter 20:22 -->
+<!-- 2016-12-28 qua 03:38 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization."
@@ -234,9 +234,15 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-1-11">1.1.11. Set Default Web Browser</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">1.2. Quiet Startup</a></li>
-<li><a href="#sec-1-3">1.3. Separte Customization from init file</a></li>
-<li><a href="#sec-1-4">1.4. Hide / Show Emacs Widgets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="widget">widget</span>&#xa0;<span class="gui">gui</span></span></a></li>
+<li><a href="#sec-1-2">1.2. Hide / Show Emacs Widgets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="widget">widget</span>&#xa0;<span class="gui">gui</span></span></a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. Hide / Show Menu bar</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Hide / Show Toolbar</a></li>
+<li><a href="#sec-1-2-3">1.2.3. Hide / Show Scroll Bar</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3. Quiet Startup</a></li>
+<li><a href="#sec-1-4">1.4. Separte Customization from init file</a></li>
 <li><a href="#sec-1-5">1.5. Languages and Encoding</a></li>
 <li><a href="#sec-1-6">1.6. Tab width and Spaces</a></li>
 <li><a href="#sec-1-7">1.7. Backup Settings</a></li>
@@ -439,10 +445,77 @@ Set the default web browsr used by (browse-url &lt;url&gt;) function and by org-
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Quiet Startup</h3>
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Hide / Show Emacs Widgets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="widget">widget</span>&#xa0;<span class="gui">gui</span></span></h3>
 <div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Hide / Show Menu bar</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+Hide Menu Bar
+</p>
+
+<p>
+<code>(menu-bar-mode 0)</code>
+</p>
+
+
+<p>
+Show Menu Bar
+</p>
+
+<pre class="example">
+(menu-bar-mode 1)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Hide / Show Toolbar</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Show Tool Bar
+</p>
+
+<pre class="example">
+(tool-bar-mode 1)
+</pre>
+
+<p>
+Hide Tool Bar
+</p>
+
+<pre class="example">
+(tool-bar-mode 0)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Hide / Show Scroll Bar</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+Show
+</p>
+
+<pre class="example">
+(scroll-bar-mode 1)
+</pre>
+
+<p>
+Hide
+</p>
+
+<pre class="example">
+(scroll-bar-mode -1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Quiet Startup</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
 From: <a href="https://news.ycombinator.com/item?id=1654164">Ask HN Emacs Users: What's in your .emacs file?</a>
 </p>
@@ -465,9 +538,9 @@ From: <a href="https://news.ycombinator.com/item?id=1654164">Ask HN Emacs Users:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Separte Customization from init file</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Separte Customization from init file</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
 It will keep the user customization created with M-x customize-theme,
 M-x customize-group in a separate file ~/.emacs.d/custom.el.
@@ -481,73 +554,6 @@ M-x customize-group in a separate file ~/.emacs.d/custom.el.
 (load custom-file 'noerror)
 </pre>
 </div>
-</div>
-</div>
-
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Hide / Show Emacs Widgets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="customize">customize</span>&#xa0;<span class="custom">custom</span>&#xa0;<span class="widget">widget</span>&#xa0;<span class="gui">gui</span></span></h3>
-<div class="outline-text-3" id="text-1-4">
-<p>
-<b>Hide / Show Menu bar</b>
-</p>
-
-<p>
-Hide Menu Bar
-</p>
-
-<p>
-<code>(menu-bar-mode 0)</code>
-</p>
-
-
-<p>
-Show Menu Bar
-</p>
-
-<pre class="example">
-(menu-bar-mode 1)
-</pre>
-
-<p>
-<b>Hide / Show Toolbar</b>
-</p>
-
-<p>
-Show Tool Bar
-</p>
-
-<pre class="example">
-(tool-bar-mode 1)
-</pre>
-
-<p>
-Hide Tool Bar
-</p>
-
-<pre class="example">
-(tool-bar-mode 0)
-</pre>
-
-
-<p>
-<b>Hide / Show Scroll Bar</b>
-</p>
-
-<p>
-Show
-</p>
-
-<pre class="example">
-(scroll-bar-mode 1)
-</pre>
-
-<p>
-Hide
-</p>
-
-<pre class="example">
-(scroll-bar-mode -1)
-</pre>
 </div>
 </div>
 
@@ -741,7 +747,7 @@ Saves the minibuffer history on every Emacs session.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-27 ter 20:22</p>
+<p class="date">Created: 2016-12-28 qua 03:38</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
