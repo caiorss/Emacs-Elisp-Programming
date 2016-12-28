@@ -118,6 +118,52 @@ Set the default web browsr used by (browse-url <url>) function and by org-mode.
 
 
 #+END_SRC
+** Hide / Show Emacs Widgets                   :customize:custom:widget:gui:
+*** Hide / Show Menu bar
+
+Hide Menu Bar
+
+=(menu-bar-mode 0)=
+
+
+Show Menu Bar
+
+#+BEGIN_SRC
+
+(menu-bar-mode 1)
+#+END_SRC
+
+*** Hide / Show Toolbar
+
+Show Tool Bar
+
+#+BEGIN_SRC
+
+(tool-bar-mode 1)
+#+END_SRC
+
+Hide Tool Bar
+
+#+BEGIN_SRC
+
+(tool-bar-mode 0)
+#+END_SRC
+
+*** Hide / Show Scroll Bar
+
+Show
+
+#+BEGIN_SRC
+
+(scroll-bar-mode 1)
+#+END_SRC
+
+Hide
+
+#+BEGIN_SRC
+
+(scroll-bar-mode -1)
+#+END_SRC
 
 ** Quiet Startup
 
@@ -148,55 +194,6 @@ M-x customize-group in a separate file ~/.emacs.d/custom.el.
                             "custom.el"
                             ))
 (load custom-file 'noerror)
-#+END_SRC
-
-** Hide / Show Emacs Widgets                   :customize:custom:widget:gui:
-
-*Hide / Show Menu bar*
-
-Hide Menu Bar
-
-=(menu-bar-mode 0)=
-
-
-Show Menu Bar
-
-#+BEGIN_SRC
-
-(menu-bar-mode 1)
-#+END_SRC
-
-*Hide / Show Toolbar*
-
-Show Tool Bar
-
-#+BEGIN_SRC
-
-(tool-bar-mode 1)
-#+END_SRC
-
-Hide Tool Bar
-
-#+BEGIN_SRC
-
-(tool-bar-mode 0)
-#+END_SRC
-
-
-*Hide / Show Scroll Bar*
-
-Show
-
-#+BEGIN_SRC
-
-(scroll-bar-mode 1)
-#+END_SRC
-
-Hide
-
-#+BEGIN_SRC
-
-(scroll-bar-mode -1)
 #+END_SRC
 
 ** Languages and Encoding
