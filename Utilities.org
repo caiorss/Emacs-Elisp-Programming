@@ -170,17 +170,25 @@ Defining a command:
 
 Example: Running Haskell REPL.
 
+ - =M-x async-shell-command stack ghci=
+
 http://i.imgur.com/I90yeoX.gif
 
 Example: Install a Haskell package 
+
+ - =M-x async-shell-command stack instal turtle=
 
 http://i.imgur.com/btfaK3k.gif
 
 Example: Running Fsharp REPL 
 
+ - =M-x async-shell-command fsi=
+
 http://i.imgur.com/tRKPfXG.gif
 
 Example: Ping a server to test connection 8.8.8.8 (Google's DNS)
+
+ - =M-x async-shell-command ping 8.8.8.8=
 
 http://i.imgur.com/3OeuGNj.gif
 
