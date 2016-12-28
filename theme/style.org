@@ -1,6 +1,5 @@
-#+AUTHOR: Caio Rodrigues
-#+EMAIL: <caiorss.rodrigues@gmail.com>
-#+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor
+#+AUTHOR: 
+#+EMAIL: 
 #+LANGUAGE: en
 #+DESCRIPTION: Emacs programming and customization.
 #+URL:  http://tinyurl.com/emacsinabox
@@ -8,4 +7,8 @@
 #+OPTIONS: 
 #+INFOJS_OPT: view:showall toc:t ltoc:t mouse:underline path:theme/org-info.js
 
-#+HTML_HEAD: <link href="theme/style.css" rel="stylesheet">
+#+HTML_HEAD: <link href="theme/style2.css" rel="stylesheet">
+
+#+BEGIN_HTML
+<a href="index.html">Top</a>
+#+END_HTML

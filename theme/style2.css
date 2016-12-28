@@ -10,28 +10,12 @@ html {
   width: 100%;
   height: 100%;
   font-family: serif;
-  /* font-size:  12pt; */
+  font-size: 2.0em;
   margin-left: auto;
   margin-right: auto;
   margin-top: 2.0em;
   
  
-}
-
-body {
-    margin-left:  3%;
-    margin-right: 3%;
-    /* font-size: 12px sans-serif; */
-    font-size: 14pt;
-    font-family: serif;
-	/* font:13px/1.4 sans-serif; */
-	*font-size:small; /* for IE */
-	*font:x-small; /* for IE in quirks mode */
-    background: white;
-    color: black;
-    text-align: left;
-    min-height: 100%;
-    position: relative;    
 }
 
 
@@ -46,6 +30,23 @@ body>div>div {
 	border-right:1px solid #e0e0e0
 }
 
+/* ============ Body =================== */
+
+body {
+    margin-left:  3%;
+    margin-right: 3%;
+    /* font-size: 12px sans-serif; */
+    font-size: 1.2em;
+    font-family: serif;
+	font:13px/1.4 sans-serif;
+	*font-size:small; /* for IE */
+	*font:x-small; /* for IE in quirks mode */
+    background: white;
+    color: black;
+    text-align: left;
+    min-height: 100%;
+    position: relative;    
+}
 
 
 /* ======= Headlines ======== */
@@ -81,9 +82,9 @@ h1,h2,h3,h4,h5,h6 {
   margin: 0.8em 0 0.4em;
 }
 
-/* * + h1, * + h2, * + h3, * + h4, * + h5, * + h6 { */
-/*   margin-top: 2em; */
-/* } */
+* + h1, * + h2, * + h3, * + h4, * + h5, * + h6 {
+  margin-top: 2em;
+}
 
 h1 + h2, h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
   margin-top: inherit;
@@ -230,7 +231,7 @@ dd {
 
 
 img {
-    max-width: 1000px;
+    max-width: 500px;
     width: 100%;
     clear: both;
 }
