@@ -3,10 +3,13 @@ all: html
 
 html:
 	mkdir -p dist
-	emacs --batch -q -l build.el --kill
-	mv dist/README.html dist/index.html
+	emacs --batch -q -l build.el --kill  ## Compile org-pages to utml 
+	mv dist/README.html dist/index.html  ## Create dist/index.html (gh-pages repository)
+
+    ## Prepare files for upload.
 	cp -r -v images/* dist/images/
 	cp -r *.org  dist/
+	cp -r theme/* dist/theme 
 	cp -r -v codes dist/codes
 
 browse:
