@@ -65,57 +65,47 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
 ** Contents
 
- - [[file:Elisp_Programming.org][Elisp Programming]]  
-
-Elisp programming guide and documentation by examples. 
-
- - [[file:Elisp_Snippets.org][Elisp Snippets]] 
-
-Elisp code examples grouped by category. 
-
- - [[file:Keybindings.org][Emacs Key bindings]] 
-
-Emacs standard keybindings and useful commands.
-
- - [[file:Emacs_Key_Bindings_Elisp.org][Emacs key bindings for Elisp]]
-
-Emacs key bindings and commands for Elisp (Emacs' lisp) development. 
+ - [[file:Elisp_Programming.org][Elisp Programming]]  Elisp programming guide and documentation by examples. 
 
 
- - [[file:Command_Line_and_Scripting.org][Command Line and Scripting]]
-
-Command line interaction with Emacs.
-
- - [[file:Customization.org][Customization]] 
-
-Emacs settings and customization.
-
- - [[file:Eshell.org][Eshell]]
-
-Eshell - Multi-platform unix shell written in Elisp highly integrated
-with Emacs and with several platform independent shell commands such
-as ls, pwd, cp, mv implemented in Elisp.
-
- - [[file:Development_Environment.org][Development Environment]]
-
-Programming language-specific configurations. 
+ - [[file:Elisp_Snippets.org][Elisp Snippets]]  Elisp code examples grouped by category. 
 
 
- - [[file:Emacs_On_Windows.org][Emacs on Microsoft Windows]]
+ - [[file:Keybindings.org][Emacs Key bindings]] Emacs standard keybindings and useful commands.
 
-Emacs settings for Microsoft Windows OS.
 
- - [[file:Utilities.org][Utilities]] 
+ - [[file:Emacs_Key_Bindings_Elisp.org][Emacs key bindings for Elisp]] Emacs key bindings and commands for
+   Elisp (Emacs' lisp) development.
 
-Emacs utilities and goodness like Calculator, Magit, Helm and so on.
 
- - [[file:Org-Mode.org][Org-mode]] 
+ - [[file:Command_Line_and_Scripting.org][Command Line and Scripting]] Command line interaction with Emacs.
 
-Org-mode notes.
 
- - [[file:Resources.org][Resources]]
- 
-Emacs Resources. 
+ - [[file:Customization.org][Customization]] Emacs settings and customization.
+
+
+ - [[file:Development_Environment.org][Development Environment]] Programming language-specific configurations. 
+
+
+ - [[file:Emacs_On_Windows.org][Emacs on Microsoft Windows]]  Emacs settings for Microsoft Windows OS.
+
+
+ - [[file:Utilities.org][Utilities]]  Emacs utilities and goodness like Calculator, Magit, Helm and so on.
+
+
+ - [[file:Packages.org][Packages]] Useful Emacs packages. 
+
+
+ - [[file:Org-Mode.org][Org-mode]] Org-mode notes.
+
+
+ - [[file:Eshell.org][Eshell]] Eshell - Multi-platform unix shell written in Elisp highly
+   integrated with Emacs and with several platform independent shell
+   commands such as ls, pwd, cp, mv implemented in Elisp.
+
+
+ - [[file:Resources.org][Bookmarks]] - Emacs bookmarks to Wikis, tutorials, videos, codes and
+   etc.
 
 ** Download this content
 
