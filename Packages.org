@@ -85,5 +85,4 @@ Features:
    the Notmuch package (notmuch-emacs in Debian). The screenshots give
    a good overview of the mode.
 
-* Emacs Packages
 
