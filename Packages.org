@@ -1,0 +1,89 @@
+# -*- mode: org; -*-
+#+INCLUDE: theme/style.org
+#+TITLE: Emacs Packages 
+#+STARTUP: content
+#+DESCRIPTION: Useful emacs packages 
+#+KEYWORDS: emacs packages libraries utilities useful 
+
+* Packages
+** Programming
+
+*Python*
+
+ - [[https://github.com/jorgenschaefer/elpy][jorgenschaefer/elpy: Emacs Python Development Environment]]
+
+*Haskell*
+
+ - [[https://commercialhaskell.github.io/intero/][Intero for Emacs]]
+
+*Clojure*
+
+ - [[https://github.com/clojure-emacs/cider][clojure-emacs/cider]] - The Clojure Interactive Development
+   Environment that Rocks for Emacs https://cider.readthedocs.org
+
+*R and S*
+
+ - ess - R-programming and S statistical programming.
+
+*Lisp dialects*
+
+ - Paredit 
+
+ - [[http://www.emacswiki.org/emacs/RainbowDelimiters][Emacs Wiki: Rainbow Delimiters]] Rainbow delimiters is useful for all
+   Lisps dialects like Elisp, Clojure, Scheme and etc. It also makes
+   easier to match and spot delimiters at different levels.
+
+ file:images/rainbow_delimiters.png
+
+** Tools
+
+ - [[https://magit.vc/][Magit]] - Git interface for Emacs
+
+ - [[http://company-mode.github.io/][company-mode]]- Completion framework
+
+ - [[https://emacs-helm.github.io/helm/][Helm]] - Menu with combobox-like interface.
+
+ - [[https://www.emacswiki.org/emacs/UndoTree][EmacsWiki: Undo Tree]]
+
+ - [[https://github.com/bbatsov/projectile][Projectile]] - Project Interaction Library for Emacs http://projectile.readthedocs.io
+
+ - [[https://bitbucket.org/lyro/evil/wiki/Home][Evil-mode]] - VIM Emulation mode. Evil is an extensible vi layer for
+   Emacs. It emulates the main features of Vim, and provides
+   facilities for writing custom extensions. - See [[http://wikemacs.org/wiki/Evil][Evil - WikEmacs]]
+
+ - [[https://github.com/pashky/restclient.el][restclient]] - This is a tool to manually explore and test HTTP REST
+   webservices. Runs queries from a plain-text query sheet, displays
+   results as a pretty-printed XML, JSON and even
+   images.
+
+** Utilities
+ 
+  - [[https://www.emacswiki.org/emacs/EmacsLispScreen][EmacsWiki: Emacs Lisp Screen]]
+
+  - [[https://github.com/dimitri/el-get][El-get]]
+
+From documentation:
+
+El-Get allows you to install and manage elisp code for Emacs. It
+supports lots of different types of sources and is able to install
+them, update them and remove them, but more importantly it will init
+them for you. That means it will require the features you need, load
+the necessary files, set the Info paths so that C-h i shows the new
+documentation you now depend on, and finally call your own
+initialisation code for you to setup the extension. Or call it a
+package.
+
+Features:
+
+ - Download the package directly from source without central repository.
+ - Asynchronous and fast download.
+ - Easy Installation and update.
+
+ - [[https://notmuchmail.org/notmuch-emacs/][notmuch-emacs]] - Notmuch Emacs Interface - One of the more popular
+   Notmuch message reading clients is notmuch.el, or notmuch-emacs, an
+   Emacs major mode for interacting with Notmuch. It is included in
+   the Notmuch package (notmuch-emacs in Debian). The screenshots give
+   a good overview of the mode.
+
+* Emacs Packages
+
