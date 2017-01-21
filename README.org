@@ -65,11 +65,15 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
 ** Contents
 
+*Elisp Programing*
+
  - [[file:Elisp_Programming.org][Elisp Programming]]  Elisp programming guide and documentation by examples. 
 
 
  - [[file:Elisp_Snippets.org][Elisp Snippets]]  Elisp code examples grouped by category. 
 
+
+*Key bindings / shortcuts*
 
  - [[file:Keybindings.org][Emacs Key bindings]] Emacs standard keybindings and useful commands.
 
@@ -77,26 +81,24 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
  - [[file:Emacs_Key_Bindings_Elisp.org][Emacs key bindings for Elisp]] Emacs key bindings and commands for
    Elisp (Emacs' lisp) development.
 
-
- - [[file:Command_Line_and_Scripting.org][Command Line and Scripting]] Command line interaction with Emacs.
-
+*Settings and Packages*
 
  - [[file:Customization.org][Customization]] Emacs settings and customization.
 
 
- - [[file:Development_Environment.org][Development Environment]] Programming language-specific configurations. 
+ - [[file:Packages.org][Packages and Development Environments]] Useful Emacs packages and
+   Programming language specific configurations and packages.
 
-
- - [[file:Emacs_On_Windows.org][Emacs on Microsoft Windows]]  Emacs settings for Microsoft Windows OS.
-
+*Emacs Utilities*
 
  - [[file:Utilities.org][Utilities]]  Emacs utilities and goodness like Calculator, Magit, Helm and so on.
 
 
- - [[file:Packages.org][Packages]] Useful Emacs packages. 
-
-
  - [[file:Org-Mode.org][Org-mode]] Org-mode notes.
+
+*Misc*
+
+ - [[file:Command_Line_and_Scripting.org][Command Line and Scripting]] Command line interaction with Emacs.
 
 
  - [[file:Eshell.org][Eshell]] Eshell - Multi-platform unix shell written in Elisp highly
@@ -104,7 +106,10 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
    commands such as ls, pwd, cp, mv implemented in Elisp.
 
 
- - [[file:Resources.org][Bookmarks]] - Emacs bookmarks to Wikis, tutorials, videos, codes and
+ - [[file:Emacs_On_Windows.org][Emacs on Microsoft Windows]]  Emacs settings for Microsoft Windows OS.
+
+
+ - [[file:Bookmarks.org][Bookmarks]] - Emacs bookmarks to Wikis, tutorials, videos, codes and
    etc.
 
 ** Download this content
