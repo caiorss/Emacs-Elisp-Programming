@@ -1,40 +1,11 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org
-#+TITLE: Emacs Packages 
+#+TITLE: Emacs Packages and Development Environment
 #+STARTUP: content
 #+DESCRIPTION: Useful emacs packages 
-#+KEYWORDS: emacs packages libraries utilities useful 
+#+KEYWORDS: emacs packages libraries utilities useful programming 
 
-* Packages
-** Programming
-
-*Python*
-
- - [[https://github.com/jorgenschaefer/elpy][jorgenschaefer/elpy: Emacs Python Development Environment]]
-
-*Haskell*
-
- - [[https://commercialhaskell.github.io/intero/][Intero for Emacs]]
-
-*Clojure*
-
- - [[https://github.com/clojure-emacs/cider][clojure-emacs/cider]] - The Clojure Interactive Development
-   Environment that Rocks for Emacs https://cider.readthedocs.org
-
-*R and S*
-
- - ess - R-programming and S statistical programming.
-
-*Lisp dialects*
-
- - Paredit 
-
- - [[http://www.emacswiki.org/emacs/RainbowDelimiters][Emacs Wiki: Rainbow Delimiters]] Rainbow delimiters is useful for all
-   Lisps dialects like Elisp, Clojure, Scheme and etc. It also makes
-   easier to match and spot delimiters at different levels.
-
- file:images/rainbow_delimiters.png
-
+* Useful Packages 
 ** Tools
 
  - [[https://magit.vc/][Magit]] - Git interface for Emacs
@@ -84,5 +55,447 @@ Features:
    Emacs major mode for interacting with Notmuch. It is included in
    the Notmuch package (notmuch-emacs in Debian). The screenshots give
    a good overview of the mode.
+* Programming Languages settings and Packages
+** Python
+
+Packages
+
+ - [[https://github.com/jorgenschaefer/elpy][jorgenschaefer/elpy: Emacs Python Development Environment]]
+
+Settings
 
 
+Set Python Interpreter:
+
+#+BEGIN_SRC elisp
+(setq python-python-command "/path-to-python-/python")
+#+END_SRC
+
+To run the interpreter type: =M-x run-python=
+
+Run more than one Python version, usage: M-x run-python3, M-x run-python2
+
+#+BEGIN_SRC elisp
+
+
+(defun run-python3 ()
+   (interactive)
+   (run-python  "/usr/bin/python2" nil t))
+
+(defun run-python2 ()
+   (interactive)
+   (run-python  "/usr/bin/python" nil t))
+
+(defun run-ipython3 ()
+   (interactive)
+   (run-python  "~/anaconda3/bin/ipython" nil t))
+
+
+#+END_SRC
+
+Search Python packages at Pip:
+
+#+BEGIN_SRC elisp
+
+(defun python/pip-search ()
+  "Search for a pip package. at: https://pypi.python.org"
+
+  (interactive)
+
+  (browse-url
+
+   (format "https://pypi.python.org/pypi?%%3Aaction=search&term=%s&submit=search"
+
+           (read-string "Pip: ")
+
+           (message "Searching pip.")
+
+    )))
+#+END_SRC
+
+
+Search Python Documentation:
+
+#+BEGIN_SRC elisp
+(defun python/doc-search ()
+  "Search Python3 official documentation. at: https://docs.python.org"
+  (interactive)
+
+  (browse-url
+   (format "https://docs.python.org/3/search.html?q=%s"
+
+           (read-string "Python3 doc: ")
+           )))
+#+END_SRC
+
+See also:
+
+
+    * [[http://wikemacs.org/wiki/Python][Python Settings]]
+
+
+    * [[http://www.reddit.com/r/emacs/comments/3anrqf/setting_up_emacs_to_support_both_python_2_and/][Setting up Emacs to Support both Python 2 and Python 3]]
+
+
+    * [[https://github.com/proofit404/pyenv-mode][Pyenv Mode]]
+
+
+    * [[http://www.johndcook.com/blog/2012/02/09/python-org-mode/][Running Python and R inside Emacs by John D. Cook]]
+
+
+    * [[http://www.emacswiki.org/emacs/PythonProgrammingInEmacs][EmacsWiki: Python Programming In Emacs]]
+
+
+    * [[http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/][Emacs as a Python IDE - Jessica Hamrick]]
+
+
+    * [[http://planspace.org/20141007-emacs_python/][Emacs and Python]]
+
+
+    * [[http://wenshanren.org/?p=351][Emacs: Python Debugging, Send Code to an Arbitrary Buffer | 肉山博客 (Wenshan's Blog)]]
+
+** Haskell
+
+ - [[https://commercialhaskell.github.io/intero/][Intero for Emacs]]
+
+Search Hoogle, the Haskell API search engine and the Hackage search engine.
+
+#+BEGIN_SRC emacs-lisp
+(defun haskell/hoogle ()
+  "Search Hoogle: Haskell API search engine
+
+   https://www.haskell.org/hoogle
+   "
+  (interactive)
+
+  (browse-url (format  "https://www.haskell.org/hoogle/?hoogle=%s"
+                       (read-string "Hoogle: ")
+                       ))
+
+  (message "Searching Hoogle ...")
+  )
+
+
+(defun haskell/hoogle-region ()
+  "Search selected text on Hoogle: Haskell API Search Engine
+   https://www.haskell.org/hoogle
+  "
+  (interactive)
+  (browse-url (format  "https://www.haskell.org/hoogle/?hoogle=%s"
+
+                       (buffer-substring-no-properties
+                        (region-beginning)
+                        (region-end)
+                        )
+
+                       )))
+
+(defun haskell/hackage ()
+  " Search a Haskell library at:  https://hackage.haskell.org/
+  "
+  (interactive)
+
+  (browse-url
+
+   (format  "https://hackage.haskell.org/packages/search?terms=%s"
+
+            (read-string "Hackage: ")))
+
+  (message "Searching Hackage ...")
+
+  )
+#+END_SRC
+
+See:
+
+  * [[http://wikemacs.org/wiki/Haskell-mode][Haskell Mode]] 
+
+  * [[https://wiki.haskell.org/Emacs/Inferior_Haskell_processes][Emacs/Inferior Haskell processes]]
+
+** R and S
+
+ - ess - R-programming and S statistical programming.
+
+See:
+
+ - [[http://blog.revolutionanalytics.com/2014/03/emacs-ess-and-r-for-zombies.html][Emacs, ESS and R for Zombies]]
+
+ - [[http://stats.blogoverflow.com/2011/08/using-emacs-to-work-with-r/][Using Emacs to work with R « Stack Exchange Stats Blog]]
+
+ - [[https://www2.stat.duke.edu/courses/Spring09/sta244/computing/R-ESS.html][Running R/S-Plus in Emacs]]
+
+** C / C++
+
+    - [[http://tuhdo.github.io/c-ide.html][C/C++ Development Environment for Emacs]]
+
+    - [[https://github.com/atilaneves/cmake-ide][C make IDE]]
+
+    - [[https://kb.iu.edu/d/aqsy][Step-by-step example for using GDB within Emacs to debug a C or C++ program]]
+
+    - [[http://tedlab.mit.edu/~dr/gdbintro.html][Intro to GDB under Emacs]]
+ 
+** Lisp dialects
+
+ - Paredit 
+
+ - [[http://www.emacswiki.org/emacs/RainbowDelimiters][Emacs Wiki: Rainbow Delimiters]] Rainbow delimiters is useful for all
+   Lisps dialects like Elisp, Clojure, Scheme and etc. It also makes
+   easier to match and spot delimiters at different levels.
+
+ file:images/rainbow_delimiters.png
+
+** Ocaml
+
+ - [[http://wikemacs.org/wiki/OCaml][Ocaml]]
+
+** JavaScript
+
+Find Javascript package:
+
+#+BEGIN_SRC elisp
+
+(defun javascript/npm-search ()
+  "Search for a NPM package at: https://www.npmjs.com"
+  (interactive)
+
+  (browse-url
+
+   (format "https://www.npmjs.com/search?q=%s"
+
+           (url-hexify-string  (read-string "npm: "))
+
+           )))
+
+#+END_SRC
+
+
+    * [[http://wikemacs.org/wiki/JavaScript][Java Script]] Swank-js provides SLIME REPL and other development
+      tools for in-browser JavaScript and Node.JS. It consists of
+      SWANK backend and accompanying SLIME contrib
+
+    * [[https://github.com/swank-js/swank-js][Swank backend for Node.JS and in-browser JavaScript]]
+
+** Java
+
+Search Java package documentation:
+
+#+BEGIN_SRC elisp
+
+(defun java/open-javadoc ()
+  "Open Java Official documentation web site:
+   https://docs.oracle.com/javase/8/docs
+
+   Usage: M-x java/open-javadoc
+
+   "
+  (interactive)
+
+  (browse-url "https://docs.oracle.com/javase/8/docs/"))
+
+(defun java/search-class ()
+  "Search a Java Class documentation.
+   at: https://docs.oracle.com/javase/<java-version>
+
+   It is assumed that is the Java 8.
+
+   Example:  M-x java/search-class  javax.swing.JPanel
+
+   "
+  (interactive)
+
+  (browse-url
+
+   (format "https://docs.oracle.com/javase/8/docs/api/%s"
+
+           (concat (replace-regexp-in-string "\\." "/"
+
+                                             (read-string "Enter a java class: ")
+
+                                             ) ".html"))))
+
+
+
+
+#+END_SRC
+
+** Lisp Dialects
+*** All Lisp Dialects
+
+    * [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][The Animated Guide to Paredit]]
+    * [[http://wikemacs.org/wiki/Paredit-mode][Paredit-mode]]* [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
+    * [[http://www.emacswiki.org/emacs/NavigatingParentheses][Emacs Wiki - NavigatingParentheses]]
+    * [[http://emacs-fu.blogspot.com.br/2010/06/automatic-pairing-of-brackets-and.html][automatic pairing of brackets and quotes]]
+
+#+BEGIN_SRC elisp
+
+;; Turn on paren match highlighting
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
+;; Highlight entire s-expression under cursor
+(setq show-paren-style 'expression)
+
+#+END_SRC
+
+*** Common Lisp
+
+    * [[https://common-lisp.net/project/slime/][SLIME: The Superior Lisp Interaction Mode for Emacs]]
+    * [[https://www.masteringemacs.org/article/evaluating-elisp-emacs][Evaluating Elisp in Emacs By Mickey Petersen]]
+    * [[https://en.wikibooks.org/wiki/Common_Lisp/First_steps/Installation][Common Lisp/First steps/Installation]]
+    * [[http://cl-cookbook.sourceforge.net/emacs-ide.html][The Common Lisp Cookbook - Using Emacs as a Lisp IDE]]
+    * [[https://www.cs.colostate.edu/helpdocs/lispEmacs.html][Running Allegro Common Lisp From Emacs]]
+
+    * [[https://common-lisp.net/project/lispbox/][Lispbox]] - Lispbox is just a pre-configured packaging of the
+      Emacs editing environment, SLIME (The Superior Lisp Interaction
+      Mode for Emacs), the Quicklisp library manager, and the Clozure
+      Common Lisp compiler.  Combined, these components integrate to
+      provide all of the functionality you would expect from an IDE,
+      and more. Lispbox makes it quick and easy to get started using
+      them.
+
+
+Collection of information about using SLIME - a proto-manual.
+
+    * [[http://www.cliki.net/slime-howto][SLIME-HOWTO]]
+
+Set Lisp Interpreter
+
+#+BEGIN_SRC elisp
+
+(setq inferior-lisp-program "clisp")
+
+#+END_SRC
+
+*** Scheme
+
+The variable scheme-program-name controls which Scheme implementation Emacs will run.
+
+#+BEGIN_SRC elisp
+
+;; Racket Lang (Scheme Derived)
+(setq scheme-program-name  "racket")
+
+;; Racket Lang (Scheme Derived)
+(setq scheme-program-name  "racket")
+
+;; Chicken Scheme
+(setq scheme-program-name "csi")
+(setq scheme-program-name "/opt/bin/csi")
+
+#+END_SRC
+
+The function M-x run-scheme will run the selected scheme program.
+
+The following functions are useful to run a specific Scheme version or
+implementation. Usage: M-x run-scheme-gambit, M-x run-scheme-guile
+...
+
+#+BEGIN_SRC elisp
+
+(defun run-scheme-gambit ()
+  (interactive)
+  ;;; It could also be: (run-scheme "/opt/gambit/bin/gsc")
+  ;;; executable-find will return the path to executable.
+  ;;;
+  (run-scheme (executable-find "gsc")))
+
+
+(defun run-scheme-guile ()
+  (interactive)
+  (run-scheme (executable-find "guile")))
+
+(defun run-scheme-chicken ()
+  (interactive)
+  (run-scheme  "/opt/chicken/bin/csi"))
+
+(defun run-racket ()
+  (interactive)
+  (run-scheme "/opt/bin/racket"))
+
+#+END_SRC
+
+    * [[http://emacswiki.org/emacs/Scheme][Emacs Wiki - Scheme]]
+    * [[http://www.nongnu.org/geiser/][Geiser]]
+    * [[http://community.schemewiki.org/?emacs-tutorial][A Tutorial For Using Emacs with Scheme]]
+    * [[http://alexott.net/en/writings/emacs-devenv/EmacsScheme.html][Support for the Scheme programming language]]
+    * [[https://mayukhmukherjee.wordpress.com/2014/01/03/setup-lisp/][Setup lisp programming environment]]
+    * [[http://www.blogbyben.com/2011/02/little-elisp-to-make-emacs-and-racket.html][A Little Elisp to Make Emacs and Racket Play Nicer]]
+
+*** Clojure
+
+Scheme inferior mode (Scheme shell support) can be used to run Clojure
+repl without Cider. It is a easy and faster to way to beginners run
+and explore Clojure.
+
+The code below sets the following key bindings:
+
+ - C-x C-e to Send the last Sexp to clojure repl.
+ - C-c =   to Send the definition to the repl, it sends the outermost
+   s-expression to the repl regardless where is the cursor.
+ - C-c C-p Send a region to the repl.
+ - C-up  Goes to the next input in the shell
+ - C-down Goes to the previous input the shell
+ - C-c C-l Opens the command history.
+
+#+BEGIN_SRC emacs-lisp
+
+(progn
+  (define-key clojure-mode-map
+      (kbd "C-x C-e") #'scheme-send-last-sexp)
+
+  (define-key clojure-mode-map
+    (kbd "C-c =") #'scheme-send-definition)
+
+  )
+
+
+(defun cloujure-repl  ()
+  (interactive)
+
+  (run-scheme "java -jar /opt/clojure.jar"))
+
+
+
+(defun run-clojure-batch ()
+  "Run a clojure file in batch mode"
+  (interactive)
+
+
+  (start-process "clojure-batch1"     ;; Process name
+                 "*clojure-batch*"   ;; Buffer name
+
+                 ;;; Command line
+                 "java" "-jar" "/opt/clojure.jar" (buffer-file-name))
+
+  (split-window-vertically)
+
+  (switch-to-buffer-other-window "*clojure-batch*"))
+
+#+END_SRC
+
+
+Download Clojure:
+
+#+BEGIN_SRC
+cd /opt/
+curl -O http://central.maven.org/maven2/org/clojure/clojure/1.7.0/clojure-1.7.0.jar
+#+END_SRC
+
+*See:*
+
+    * [[http://pythonhackers.com/p/clojure-emacs/cider][CIDER is a Clojure IDE and REPL for Emacs]]
+    * [[http://blog.zenmodeler.com/engineering/2014/06/06/starting-with-clojure-practical-tips.html][Practical Starter Tips for Clojure]]
+    * [[http://www.braveclojure.com/basic-emacs/][How to Use Emacs, an Excellent Clojure Editor]]
+    * [[http://eigenhombre.com/clojure/2014/07/05/emacs-customization-for-clojure/][Emacs Customization for Clojure]]
+    * [[http://jr0cket.co.uk/2015/01/getting-started-with-cider-repl-for-clojure-on-emacs-live.html][Getting Started With Cider Repl for Clojure on Emacs Live]]
+
+*Non Categorized*
+
+    * [[http://emacswiki.org/emacs/LocalVariables][Local Variables]]
+    * [[https://github.com/joelmccracken/projectile][Project Interaction Library for Emacs]]
+    * [[http://www.gnu.org/software/emacs/manual/html_node/widget/index.html][The Emacs Widget Library]]
+    * [[http://www.emacswiki.org/emacs/InteractivelyDoThings][InteractivelyDoThings]]
+** Clojure
+
+ - [[https://github.com/clojure-emacs/cider][clojure-emacs/cider]] - The Clojure Interactive Development
+   Environment that Rocks for Emacs https://cider.readthedocs.org
