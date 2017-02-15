@@ -4,7 +4,7 @@
 #+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor
 #+STARTUP: content
 
-* Emacs - Programming and Customization
+* Emacs - Elisp Programming and Customization
 ** Overview
 
 # file:images/emacs_logo.png
@@ -111,6 +111,20 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
  - [[file:Bookmarks.org][Bookmarks]] - Emacs bookmarks to Wikis, tutorials, videos, codes and
    etc.
+
+** TODO Future Work 
+
+ - [ ] Comint Mode / interacting with REPLs and subprocesses 
+
+ - [ ] Network API
+
+ - [ ] Add cross references 
+
+ - [ ] Emacs Widget Interfaces and Emacs User Interfaces 
+
+ - [ ] Add more examples about org-mode API.
+
+ - [ ] Add a better layout.
 
 ** Download this content
 
