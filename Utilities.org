@@ -12,30 +12,30 @@ Some Emacs utilities and goodness.
 | Feature                              | Entry Point                          | Description                                                                      |
 |--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | *Help Commands*                      |                                      |                                                                                  |
-|                                      |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | Help for all help commads            | M-x help-for-help                    |                                                                                  |
 | Emacs built-in tutorial              | M-x help-with-tutorial               | Open Emacs tutorial.                                                             |
 | Emacs built-in localized tutorial    | M-x help-with-tutorial-spec-language | Emacs built-in tutorial in many languages like Russian, Portuguese ...           |
 |                                      |                                      |                                                                                  |
 | *Package Manager*                    |                                      |                                                                                  |
-|                                      |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | Package Manager                      | M-x list-packages                    | List all packages available.                                                     |
 |                                      | M-x package-install                  | Install some package                                                             |
 |                                      |                                      |                                                                                  |
 | *Info page and Man page - Unix docs* |                                      |                                                                                  |
-|                                      |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | Info page                            | M-x info  / M-x heml-info            | Info page reader. The helm-version is provided by heml package.                  |
 |                                      |                                      |                                                                                  |
 | Manpage                              | M-x woman / M-x helm-man-woman       | Manpage Reader                                                                   |
 |                                      |                                      |                                                                                  |
 | *File Manager and edit remote files* |                                      |                                                                                  |
-|                                      |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | File manager                         | M-x dired or C-x d                   | File manager and directory editor                                                |
 |                                      |                                      |                                                                                  |
 | Tramp mode                           |                                      | Tramp mode - edit remote files, edit as super user and open                      |
 |                                      |                                      | remote directories through ssh, sftp, telnet and ftp                             |
 | *Programming*                        |                                      |                                                                                  |
-|                                      |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | Compile mode                         | M-x compile                          | Run any compilation command, compiler or build automation tool like make or ant. |
 | GNU Debugger Interface               | M-x gdb                              |                                                                                  |
 | Git Version Control System           | M-x magit-status                     | Git user interface provided by the magit package.                                |
@@ -46,18 +46,24 @@ Some Emacs utilities and goodness.
 | VIM Emulation                        | M-x evil-mode                        | Emulates VI/VIM editor behavior. It is provided by the evil package.             |
 |                                      |                                      |                                                                                  |
 | *Shells*                             |                                      |                                                                                  |
-|                                      |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | Shell Command                        | M-x shell-command                    | Run a batch shell command like ifconfig or dmesg (Linux)                         |
 | Async shell command                  | M-x async-shell-command              | Run any shell command asynchronously.                                            |
 | Eshel                                | M-x eshell                           | Multi platform shell written in Elisp and highly integrated to Emacs.            |
 | Ielm                                 | M-x ielm                             | Elisp Interactive shell to control and Debug Emacs                               |
 |                                      |                                      |                                                                                  |
 | *System Related Commands*            |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
+| Copy file                            | M-x copy-file                        | Copy a file. Prompt user for a file to copy.                                     |
+| Delete file                          | M-x delete-file                      | Prompt user for a file to delete.                                                |
+| Make directory                       | M-x make-directory                   | Creates a new directory. Equivalent to shell command $ mkdir                     |
+| Delete directory                     | M-x delete-directory                 | Delete a directory. Promps the user for a directory to delete.                   |
+| Copy directory                       | M-x copy-directory                   | Copy directory.                                                                  |
 |                                      |                                      |                                                                                  |
 | Task manager/ Process manager        | M-x proced                           | Htop like multi platform task manager.                                           |
 |                                      |                                      |                                                                                  |
 | *Network Tools*                      |                                      |                                                                                  |
-|                                      |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | Network information                  | M-x ifconfig                         | Show iformation about network interfaces                                         |
 | Ping                                 | M-x ping                             | Ping a host name or ip address                                                   |
 | Traceroute                           | M-x traceroute                       | Traceroute a host name or ip address                                             |
@@ -67,7 +73,7 @@ Some Emacs utilities and goodness.
 | Telnet                               | M-x telnet                           | Telnet login. It is the acient version of SSH.                                   |
 |                                      |                                      |                                                                                  |
 | *Misc*                               |                                      |                                                                                  |
-|                                      |                                      |                                                                                  |
+|--------------------------------------+--------------------------------------+----------------------------------------------------------------------------------|
 | Calculator                           | M-x calc                             | RPN (Reverse Polish Notation) calculator like HP-48g engineering calculator.     |
 | Color Pallete                        | M-x list-colors-display              | Display a collor pallete.                                                        |
 |                                      |                                      |                                                                                  |
