@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Snippets</title>
-<!-- 2016-12-28 qua 14:51 -->
+<!-- 2017-03-02 qui 08:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization.
@@ -265,7 +265,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-6-1">1.6.1. Save buffer</a></li>
 <li><a href="#sec-1-6-2">1.6.2. Get buffer content as string</a></li>
 <li><a href="#sec-1-6-3">1.6.3. Get selected text as string</a></li>
-<li><a href="#sec-1-6-4">1.6.4. Creating a scratch buffer for Programming Languages</a></li>
+<li><a href="#sec-1-6-4">1.6.4. Create a scratch buffer for Programming Languages</a></li>
+<li><a href="#sec-1-6-5">1.6.5. Get all buffer's local variables</a></li>
+<li><a href="#sec-1-6-6">1.6.6. Get a specific buffer local variable</a></li>
+<li><a href="#sec-1-6-7">1.6.7. Append buffer content to file</a></li>
+<li><a href="#sec-1-6-8">1.6.8. Write file with buffer content (overwrite file it exists)</a></li>
 </ul>
 </li>
 <li><a href="#sec-1-7">1.7. IO - Input and Output</a>
@@ -986,7 +990,7 @@ Returns the selected text of the current buffer.
 </div>
 
 <div id="outline-container-sec-1-6-4" class="outline-4">
-<h4 id="sec-1-6-4"><span class="section-number-4">1.6.4</span> Creating a scratch buffer for Programming Languages</h4>
+<h4 id="sec-1-6-4"><span class="section-number-4">1.6.4</span> Create a scratch buffer for Programming Languages</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 This function creates a Python scratch buffer like elisp <code>*scratch*</code>
@@ -1054,8 +1058,142 @@ Usage: M-x sh/scratch
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-1-6-5" class="outline-4">
+<h4 id="sec-1-6-5"><span class="section-number-4">1.6.5</span> Get all buffer's local variables</h4>
+<div class="outline-text-4" id="text-1-6-5">
+<p>
+Get all current buffer's local variables
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(buffer-local-variables) <span class="org-comment-delimiter">;; </span><span class="org-comment">Evalute with M-x eval-print-last-sexp</span>
+</pre>
 </div>
 
+<p>
+Output: 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">((cursor-type . bar) 
+(buffer-display-time 22711 20278 987330 737000) 
+(buffer-display-count . 4) 
+(buffer-invisibility-spec 
+(org-babel-hide-hash . t) 
+(org-babel-hide-hash . t) 
+(org-babel-hide-hash . t) 
+(org-babel-hide-hash . t) 
+(org-babel-hide-result . t) 
+(org-hide-block . t) 
+(org-cwidth) (org-link) (outline . t) t) 
+(buffer-file-truename . <span class="org-string">"~/Documents/projects/emacs/Elisp_Snippets.org"</span>) (point-before-scroll) 
+
+(buffer-auto-save-file-format . t) 
+(buffer-file-format) (buffer-file-coding-system . utf-8-unix) 
+(enable-multibyte-characters . t) 
+(mark-active) 
+(overwrite-mode) ...)
+</pre>
+</div>
+
+
+<p>
+Get all local variables of a buffer. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(buffer-local-variables &lt;buffer-name&gt;)
+</pre>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div id="outline-container-sec-1-6-6" class="outline-4">
+<h4 id="sec-1-6-6"><span class="section-number-4">1.6.6</span> Get a specific buffer local variable</h4>
+<div class="outline-text-4" id="text-1-6-6">
+<div class="org-src-container">
+
+<pre class="src src-elisp">(buffer-local-value VARIABLE BUFFER)
+</pre>
+</div>
+
+<p>
+Get current buffer major-mode:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">&gt;  (buffer-local-value 'major-mode (current-buffer))
+org-mode
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-7" class="outline-4">
+<h4 id="sec-1-6-7"><span class="section-number-4">1.6.7</span> Append buffer content to file</h4>
+<div class="outline-text-4" id="text-1-6-7">
+<p>
+Function append to file: Append buffer's region content to file.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(append-to-file &lt;point-min&gt; &lt;point-max&gt; &lt;file-name&gt;)
+</pre>
+</div>
+
+<p>
+Append current buffer content to file. If the file doesn't exist, it will be
+created. Otherwise the buffer content will be appended to the end of
+the file.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(append-to-file (point-min) (point-max) <span class="org-string">"/tmp/afile.txt"</span>)
+</pre>
+</div>
+
+
+<p>
+Append a specific buffer content to file. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-elisp">(<span class="org-keyword">with-current-buffer</span> <span class="org-string">"my-buffer-name"</span>
+  (append-to-file (point-min) (point-max) <span class="org-string">"/tmp/afile.txt"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-8" class="outline-4">
+<h4 id="sec-1-6-8"><span class="section-number-4">1.6.8</span> Write file with buffer content (overwrite file it exists)</h4>
+<div class="outline-text-4" id="text-1-6-8">
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Delete file if exists in order to overwrite it.</span>
+(<span class="org-keyword">if</span> (file-exists-p filename)
+    (delete-file file))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Append buffer content to file.</span>
+(append-to-file (point-min) (point-max) filename))
+</pre>
+</div>
+</div>
+</div>
+</div>
 <div id="outline-container-sec-1-7" class="outline-3">
 <h3 id="sec-1-7"><span class="section-number-3">1.7</span> IO - Input and Output</h3>
 <div class="outline-text-3" id="text-1-7">
@@ -5329,7 +5467,7 @@ a rails console </a>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-28 qua 14:51</p>
+<p class="date">Created: 2017-03-02 qui 08:08</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

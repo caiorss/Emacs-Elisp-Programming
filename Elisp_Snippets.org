@@ -428,7 +428,7 @@ Returns the selected text of the current buffer.
   (buffer-substring-no-properties (region-beginning) (region-end)))
 #+END_SRC
 
-*** Creating a scratch buffer for Programming Languages 
+*** Create a scratch buffer for Programming Languages 
 
 This function creates a Python scratch buffer like elisp ~*scratch*~
 which allows the user to play with Python without creating any
@@ -479,6 +479,97 @@ Usage: M-x sh/scratch
           ))) 
  #+END_SRC
 
+*** Get all buffer's local variables 
+
+Get all current buffer's local variables
+
+#+BEGIN_SRC elisp 
+    (buffer-local-variables) ;; Evalute with M-x eval-print-last-sexp
+#+END_SRC
+
+Output: 
+
+#+BEGIN_SRC elisp 
+((cursor-type . bar) 
+(buffer-display-time 22711 20278 987330 737000) 
+(buffer-display-count . 4) 
+(buffer-invisibility-spec 
+(org-babel-hide-hash . t) 
+(org-babel-hide-hash . t) 
+(org-babel-hide-hash . t) 
+(org-babel-hide-hash . t) 
+(org-babel-hide-result . t) 
+(org-hide-block . t) 
+(org-cwidth) (org-link) (outline . t) t) 
+(buffer-file-truename . "~/Documents/projects/emacs/Elisp_Snippets.org") (point-before-scroll) 
+
+(buffer-auto-save-file-format . t) 
+(buffer-file-format) (buffer-file-coding-system . utf-8-unix) 
+(enable-multibyte-characters . t) 
+(mark-active) 
+(overwrite-mode) ...)
+#+END_SRC
+
+
+Get all local variables of a buffer. 
+
+#+BEGIN_SRC elisp 
+  (buffer-local-variables <buffer-name>)
+#+END_SRC
+
+
+
+
+
+
+*** Get a specific buffer local variable 
+
+#+BEGIN_SRC elisp 
+(buffer-local-value VARIABLE BUFFER)
+#+END_SRC
+
+Get current buffer major-mode:
+
+#+BEGIN_SRC elisp 
+>  (buffer-local-value 'major-mode (current-buffer))
+org-mode
+
+#+END_SRC
+
+*** Append buffer content to file 
+
+Function append to file: Append buffer's region content to file.
+
+#+BEGIN_SRC elisp 
+  (append-to-file <point-min> <point-max> <file-name>)
+#+END_SRC
+
+Append current buffer content to file. If the file doesn't exist, it will be
+created. Otherwise the buffer content will be appended to the end of
+the file.
+
+#+BEGIN_SRC elisp    
+  (append-to-file (point-min) (point-max) "/tmp/afile.txt")
+#+END_SRC
+
+
+Append a specific buffer content to file. 
+
+#+BEGIN_SRC elisp 
+  (with-current-buffer "my-buffer-name"
+    (append-to-file (point-min) (point-max) "/tmp/afile.txt"))
+#+END_SRC
+
+*** Write file with buffer content (overwrite file it exists)
+
+#+BEGIN_SRC elisp 
+  ;; Delete file if exists in order to overwrite it.
+  (if (file-exists-p filename)
+      (delete-file file))
+
+  ;; Append buffer content to file.
+  (append-to-file (point-min) (point-max) filename))
+#+END_SRC
 ** IO - Input and Output
 *** Input - Read User Input
 **** Prompt functions

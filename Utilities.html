@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Utilities</title>
-<!-- 2016-12-28 qua 14:51 -->
+<!-- 2017-03-02 qui 08:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization."
@@ -273,14 +273,15 @@ Some Emacs utilities and goodness.
 </thead>
 <tbody>
 <tr>
-<td class="left">Help for all help commads</td>
-<td class="left">M-x help-for-help</td>
+<td class="left"><b>Help Commands</b></td>
+<td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
+<td class="left">Help for all help commads</td>
+<td class="left">M-x help-for-help</td>
 <td class="left">&#xa0;</td>
 </tr>
 
@@ -288,12 +289,6 @@ Some Emacs utilities and goodness.
 <td class="left">Emacs built-in tutorial</td>
 <td class="left">M-x help-with-tutorial</td>
 <td class="left">Open Emacs tutorial.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -309,6 +304,13 @@ Some Emacs utilities and goodness.
 </tr>
 
 <tr>
+<td class="left"><b>Package Manager</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
 <td class="left">Package Manager</td>
 <td class="left">M-x list-packages</td>
 <td class="left">List all packages available.</td>
@@ -316,7 +318,7 @@ Some Emacs utilities and goodness.
 
 <tr>
 <td class="left">&#xa0;</td>
-<td class="left">M-x package-insstall</td>
+<td class="left">M-x package-install</td>
 <td class="left">Install some package</td>
 </tr>
 
@@ -327,9 +329,16 @@ Some Emacs utilities and goodness.
 </tr>
 
 <tr>
+<td class="left"><b>Info page and Man page - Unix docs</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
 <td class="left">Info page</td>
-<td class="left">M-x info</td>
-<td class="left">Info page reader</td>
+<td class="left">M-x info  / M-x heml-info</td>
+<td class="left">Info page reader. The helm-version is provided by heml package.</td>
 </tr>
 
 <tr>
@@ -340,7 +349,7 @@ Some Emacs utilities and goodness.
 
 <tr>
 <td class="left">Manpage</td>
-<td class="left">M-x woman</td>
+<td class="left">M-x woman / M-x helm-man-woman</td>
 <td class="left">Manpage Reader</td>
 </tr>
 
@@ -351,99 +360,16 @@ Some Emacs utilities and goodness.
 </tr>
 
 <tr>
-<td class="left">Diff files</td>
-<td class="left">M-x ediff</td>
-<td class="left">File diff viwer</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
+<td class="left"><b>File Manager and edit remote files</b></td>
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
 </tr>
-
-<tr>
-<td class="left">Diff buffers</td>
-<td class="left">M-x ediff-buffers</td>
-<td class="left">Buffers diff viewer like ediff</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="left">File manager</td>
 <td class="left">M-x dired or C-x d</td>
 <td class="left">File manager and directory editor</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">Shell Command</td>
-<td class="left">M-x shell-command</td>
-<td class="left">Run a batch shell command like ifconfig or dmesg (Linux)</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">Async shell command</td>
-<td class="left">M-x async-shell-command</td>
-<td class="left">Run any shell command asynchronously. It is useful to</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">run REPLs like database shells, shells, interactive CLI apps</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">and launch apps.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">Eshel</td>
-<td class="left">M-x eshell</td>
-<td class="left">Multi platform shell written in Elisp and</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">highly integrated to Emacs.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">Ielm</td>
-<td class="left">M-x ielm</td>
-<td class="left">Elisp Interactive shell to control and Debug Emacs</td>
 </tr>
 
 <tr>
@@ -465,61 +391,26 @@ Some Emacs utilities and goodness.
 </tr>
 
 <tr>
-<td class="left">&#xa0;</td>
+<td class="left"><b>Programming</b></td>
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="left">Compile mode</td>
 <td class="left">M-x compile</td>
-<td class="left">Integrate Emacs to any build automation tool like make.</td>
+<td class="left">Run any compilation command, compiler or build automation tool like make or ant.</td>
 </tr>
 
 <tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">It can extract compilation targets from Makefile.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
+<td class="left">GNU Debugger Interface</td>
+<td class="left">M-x gdb</td>
 <td class="left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left">Calculator</td>
-<td class="left">M-x calc</td>
-<td class="left">RPN (Reverse Polish Notation) calculator like HP-48g</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">series calculator with features like unit conversion,</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">financial functions, integration, differentiation and</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">symbolic math.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">Git</td>
+<td class="left">Git Version Control System</td>
 <td class="left">M-x magit-status</td>
 <td class="left">Git user interface provided by the magit package.</td>
 </tr>
@@ -528,6 +419,110 @@ Some Emacs utilities and goodness.
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Diff files</td>
+<td class="left">M-x ediff</td>
+<td class="left">File diff viwer</td>
+</tr>
+
+<tr>
+<td class="left">Diff buffers</td>
+<td class="left">M-x ediff-buffers</td>
+<td class="left">Buffers diff viewer like ediff</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">VIM Emulation</td>
+<td class="left">M-x evil-mode</td>
+<td class="left">Emulates VI/VIM editor behavior. It is provided by the evil package.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>Shells</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">Shell Command</td>
+<td class="left">M-x shell-command</td>
+<td class="left">Run a batch shell command like ifconfig or dmesg (Linux)</td>
+</tr>
+
+<tr>
+<td class="left">Async shell command</td>
+<td class="left">M-x async-shell-command</td>
+<td class="left">Run any shell command asynchronously.</td>
+</tr>
+
+<tr>
+<td class="left">Eshel</td>
+<td class="left">M-x eshell</td>
+<td class="left">Multi platform shell written in Elisp and highly integrated to Emacs.</td>
+</tr>
+
+<tr>
+<td class="left">Ielm</td>
+<td class="left">M-x ielm</td>
+<td class="left">Elisp Interactive shell to control and Debug Emacs</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>System Related Commands</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">Copy file</td>
+<td class="left">M-x copy-file</td>
+<td class="left">Copy a file. Prompt user for a file to copy.</td>
+</tr>
+
+<tr>
+<td class="left">Delete file</td>
+<td class="left">M-x delete-file</td>
+<td class="left">Prompt user for a file to delete.</td>
+</tr>
+
+<tr>
+<td class="left">Make directory</td>
+<td class="left">M-x make-directory</td>
+<td class="left">Creates a new directory. Equivalent to shell command $ mkdir</td>
+</tr>
+
+<tr>
+<td class="left">Delete directory</td>
+<td class="left">M-x delete-directory</td>
+<td class="left">Delete a directory. Promps the user for a directory to delete.</td>
+</tr>
+
+<tr>
+<td class="left">Copy directory</td>
+<td class="left">M-x copy-directory</td>
+<td class="left">Copy directory.</td>
 </tr>
 
 <tr>
@@ -549,45 +544,77 @@ Some Emacs utilities and goodness.
 </tr>
 
 <tr>
+<td class="left"><b>Network Tools</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
 <td class="left">Network information</td>
 <td class="left">M-x ifconfig</td>
 <td class="left">Show iformation about network interfaces</td>
 </tr>
 
 <tr>
+<td class="left">Ping</td>
+<td class="left">M-x ping</td>
+<td class="left">Ping a host name or ip address</td>
+</tr>
+
+<tr>
+<td class="left">Traceroute</td>
+<td class="left">M-x traceroute</td>
+<td class="left">Traceroute a host name or ip address</td>
+</tr>
+
+<tr>
+<td class="left">ARP</td>
+<td class="left">M-x arp</td>
+<td class="left">Display the command arp output.</td>
+</tr>
+
+<tr>
+<td class="left">Routing Table</td>
+<td class="left">M-x route</td>
+<td class="left">Show routing table.</td>
+</tr>
+
+<tr>
+<td class="left">Whois</td>
+<td class="left">M-x whois</td>
+<td class="left">Run whois command to show information about route.</td>
+</tr>
+
+<tr>
+<td class="left">Telnet</td>
+<td class="left">M-x telnet</td>
+<td class="left">Telnet login. It is the acient version of SSH.</td>
+</tr>
+
+<tr>
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>Misc</b></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">Calculator</td>
+<td class="left">M-x calc</td>
+<td class="left">RPN (Reverse Polish Notation) calculator like HP-48g engineering calculator.</td>
 </tr>
 
 <tr>
 <td class="left">Color Pallete</td>
 <td class="left">M-x list-colors-display</td>
 <td class="left">Display a collor pallete.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">VIM Emulation</td>
-<td class="left">M-x evil-mode</td>
-<td class="left">It provided by the evil package.</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="left">GNU Debugger Interface</td>
-<td class="left">M-x gdb</td>
-<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -3107,7 +3134,7 @@ See also:
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-28 qua 14:51</p>
+<p class="date">Created: 2017-03-02 qui 08:08</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
