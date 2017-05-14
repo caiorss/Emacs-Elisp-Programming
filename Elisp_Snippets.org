@@ -406,6 +406,24 @@ nil
 #+BEGIN_SRC elisp
 (save-buffer)
 #+END_SRC
+*** Kill / delete buffer 
+
+#+BEGIN_SRC elisp 
+ (kill-buffer <buffer-object or buffer-name>)
+#+END_SRC
+
+Example: Delete buffer named ~Elisp_Snippets.org~
+
+#+BEGIN_SRC elisp 
+  (kill-buffer "Elisp_Snippets.org")
+#+END_SRC
+
+Example: Delete all buffers:
+
+#+BEGIN_SRC elisp 
+ (mapc #'kill-buffer (buffer-list))
+#+END_SRC
+
 *** Get buffer content as string
 
 Returns the content of a buffer referencend by its name or the buffer
@@ -520,8 +538,6 @@ Get all local variables of a buffer.
 
 
 
-
-
 *** Get a specific buffer local variable 
 
 #+BEGIN_SRC elisp 
@@ -569,6 +585,11 @@ Append a specific buffer content to file.
 
   ;; Append buffer content to file.
   (append-to-file (point-min) (point-max) filename))
+#+END_SRC
+*** Revert / update buffer without asking to confirm 
+
+#+BEGIN_SRC elisp 
+ (revert-buffer t t t)
 #+END_SRC
 ** IO - Input and Output
 *** Input - Read User Input
@@ -886,23 +907,18 @@ all defun words by defn.
 #+BEGIN_SRC elisp
 (defun shell-command-on-buffer (&optional command)
   "Apply a shell command in the current buffer and replace it by the command output.
+Example:
+- Interactive usage:  M-x shell-command-on-buffer Enter: sed 's/defun/defn/g'.
+                      replaces all defun words by defn.
 
-   Example:
-            - Interactive usage:  M-x shell-command-on-buffer Enter: sed 's/defun/defn/g'.
-                                  replaces all defun words by defn.
-
-            - (shell-command-on-buffer \"sed 's/defun/defn/g'\")
-  "
-
+- (shell-command-on-buffer \"sed 's/defun/defn/g'\")"
   (interactive)
-
   (shell-command-on-region (point-min)
 			   (point-max)
 			   (if command command (read-string "Cmd on buffer: "))
 			   "*shell-output*"
 			   t
-			   )
-  )
+			   ))
 #+END_SRC
 
 **** Insert line number in all lines of a buffer using ruby
@@ -929,16 +945,11 @@ See also: [[http://reference.jumpingmonkey.org/programming_languages/ruby/ruby-o
 
 #+BEGIN_SRC elisp
 (defun ruby-on-buffer (&optional command)
-  "
-   Applies a ruby command on buffer
-
-   Example: The command will number each line of the current buffer.
-
-            1. M-x ruby-on-buffer
-            2. type: 'printf(\"%6s%s\", $., $_)' without quotes.
-   "
+  "Applies a ruby command on buffer
+Example: The command will number each line of the current buffer.
+1. M-x ruby-on-buffer
+2. type: 'printf(\"%6s%s\", $., $_)' without quotes."
   (interactive)
-
   (shell-command-on-buffer
    (format "ruby -ne '%s'"
            (if command
@@ -960,30 +971,50 @@ Usage: M-x ruby-gsub-on-buffer
 See also: [[http://reference.jumpingmonkey.org/programming_languages/ruby/ruby-one-liners.html][Ruby One-Liners]]
 
 #+BEGIN_SRC elisp
-
 (defun ruby-gsub-on-buffer (&optional regexp)
-   "
-   Applies ruby regex, the command $ ruby -pe 'gsub(regexp)'
-   on the current buffer.
-
-   Usage M-x ruby-gsub-on-buffer
-         (ruby-gsub-on-buffer <regexp>)
-
-   Example: The Command replace all occurrences
-            of 'defun' by 'defn'.
-
-            1. M-x ruby-gsub-on-buffer
-            2. Type /defun/,\"defn\"
-
-   "
+   "Applies ruby regex, the command $ ruby -pe 'gsub(regexp)' on the current buffer.
+Usage M-x ruby-gsub-on-buffer
+      (ruby-gsub-on-buffer <regexp>)
+Example: The Command replace all occurrences  of 'defun' by 'defn'.
+1. M-x ruby-gsub-on-buffer
+2. Type /defun/,\"defn\""
    (interactive)
-
    (shell-regexp-on-buffer
     (format "ruby -pe 'gsub(%s)'"
            (if regexp
                regexp
              (read-string "ruby regex: ")))))
 #+END_SRC
+
+Refactoring to a self-contained-code, removing all dependencies.
+
+Example: To remove all numbers in at beggining of line run:   
+
+#+BEGIN_SRC text 
+M-x replace-regex-ruby /^\d\d?/,""
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (defun replace-regexp-ruby (&optional regexp)
+     "Replace ruby-gsub on buffer same as replace-regexp, but with ruby regex.
+  Usage M-x ruby-gsub-on-buffer
+        (ruby-gsub-on-buffer <regexp>)
+  Example: The Command replace all occurrences of 'defun' by 'defn'.
+  1. M-x ruby-gsub-on-buffer
+  2. Type /defun/,\"defn\""
+     (interactive)
+     (shell-command-on-region (point-min)
+                              (point-max)
+                              (format "ruby -pe 'gsub(%s)'"
+                                      (if regexp
+                                          regexp
+                                        (read-string "ruby regex: ")))
+                              "*shell-output*"
+                              t
+                              ))
+#+END_SRC
+
+
 
 *** Launch apps in Asynchronous mode
 *** Run asynchronous commands piping the output to a buffer
