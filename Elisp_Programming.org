@@ -24,24 +24,24 @@ The scratch buffer is useful to evaluate Emacs lisp commands, test new
 features and test new Emacs configurations and dot emacs without need
 to reload Emacs.
 
-file:images/scratch_buffer_usage_1.png
+[[file:images/scratch_buffer_usage_1.png][file:images/scratch_buffer_usage_1.png]]
 
 C-x C-e at the end of s-expression displays the result of evaluation
 in the minibuffer.
 
-file:images/scratch_buffer_usage_2.png
+[[file:images/scratch_buffer_usage_2.png][file:images/scratch_buffer_usage_2.png]]
 
 C-j  at the end of s-expression prints the result in the scratch
 buffer.
 
-file:images/scratch_buffer_usage_3.png
+[[file:images/scratch_buffer_usage_3.png][file:images/scratch_buffer_usage_3.png]]
 
 The scratch buffer can be used with the interpreter IELM, to open the
 interpreter type: C-x 3, put the cursor on the other window(C-x o) and type
 M-x ielm. By this way it is possible to evaluate expressions in the
 scratch buffer and test it in the shell.
 
-file:images/scratch_buffer_usage_4.png
+[[file:images/scratch_buffer_usage_4.png][file:images/scratch_buffer_usage_4.png]]
 
 The command *M-x eval-expression* which is bound to the key bind *M-:* can
 be used to evaluate Elisp commands in any buffer and test buffer local
@@ -53,9 +53,9 @@ Example:
 (insert (buffer-file-name (current-buffer)))
 #+END_SRC
 
-file:images/mx_eval_buffer1.png
+[[file:images/mx_eval_buffer1.png][file:images/mx_eval_buffer1.png]]
 
-file:images/mx_eval_buffer2.png
+[[file:images/mx_eval_buffer2.png][file:images/mx_eval_buffer2.png]]
 
 *** Creating Commands (Interactive Functions)
 
@@ -71,11 +71,11 @@ file:images/mx_eval_buffer2.png
 
 Before:
 
-file:images/emacs-interactive-command1.png
+[[file:images/emacs-interactive-command1.png][file:images/emacs-interactive-command1.png]]
 
 After:
 
-file:images/emacs-interactive-command2.png
+[[file:images/emacs-interactive-command2.png][file:images/emacs-interactive-command2.png]]
 
 *** Exploring Emacs
 **** Function Bound to Key Binding
@@ -92,7 +92,7 @@ then type the key binding like =C-x <right>= to pop up a window that
 shows the function bound to that key or just type =C-h-k= and type the
 key combination.
 
-file:images/function_keybind_describe.png
+[[file:images/function_keybind_describe.png][file:images/function_keybind_describe.png]]
 
 **** List All Defined Key Bindings
 
@@ -107,19 +107,19 @@ Example:
 The picture shows the major mode key bindings (elisp interactive mode)
 for the scratch buffer.
 
-file:images/emacs-list-all-key-bindings.png
+[[file:images/emacs-list-all-key-bindings.png][file:images/emacs-list-all-key-bindings.png]]
 
 This command also shows _minor modes_ key bindings.
 
 The image bellow shows the minor mode (pareddit) key bindings:
 
-file:images/minor-mode-binding-pareddit.png
+[[file:images/minor-mode-binding-pareddit.png][file:images/minor-mode-binding-pareddit.png]]
 
 If the user select the function pareddit-kill (which is associated with
 the key binding =C-k= in pareddit-mode) and type return, it will show
 the function documentation or what the key combination does.
 
-file:images/minor-mode-binding-pareddit2.png
+[[file:images/minor-mode-binding-pareddit2.png][file:images/minor-mode-binding-pareddit2.png]]
 
 **** Function Documentation
 
@@ -134,9 +134,9 @@ This can also be invoked with:
 (describe-function 'replace-regexp)
 #+END_SRC
 
-file:images/function-documentation-describe.png
+[[file:images/function-documentation-describe.png][file:images/function-documentation-describe.png]]
 
-** Basic settings for Elisp Programming 
+** Basic settings for Elisp Programming
 
 The packages paredit, rainbow-delimiters and company gives a better
 user experience when programming Elisp. The package [[https://www.emacswiki.org/emacs/RainbowDelimiters][rainbow-delimiters]]
@@ -149,7 +149,7 @@ Paredit and rainbow-delimiters are not only useful for Elisp, they are
 also invaluable for other lisp dialects like Scheme, Common Lisp and
 Clojure.
 
-See also: 
+See also:
 
  - [[https://www.youtube.com/watch?v=D6h5dFyyUX0][Emacs Rocks! Episode 14: Paredit - YouTube]]
 
@@ -161,15 +161,15 @@ This packages can be installed by using this commands:
  - M-x package-install rainbow-delimiters
  - M-x package-install company
 
-Settings ~/.emacs.d/init.el 
+Settings ~/.emacs.d/init.el
 
  - Install the packages if they are not installed yet.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
     (setq package-archives
-     '( 
+     '(
         ("melpa" . "https://melpa.org/packages/")
-        
+
         ;; ("org"       . "http://orgmode.org/elpa/")
         ("gnu"       . "http://elpa.gnu.org/packages/")
 
@@ -183,12 +183,12 @@ Settings ~/.emacs.d/init.el
        installs it automaticaly."
       (mapc  (lambda (package)
                (unless (package-installed-p package)
-                       (package-install package)    
+                       (package-install package)
                        ;;#'package-require
                        ))
 
              packs
-             
+
              ))
 
 
@@ -202,13 +202,13 @@ Settings ~/.emacs.d/init.el
 
  - Enable paredit, rainbow-delimiters and show-paren-mode for Emacs
    lisp mode (mode to edit Emacs files *.el) and lisp-interaction-mode
-   (mode to edit ~*scratch*~ buffer). 
+   (mode to edit ~*scratch*~ buffer).
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 
   (add-hook 'after-init-hook 'global-company-mode)
 
-  (add-hook 'emacs-lisp-mode-hook          
+  (add-hook 'emacs-lisp-mode-hook
             (lambda ()
               (paredit-mode t)
               (rainbow-delimiters-mode t)
@@ -223,7 +223,7 @@ Settings ~/.emacs.d/init.el
               ))
 #+END_SRC
 
-Set useful key bindings for IELM (Emacs-lisp interactive shell). 
+Set useful key bindings for IELM (Emacs-lisp interactive shell).
 
 | Key Binding | Description                                              |
 |-------------+----------------------------------------------------------|
@@ -241,14 +241,14 @@ This setting allows multiline input and by typing M-RET (Alt + Return)
 sends the current input to IELM process.
 
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (require 'ielm)
 
   (defun ielm/clear-repl ()
     "Clear current REPL buffer."
     (interactive)
     (let ((inhibit-read-only t))
-        (erase-buffer)     
+        (erase-buffer)
         (ielm-send-input)))
 
   (define-key inferior-emacs-lisp-mode-map
@@ -3422,7 +3422,7 @@ ELISP>
 
 #+END_SRC
 * Macros and Metaprogramming                  :macro:metaprogramming:lisp:
-** Overview 
+** Overview
 
 Macros are useful to create new lisp special forms like if and when,
 create new control structures, domain specific languages, eliminate
@@ -3981,7 +3981,7 @@ See also:
 
     * [[http://www.blogbyben.com/2011/04/10-concepts-emacs-newbie-should-master.html][11 Concepts The Emacs Newbie Should Master]]
 
-file:images/Emacs_terminology.png
+[[file:images/Emacs_terminology.png][file:images/Emacs_terminology.png]]
 
 **  Emacs API
 
@@ -4761,7 +4761,7 @@ or enter C-c C-b when using the IELM.
 
 Example:
 
-file:images/emacs_points_functions.png
+[[file:images/emacs_points_functions.png][file:images/emacs_points_functions.png]]
 
 
 Examples:
@@ -4838,14 +4838,14 @@ Example:
 (thing-at-point 'email)
 #+END_SRC
 
-file:images/thing_at_point_example1.png
+[[file:images/thing_at_point_example1.png][file:images/thing_at_point_example1.png]]
 
 #+BEGIN_SRC elisp
 (thing-at-point 'sexp)
 #+END_SRC
 
 
-file:images/thing_at_point_sexp.png
+[[file:images/thing_at_point_sexp.png][file:images/thing_at_point_sexp.png]]
 
 
 #+BEGIN_SRC elisp
@@ -4866,35 +4866,35 @@ ELISP>
 #+END_SRC
 
 
-file:images/thing_at_point_sexp2.png
+[[file:images/thing_at_point_sexp2.png][file:images/thing_at_point_sexp2.png]]
 **  Message / Output                                  :message:output:dialog:
-*** message 
+*** message
 
 Display a message at the bottom of the screen.
 
-Example: 
+Example:
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (message "Hello world")
 #+END_SRC
 
 Output:
 
-file:images/message_output1.png
+[[file:images/message_output1.png][file:images/message_output1.png]]
 
-*** message-box 
+*** message-box
 
 Display a message, in a dialog box if possible. If a dialog box is not
-available, use the echo area. 
+available, use the echo area.
 
 =(message-box FORMAT-STRING &rest ARGS)=
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 ELISP> (message-box "Time for a break.\nDrink some coffee")
 "Time for a break.\nDrink some coffee"
 #+END_SRC
 
-file:images/message_output2.png
+[[file:images/message_output2.png][file:images/message_output2.png]]
 
 **  Files, Directories and Path                          :api:system:file:os:
 
@@ -5009,7 +5009,7 @@ ELISP>
 
 Original Window before be changed.
 
-file:images/window_start.png
+[[file:images/window_start.png][file:images/window_start.png]]
 
 Split Window Horizontally
 
@@ -5019,7 +5019,7 @@ Split Window Horizontally
     #<window 6 on *ielm*>
 #+END_SRC
 
-file:images/window_horizontally.png
+[[file:images/window_horizontally.png][file:images/window_horizontally.png]]
 
 Delete Other Windows
 
@@ -5030,7 +5030,7 @@ Delete Other Windows
     ELISP>
 #+END_SRC
 
-file:images/window_delete.png
+[[file:images/window_delete.png][file:images/window_delete.png]]
 
 Split Window Vertically
 
@@ -5041,7 +5041,7 @@ Split Window Vertically
     ELISP>
 #+END_SRC
 
-file:images/window_vertically.png
+[[file:images/window_vertically.png][file:images/window_vertically.png]]
 
 Switch to Buffer on other window.
 
@@ -5052,7 +5052,7 @@ Switch to Buffer on other window.
     ELISP>
 #+END_SRC
 
-file:images/window_switch_to_buffer.png
+[[file:images/window_switch_to_buffer.png][file:images/window_switch_to_buffer.png]]
 
 Delete Current Window
 
@@ -5065,7 +5065,7 @@ Delete Current Window
     #<buffer init.el>
 #+END_SRC
 
-file:images/window_delete_this0.png
+[[file:images/window_delete_this0.png][file:images/window_delete_this0.png]]
 
 #+BEGIN_SRC elisp
 
@@ -5074,7 +5074,7 @@ nil
 ELISP>
 #+END_SRC
 
-file:images/window_delete_this1.png
+[[file:images/window_delete_this1.png][file:images/window_delete_this1.png]]
 
 Launch a new frame
 
@@ -5085,7 +5085,7 @@ Launch a new frame
     ELISP>
 #+END_SRC
 
-file:images/window_make_frame.png
+[[file:images/window_make_frame.png][file:images/window_make_frame.png]]
 
 #+BEGIN_SRC elisp
 
@@ -5124,7 +5124,7 @@ to this buffer on the second window and set the current buffer to dummy.
     ELISP>
 #+END_SRC
 
-file:images/window_manipulate_buffer1.png
+[[file:images/window_manipulate_buffer1.png][file:images/window_manipulate_buffer1.png]]
 
 
 Description: Insert some text on the buffer dummy.
@@ -5137,7 +5137,7 @@ ELISP>
 
 #+END_SRC
 
-file:images/window_manipulate_buffer2.png
+[[file:images/window_manipulate_buffer2.png][file:images/window_manipulate_buffer2.png]]
 
 Description: Redirect a shell command to the dummy buffer.
 
@@ -5151,7 +5151,7 @@ ELISP> (print (shell-command-to-string "lsusb") dummy-buffer)
 
 #+END_SRC
 
-file:images/window_manipulate_buffer3.png
+[[file:images/window_manipulate_buffer3.png][file:images/window_manipulate_buffer3.png]]
 
 Description: Erase Dummy buffer:
 
@@ -5162,7 +5162,7 @@ nil
 ELISP>
 #+END_SRC
 
-file:images/window_manipulate_buffer4.png
+[[file:images/window_manipulate_buffer4.png][file:images/window_manipulate_buffer4.png]]
 
 Change Buffer Safely:
 
@@ -5174,7 +5174,7 @@ nil
 ELISP>
 #+END_SRC
 
-file:images/window_manipulate_buffer5.png
+[[file:images/window_manipulate_buffer5.png][file:images/window_manipulate_buffer5.png]]
 
 Other Window Operations
 
@@ -5218,11 +5218,11 @@ Save the current window configuration to variable w
     ELISP>
 #+END_SRC
 
-file:images/window_configuration1.png
+[[file:images/window_configuration1.png][file:images/window_configuration1.png]]
 
 Change the Window configuration and buffers:
 
-file:images/window_configuration2.png
+[[file:images/window_configuration2.png][file:images/window_configuration2.png]]
 
 Restore the window configuration.
 
@@ -5236,7 +5236,7 @@ Restore the window configuration.
     ELISP>
 #+END_SRC
 
-file:images/window_configuration3.png
+[[file:images/window_configuration3.png][file:images/window_configuration3.png]]
 
 Not Compiled Yet.
 
@@ -5292,9 +5292,9 @@ ELISP>
     * http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_441.html
     * http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_26.html
 **  OS Interface
-***  Find the current operating system  
+***  Find the current operating system
 
-The variable _system-type_ indicates the current operating system. 
+The variable _system-type_ indicates the current operating system.
 
 | Value        | Description                       |
 |--------------+-----------------------------------|
@@ -5308,11 +5308,11 @@ The variable _system-type_ indicates the current operating system.
 
 Example:
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 ELISP> system-type
 gnu/linux
 
-;; Dispatch by operating system 
+;; Dispatch by operating system
 ;;
 ELISP> (cl-case  system-type
           (cywing  "Running cywing")
@@ -5385,7 +5385,7 @@ ELISP>
 ;;
 ELISP> (getenv "PATH")
 "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
-ELISP> 
+ELISP>
 
 ELISP> (split-string  (getenv "PATH") ":")
 ("/usr/local/sbin" "/usr/local/bin" "/usr/sbin" "/usr/bin")
@@ -5396,14 +5396,14 @@ ELISP> (dolist (e (split-string  (getenv "PATH") ":")) (princ (format "%s\n" e))
 /usr/sbin
 /usr/bin
 
-;; Alternative: See exec-path variable 
+;; Alternative: See exec-path variable
 ;;
 ELISP> exec-path
 
-("/usr/local/sbin" 
-"/usr/local/bin" 
-"/usr/sbin" 
-"/usr/bin" 
+("/usr/local/sbin"
+"/usr/local/bin"
+"/usr/sbin"
+"/usr/bin"
 "/usr/lib/emacs/24.5/x86_64-unknown-linux-gnu")
 
 
@@ -5599,9 +5599,9 @@ ELISP> (mapcar
 **  Interfaces                                  :interface:toolbar:menu:icon:
 *** Creating Quick Access Menu                               :interface:menu:
 
-file:images/utils_menu1.png 
+[[file:images/utils_menu1.png ][file:images/utils_menu1.png]]
 
-file:images/utils_menu2.png 
+[[file:images/utils_menu2.png ][file:images/utils_menu2.png]]
 
 #+BEGIN_SRC elisp
 
@@ -5645,7 +5645,7 @@ file:images/utils_menu2.png
 #+END_SRC
 
 *** Add Icons to toolbar                                  :interface:toolbar:
-**** Image search path 
+**** Image search path
 
 Emacs will search for images *.xpm or *.xbm in all directories listed
 in the variable _image-load-path_. Emacs search for images by default
@@ -5654,18 +5654,18 @@ change depending on current Emacs version and operating system.
 
 To add a dictory with icons to this variable use:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (add-to-list 'image-load-path "/home/arch/icons")
 #+END_SRC
 
 The program [[https://www.imagemagick.org/script/index.php][ImageMagick]] can be used to create Emacs-compatible icons
 that must have *.xpm or .xbm extension and have size 24x24 of pixels.
 
-Example: 
+Example:
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 $ cd ~/icons
-$ convert icon.png -resize 24x24 icon.xbm 
+$ convert icon.png -resize 24x24 icon.xbm
 #+END_SRC
 
 **** Add icons to global toolbar ( tool-bar-map )
@@ -5673,45 +5673,45 @@ $ convert icon.png -resize 24x24 icon.xbm
 Example 1: Add the icon index.xpm ( /usr/share/emacs/25.1/etc/images/ )
 to toolbar that when clicked call the command  M-x compile or function compile.
 
-Label and help parameters are optional. 
+Label and help parameters are optional.
 
 #+BEGIN_SRC elisp
-  (tool-bar-add-item 
+  (tool-bar-add-item
              "index"                               ;; icon .xpm or .xbm
              #'compile                             ;; callback function that will run when user click.
-             'compile-button                       ;; unique name 
-             :help "Run compilation command"       ;; 
-             ;; :label "Compile"                   ;; 
+             'compile-button                       ;; unique name
+             :help "Run compilation command"       ;;
+             ;; :label "Compile"                   ;;
              )
 #+END_SRC
 
-file:images/ae004dbd-be07-4faf-bca9-5a8f627215b0.png
+[[file:images/ae004dbd-be07-4faf-bca9-5a8f627215b0.png][file:images/ae004dbd-be07-4faf-bca9-5a8f627215b0.png]]
 
 
 Example 2: Add the icon compile.xpm to toolbar and invoke the command
 M-x compile when clicked.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (add-to-list 'image-load-path "/home/arch/icons")
 
-  (tool-bar-add-item 
+  (tool-bar-add-item
              "hammer2"                             ;; /home/arch/hammer2.xpm - icon .xpm or .xbm
              #'recompile                           ;; callback function that will run when user click.
              'recompile
-             :help "Run recompile"                 ;; 
+             :help "Run recompile"                 ;;
              :label "Recompile"
              )
 #+END_SRC
 
 
-file:images/bfe10437-40dd-4569-9a17-5ef6ddd07c28.png
+[[file:images/bfe10437-40dd-4569-9a17-5ef6ddd07c28.png][file:images/bfe10437-40dd-4569-9a17-5ef6ddd07c28.png]]
 
-**** Add icons to mode-specific toolbar 
+**** Add icons to mode-specific toolbar
 
 Example 1: Create a menubar to org-mode with only two buttons. It will
 only be shown in org-mode.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (add-to-list 'image-load-path "/home/arch/icons")
 
   (defvar org-mode-toolbar-map
@@ -5742,7 +5742,7 @@ only be shown in org-mode.
 
   (defun install-org-toolbar ()
     (interactive)
-    ;;; Make the variable tool-bar-map local in org-mode 
+    ;;; Make the variable tool-bar-map local in org-mode
     (set (make-local-variable 'tool-bar-map) org-mode-toolbar-map)
 
     ;;; Debugging message that will be printed every time this function is
@@ -5762,7 +5762,7 @@ only be shown in org-mode.
 #+END_SRC
 
 #+CAPTION: Example 1 - Toolbar for org-mode keeping buttons from tool-bar-map
-file:images/6e3504f3-12f7-4b3e-85a4-4233aed0e293.png
+[[file:images/6e3504f3-12f7-4b3e-85a4-4233aed0e293.png][file:images/6e3504f3-12f7-4b3e-85a4-4233aed0e293.png]]
 
 
 Example 2: Create a menubar to org-mode with only two buttons removing
@@ -5800,7 +5800,7 @@ open a org-file.
 
   (defun install-org-toolbar ()
     (interactive)
-    ;;; Make the variable tool-bar-map local in org-mode 
+    ;;; Make the variable tool-bar-map local in org-mode
     (set (make-local-variable 'tool-bar-map) org-mode-toolbar-map)
 
     ;;; Debugging message that will be printed every time this function is
@@ -5820,18 +5820,18 @@ open a org-file.
 #+END_SRC
 
 #+CAPTION: Example 2 -  Toolbar for org-mode removing buttons from tool-bar-map
-file:images/7e920a98-0161-4f4a-b83a-74105eb5ce87.png
+[[file:images/7e920a98-0161-4f4a-b83a-74105eb5ce87.png][file:images/7e920a98-0161-4f4a-b83a-74105eb5ce87.png]]
 
-**** Utilities toolbar demonstration 
+**** Utilities toolbar demonstration
 
-Demonstration of toolbar with three utilities: 
+Demonstration of toolbar with three utilities:
 
  - button to call M-x compile
  - button to call M-x magit-status
  - button to open project directory
  - button to launch terminal.
 
-file:images/toolbar-demo1.gif
+[[file:images/toolbar-demo1.gif][file:images/toolbar-demo1.gif]]
 
 The icons were created using ImageMagick to convert png images to xpm.
 It can be download from: [[https://github.com/caiorss/Emacs-Elisp-Programming/raw/gh-pages/icons.zip][Download icons.zip]]
@@ -5842,34 +5842,34 @@ It can be download from: [[https://github.com/caiorss/Emacs-Elisp-Programming/ra
   ;; /home/arch/.emacs.d/icons/tools-build.xpm
   (tool-bar-add-item  "tools-build"                         ;; File name without extension
                       #'compile                             ;; callback function that will run when user click.
-                      'toolbar-compile-button                       ;; unique name 
-                      :help "Run compilation command"       ;; 
-                      :label ""                             ;; 
+                      'toolbar-compile-button                       ;; unique name
+                      :help "Run compilation command"       ;;
+                      :label ""                             ;;
                       )
 
   ;; File /home/arch/.emacs.d/icons/tools-git.xpm
-  (tool-bar-add-item  "tools-git"        
-                      #'magit-status     
-                      'toolbar-magit-button      
-                      :help "Magit status" 
-                      :label ""            
+  (tool-bar-add-item  "tools-git"
+                      #'magit-status
+                      'toolbar-magit-button
+                      :help "Magit status"
+                      :label ""
                       )
 
 
   ;; File /home/arch/.emacs.d/icons/tools-projects-folder.xpm
-  (tool-bar-add-item  "tools-projects-folder"        
+  (tool-bar-add-item  "tools-projects-folder"
                       (lambda () (interactive) (dired "~/Documents/projects"))
-                      'toolbar-project-button      
-                      :help "Open project directory" 
-                      :label ""            
+                      'toolbar-project-button
+                      :help "Open project directory"
+                      :label ""
                       )
 
   ;; File /home/arch/.emacs.d/icons/tools-projects-folder.xpm
-  (tool-bar-add-item  "tools-terminal"        
+  (tool-bar-add-item  "tools-terminal"
                       #'terminal/run
-                      'toolbar-terminal-button      
-                      :help "Launch Xfce4 terminal emulator." 
-                      :label ""            
+                      'toolbar-terminal-button
+                      :help "Launch Xfce4 terminal emulator."
+                      :label ""
                       )
 
   (defun terminal/run ()
@@ -5882,8 +5882,8 @@ It can be download from: [[https://github.com/caiorss/Emacs-Elisp-Programming/ra
 
 #+END_SRC
 
-**  Timer 
-*** run-with-timer 
+**  Timer
+*** run-with-timer
 
 Perform an action after a delay of SECS seconds. Repeat the action
 every REPEAT seconds, if REPEAT is non-nil.  SECS and REPEAT may be
@@ -5903,29 +5903,29 @@ seconds.
    (lambda () (message-box "Hello World Emacs")))
 #+END_SRC
 
-Example 2: Run 4 times 
+Example 2: Run 4 times
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (run-with-timer 5 4
    (lambda () (message-box "Hello World Emacs")))
 #+END_SRC
 
 Example 3: Pop up a message showing that the coffee is ready after 3
-minutes. 
+minutes.
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (defun cofee-wait ()
   (interactive)
 
   (let ((minutes 3))
 
-    (run-with-timer (* 60 minutes)  nil 
+    (run-with-timer (* 60 minutes)  nil
      (lambda () (message-box "Coffee done"))
      )
 
     (message "Waiting for the cofee")
     ))
-  
+
 
 #+END_SRC
 
@@ -6265,15 +6265,15 @@ Emacs tools and codes that can be useful as implementation references and proof 
     - [[https://www.gnu.org/software/emacs/manual/html_mono/dbus.html][D-Bus integration in Emacs]]
 
 * Regex - Regular Expressions
-** Overview 
+** Overview
 
 # @TODO: Add notes, documentations and functions about Emacs Regex and S-expression based regex.
 
 The Emacs regular expressions are different from the standard Perl
-regular expressions that are used by most languages. 
+regular expressions that are used by most languages.
 
 Note: The regex patterns entered in elisp code between "" quotes
-requires two backlashes. 
+requires two backlashes.
 
 Example: The pattern =\s-= will match white space in =M-x
 <commands>=. To match white space in Elisp code the pattern must be
@@ -6281,20 +6281,20 @@ written as "\\s-"
 
 Note: Lookahead and lookbehind like in PCRE are not supported.
 
-Usefulness: 
+Usefulness:
 
- - Batch search replace 
+ - Batch search replace
  - Interactive Search Replace
  - Create customized commands to change or search source code.
  - Refactor code
 
 To see Emacs regex manual evaluate the s-expression:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (info "(emacs) Regexps")
 #+END_SRC
 
-** Emacs Regex 
+** Emacs Regex
 
 *Special characters*
 
@@ -6322,7 +6322,7 @@ To see Emacs regex manual evaluate the s-expression:
 | \{3,6\} | previous character or group, repeated 3 to 6 times     |
 
 
-*POSIX Character classes* 
+*POSIX Character classes*
 
 |            |                                                      |
 |------------+------------------------------------------------------|
@@ -6362,13 +6362,13 @@ To see Emacs regex manual evaluate the s-expression:
 | \b                 | \b         | Word boundary                       |
 | \w                 | \w         | Word character                      |
 
-** Regex Commands 
+** Regex Commands
 
 |-------+---------------------------------------------|
 | C-M-s | incremental forward search matching regexp  |
 | C-M-r | incremental backward search matching regexp |
 
-Buffer Commands 
+Buffer Commands
 
 | M-x replace-regexp         | replace string matching regexp                         |
 | M-x query-replace-regexp   | same, but query before each replacement                |
@@ -6381,7 +6381,7 @@ Buffer Commands
 | M-x dired-do-rename-regexp | rename files matching regexp                           |
 | M-x find-grep-dired        | display files containing matches for regexp with Dired |
 
-Line Commands 
+Line Commands
 
 | Command (M-x command)           | Alias                     | Description                                      |
 |---------------------------------+---------------------------+--------------------------------------------------|
@@ -6392,7 +6392,7 @@ Line Commands
 | multi-occur                     |                           | Show lines in all buffers containing a match     |
 | how-many                        | count-matches             | Count the number of strings matching regexp      |
 
-** Regex Functions 
+** Regex Functions
 
  - match-string
  - match-end
@@ -6402,9 +6402,9 @@ Line Commands
  - replace-string-in-regexp
  - replace-string
 
-** Build regex interactively 
+** Build regex interactively
 
-=M-x re-builder= 
+=M-x re-builder=
 
 
 =M-x query-replace-regexp=
@@ -6419,7 +6419,7 @@ regex patterns.
 
 Rx macro:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (require 'rx)
 
 ;;  (rx <patterns>)
@@ -6454,49 +6454,49 @@ ELISP> (rx-to-string '(or "foo" "bar"))
 |                           |             |                          |
 
 
-Zero or More - greedy regexp 
+Zero or More - greedy regexp
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 =(* SEXP ...)
 #+END_SRC
 
-Zero or more - non-greedy regexp 
+Zero or more - non-greedy regexp
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 =(*? SEXP ...)
 #+END_SRC
 
 One or more occurrence of pattern
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 (1+ SEXP ...)
 
-;; or 
+;; or
 
 (one-or-more SEXP ...)
 #+END_SRC
 
-One or more - non-greedy regexp 
+One or more - non-greedy regexp
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 (+? SEXP ...)
 #+END_SRC
 
-Matches n occurrences of a pattern 
+Matches n occurrences of a pattern
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 (= N SEXP ...)
 #+END_SRC
 
 
-Matches n or more occurrences 
+Matches n or more occurrences
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 (>= N SEXP ...)
 #+END_SRC
 
 
-Example: 
+Example:
 
 #+BEGIN_SRC elisp
 ELISP> (require 'rx)
@@ -6520,54 +6520,54 @@ ELISP> (rx (one-or-more digit))
 ELISP> (rx (or "cat" "rat" "dog"))
 "\\(?:cat\\|dog\\|rat\\)"
 
-;; (replace-regexp-in-string REGEXP REP STRING 
+;; (replace-regexp-in-string REGEXP REP STRING
 ;;      &optional FIXEDCASE LITERAL SUBEXP START)
 
-ELISP> (replace-regexp-in-string 
-          (rx (or "cat" "rat" "dog")) 
-          "" 
+ELISP> (replace-regexp-in-string
+          (rx (or "cat" "rat" "dog"))
+          ""
           "cat cata rat rat dograt dog cat2334 23rat2")
 " a     2334 232"
 
-;; Replaces only in the beggining of line 
+;; Replaces only in the beggining of line
 ;;
-ELISP>  (replace-regexp-in-string 
+ELISP>  (replace-regexp-in-string
           (rx bol (or "cat" "rat" "dog"))
-          "" 
+          ""
           "cat cata rat rat dograt dog cat2334 23rat2")
 " cata rat rat dograt dog cat2334 23rat2"
 
 
-ELISP>  (replace-regexp-in-string 
+ELISP>  (replace-regexp-in-string
           (rx bow (or "cat" "rat" "dog") eow)
-          "" 
+          ""
           "cat cata rat rat dograt dog cat2334 23rat2")
 " cata   dograt  cat2334 23rat2"
 
-ELISP>  (rx bow (or "cat" "rat" "dog") eow)               
+ELISP>  (rx bow (or "cat" "rat" "dog") eow)
 "\\<\\(?:cat\\|dog\\|rat\\)\\>"
 
-;;  Removes all whitespaces 
+;;  Removes all whitespaces
 ;;
-ELISP>  (replace-regexp-in-string 
+ELISP>  (replace-regexp-in-string
           (rx (* whitespace))
-          "" 
+          ""
           "cat cata rat rat dograt dog cat2334 23rat2")
 
 "catcataratratdogratdogcat233423rat"
 
-ELISP>  (replace-regexp-in-string 
+ELISP>  (replace-regexp-in-string
           (rx (* whitespace))
-          "" 
+          ""
           "cat cata rat rat dograt dog cat2334 23rat2")
 
 "catcataratratdogratdogcat233423rat"
 
-;; Capture group 
+;; Capture group
 ;;
-ELISP>  (replace-regexp-in-string 
+ELISP>  (replace-regexp-in-string
           (rx (submatch bow (or "cat" "rat" "dog") eow))
-          "(\\1)" 
+          "(\\1)"
           "cat cata rat rat dograt dog cat2334 23rat2")
 
 "(cat) cata (rat) (rat) dograt (dog) cat2334 23rat2"
@@ -6576,13 +6576,13 @@ ELISP> (rx (submatch bow (or "cat" "rat" "dog") eow))
 "\\(\\<\\(?:cat\\|dog\\|rat\\)\\>\\)"
 #+END_SRC
 
-** See also 
+** See also
 
  - [[https://www.emacswiki.org/emacs/rx][EmacsWiki: rx]]
 
  - [[https://carlfg.wordpress.com/2014/05/13/introduction-to-regex-in-emacs/][Introduction to Regex in Emacs | tas devil]]
 
- - [[http://emacs-fu.blogspot.com.br/2009/05/building-regular-expression.html][emacs-fu: building regular expressions]] 
+ - [[http://emacs-fu.blogspot.com.br/2009/05/building-regular-expression.html][emacs-fu: building regular expressions]]
 
  - [[https://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_31.html][GNU Emacs Lisp Reference Manual - Searching and Matching]]
 
@@ -6864,7 +6864,7 @@ It will open a Emacs developement window whatever the current frames opened. It 
 
 By typing C-c M-w the frame settings will be:
 
-file:images/develop_window.png
+[[file:images/develop_window.png][file:images/develop_window.png]]
 
 *Open URL at Cursor*
 
@@ -6997,7 +6997,3 @@ or by entering the command below in the shell IELM or by putting it in the confi
 #+END_SRC
 
 ** Mode Key Bindings
-
-
-
-
