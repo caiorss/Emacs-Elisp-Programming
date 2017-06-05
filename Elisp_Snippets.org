@@ -1015,7 +1015,6 @@ M-x replace-regex-ruby /^\d\d?/,""
 #+END_SRC
 
 
-
 *** Launch apps in Asynchronous mode
 *** Run asynchronous commands piping the output to a buffer
 **** Ping a host
@@ -1325,6 +1324,57 @@ file:images/faf2389f-7c67-43fb-af0a-125f1c1d28eb.png
 #+CAPTION: Demonstration of M-x shell/buffer-repl-frame and shell/insert-region
 file:images/shell-demo2.gif
 
+** Compilation 
+
+*Compile a single c++ file related to current buffer and run it.*
+
+Usage: When the user run the command _M-x cpp/compile-run-buffer_ at
+the current buffer (file code1.cpp) it will compile and run this file
+running the command =$ g++ code1.cpp -o code1.bin && ./code1.bin=. 
+
+#+BEGIN_SRC elisp
+(defun cpp/compile-run-buffer ()
+  "Compile and run current c++ buffer (single-file C++ code).
+Usage: By running M-x cpp/compile-buffer-run at current buffer (file code1.cpp)
+will run $ g++ code1.cpp -o code1.bin && ./code1.bin"
+  (interactive)
+  (let* ((file-name  (file-name-nondirectory (buffer-file-name)))
+        ;; Change file name extension to .bin 
+         (output     (concat (file-name-base file-name) ".bin")))
+    (save-buffer)
+    (compile (format "g++ %s -o %s && ./%s"
+                     file-name
+                     output
+                     output
+                     ))))
+#+END_SRC
+
+
+*Compile and run a single c++ file at point in dired mode* 
+
+Usage: In dired mode mode, place the cursor at the file to be compiled
+and run M-x cpp/compile-run-dired.
+
+#+BEGIN_SRC elisp 
+(defun cpp/compile-run-dired ()
+  "Compile single c++ file at point in dired mode.
+Usage: Position the cursor at the file to be compiled and
+run M-x cpp/compile-dired.
+"
+  (interactive)
+  (let* ((file-name  (file-name-nondirectory (dired-file-name-at-point)))
+        ;; Change file name extension to .bin 
+         (output     (concat (file-name-base file-name) ".bin")))
+    (save-buffer)
+    (compile (format "g++ %s -o %s && ./%s"
+                     file-name
+                     output
+                     output
+                     ))))
+#+END_SRC
+
+
+[[file:images/cpp_compile_dired.png][file:images/cpp_compile_dired.png]]
 ** File
 *** Test if file or directory exists
 
