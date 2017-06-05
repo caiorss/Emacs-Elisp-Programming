@@ -672,7 +672,7 @@ Display a message at the bottom of the screen.
 (message "A message to the user")
 #+END_SRC
 
-file:images/emacs_message.png
+[[file:images/emacs_message.png][file:images/emacs_message.png]]
 
 **** Print
 **** Princ
@@ -685,7 +685,7 @@ available, use the echo area.
 (message-box "Emacs Alert. Time to drink a coffee!")
 #+END_SRC
 
-file:images/emacs_messagebox.png
+[[file:images/emacs_messagebox.png][file:images/emacs_messagebox.png]]
 
 **** Tooltip
 
@@ -724,7 +724,7 @@ file:images/emacs_show_tooltip.png
 (shell-command "uname -a") ;; M-x eval-last-sexp
 #+END_SRC
 
-file:images/emacs_shell_command_output.png
+[[file:images/emacs_shell_command_output.png][file:images/emacs_shell_command_output.png]]
 
 **** Display output of shell command in another frame   :shell:command:frame:
 
@@ -893,11 +893,11 @@ sed 's/foo.*/bar/g'= which replaces all values of foo for bar.
 
 Before the form evaluation
 
-file:images/shell-on-region-before.png
+[[file:images/shell-on-region-before.png][file:images/shell-on-region-before.png]]
 
 After the form evaluation.
 
-file:images/shell-on-region-after.png
+[[file:images/shell-on-region-after.png][file:images/shell-on-region-after.png]]
 
 **** Function to apply an external command to buffer
 
@@ -931,11 +931,11 @@ ruby -ne 'printf("-%6s%s", $., $_)'
 
 Before running the command:
 
-file:images/shell-ruby-on-buffer-before.png
+[[file:images/shell-ruby-on-buffer-before.png][file:images/shell-ruby-on-buffer-before.png]]
 
 After running the command:
 
-file:images/shell-ruby-on-buffer-after.png
+[[file:images/shell-ruby-on-buffer-after.png][file:images/shell-ruby-on-buffer-after.png]]
 
 **** Ruby command on buffer
 
@@ -958,7 +958,7 @@ Example: The command will number each line of the current buffer.
 
 #+END_SRC
 
-file:images/ruby-command-on-buffer.png
+[[file:images/ruby-command-on-buffer.png][file:images/ruby-command-on-buffer.png]]
 
 **** Ruby regex on buffer
 
@@ -1098,7 +1098,7 @@ Run linux htop (task manager) inside Emacs:
 (term "htop") ;; C-x C-e or M-x eval-last-sexp
 #+END_SRC
 
-file:images/emacs_ncurses_term.png
+[[file:images/emacs_ncurses_term.png][file:images/emacs_ncurses_term.png]]
 *** Run apps in external terminal emulator        :terminal:shell:os:command:
 
 Some Linux ncurses-based applications like Htop, Top, Nmtui (Network
@@ -1319,10 +1319,10 @@ Example:
     output, in this case the content of root directory.
 
 #+CAPTION: Example of M-x shell/buffer-repl-frame.
-file:images/faf2389f-7c67-43fb-af0a-125f1c1d28eb.png
+[[file:images/faf2389f-7c67-43fb-af0a-125f1c1d28eb.png][file:images/faf2389f-7c67-43fb-af0a-125f1c1d28eb.png]]
 
 #+CAPTION: Demonstration of M-x shell/buffer-repl-frame and shell/insert-region
-file:images/shell-demo2.gif
+[[file:images/shell-demo2.gif][file:images/shell-demo2.gif]]
 
 ** Compilation 
 
@@ -1531,7 +1531,7 @@ Open a file and returns a buffer:
 (dired-other-frame "/var/log")
 #+END_SRC
 
-file:images/emacs_dired_frame_open_dir.png
+[[file:images/emacs_dired_frame_open_dir.png][file:images/emacs_dired_frame_open_dir.png]]
 
 *** Create directory
 *** List directory
@@ -2600,7 +2600,7 @@ Usage: M-x helm-recent-files
                 ))))
 #+END_SRC
 
-file:images/helm-recent-files.png
+[[file:images/helm-recent-files.png][file:images/helm-recent-files.png]]
 
 *** Browser Recent directories
 
@@ -2737,7 +2737,7 @@ Usage: M-x helm-laucher
 #+END_SRC
 
 
-file:images/helm-app-launcher.png
+[[file:images/helm-app-launcher.png][file:images/helm-app-launcher.png]]
 
 *** Switch between buffers associated with files
 
@@ -3141,7 +3141,7 @@ right side.
 
 Example:
 
-file:images/occur_statement_scan.png
+[[file:images/occur_statement_scan.png][file:images/occur_statement_scan.png]]
 
 
 It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
@@ -3163,7 +3163,7 @@ Example:
 #+END_SRC
 
 
-file:images/scan_code_tags.png
+[[file:images/scan_code_tags.png][file:images/scan_code_tags.png]]
 
 *** Quick edit and reload Emacs Configuration File.    :elisp:customization:
 
@@ -3209,7 +3209,7 @@ M-x refresh
 
 *** Create a menu with all color themes available
 
-file:images/colortheme_menu.png
+[[file:images/colortheme_menu.png][file:images/colortheme_menu.png]]
 
 *Using Eval*
 
@@ -3576,7 +3576,7 @@ manager click on the hyperlink bellow.
 #+END_SRC
 
 
-file:images/org-mode-protocol-file-manager.png
+[[file:images/org-mode-protocol-file-manager.png][file:images/org-mode-protocol-file-manager.png]]
 
 *** Man page
 
@@ -3656,11 +3656,11 @@ The function elisp-doc:start-process is used to start an asynchronous process.
 
 This screenshot show what happens when the user clicks in the hyperlink.
 
-file:images/elisp-doc-org-mode-protocol-click.png
+[[file:images/elisp-doc-org-mode-protocol-click.png][file:images/elisp-doc-org-mode-protocol-click.png]]
 
 Exported to html with: =M-x org-html-export-to-html=
 
-file:images/elisp-doc-org-mode-protocol.png
+[[file:images/elisp-doc-org-mode-protocol.png][file:images/elisp-doc-org-mode-protocol.png]]
 ** Settings
 *** General Settings
 
