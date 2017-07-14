@@ -406,6 +406,24 @@ nil
 #+BEGIN_SRC elisp
 (save-buffer)
 #+END_SRC
+*** Kill / delete buffer 
+
+#+BEGIN_SRC elisp 
+ (kill-buffer <buffer-object or buffer-name>)
+#+END_SRC
+
+Example: Delete buffer named ~Elisp_Snippets.org~
+
+#+BEGIN_SRC elisp 
+  (kill-buffer "Elisp_Snippets.org")
+#+END_SRC
+
+Example: Delete all buffers:
+
+#+BEGIN_SRC elisp 
+ (mapc #'kill-buffer (buffer-list))
+#+END_SRC
+
 *** Get buffer content as string
 
 Returns the content of a buffer referencend by its name or the buffer
@@ -519,9 +537,6 @@ Get all local variables of a buffer.
 
 
 
-
-
-
 *** Get a specific buffer local variable 
 
 #+BEGIN_SRC elisp 
@@ -569,6 +584,11 @@ Append a specific buffer content to file.
 
   ;; Append buffer content to file.
   (append-to-file (point-min) (point-max) filename))
+#+END_SRC
+*** Revert / update buffer without asking to confirm 
+
+#+BEGIN_SRC elisp 
+ (revert-buffer t t t)
 #+END_SRC
 ** IO - Input and Output
 *** Input - Read User Input
@@ -651,7 +671,7 @@ Display a message at the bottom of the screen.
 (message "A message to the user")
 #+END_SRC
 
-file:images/emacs_message.png
+[[file:images/emacs_message.png][file:images/emacs_message.png]]
 
 **** Print
 **** Princ
@@ -664,7 +684,7 @@ available, use the echo area.
 (message-box "Emacs Alert. Time to drink a coffee!")
 #+END_SRC
 
-file:images/emacs_messagebox.png
+[[file:images/emacs_messagebox.png][file:images/emacs_messagebox.png]]
 
 **** Tooltip
 
@@ -703,7 +723,7 @@ file:images/emacs_show_tooltip.png
 (shell-command "uname -a") ;; M-x eval-last-sexp
 #+END_SRC
 
-file:images/emacs_shell_command_output.png
+[[file:images/emacs_shell_command_output.png][file:images/emacs_shell_command_output.png]]
 
 **** Display output of shell command in another frame   :shell:command:frame:
 
@@ -872,11 +892,11 @@ sed 's/foo.*/bar/g'= which replaces all values of foo for bar.
 
 Before the form evaluation
 
-file:images/shell-on-region-before.png
+[[file:images/shell-on-region-before.png][file:images/shell-on-region-before.png]]
 
 After the form evaluation.
 
-file:images/shell-on-region-after.png
+[[file:images/shell-on-region-after.png][file:images/shell-on-region-after.png]]
 
 **** Function to apply an external command to buffer
 
@@ -886,23 +906,18 @@ all defun words by defn.
 #+BEGIN_SRC elisp
 (defun shell-command-on-buffer (&optional command)
   "Apply a shell command in the current buffer and replace it by the command output.
+Example:
+- Interactive usage:  M-x shell-command-on-buffer Enter: sed 's/defun/defn/g'.
+                      replaces all defun words by defn.
 
-   Example:
-            - Interactive usage:  M-x shell-command-on-buffer Enter: sed 's/defun/defn/g'.
-                                  replaces all defun words by defn.
-
-            - (shell-command-on-buffer \"sed 's/defun/defn/g'\")
-  "
-
+- (shell-command-on-buffer \"sed 's/defun/defn/g'\")"
   (interactive)
-
   (shell-command-on-region (point-min)
 			   (point-max)
 			   (if command command (read-string "Cmd on buffer: "))
 			   "*shell-output*"
 			   t
-			   )
-  )
+			   ))
 #+END_SRC
 
 **** Insert line number in all lines of a buffer using ruby
@@ -915,11 +930,11 @@ ruby -ne 'printf("-%6s%s", $., $_)'
 
 Before running the command:
 
-file:images/shell-ruby-on-buffer-before.png
+[[file:images/shell-ruby-on-buffer-before.png][file:images/shell-ruby-on-buffer-before.png]]
 
 After running the command:
 
-file:images/shell-ruby-on-buffer-after.png
+[[file:images/shell-ruby-on-buffer-after.png][file:images/shell-ruby-on-buffer-after.png]]
 
 **** Ruby command on buffer
 
@@ -929,16 +944,11 @@ See also: [[http://reference.jumpingmonkey.org/programming_languages/ruby/ruby-o
 
 #+BEGIN_SRC elisp
 (defun ruby-on-buffer (&optional command)
-  "
-   Applies a ruby command on buffer
-
-   Example: The command will number each line of the current buffer.
-
-            1. M-x ruby-on-buffer
-            2. type: 'printf(\"%6s%s\", $., $_)' without quotes.
-   "
+  "Applies a ruby command on buffer
+Example: The command will number each line of the current buffer.
+1. M-x ruby-on-buffer
+2. type: 'printf(\"%6s%s\", $., $_)' without quotes."
   (interactive)
-
   (shell-command-on-buffer
    (format "ruby -ne '%s'"
            (if command
@@ -947,7 +957,7 @@ See also: [[http://reference.jumpingmonkey.org/programming_languages/ruby/ruby-o
 
 #+END_SRC
 
-file:images/ruby-command-on-buffer.png
+[[file:images/ruby-command-on-buffer.png][file:images/ruby-command-on-buffer.png]]
 
 **** Ruby regex on buffer
 
@@ -960,30 +970,49 @@ Usage: M-x ruby-gsub-on-buffer
 See also: [[http://reference.jumpingmonkey.org/programming_languages/ruby/ruby-one-liners.html][Ruby One-Liners]]
 
 #+BEGIN_SRC elisp
-
 (defun ruby-gsub-on-buffer (&optional regexp)
-   "
-   Applies ruby regex, the command $ ruby -pe 'gsub(regexp)'
-   on the current buffer.
-
-   Usage M-x ruby-gsub-on-buffer
-         (ruby-gsub-on-buffer <regexp>)
-
-   Example: The Command replace all occurrences
-            of 'defun' by 'defn'.
-
-            1. M-x ruby-gsub-on-buffer
-            2. Type /defun/,\"defn\"
-
-   "
+   "Applies ruby regex, the command $ ruby -pe 'gsub(regexp)' on the current buffer.
+Usage M-x ruby-gsub-on-buffer
+      (ruby-gsub-on-buffer <regexp>)
+Example: The Command replace all occurrences  of 'defun' by 'defn'.
+1. M-x ruby-gsub-on-buffer
+2. Type /defun/,\"defn\""
    (interactive)
-
    (shell-regexp-on-buffer
     (format "ruby -pe 'gsub(%s)'"
            (if regexp
                regexp
              (read-string "ruby regex: ")))))
 #+END_SRC
+
+Refactoring to a self-contained-code, removing all dependencies.
+
+Example: To remove all numbers in at beggining of line run:   
+
+#+BEGIN_SRC text 
+M-x replace-regex-ruby /^\d\d?/,""
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (defun replace-regexp-ruby (&optional regexp)
+     "Replace ruby-gsub on buffer same as replace-regexp, but with ruby regex.
+  Usage M-x ruby-gsub-on-buffer
+        (ruby-gsub-on-buffer <regexp>)
+  Example: The Command replace all occurrences of 'defun' by 'defn'.
+  1. M-x ruby-gsub-on-buffer
+  2. Type /defun/,\"defn\""
+     (interactive)
+     (shell-command-on-region (point-min)
+                              (point-max)
+                              (format "ruby -pe 'gsub(%s)'"
+                                      (if regexp
+                                          regexp
+                                        (read-string "ruby regex: ")))
+                              "*shell-output*"
+                              t
+                              ))
+#+END_SRC
+
 
 *** Launch apps in Asynchronous mode
 *** Run asynchronous commands piping the output to a buffer
@@ -1068,7 +1097,7 @@ Run linux htop (task manager) inside Emacs:
 (term "htop") ;; C-x C-e or M-x eval-last-sexp
 #+END_SRC
 
-file:images/emacs_ncurses_term.png
+[[file:images/emacs_ncurses_term.png][file:images/emacs_ncurses_term.png]]
 *** Run apps in external terminal emulator        :terminal:shell:os:command:
 
 Some Linux ncurses-based applications like Htop, Top, Nmtui (Network
@@ -1289,11 +1318,62 @@ Example:
     output, in this case the content of root directory.
 
 #+CAPTION: Example of M-x shell/buffer-repl-frame.
-file:images/faf2389f-7c67-43fb-af0a-125f1c1d28eb.png
+[[file:images/faf2389f-7c67-43fb-af0a-125f1c1d28eb.png][file:images/faf2389f-7c67-43fb-af0a-125f1c1d28eb.png]]
 
 #+CAPTION: Demonstration of M-x shell/buffer-repl-frame and shell/insert-region
-file:images/shell-demo2.gif
+[[file:images/shell-demo2.gif][file:images/shell-demo2.gif]]
 
+** Compilation 
+
+*Compile a single c++ file related to current buffer and run it.*
+
+Usage: When the user run the command _M-x cpp/compile-run-buffer_ at
+the current buffer (file code1.cpp) it will compile and run this file
+running the command =$ g++ code1.cpp -o code1.bin && ./code1.bin=. 
+
+#+BEGIN_SRC elisp
+(defun cpp/compile-run-buffer ()
+  "Compile and run current c++ buffer (single-file C++ code).
+Usage: By running M-x cpp/compile-buffer-run at current buffer (file code1.cpp)
+will run $ g++ code1.cpp -o code1.bin && ./code1.bin"
+  (interactive)
+  (let* ((file-name  (file-name-nondirectory (buffer-file-name)))
+        ;; Change file name extension to .bin 
+         (output     (concat (file-name-base file-name) ".bin")))
+    (save-buffer)
+    (compile (format "g++ %s -o %s && ./%s"
+                     file-name
+                     output
+                     output
+                     ))))
+#+END_SRC
+
+
+*Compile and run a single c++ file at point in dired mode* 
+
+Usage: In dired mode mode, place the cursor at the file to be compiled
+and run M-x cpp/compile-run-dired.
+
+#+BEGIN_SRC elisp 
+(defun cpp/compile-run-dired ()
+  "Compile single c++ file at point in dired mode.
+Usage: Position the cursor at the file to be compiled and
+run M-x cpp/compile-dired.
+"
+  (interactive)
+  (let* ((file-name  (file-name-nondirectory (dired-file-name-at-point)))
+        ;; Change file name extension to .bin 
+         (output     (concat (file-name-base file-name) ".bin")))
+    (save-buffer)
+    (compile (format "g++ %s -o %s && ./%s"
+                     file-name
+                     output
+                     output
+                     ))))
+#+END_SRC
+
+
+[[file:images/cpp_compile_dired.png][file:images/cpp_compile_dired.png]]
 ** File
 *** Test if file or directory exists
 
@@ -1373,7 +1453,7 @@ multi on
 (find-file-other-frame "/etc/fstab")
 #+END_SRC
 
-*** Open file to edit silently
+*** Open file to edit silently                             :file:buffer:open:
 
 Function: find-file-nonselect
 
@@ -1430,6 +1510,87 @@ Open a file and returns a buffer:
 
 #+END_SRC
 
+** File Name Manipulation 
+*** Get absolute path to current buffer's file. 
+
+#+BEGIN_SRC elisp
+ELISP> (buffer-file-name)
+"/home/archbox/.emacs.d/init.el"
+ELISP> 
+#+END_SRC
+*** File name without path 
+
+#+BEGIN_SRC elisp 
+ELISP> (file-name-nondirectory "/home/archbox/.emacs.d/init.el")
+"init.el"
+ELISP> 
+#+END_SRC
+
+*** File name to base name 
+
+Transform file name to name without path and extension.
+
+#+BEGIN_SRC elisp 
+ELISP> (file-name-base "/home/archbox/.emacs.d/init.el")
+"init"
+ELISP> 
+#+END_SRC
+*** Get file's path 
+
+Get the directory that contais a file.
+
+#+BEGIN_SRC elisp
+ELISP> (file-name-directory "/home/archbox/.emacs.d/init.el")
+"/home/archbox/.emacs.d/"
+ELISP> 
+#+END_SRC
+*** Expand file name 
+
+#+BEGIN_SRC elisp 
+ELISP> (expand-file-name ".")
+"/home/archbox/.emacs.d"
+
+ELISP> (expand-file-name "./init.el")
+"/home/archbox/.emacs.d/init.el"
+ELISP> 
+
+ELISP> (expand-file-name "~")
+"/home/archbox"
+
+ELISP> (expand-file-name "~/.bashrc")
+"/home/archbox/.bashrc"
+ELISP> 
+#+END_SRC
+*** Replace file extension 
+
+Example: It will replace the extension of file name init.el to
+init.py. Note: it will not modify the file.
+
+#+BEGIN_SRC elisp 
+  ELISP> 
+  (let ((file  "/home/archbox/.emacs.d/init.el"))
+    (concat (file-name-directory file)
+            (file-name-base file)
+            ".py"
+            ))
+
+  "/home/archbox/.emacs.d/init.py"
+  ELISP> 
+#+END_SRC
+
+or 
+
+#+BEGIN_SRC elisp 
+  (defun file-replace-extension (ext file)
+      (concat (file-name-directory file)
+              (file-name-base file)
+              ext 
+              ))
+
+  ELISP> (file-replace-extension ".py" "/home/archbox/.emacs.d/init.el")
+  "/home/archbox/.emacs.d/init.py"
+  ELISP> 
+#+END_SRC
 ** Directory                                                      :directory:
 *** Open directory
 **** Open directory in current window
@@ -1450,7 +1611,7 @@ Open a file and returns a buffer:
 (dired-other-frame "/var/log")
 #+END_SRC
 
-file:images/emacs_dired_frame_open_dir.png
+[[file:images/emacs_dired_frame_open_dir.png][file:images/emacs_dired_frame_open_dir.png]]
 
 *** Create directory
 *** List directory
@@ -2519,7 +2680,7 @@ Usage: M-x helm-recent-files
                 ))))
 #+END_SRC
 
-file:images/helm-recent-files.png
+[[file:images/helm-recent-files.png][file:images/helm-recent-files.png]]
 
 *** Browser Recent directories
 
@@ -2656,7 +2817,7 @@ Usage: M-x helm-laucher
 #+END_SRC
 
 
-file:images/helm-app-launcher.png
+[[file:images/helm-app-launcher.png][file:images/helm-app-launcher.png]]
 
 *** Switch between buffers associated with files
 
@@ -3060,7 +3221,7 @@ right side.
 
 Example:
 
-file:images/occur_statement_scan.png
+[[file:images/occur_statement_scan.png][file:images/occur_statement_scan.png]]
 
 
 It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
@@ -3082,7 +3243,7 @@ Example:
 #+END_SRC
 
 
-file:images/scan_code_tags.png
+[[file:images/scan_code_tags.png][file:images/scan_code_tags.png]]
 
 *** Quick edit and reload Emacs Configuration File.    :elisp:customization:
 
@@ -3128,7 +3289,7 @@ M-x refresh
 
 *** Create a menu with all color themes available
 
-file:images/colortheme_menu.png
+[[file:images/colortheme_menu.png][file:images/colortheme_menu.png]]
 
 *Using Eval*
 
@@ -3495,7 +3656,7 @@ manager click on the hyperlink bellow.
 #+END_SRC
 
 
-file:images/org-mode-protocol-file-manager.png
+[[file:images/org-mode-protocol-file-manager.png][file:images/org-mode-protocol-file-manager.png]]
 
 *** Man page
 
@@ -3575,11 +3736,11 @@ The function elisp-doc:start-process is used to start an asynchronous process.
 
 This screenshot show what happens when the user clicks in the hyperlink.
 
-file:images/elisp-doc-org-mode-protocol-click.png
+[[file:images/elisp-doc-org-mode-protocol-click.png][file:images/elisp-doc-org-mode-protocol-click.png]]
 
 Exported to html with: =M-x org-html-export-to-html=
 
-file:images/elisp-doc-org-mode-protocol.png
+[[file:images/elisp-doc-org-mode-protocol.png][file:images/elisp-doc-org-mode-protocol.png]]
 ** Settings
 *** General Settings
 

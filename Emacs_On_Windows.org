@@ -255,14 +255,14 @@ Eshell provides many benefits to Windows users:
 
 *** Screenshots
 
-file:images/eshell-windows-demo1.png
+[[file:images/eshell-windows-demo1.png][file:images/eshell-windows-demo1.png]]
 
 *** Demonstrations
 **** Commands and history 
 
 To open the history type: C-c C-l 
 
-file:images/eshell-windows-demo1.gif
+[[file:images/eshell-windows-demo1.gif][file:images/eshell-windows-demo1.gif]]
 
 **** Emacs Integration 
 
