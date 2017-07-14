@@ -537,7 +537,6 @@ Get all local variables of a buffer.
 
 
 
-
 *** Get a specific buffer local variable 
 
 #+BEGIN_SRC elisp 
@@ -1454,7 +1453,7 @@ multi on
 (find-file-other-frame "/etc/fstab")
 #+END_SRC
 
-*** Open file to edit silently
+*** Open file to edit silently                             :file:buffer:open:
 
 Function: find-file-nonselect
 
@@ -1511,6 +1510,87 @@ Open a file and returns a buffer:
 
 #+END_SRC
 
+** File Name Manipulation 
+*** Get absolute path to current buffer's file. 
+
+#+BEGIN_SRC elisp
+ELISP> (buffer-file-name)
+"/home/archbox/.emacs.d/init.el"
+ELISP> 
+#+END_SRC
+*** File name without path 
+
+#+BEGIN_SRC elisp 
+ELISP> (file-name-nondirectory "/home/archbox/.emacs.d/init.el")
+"init.el"
+ELISP> 
+#+END_SRC
+
+*** File name to base name 
+
+Transform file name to name without path and extension.
+
+#+BEGIN_SRC elisp 
+ELISP> (file-name-base "/home/archbox/.emacs.d/init.el")
+"init"
+ELISP> 
+#+END_SRC
+*** Get file's path 
+
+Get the directory that contais a file.
+
+#+BEGIN_SRC elisp
+ELISP> (file-name-directory "/home/archbox/.emacs.d/init.el")
+"/home/archbox/.emacs.d/"
+ELISP> 
+#+END_SRC
+*** Expand file name 
+
+#+BEGIN_SRC elisp 
+ELISP> (expand-file-name ".")
+"/home/archbox/.emacs.d"
+
+ELISP> (expand-file-name "./init.el")
+"/home/archbox/.emacs.d/init.el"
+ELISP> 
+
+ELISP> (expand-file-name "~")
+"/home/archbox"
+
+ELISP> (expand-file-name "~/.bashrc")
+"/home/archbox/.bashrc"
+ELISP> 
+#+END_SRC
+*** Replace file extension 
+
+Example: It will replace the extension of file name init.el to
+init.py. Note: it will not modify the file.
+
+#+BEGIN_SRC elisp 
+  ELISP> 
+  (let ((file  "/home/archbox/.emacs.d/init.el"))
+    (concat (file-name-directory file)
+            (file-name-base file)
+            ".py"
+            ))
+
+  "/home/archbox/.emacs.d/init.py"
+  ELISP> 
+#+END_SRC
+
+or 
+
+#+BEGIN_SRC elisp 
+  (defun file-replace-extension (ext file)
+      (concat (file-name-directory file)
+              (file-name-base file)
+              ext 
+              ))
+
+  ELISP> (file-replace-extension ".py" "/home/archbox/.emacs.d/init.el")
+  "/home/archbox/.emacs.d/init.py"
+  ELISP> 
+#+END_SRC
 ** Directory                                                      :directory:
 *** Open directory
 **** Open directory in current window
