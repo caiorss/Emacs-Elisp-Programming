@@ -1387,8 +1387,57 @@ Example:
 #+CAPTION: Demonstration of M-x shell/buffer-repl-frame and shell/insert-region
 [[file:images/shell-demo2.gif][file:images/shell-demo2.gif]]
 ** Compilation
+*** Enhanced Compilation Command 
 
-*Compile a single c++ file related to current buffer and run it.*
+This command is similar to emacs M-x compile, however it expands '%f'
+to the buffer file name, '%n' to buffer base name and '%d' to buffer
+directory.
+
+Example: if the current buffer is associated to the file
+/home/arch/scripts/gui1.scala and the user types the command M-x
+compile2 followed by the command below.
+
+ - =$ scalac %f -d app-%n.jar && scala app-%n.jar= 
+
+Emacs will run M-x compile with:
+
+ - =$ scalac gui1.scala -d app-gui1.jar && scala scala app-gui1.jar=
+
+
+The advantage of this command is that user doesn't need to type the
+file name to be compiled.
+
+#+BEGIN_SRC elisp 
+(setq compile2-command-history "")
+
+(defun compile2 ()
+  "Enhanced compilation command.
+- %f - is expanded to current buffer file name. 
+- %d - is expanded to current buffer current directory.
+- %n - is expanded to current buffer base name.
+
+Example: if the current buffer is associated to the file. 
+ - /home/arch/scripts/gui1.scala 
+
+If the user enter the command: 
+  
+ $ scalac %f -d app-%n.jar && scala app-%n.jar
+
+It will run M-x compile with: 
+
+ $ scalac gui1.scala -d app-gui1.jar && scala scala app-gui1.jar"
+  (interactive)
+  (let* ((file (buffer-file-name))
+         (cmd  (read-shell-command "cmd> " compile2-command-history))
+         (cmd1 (replace-regexp-in-string "%f" (file-name-nondirectory file) cmd))
+         (cmd2 (replace-regexp-in-string "%n" (file-name-base file) cmd1))
+         (cmd3 (replace-regexp-in-string "%d" (file-name-directory file) cmd2)))
+    (setq compile2-command-history cmd)
+    (save-buffer)
+    (compile cmd3)))
+#+END_SRC
+
+*** Compile a single c++ file related to current buffer and run it.
 
 Usage: When the user run the command _M-x cpp/compile-run-buffer_ at
 the current buffer (file code1.cpp) it will compile and run this file
@@ -1411,8 +1460,7 @@ will run $ g++ code1.cpp -o code1.bin && ./code1.bin"
                      ))))
 #+END_SRC
 
-
-*Compile and run a single c++ file at point in dired mode*
+*** Compile and run a single c++ file at point in dired mode
 
 Usage: In dired mode mode, place the cursor at the file to be compiled
 and run M-x cpp/compile-run-dired.
