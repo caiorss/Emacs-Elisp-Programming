@@ -3815,11 +3815,40 @@ frame.setVisible(true)"
   "/tmp/scalatest.scala"
   ELISP>
 #+END_SRC
-*** Saving code block to file
+*** Run a Scala code block 
 
-#+BEGIN_SRC elisp
+This example is specific for the Scala language, but can be easily
+adapated to other languages.
 
+Usage: 
+
+ 1. Place the cursos at the some scala code block
+ 2. run M-x org/run-scala-block
+
+It will run save the code block content to the file /tmp/scala-snippet.scala
+and run the command =$ scala /tmp/scala-snippet.scala= in the
+compiling mode.
+
+#+BEGIN_SRC elisp 
+  (defun org/run-scala-block ()
+    (interactive)
+           ;; Org-mode block contents 
+    (let* ((content (cadr (org-babel-get-src-block-info)))
+           ;; File in that the contents will be saved.
+           (file    "/tmp/scala-snippet.scala"))
+      ;; Execute the commands inside this special form
+      ;; in a temporary buffer 
+      (with-temp-buffer
+        ;; Delete file if it exists
+        (if (file-exists-p file) (delete-file file))
+        ;; Insert the code block contents in the temporary buffer 
+        (insert content)
+        ;; Write the buffer contents to fil.
+        (append-to-file (point-min) (point-max) file))    
+      ;; Run the compilation command 
+      (compile (format "scala %s" file))))
 #+END_SRC
+
 ** Custom Protocols
 *** Open directory with dired mode
 
@@ -3983,7 +4012,6 @@ Syntax highlight for latex fragments
 #+BEGIN_SRC elisp
 (setq org-highlight-latex-and-related '(latex script entities))
 #+END_SRC
-
 
 *** Code Block - Org-babel
 
