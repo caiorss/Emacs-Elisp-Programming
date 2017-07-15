@@ -60,6 +60,71 @@ ELISP> (join ", " '("1.232" "300"  "500"))
 #+END_SRC
 *** Replace Strings
 *** Regex
+** Text Manipulation
+*** Text alignment
+
+Source: [[http://www.svjatoslav.eu/notes/init.html][Init file]] - www.svjatoslav.eu
+
+#+BEGIN_SRC elisp
+(defun align-to-colon (begin end)
+  "Align region to colon (:) signs"
+  (interactive "r")
+
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) ":") 1 1 ))
+
+(defun align-to-comma (begin end)
+  "Align region to comma signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx "," (group (zero-or-more (syntax whitespace))) ) 1 1 ))
+
+
+(defun align-to-equals (begin end)
+  "Align region to equal signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) "=") 1 1 ))
+
+(defun align-to-hash (begin end)
+  "Align region to hash ( => ) signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) "=>") 1 1 ))
+
+;; work with this
+(defun align-to-comma-before (begin end)
+  "Align region to equal signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) ",") 1 1 ))
+#+END_SRC
+
+*** Join Multiple Lines
+
+From: [[https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d][jidaikobo-shibata/join-multi-lines-to-one.el]]
+
+#+BEGIN_SRC elisp
+(defun join-multi-lines-to-one ()
+  "Join multi lines."
+  (interactive)
+  (let ((beg (region-beginning))
+        (end (region-end))
+        strings)
+    (goto-char beg)
+    (back-to-indentation)
+    (setq beg (point))
+    (goto-char end)
+    (goto-char (- (point) 1))
+    (end-of-line)
+    (setq end (point))
+    (setq strings (buffer-substring-no-properties beg end))
+    (setq strings (replace-regexp-in-string "\n\\|^>+ *\\|^[\t　 ]+" " " strings))
+    (setq strings (replace-regexp-in-string " +" " " strings))
+    (delete-region beg end)
+    (insert strings)
+(goto-char beg)))
+#+END_SRC
 ** S-expressions
 *** Parse s-expressions
 
@@ -91,7 +156,6 @@ ELISP> (join ", " '("1.232" "300"  "500"))
 > (eval '(+ 1 2 3 4))
 10
 #+END_SRC
-
 ** Clipboard (Kill-ring)                          :elisp:clipboard:kill:ring:
 *** Copy string to clipboard
 
@@ -175,7 +239,6 @@ nil
                    (point-max)
                    )))
 #+END_SRC
-
 ** Elisp
 *** Load an Elisp file
 
@@ -339,7 +402,6 @@ Function Docstring
  (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
 "
  #+END_SRC
-
 ** Common Lisp Emulation Library
 *** Reduce (fold left) function
 **** Build a number from a list of digits
@@ -399,7 +461,6 @@ ELISP> (some-p '(nil nil nil nil))
 nil
 
 #+END_SRC
-
 ** Buffer and regions
 *** Save buffer
 
@@ -534,7 +595,6 @@ Get all local variables of a buffer.
 #+BEGIN_SRC elisp 
   (buffer-local-variables <buffer-name>)
 #+END_SRC
-
 
 
 *** Get a specific buffer local variable 
@@ -1322,7 +1382,6 @@ Example:
 
 #+CAPTION: Demonstration of M-x shell/buffer-repl-frame and shell/insert-region
 [[file:images/shell-demo2.gif][file:images/shell-demo2.gif]]
-
 ** Compilation 
 
 *Compile a single c++ file related to current buffer and run it.*
@@ -1509,7 +1568,6 @@ Open a file and returns a buffer:
 
 
 #+END_SRC
-
 ** File Name Manipulation 
 *** Get absolute path to current buffer's file. 
 
@@ -1978,71 +2036,67 @@ only show file names ending with .pdf. To display all files again type 'g'.
 )
 
 #+END_SRC
+** Date Time 
+*** Overview 
 
-** Text Manipulation
-*** Text alignment
+References: 
 
-Source: [[http://www.svjatoslav.eu/notes/init.html][Init file]] - www.svjatoslav.eu
+ + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html][Time Parsing - GNU Emacs Lisp Reference Manual]]
 
-#+BEGIN_SRC elisp
-(defun align-to-colon (begin end)
-  "Align region to colon (:) signs"
-  (interactive "r")
-
-  (align-regexp begin end
-                (rx (group (zero-or-more (syntax whitespace))) ":") 1 1 ))
-
-(defun align-to-comma (begin end)
-  "Align region to comma signs"
-  (interactive "r")
-  (align-regexp begin end
-                (rx "," (group (zero-or-more (syntax whitespace))) ) 1 1 ))
+ + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-of-Day.html][Time of Day - GNU Emacs Lisp Reference Manual]]
 
 
-(defun align-to-equals (begin end)
-  "Align region to equal signs"
-  (interactive "r")
-  (align-regexp begin end
-                (rx (group (zero-or-more (syntax whitespace))) "=") 1 1 ))
+*** Function format-time-string
 
-(defun align-to-hash (begin end)
-  "Align region to hash ( => ) signs"
-  (interactive "r")
-  (align-regexp begin end
-                (rx (group (zero-or-more (syntax whitespace))) "=>") 1 1 ))
+Format date and time: 
 
-;; work with this
-(defun align-to-comma-before (begin end)
-  "Align region to equal signs"
-  (interactive "r")
-  (align-regexp begin end
-                (rx (group (zero-or-more (syntax whitespace))) ",") 1 1 ))
+#+BEGIN_SRC elisp 
+ELISP> (format-time-string "%Y-%m-%d")
+"2017-07-15"
+
+ELISP> (format-time-string "%Y%m%d")
+"20170715"
+ELISP> 
 #+END_SRC
 
-*** Join Multiple Lines
+Unix time stamp (Number of seconds or microseconds since January first of 1970):
 
-From: [[https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d][jidaikobo-shibata/join-multi-lines-to-one.el]]
+#+BEGIN_SRC elisp 
+ELISP> (format-time-string "%s")
+"1500103484"
+ELISP> 
+#+END_SRC
 
-#+BEGIN_SRC elisp
-(defun join-multi-lines-to-one ()
-  "Join multi lines."
-  (interactive)
-  (let ((beg (region-beginning))
-        (end (region-end))
-        strings)
-    (goto-char beg)
-    (back-to-indentation)
-    (setq beg (point))
-    (goto-char end)
-    (goto-char (- (point) 1))
-    (end-of-line)
-    (setq end (point))
-    (setq strings (buffer-substring-no-properties beg end))
-    (setq strings (replace-regexp-in-string "\n\\|^>+ *\\|^[\t　 ]+" " " strings))
-    (setq strings (replace-regexp-in-string " +" " " strings))
-    (delete-region beg end)
-    (insert strings)
-(goto-char beg)))
+*** Function current-time 
+
+#+BEGIN_SRC elisp 
+ELISP> (current-time)
+(22889 50074 486018 948000)
+#+END_SRC
+
+*** Function current-time-string 
+
+#+BEGIN_SRC elisp 
+ELISP> (current-time-string)
+"Sat Jul 15 04:26:27 2017"
+ELISP> 
+#+END_SRC
+
+*** Function float-time 
+
+#+BEGIN_SRC elisp 
+ELISP> (float-time)
+1500103652.678849
+ELISP> 
+#+END_SRC
+
+*** Function current-time-zone 
+
+#+BEGIN_SRC elisp 
+ELISP> (current-time-zone)
+(-10800 "-03")
+
+ELISP> 
 #+END_SRC
 ** Emacs Introspection
 *** User init file
@@ -3593,6 +3647,176 @@ Elisp code:
 (add-to-list 'org-structure-template-alist
 	     '("p" "#+BEGIN_SRC python :results ?value\n\n#+END_SRC"))
 #+END_SRC
+** Code Blocks API 
+*** Overview 
+
+ 1. To test this the code block API divide the window in two parts,
+    one cointaining a org buffer with some org-mode file and other one
+    the emacs shell, IELM, that can be invoked with M-x ielm.
+
+ 2. At the org-mode buffer position the cursor at the code block.
+
+ 3. Go to the IELM buffer and run C-c C-b or type =M-x ielm-change-working-buffer= 
+    and change the working buffer to the org-mode buffer by typing its
+    name and hitting tab to complete it.
+
+ 4. Run the commands at the IELM shell. If it was done the command
+
+    - (buffer-name) will return the name of the org-mode buffer
+      instead of ~*ielm*~.
+
+
+In this section is supposed that the org-buffer has this code block:
+
+#+BEGIN_SRC org
+  ,#+BEGIN_SRC scala :tangle /tmp/scalatest.scala 
+    import java.awt.BorderLayout
+    import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+    val frame = new JFrame("Border Layout")
+    val btn1  = new JButton("North")
+    val btn2  = new JButton("South")
+    val btn3  = new JButton("Center")
+    val btn4  = new JButton("West")
+    val btn5  = new JButton("East")
+
+    frame.setLayout(new BorderLayout())
+    frame.add(btn1, BorderLayout.NORTH)
+    frame.add(btn2, BorderLayout.SOUTH)
+    frame.add(btn3, BorderLayout.CENTER)
+    frame.add(btn4, BorderLayout.WEST)
+    frame.add(btn5, BorderLayout.EAST)
+
+    frame.setSize(300, 400)
+    frame.setVisible(true)
+  ,#+END_SRC
+#+END_SRC
+
+It would be rendered as: 
+
+#+BEGIN_SRC scala :tangle /tmp/scalatest.scala 
+  import java.awt.BorderLayout
+  import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+  val frame = new JFrame("Border Layout")
+  val btn1  = new JButton("North")
+  val btn2  = new JButton("South")
+  val btn3  = new JButton("Center")
+  val btn4  = new JButton("West")
+  val btn5  = new JButton("East")
+
+  frame.setLayout(new BorderLayout())
+  frame.add(btn1, BorderLayout.NORTH)
+  frame.add(btn2, BorderLayout.SOUTH)
+  frame.add(btn3, BorderLayout.CENTER)
+  frame.add(btn4, BorderLayout.WEST)
+  frame.add(btn5, BorderLayout.EAST)
+
+  frame.setSize(300, 400)
+  frame.setVisible(true)
+#+END_SRC
+
+*** Get information about code block 
+
+#+BEGIN_SRC elisp 
+ELISP> (org-babel-get-src-block-info)
+("scala" "import java.awt.BorderLayout\nimport javax.swing.{JFrame, JPanel, JButton, JTextArea}\n\nval frame = new JFrame(\"Border Layout\")\nval btn1  = new JButton(\"North\")\nval btn2  = new JButton(\"South\")\nval btn3  = new JButton(\"Center\")\nval btn4  = new JButton(\"West\")\nval btn5  = new JButton(\"East\")\n\nframe.setLayout(new BorderLayout())\nframe.add(btn1, BorderLayout.NORTH)\nframe.add(btn2, BorderLayout.SOUTH)\nframe.add(btn3, BorderLayout.CENTER)\nframe.add(btn4, BorderLayout.WEST)\nframe.add(btn5, BorderLayout.EAST)\n\nframe.setSize(300, 400)\nframe.setVisible(true)"
+ ((:colname-names)
+  (:rowname-names)
+  (:result-params "replace")
+  (:result-type . value)
+  (:comments . "")
+  (:shebang . "")
+  (:cache . "no")
+  (:padline . "")
+  (:noweb . "no")
+  (:tangle . "/tmp/scalatest.scala")
+  (:exports . "code")
+  (:results . "replace")
+  (:hlines . "no")
+  (:session . "none"))
+ "" nil 0 2257)
+
+ELISP> 
+#+END_SRC
+
+*** Getting the programming language of the code block
+
+#+BEGIN_SRC elisp 
+ELISP> (car (org-babel-get-src-block-info))
+"scala"
+ELISP> 
+#+END_SRC
+
+*** Getting the source code of the code block
+
+#+BEGIN_SRC elisp
+ELISP> (cadr (org-babel-get-src-block-info))
+"import java.awt.BorderLayout\nimport javax.swing.{JFrame, JPanel, JButton, JTextArea}\n\nval frame = ..."
+ELISP> 
+
+ELISP> (print (cadr (org-babel-get-src-block-info)))
+
+"import java.awt.BorderLayout
+import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+val frame = new JFrame(\"Border Layout\")
+val btn1  = new JButton(\"North\")
+val btn2  = new JButton(\"South\")
+val btn3  = new JButton(\"Center\")
+val btn4  = new JButton(\"West\")
+val btn5  = new JButton(\"East\")
+
+frame.setLayout(new BorderLayout())
+frame.add(btn1, BorderLayout.NORTH)
+frame.add(btn2, BorderLayout.SOUTH)
+frame.add(btn3, BorderLayout.CENTER)
+frame.add(btn4, BorderLayout.WEST)
+frame.add(btn5, BorderLayout.EAST)
+
+frame.setSize(300, 400)
+frame.setVisible(true)"
+
+#+END_SRC
+
+*** Getting code block attributes 
+
+#+BEGIN_SRC elisp 
+  ELISP> (caddr (org-babel-get-src-block-info))
+  ((:colname-names)
+   (:rowname-names)
+   (:result-params "replace")
+   (:result-type . value)
+   (:comments . "")
+   (:shebang . "")
+   (:cache . "no")
+   (:padline . "")
+   (:noweb . "no")
+   (:tangle . "/tmp/scalatest.scala")
+   (:exports . "code")
+   (:results . "replace")
+   (:hlines . "no")
+   (:session . "none"))
+
+  ELISP> (assoc :exports (caddr (org-babel-get-src-block-info)))
+  (:exports . "code")
+
+  ELISP> (cdr (assoc :exports (caddr (org-babel-get-src-block-info))))
+  "code"
+  ELISP>
+
+  ELISP> (assoc :tangle (caddr (org-babel-get-src-block-info)))
+  (:tangle . "/tmp/scalatest.scala")
+
+  ELISP> (cdr (assoc :tangle (caddr (org-babel-get-src-block-info))))
+  "/tmp/scalatest.scala"
+  ELISP> 
+#+END_SRC
+*** Saving code block to file 
+
+#+BEGIN_SRC elisp 
+
+#+END_SRC
 ** Custom Protocols
 *** Open directory with dired mode
 
@@ -3618,7 +3842,6 @@ Log directory      -  dir:/var/log  -  [[dir:/var/log][Log directory]]
 
 System cofiguration - dir:/etc
 #+END_SRC
-
 
 *** Open directory with system file manager
 
