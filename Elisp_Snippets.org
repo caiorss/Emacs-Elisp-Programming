@@ -3,7 +3,7 @@
 #+TITLE: Elisp Snippets
 #+DESCRIPTION: Lots of ELisp examples categorized by task.
 #+KEYWORDS: emacs, elisp, lisp, programming, snippets, examples, code, utilities
-#+STARTUP: content 
+#+STARTUP: content
 
 * Elisp Snippets
 ** Strings
@@ -60,6 +60,71 @@ ELISP> (join ", " '("1.232" "300"  "500"))
 #+END_SRC
 *** Replace Strings
 *** Regex
+** Text Manipulation
+*** Text alignment
+
+Source: [[http://www.svjatoslav.eu/notes/init.html][Init file]] - www.svjatoslav.eu
+
+#+BEGIN_SRC elisp
+(defun align-to-colon (begin end)
+  "Align region to colon (:) signs"
+  (interactive "r")
+
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) ":") 1 1 ))
+
+(defun align-to-comma (begin end)
+  "Align region to comma signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx "," (group (zero-or-more (syntax whitespace))) ) 1 1 ))
+
+
+(defun align-to-equals (begin end)
+  "Align region to equal signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) "=") 1 1 ))
+
+(defun align-to-hash (begin end)
+  "Align region to hash ( => ) signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) "=>") 1 1 ))
+
+;; work with this
+(defun align-to-comma-before (begin end)
+  "Align region to equal signs"
+  (interactive "r")
+  (align-regexp begin end
+                (rx (group (zero-or-more (syntax whitespace))) ",") 1 1 ))
+#+END_SRC
+
+*** Join Multiple Lines
+
+From: [[https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d][jidaikobo-shibata/join-multi-lines-to-one.el]]
+
+#+BEGIN_SRC elisp
+(defun join-multi-lines-to-one ()
+  "Join multi lines."
+  (interactive)
+  (let ((beg (region-beginning))
+        (end (region-end))
+        strings)
+    (goto-char beg)
+    (back-to-indentation)
+    (setq beg (point))
+    (goto-char end)
+    (goto-char (- (point) 1))
+    (end-of-line)
+    (setq end (point))
+    (setq strings (buffer-substring-no-properties beg end))
+    (setq strings (replace-regexp-in-string "\n\\|^>+ *\\|^[\t　 ]+" " " strings))
+    (setq strings (replace-regexp-in-string " +" " " strings))
+    (delete-region beg end)
+    (insert strings)
+(goto-char beg)))
+#+END_SRC
 ** S-expressions
 *** Parse s-expressions
 
@@ -91,7 +156,6 @@ ELISP> (join ", " '("1.232" "300"  "500"))
 > (eval '(+ 1 2 3 4))
 10
 #+END_SRC
-
 ** Clipboard (Kill-ring)                          :elisp:clipboard:kill:ring:
 *** Copy string to clipboard
 
@@ -175,7 +239,6 @@ nil
                    (point-max)
                    )))
 #+END_SRC
-
 ** Elisp
 *** Load an Elisp file
 
@@ -275,7 +338,7 @@ ELISP>
 
 #+END_SRC
 
-***  Extract Function Documentation                                   :elisp:
+*** Extract Function Documentation                                    :elisp:
 
 Source: [[http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/][Generate emacs-lisp documentation]]
 Primitives:
@@ -339,7 +402,11 @@ Function Docstring
  (lambda (a b c) \"Function Docstring\" (+ a (* 5 b) (* 3 c)))
 "
  #+END_SRC
+*** Describe function 
 
+#+BEGIN_SRC elisp 
+(describe-function 'find-file-noselect) 
+#+END_SRC
 ** Common Lisp Emulation Library
 *** Reduce (fold left) function
 **** Build a number from a list of digits
@@ -399,28 +466,27 @@ ELISP> (some-p '(nil nil nil nil))
 nil
 
 #+END_SRC
-
 ** Buffer and regions
 *** Save buffer
 
 #+BEGIN_SRC elisp
 (save-buffer)
 #+END_SRC
-*** Kill / delete buffer 
+*** Kill / delete buffer
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
  (kill-buffer <buffer-object or buffer-name>)
 #+END_SRC
 
 Example: Delete buffer named ~Elisp_Snippets.org~
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (kill-buffer "Elisp_Snippets.org")
 #+END_SRC
 
 Example: Delete all buffers:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
  (mapc #'kill-buffer (buffer-list))
 #+END_SRC
 
@@ -446,11 +512,11 @@ Returns the selected text of the current buffer.
   (buffer-substring-no-properties (region-beginning) (region-end)))
 #+END_SRC
 
-*** Create a scratch buffer for Programming Languages 
+*** Create a scratch buffer for Programming Languages
 
 This function creates a Python scratch buffer like elisp ~*scratch*~
 which allows the user to play with Python without creating any
-file. It is possible to run 
+file. It is possible to run
 
 It can be easily changed to work with other languages like ruby by
 replacing python-mode to ruby-mode.
@@ -463,15 +529,15 @@ Usage: _M-x python/scratch_
   (defun python/scratch ()
     (interactive)
       (let (
-            ;; Creates a new buffer object.    
+            ;; Creates a new buffer object.
            (buf (get-buffer-create "*python-scratch*"))
            )
         ;; Executes functions that would change the current buffer at
-        ;; buffer buf 
+        ;; buffer buf
        (with-current-buffer buf
-         ;;; Set the new buffer to scratch mode 
+         ;;; Set the new buffer to scratch mode
          (python-mode)
-         ;;; Pop to scratch buffer 
+         ;;; Pop to scratch buffer
          (pop-to-buffer buf)
          )))
 #+END_SRC
@@ -480,82 +546,80 @@ Usage: _M-x python/scratch_
 
 Usage: M-x sh/scratch
 
- #+BEGIN_SRC elisp 
+ #+BEGIN_SRC elisp
    (defun sh/scratch ()
      (interactive)
        (let (
-             ;; Creates a new buffer object.    
+             ;; Creates a new buffer object.
             (buf (get-buffer-create "*sh-scratch*"))
             )
          ;; Executes functions that would change the current buffer at
-         ;; buffer buf 
+         ;; buffer buf
         (with-current-buffer buf
-          ;;; Set the new buffer to scratch mode 
-          (sh-mode) 
-          ;;; Pop to scratch buffer 
+          ;;; Set the new buffer to scratch mode
+          (sh-mode)
+          ;;; Pop to scratch buffer
           (pop-to-buffer buf)
-          ))) 
+          )))
  #+END_SRC
 
-*** Get all buffer's local variables 
+*** Get all buffer's local variables
 
 Get all current buffer's local variables
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
     (buffer-local-variables) ;; Evalute with M-x eval-print-last-sexp
 #+END_SRC
 
-Output: 
+Output:
 
-#+BEGIN_SRC elisp 
-((cursor-type . bar) 
-(buffer-display-time 22711 20278 987330 737000) 
-(buffer-display-count . 4) 
-(buffer-invisibility-spec 
-(org-babel-hide-hash . t) 
-(org-babel-hide-hash . t) 
-(org-babel-hide-hash . t) 
-(org-babel-hide-hash . t) 
-(org-babel-hide-result . t) 
-(org-hide-block . t) 
-(org-cwidth) (org-link) (outline . t) t) 
-(buffer-file-truename . "~/Documents/projects/emacs/Elisp_Snippets.org") (point-before-scroll) 
+#+BEGIN_SRC elisp
+((cursor-type . bar)
+(buffer-display-time 22711 20278 987330 737000)
+(buffer-display-count . 4)
+(buffer-invisibility-spec
+(org-babel-hide-hash . t)
+(org-babel-hide-hash . t)
+(org-babel-hide-hash . t)
+(org-babel-hide-hash . t)
+(org-babel-hide-result . t)
+(org-hide-block . t)
+(org-cwidth) (org-link) (outline . t) t)
+(buffer-file-truename . "~/Documents/projects/emacs/Elisp_Snippets.org") (point-before-scroll)
 
-(buffer-auto-save-file-format . t) 
-(buffer-file-format) (buffer-file-coding-system . utf-8-unix) 
-(enable-multibyte-characters . t) 
-(mark-active) 
+(buffer-auto-save-file-format . t)
+(buffer-file-format) (buffer-file-coding-system . utf-8-unix)
+(enable-multibyte-characters . t)
+(mark-active)
 (overwrite-mode) ...)
 #+END_SRC
 
 
-Get all local variables of a buffer. 
+Get all local variables of a buffer.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (buffer-local-variables <buffer-name>)
 #+END_SRC
 
+*** Get a specific buffer local variable
 
-
-*** Get a specific buffer local variable 
-
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (buffer-local-value VARIABLE BUFFER)
 #+END_SRC
 
 Get current buffer major-mode:
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 >  (buffer-local-value 'major-mode (current-buffer))
 org-mode
 
 #+END_SRC
 
-*** Append buffer content to file 
+*** Append buffer content to file
 
 Function append to file: Append buffer's region content to file.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (append-to-file <point-min> <point-max> <file-name>)
 #+END_SRC
 
@@ -563,21 +627,21 @@ Append current buffer content to file. If the file doesn't exist, it will be
 created. Otherwise the buffer content will be appended to the end of
 the file.
 
-#+BEGIN_SRC elisp    
+#+BEGIN_SRC elisp
   (append-to-file (point-min) (point-max) "/tmp/afile.txt")
 #+END_SRC
 
 
-Append a specific buffer content to file. 
+Append a specific buffer content to file.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (with-current-buffer "my-buffer-name"
     (append-to-file (point-min) (point-max) "/tmp/afile.txt"))
 #+END_SRC
 
 *** Write file with buffer content (overwrite file it exists)
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   ;; Delete file if exists in order to overwrite it.
   (if (file-exists-p filename)
       (delete-file file))
@@ -585,9 +649,9 @@ Append a specific buffer content to file.
   ;; Append buffer content to file.
   (append-to-file (point-min) (point-max) filename))
 #+END_SRC
-*** Revert / update buffer without asking to confirm 
+*** Revert / update buffer without asking to confirm
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
  (revert-buffer t t t)
 #+END_SRC
 ** IO - Input and Output
@@ -695,7 +759,7 @@ Show a tooltip
 #+END_SRC
 
 file:images/emacs_show_tooltip.png
-** Shell Commands / Interacting with external applications
+** Interacting with Operating System and External Applications
 *** Related Documentation
 
 [C-h-f] <name of function>
@@ -716,6 +780,147 @@ file:images/emacs_show_tooltip.png
 
  - setenv
 
+*** Add application path to the PATH variable - Solving command not found
+**** Overview 
+
+In order to Emacs find where applications such as ruby shell, scala
+compiler and tools are installed it is necessary to the PATH
+environment variable contain the path to the directories which
+contains those applications. 
+
+**** Checking PATH variable
+
+Copy this command below to the scratch buffer and enter M-x
+eval-print-last-last-sexp.
+
+#+BEGIN_SRC elisp 
+  (getenv "PATH")
+  "/home/archbox/opt/scala/bin:/usr/bin:/bin: ..." 
+#+END_SRC
+
+**** Command to display path variable
+
+#+BEGIN_SRC elisp 
+  (defun show-path-variable ()
+    (interactive)
+    ;; Create a new buffer to display results to user
+    (switch-to-buffer (get-buffer-create "*path-variable*"))
+    ;; Clear buffer 
+    (delete-region (point-min) (point-max))
+    ;; save cursor position 
+    (save-excursion 
+     (mapc (lambda (p) (insert (concat  p "\n")))
+           (split-string (getenv "PATH")
+                         ;; Get path separator (;) for Windows
+                         ;; and (:) for Unix-like systems.
+                         (if (equal system-type 'windows/nt)
+                             ";"
+                             ":"
+                           )))))
+#+END_SRC
+
+By running this command M-x show-path-varible it will print all paths
+in the $PATH variable in a new buffer a easy way to read: 
+
+#+BEGIN_SRC text 
+/home/archbox/opt/scala-2.11.8/bin
+/home/archbox/opt/jdk1.8.0_74/bin/
+/usr/local/sbin
+/usr/local/bin
+/usr/bin
+/usr/lib/jvm/default/bin
+/usr/bin/site_perl
+/usr/bin/vendor_perl
+/usr/bin/core_perl
+/home/archbox/opt/java/bin
+/home/archbox/opt/scala-2.11.8/bin/
+#+END_SRC
+
+**** Add a directories to PATH variable 
+
+It will add the directory: ~/opt/scala/bin to the $PATH
+variable. Before run add the code below when the user run 
+=M-x async-shell-command= scala it shows an error message: 
+
+#+BEGIN_SRC text 
+  /bin/bash: scala: command not found
+#+END_SRC
+
+Note: The character ':' is the separator for Unix-like OS (Linux/ BSD
+and OSX) and ';' is the separator for Windows.
+
+#+BEGIN_SRC elisp 
+  ;; Add single directory 
+  (setenv "PATH"
+          (concat
+           (expand-file-name "~/opt/scala/bin") ":"
+           (getenv "PATH")))
+
+  ;; Add multiple directories 
+  (setenv "PATH"
+          (concat
+           (expand-file-name "~/opt/scala/bin")        ":"
+           (expand-file-name "~/opt/jdk1.8.0_20/bin/") ":"
+           "/Applications/haste-compiler/bin/"         ":"
+           (getenv "PATH")))
+#+END_SRC
+
+After it is done the Scala REPL will look like the picture below: 
+
+#+CAPTION: Scala in PATH variable. 
+[[file:images/scala-shellx1.png][file:images/scala-shellx1.png]]
+
+**** Function to add multiple directories in PATH variable 
+
+#+BEGIN_SRC elisp 
+(defun add-to-path-var (&rest pathlist)
+  (let* ((path-sep (if (equal system-type 'windows/nt)
+                       ";"  ;; Windows separator 
+                       ":"  ;; Unix separator 
+                      )))
+    (setenv "PATH" (concat (apply #'concat
+                                  (mapcar
+                                   (lambda (path)
+                                     (concat (expand-file-name path)
+                                             path-sep))
+                                   pathlist))
+                           (getenv "PATH")))))
+#+END_SRC
+
+Usage example: 
+
+#+BEGIN_SRC elisp 
+  (add-to-path-var "~/opt/scala/bin" "~/opt/jdk1.8.0_20/bin/")
+#+END_SRC
+
+*Alternative way*: 
+
+Use the function locally without pollute the namespace. 
+
+#+BEGIN_SRC elisp 
+  (require 'cl)
+
+  (cl-flet
+      ((add-to-path-var
+        (&rest pathlist)
+        (let* ((path-sep (if (equal system-type 'windows/nt)
+                             ";" ;; Windows separator 
+                             ":" ;; Unix separator 
+                             )))
+          (setenv "PATH"
+                  (concat (apply #'concat
+                                 (mapcar
+                                  (lambda (path)
+                                    (concat (expand-file-name path)
+                                            path-sep))
+                                            pathlist))
+                          (getenv "PATH"))))))
+    ;; Add paths to be added to PATH variable here,
+    (add-to-path-var
+     "~/opt/scala/bin"
+     "~/opt/jdk1.8.0_20/bin/"
+     ))
+#+END_SRC
 *** Synchronous Shell Commands
 **** Display output of shell command
 
@@ -987,9 +1192,9 @@ Example: The Command replace all occurrences  of 'defun' by 'defn'.
 
 Refactoring to a self-contained-code, removing all dependencies.
 
-Example: To remove all numbers in at beggining of line run:   
+Example: To remove all numbers in at beggining of line run:
 
-#+BEGIN_SRC text 
+#+BEGIN_SRC text
 M-x replace-regex-ruby /^\d\d?/,""
 #+END_SRC
 
@@ -1012,7 +1217,6 @@ M-x replace-regex-ruby /^\d\d?/,""
                               t
                               ))
 #+END_SRC
-
 
 *** Launch apps in Asynchronous mode
 *** Run asynchronous commands piping the output to a buffer
@@ -1089,7 +1293,7 @@ file:images/emacs_shell_ping_hostname.png
 
 #+END_SRC
 
-*** Run a ncurses / terminal app inside Emacs 
+*** Run a ncurses / terminal app inside Emacs
 
 Run linux htop (task manager) inside Emacs:
 
@@ -1163,7 +1367,7 @@ Command =M-x htop= to launch htop.
 #+RESULTS:
 : htop
 
-*** Launch applicatiosn from Emacs 
+*** Launch applicatiosn from Emacs
 
 This command asks the user a shell command providing tab completion
 and launches an asynchronous process (it doesn't freeze Emacs). Unlike
@@ -1172,9 +1376,9 @@ buffer. It is useful to launch desktop GUI applications from Emacs
 like Firefox, terminal emulator, file mangers and so on.
 
 Note: In order to this command find the app the directory of the app
-must be in the $PATH variable. 
+must be in the $PATH variable.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (defun shell-launch ()
     "Launch a process without creating a buffer. It is useful to launch apps from Emacs."
     (interactive)
@@ -1191,7 +1395,7 @@ must be in the $PATH variable.
 This comamnd can be bound to a keybiding with the code bellow that
 bidns the key combination SUPER (Windows Key) + 8.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (global-set-key (kbd "s-8") #'shell-launch)
 #+END_SRC
 
@@ -1322,14 +1526,62 @@ Example:
 
 #+CAPTION: Demonstration of M-x shell/buffer-repl-frame and shell/insert-region
 [[file:images/shell-demo2.gif][file:images/shell-demo2.gif]]
+** Compilation
+*** Enhanced Compilation Command 
 
-** Compilation 
+This command is similar to emacs M-x compile, however it expands '%f'
+to the buffer file name, '%n' to buffer base name and '%d' to buffer
+directory.
 
-*Compile a single c++ file related to current buffer and run it.*
+Example: if the current buffer is associated to the file
+/home/arch/scripts/gui1.scala and the user types the command M-x
+compile2 followed by the command below.
+
+ - =$ scalac %f -d app-%n.jar && scala app-%n.jar= 
+
+Emacs will run M-x compile with:
+
+ - =$ scalac gui1.scala -d app-gui1.jar && scala scala app-gui1.jar=
+
+
+The advantage of this command is that user doesn't need to type the
+file name to be compiled.
+
+#+BEGIN_SRC elisp 
+(setq compile2-command-history "")
+
+(defun compile2 ()
+  "Enhanced compilation command.
+- %f - is expanded to current buffer file name. 
+- %d - is expanded to current buffer current directory.
+- %n - is expanded to current buffer base name.
+
+Example: if the current buffer is associated to the file. 
+ - /home/arch/scripts/gui1.scala 
+
+If the user enter the command: 
+  
+ $ scalac %f -d app-%n.jar && scala app-%n.jar
+
+It will run M-x compile with: 
+
+ $ scalac gui1.scala -d app-gui1.jar && scala scala app-gui1.jar"
+  (interactive)
+  (let* ((file (buffer-file-name))
+         (cmd  (read-shell-command "cmd> " compile2-command-history))
+         (cmd1 (replace-regexp-in-string "%f" (file-name-nondirectory file) cmd))
+         (cmd2 (replace-regexp-in-string "%n" (file-name-base file) cmd1))
+         (cmd3 (replace-regexp-in-string "%d" (file-name-directory file) cmd2)))
+    (setq compile2-command-history cmd)
+    (save-buffer)
+    (compile cmd3)))
+#+END_SRC
+
+*** Compile a single c++ file related to current buffer and run it.
 
 Usage: When the user run the command _M-x cpp/compile-run-buffer_ at
 the current buffer (file code1.cpp) it will compile and run this file
-running the command =$ g++ code1.cpp -o code1.bin && ./code1.bin=. 
+running the command =$ g++ code1.cpp -o code1.bin && ./code1.bin=.
 
 #+BEGIN_SRC elisp
 (defun cpp/compile-run-buffer ()
@@ -1338,7 +1590,7 @@ Usage: By running M-x cpp/compile-buffer-run at current buffer (file code1.cpp)
 will run $ g++ code1.cpp -o code1.bin && ./code1.bin"
   (interactive)
   (let* ((file-name  (file-name-nondirectory (buffer-file-name)))
-        ;; Change file name extension to .bin 
+        ;; Change file name extension to .bin
          (output     (concat (file-name-base file-name) ".bin")))
     (save-buffer)
     (compile (format "g++ %s -o %s && ./%s"
@@ -1348,13 +1600,12 @@ will run $ g++ code1.cpp -o code1.bin && ./code1.bin"
                      ))))
 #+END_SRC
 
-
-*Compile and run a single c++ file at point in dired mode* 
+*** Compile and run a single c++ file at point in dired mode
 
 Usage: In dired mode mode, place the cursor at the file to be compiled
 and run M-x cpp/compile-run-dired.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (defun cpp/compile-run-dired ()
   "Compile single c++ file at point in dired mode.
 Usage: Position the cursor at the file to be compiled and
@@ -1362,7 +1613,7 @@ run M-x cpp/compile-dired.
 "
   (interactive)
   (let* ((file-name  (file-name-nondirectory (dired-file-name-at-point)))
-        ;; Change file name extension to .bin 
+        ;; Change file name extension to .bin
          (output     (concat (file-name-base file-name) ".bin")))
     (save-buffer)
     (compile (format "g++ %s -o %s && ./%s"
@@ -1509,65 +1760,64 @@ Open a file and returns a buffer:
 
 
 #+END_SRC
-
-** File Name Manipulation 
-*** Get absolute path to current buffer's file. 
+** File Name Manipulation
+*** Get absolute path to current buffer's file.
 
 #+BEGIN_SRC elisp
 ELISP> (buffer-file-name)
 "/home/archbox/.emacs.d/init.el"
-ELISP> 
+ELISP>
 #+END_SRC
-*** File name without path 
+*** File name without path
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 ELISP> (file-name-nondirectory "/home/archbox/.emacs.d/init.el")
 "init.el"
-ELISP> 
+ELISP>
 #+END_SRC
 
-*** File name to base name 
+*** File name to base name
 
 Transform file name to name without path and extension.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 ELISP> (file-name-base "/home/archbox/.emacs.d/init.el")
 "init"
-ELISP> 
+ELISP>
 #+END_SRC
-*** Get file's path 
+*** Get file's path
 
 Get the directory that contais a file.
 
 #+BEGIN_SRC elisp
 ELISP> (file-name-directory "/home/archbox/.emacs.d/init.el")
 "/home/archbox/.emacs.d/"
-ELISP> 
+ELISP>
 #+END_SRC
-*** Expand file name 
+*** Expand file name
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 ELISP> (expand-file-name ".")
 "/home/archbox/.emacs.d"
 
 ELISP> (expand-file-name "./init.el")
 "/home/archbox/.emacs.d/init.el"
-ELISP> 
+ELISP>
 
 ELISP> (expand-file-name "~")
 "/home/archbox"
 
 ELISP> (expand-file-name "~/.bashrc")
 "/home/archbox/.bashrc"
-ELISP> 
+ELISP>
 #+END_SRC
-*** Replace file extension 
+*** Replace file extension
 
 Example: It will replace the extension of file name init.el to
 init.py. Note: it will not modify the file.
 
-#+BEGIN_SRC elisp 
-  ELISP> 
+#+BEGIN_SRC elisp
+  ELISP>
   (let ((file  "/home/archbox/.emacs.d/init.el"))
     (concat (file-name-directory file)
             (file-name-base file)
@@ -1575,21 +1825,21 @@ init.py. Note: it will not modify the file.
             ))
 
   "/home/archbox/.emacs.d/init.py"
-  ELISP> 
+  ELISP>
 #+END_SRC
 
-or 
+or
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (defun file-replace-extension (ext file)
       (concat (file-name-directory file)
               (file-name-base file)
-              ext 
+              ext
               ))
 
   ELISP> (file-replace-extension ".py" "/home/archbox/.emacs.d/init.el")
   "/home/archbox/.emacs.d/init.py"
-  ELISP> 
+  ELISP>
 #+END_SRC
 ** Directory                                                      :directory:
 *** Open directory
@@ -1904,9 +2154,9 @@ navigation.
                 ))))
 #+END_SRC
 
-*** Filter dired buffer by file extensions 
+*** Filter dired buffer by file extensions
 
-Usage: 
+Usage:
 
  1. M-x dired/filter-extension
 
@@ -1916,18 +2166,18 @@ Usage:
     type g.
 
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (defun dired/filter-extension ()
     "Filter dired buffer by file extensions.
-  Usage: 
-1. M-x dired/filter-extension 
-2. Enter the file extensions separated by space like: exe dll 
+  Usage:
+1. M-x dired/filter-extension
+2. Enter the file extensions separated by space like: exe dll
 
-It will only show files ending with extensions *.exe and *.dll. 
+It will only show files ending with extensions *.exe and *.dll.
 To show all files of dired buffer again type 'g'."
     (interactive)
     (dired-mark-files-regexp
-     (mapconcat 'identity 
+     (mapconcat 'identity
                 (mapcar (lambda (ext) (format "\\.%s$" ext))
                         (split-string (read-string "Extension:  ")))
                 "\\\|"
@@ -1939,20 +2189,20 @@ To show all files of dired buffer again type 'g'."
 
 The key (') quote can be used to invoke this command:
 
-#+BEGIN_SRC elisp 
-;; Filter files by extension 
+#+BEGIN_SRC elisp
+;; Filter files by extension
 (define-key dired-mode-map "'" #'dired/filter-extension)
 #+END_SRC
 
-*** Filter dired buffer by regex 
+*** Filter dired buffer by regex
 
-This command only displays files matching the given regex (Emacs' regex). 
+This command only displays files matching the given regex (Emacs' regex).
 
 Example: By entering M-x dired/filter '\.pdf$' without quotes it will
 only show file names ending with .pdf. To display all files again type 'g'.
 
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (defun dired/filter ()
     "Show only files which name matches a regex."
     (interactive)
@@ -1978,71 +2228,66 @@ only show file names ending with .pdf. To display all files again type 'g'.
 )
 
 #+END_SRC
+** Date Time
+*** Overview
 
-** Text Manipulation
-*** Text alignment
+References:
 
-Source: [[http://www.svjatoslav.eu/notes/init.html][Init file]] - www.svjatoslav.eu
+ + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html][Time Parsing - GNU Emacs Lisp Reference Manual]]
+
+ + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-of-Day.html][Time of Day - GNU Emacs Lisp Reference Manual]]
+
+*** Function format-time-string
+
+Format date and time:
 
 #+BEGIN_SRC elisp
-(defun align-to-colon (begin end)
-  "Align region to colon (:) signs"
-  (interactive "r")
+ELISP> (format-time-string "%Y-%m-%d")
+"2017-07-15"
 
-  (align-regexp begin end
-                (rx (group (zero-or-more (syntax whitespace))) ":") 1 1 ))
-
-(defun align-to-comma (begin end)
-  "Align region to comma signs"
-  (interactive "r")
-  (align-regexp begin end
-                (rx "," (group (zero-or-more (syntax whitespace))) ) 1 1 ))
-
-
-(defun align-to-equals (begin end)
-  "Align region to equal signs"
-  (interactive "r")
-  (align-regexp begin end
-                (rx (group (zero-or-more (syntax whitespace))) "=") 1 1 ))
-
-(defun align-to-hash (begin end)
-  "Align region to hash ( => ) signs"
-  (interactive "r")
-  (align-regexp begin end
-                (rx (group (zero-or-more (syntax whitespace))) "=>") 1 1 ))
-
-;; work with this
-(defun align-to-comma-before (begin end)
-  "Align region to equal signs"
-  (interactive "r")
-  (align-regexp begin end
-                (rx (group (zero-or-more (syntax whitespace))) ",") 1 1 ))
+ELISP> (format-time-string "%Y%m%d")
+"20170715"
+ELISP>
 #+END_SRC
 
-*** Join Multiple Lines
-
-From: [[https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d][jidaikobo-shibata/join-multi-lines-to-one.el]]
+Unix time stamp (Number of seconds or microseconds since January first of 1970):
 
 #+BEGIN_SRC elisp
-(defun join-multi-lines-to-one ()
-  "Join multi lines."
-  (interactive)
-  (let ((beg (region-beginning))
-        (end (region-end))
-        strings)
-    (goto-char beg)
-    (back-to-indentation)
-    (setq beg (point))
-    (goto-char end)
-    (goto-char (- (point) 1))
-    (end-of-line)
-    (setq end (point))
-    (setq strings (buffer-substring-no-properties beg end))
-    (setq strings (replace-regexp-in-string "\n\\|^>+ *\\|^[\t　 ]+" " " strings))
-    (setq strings (replace-regexp-in-string " +" " " strings))
-    (delete-region beg end)
-    (insert strings)
-(goto-char beg)))
+ELISP> (format-time-string "%s")
+"1500103484"
+ELISP>
+#+END_SRC
+
+*** Function current-time
+
+#+BEGIN_SRC elisp
+ELISP> (current-time)
+(22889 50074 486018 948000)
+#+END_SRC
+
+*** Function current-time-string
+
+#+BEGIN_SRC elisp
+ELISP> (current-time-string)
+"Sat Jul 15 04:26:27 2017"
+ELISP>
+#+END_SRC
+
+*** Function float-time
+
+#+BEGIN_SRC elisp
+ELISP> (float-time)
+1500103652.678849
+ELISP>
+#+END_SRC
+
+*** Function current-time-zone
+
+#+BEGIN_SRC elisp
+ELISP> (current-time-zone)
+(-10800 "-03")
+
+ELISP>
 #+END_SRC
 ** Emacs Introspection
 *** User init file
@@ -2430,13 +2675,13 @@ to be downloaded suggesting the file name extracted from the url.
 *** Download a file and display it on a buffer    :http:web:buffer:clipboard:
 
 This command reads an url from the user and download the file content
-and displays it on a buffer without write a file to disk. 
+and displays it on a buffer without write a file to disk.
 
-Example: 
+Example:
 
- 1. User copies the url: (file: [[http://patterns.cs.up.ac.za/examples/ch9/iterator-theory.cs][iterator-theory.cs]])  ~http://patterns.cs.up.ac.za/examples/ch9/iterator-theory.cs~ 
+ 1. User copies the url: (file: [[http://patterns.cs.up.ac.za/examples/ch9/iterator-theory.cs][iterator-theory.cs]])  ~http://patterns.cs.up.ac.za/examples/ch9/iterator-theory.cs~
 
- 2. User enters the command =M-x download-code-view= 
+ 2. User enters the command =M-x download-code-view=
 
  3. It will suggest in a prompt the former url. User hit return.
 
@@ -2444,32 +2689,32 @@ Example:
 
  5. User enter the command. M-x csharp-mode that turns on the syntax hightlight.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
 (defun download-code-view ()
     "Download a source code from url and displays it on a buffer."
     (interactive)
     (let* (
-           ;; Get url from clipboard 
+           ;; Get url from clipboard
            (clipboard (with-temp-buffer
                         (clipboard-yank)
                         (buffer-substring-no-properties (point-min)
                                                         (point-max))))
-           ;; Read url and suggesting clipboard 
+           ;; Read url and suggesting clipboard
            (url      (read-string "Url: " clipboard))
            (buf      (url-retrieve-synchronously url))
-           ;; Tries to extract the file name from url 
-           (filename (car  (last (split-string url "/"))))         
-           (bufname  (concat "*" filename "*")) 
-           )         
+           ;; Tries to extract the file name from url
+           (filename (car  (last (split-string url "/"))))
+           (bufname  (concat "*" filename "*"))
+           )
       (switch-to-buffer buf)
-      ;; Remove http header 
+      ;; Remove http header
       (goto-char (point-min))
       (re-search-forward "^$")
       (delete-region (point) (point-min))
       (kill-whole-line)
       ;; Remove \r characters or ^M
       (replace-string (char-to-string 13) "")
-      ;; Rename buffer to a better name 
+      ;; Rename buffer to a better name
       (with-current-buffer buf
         (rename-buffer bufname))))
 #+END_SRC
@@ -2578,28 +2823,28 @@ If the package is installed returns t (true) and nil otherwise.
 
  - =(package-installed-p PACKAGE &optional MIN-VERSION)=
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   > (package-installed-p 'helm-core)
   t
 #+END_SRC
 
 *** Install a package if it is not installed
-*** Install a single-file package from URL 
+*** Install a single-file package from URL
 
 This command install a single-file elisp package from a given URL to
 source file.
 
-Usage: 
+Usage:
 
  1. Copy the url of the package file to be installed like
     http://mumble.net/~campbell/emacs/paredit-beta.el from [[https://www.emacswiki.org/emacs/ParEdit][EmacsWiki:Par Edit]].
 
  2. Type M-x package-install-url It will ask to confirm the URL. Then
-    type return and the package will be installed. 
+    type return and the package will be installed.
 
 To find where the package was intalled type M-x find-library <library-name>.
 
-#+BEGIN_SRC elisp 
+#+BEGIN_SRC elisp
   (defun package-install-url ()
     "Install a single-file package *.el file from Url."
     (interactive)
@@ -2608,10 +2853,10 @@ To find where the package was intalled type M-x find-library <library-name>.
            (clipboard (with-temp-buffer
                         (clipboard-yank)
                         (buffer-substring-no-properties (point-min) (point-max))))
-           ;; Ask the user to confirm the url 
+           ;; Ask the user to confirm the url
            (url (read-string "Url: " clipboard))
            )
-      
+
        (with-current-buffer (url-retrieve-synchronously url)
          (goto-char (point-min))
          (re-search-forward "^$")
@@ -2630,9 +2875,9 @@ This command switches between buffer with files that are in current directory.
   (defun buffer/with-file-in-directory-p (directory buf)
     "Check if a buffer has file associated and is is in DIRECTORY.
   Parameters:
-  - directory  string         - root directory 
+  - directory  string         - root directory
   - buf        buffer object  - buffer object"
-    (and (buffer-file-name buf) ;; check if buffer has a file associated 
+    (and (buffer-file-name buf) ;; check if buffer has a file associated
          (string-prefix-p (expand-file-name directory)
                           (expand-file-name (buffer-file-name buf)
                                               ))))
@@ -2644,7 +2889,7 @@ This command switches between buffer with files that are in current directory.
     (helm
      :prompt "Buffer switch: "
      :sources  `((
-                  (name       . "Dir: ")                                 
+                  (name       . "Dir: ")
                   (candidates . ,(mapcar (lambda (b) (cons (buffer-name b) b))
                                          ;; filter buffers not in this directory (code bellow)
                                          (remove-if-not  (lambda (b)
@@ -3018,7 +3263,7 @@ browse:
 clean:
 	rm -rf dist/*.html dist/*.html~
 #+END_SRC
-** Persistence 
+** Persistence
 ***  Save and Reload Current Session
 
 Interactive Developement
@@ -3593,6 +3838,205 @@ Elisp code:
 (add-to-list 'org-structure-template-alist
 	     '("p" "#+BEGIN_SRC python :results ?value\n\n#+END_SRC"))
 #+END_SRC
+** Code Blocks API
+*** Overview
+
+ 1. To test this the code block API divide the window in two parts,
+    one cointaining a org buffer with some org-mode file and other one
+    the emacs shell, IELM, that can be invoked with M-x ielm.
+
+ 2. At the org-mode buffer position the cursor at the code block.
+
+ 3. Go to the IELM buffer and run C-c C-b or type =M-x ielm-change-working-buffer=
+    and change the working buffer to the org-mode buffer by typing its
+    name and hitting tab to complete it.
+
+ 4. Run the commands at the IELM shell. If it was done the command
+
+    - (buffer-name) will return the name of the org-mode buffer
+      instead of ~*ielm*~.
+
+
+In this section is supposed that the org-buffer has this code block:
+
+#+BEGIN_SRC org
+  ,#+BEGIN_SRC scala :tangle /tmp/scalatest.scala
+    import java.awt.BorderLayout
+    import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+    val frame = new JFrame("Border Layout")
+    val btn1  = new JButton("North")
+    val btn2  = new JButton("South")
+    val btn3  = new JButton("Center")
+    val btn4  = new JButton("West")
+    val btn5  = new JButton("East")
+
+    frame.setLayout(new BorderLayout())
+    frame.add(btn1, BorderLayout.NORTH)
+    frame.add(btn2, BorderLayout.SOUTH)
+    frame.add(btn3, BorderLayout.CENTER)
+    frame.add(btn4, BorderLayout.WEST)
+    frame.add(btn5, BorderLayout.EAST)
+
+    frame.setSize(300, 400)
+    frame.setVisible(true)
+  ,#+END_SRC
+#+END_SRC
+
+It would be rendered as:
+
+#+BEGIN_SRC scala :tangle /tmp/scalatest.scala
+  import java.awt.BorderLayout
+  import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+  val frame = new JFrame("Border Layout")
+  val btn1  = new JButton("North")
+  val btn2  = new JButton("South")
+  val btn3  = new JButton("Center")
+  val btn4  = new JButton("West")
+  val btn5  = new JButton("East")
+
+  frame.setLayout(new BorderLayout())
+  frame.add(btn1, BorderLayout.NORTH)
+  frame.add(btn2, BorderLayout.SOUTH)
+  frame.add(btn3, BorderLayout.CENTER)
+  frame.add(btn4, BorderLayout.WEST)
+  frame.add(btn5, BorderLayout.EAST)
+
+  frame.setSize(300, 400)
+  frame.setVisible(true)
+#+END_SRC
+
+*** Get information about code block
+
+#+BEGIN_SRC elisp
+ELISP> (org-babel-get-src-block-info)
+("scala" "import java.awt.BorderLayout\nimport javax.swing.{JFrame, JPanel, JButton, JTextArea}\n\nval frame = new JFrame(\"Border Layout\")\nval btn1  = new JButton(\"North\")\nval btn2  = new JButton(\"South\")\nval btn3  = new JButton(\"Center\")\nval btn4  = new JButton(\"West\")\nval btn5  = new JButton(\"East\")\n\nframe.setLayout(new BorderLayout())\nframe.add(btn1, BorderLayout.NORTH)\nframe.add(btn2, BorderLayout.SOUTH)\nframe.add(btn3, BorderLayout.CENTER)\nframe.add(btn4, BorderLayout.WEST)\nframe.add(btn5, BorderLayout.EAST)\n\nframe.setSize(300, 400)\nframe.setVisible(true)"
+ ((:colname-names)
+  (:rowname-names)
+  (:result-params "replace")
+  (:result-type . value)
+  (:comments . "")
+  (:shebang . "")
+  (:cache . "no")
+  (:padline . "")
+  (:noweb . "no")
+  (:tangle . "/tmp/scalatest.scala")
+  (:exports . "code")
+  (:results . "replace")
+  (:hlines . "no")
+  (:session . "none"))
+ "" nil 0 2257)
+
+ELISP>
+#+END_SRC
+
+*** Getting the programming language of the code block
+
+#+BEGIN_SRC elisp
+ELISP> (car (org-babel-get-src-block-info))
+"scala"
+ELISP>
+#+END_SRC
+
+*** Getting the source code of the code block
+
+#+BEGIN_SRC elisp
+ELISP> (cadr (org-babel-get-src-block-info))
+"import java.awt.BorderLayout\nimport javax.swing.{JFrame, JPanel, JButton, JTextArea}\n\nval frame = ..."
+ELISP>
+
+ELISP> (print (cadr (org-babel-get-src-block-info)))
+
+"import java.awt.BorderLayout
+import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+val frame = new JFrame(\"Border Layout\")
+val btn1  = new JButton(\"North\")
+val btn2  = new JButton(\"South\")
+val btn3  = new JButton(\"Center\")
+val btn4  = new JButton(\"West\")
+val btn5  = new JButton(\"East\")
+
+frame.setLayout(new BorderLayout())
+frame.add(btn1, BorderLayout.NORTH)
+frame.add(btn2, BorderLayout.SOUTH)
+frame.add(btn3, BorderLayout.CENTER)
+frame.add(btn4, BorderLayout.WEST)
+frame.add(btn5, BorderLayout.EAST)
+
+frame.setSize(300, 400)
+frame.setVisible(true)"
+
+#+END_SRC
+
+*** Getting code block attributes
+
+#+BEGIN_SRC elisp
+  ELISP> (caddr (org-babel-get-src-block-info))
+  ((:colname-names)
+   (:rowname-names)
+   (:result-params "replace")
+   (:result-type . value)
+   (:comments . "")
+   (:shebang . "")
+   (:cache . "no")
+   (:padline . "")
+   (:noweb . "no")
+   (:tangle . "/tmp/scalatest.scala")
+   (:exports . "code")
+   (:results . "replace")
+   (:hlines . "no")
+   (:session . "none"))
+
+  ELISP> (assoc :exports (caddr (org-babel-get-src-block-info)))
+  (:exports . "code")
+
+  ELISP> (cdr (assoc :exports (caddr (org-babel-get-src-block-info))))
+  "code"
+  ELISP>
+
+  ELISP> (assoc :tangle (caddr (org-babel-get-src-block-info)))
+  (:tangle . "/tmp/scalatest.scala")
+
+  ELISP> (cdr (assoc :tangle (caddr (org-babel-get-src-block-info))))
+  "/tmp/scalatest.scala"
+  ELISP>
+#+END_SRC
+*** Run a Scala code block 
+
+This example is specific for the Scala language, but can be easily
+adapated to other languages.
+
+Usage: 
+
+ 1. Place the cursos at the some scala code block
+ 2. run M-x org/run-scala-block
+
+It will run save the code block content to the file /tmp/scala-snippet.scala
+and run the command =$ scala /tmp/scala-snippet.scala= in the
+compiling mode.
+
+#+BEGIN_SRC elisp 
+  (defun org/run-scala-block ()
+    (interactive)
+           ;; Org-mode block contents 
+    (let* ((content (cadr (org-babel-get-src-block-info)))
+           ;; File in that the contents will be saved.
+           (file    "/tmp/scala-snippet.scala"))
+      ;; Execute the commands inside this special form
+      ;; in a temporary buffer 
+      (with-temp-buffer
+        ;; Delete file if it exists
+        (if (file-exists-p file) (delete-file file))
+        ;; Insert the code block contents in the temporary buffer 
+        (insert content)
+        ;; Write the buffer contents to fil.
+        (append-to-file (point-min) (point-max) file))    
+      ;; Run the compilation command 
+      (compile (format "scala %s" file))))
+#+END_SRC
+
 ** Custom Protocols
 *** Open directory with dired mode
 
@@ -3618,7 +4062,6 @@ Log directory      -  dir:/var/log  -  [[dir:/var/log][Log directory]]
 
 System cofiguration - dir:/etc
 #+END_SRC
-
 
 *** Open directory with system file manager
 
@@ -3758,7 +4201,6 @@ Syntax highlight for latex fragments
 (setq org-highlight-latex-and-related '(latex script entities))
 #+END_SRC
 
-
 *** Code Block - Org-babel
 
 Enable source code block in org files
@@ -3806,8 +4248,8 @@ Disable Security confirmation:
         )
 #+END_SRC
 
-* Selected Gists and Source Codes 
-** Gists 
+* Selected Gists and Source Codes
+** Gists
 
  - [[https://gist.github.com/justinabrahms/1390864][extract archives from eshell]]
 
@@ -3824,6 +4266,6 @@ Disable Security confirmation:
 
  - [[https://gist.github.com/rosarinjroy/2417726][Elisp code to create
    a rails console ]]
-** Source Codes 
+** Source Codes
 
  - https://www.emacswiki.org/emacs/download/install-elisp.el
