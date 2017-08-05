@@ -839,8 +839,9 @@ in the $PATH variable in a new buffer a easy way to read:
 **** Add a directories to PATH variable 
 
 It will add the directory: ~/opt/scala/bin to the $PATH
-variable. Before run add the code below when the user run 
-=M-x async-shell-command= scala it shows an error message: 
+variable. Before run the code below when the user runs 
+=M-x async-shell-command= scala it will shows an error message 
+like this: 
 
 #+BEGIN_SRC text 
   /bin/bash: scala: command not found
