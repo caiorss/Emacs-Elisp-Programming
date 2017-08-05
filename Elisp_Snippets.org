@@ -759,7 +759,7 @@ Show a tooltip
 #+END_SRC
 
 file:images/emacs_show_tooltip.png
-** Shell Commands / Interacting with external applications
+** Interacting with Operating System and External Applications
 *** Related Documentation
 
 [C-h-f] <name of function>
@@ -780,6 +780,147 @@ file:images/emacs_show_tooltip.png
 
  - setenv
 
+*** Add application path to the PATH variable - Solving command not found
+**** Overview 
+
+In order to Emacs find where applications such as ruby shell, scala
+compiler and tools are installed it is necessary to the PATH
+environment variable contain the path to the directories which
+contains those applications. 
+
+**** Checking PATH variable
+
+Copy this command below to the scratch buffer and enter M-x
+eval-print-last-last-sexp.
+
+#+BEGIN_SRC elisp 
+  (getenv "PATH")
+  "/home/archbox/opt/scala/bin:/usr/bin:/bin: ..." 
+#+END_SRC
+
+**** Command to display path variable
+
+#+BEGIN_SRC elisp 
+  (defun show-path-variable ()
+    (interactive)
+    ;; Create a new buffer to display results to user
+    (switch-to-buffer (get-buffer-create "*path-variable*"))
+    ;; Clear buffer 
+    (delete-region (point-min) (point-max))
+    ;; save cursor position 
+    (save-excursion 
+     (mapc (lambda (p) (insert (concat  p "\n")))
+           (split-string (getenv "PATH")
+                         ;; Get path separator (;) for Windows
+                         ;; and (:) for Unix-like systems.
+                         (if (equal system-type 'windows/nt)
+                             ";"
+                             ":"
+                           )))))
+#+END_SRC
+
+By running this command M-x show-path-varible it will print all paths
+in the $PATH variable in a new buffer a easy way to read: 
+
+#+BEGIN_SRC text 
+/home/archbox/opt/scala-2.11.8/bin
+/home/archbox/opt/jdk1.8.0_74/bin/
+/usr/local/sbin
+/usr/local/bin
+/usr/bin
+/usr/lib/jvm/default/bin
+/usr/bin/site_perl
+/usr/bin/vendor_perl
+/usr/bin/core_perl
+/home/archbox/opt/java/bin
+/home/archbox/opt/scala-2.11.8/bin/
+#+END_SRC
+
+**** Add a directories to PATH variable 
+
+It will add the directory: ~/opt/scala/bin to the $PATH
+variable. Before run add the code below when the user run 
+=M-x async-shell-command= scala it shows an error message: 
+
+#+BEGIN_SRC text 
+  /bin/bash: scala: command not found
+#+END_SRC
+
+Note: The character ':' is the separator for Unix-like OS (Linux/ BSD
+and OSX) and ';' is the separator for Windows.
+
+#+BEGIN_SRC elisp 
+  ;; Add single directory 
+  (setenv "PATH"
+          (concat
+           (expand-file-name "~/opt/scala/bin") ":"
+           (getenv "PATH")))
+
+  ;; Add multiple directories 
+  (setenv "PATH"
+          (concat
+           (expand-file-name "~/opt/scala/bin")        ":"
+           (expand-file-name "~/opt/jdk1.8.0_20/bin/") ":"
+           "/Applications/haste-compiler/bin/"         ":"
+           (getenv "PATH")))
+#+END_SRC
+
+After it is done the Scala REPL will look like the picture below: 
+
+#+CAPTION: Scala in PATH variable. 
+[[file:images/scala-shellx1.png][file:images/scala-shellx1.png]]
+
+**** Function to add multiple directories in PATH variable 
+
+#+BEGIN_SRC elisp 
+(defun add-to-path-var (&rest pathlist)
+  (let* ((path-sep (if (equal system-type 'windows/nt)
+                       ";"  ;; Windows separator 
+                       ":"  ;; Unix separator 
+                      )))
+    (setenv "PATH" (concat (apply #'concat
+                                  (mapcar
+                                   (lambda (path)
+                                     (concat (expand-file-name path)
+                                             path-sep))
+                                   pathlist))
+                           (getenv "PATH")))))
+#+END_SRC
+
+Usage example: 
+
+#+BEGIN_SRC elisp 
+  (add-to-path-var "~/opt/scala/bin" "~/opt/jdk1.8.0_20/bin/")
+#+END_SRC
+
+*Alternative way*: 
+
+Use the function locally without pollute the namespace. 
+
+#+BEGIN_SRC elisp 
+  (require 'cl)
+
+  (cl-flet
+      ((add-to-path-var
+        (&rest pathlist)
+        (let* ((path-sep (if (equal system-type 'windows/nt)
+                             ";" ;; Windows separator 
+                             ":" ;; Unix separator 
+                             )))
+          (setenv "PATH"
+                  (concat (apply #'concat
+                                 (mapcar
+                                  (lambda (path)
+                                    (concat (expand-file-name path)
+                                            path-sep))
+                                            pathlist))
+                          (getenv "PATH"))))))
+    ;; Add paths to be added to PATH variable here,
+    (add-to-path-var
+     "~/opt/scala/bin"
+     "~/opt/jdk1.8.0_20/bin/"
+     ))
+#+END_SRC
 *** Synchronous Shell Commands
 **** Display output of shell command
 
@@ -1076,7 +1217,6 @@ M-x replace-regex-ruby /^\d\d?/,""
                               t
                               ))
 #+END_SRC
-
 
 *** Launch apps in Asynchronous mode
 *** Run asynchronous commands piping the output to a buffer
