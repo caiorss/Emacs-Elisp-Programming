@@ -3,17 +3,13 @@
 #+TITLE: Emacs In a Box
 #+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor
 #+STARTUP: content
+#+DESCRIPTION: Emacs in self-contained box!
 
 * Emacs - Elisp Programming and Customization
 ** Overview
 
-# file:images/emacs_logo.png
+[[file:images/emacs_logo.png][file:images/emacs_logo.png]]
 
-*Repository Link*
-
-    - [[https://github.com/caiorss/Emacs-Elisp-Programming][Github Repository]]
-    - Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
-    - [[http://caiorss.github.io/Emacs-Elisp-Programming][HTML Version - github.io]]
 
 Emacs doesn't need any presentation. Emacs is a software [[https://en.wikipedia.org/wiki/Lisp_machine]["Lisp
 Machine"]] that provides a programmable text editor, email reader, text
@@ -25,6 +21,11 @@ and Scheme, created in MIT. Emacs was written in 1976 by the legendary
 has many constructs similar to it and n excellent book about Common
 Lisp that is also useful to understand Elisp and Scheme is [[http://unintelligible.org/onlisp/onlisp.html][On Lisp - by Paul Graham]].
 
+*Repository Link*
+
+    - [[https://github.com/caiorss/Emacs-Elisp-Programming][Github Repository]]
+    - Short Link: http://tinyurl.com/emacsinabox - Mneumonic: *Emacs In A Box*
+    - [[http://caiorss.github.io/Emacs-Elisp-Programming][HTML Version - github.io]]
 
 Note:
 
@@ -41,7 +42,6 @@ is in the same directory of all emacs configuration files.
 
 The Emacs scratch buffer can be used to test new features and try
 Emacs codes along with IELM - Emacs Lisp interactive shell.
-
 
 *Emacs Features*
 
@@ -63,17 +63,25 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
    - File manager (dired-mode)
    - Git interface (magit)
 
-** Contents
+*Objectives* 
 
-*Elisp Programing*
+ - Increase Emacs discoverability
+
+ - Empower Emacs users to create their own extensions and
+   customization
+
+ - Provide self-contained working examples about Emacs API and Elisp
+   programming. 
+
+** Contents
+*** Elisp Programing
 
  - [[file:Elisp_Programming.org][Elisp Programming]]  Elisp programming guide and documentation by examples. 
 
 
  - [[file:Elisp_Snippets.org][Elisp Snippets]]  Elisp code examples grouped by category. 
 
-
-*Key bindings / shortcuts*
+*** Key bindings / shortcuts
 
  - [[file:Keybindings.org][Emacs Key bindings]] Emacs standard keybindings and useful commands.
 
@@ -81,7 +89,7 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
  - [[file:Emacs_Key_Bindings_Elisp.org][Emacs key bindings for Elisp]] Emacs key bindings and commands for
    Elisp (Emacs' lisp) development.
 
-*Settings and Packages*
+*** Settings and Packages
 
  - [[file:Customization.org][Customization]] Emacs settings and customization.
 
@@ -89,14 +97,14 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
  - [[file:Packages.org][Packages and Development Environments]] Useful Emacs packages and
    Programming language specific configurations and packages.
 
-*Emacs Utilities*
+*** Emacs Utilities
 
  - [[file:Utilities.org][Utilities]]  Emacs utilities and goodness like Calculator, Magit, Helm and so on.
 
 
  - [[file:Org-Mode.org][Org-mode]] Org-mode notes.
 
-*Misc*
+*** Miscellaneous
 
  - [[file:Command_Line_and_Scripting.org][Command Line and Scripting]] Command line interaction with Emacs.
 
@@ -116,7 +124,7 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
  - [ ] Comint Mode / interacting with REPLs and subprocesses 
 
- - [ ] Network API
+ - [ ] Network API - Interacting with servers. 
 
  - [ ] Add cross references 
 
@@ -126,7 +134,7 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
  - [ ] Add a better layout.
 
-** Download this content
+** Downloading it
 
 *Download manually*
 
