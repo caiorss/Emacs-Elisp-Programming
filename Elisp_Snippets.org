@@ -1047,34 +1047,29 @@ Pipes the buffer content to external command =$wc -l= and get the
 output as a string.
 
 #+BEGIN_SRC elisp
-> (with-output-to-string  ;; M-x eval-print-last-sexp
-      (shell-command-on-region (point-min) (point-max) "wc -l"))
-""
+  > (with-output-to-string  ;; M-x eval-print-last-sexp
+        (shell-command-on-region (point-min) (point-max) "wc -l"))
+  ""
 
-(defun pipe-region-to-command (pmin pmax command)
-  (interactive)
+  (defun pipe-region-to-command (pmin pmax command)
+    (interactive)
+    (shell-command-on-region
+     pmin
+     pmax
+     command
+     "*shell-output*")
+    (let ((output
+           (with-current-buffer "*shell-output*"
+             (buffer-substring-no-properties
+              (point-min)
+              (point-max)))))
+      (kill-buffer "*shell-output*")
+      output
+      ))
 
-  (shell-command-on-region
-   pmin
-   pmax
-   command
-   "*shell-output*"
-   )
-
-  (let (
-        (output  (with-current-buffer "*shell-output*"
-                    (buffer-substring-no-properties (point-min) (point-max))))
-        )
-
-    (kill-buffer "*shell-output*")
-    output
-    )
-  )
-
-
-> (pipe-region-to-command (point-min) (point-max) "wc -l") ;; M-x eval-print-last-sexp
-"1515
-"
+  > (pipe-region-to-command (point-min) (point-max) "wc -l") ;; M-x eval-print-last-sexp
+  "1515
+  "
 #+END_SRC
 
 **** Apply an external command to buffer
@@ -1083,11 +1078,10 @@ The command below will pipe the buffer ~*scratch*~ to the command =$
 sed 's/foo.*/bar/g'= which replaces all values of foo for bar.
 
 #+BEGIN_SRC elisp
-
-(with-current-buffer "*scratch*"
-    (shell-command-on-region (point-min) (point-max) "sed 's/foo.*/bar/g'" "*shell-output*" t )
-
-) ;; M-x eval-last-sexp
+  (with-current-buffer "*scratch*"
+    (shell-command-on-region
+     (point-min)
+     (point-max) "sed 's/foo.*/bar/g'" "*shell-output*" t )) ;; M-x eval-last-sexp
 #+END_SRC
 
 Before the form evaluation
@@ -1223,38 +1217,21 @@ Usage: M-x ping-host or (ping-host <hostname>)
 
 #+BEGIN_SRC elisp
 
-(defun ping-host (&optional hostname)
-  "
-  Ping a hostname.
-
+  (defun ping-host (&optional hostname)
+    "Ping a hostname.  
   Usage:
-        - Interactive: M-x ping-host
-        - Command:     (ping-host <hostname>)
-
-  Example: (ping-host \"www.google.com\")
-           (ping-host \"192.168.0.1\")
-  "
-  (interactive)
-
-  (let
-      (
-       (hostname- (if hostname hostname (read-string "host to ping: ")))
-       )
-
-    ;; (with-selected-frame (make-frame)
-    ;;   ;;
-    ;;   ;; Process name:    ping
-    ;;   ;; Process buffer: *ping*
-    ;;   ;; Command:         ping <hostname>
-    ;;   ;;
-
-    ;;   (start-process "ping" "*ping*" "ping" hostname-)
-
-    ;;   )
-
-    (start-process "ping" "*ping*" "ping" hostname-)
-    (switch-to-buffer-other-frame "*ping*")
-    ))
+  - Interactive: M-x ping-host
+  - Command:     (ping-host <hostname>)
+  Examples: 
+   (ping-host \"www.google.com\")
+   (ping-host \"192.168.0.1\")"
+    (interactive)
+    (let ((hostname-
+           (if hostname
+               hostname
+             (read-string "host to ping: "))))
+      (start-process "ping" "*ping*" "ping" hostname-)
+      (switch-to-buffer-other-frame "*ping*")))
 
 #+END_SRC
 
@@ -1263,29 +1240,18 @@ file:images/emacs_shell_ping_hostname.png
 **** Tracerote a host
 
 #+BEGIN_SRC elisp
-
-(defun traceroute-host (&optional hostname)
-  "
-  Ping a hostname.
-
+  (defun traceroute-host (&optional hostname)
+    "Run traceroute command to test connection.
   Usage:
-        - Interactive: M-x traceroute-host [Enter the hostname]
-        - Command:     (traceroute-host <hostname>)
-
-  Example: (traceroute-host \"www.yahoo.co.uk\")
-
-  "
-  (interactive)
-
-  (let
-      (
-       (hostname- (if hostname hostname (read-string "host to traceroute: ")))
-       )
-
-    (start-process "traceroute" "*traceroute*" "traceroute" hostname-)
-    (switch-to-buffer-other-frame "*traceroute*")
-    ))
-
+  - Interactive: M-x traceroute-host [Enter the hostname]
+  - Command:     (traceroute-host <hostname>)
+  Example: (traceroute-host \"www.yahoo.co.uk\")."
+    (interactive)
+    (let ((hostname- (if hostname
+                         hostname
+                       (read-string "host to traceroute: "))))
+      (start-process "traceroute" "*traceroute*" "traceroute" hostname-)
+      (switch-to-buffer-other-frame "*traceroute*")))
 #+END_SRC
 
 *** Run a ncurses / terminal app inside Emacs
@@ -1317,8 +1283,7 @@ terminal emulator.
    "termx"
    nil
    ;; Change this for your terminal.
-   "xfce4-terminal" "-e" (read-shell-command "Shell: ")
-   ))
+   "xfce4-terminal" "-e" (read-shell-command "Shell: ")))
 #+END_SRC
 
 #+RESULTS:
@@ -1332,8 +1297,7 @@ terminal emulator.
    "termx"
    nil
    ;; Change this for your terminal.
-   "xfce4-terminal" "-e" command
-   ))
+   "xfce4-terminal" "-e" command))
 #+END_SRC
 
 #+RESULTS:
@@ -1604,8 +1568,7 @@ and run M-x cpp/compile-run-dired.
 (defun cpp/compile-run-dired ()
   "Compile single c++ file at point in dired mode.
 Usage: Position the cursor at the file to be compiled and
-run M-x cpp/compile-dired.
-"
+run M-x cpp/compile-dired."
   (interactive)
   (let* ((file-name  (file-name-nondirectory (dired-file-name-at-point)))
         ;; Change file name extension to .bin
