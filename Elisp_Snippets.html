@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Snippets</title>
-<!-- 2017-08-05 sáb 20:30 -->
+<!-- 2017-10-02 Mon 20:11 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization.
@@ -220,205 +220,206 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1">1. Elisp Snippets</a>
 <ul>
-<li><a href="#sec-1-1">1.1. Strings</a>
+<li><a href="#sec-1-1">1.1. Overview</a></li>
+<li><a href="#sec-1-2">1.2. Strings</a>
 <ul>
-<li><a href="#sec-1-1-1">1.1.1. Concatenate strings</a></li>
-<li><a href="#sec-1-1-2">1.1.2. Join Strings by Separator</a></li>
-<li><a href="#sec-1-1-3">1.1.3. Split String</a></li>
-<li><a href="#sec-1-1-4">1.1.4. Split String with quotes</a></li>
-<li><a href="#sec-1-1-5">1.1.5. Replace Strings</a></li>
-<li><a href="#sec-1-1-6">1.1.6. Regex</a></li>
+<li><a href="#sec-1-2-1">1.2.1. Concatenate strings</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Join Strings by Separator</a></li>
+<li><a href="#sec-1-2-3">1.2.3. Split String</a></li>
+<li><a href="#sec-1-2-4">1.2.4. Split String with quotes</a></li>
+<li><a href="#sec-1-2-5">1.2.5. Replace Strings</a></li>
+<li><a href="#sec-1-2-6">1.2.6. Regex</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">1.2. Text Manipulation</a>
+<li><a href="#sec-1-3">1.3. Text Manipulation</a>
 <ul>
-<li><a href="#sec-1-2-1">1.2.1. Text alignment</a></li>
-<li><a href="#sec-1-2-2">1.2.2. Join Multiple Lines</a></li>
+<li><a href="#sec-1-3-1">1.3.1. Text alignment</a></li>
+<li><a href="#sec-1-3-2">1.3.2. Join Multiple Lines</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-3">1.3. S-expressions</a>
+<li><a href="#sec-1-4">1.4. S-expressions</a>
 <ul>
-<li><a href="#sec-1-3-1">1.3.1. Parse s-expressions</a></li>
-<li><a href="#sec-1-3-2">1.3.2. Evaluate s-expressions</a></li>
+<li><a href="#sec-1-4-1">1.4.1. Parse s-expressions</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Evaluate s-expressions</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-4">1.4. Clipboard (Kill-ring)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="clipboard">clipboard</span>&#xa0;<span class="kill">kill</span>&#xa0;<span class="ring">ring</span></span></a>
+<li><a href="#sec-1-5">1.5. Clipboard (Kill-ring)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="clipboard">clipboard</span>&#xa0;<span class="kill">kill</span>&#xa0;<span class="ring">ring</span></span></a>
 <ul>
-<li><a href="#sec-1-4-1">1.4.1. Copy string to clipboard</a></li>
-<li><a href="#sec-1-4-2">1.4.2. Paste string from clipboard</a></li>
-<li><a href="#sec-1-4-3">1.4.3. Copy buffer file name to clibpoard</a></li>
-<li><a href="#sec-1-4-4">1.4.4. Copy buffer directory to clibpoard</a></li>
-<li><a href="#sec-1-4-5">1.4.5. Copy buffer content to clipboard</a></li>
+<li><a href="#sec-1-5-1">1.5.1. Copy string to clipboard</a></li>
+<li><a href="#sec-1-5-2">1.5.2. Paste string from clipboard</a></li>
+<li><a href="#sec-1-5-3">1.5.3. Copy buffer file name to clibpoard</a></li>
+<li><a href="#sec-1-5-4">1.5.4. Copy buffer directory to clibpoard</a></li>
+<li><a href="#sec-1-5-5">1.5.5. Copy buffer content to clipboard</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-5">1.5. Elisp</a>
+<li><a href="#sec-1-6">1.6. Elisp</a>
 <ul>
-<li><a href="#sec-1-5-1">1.5.1. Load an Elisp file</a></li>
-<li><a href="#sec-1-5-2">1.5.2. Load all elisp files of a directory</a></li>
-<li><a href="#sec-1-5-3">1.5.3. Add directory to load path</a></li>
-<li><a href="#sec-1-5-4">1.5.4. Switch and Create the Scratch Buffer</a></li>
-<li><a href="#sec-1-5-5">1.5.5. Eval String in Clipboard</a></li>
-<li><a href="#sec-1-5-6">1.5.6. Extract Function Documentation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#sec-1-5-7">1.5.7. Describe function</a></li>
+<li><a href="#sec-1-6-1">1.6.1. Load an Elisp file</a></li>
+<li><a href="#sec-1-6-2">1.6.2. Load all elisp files of a directory</a></li>
+<li><a href="#sec-1-6-3">1.6.3. Add directory to load path</a></li>
+<li><a href="#sec-1-6-4">1.6.4. Switch and Create the Scratch Buffer</a></li>
+<li><a href="#sec-1-6-5">1.6.5. Eval String in Clipboard</a></li>
+<li><a href="#sec-1-6-6">1.6.6. Extract Function Documentation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#sec-1-6-7">1.6.7. Describe function</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-6">1.6. Common Lisp Emulation Library</a>
+<li><a href="#sec-1-7">1.7. Common Lisp Emulation Library</a>
 <ul>
-<li><a href="#sec-1-6-1">1.6.1. Reduce (fold left) function</a></li>
+<li><a href="#sec-1-7-1">1.7.1. Reduce (fold left) function</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-7">1.7. Buffer and regions</a>
+<li><a href="#sec-1-8">1.8. Buffer and regions</a>
 <ul>
-<li><a href="#sec-1-7-1">1.7.1. Save buffer</a></li>
-<li><a href="#sec-1-7-2">1.7.2. Kill / delete buffer</a></li>
-<li><a href="#sec-1-7-3">1.7.3. Get buffer content as string</a></li>
-<li><a href="#sec-1-7-4">1.7.4. Get selected text as string</a></li>
-<li><a href="#sec-1-7-5">1.7.5. Create a scratch buffer for Programming Languages</a></li>
-<li><a href="#sec-1-7-6">1.7.6. Get all buffer's local variables</a></li>
-<li><a href="#sec-1-7-7">1.7.7. Get a specific buffer local variable</a></li>
-<li><a href="#sec-1-7-8">1.7.8. Append buffer content to file</a></li>
-<li><a href="#sec-1-7-9">1.7.9. Write file with buffer content (overwrite file it exists)</a></li>
-<li><a href="#sec-1-7-10">1.7.10. Revert / update buffer without asking to confirm</a></li>
+<li><a href="#sec-1-8-1">1.8.1. Save buffer</a></li>
+<li><a href="#sec-1-8-2">1.8.2. Kill / delete buffer</a></li>
+<li><a href="#sec-1-8-3">1.8.3. Get buffer content as string</a></li>
+<li><a href="#sec-1-8-4">1.8.4. Get selected text as string</a></li>
+<li><a href="#sec-1-8-5">1.8.5. Create a scratch buffer for Programming Languages</a></li>
+<li><a href="#sec-1-8-6">1.8.6. Get all buffer's local variables</a></li>
+<li><a href="#sec-1-8-7">1.8.7. Get a specific buffer local variable</a></li>
+<li><a href="#sec-1-8-8">1.8.8. Append buffer content to file</a></li>
+<li><a href="#sec-1-8-9">1.8.9. Write file with buffer content (overwrite file it exists)</a></li>
+<li><a href="#sec-1-8-10">1.8.10. Revert / update buffer without asking to confirm</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-8">1.8. IO - Input and Output</a>
+<li><a href="#sec-1-9">1.9. IO - Input and Output</a>
 <ul>
-<li><a href="#sec-1-8-1">1.8.1. Input - Read User Input</a></li>
-<li><a href="#sec-1-8-2">1.8.2. Output</a></li>
+<li><a href="#sec-1-9-1">1.9.1. Input - Read User Input</a></li>
+<li><a href="#sec-1-9-2">1.9.2. Output</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-9">1.9. Interacting with Operating System and External Applications</a>
+<li><a href="#sec-1-10">1.10. Interacting with Operating System and External Applications</a>
 <ul>
-<li><a href="#sec-1-9-1">1.9.1. Related Documentation</a></li>
-<li><a href="#sec-1-9-2">1.9.2. Add application path to the PATH variable - Solving command not found</a></li>
-<li><a href="#sec-1-9-3">1.9.3. Synchronous Shell Commands</a></li>
-<li><a href="#sec-1-9-4">1.9.4. Pipe a region to external command&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="command">command</span>&#xa0;<span class="pipe">pipe</span>&#xa0;<span class="interface">interface</span></span></a></li>
-<li><a href="#sec-1-9-5">1.9.5. Launch apps in Asynchronous mode</a></li>
-<li><a href="#sec-1-9-6">1.9.6. Run asynchronous commands piping the output to a buffer</a></li>
-<li><a href="#sec-1-9-7">1.9.7. Run a ncurses / terminal app inside Emacs</a></li>
-<li><a href="#sec-1-9-8">1.9.8. Run apps in external terminal emulator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="os">os</span>&#xa0;<span class="command">command</span></span></a></li>
-<li><a href="#sec-1-9-9">1.9.9. Launch applicatiosn from Emacs</a></li>
-<li><a href="#sec-1-9-10">1.9.10. Send regions, commands and buffer to M-x shell repl.</a></li>
+<li><a href="#sec-1-10-1">1.10.1. Related Documentation</a></li>
+<li><a href="#sec-1-10-2">1.10.2. Add application path to the PATH variable - Solving command not found</a></li>
+<li><a href="#sec-1-10-3">1.10.3. Synchronous Shell Commands</a></li>
+<li><a href="#sec-1-10-4">1.10.4. Pipe a region to external command&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="command">command</span>&#xa0;<span class="pipe">pipe</span>&#xa0;<span class="interface">interface</span></span></a></li>
+<li><a href="#sec-1-10-5">1.10.5. Launch apps in Asynchronous mode</a></li>
+<li><a href="#sec-1-10-6">1.10.6. Run asynchronous commands piping the output to a buffer</a></li>
+<li><a href="#sec-1-10-7">1.10.7. Run a ncurses / terminal app inside Emacs</a></li>
+<li><a href="#sec-1-10-8">1.10.8. Run apps in external terminal emulator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="os">os</span>&#xa0;<span class="command">command</span></span></a></li>
+<li><a href="#sec-1-10-9">1.10.9. Launch applicatiosn from Emacs</a></li>
+<li><a href="#sec-1-10-10">1.10.10. Send regions, commands and buffer to M-x shell repl.</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-10">1.10. Compilation</a>
+<li><a href="#sec-1-11">1.11. Compilation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="compile">compile</span>&#xa0;<span class="tool">tool</span>&#xa0;<span class="building">building</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="process">process</span></span></a>
 <ul>
-<li><a href="#sec-1-10-1">1.10.1. Enhanced Compilation Command</a></li>
-<li><a href="#sec-1-10-2">1.10.2. Compile a single c++ file related to current buffer and run it.</a></li>
-<li><a href="#sec-1-10-3">1.10.3. Compile and run a single c++ file at point in dired mode</a></li>
+<li><a href="#sec-1-11-1">1.11.1. Enhanced Compilation Command</a></li>
+<li><a href="#sec-1-11-2">1.11.2. Compile a single c++ file related to current buffer and run it.</a></li>
+<li><a href="#sec-1-11-3">1.11.3. Compile and run a single c++ file at point in dired mode</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-11">1.11. File</a>
+<li><a href="#sec-1-12">1.12. File</a>
 <ul>
-<li><a href="#sec-1-11-1">1.11.1. Test if file or directory exists</a></li>
-<li><a href="#sec-1-11-2">1.11.2. Expand file name</a></li>
-<li><a href="#sec-1-11-3">1.11.3. Read file to string</a></li>
-<li><a href="#sec-1-11-4">1.11.4. Open file to edit</a></li>
-<li><a href="#sec-1-11-5">1.11.5. Open file to edit silently&#xa0;&#xa0;&#xa0;<span class="tag"><span class="file">file</span>&#xa0;<span class="buffer">buffer</span>&#xa0;<span class="open">open</span></span></a></li>
-<li><a href="#sec-1-11-6">1.11.6. Edit File as Root&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="edit">edit</span></span></a></li>
+<li><a href="#sec-1-12-1">1.12.1. Test if file or directory exists</a></li>
+<li><a href="#sec-1-12-2">1.12.2. Expand file name</a></li>
+<li><a href="#sec-1-12-3">1.12.3. Read file to string</a></li>
+<li><a href="#sec-1-12-4">1.12.4. Open file to edit</a></li>
+<li><a href="#sec-1-12-5">1.12.5. Open file to edit silently&#xa0;&#xa0;&#xa0;<span class="tag"><span class="file">file</span>&#xa0;<span class="buffer">buffer</span>&#xa0;<span class="open">open</span></span></a></li>
+<li><a href="#sec-1-12-6">1.12.6. Edit File as Root&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="edit">edit</span></span></a></li>
 </ul>
 </li>
-<li><a href="#sec-1-12">1.12. File Name Manipulation</a>
+<li><a href="#sec-1-13">1.13. File Name Manipulation</a>
 <ul>
-<li><a href="#sec-1-12-1">1.12.1. Get absolute path to current buffer's file.</a></li>
-<li><a href="#sec-1-12-2">1.12.2. File name without path</a></li>
-<li><a href="#sec-1-12-3">1.12.3. File name to base name</a></li>
-<li><a href="#sec-1-12-4">1.12.4. Get file's path</a></li>
-<li><a href="#sec-1-12-5">1.12.5. Expand file name</a></li>
-<li><a href="#sec-1-12-6">1.12.6. Replace file extension</a></li>
+<li><a href="#sec-1-13-1">1.13.1. Get absolute path to current buffer's file.</a></li>
+<li><a href="#sec-1-13-2">1.13.2. File name without path</a></li>
+<li><a href="#sec-1-13-3">1.13.3. File name to base name</a></li>
+<li><a href="#sec-1-13-4">1.13.4. Get file's path</a></li>
+<li><a href="#sec-1-13-5">1.13.5. Expand file name</a></li>
+<li><a href="#sec-1-13-6">1.13.6. Replace file extension</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-13">1.13. Directory&#xa0;&#xa0;&#xa0;<span class="tag"><span class="directory">directory</span></span></a>
+<li><a href="#sec-1-14">1.14. Directory&#xa0;&#xa0;&#xa0;<span class="tag"><span class="directory">directory</span></span></a>
 <ul>
-<li><a href="#sec-1-13-1">1.13.1. Open directory</a></li>
-<li><a href="#sec-1-13-2">1.13.2. Create directory</a></li>
-<li><a href="#sec-1-13-3">1.13.3. List directory</a></li>
+<li><a href="#sec-1-14-1">1.14.1. Open directory</a></li>
+<li><a href="#sec-1-14-2">1.14.2. Create directory</a></li>
+<li><a href="#sec-1-14-3">1.14.3. List directory</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-14">1.14. Dired mode snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="directory">directory</span>&#xa0;<span class="dired">dired</span></span></a>
-<ul>
-<li><a href="#sec-1-14-1">1.14.1. Overview</a></li>
-<li><a href="#sec-1-14-2">1.14.2. Copy path of file at point</a></li>
-<li><a href="#sec-1-14-3">1.14.3. Paste a file from clibpboard</a></li>
-<li><a href="#sec-1-14-4">1.14.4. Create empty file (touch)</a></li>
-<li><a href="#sec-1-14-5">1.14.5. Open multiple marked files</a></li>
-<li><a href="#sec-1-14-6">1.14.6. Close multiple marked files</a></li>
-<li><a href="#sec-1-14-7">1.14.7. Open a file with default system application&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="file">file</span>&#xa0;<span class="open">open</span>&#xa0;<span class="system">system</span></span></a></li>
-<li><a href="#sec-1-14-8">1.14.8. Close all dired buffers</a></li>
-<li><a href="#sec-1-14-9">1.14.9. Browse bookmarked directories&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="directory">directory</span>&#xa0;<span class="helm">helm</span>&#xa0;<span class="browse">browse</span></span></a></li>
-<li><a href="#sec-1-14-10">1.14.10. Filter dired buffer by file extensions</a></li>
-<li><a href="#sec-1-14-11">1.14.11. Filter dired buffer by regex</a></li>
-<li><a href="#sec-1-14-12">1.14.12. Open directory at point with Microsoft Explorer in Windows OS.</a></li>
-</ul>
-</li>
-<li><a href="#sec-1-15">1.15. Date Time</a>
+<li><a href="#sec-1-15">1.15. Dired mode snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="directory">directory</span>&#xa0;<span class="dired">dired</span></span></a>
 <ul>
 <li><a href="#sec-1-15-1">1.15.1. Overview</a></li>
-<li><a href="#sec-1-15-2">1.15.2. Function format-time-string</a></li>
-<li><a href="#sec-1-15-3">1.15.3. Function current-time</a></li>
-<li><a href="#sec-1-15-4">1.15.4. Function current-time-string</a></li>
-<li><a href="#sec-1-15-5">1.15.5. Function float-time</a></li>
-<li><a href="#sec-1-15-6">1.15.6. Function current-time-zone</a></li>
+<li><a href="#sec-1-15-2">1.15.2. Copy path of file at point</a></li>
+<li><a href="#sec-1-15-3">1.15.3. Paste a file from clibpboard</a></li>
+<li><a href="#sec-1-15-4">1.15.4. Create empty file (touch)</a></li>
+<li><a href="#sec-1-15-5">1.15.5. Open multiple marked files</a></li>
+<li><a href="#sec-1-15-6">1.15.6. Close multiple marked files</a></li>
+<li><a href="#sec-1-15-7">1.15.7. Open a file with default system application&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="file">file</span>&#xa0;<span class="open">open</span>&#xa0;<span class="system">system</span></span></a></li>
+<li><a href="#sec-1-15-8">1.15.8. Close all dired buffers</a></li>
+<li><a href="#sec-1-15-9">1.15.9. Browse bookmarked directories&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="directory">directory</span>&#xa0;<span class="helm">helm</span>&#xa0;<span class="browse">browse</span></span></a></li>
+<li><a href="#sec-1-15-10">1.15.10. Filter dired buffer by file extensions</a></li>
+<li><a href="#sec-1-15-11">1.15.11. Filter dired buffer by regex</a></li>
+<li><a href="#sec-1-15-12">1.15.12. Open directory at point with Microsoft Explorer in Windows OS.</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-16">1.16. Emacs Introspection</a>
+<li><a href="#sec-1-16">1.16. Date Time</a>
 <ul>
-<li><a href="#sec-1-16-1">1.16.1. User init file</a></li>
-<li><a href="#sec-1-16-2">1.16.2. User Emacs Directory</a></li>
-<li><a href="#sec-1-16-3">1.16.3. Enviroment Variables</a></li>
-<li><a href="#sec-1-16-4">1.16.4. Get current Operating System</a></li>
-<li><a href="#sec-1-16-5">1.16.5. Test if Emacs is running in terminal or in window system</a></li>
+<li><a href="#sec-1-16-1">1.16.1. Overview</a></li>
+<li><a href="#sec-1-16-2">1.16.2. Function format-time-string</a></li>
+<li><a href="#sec-1-16-3">1.16.3. Function current-time</a></li>
+<li><a href="#sec-1-16-4">1.16.4. Function current-time-string</a></li>
+<li><a href="#sec-1-16-5">1.16.5. Function float-time</a></li>
+<li><a href="#sec-1-16-6">1.16.6. Function current-time-zone</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-17">1.17. Web Browser&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="browser">browser</span></span></a>
+<li><a href="#sec-1-17">1.17. Emacs Introspection</a>
 <ul>
-<li><a href="#sec-1-17-1">1.17.1. Browse Url</a></li>
-<li><a href="#sec-1-17-2">1.17.2. Browser Url setting the web browser</a></li>
-<li><a href="#sec-1-17-3">1.17.3. Search Web sites with Emacs</a></li>
-<li><a href="#sec-1-17-4">1.17.4. Browser Inside Emacs</a></li>
+<li><a href="#sec-1-17-1">1.17.1. User init file</a></li>
+<li><a href="#sec-1-17-2">1.17.2. User Emacs Directory</a></li>
+<li><a href="#sec-1-17-3">1.17.3. Enviroment Variables</a></li>
+<li><a href="#sec-1-17-4">1.17.4. Get current Operating System</a></li>
+<li><a href="#sec-1-17-5">1.17.5. Test if Emacs is running in terminal or in window system</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-18">1.18. Http Requests&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="request">request</span>&#xa0;<span class="url">url</span>&#xa0;<span class="network">network</span></span></a>
+<li><a href="#sec-1-18">1.18. Web Browser&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="browser">browser</span></span></a>
 <ul>
-<li><a href="#sec-1-18-1">1.18.1. Download File&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span></span></a></li>
-<li><a href="#sec-1-18-2">1.18.2. url-retrieve-synchronously&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span>&#xa0;<span class="sync">sync</span></span></a></li>
-<li><a href="#sec-1-18-3">1.18.3. Download a file interactively&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span>&#xa0;<span class="file">file</span></span></a></li>
-<li><a href="#sec-1-18-4">1.18.4. Download a file and display it on a buffer&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="buffer">buffer</span>&#xa0;<span class="clipboard">clipboard</span></span></a></li>
-<li><a href="#sec-1-18-5">1.18.5. Http and Post Request&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connections">connections</span>&#xa0;<span class="http">http</span></span></a></li>
+<li><a href="#sec-1-18-1">1.18.1. Browse Url</a></li>
+<li><a href="#sec-1-18-2">1.18.2. Browser Url setting the web browser</a></li>
+<li><a href="#sec-1-18-3">1.18.3. Search Web sites with Emacs&#xa0;&#xa0;&#xa0;<span class="tag"><span class="web">web</span>&#xa0;<span class="search">search</span>&#xa0;<span class="url">url</span>&#xa0;<span class="browser">browser</span></span></a></li>
+<li><a href="#sec-1-18-4">1.18.4. Browser Inside Emacs</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-19">1.19. Packages&#xa0;&#xa0;&#xa0;<span class="tag"><span class="package">package</span>&#xa0;<span class="install">install</span>&#xa0;<span class="library">library</span></span></a>
+<li><a href="#sec-1-19">1.19. Http Requests&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="request">request</span>&#xa0;<span class="url">url</span>&#xa0;<span class="network">network</span></span></a>
 <ul>
-<li><a href="#sec-1-19-1">1.19.1. Test if package is installed</a></li>
-<li><a href="#sec-1-19-2">1.19.2. Install a package if it is not installed</a></li>
-<li><a href="#sec-1-19-3">1.19.3. Install a single-file package from URL</a></li>
+<li><a href="#sec-1-19-1">1.19.1. Download File&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span></span></a></li>
+<li><a href="#sec-1-19-2">1.19.2. url-retrieve-synchronously&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span>&#xa0;<span class="sync">sync</span></span></a></li>
+<li><a href="#sec-1-19-3">1.19.3. Download a file interactively&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span>&#xa0;<span class="file">file</span></span></a></li>
+<li><a href="#sec-1-19-4">1.19.4. Download a file and display it on a buffer&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="buffer">buffer</span>&#xa0;<span class="clipboard">clipboard</span></span></a></li>
+<li><a href="#sec-1-19-5">1.19.5. Http and Post Request&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connections">connections</span>&#xa0;<span class="http">http</span></span></a></li>
 </ul>
 </li>
-<li><a href="#sec-1-20">1.20. Helm Snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="framework">framework</span>&#xa0;<span class="library">library</span>&#xa0;<span class="helm">helm</span></span></a>
+<li><a href="#sec-1-20">1.20. Packages&#xa0;&#xa0;&#xa0;<span class="tag"><span class="package">package</span>&#xa0;<span class="install">install</span>&#xa0;<span class="library">library</span></span></a>
 <ul>
-<li><a href="#sec-1-20-1">1.20.1. Switch between buffers in same directory</a></li>
-<li><a href="#sec-1-20-2">1.20.2. Browser Recent files</a></li>
-<li><a href="#sec-1-20-3">1.20.3. Browser Recent directories</a></li>
-<li><a href="#sec-1-20-4">1.20.4. Launch ansync shell command with helm</a></li>
-<li><a href="#sec-1-20-5">1.20.5. Switch between buffers associated with files</a></li>
-<li><a href="#sec-1-20-6">1.20.6. Switch between Emacs major modes</a></li>
-<li><a href="#sec-1-20-7">1.20.7. Open a list of web sites</a></li>
-<li><a href="#sec-1-20-8">1.20.8. Interface Makefile</a></li>
+<li><a href="#sec-1-20-1">1.20.1. Test if package is installed</a></li>
+<li><a href="#sec-1-20-2">1.20.2. Install a package if it is not installed</a></li>
+<li><a href="#sec-1-20-3">1.20.3. Install a single-file package from URL</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-21">1.21. Persistence</a>
+<li><a href="#sec-1-21">1.21. Helm Snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="framework">framework</span>&#xa0;<span class="library">library</span>&#xa0;<span class="helm">helm</span></span></a>
 <ul>
-<li><a href="#sec-1-21-1">1.21.1. Save and Reload Current Session</a></li>
-<li><a href="#sec-1-21-2">1.21.2. Save and Restore Current Window Configuration</a></li>
+<li><a href="#sec-1-21-1">1.21.1. Switch between buffers in same directory</a></li>
+<li><a href="#sec-1-21-2">1.21.2. Browser Recent files</a></li>
+<li><a href="#sec-1-21-3">1.21.3. Browser Recent directories</a></li>
+<li><a href="#sec-1-21-4">1.21.4. Launch ansync shell command with helm</a></li>
+<li><a href="#sec-1-21-5">1.21.5. Switch between buffers associated with files</a></li>
+<li><a href="#sec-1-21-6">1.21.6. Switch between Emacs major modes</a></li>
+<li><a href="#sec-1-21-7">1.21.7. Open a list of web sites</a></li>
+<li><a href="#sec-1-21-8">1.21.8. Interface Makefile</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-22">1.22. Non categorized</a>
+<li><a href="#sec-1-22">1.22. Persistence</a>
 <ul>
-<li><a href="#sec-1-22-1">1.22.1. Save the scratch buffer and reload every Emacs startup</a></li>
-<li><a href="#sec-1-22-2">1.22.2. Code Navigation with Occur&#xa0;&#xa0;&#xa0;<span class="tag"><span class="edit">edit</span></span></a></li>
-<li><a href="#sec-1-22-3">1.22.3. Quick edit and reload Emacs Configuration File.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="customization">customization</span></span></a></li>
-<li><a href="#sec-1-22-4">1.22.4. Refresh / Revert buffer without confirmation.</a></li>
-<li><a href="#sec-1-22-5">1.22.5. Create a menu with all color themes available</a></li>
+<li><a href="#sec-1-22-1">1.22.1. Save and Reload Current Session</a></li>
+<li><a href="#sec-1-22-2">1.22.2. Save and Restore Current Window Configuration</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-23">1.23. Non categorized</a>
+<ul>
+<li><a href="#sec-1-23-1">1.23.1. Save the scratch buffer and reload every Emacs startup</a></li>
+<li><a href="#sec-1-23-2">1.23.2. Code Navigation with Occur&#xa0;&#xa0;&#xa0;<span class="tag"><span class="edit">edit</span></span></a></li>
+<li><a href="#sec-1-23-3">1.23.3. Quick edit and reload Emacs Configuration File.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="customization">customization</span></span></a></li>
+<li><a href="#sec-1-23-4">1.23.4. Refresh / Revert buffer without confirmation.</a></li>
+<li><a href="#sec-1-23-5">1.23.5. Create a menu with all color themes available</a></li>
 </ul>
 </li>
 </ul>
@@ -478,11 +479,21 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> Elisp Snippets</h2>
 <div class="outline-text-2" id="text-1">
 </div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Strings</h3>
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Overview</h3>
 <div class="outline-text-3" id="text-1-1">
-</div><div id="outline-container-sec-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Concatenate strings</h4>
-<div class="outline-text-4" id="text-1-1-1">
+<p>
+This section provides Elisp snippets and examples about Emacs
+API to help developers find what they need quickly.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Strings</h3>
+<div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Concatenate strings</h4>
+<div class="outline-text-4" id="text-1-2-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (concat <span class="org-string">"hello"</span> <span class="org-string">" world"</span>)
@@ -498,9 +509,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-sec-1-1-2" class="outline-4">
-<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Join Strings by Separator</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Join Strings by Separator</h4>
+<div class="outline-text-4" id="text-1-2-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">join</span> (sep lst)
@@ -516,9 +527,9 @@ ELISP&gt; (join <span class="org-string">", "</span> '(<span class="org-string">
 </div>
 </div>
 
-<div id="outline-container-sec-1-1-3" class="outline-4">
-<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Split String</h4>
-<div class="outline-text-4" id="text-1-1-3">
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Split String</h4>
+<div class="outline-text-4" id="text-1-2-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (split-string  <span class="org-string">"100,200,300,400"</span> <span class="org-string">","</span>)
@@ -531,9 +542,9 @@ ELISP&gt; (join <span class="org-string">", "</span> '(<span class="org-string">
 </div>
 </div>
 
-<div id="outline-container-sec-1-1-4" class="outline-4">
-<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Split String with quotes</h4>
-<div class="outline-text-4" id="text-1-1-4">
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Split String with quotes</h4>
+<div class="outline-text-4" id="text-1-2-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (split-string-and-unquote <span class="org-string">"/bin/app -x -y -z   \"/home/user/some name with space/etc\" -k cmd "</span>)
@@ -543,19 +554,19 @@ ELISP&gt; (join <span class="org-string">", "</span> '(<span class="org-string">
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-1-5" class="outline-4">
-<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Replace Strings</h4>
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> Replace Strings</h4>
 </div>
-<div id="outline-container-sec-1-1-6" class="outline-4">
-<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Regex</h4>
+<div id="outline-container-sec-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6"><span class="section-number-4">1.2.6</span> Regex</h4>
 </div>
 </div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Text Manipulation</h3>
-<div class="outline-text-3" id="text-1-2">
-</div><div id="outline-container-sec-1-2-1" class="outline-4">
-<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Text alignment</h4>
-<div class="outline-text-4" id="text-1-2-1">
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Text Manipulation</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Text alignment</h4>
+<div class="outline-text-4" id="text-1-3-1">
 <p>
 Source: <a href="http://www.svjatoslav.eu/notes/init.html">Init file</a> - www.svjatoslav.eu
 </p>
@@ -599,9 +610,9 @@ Source: <a href="http://www.svjatoslav.eu/notes/init.html">Init file</a> - www.s
 </div>
 </div>
 
-<div id="outline-container-sec-1-2-2" class="outline-4">
-<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Join Multiple Lines</h4>
-<div class="outline-text-4" id="text-1-2-2">
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> Join Multiple Lines</h4>
+<div class="outline-text-4" id="text-1-3-2">
 <p>
 From: <a href="https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d">jidaikobo-shibata/join-multi-lines-to-one.el</a>
 </p>
@@ -632,12 +643,12 @@ From: <a href="https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d">j
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> S-expressions</h3>
-<div class="outline-text-3" id="text-1-3">
-</div><div id="outline-container-sec-1-3-1" class="outline-4">
-<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Parse s-expressions</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> S-expressions</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Parse s-expressions</h4>
+<div class="outline-text-4" id="text-1-4-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Exaluate with M-x eval-print-last-sexp</span>
@@ -657,9 +668,9 @@ From: <a href="https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d">j
 </div>
 </div>
 
-<div id="outline-container-sec-1-3-2" class="outline-4">
-<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> Evaluate s-expressions</h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Evaluate s-expressions</h4>
+<div class="outline-text-4" id="text-1-4-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (eval (read <span class="org-string">"(+ 1 2 3 4)"</span> ))
@@ -672,17 +683,16 @@ From: <a href="https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d">j
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Clipboard (Kill-ring)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="clipboard">clipboard</span>&#xa0;<span class="kill">kill</span>&#xa0;<span class="ring">ring</span></span></h3>
-<div class="outline-text-3" id="text-1-4">
-</div><div id="outline-container-sec-1-4-1" class="outline-4">
-<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Copy string to clipboard</h4>
-<div class="outline-text-4" id="text-1-4-1">
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Clipboard (Kill-ring)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="clipboard">clipboard</span>&#xa0;<span class="kill">kill</span>&#xa0;<span class="ring">ring</span></span></h3>
+<div class="outline-text-3" id="text-1-5">
+</div><div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> Copy string to clipboard</h4>
+<div class="outline-text-4" id="text-1-5-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">clipboard/set</span> (astring)
   <span class="org-doc">"Copy a string to clipboard"</span>
-
    (<span class="org-keyword">with-temp-buffer</span>
     (insert astring)
     (clipboard-kill-region (point-min) (point-max))))
@@ -691,30 +701,25 @@ From: <a href="https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d">j
 </div>
 </div>
 
-<div id="outline-container-sec-1-4-2" class="outline-4">
-<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Paste string from clipboard</h4>
-<div class="outline-text-4" id="text-1-4-2">
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> Paste string from clipboard</h4>
+<div class="outline-text-4" id="text-1-5-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">clipboard/get</span> ()
-
     <span class="org-doc">"Return the content of clipboard as string"</span>
-
     (<span class="org-keyword">interactive</span>)
-
     (<span class="org-keyword">with-temp-buffer</span>
-
       (clipboard-yank)
-
       (buffer-substring-no-properties (point-min) (point-max))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-4-3" class="outline-4">
-<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> Copy buffer file name to clibpoard</h4>
-<div class="outline-text-4" id="text-1-4-3">
+<div id="outline-container-sec-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> Copy buffer file name to clibpoard</h4>
+<div class="outline-text-4" id="text-1-5-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">buffer/copy-file-name</span> ()
@@ -733,16 +738,15 @@ nil
 </div>
 </div>
 
-<div id="outline-container-sec-1-4-4" class="outline-4">
-<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> Copy buffer directory to clibpoard</h4>
-<div class="outline-text-4" id="text-1-4-4">
+<div id="outline-container-sec-1-5-4" class="outline-4">
+<h4 id="sec-1-5-4"><span class="section-number-4">1.5.4</span> Copy buffer directory to clibpoard</h4>
+<div class="outline-text-4" id="text-1-5-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">buffer/copy-path</span> ()
   (<span class="org-keyword">interactive</span>)
   (clipboard/set (file-name-directory (buffer-file-name)))
-  (message <span class="org-string">"Copied file path to clipboard"</span>)
-  )
+  (message <span class="org-string">"Copied file path to clipboard"</span>))
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Eval using M-x eval-print-last-sexp</span>
 <span class="org-comment-delimiter">;;</span>
@@ -757,32 +761,31 @@ nil
 </div>
 </div>
 
-<div id="outline-container-sec-1-4-5" class="outline-4">
-<h4 id="sec-1-4-5"><span class="section-number-4">1.4.5</span> Copy buffer content to clipboard</h4>
-<div class="outline-text-4" id="text-1-4-5">
+<div id="outline-container-sec-1-5-5" class="outline-4">
+<h4 id="sec-1-5-5"><span class="section-number-4">1.5.5</span> Copy buffer content to clipboard</h4>
+<div class="outline-text-4" id="text-1-5-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">buffer/copy-content</span> ()
-  <span class="org-doc">"</span>
-<span class="org-doc">  Copy buffer content to clibpoard</span>
-<span class="org-doc">   Usage: M-x buffer/copy-content</span>
-<span class="org-doc">  "</span>
+  <span class="org-doc">"Copy buffer content to clibpoard</span>
+<span class="org-doc">Usage: M-x buffer/copy-content"</span>
   (<span class="org-keyword">interactive</span>)
-  (clipboard/set  (buffer-substring-no-properties
-                   (point-min)
-                   (point-max)
-                   )))
+  (clipboard/set
+   (buffer-substring-no-properties
+    (point-min)
+    (point-max)
+    )))
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Elisp</h3>
-<div class="outline-text-3" id="text-1-5">
-</div><div id="outline-container-sec-1-5-1" class="outline-4">
-<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> Load an Elisp file</h4>
-<div class="outline-text-4" id="text-1-5-1">
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Elisp</h3>
+<div class="outline-text-3" id="text-1-6">
+</div><div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> Load an Elisp file</h4>
+<div class="outline-text-4" id="text-1-6-1">
 <p>
 Load an elisp source file *.el.
 </p>
@@ -805,9 +808,9 @@ Load an byte-compiled (*.elc) elisp file.
 </div>
 </div>
 
-<div id="outline-container-sec-1-5-2" class="outline-4">
-<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> Load all elisp files of a directory</h4>
-<div class="outline-text-4" id="text-1-5-2">
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> Load all elisp files of a directory</h4>
+<div class="outline-text-4" id="text-1-6-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">load-dir</span> (path)
@@ -825,9 +828,9 @@ Load an byte-compiled (*.elc) elisp file.
 </div>
 </div>
 
-<div id="outline-container-sec-1-5-3" class="outline-4">
-<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> Add directory to load path</h4>
-<div class="outline-text-4" id="text-1-5-3">
+<div id="outline-container-sec-1-6-3" class="outline-4">
+<h4 id="sec-1-6-3"><span class="section-number-4">1.6.3</span> Add directory to load path</h4>
+<div class="outline-text-4" id="text-1-6-3">
 <p>
 It adds a directory containing Emacs packages (&lt;package name&gt;.el) to
 the load path. The user can load packages by adding the code <code>(require '&lt;package&gt;)</code>
@@ -845,9 +848,9 @@ to the file init.el.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-5-4" class="outline-4">
-<h4 id="sec-1-5-4"><span class="section-number-4">1.5.4</span> Switch and Create the Scratch Buffer</h4>
-<div class="outline-text-4" id="text-1-5-4">
+<div id="outline-container-sec-1-6-4" class="outline-4">
+<h4 id="sec-1-6-4"><span class="section-number-4">1.6.4</span> Switch and Create the Scratch Buffer</h4>
+<div class="outline-text-4" id="text-1-6-4">
 <p>
 This function switches and crates the scratch buffer if it doesn't
 exist or was deleted. Usage: M-x scratch.
@@ -883,9 +886,9 @@ exist or was deleted. Usage: M-x scratch.
 </div>
 </div>
 
-<div id="outline-container-sec-1-5-5" class="outline-4">
-<h4 id="sec-1-5-5"><span class="section-number-4">1.5.5</span> Eval String in Clipboard</h4>
-<div class="outline-text-4" id="text-1-5-5">
+<div id="outline-container-sec-1-6-5" class="outline-4">
+<h4 id="sec-1-6-5"><span class="section-number-4">1.6.5</span> Eval String in Clipboard</h4>
+<div class="outline-text-4" id="text-1-6-5">
 <p>
 It only works on Linux and requires Xclip to be installed, but with a few changes can be tweaked to work in another Os.
 </p>
@@ -911,9 +914,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-1-5-6" class="outline-4">
-<h4 id="sec-1-5-6"><span class="section-number-4">1.5.6</span> Extract Function Documentation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
-<div class="outline-text-4" id="text-1-5-6">
+<div id="outline-container-sec-1-6-6" class="outline-4">
+<h4 id="sec-1-6-6"><span class="section-number-4">1.6.6</span> Extract Function Documentation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-1-6-6">
 <p>
 Source: <a href="http://kitchingroup.cheme.cmu.edu/blog/2014/10/17/Generate-emacs-lisp-documentation/">Generate emacs-lisp documentation</a>
 Primitives:
@@ -985,9 +988,9 @@ Final Code
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-5-7" class="outline-4">
-<h4 id="sec-1-5-7"><span class="section-number-4">1.5.7</span> Describe function</h4>
-<div class="outline-text-4" id="text-1-5-7">
+<div id="outline-container-sec-1-6-7" class="outline-4">
+<h4 id="sec-1-6-7"><span class="section-number-4">1.6.7</span> Describe function</h4>
+<div class="outline-text-4" id="text-1-6-7">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(describe-function 'find-file-noselect)
@@ -996,13 +999,13 @@ Final Code
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Common Lisp Emulation Library</h3>
-<div class="outline-text-3" id="text-1-6">
-</div><div id="outline-container-sec-1-6-1" class="outline-4">
-<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> Reduce (fold left) function</h4>
-<div class="outline-text-4" id="text-1-6-1">
-</div><ol class="org-ol"><li><a id="sec-1-6-1-1" name="sec-1-6-1-1"></a>Build a number from a list of digits<br  /><div class="outline-text-5" id="text-1-6-1-1">
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Common Lisp Emulation Library</h3>
+<div class="outline-text-3" id="text-1-7">
+</div><div id="outline-container-sec-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> Reduce (fold left) function</h4>
+<div class="outline-text-4" id="text-1-7-1">
+</div><ol class="org-ol"><li><a id="sec-1-7-1-1" name="sec-1-7-1-1"></a>Build a number from a list of digits<br  /><div class="outline-text-5" id="text-1-7-1-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">require</span> '<span class="org-constant">cl</span>)
@@ -1013,8 +1016,7 @@ ELISP&gt; (cl-reduce (<span class="org-keyword">lambda</span> (acc x) (+ (* 10 a
 </div>
 </div>
 </li>
-
-<li><a id="sec-1-6-1-2" name="sec-1-6-1-2"></a>Test if all values of a list are true<br  /><div class="outline-text-5" id="text-1-6-1-2">
+<li><a id="sec-1-7-1-2" name="sec-1-7-1-2"></a>Test if all values of a list are true<br  /><div class="outline-text-5" id="text-1-7-1-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">require</span> '<span class="org-constant">cl</span>)
@@ -1040,7 +1042,7 @@ nil
 </div>
 </li>
 
-<li><a id="sec-1-6-1-3" name="sec-1-6-1-3"></a>Test if at least one value of a list is true<br  /><div class="outline-text-5" id="text-1-6-1-3">
+<li><a id="sec-1-7-1-3" name="sec-1-7-1-3"></a>Test if at least one value of a list is true<br  /><div class="outline-text-5" id="text-1-7-1-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (cl-reduce (<span class="org-keyword">lambda</span> (acc x) (<span class="org-keyword">and</span> acc x)) '(t t t t t t) <span class="org-builtin">:initial-value</span> t)
@@ -1069,12 +1071,12 @@ nil
 </li></ol>
 </div>
 </div>
-<div id="outline-container-sec-1-7" class="outline-3">
-<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Buffer and regions</h3>
-<div class="outline-text-3" id="text-1-7">
-</div><div id="outline-container-sec-1-7-1" class="outline-4">
-<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> Save buffer</h4>
-<div class="outline-text-4" id="text-1-7-1">
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Buffer and regions</h3>
+<div class="outline-text-3" id="text-1-8">
+</div><div id="outline-container-sec-1-8-1" class="outline-4">
+<h4 id="sec-1-8-1"><span class="section-number-4">1.8.1</span> Save buffer</h4>
+<div class="outline-text-4" id="text-1-8-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(save-buffer)
@@ -1082,9 +1084,9 @@ nil
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-7-2" class="outline-4">
-<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> Kill / delete buffer</h4>
-<div class="outline-text-4" id="text-1-7-2">
+<div id="outline-container-sec-1-8-2" class="outline-4">
+<h4 id="sec-1-8-2"><span class="section-number-4">1.8.2</span> Kill / delete buffer</h4>
+<div class="outline-text-4" id="text-1-8-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(kill-buffer &lt;buffer-object or buffer-name&gt;)
@@ -1113,9 +1115,9 @@ Example: Delete all buffers:
 </div>
 </div>
 
-<div id="outline-container-sec-1-7-3" class="outline-4">
-<h4 id="sec-1-7-3"><span class="section-number-4">1.7.3</span> Get buffer content as string</h4>
-<div class="outline-text-4" id="text-1-7-3">
+<div id="outline-container-sec-1-8-3" class="outline-4">
+<h4 id="sec-1-8-3"><span class="section-number-4">1.8.3</span> Get buffer content as string</h4>
+<div class="outline-text-4" id="text-1-8-3">
 <p>
 Returns the content of a buffer referencend by its name or the buffer
 object.
@@ -1131,9 +1133,9 @@ object.
 </div>
 </div>
 
-<div id="outline-container-sec-1-7-4" class="outline-4">
-<h4 id="sec-1-7-4"><span class="section-number-4">1.7.4</span> Get selected text as string</h4>
-<div class="outline-text-4" id="text-1-7-4">
+<div id="outline-container-sec-1-8-4" class="outline-4">
+<h4 id="sec-1-8-4"><span class="section-number-4">1.8.4</span> Get selected text as string</h4>
+<div class="outline-text-4" id="text-1-8-4">
 <p>
 Returns the selected text of the current buffer.
 </p>
@@ -1149,9 +1151,9 @@ Returns the selected text of the current buffer.
 </div>
 </div>
 
-<div id="outline-container-sec-1-7-5" class="outline-4">
-<h4 id="sec-1-7-5"><span class="section-number-4">1.7.5</span> Create a scratch buffer for Programming Languages</h4>
-<div class="outline-text-4" id="text-1-7-5">
+<div id="outline-container-sec-1-8-5" class="outline-4">
+<h4 id="sec-1-8-5"><span class="section-number-4">1.8.5</span> Create a scratch buffer for Programming Languages</h4>
+<div class="outline-text-4" id="text-1-8-5">
 <p>
 This function creates a Python scratch buffer like elisp <code>*scratch*</code>
 which allows the user to play with Python without creating any
@@ -1219,9 +1221,9 @@ Usage: M-x sh/scratch
 </div>
 </div>
 
-<div id="outline-container-sec-1-7-6" class="outline-4">
-<h4 id="sec-1-7-6"><span class="section-number-4">1.7.6</span> Get all buffer's local variables</h4>
-<div class="outline-text-4" id="text-1-7-6">
+<div id="outline-container-sec-1-8-6" class="outline-4">
+<h4 id="sec-1-8-6"><span class="section-number-4">1.8.6</span> Get all buffer's local variables</h4>
+<div class="outline-text-4" id="text-1-8-6">
 <p>
 Get all current buffer's local variables
 </p>
@@ -1272,9 +1274,9 @@ Get all local variables of a buffer.
 </div>
 </div>
 
-<div id="outline-container-sec-1-7-7" class="outline-4">
-<h4 id="sec-1-7-7"><span class="section-number-4">1.7.7</span> Get a specific buffer local variable</h4>
-<div class="outline-text-4" id="text-1-7-7">
+<div id="outline-container-sec-1-8-7" class="outline-4">
+<h4 id="sec-1-8-7"><span class="section-number-4">1.8.7</span> Get a specific buffer local variable</h4>
+<div class="outline-text-4" id="text-1-8-7">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(buffer-local-value VARIABLE BUFFER)
@@ -1294,9 +1296,9 @@ org-mode
 </div>
 </div>
 
-<div id="outline-container-sec-1-7-8" class="outline-4">
-<h4 id="sec-1-7-8"><span class="section-number-4">1.7.8</span> Append buffer content to file</h4>
-<div class="outline-text-4" id="text-1-7-8">
+<div id="outline-container-sec-1-8-8" class="outline-4">
+<h4 id="sec-1-8-8"><span class="section-number-4">1.8.8</span> Append buffer content to file</h4>
+<div class="outline-text-4" id="text-1-8-8">
 <p>
 Function append to file: Append buffer's region content to file.
 </p>
@@ -1333,9 +1335,9 @@ Append a specific buffer content to file.
 </div>
 </div>
 
-<div id="outline-container-sec-1-7-9" class="outline-4">
-<h4 id="sec-1-7-9"><span class="section-number-4">1.7.9</span> Write file with buffer content (overwrite file it exists)</h4>
-<div class="outline-text-4" id="text-1-7-9">
+<div id="outline-container-sec-1-8-9" class="outline-4">
+<h4 id="sec-1-8-9"><span class="section-number-4">1.8.9</span> Write file with buffer content (overwrite file it exists)</h4>
+<div class="outline-text-4" id="text-1-8-9">
 <div class="org-src-container">
 
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Delete file if exists in order to overwrite it.</span>
@@ -1348,9 +1350,9 @@ Append a specific buffer content to file.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-7-10" class="outline-4">
-<h4 id="sec-1-7-10"><span class="section-number-4">1.7.10</span> Revert / update buffer without asking to confirm</h4>
-<div class="outline-text-4" id="text-1-7-10">
+<div id="outline-container-sec-1-8-10" class="outline-4">
+<h4 id="sec-1-8-10"><span class="section-number-4">1.8.10</span> Revert / update buffer without asking to confirm</h4>
+<div class="outline-text-4" id="text-1-8-10">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(revert-buffer t t t)
@@ -1359,13 +1361,13 @@ Append a specific buffer content to file.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-8" class="outline-3">
-<h3 id="sec-1-8"><span class="section-number-3">1.8</span> IO - Input and Output</h3>
-<div class="outline-text-3" id="text-1-8">
-</div><div id="outline-container-sec-1-8-1" class="outline-4">
-<h4 id="sec-1-8-1"><span class="section-number-4">1.8.1</span> Input - Read User Input</h4>
-<div class="outline-text-4" id="text-1-8-1">
-</div><ol class="org-ol"><li><a id="sec-1-8-1-1" name="sec-1-8-1-1"></a>Prompt functions<br  /><div class="outline-text-5" id="text-1-8-1-1">
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> IO - Input and Output</h3>
+<div class="outline-text-3" id="text-1-9">
+</div><div id="outline-container-sec-1-9-1" class="outline-4">
+<h4 id="sec-1-9-1"><span class="section-number-4">1.9.1</span> Input - Read User Input</h4>
+<div class="outline-text-4" id="text-1-9-1">
+</div><ol class="org-ol"><li><a id="sec-1-9-1-1" name="sec-1-9-1-1"></a>Prompt functions<br  /><div class="outline-text-5" id="text-1-9-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1450,7 +1452,7 @@ Append a specific buffer content to file.
 </div>
 </li>
 
-<li><a id="sec-1-8-1-2" name="sec-1-8-1-2"></a>Read string<br  /><div class="outline-text-5" id="text-1-8-1-2">
+<li><a id="sec-1-9-1-2" name="sec-1-9-1-2"></a>Read string<br  /><div class="outline-text-5" id="text-1-9-1-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (read-string <span class="org-string">"prompt &gt; "</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x eval-print-last-sexp</span>
@@ -1471,7 +1473,7 @@ user enter a message in the minibuffer
 </div>
 </li>
 
-<li><a id="sec-1-8-1-3" name="sec-1-8-1-3"></a>Read file name<br  /><div class="outline-text-5" id="text-1-8-1-3">
+<li><a id="sec-1-9-1-3" name="sec-1-9-1-3"></a>Read file name<br  /><div class="outline-text-5" id="text-1-9-1-3">
 <p>
 Reads a file name from the user and gives auto completion. Enter tab
 to autocomplete the file name.
@@ -1486,7 +1488,7 @@ to autocomplete the file name.
 </div>
 </li>
 
-<li><a id="sec-1-8-1-4" name="sec-1-8-1-4"></a>Read file name and insert at point<br  /><div class="outline-text-5" id="text-1-8-1-4">
+<li><a id="sec-1-9-1-4" name="sec-1-9-1-4"></a>Read file name and insert at point<br  /><div class="outline-text-5" id="text-1-9-1-4">
 <p>
 Opens a prompt that asks for the path in the minibuffer with
 completion and inserts the path at the current point.
@@ -1516,7 +1518,7 @@ completion and inserts the path at the current point.
 </div>
 </li>
 
-<li><a id="sec-1-8-1-5" name="sec-1-8-1-5"></a>Read a directory path<br  /><div class="outline-text-5" id="text-1-8-1-5">
+<li><a id="sec-1-9-1-5" name="sec-1-9-1-5"></a>Read a directory path<br  /><div class="outline-text-5" id="text-1-9-1-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (read-directory-name <span class="org-string">"Enter a directory: "</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x eval-print-last-sexp</span>
@@ -1526,10 +1528,10 @@ completion and inserts the path at the current point.
 </div>
 </li></ol>
 </div>
-<div id="outline-container-sec-1-8-2" class="outline-4">
-<h4 id="sec-1-8-2"><span class="section-number-4">1.8.2</span> Output</h4>
-<div class="outline-text-4" id="text-1-8-2">
-</div><ol class="org-ol"><li><a id="sec-1-8-2-1" name="sec-1-8-2-1"></a>Message<br  /><div class="outline-text-5" id="text-1-8-2-1">
+<div id="outline-container-sec-1-9-2" class="outline-4">
+<h4 id="sec-1-9-2"><span class="section-number-4">1.9.2</span> Output</h4>
+<div class="outline-text-4" id="text-1-9-2">
+</div><ol class="org-ol"><li><a id="sec-1-9-2-1" name="sec-1-9-2-1"></a>Message<br  /><div class="outline-text-5" id="text-1-9-2-1">
 <p>
 Display a message at the bottom of the screen.
 </p>
@@ -1548,9 +1550,9 @@ Display a message at the bottom of the screen.
 </div>
 </li>
 
-<li><a id="sec-1-8-2-2" name="sec-1-8-2-2"></a>Print<br  /></li>
-<li><a id="sec-1-8-2-3" name="sec-1-8-2-3"></a>Princ<br  /></li>
-<li><a id="sec-1-8-2-4" name="sec-1-8-2-4"></a>Message box<br  /><div class="outline-text-5" id="text-1-8-2-4">
+<li><a id="sec-1-9-2-2" name="sec-1-9-2-2"></a>Print<br  /></li>
+<li><a id="sec-1-9-2-3" name="sec-1-9-2-3"></a>Princ<br  /></li>
+<li><a id="sec-1-9-2-4" name="sec-1-9-2-4"></a>Message box<br  /><div class="outline-text-5" id="text-1-9-2-4">
 <p>
 Display a message, in a dialog box if possible. If a dialog box is not
 available, use the echo area.
@@ -1570,7 +1572,7 @@ available, use the echo area.
 </div>
 </li>
 
-<li><a id="sec-1-8-2-5" name="sec-1-8-2-5"></a>Tooltip<br  /><div class="outline-text-5" id="text-1-8-2-5">
+<li><a id="sec-1-9-2-5" name="sec-1-9-2-5"></a>Tooltip<br  /><div class="outline-text-5" id="text-1-9-2-5">
 <p>
 Show a tooltip
 </p>
@@ -1590,12 +1592,12 @@ Show a tooltip
 </li></ol>
 </div>
 </div>
-<div id="outline-container-sec-1-9" class="outline-3">
-<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Interacting with Operating System and External Applications</h3>
-<div class="outline-text-3" id="text-1-9">
-</div><div id="outline-container-sec-1-9-1" class="outline-4">
-<h4 id="sec-1-9-1"><span class="section-number-4">1.9.1</span> Related Documentation</h4>
-<div class="outline-text-4" id="text-1-9-1">
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Interacting with Operating System and External Applications</h3>
+<div class="outline-text-3" id="text-1-10">
+</div><div id="outline-container-sec-1-10-1" class="outline-4">
+<h4 id="sec-1-10-1"><span class="section-number-4">1.10.1</span> Related Documentation</h4>
+<div class="outline-text-4" id="text-1-10-1">
 <p>
 [C-h-f] &lt;name of function&gt;
 </p>
@@ -1628,10 +1630,10 @@ Show a tooltip
 </div>
 </div>
 
-<div id="outline-container-sec-1-9-2" class="outline-4">
-<h4 id="sec-1-9-2"><span class="section-number-4">1.9.2</span> Add application path to the PATH variable - Solving command not found</h4>
-<div class="outline-text-4" id="text-1-9-2">
-</div><ol class="org-ol"><li><a id="sec-1-9-2-1" name="sec-1-9-2-1"></a>Overview<br  /><div class="outline-text-5" id="text-1-9-2-1">
+<div id="outline-container-sec-1-10-2" class="outline-4">
+<h4 id="sec-1-10-2"><span class="section-number-4">1.10.2</span> Add application path to the PATH variable - Solving command not found</h4>
+<div class="outline-text-4" id="text-1-10-2">
+</div><ol class="org-ol"><li><a id="sec-1-10-2-1" name="sec-1-10-2-1"></a>Overview<br  /><div class="outline-text-5" id="text-1-10-2-1">
 <p>
 In order to Emacs find where applications such as ruby shell, scala
 compiler and tools are installed it is necessary to the PATH
@@ -1641,7 +1643,7 @@ contains those applications.
 </div>
 </li>
 
-<li><a id="sec-1-9-2-2" name="sec-1-9-2-2"></a>Checking PATH variable<br  /><div class="outline-text-5" id="text-1-9-2-2">
+<li><a id="sec-1-10-2-2" name="sec-1-10-2-2"></a>Checking PATH variable<br  /><div class="outline-text-5" id="text-1-10-2-2">
 <p>
 Copy this command below to the scratch buffer and enter M-x
 eval-print-last-last-sexp.
@@ -1656,7 +1658,7 @@ eval-print-last-last-sexp.
 </div>
 </li>
 
-<li><a id="sec-1-9-2-3" name="sec-1-9-2-3"></a>Command to display path variable<br  /><div class="outline-text-5" id="text-1-9-2-3">
+<li><a id="sec-1-10-2-3" name="sec-1-10-2-3"></a>Command to display path variable<br  /><div class="outline-text-5" id="text-1-10-2-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">show-path-variable</span> ()
@@ -1701,7 +1703,7 @@ in the $PATH variable in a new buffer a easy way to read:
 </div>
 </li>
 
-<li><a id="sec-1-9-2-4" name="sec-1-9-2-4"></a>Add a directories to PATH variable<br  /><div class="outline-text-5" id="text-1-9-2-4">
+<li><a id="sec-1-10-2-4" name="sec-1-10-2-4"></a>Add a directories to PATH variable<br  /><div class="outline-text-5" id="text-1-10-2-4">
 <p>
 It will add the directory: ~/opt/scala/bin to the $PATH
 variable. Before run the code below when the user runs 
@@ -1751,7 +1753,7 @@ After it is done the Scala REPL will look like the picture below:
 </div>
 </li>
 
-<li><a id="sec-1-9-2-5" name="sec-1-9-2-5"></a>Function to add multiple directories in PATH variable<br  /><div class="outline-text-5" id="text-1-9-2-5">
+<li><a id="sec-1-10-2-5" name="sec-1-10-2-5"></a>Function to add multiple directories in PATH variable<br  /><div class="outline-text-5" id="text-1-10-2-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">add-to-path-var</span> (<span class="org-type">&amp;rest</span> pathlist)
@@ -1816,10 +1818,10 @@ Use the function locally without pollute the namespace.
 </div>
 </li></ol>
 </div>
-<div id="outline-container-sec-1-9-3" class="outline-4">
-<h4 id="sec-1-9-3"><span class="section-number-4">1.9.3</span> Synchronous Shell Commands</h4>
-<div class="outline-text-4" id="text-1-9-3">
-</div><ol class="org-ol"><li><a id="sec-1-9-3-1" name="sec-1-9-3-1"></a>Display output of shell command<br  /><div class="outline-text-5" id="text-1-9-3-1">
+<div id="outline-container-sec-1-10-3" class="outline-4">
+<h4 id="sec-1-10-3"><span class="section-number-4">1.10.3</span> Synchronous Shell Commands</h4>
+<div class="outline-text-4" id="text-1-10-3">
+</div><ol class="org-ol"><li><a id="sec-1-10-3-1" name="sec-1-10-3-1"></a>Display output of shell command<br  /><div class="outline-text-5" id="text-1-10-3-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(shell-command <span class="org-string">"uname -a"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x eval-last-sexp</span>
@@ -1834,7 +1836,7 @@ Use the function locally without pollute the namespace.
 </div>
 </li>
 
-<li><a id="sec-1-9-3-2" name="sec-1-9-3-2"></a>Display output of shell command in another frame&#xa0;&#xa0;&#xa0;<span class="tag"><span class="shell">shell</span>&#xa0;<span class="command">command</span>&#xa0;<span class="frame">frame</span></span><br  /><div class="outline-text-5" id="text-1-9-3-2">
+<li><a id="sec-1-10-3-2" name="sec-1-10-3-2"></a>Display output of shell command in another frame&#xa0;&#xa0;&#xa0;<span class="tag"><span class="shell">shell</span>&#xa0;<span class="command">command</span>&#xa0;<span class="frame">frame</span></span><br  /><div class="outline-text-5" id="text-1-10-3-2">
 <p>
 Display PCI cards in another frame.
 </p>
@@ -1848,7 +1850,7 @@ Display PCI cards in another frame.
 </div>
 </li>
 
-<li><a id="sec-1-9-3-3" name="sec-1-9-3-3"></a>Shell Command To String&#xa0;&#xa0;&#xa0;<span class="tag"><span class="shell">shell</span>&#xa0;<span class="string">string</span></span><br  /><div class="outline-text-5" id="text-1-9-3-3">
+<li><a id="sec-1-10-3-3" name="sec-1-10-3-3"></a>Shell Command To String&#xa0;&#xa0;&#xa0;<span class="tag"><span class="shell">shell</span>&#xa0;<span class="string">string</span></span><br  /><div class="outline-text-5" id="text-1-10-3-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (shell-command-to-string <span class="org-string">"uname -a"</span>)  <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x eval-print-last-sexp</span>
@@ -1878,7 +1880,7 @@ Gcc version <span class="org-builtin">:gcc</span> (GCC) 6.1.1 20160802
 </div>
 </li>
 
-<li><a id="sec-1-9-3-4" name="sec-1-9-3-4"></a>Shell Command Wrappers<br  /><div class="outline-text-5" id="text-1-9-3-4">
+<li><a id="sec-1-10-3-4" name="sec-1-10-3-4"></a>Shell Command Wrappers<br  /><div class="outline-text-5" id="text-1-10-3-4">
 <p>
 The function shell-command-to-lines runs a shell command and returns
 the output lines. This function is useful to create shell command
@@ -1956,10 +1958,10 @@ ELISP&gt; (mapc (<span class="org-keyword">lambda</span> (p) (princ p) (princ <s
 </li></ol>
 </div>
 
-<div id="outline-container-sec-1-9-4" class="outline-4">
-<h4 id="sec-1-9-4"><span class="section-number-4">1.9.4</span> Pipe a region to external command&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="command">command</span>&#xa0;<span class="pipe">pipe</span>&#xa0;<span class="interface">interface</span></span></h4>
-<div class="outline-text-4" id="text-1-9-4">
-</div><ol class="org-ol"><li><a id="sec-1-9-4-1" name="sec-1-9-4-1"></a>Pipe buffer or region to external command<br  /><div class="outline-text-5" id="text-1-9-4-1">
+<div id="outline-container-sec-1-10-4" class="outline-4">
+<h4 id="sec-1-10-4"><span class="section-number-4">1.10.4</span> Pipe a region to external command&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="command">command</span>&#xa0;<span class="pipe">pipe</span>&#xa0;<span class="interface">interface</span></span></h4>
+<div class="outline-text-4" id="text-1-10-4">
+</div><ol class="org-ol"><li><a id="sec-1-10-4-1" name="sec-1-10-4-1"></a>Pipe buffer or region to external command<br  /><div class="outline-text-5" id="text-1-10-4-1">
 <p>
 Pipes the buffer content to external command and print the output in
 the buffer <code>*Shell Command Output*</code>. The command <code>$ wc -l</code> counts the
@@ -1985,24 +1987,19 @@ output as a string.
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">pipe-region-to-command</span> (pmin pmax command)
   (<span class="org-keyword">interactive</span>)
-
   (shell-command-on-region
    pmin
    pmax
    command
-   <span class="org-string">"*shell-output*"</span>
-   )
-
-  (<span class="org-keyword">let</span> (
-        (output  (<span class="org-keyword">with-current-buffer</span> <span class="org-string">"*shell-output*"</span>
-                    (buffer-substring-no-properties (point-min) (point-max))))
-        )
-
+   <span class="org-string">"*shell-output*"</span>)
+  (<span class="org-keyword">let</span> ((output
+         (<span class="org-keyword">with-current-buffer</span> <span class="org-string">"*shell-output*"</span>
+           (buffer-substring-no-properties
+            (point-min)
+            (point-max)))))
     (kill-buffer <span class="org-string">"*shell-output*"</span>)
     output
-    )
-  )
-
+    ))
 
 &gt; (pipe-region-to-command (point-min) (point-max) <span class="org-string">"wc -l"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x eval-print-last-sexp</span>
 <span class="org-string">"1515</span>
@@ -2012,7 +2009,7 @@ output as a string.
 </div>
 </li>
 
-<li><a id="sec-1-9-4-2" name="sec-1-9-4-2"></a>Apply an external command to buffer<br  /><div class="outline-text-5" id="text-1-9-4-2">
+<li><a id="sec-1-10-4-2" name="sec-1-10-4-2"></a>Apply an external command to buffer<br  /><div class="outline-text-5" id="text-1-10-4-2">
 <p>
 The command below will pipe the buffer <code>*scratch*</code> to the command =$
 sed 's/foo.*/bar/g'= which replaces all values of foo for bar.
@@ -2021,9 +2018,9 @@ sed 's/foo.*/bar/g'= which replaces all values of foo for bar.
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">with-current-buffer</span> <span class="org-string">"*scratch*"</span>
-    (shell-command-on-region (point-min) (point-max) <span class="org-string">"sed 's/foo.*/bar/g'"</span> <span class="org-string">"*shell-output*"</span> t )
-
-) <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x eval-last-sexp</span>
+  (shell-command-on-region
+   (point-min)
+   (point-max) <span class="org-string">"sed 's/foo.*/bar/g'"</span> <span class="org-string">"*shell-output*"</span> t )) <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x eval-last-sexp</span>
 </pre>
 </div>
 
@@ -2049,7 +2046,7 @@ After the form evaluation.
 </div>
 </li>
 
-<li><a id="sec-1-9-4-3" name="sec-1-9-4-3"></a>Function to apply an external command to buffer<br  /><div class="outline-text-5" id="text-1-9-4-3">
+<li><a id="sec-1-10-4-3" name="sec-1-10-4-3"></a>Function to apply an external command to buffer<br  /><div class="outline-text-5" id="text-1-10-4-3">
 <p>
 Usage: M-x shell-command-on-buffer Enter: sed 's/defun/defn/g' eplaces
 all defun words by defn.
@@ -2076,7 +2073,7 @@ all defun words by defn.
 </div>
 </li>
 
-<li><a id="sec-1-9-4-4" name="sec-1-9-4-4"></a>Insert line number in all lines of a buffer using ruby<br  /><div class="outline-text-5" id="text-1-9-4-4">
+<li><a id="sec-1-10-4-4" name="sec-1-10-4-4"></a>Insert line number in all lines of a buffer using ruby<br  /><div class="outline-text-5" id="text-1-10-4-4">
 <p>
 Enter M-x <span class="underline">shell-command-on-buffer</span> and then $ ruby -ne 'printf("-%6s%s", $., $_)'
 </p>
@@ -2109,7 +2106,7 @@ After running the command:
 </div>
 </li>
 
-<li><a id="sec-1-9-4-5" name="sec-1-9-4-5"></a>Ruby command on buffer<br  /><div class="outline-text-5" id="text-1-9-4-5">
+<li><a id="sec-1-10-4-5" name="sec-1-10-4-5"></a>Ruby command on buffer<br  /><div class="outline-text-5" id="text-1-10-4-5">
 <p>
 This function applies a ruby batch command on the buffer.
 </p>
@@ -2142,7 +2139,7 @@ See also: <a href="http://reference.jumpingmonkey.org/programming_languages/ruby
 </div>
 </li>
 
-<li><a id="sec-1-9-4-6" name="sec-1-9-4-6"></a>Ruby regex on buffer<br  /><div class="outline-text-5" id="text-1-9-4-6">
+<li><a id="sec-1-10-4-6" name="sec-1-10-4-6"></a>Ruby regex on buffer<br  /><div class="outline-text-5" id="text-1-10-4-6">
 <p>
 Emacs regexp islimited and doesn't have lookahead like perl or ruby
 regex. This command can extend the functionality of Emacs regex using
@@ -2214,13 +2211,13 @@ Example: To remove all numbers in at beggining of line run:
 </li></ol>
 </div>
 
-<div id="outline-container-sec-1-9-5" class="outline-4">
-<h4 id="sec-1-9-5"><span class="section-number-4">1.9.5</span> Launch apps in Asynchronous mode</h4>
+<div id="outline-container-sec-1-10-5" class="outline-4">
+<h4 id="sec-1-10-5"><span class="section-number-4">1.10.5</span> Launch apps in Asynchronous mode</h4>
 </div>
-<div id="outline-container-sec-1-9-6" class="outline-4">
-<h4 id="sec-1-9-6"><span class="section-number-4">1.9.6</span> Run asynchronous commands piping the output to a buffer</h4>
-<div class="outline-text-4" id="text-1-9-6">
-</div><ol class="org-ol"><li><a id="sec-1-9-6-1" name="sec-1-9-6-1"></a>Ping a host<br  /><div class="outline-text-5" id="text-1-9-6-1">
+<div id="outline-container-sec-1-10-6" class="outline-4">
+<h4 id="sec-1-10-6"><span class="section-number-4">1.10.6</span> Run asynchronous commands piping the output to a buffer</h4>
+<div class="outline-text-4" id="text-1-10-6">
+</div><ol class="org-ol"><li><a id="sec-1-10-6-1" name="sec-1-10-6-1"></a>Ping a host<br  /><div class="outline-text-5" id="text-1-10-6-1">
 <ul class="org-ul">
 <li><code>(start-process NAME BUFFER PROGRAM &amp;rest PROGRAM-ARGS</code>
 </li>
@@ -2233,37 +2230,20 @@ Usage: M-x ping-host or (ping-host &lt;hostname&gt;)
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">ping-host</span> (<span class="org-type">&amp;optional</span> hostname)
-  <span class="org-doc">"</span>
-<span class="org-doc">  Ping a hostname.</span>
-
-<span class="org-doc">  Usage:</span>
-<span class="org-doc">        - Interactive: M-x ping-host</span>
-<span class="org-doc">        - Command:     (ping-host &lt;hostname&gt;)</span>
-
-<span class="org-doc">  Example: (ping-host \"www.google.com\")</span>
-<span class="org-doc">           (ping-host \"192.168.0.1\")</span>
-<span class="org-doc">  "</span>
+  <span class="org-doc">"Ping a hostname.  </span>
+<span class="org-doc">Usage:</span>
+<span class="org-doc">- Interactive: M-x ping-host</span>
+<span class="org-doc">- Command:     (ping-host &lt;hostname&gt;)</span>
+<span class="org-doc">Examples: </span>
+<span class="org-doc"> (ping-host \"www.google.com\")</span>
+<span class="org-doc"> (ping-host \"192.168.0.1\")"</span>
   (<span class="org-keyword">interactive</span>)
-
-  (<span class="org-keyword">let</span>
-      (
-       (hostname- (<span class="org-keyword">if</span> hostname hostname (read-string <span class="org-string">"host to ping: "</span>)))
-       )
-
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">(with-selected-frame (make-frame)</span>
-    <span class="org-comment-delimiter">;;   </span><span class="org-comment">;;</span>
-    <span class="org-comment-delimiter">;;   </span><span class="org-comment">;; Process name:    ping</span>
-    <span class="org-comment-delimiter">;;   </span><span class="org-comment">;; Process buffer: *ping*</span>
-    <span class="org-comment-delimiter">;;   </span><span class="org-comment">;; Command:         ping &lt;hostname&gt;</span>
-    <span class="org-comment-delimiter">;;   </span><span class="org-comment">;;</span>
-
-    <span class="org-comment-delimiter">;;   </span><span class="org-comment">(start-process "ping" "*ping*" "ping" hostname-)</span>
-
-    <span class="org-comment-delimiter">;;   </span><span class="org-comment">)</span>
-
+  (<span class="org-keyword">let</span> ((hostname-
+         (<span class="org-keyword">if</span> hostname
+             hostname
+           (read-string <span class="org-string">"host to ping: "</span>))))
     (start-process <span class="org-string">"ping"</span> <span class="org-string">"*ping*"</span> <span class="org-string">"ping"</span> hostname-)
-    (switch-to-buffer-other-frame <span class="org-string">"*ping*"</span>)
-    ))
+    (switch-to-buffer-other-frame <span class="org-string">"*ping*"</span>)))
 </pre>
 </div>
 
@@ -2275,39 +2255,30 @@ Usage: M-x ping-host or (ping-host &lt;hostname&gt;)
 </div>
 </li>
 
-<li><a id="sec-1-9-6-2" name="sec-1-9-6-2"></a>Tracerote a host<br  /><div class="outline-text-5" id="text-1-9-6-2">
+<li><a id="sec-1-10-6-2" name="sec-1-10-6-2"></a>Tracerote a host<br  /><div class="outline-text-5" id="text-1-10-6-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">traceroute-host</span> (<span class="org-type">&amp;optional</span> hostname)
-  <span class="org-doc">"</span>
-<span class="org-doc">  Ping a hostname.</span>
-
-<span class="org-doc">  Usage:</span>
-<span class="org-doc">        - Interactive: M-x traceroute-host [Enter the hostname]</span>
-<span class="org-doc">        - Command:     (traceroute-host &lt;hostname&gt;)</span>
-
-<span class="org-doc">  Example: (traceroute-host \"www.yahoo.co.uk\")</span>
-
-<span class="org-doc">  "</span>
+  <span class="org-doc">"Run traceroute command to test connection.</span>
+<span class="org-doc">Usage:</span>
+<span class="org-doc">- Interactive: M-x traceroute-host [Enter the hostname]</span>
+<span class="org-doc">- Command:     (traceroute-host &lt;hostname&gt;)</span>
+<span class="org-doc">Example: (traceroute-host \"www.yahoo.co.uk\")."</span>
   (<span class="org-keyword">interactive</span>)
-
-  (<span class="org-keyword">let</span>
-      (
-       (hostname- (<span class="org-keyword">if</span> hostname hostname (read-string <span class="org-string">"host to traceroute: "</span>)))
-       )
-
+  (<span class="org-keyword">let</span> ((hostname- (<span class="org-keyword">if</span> hostname
+                       hostname
+                     (read-string <span class="org-string">"host to traceroute: "</span>))))
     (start-process <span class="org-string">"traceroute"</span> <span class="org-string">"*traceroute*"</span> <span class="org-string">"traceroute"</span> hostname-)
-    (switch-to-buffer-other-frame <span class="org-string">"*traceroute*"</span>)
-    ))
+    (switch-to-buffer-other-frame <span class="org-string">"*traceroute*"</span>)))
 </pre>
 </div>
 </div>
 </li></ol>
 </div>
 
-<div id="outline-container-sec-1-9-7" class="outline-4">
-<h4 id="sec-1-9-7"><span class="section-number-4">1.9.7</span> Run a ncurses / terminal app inside Emacs</h4>
-<div class="outline-text-4" id="text-1-9-7">
+<div id="outline-container-sec-1-10-7" class="outline-4">
+<h4 id="sec-1-10-7"><span class="section-number-4">1.10.7</span> Run a ncurses / terminal app inside Emacs</h4>
+<div class="outline-text-4" id="text-1-10-7">
 <p>
 Run linux htop (task manager) inside Emacs:
 </p>
@@ -2325,9 +2296,9 @@ Run linux htop (task manager) inside Emacs:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-9-8" class="outline-4">
-<h4 id="sec-1-9-8"><span class="section-number-4">1.9.8</span> Run apps in external terminal emulator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="os">os</span>&#xa0;<span class="command">command</span></span></h4>
-<div class="outline-text-4" id="text-1-9-8">
+<div id="outline-container-sec-1-10-8" class="outline-4">
+<h4 id="sec-1-10-8"><span class="section-number-4">1.10.8</span> Run apps in external terminal emulator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="terminal">terminal</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="os">os</span>&#xa0;<span class="command">command</span></span></h4>
+<div class="outline-text-4" id="text-1-10-8">
 <p>
 Some Linux ncurses-based applications like Htop, Top, Nmtui (Network
 Manager's terminal UI) doesn't work well running in Emacs terminal
@@ -2353,8 +2324,7 @@ terminal emulator.
    <span class="org-string">"termx"</span>
    nil
    <span class="org-comment-delimiter">;; </span><span class="org-comment">Change this for your terminal.</span>
-   <span class="org-string">"xfce4-terminal"</span> <span class="org-string">"-e"</span> (read-shell-command <span class="org-string">"Shell: "</span>)
-   ))
+   <span class="org-string">"xfce4-terminal"</span> <span class="org-string">"-e"</span> (read-shell-command <span class="org-string">"Shell: "</span>)))
 </pre>
 </div>
 
@@ -2369,8 +2339,7 @@ terminal emulator.
    <span class="org-string">"termx"</span>
    nil
    <span class="org-comment-delimiter">;; </span><span class="org-comment">Change this for your terminal.</span>
-   <span class="org-string">"xfce4-terminal"</span> <span class="org-string">"-e"</span> command
-   ))
+   <span class="org-string">"xfce4-terminal"</span> <span class="org-string">"-e"</span> command))
 </pre>
 </div>
 
@@ -2408,9 +2377,9 @@ Command <code>M-x htop</code> to launch htop.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-9-9" class="outline-4">
-<h4 id="sec-1-9-9"><span class="section-number-4">1.9.9</span> Launch applicatiosn from Emacs</h4>
-<div class="outline-text-4" id="text-1-9-9">
+<div id="outline-container-sec-1-10-9" class="outline-4">
+<h4 id="sec-1-10-9"><span class="section-number-4">1.10.9</span> Launch applicatiosn from Emacs</h4>
+<div class="outline-text-4" id="text-1-10-9">
 <p>
 This command asks the user a shell command providing tab completion
 and launches an asynchronous process (it doesn't freeze Emacs). Unlike
@@ -2453,9 +2422,9 @@ bidns the key combination SUPER (Windows Key) + 8.
 </div>
 </div>
 
-<div id="outline-container-sec-1-9-10" class="outline-4">
-<h4 id="sec-1-9-10"><span class="section-number-4">1.9.10</span> Send regions, commands and buffer to M-x shell repl.</h4>
-<div class="outline-text-4" id="text-1-9-10">
+<div id="outline-container-sec-1-10-10" class="outline-4">
+<h4 id="sec-1-10-10"><span class="section-number-4">1.10.10</span> Send regions, commands and buffer to M-x shell repl.</h4>
+<div class="outline-text-4" id="text-1-10-10">
 <ul class="org-ul">
 <li><span class="underline">M-x shell/buffer-repl</span> This command deletes all other windows and
 splits the current frame into two windows one containing a M-x
@@ -2608,12 +2577,12 @@ output, in this case the content of root directory.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-10" class="outline-3">
-<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Compilation</h3>
-<div class="outline-text-3" id="text-1-10">
-</div><div id="outline-container-sec-1-10-1" class="outline-4">
-<h4 id="sec-1-10-1"><span class="section-number-4">1.10.1</span> Enhanced Compilation Command</h4>
-<div class="outline-text-4" id="text-1-10-1">
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> Compilation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="compile">compile</span>&#xa0;<span class="tool">tool</span>&#xa0;<span class="building">building</span>&#xa0;<span class="shell">shell</span>&#xa0;<span class="process">process</span></span></h3>
+<div class="outline-text-3" id="text-1-11">
+</div><div id="outline-container-sec-1-11-1" class="outline-4">
+<h4 id="sec-1-11-1"><span class="section-number-4">1.11.1</span> Enhanced Compilation Command</h4>
+<div class="outline-text-4" id="text-1-11-1">
 <p>
 This command is similar to emacs M-x compile, however it expands '%f'
 to the buffer file name, '%n' to buffer base name and '%d' to buffer
@@ -2680,9 +2649,9 @@ file name to be compiled.
 </div>
 </div>
 
-<div id="outline-container-sec-1-10-2" class="outline-4">
-<h4 id="sec-1-10-2"><span class="section-number-4">1.10.2</span> Compile a single c++ file related to current buffer and run it.</h4>
-<div class="outline-text-4" id="text-1-10-2">
+<div id="outline-container-sec-1-11-2" class="outline-4">
+<h4 id="sec-1-11-2"><span class="section-number-4">1.11.2</span> Compile a single c++ file related to current buffer and run it.</h4>
+<div class="outline-text-4" id="text-1-11-2">
 <p>
 Usage: When the user run the command <span class="underline">M-x cpp/compile-run-buffer</span> at
 the current buffer (file code1.cpp) it will compile and run this file
@@ -2710,9 +2679,9 @@ running the command <code>$ g++ code1.cpp -o code1.bin &amp;&amp; ./code1.bin</c
 </div>
 </div>
 
-<div id="outline-container-sec-1-10-3" class="outline-4">
-<h4 id="sec-1-10-3"><span class="section-number-4">1.10.3</span> Compile and run a single c++ file at point in dired mode</h4>
-<div class="outline-text-4" id="text-1-10-3">
+<div id="outline-container-sec-1-11-3" class="outline-4">
+<h4 id="sec-1-11-3"><span class="section-number-4">1.11.3</span> Compile and run a single c++ file at point in dired mode</h4>
+<div class="outline-text-4" id="text-1-11-3">
 <p>
 Usage: In dired mode mode, place the cursor at the file to be compiled
 and run M-x cpp/compile-run-dired.
@@ -2723,8 +2692,7 @@ and run M-x cpp/compile-run-dired.
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">cpp/compile-run-dired</span> ()
   <span class="org-doc">"Compile single c++ file at point in dired mode.</span>
 <span class="org-doc">Usage: Position the cursor at the file to be compiled and</span>
-<span class="org-doc">run M-x cpp/compile-dired.</span>
-<span class="org-doc">"</span>
+<span class="org-doc">run M-x cpp/compile-dired."</span>
   (<span class="org-keyword">interactive</span>)
   (<span class="org-keyword">let*</span> ((file-name  (file-name-nondirectory (dired-file-name-at-point)))
         <span class="org-comment-delimiter">;; </span><span class="org-comment">Change file name extension to .bin</span>
@@ -2747,12 +2715,12 @@ and run M-x cpp/compile-run-dired.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-11" class="outline-3">
-<h3 id="sec-1-11"><span class="section-number-3">1.11</span> File</h3>
-<div class="outline-text-3" id="text-1-11">
-</div><div id="outline-container-sec-1-11-1" class="outline-4">
-<h4 id="sec-1-11-1"><span class="section-number-4">1.11.1</span> Test if file or directory exists</h4>
-<div class="outline-text-4" id="text-1-11-1">
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> File</h3>
+<div class="outline-text-3" id="text-1-12">
+</div><div id="outline-container-sec-1-12-1" class="outline-4">
+<h4 id="sec-1-12-1"><span class="section-number-4">1.12.1</span> Test if file or directory exists</h4>
+<div class="outline-text-4" id="text-1-12-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (file-exists-p <span class="org-string">"/var/log/pacman.log"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">M-x eval-print-last-sexp</span>
@@ -2771,9 +2739,9 @@ nil
 </div>
 </div>
 
-<div id="outline-container-sec-1-11-2" class="outline-4">
-<h4 id="sec-1-11-2"><span class="section-number-4">1.11.2</span> Expand file name</h4>
-<div class="outline-text-4" id="text-1-11-2">
+<div id="outline-container-sec-1-12-2" class="outline-4">
+<h4 id="sec-1-12-2"><span class="section-number-4">1.12.2</span> Expand file name</h4>
+<div class="outline-text-4" id="text-1-12-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (expand-file-name <span class="org-string">"~"</span>)
@@ -2789,9 +2757,9 @@ ELISP&gt; (expand-file-name <span class="org-string">"."</span>)
 </div>
 </div>
 
-<div id="outline-container-sec-1-11-3" class="outline-4">
-<h4 id="sec-1-11-3"><span class="section-number-4">1.11.3</span> Read file to string</h4>
-<div class="outline-text-4" id="text-1-11-3">
+<div id="outline-container-sec-1-12-3" class="outline-4">
+<h4 id="sec-1-12-3"><span class="section-number-4">1.12.3</span> Read file to string</h4>
+<div class="outline-text-4" id="text-1-12-3">
 <p>
 The Emacs API doesn't provide a straightforward way to read file
 directly to a string. The only way to perform this taks is using a
@@ -2822,10 +2790,10 @@ multi on
 </div>
 </div>
 
-<div id="outline-container-sec-1-11-4" class="outline-4">
-<h4 id="sec-1-11-4"><span class="section-number-4">1.11.4</span> Open file to edit</h4>
-<div class="outline-text-4" id="text-1-11-4">
-</div><ol class="org-ol"><li><a id="sec-1-11-4-1" name="sec-1-11-4-1"></a>Open file to edit in current window<br  /><div class="outline-text-5" id="text-1-11-4-1">
+<div id="outline-container-sec-1-12-4" class="outline-4">
+<h4 id="sec-1-12-4"><span class="section-number-4">1.12.4</span> Open file to edit</h4>
+<div class="outline-text-4" id="text-1-12-4">
+</div><ol class="org-ol"><li><a id="sec-1-12-4-1" name="sec-1-12-4-1"></a>Open file to edit in current window<br  /><div class="outline-text-5" id="text-1-12-4-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">&gt; (find-file <span class="org-string">"/etc/fstab"</span>)
@@ -2834,7 +2802,7 @@ multi on
 </div>
 </li>
 
-<li><a id="sec-1-11-4-2" name="sec-1-11-4-2"></a>Open file to edit in anther window<br  /><div class="outline-text-5" id="text-1-11-4-2">
+<li><a id="sec-1-12-4-2" name="sec-1-12-4-2"></a>Open file to edit in anther window<br  /><div class="outline-text-5" id="text-1-12-4-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(find-file-other-window <span class="org-string">"/etc/fstab"</span>)
@@ -2843,7 +2811,7 @@ multi on
 </div>
 </li>
 
-<li><a id="sec-1-11-4-3" name="sec-1-11-4-3"></a>Open file to edit in anther frame<br  /><div class="outline-text-5" id="text-1-11-4-3">
+<li><a id="sec-1-12-4-3" name="sec-1-12-4-3"></a>Open file to edit in anther frame<br  /><div class="outline-text-5" id="text-1-12-4-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(find-file-other-frame <span class="org-string">"/etc/fstab"</span>)
@@ -2853,9 +2821,9 @@ multi on
 </li></ol>
 </div>
 
-<div id="outline-container-sec-1-11-5" class="outline-4">
-<h4 id="sec-1-11-5"><span class="section-number-4">1.11.5</span> Open file to edit silently&#xa0;&#xa0;&#xa0;<span class="tag"><span class="file">file</span>&#xa0;<span class="buffer">buffer</span>&#xa0;<span class="open">open</span></span></h4>
-<div class="outline-text-4" id="text-1-11-5">
+<div id="outline-container-sec-1-12-5" class="outline-4">
+<h4 id="sec-1-12-5"><span class="section-number-4">1.12.5</span> Open file to edit silently&#xa0;&#xa0;&#xa0;<span class="tag"><span class="file">file</span>&#xa0;<span class="buffer">buffer</span>&#xa0;<span class="open">open</span></span></h4>
+<div class="outline-text-4" id="text-1-12-5">
 <p>
 Function: find-file-nonselect
 </p>
@@ -2883,9 +2851,9 @@ Open a file and returns a buffer:
 </div>
 </div>
 
-<div id="outline-container-sec-1-11-6" class="outline-4">
-<h4 id="sec-1-11-6"><span class="section-number-4">1.11.6</span> Edit File as Root&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="edit">edit</span></span></h4>
-<div class="outline-text-4" id="text-1-11-6">
+<div id="outline-container-sec-1-12-6" class="outline-4">
+<h4 id="sec-1-12-6"><span class="section-number-4">1.12.6</span> Edit File as Root&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="edit">edit</span></span></h4>
+<div class="outline-text-4" id="text-1-12-6">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">open-as-root</span> (filename)
@@ -2920,12 +2888,12 @@ Open a file and returns a buffer:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-12" class="outline-3">
-<h3 id="sec-1-12"><span class="section-number-3">1.12</span> File Name Manipulation</h3>
-<div class="outline-text-3" id="text-1-12">
-</div><div id="outline-container-sec-1-12-1" class="outline-4">
-<h4 id="sec-1-12-1"><span class="section-number-4">1.12.1</span> Get absolute path to current buffer's file.</h4>
-<div class="outline-text-4" id="text-1-12-1">
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> File Name Manipulation</h3>
+<div class="outline-text-3" id="text-1-13">
+</div><div id="outline-container-sec-1-13-1" class="outline-4">
+<h4 id="sec-1-13-1"><span class="section-number-4">1.13.1</span> Get absolute path to current buffer's file.</h4>
+<div class="outline-text-4" id="text-1-13-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (buffer-file-name)
@@ -2935,9 +2903,9 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-12-2" class="outline-4">
-<h4 id="sec-1-12-2"><span class="section-number-4">1.12.2</span> File name without path</h4>
-<div class="outline-text-4" id="text-1-12-2">
+<div id="outline-container-sec-1-13-2" class="outline-4">
+<h4 id="sec-1-13-2"><span class="section-number-4">1.13.2</span> File name without path</h4>
+<div class="outline-text-4" id="text-1-13-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (file-name-nondirectory <span class="org-string">"/home/archbox/.emacs.d/init.el"</span>)
@@ -2948,9 +2916,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-1-12-3" class="outline-4">
-<h4 id="sec-1-12-3"><span class="section-number-4">1.12.3</span> File name to base name</h4>
-<div class="outline-text-4" id="text-1-12-3">
+<div id="outline-container-sec-1-13-3" class="outline-4">
+<h4 id="sec-1-13-3"><span class="section-number-4">1.13.3</span> File name to base name</h4>
+<div class="outline-text-4" id="text-1-13-3">
 <p>
 Transform file name to name without path and extension.
 </p>
@@ -2964,9 +2932,9 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-12-4" class="outline-4">
-<h4 id="sec-1-12-4"><span class="section-number-4">1.12.4</span> Get file's path</h4>
-<div class="outline-text-4" id="text-1-12-4">
+<div id="outline-container-sec-1-13-4" class="outline-4">
+<h4 id="sec-1-13-4"><span class="section-number-4">1.13.4</span> Get file's path</h4>
+<div class="outline-text-4" id="text-1-13-4">
 <p>
 Get the directory that contais a file.
 </p>
@@ -2980,9 +2948,9 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-12-5" class="outline-4">
-<h4 id="sec-1-12-5"><span class="section-number-4">1.12.5</span> Expand file name</h4>
-<div class="outline-text-4" id="text-1-12-5">
+<div id="outline-container-sec-1-13-5" class="outline-4">
+<h4 id="sec-1-13-5"><span class="section-number-4">1.13.5</span> Expand file name</h4>
+<div class="outline-text-4" id="text-1-13-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (expand-file-name <span class="org-string">"."</span>)
@@ -3002,9 +2970,9 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-12-6" class="outline-4">
-<h4 id="sec-1-12-6"><span class="section-number-4">1.12.6</span> Replace file extension</h4>
-<div class="outline-text-4" id="text-1-12-6">
+<div id="outline-container-sec-1-13-6" class="outline-4">
+<h4 id="sec-1-13-6"><span class="section-number-4">1.13.6</span> Replace file extension</h4>
+<div class="outline-text-4" id="text-1-13-6">
 <p>
 Example: It will replace the extension of file name init.el to
 init.py. Note: it will not modify the file.
@@ -3044,13 +3012,13 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-13" class="outline-3">
-<h3 id="sec-1-13"><span class="section-number-3">1.13</span> Directory&#xa0;&#xa0;&#xa0;<span class="tag"><span class="directory">directory</span></span></h3>
-<div class="outline-text-3" id="text-1-13">
-</div><div id="outline-container-sec-1-13-1" class="outline-4">
-<h4 id="sec-1-13-1"><span class="section-number-4">1.13.1</span> Open directory</h4>
-<div class="outline-text-4" id="text-1-13-1">
-</div><ol class="org-ol"><li><a id="sec-1-13-1-1" name="sec-1-13-1-1"></a>Open directory in current window<br  /><div class="outline-text-5" id="text-1-13-1-1">
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14"><span class="section-number-3">1.14</span> Directory&#xa0;&#xa0;&#xa0;<span class="tag"><span class="directory">directory</span></span></h3>
+<div class="outline-text-3" id="text-1-14">
+</div><div id="outline-container-sec-1-14-1" class="outline-4">
+<h4 id="sec-1-14-1"><span class="section-number-4">1.14.1</span> Open directory</h4>
+<div class="outline-text-4" id="text-1-14-1">
+</div><ol class="org-ol"><li><a id="sec-1-14-1-1" name="sec-1-14-1-1"></a>Open directory in current window<br  /><div class="outline-text-5" id="text-1-14-1-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(dired <span class="org-string">"/var/log"</span>)
@@ -3059,7 +3027,7 @@ ELISP&gt;
 </div>
 </li>
 
-<li><a id="sec-1-13-1-2" name="sec-1-13-1-2"></a>Open directory in another window<br  /><div class="outline-text-5" id="text-1-13-1-2">
+<li><a id="sec-1-14-1-2" name="sec-1-14-1-2"></a>Open directory in another window<br  /><div class="outline-text-5" id="text-1-14-1-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(dired-other-window <span class="org-string">"/var/log"</span>)
@@ -3068,7 +3036,7 @@ ELISP&gt;
 </div>
 </li>
 
-<li><a id="sec-1-13-1-3" name="sec-1-13-1-3"></a>Open directory in another frame<br  /><div class="outline-text-5" id="text-1-13-1-3">
+<li><a id="sec-1-14-1-3" name="sec-1-14-1-3"></a>Open directory in another frame<br  /><div class="outline-text-5" id="text-1-14-1-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(dired-other-frame <span class="org-string">"/var/log"</span>)
@@ -3084,12 +3052,12 @@ ELISP&gt;
 </li></ol>
 </div>
 
-<div id="outline-container-sec-1-13-2" class="outline-4">
-<h4 id="sec-1-13-2"><span class="section-number-4">1.13.2</span> Create directory</h4>
+<div id="outline-container-sec-1-14-2" class="outline-4">
+<h4 id="sec-1-14-2"><span class="section-number-4">1.14.2</span> Create directory</h4>
 </div>
-<div id="outline-container-sec-1-13-3" class="outline-4">
-<h4 id="sec-1-13-3"><span class="section-number-4">1.13.3</span> List directory</h4>
-<div class="outline-text-4" id="text-1-13-3">
+<div id="outline-container-sec-1-14-3" class="outline-4">
+<h4 id="sec-1-14-3"><span class="section-number-4">1.14.3</span> List directory</h4>
+<div class="outline-text-4" id="text-1-14-3">
 <p>
 Get directory content
 </p>
@@ -3174,12 +3142,12 @@ ELISP&gt; (directory-files <span class="org-string">"/etc/"</span> nil <span cla
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-14" class="outline-3">
-<h3 id="sec-1-14"><span class="section-number-3">1.14</span> Dired mode snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="directory">directory</span>&#xa0;<span class="dired">dired</span></span></h3>
-<div class="outline-text-3" id="text-1-14">
-</div><div id="outline-container-sec-1-14-1" class="outline-4">
-<h4 id="sec-1-14-1"><span class="section-number-4">1.14.1</span> Overview</h4>
-<div class="outline-text-4" id="text-1-14-1">
+<div id="outline-container-sec-1-15" class="outline-3">
+<h3 id="sec-1-15"><span class="section-number-3">1.15</span> Dired mode snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="directory">directory</span>&#xa0;<span class="dired">dired</span></span></h3>
+<div class="outline-text-3" id="text-1-15">
+</div><div id="outline-container-sec-1-15-1" class="outline-4">
+<h4 id="sec-1-15-1"><span class="section-number-4">1.15.1</span> Overview</h4>
+<div class="outline-text-4" id="text-1-15-1">
 <p>
 The dired mode is the mode used by Emacs to browser directories.
 </p>
@@ -3194,9 +3162,9 @@ Source: <a href="https://gist.github.com/hiroina/4702961">hiroina/.emacs</a>
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-2" class="outline-4">
-<h4 id="sec-1-14-2"><span class="section-number-4">1.14.2</span> Copy path of file at point</h4>
-<div class="outline-text-4" id="text-1-14-2">
+<div id="outline-container-sec-1-15-2" class="outline-4">
+<h4 id="sec-1-15-2"><span class="section-number-4">1.15.2</span> Copy path of file at point</h4>
+<div class="outline-text-4" id="text-1-15-2">
 <ul class="org-ul">
 <li>Copy path of file at point.
 </li>
@@ -3205,23 +3173,22 @@ Source: <a href="https://gist.github.com/hiroina/4702961">hiroina/.emacs</a>
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">dired-copy-path</span> ()
-  <span class="org-doc">"In dired, copy file path to kill-buffer.  At 2nd time it copy current directory to kill-buffer."</span>
+  <span class="org-doc">"In dired, copy file path to kill-buffer.  </span>
+<span class="org-doc">At 2nd time it copy current directory to kill-buffer."</span>
   (<span class="org-keyword">interactive</span>)
   (<span class="org-keyword">let</span> (path)
     (<span class="org-keyword">setq</span> path (dired-file-name-at-point))
-        (<span class="org-keyword">if</span> (string= path (current-kill 0 1)) (<span class="org-keyword">setq</span> path (dired-current-directory)))
+    (<span class="org-keyword">if</span> (string= path (current-kill 0 1)) (<span class="org-keyword">setq</span> path (dired-current-directory)))
     (message path)
-    (kill-new path)
-  )
-)
+    (kill-new path)))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-3" class="outline-4">
-<h4 id="sec-1-14-3"><span class="section-number-4">1.14.3</span> Paste a file from clibpboard</h4>
-<div class="outline-text-4" id="text-1-14-3">
+<div id="outline-container-sec-1-15-3" class="outline-4">
+<h4 id="sec-1-15-3"><span class="section-number-4">1.15.3</span> Paste a file from clibpboard</h4>
+<div class="outline-text-4" id="text-1-15-3">
 <p>
 This command pastes a file which path is stored in clibpoard.
 </p>
@@ -3250,7 +3217,6 @@ manager.
                            (buffer-substring-no-properties
                             (point-min)
                             (point-max)))))
-
     (copy-file (clipboard-get) <span class="org-string">"."</span>)
     (revert-buffer)))
 </pre>
@@ -3258,9 +3224,9 @@ manager.
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-4" class="outline-4">
-<h4 id="sec-1-14-4"><span class="section-number-4">1.14.4</span> Create empty file (touch)</h4>
-<div class="outline-text-4" id="text-1-14-4">
+<div id="outline-container-sec-1-15-4" class="outline-4">
+<h4 id="sec-1-15-4"><span class="section-number-4">1.15.4</span> Create empty file (touch)</h4>
+<div class="outline-text-4" id="text-1-15-4">
 <ul class="org-ul">
 <li>Create empty file at current directory opened in dired mode.
 </li>
@@ -3271,70 +3237,56 @@ manager.
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">dired-touch</span> ()
   <span class="org-doc">"Creates empty file at current directory."</span>
   (<span class="org-keyword">interactive</span>)
-
   (append-to-file <span class="org-string">""</span> nil (read-string <span class="org-string">"New file: "</span>))
   (<span class="org-keyword">if</span> (equal major-mode 'dired-mode)
-
-      (revert-buffer)
-      ))
+      (revert-buffer)))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-5" class="outline-4">
-<h4 id="sec-1-14-5"><span class="section-number-4">1.14.5</span> Open multiple marked files</h4>
-<div class="outline-text-4" id="text-1-14-5">
+<div id="outline-container-sec-1-15-5" class="outline-4">
+<h4 id="sec-1-15-5"><span class="section-number-4">1.15.5</span> Open multiple marked files</h4>
+<div class="outline-text-4" id="text-1-15-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">dired-open-files</span> (files)
-  <span class="org-doc">"</span>
-<span class="org-doc">  Open all marked files in dired mode with m.</span>
-
-<span class="org-doc">  Usage:</span>
-<span class="org-doc">        1. Mark the files with m</span>
-<span class="org-doc">        2. M-x dired-open-files</span>
-<span class="org-doc">  "</span>
-  (<span class="org-keyword">interactive</span>  (list (dired-get-marked-files)) )
-
-  (mapc #'find-file files)
-
-  )
+  <span class="org-doc">"Open all marked files in dired mode with m.</span>
+<span class="org-doc">Usage:</span>
+<span class="org-doc">1. Mark the files with m</span>
+<span class="org-doc">2. M-x dired-open-files"</span>
+  (<span class="org-keyword">interactive</span>
+   (list (dired-get-marked-files)) )
+  (mapc #'find-file files))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-6" class="outline-4">
-<h4 id="sec-1-14-6"><span class="section-number-4">1.14.6</span> Close multiple marked files</h4>
-<div class="outline-text-4" id="text-1-14-6">
+<div id="outline-container-sec-1-15-6" class="outline-4">
+<h4 id="sec-1-15-6"><span class="section-number-4">1.15.6</span> Close multiple marked files</h4>
+<div class="outline-text-4" id="text-1-15-6">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">setq</span> lexical-binding t)
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">compose</span> (fn1 fn2)
   (<span class="org-keyword">let</span> ((lexical-binding t))
-
     (<span class="org-keyword">lambda</span> (x)
-       (funcall fn2 (funcall fn1 x))
-    )
-  ))
+       (funcall fn2 (funcall fn1 x)))))
+
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">dired-close-files</span> (files)
-
   (<span class="org-keyword">interactive</span>  (list (dired-get-marked-files)) )
-
-  (mapc (compose #'get-file-buffer #'kill-buffer) files)
-
-  )
+  (mapc (compose #'get-file-buffer #'kill-buffer) files))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-7" class="outline-4">
-<h4 id="sec-1-14-7"><span class="section-number-4">1.14.7</span> Open a file with default system application&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="file">file</span>&#xa0;<span class="open">open</span>&#xa0;<span class="system">system</span></span></h4>
-<div class="outline-text-4" id="text-1-14-7">
+<div id="outline-container-sec-1-15-7" class="outline-4">
+<h4 id="sec-1-15-7"><span class="section-number-4">1.15.7</span> Open a file with default system application&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="file">file</span>&#xa0;<span class="open">open</span>&#xa0;<span class="system">system</span></span></h4>
+<div class="outline-text-4" id="text-1-15-7">
 <p>
 Usage. Select a file in dired mode and enter <code>M-x dired-xdg</code>
 </p>
@@ -3353,20 +3305,18 @@ application.
 
       <span class="org-comment-delimiter">;;; </span><span class="org-comment">Linux</span>
       (gnu/linux      (<span class="org-keyword">let</span> ((process-connection-type  nil))
-
                         (start-process
                             <span class="org-string">"proc"</span>
                             nil
-                                          <span class="org-comment-delimiter">;; </span><span class="org-comment">Command</span>
+                            <span class="org-comment-delimiter">;; </span><span class="org-comment">Command</span>
                             <span class="org-string">"xdg-open"</span> (expand-file-name filename))))
 
       <span class="org-comment-delimiter">;;; </span><span class="org-comment">Free BSD OS</span>
       (gnu/kfreebsd    (<span class="org-keyword">let</span> ((process-connection-type  nil))
-
                         (start-process
                             <span class="org-string">"proc"</span>
                             nil
-                                          <span class="org-comment-delimiter">;; </span><span class="org-comment">Command</span>
+                            <span class="org-comment-delimiter">;; </span><span class="org-comment">Command</span>
                             <span class="org-string">"xdg-open"</span> (expand-file-name filename))))
 
       <span class="org-comment-delimiter">;; </span><span class="org-comment">Mac OSX - (Not tested )</span>
@@ -3382,9 +3332,7 @@ application.
                      nil
                      <span class="org-comment-delimiter">;; </span><span class="org-comment">Command</span>
                      <span class="org-string">"cmd"</span>  <span class="org-string">"/C"</span>  <span class="org-string">"start"</span> <span class="org-string">""</span> (expand-file-name filename)
-                      )
-
-         )))
+                      ))))
 </pre>
 </div>
 
@@ -3407,9 +3355,9 @@ Function: dired-xdg
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-8" class="outline-4">
-<h4 id="sec-1-14-8"><span class="section-number-4">1.14.8</span> Close all dired buffers</h4>
-<div class="outline-text-4" id="text-1-14-8">
+<div id="outline-container-sec-1-15-8" class="outline-4">
+<h4 id="sec-1-15-8"><span class="section-number-4">1.15.8</span> Close all dired buffers</h4>
+<div class="outline-text-4" id="text-1-15-8">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">dired-close-all</span> ()
@@ -3426,9 +3374,9 @@ Function: dired-xdg
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-9" class="outline-4">
-<h4 id="sec-1-14-9"><span class="section-number-4">1.14.9</span> Browse bookmarked directories&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="directory">directory</span>&#xa0;<span class="helm">helm</span>&#xa0;<span class="browse">browse</span></span></h4>
-<div class="outline-text-4" id="text-1-14-9">
+<div id="outline-container-sec-1-15-9" class="outline-4">
+<h4 id="sec-1-15-9"><span class="section-number-4">1.15.9</span> Browse bookmarked directories&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span>&#xa0;<span class="directory">directory</span>&#xa0;<span class="helm">helm</span>&#xa0;<span class="browse">browse</span></span></h4>
+<div class="outline-text-4" id="text-1-15-9">
 <p>
 The function <code>M-x dired-bookmarks</code> opens a helm menu where the user
 can select its favorites directories. It provides quick directory
@@ -3470,9 +3418,9 @@ navigation.
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-10" class="outline-4">
-<h4 id="sec-1-14-10"><span class="section-number-4">1.14.10</span> Filter dired buffer by file extensions</h4>
-<div class="outline-text-4" id="text-1-14-10">
+<div id="outline-container-sec-1-15-10" class="outline-4">
+<h4 id="sec-1-15-10"><span class="section-number-4">1.15.10</span> Filter dired buffer by file extensions</h4>
+<div class="outline-text-4" id="text-1-15-10">
 <p>
 Usage:
 </p>
@@ -3525,9 +3473,9 @@ The key (') quote can be used to invoke this command:
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-11" class="outline-4">
-<h4 id="sec-1-14-11"><span class="section-number-4">1.14.11</span> Filter dired buffer by regex</h4>
-<div class="outline-text-4" id="text-1-14-11">
+<div id="outline-container-sec-1-15-11" class="outline-4">
+<h4 id="sec-1-15-11"><span class="section-number-4">1.15.11</span> Filter dired buffer by regex</h4>
+<div class="outline-text-4" id="text-1-15-11">
 <p>
 This command only displays files matching the given regex (Emacs' regex).
 </p>
@@ -3551,9 +3499,9 @@ only show file names ending with .pdf. To display all files again type 'g'.
 </div>
 </div>
 
-<div id="outline-container-sec-1-14-12" class="outline-4">
-<h4 id="sec-1-14-12"><span class="section-number-4">1.14.12</span> Open directory at point with Microsoft Explorer in Windows OS.</h4>
-<div class="outline-text-4" id="text-1-14-12">
+<div id="outline-container-sec-1-15-12" class="outline-4">
+<h4 id="sec-1-15-12"><span class="section-number-4">1.15.12</span> Open directory at point with Microsoft Explorer in Windows OS.</h4>
+<div class="outline-text-4" id="text-1-15-12">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">dired-exec-explorer</span> ()
@@ -3565,20 +3513,18 @@ only show file names ending with .pdf. To display all files again type 'g'.
     (<span class="org-keyword">setq</span> path (replace-regexp-in-string <span class="org-string">"/"</span> <span class="org-string">"\\\\"</span> path))
     (message path)
     <span class="org-comment-delimiter">;</span><span class="org-comment">(kill-new path)</span>
-    (start-process <span class="org-string">"explorer"</span> nil <span class="org-string">"explorer"</span> (concat <span class="org-string">"/select,"</span> path))
-  )
-)
+    (start-process <span class="org-string">"explorer"</span> nil <span class="org-string">"explorer"</span> (concat <span class="org-string">"/select,"</span> path))))
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-15" class="outline-3">
-<h3 id="sec-1-15"><span class="section-number-3">1.15</span> Date Time</h3>
-<div class="outline-text-3" id="text-1-15">
-</div><div id="outline-container-sec-1-15-1" class="outline-4">
-<h4 id="sec-1-15-1"><span class="section-number-4">1.15.1</span> Overview</h4>
-<div class="outline-text-4" id="text-1-15-1">
+<div id="outline-container-sec-1-16" class="outline-3">
+<h3 id="sec-1-16"><span class="section-number-3">1.16</span> Date Time</h3>
+<div class="outline-text-3" id="text-1-16">
+</div><div id="outline-container-sec-1-16-1" class="outline-4">
+<h4 id="sec-1-16-1"><span class="section-number-4">1.16.1</span> Overview</h4>
+<div class="outline-text-4" id="text-1-16-1">
 <p>
 References:
 </p>
@@ -3593,9 +3539,9 @@ References:
 </div>
 </div>
 
-<div id="outline-container-sec-1-15-2" class="outline-4">
-<h4 id="sec-1-15-2"><span class="section-number-4">1.15.2</span> Function format-time-string</h4>
-<div class="outline-text-4" id="text-1-15-2">
+<div id="outline-container-sec-1-16-2" class="outline-4">
+<h4 id="sec-1-16-2"><span class="section-number-4">1.16.2</span> Function format-time-string</h4>
+<div class="outline-text-4" id="text-1-16-2">
 <p>
 Format date and time:
 </p>
@@ -3625,9 +3571,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-1-15-3" class="outline-4">
-<h4 id="sec-1-15-3"><span class="section-number-4">1.15.3</span> Function current-time</h4>
-<div class="outline-text-4" id="text-1-15-3">
+<div id="outline-container-sec-1-16-3" class="outline-4">
+<h4 id="sec-1-16-3"><span class="section-number-4">1.16.3</span> Function current-time</h4>
+<div class="outline-text-4" id="text-1-16-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (current-time)
@@ -3637,9 +3583,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-1-15-4" class="outline-4">
-<h4 id="sec-1-15-4"><span class="section-number-4">1.15.4</span> Function current-time-string</h4>
-<div class="outline-text-4" id="text-1-15-4">
+<div id="outline-container-sec-1-16-4" class="outline-4">
+<h4 id="sec-1-16-4"><span class="section-number-4">1.16.4</span> Function current-time-string</h4>
+<div class="outline-text-4" id="text-1-16-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (current-time-string)
@@ -3650,9 +3596,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-1-15-5" class="outline-4">
-<h4 id="sec-1-15-5"><span class="section-number-4">1.15.5</span> Function float-time</h4>
-<div class="outline-text-4" id="text-1-15-5">
+<div id="outline-container-sec-1-16-5" class="outline-4">
+<h4 id="sec-1-16-5"><span class="section-number-4">1.16.5</span> Function float-time</h4>
+<div class="outline-text-4" id="text-1-16-5">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (float-time)
@@ -3663,9 +3609,9 @@ ELISP&gt;
 </div>
 </div>
 
-<div id="outline-container-sec-1-15-6" class="outline-4">
-<h4 id="sec-1-15-6"><span class="section-number-4">1.15.6</span> Function current-time-zone</h4>
-<div class="outline-text-4" id="text-1-15-6">
+<div id="outline-container-sec-1-16-6" class="outline-4">
+<h4 id="sec-1-16-6"><span class="section-number-4">1.16.6</span> Function current-time-zone</h4>
+<div class="outline-text-4" id="text-1-16-6">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (current-time-zone)
@@ -3677,12 +3623,12 @@ ELISP&gt;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-16" class="outline-3">
-<h3 id="sec-1-16"><span class="section-number-3">1.16</span> Emacs Introspection</h3>
-<div class="outline-text-3" id="text-1-16">
-</div><div id="outline-container-sec-1-16-1" class="outline-4">
-<h4 id="sec-1-16-1"><span class="section-number-4">1.16.1</span> User init file</h4>
-<div class="outline-text-4" id="text-1-16-1">
+<div id="outline-container-sec-1-17" class="outline-3">
+<h3 id="sec-1-17"><span class="section-number-3">1.17</span> Emacs Introspection</h3>
+<div class="outline-text-3" id="text-1-17">
+</div><div id="outline-container-sec-1-17-1" class="outline-4">
+<h4 id="sec-1-17-1"><span class="section-number-4">1.17.1</span> User init file</h4>
+<div class="outline-text-4" id="text-1-17-1">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; user-init-file
@@ -3695,9 +3641,9 @@ ELISP&gt; (expand-file-name user-init-file)
 </div>
 </div>
 
-<div id="outline-container-sec-1-16-2" class="outline-4">
-<h4 id="sec-1-16-2"><span class="section-number-4">1.16.2</span> User Emacs Directory</h4>
-<div class="outline-text-4" id="text-1-16-2">
+<div id="outline-container-sec-1-17-2" class="outline-4">
+<h4 id="sec-1-17-2"><span class="section-number-4">1.17.2</span> User Emacs Directory</h4>
+<div class="outline-text-4" id="text-1-17-2">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; user-emacs-directory
@@ -3710,15 +3656,15 @@ ELISP&gt; (expand-file-name user-emacs-directory)
 </div>
 </div>
 
-<div id="outline-container-sec-1-16-3" class="outline-4">
-<h4 id="sec-1-16-3"><span class="section-number-4">1.16.3</span> Enviroment Variables</h4>
+<div id="outline-container-sec-1-17-3" class="outline-4">
+<h4 id="sec-1-17-3"><span class="section-number-4">1.17.3</span> Enviroment Variables</h4>
 </div>
-<div id="outline-container-sec-1-16-4" class="outline-4">
-<h4 id="sec-1-16-4"><span class="section-number-4">1.16.4</span> Get current Operating System</h4>
+<div id="outline-container-sec-1-17-4" class="outline-4">
+<h4 id="sec-1-17-4"><span class="section-number-4">1.17.4</span> Get current Operating System</h4>
 </div>
-<div id="outline-container-sec-1-16-5" class="outline-4">
-<h4 id="sec-1-16-5"><span class="section-number-4">1.16.5</span> Test if Emacs is running in terminal or in window system</h4>
-<div class="outline-text-4" id="text-1-16-5">
+<div id="outline-container-sec-1-17-5" class="outline-4">
+<h4 id="sec-1-17-5"><span class="section-number-4">1.17.5</span> Test if Emacs is running in terminal or in window system</h4>
+<div class="outline-text-4" id="text-1-17-5">
 <p>
 The variable <span class="underline">window-system</span> is the name of window system through
 which the selected frame is displayed.
@@ -3766,12 +3712,12 @@ Its value is a symbol:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-17" class="outline-3">
-<h3 id="sec-1-17"><span class="section-number-3">1.17</span> Web Browser&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="browser">browser</span></span></h3>
-<div class="outline-text-3" id="text-1-17">
-</div><div id="outline-container-sec-1-17-1" class="outline-4">
-<h4 id="sec-1-17-1"><span class="section-number-4">1.17.1</span> Browse Url</h4>
-<div class="outline-text-4" id="text-1-17-1">
+<div id="outline-container-sec-1-18" class="outline-3">
+<h3 id="sec-1-18"><span class="section-number-3">1.18</span> Web Browser&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="browser">browser</span></span></h3>
+<div class="outline-text-3" id="text-1-18">
+</div><div id="outline-container-sec-1-18-1" class="outline-4">
+<h4 id="sec-1-18-1"><span class="section-number-4">1.18.1</span> Browse Url</h4>
+<div class="outline-text-4" id="text-1-18-1">
 <p>
 Open <a href="http://www.yandex.com">http://www.yandex.com</a> in the web browser
 </p>
@@ -3789,18 +3735,17 @@ Function to open Yandex.com. Usage M-x <span class="underline">open-yandex</span
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">open-yandex</span> ()
-  <span class="org-doc">"Open the web site http://www.yandex.com"</span>
+  <span class="org-doc">"Open the web site http://www.yandex.com."</span>
   (<span class="org-keyword">interactive</span>)
-  (browse-url <span class="org-string">"http://www.yandex.com"</span>)
-  )
+  (browse-url <span class="org-string">"http://www.yandex.com"</span>))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-17-2" class="outline-4">
-<h4 id="sec-1-17-2"><span class="section-number-4">1.17.2</span> Browser Url setting the web browser</h4>
-<div class="outline-text-4" id="text-1-17-2">
+<div id="outline-container-sec-1-18-2" class="outline-4">
+<h4 id="sec-1-18-2"><span class="section-number-4">1.18.2</span> Browser Url setting the web browser</h4>
+<div class="outline-text-4" id="text-1-18-2">
 <p>
 Open url with firefox
 </p>
@@ -3855,10 +3800,10 @@ Open url with Emacs eww browser
 </div>
 </div>
 
-<div id="outline-container-sec-1-17-3" class="outline-4">
-<h4 id="sec-1-17-3"><span class="section-number-4">1.17.3</span> Search Web sites with Emacs</h4>
-<div class="outline-text-4" id="text-1-17-3">
-</div><ol class="org-ol"><li><a id="sec-1-17-3-1" name="sec-1-17-3-1"></a>Search google<br  /><div class="outline-text-5" id="text-1-17-3-1">
+<div id="outline-container-sec-1-18-3" class="outline-4">
+<h4 id="sec-1-18-3"><span class="section-number-4">1.18.3</span> Search Web sites with Emacs&#xa0;&#xa0;&#xa0;<span class="tag"><span class="web">web</span>&#xa0;<span class="search">search</span>&#xa0;<span class="url">url</span>&#xa0;<span class="browser">browser</span></span></h4>
+<div class="outline-text-4" id="text-1-18-3">
+</div><ol class="org-ol"><li><a id="sec-1-18-3-1" name="sec-1-18-3-1"></a>Search google<br  /><div class="outline-text-5" id="text-1-18-3-1">
 <p>
 Usage: M-x search-google
 </p>
@@ -3869,14 +3814,17 @@ Usage: M-x search-google
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">search-google</span> ()
    (<span class="org-keyword">interactive</span>)
-   <span class="org-string">"Search www.google.ca"</span>
-   (browse-url (format <span class="org-string">"http://www.google.ca?gws_rd=ssl#q=%s"</span> (url-encode-url (read-string <span class="org-string">"Google: "</span>)))))
+   <span class="org-string">"Search www.google.ca."</span>
+   (browse-url
+    (format <span class="org-string">"http://www.google.ca?gws_rd=ssl#q=%s"</span>
+            (url-encode-url
+             (read-string <span class="org-string">"Google: "</span>)))))
 </pre>
 </div>
 </div>
 </li>
 
-<li><a id="sec-1-17-3-2" name="sec-1-17-3-2"></a>Search a specific url site with google<br  /><div class="outline-text-5" id="text-1-17-3-2">
+<li><a id="sec-1-18-3-2" name="sec-1-18-3-2"></a>Search a specific url site with google<br  /><div class="outline-text-5" id="text-1-18-3-2">
 <p>
 Usage:
 </p>
@@ -3920,7 +3868,7 @@ Usage:
 </div>
 </li>
 
-<li><a id="sec-1-17-3-3" name="sec-1-17-3-3"></a>Search github<br  /><div class="outline-text-5" id="text-1-17-3-3">
+<li><a id="sec-1-18-3-3" name="sec-1-18-3-3"></a>Search github<br  /><div class="outline-text-5" id="text-1-18-3-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">require</span> '<span class="org-constant">url-util</span>)
@@ -3928,51 +3876,66 @@ Usage:
 (<span class="org-keyword">defun</span> <span class="org-function-name">search-github</span> ()
    (<span class="org-keyword">interactive</span>)
    <span class="org-string">"Search www.google.ca"</span>
-   (browse-url (format <span class="org-string">"https://github.com/search?q=%s"</span> (url-encode-url (read-string <span class="org-string">"Github Search: "</span>)))))
+   (browse-url
+    (format <span class="org-string">"https://github.com/search?q=%s"</span>
+            (url-encode-url
+             (read-string <span class="org-string">"Github Search: "</span>)))))
 </pre>
 </div>
 </div>
 </li>
 
-<li><a id="sec-1-17-3-4" name="sec-1-17-3-4"></a>Search gisthub<br  /><div class="outline-text-5" id="text-1-17-3-4">
+<li><a id="sec-1-18-3-4" name="sec-1-18-3-4"></a>Search gisthub<br  /><div class="outline-text-5" id="text-1-18-3-4">
 <div class="org-src-container">
 
-<pre class="src src-elisp">(<span class="org-keyword">require</span> '<span class="org-constant">url-util</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">url-util</span>)
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">search-gisthub</span> ()
-   <span class="org-doc">"</span>
-<span class="org-doc">    Search gisthub : http://gist.github.com</span>
-<span class="org-doc">    Usage: M-x search-gisthub</span>
-<span class="org-doc">   "</span>
+   <span class="org-doc">"Search gisthub : http://gist.github.com.</span>
+<span class="org-doc">Usage: M-x search-gisthub"</span>
    (<span class="org-keyword">interactive</span>)
-   (browse-url (format <span class="org-string">"https://gist.github.com/search?p=50&amp;q=%s&amp;ref=searchresults"</span> (url-encode-url (read-string <span class="org-string">"Gisthub Search: "</span>)))))
+   (browse-url
+    (format <span class="org-string">"https://gist.github.com/search?p=50&amp;q=%s&amp;ref=searchresults"</span>
+            (url-encode-url
+             (read-string <span class="org-string">"Gisthub Search: "</span>)))))
 </pre>
 </div>
 </div>
 </li>
 
-<li><a id="sec-1-17-3-5" name="sec-1-17-3-5"></a>Open Emacs Web Manual<br  /><div class="outline-text-5" id="text-1-17-3-5">
+<li><a id="sec-1-18-3-5" name="sec-1-18-3-5"></a>Open Emacs Web Manual<br  /><div class="outline-text-5" id="text-1-18-3-5">
 <div class="org-src-container">
 
-<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">open-emacs-manual</span> ()
-  <span class="org-doc">"</span>
-<span class="org-doc">  Open Emacs online Manual</span>
+<pre class="src src-elisp">  (<span class="org-keyword">defun</span> <span class="org-function-name">open-emacs-manual</span> ()
+    <span class="org-doc">"Open Emacs online Manual.</span>
+<span class="org-doc">Usage: M-x open-emacs-manual.</span>
+<span class="org-doc">It opens the web site: https://www.gnu.org/software/emacs/manual"</span>
+    (<span class="org-keyword">interactive</span>)
+    (browse-url <span class="org-string">"https://www.gnu.org/software/emacs/manual/"</span>))
+</pre>
+</div>
+</div>
+</li>
 
-<span class="org-doc">  Usage: M-x open-emacs-manual</span>
+<li><a id="sec-1-18-3-6" name="sec-1-18-3-6"></a>Search words in Merrian Webster dictionary<br  /><div class="outline-text-5" id="text-1-18-3-6">
+<div class="org-src-container">
 
-<span class="org-doc">  It opens the web site: https://www.gnu.org/software/emacs/manual</span>
-<span class="org-doc">  "</span>
+<pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">search/dictionary</span> ()
+  <span class="org-doc">"Search Merrian Webster Dictionary&#183;"</span>
   (<span class="org-keyword">interactive</span>)
-  (browse-url <span class="org-string">"https://www.gnu.org/software/emacs/manual/"</span>))
+  (browse-url
+    (format <span class="org-string">"https://www.merriam-webster.com/dictionary/%s"</span>
+            (url-encode-url
+             (read-string <span class="org-string">"Dictionary: "</span>)))))
 </pre>
 </div>
 </div>
 </li></ol>
 </div>
 
-<div id="outline-container-sec-1-17-4" class="outline-4">
-<h4 id="sec-1-17-4"><span class="section-number-4">1.17.4</span> Browser Inside Emacs</h4>
-<div class="outline-text-4" id="text-1-17-4">
+<div id="outline-container-sec-1-18-4" class="outline-4">
+<h4 id="sec-1-18-4"><span class="section-number-4">1.18.4</span> Browser Inside Emacs</h4>
+<div class="outline-text-4" id="text-1-18-4">
 <p>
 Emacs Provides a built-in lightweight web browser eww browser that can be used to
 quick access web sites in terminal or Emacs GUI.
@@ -4170,12 +4133,12 @@ See the browser http request:
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-18" class="outline-3">
-<h3 id="sec-1-18"><span class="section-number-3">1.18</span> Http Requests&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="request">request</span>&#xa0;<span class="url">url</span>&#xa0;<span class="network">network</span></span></h3>
-<div class="outline-text-3" id="text-1-18">
-</div><div id="outline-container-sec-1-18-1" class="outline-4">
-<h4 id="sec-1-18-1"><span class="section-number-4">1.18.1</span> Download File&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span></span></h4>
-<div class="outline-text-4" id="text-1-18-1">
+<div id="outline-container-sec-1-19" class="outline-3">
+<h3 id="sec-1-19"><span class="section-number-3">1.19</span> Http Requests&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="request">request</span>&#xa0;<span class="url">url</span>&#xa0;<span class="network">network</span></span></h3>
+<div class="outline-text-3" id="text-1-19">
+</div><div id="outline-container-sec-1-19-1" class="outline-4">
+<h4 id="sec-1-19-1"><span class="section-number-4">1.19.1</span> Download File&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span></span></h4>
+<div class="outline-text-4" id="text-1-19-1">
 <pre class="example">
 (url-copy-file &lt;url&gt; &lt;filename&gt;)
 </pre>
@@ -4189,9 +4152,9 @@ See the browser http request:
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-2" class="outline-4">
-<h4 id="sec-1-18-2"><span class="section-number-4">1.18.2</span> url-retrieve-synchronously&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span>&#xa0;<span class="sync">sync</span></span></h4>
-<div class="outline-text-4" id="text-1-18-2">
+<div id="outline-container-sec-1-19-2" class="outline-4">
+<h4 id="sec-1-19-2"><span class="section-number-4">1.19.2</span> url-retrieve-synchronously&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span>&#xa0;<span class="sync">sync</span></span></h4>
+<div class="outline-text-4" id="text-1-19-2">
 <pre class="example">
 (url-retrieve-synchronously URL &amp;optional SILENT INHIBIT-COOKIES)
 </pre>
@@ -4238,9 +4201,9 @@ Access-Control-Allow-Credentials: true
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-3" class="outline-4">
-<h4 id="sec-1-18-3"><span class="section-number-4">1.18.3</span> Download a file interactively&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span>&#xa0;<span class="file">file</span></span></h4>
-<div class="outline-text-4" id="text-1-18-3">
+<div id="outline-container-sec-1-19-3" class="outline-4">
+<h4 id="sec-1-19-3"><span class="section-number-4">1.19.3</span> Download a file interactively&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="download">download</span>&#xa0;<span class="file">file</span></span></h4>
+<div class="outline-text-4" id="text-1-19-3">
 <p>
 This function downloads a file from the url copied to clipboard and
 then asks the user to which file the data will be downloaded
@@ -4301,9 +4264,9 @@ Usage: <code>M-x download-url-to-file</code>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-18-4" class="outline-4">
-<h4 id="sec-1-18-4"><span class="section-number-4">1.18.4</span> Download a file and display it on a buffer&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="buffer">buffer</span>&#xa0;<span class="clipboard">clipboard</span></span></h4>
-<div class="outline-text-4" id="text-1-18-4">
+<div id="outline-container-sec-1-19-4" class="outline-4">
+<h4 id="sec-1-19-4"><span class="section-number-4">1.19.4</span> Download a file and display it on a buffer&#xa0;&#xa0;&#xa0;<span class="tag"><span class="http">http</span>&#xa0;<span class="web">web</span>&#xa0;<span class="buffer">buffer</span>&#xa0;<span class="clipboard">clipboard</span></span></h4>
+<div class="outline-text-4" id="text-1-19-4">
 <p>
 This command reads an url from the user and download the file content
 and displays it on a buffer without write a file to disk.
@@ -4364,9 +4327,9 @@ Example:
 </div>
 </div>
 
-<div id="outline-container-sec-1-18-5" class="outline-4">
-<h4 id="sec-1-18-5"><span class="section-number-4">1.18.5</span> Http and Post Request&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connections">connections</span>&#xa0;<span class="http">http</span></span></h4>
-<div class="outline-text-4" id="text-1-18-5">
+<div id="outline-container-sec-1-19-5" class="outline-4">
+<h4 id="sec-1-19-5"><span class="section-number-4">1.19.5</span> Http and Post Request&#xa0;&#xa0;&#xa0;<span class="tag"><span class="utils">utils</span>&#xa0;<span class="connections">connections</span>&#xa0;<span class="http">http</span></span></h4>
+<div class="outline-text-4" id="text-1-19-5">
 <p>
 <a href="http://qiita.com/sanryuu/items/eed79c7b99616e769e67">Source</a>
 </p>
@@ -4465,12 +4428,12 @@ ELISP&gt; (princ (url-http-post <span class="org-string">"http://httpbin.org/pos
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-19" class="outline-3">
-<h3 id="sec-1-19"><span class="section-number-3">1.19</span> Packages&#xa0;&#xa0;&#xa0;<span class="tag"><span class="package">package</span>&#xa0;<span class="install">install</span>&#xa0;<span class="library">library</span></span></h3>
-<div class="outline-text-3" id="text-1-19">
-</div><div id="outline-container-sec-1-19-1" class="outline-4">
-<h4 id="sec-1-19-1"><span class="section-number-4">1.19.1</span> Test if package is installed</h4>
-<div class="outline-text-4" id="text-1-19-1">
+<div id="outline-container-sec-1-20" class="outline-3">
+<h3 id="sec-1-20"><span class="section-number-3">1.20</span> Packages&#xa0;&#xa0;&#xa0;<span class="tag"><span class="package">package</span>&#xa0;<span class="install">install</span>&#xa0;<span class="library">library</span></span></h3>
+<div class="outline-text-3" id="text-1-20">
+</div><div id="outline-container-sec-1-20-1" class="outline-4">
+<h4 id="sec-1-20-1"><span class="section-number-4">1.20.1</span> Test if package is installed</h4>
+<div class="outline-text-4" id="text-1-20-1">
 <p>
 If the package is installed returns t (true) and nil otherwise.
 </p>
@@ -4489,12 +4452,12 @@ t
 </div>
 </div>
 
-<div id="outline-container-sec-1-19-2" class="outline-4">
-<h4 id="sec-1-19-2"><span class="section-number-4">1.19.2</span> Install a package if it is not installed</h4>
+<div id="outline-container-sec-1-20-2" class="outline-4">
+<h4 id="sec-1-20-2"><span class="section-number-4">1.20.2</span> Install a package if it is not installed</h4>
 </div>
-<div id="outline-container-sec-1-19-3" class="outline-4">
-<h4 id="sec-1-19-3"><span class="section-number-4">1.19.3</span> Install a single-file package from URL</h4>
-<div class="outline-text-4" id="text-1-19-3">
+<div id="outline-container-sec-1-20-3" class="outline-4">
+<h4 id="sec-1-20-3"><span class="section-number-4">1.20.3</span> Install a single-file package from URL</h4>
+<div class="outline-text-4" id="text-1-20-3">
 <p>
 This command install a single-file elisp package from a given URL to
 source file.
@@ -4543,12 +4506,12 @@ To find where the package was intalled type M-x find-library &lt;library-name&gt
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-20" class="outline-3">
-<h3 id="sec-1-20"><span class="section-number-3">1.20</span> Helm Snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="framework">framework</span>&#xa0;<span class="library">library</span>&#xa0;<span class="helm">helm</span></span></h3>
-<div class="outline-text-3" id="text-1-20">
-</div><div id="outline-container-sec-1-20-1" class="outline-4">
-<h4 id="sec-1-20-1"><span class="section-number-4">1.20.1</span> Switch between buffers in same directory</h4>
-<div class="outline-text-4" id="text-1-20-1">
+<div id="outline-container-sec-1-21" class="outline-3">
+<h3 id="sec-1-21"><span class="section-number-3">1.21</span> Helm Snippets&#xa0;&#xa0;&#xa0;<span class="tag"><span class="framework">framework</span>&#xa0;<span class="library">library</span>&#xa0;<span class="helm">helm</span></span></h3>
+<div class="outline-text-3" id="text-1-21">
+</div><div id="outline-container-sec-1-21-1" class="outline-4">
+<h4 id="sec-1-21-1"><span class="section-number-4">1.21.1</span> Switch between buffers in same directory</h4>
+<div class="outline-text-4" id="text-1-21-1">
 <p>
 Usage: M-x buffer/switch-in-directory
 </p>
@@ -4577,17 +4540,18 @@ This command switches between buffer with files that are in current directory.
    <span class="org-builtin">:prompt</span> <span class="org-string">"Buffer switch: "</span>
    <span class="org-builtin">:sources</span>  `((
                 (name       . <span class="org-string">"Dir: "</span>)
-                (candidates . ,(mapcar (<span class="org-keyword">lambda</span> (b) (cons (buffer-name b) b))
-                                       <span class="org-comment-delimiter">;; </span><span class="org-comment">filter buffers not in this directory (code bellow)</span>
-                                       (remove-if-not  (<span class="org-keyword">lambda</span> (b)
-                                                         (buffer/with-file-in-directory-p
-                                                          (<span class="org-keyword">or</span> (file-name-directory (buffer-file-name))
-                                                              default-directory
-                                                              )
-                                                          b
-                                                          ))
-                                                  (buffer-list)
-                                                  )))
+                (candidates . ,(mapcar
+                                (<span class="org-keyword">lambda</span> (b) (cons (buffer-name b) b))
+                                <span class="org-comment-delimiter">;; </span><span class="org-comment">filter buffers not in this directory (code bellow)</span>
+                                (remove-if-not  (<span class="org-keyword">lambda</span> (b)
+                                                  (buffer/with-file-in-directory-p
+                                                   (<span class="org-keyword">or</span> (file-name-directory (buffer-file-name))
+                                                       default-directory
+                                                       )
+                                                   b
+                                                   ))
+                                                (buffer-list)
+                                                )))
                 (action     . switch-to-buffer)
                 ))))
 </pre>
@@ -4595,9 +4559,9 @@ This command switches between buffer with files that are in current directory.
 </div>
 </div>
 
-<div id="outline-container-sec-1-20-2" class="outline-4">
-<h4 id="sec-1-20-2"><span class="section-number-4">1.20.2</span> Browser Recent files</h4>
-<div class="outline-text-4" id="text-1-20-2">
+<div id="outline-container-sec-1-21-2" class="outline-4">
+<h4 id="sec-1-21-2"><span class="section-number-4">1.21.2</span> Browser Recent files</h4>
+<div class="outline-text-4" id="text-1-21-2">
 <p>
 Usage: M-x helm-recent-files
 </p>
@@ -4608,7 +4572,6 @@ Usage: M-x helm-recent-files
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">helm-recent-files</span> ()
   (<span class="org-keyword">interactive</span>)
-
   (helm
    <span class="org-builtin">:prompt</span> <span class="org-string">"File: "</span>
    <span class="org-builtin">:sources</span>  `((
@@ -4627,9 +4590,9 @@ Usage: M-x helm-recent-files
 </div>
 </div>
 
-<div id="outline-container-sec-1-20-3" class="outline-4">
-<h4 id="sec-1-20-3"><span class="section-number-4">1.20.3</span> Browser Recent directories</h4>
-<div class="outline-text-4" id="text-1-20-3">
+<div id="outline-container-sec-1-21-3" class="outline-4">
+<h4 id="sec-1-21-3"><span class="section-number-4">1.21.3</span> Browser Recent directories</h4>
+<div class="outline-text-4" id="text-1-21-3">
 <p>
 Usage M-x helm-recent-dirs
 </p>
@@ -4640,40 +4603,34 @@ Usage M-x helm-recent-dirs
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">unique</span> (xs)
   <span class="org-doc">"Remove repeated elements from list xs</span>
-
-<span class="org-doc">  Example:</span>
-
-<span class="org-doc">  &gt; (unique '(x y a b 21 21 10 21 x y a ))</span>
-<span class="org-doc">  (x y a b 21 10)</span>
-<span class="org-doc">  "</span>
-  (<span class="org-keyword">let</span>
-    ((result nil))
-
+<span class="org-doc">Example:</span>
+<span class="org-doc">&gt; (unique '(x y a b 21 21 10 21 x y a ))</span>
+<span class="org-doc">(x y a b 21 10)."</span>
+  (<span class="org-keyword">let</span> ((result nil))
     (<span class="org-keyword">dolist</span> (x xs)
       (<span class="org-keyword">if</span> (not (member x result))
-          (<span class="org-keyword">push</span> x result)
-        ))
-    (reverse result)
-    ))
+          (<span class="org-keyword">push</span> x result)))
+    (reverse result)))
+
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">helm-recent-dirs</span> ()
   (<span class="org-keyword">interactive</span>)
-
   (helm
    <span class="org-builtin">:prompt</span> <span class="org-string">"Dir: "</span>
    <span class="org-builtin">:sources</span>  `((
                 (name       . <span class="org-string">"Dir: "</span>)
-                (candidates . (<span class="org-keyword">lambda</span> () (unique (map #'file-name-directory recentf-list))))
-                (action     . dired)
-                ))))
+                (candidates . (<span class="org-keyword">lambda</span> ()
+                                (unique
+                                 (map #'file-name-directory recentf-list))))
+                (action     . dired)))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-20-4" class="outline-4">
-<h4 id="sec-1-20-4"><span class="section-number-4">1.20.4</span> Launch ansync shell command with helm</h4>
-<div class="outline-text-4" id="text-1-20-4">
+<div id="outline-container-sec-1-21-4" class="outline-4">
+<h4 id="sec-1-21-4"><span class="section-number-4">1.21.4</span> Launch ansync shell command with helm</h4>
+<div class="outline-text-4" id="text-1-21-4">
 <p>
 This piece of code gets all executables in the $PATH variable and
 searche for one that matches the user input and then launches it. It
@@ -4687,11 +4644,7 @@ Usage: M-x helm-laucher
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">get-executables</span> ()
-
-  <span class="org-doc">"</span>
-<span class="org-doc">  Returns a list of all files available in the directories of the $PATH</span>
-<span class="org-doc">  variable.</span>
-<span class="org-doc">  "</span>
+  <span class="org-doc">"Returns a list of all files available in the directories of the $PATH variable."</span>
   (apply #'append
    (mapcar  (<span class="org-keyword">lambda</span> (p) (directory-files p t))
             (remove-if-not #'file-exists-p
@@ -4699,69 +4652,44 @@ Usage: M-x helm-laucher
 
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">run-async</span>  (<span class="org-type">&amp;optional</span> command)
-
   <span class="org-doc">"Run a shell command in asynchronous mode.</span>
-<span class="org-doc">   It doesn't block Emacs while the command</span>
-<span class="org-doc">   is running.</span>
-
-<span class="org-doc">   Usage:  (run-async \"python -m http.server\")</span>
-<span class="org-doc">           M-x run-async  -&gt; User enters a command.</span>
-<span class="org-doc">  "</span>
-
+<span class="org-doc">It doesn't block Emacs while the command is running.</span>
+<span class="org-doc">Usage:  (run-async \"python -m http.server\")</span>
+<span class="org-doc">M-x run-async  -&gt; User enters a command."</span>
   (<span class="org-keyword">interactive</span>)
-
   (apply #'start-process
-
          `(
-
-
            <span class="org-string">"proc-any"</span>          <span class="org-comment-delimiter">;; </span><span class="org-comment">We don't care about the application name</span>
-
            nil                 <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't name the buffer</span>
-
            ,@(split-string-and-unquote
-
               (<span class="org-keyword">if</span>  command
                    command
                    (read-string <span class="org-string">"Command: "</span>  )
-                  ))
+                  )))))
 
-           )))
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">run-async-lst</span> (<span class="org-type">&amp;rest</span> commands)
-  <span class="org-doc">"</span>
-<span class="org-doc">  Run a shell command in asynchronus mode, not blocking Emacs.</span>
-
-<span class="org-doc">  Usage:    &gt; (run-async-lst &lt;program&gt; &lt;argument 1&gt; &lt;agurment2&gt; ...)</span>
-<span class="org-doc">  Example:  &gt; (run-async \"thunar\" \"/usr/share/applications\")</span>
-<span class="org-doc">  "</span>
+  <span class="org-doc">"Run a shell command in asynchronus mode, not blocking Emacs.</span>
+<span class="org-doc">Usage:    &gt; (run-async-lst &lt;program&gt; &lt;argument 1&gt; &lt;agurment2&gt; ...)</span>
+<span class="org-doc">Example:  &gt; (run-async \"thunar\" \"/usr/share/applications\")"</span>
   (apply #'start-process
-
          `(
            <span class="org-string">"dontcare"</span>          <span class="org-comment-delimiter">;; </span><span class="org-comment">We don't care about the application name</span>
            nil                 <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't name the buffer</span>
            ,@commands
-
            )))
 
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">helm-launcher</span> ()
-
-  <span class="org-doc">" Launches applications available in $PATH directories in</span>
-<span class="org-doc">    asynchronous mode without Emacs wait for it.</span>
-<span class="org-doc">    Usage M-x heml-launcher</span>
-<span class="org-doc">  "</span>
+  <span class="org-doc">"Launches apps available in $PATH without blocking Emacs.</span>
+<span class="org-doc">Usage M-x heml-launcher"</span>
   (<span class="org-keyword">interactive</span>)
-
-  (<span class="org-keyword">let</span>
-      ((data      (mapcar (<span class="org-keyword">lambda</span> (p) (cons  (file-name-nondirectory p)
-                                             p
-                                             ))
-
-                          (get-executables)
-                          )
-        ))
-
+  (<span class="org-keyword">let</span> ((data  (mapcar (<span class="org-keyword">lambda</span> (p)
+                         (cons (file-name-nondirectory p)
+                               p
+                               ))
+                       (get-executables)
+                       )))
    (helm
    <span class="org-builtin">:prompt</span> <span class="org-string">"Shell: "</span>
    <span class="org-builtin">:sources</span>  `((
@@ -4781,9 +4709,9 @@ Usage: M-x helm-laucher
 </div>
 </div>
 
-<div id="outline-container-sec-1-20-5" class="outline-4">
-<h4 id="sec-1-20-5"><span class="section-number-4">1.20.5</span> Switch between buffers associated with files</h4>
-<div class="outline-text-4" id="text-1-20-5">
+<div id="outline-container-sec-1-21-5" class="outline-4">
+<h4 id="sec-1-21-5"><span class="section-number-4">1.21.5</span> Switch between buffers associated with files</h4>
+<div class="outline-text-4" id="text-1-21-5">
 <p>
 Switch between buffers associated with files.
 </p>
@@ -4791,86 +4719,60 @@ Switch between buffers associated with files.
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">switch-file</span> ()
-  <span class="org-doc">"</span>
-<span class="org-doc">  Switch between buffers that are associated with files.</span>
-<span class="org-doc">  Depends on helm.</span>
-
-
-<span class="org-doc">  Usage: M-x switch file.</span>
-
-<span class="org-doc">  "</span>
+  <span class="org-doc">"Switch between buffers that are associated with files.</span>
+<span class="org-doc">Usage: M-x switch file."</span>
   (<span class="org-keyword">interactive</span>)
-
-  (<span class="org-keyword">let</span> ((data  (mapcar (<span class="org-keyword">lambda</span> (b)  (cons (buffer-file-name b) b ))
-                       (remove-if-not #'buffer-file-name (buffer-list)))))
+  (<span class="org-keyword">let</span> ((data
+         (mapcar (<span class="org-keyword">lambda</span> (b)
+                   (cons (buffer-file-name b) b ))
+                 (remove-if-not #'buffer-file-name (buffer-list)))))
     (helm
      <span class="org-builtin">:prompt</span> <span class="org-string">"Buffer: "</span>
      <span class="org-builtin">:sources</span>  `((
                   (name       . <span class="org-string">"File Buffers"</span>)
                   (candidates . ,data)
                   (action     . switch-to-buffer)
-                  )))
-
-    ))
+                  )))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-20-6" class="outline-4">
-<h4 id="sec-1-20-6"><span class="section-number-4">1.20.6</span> Switch between Emacs major modes</h4>
-<div class="outline-text-4" id="text-1-20-6">
+<div id="outline-container-sec-1-21-6" class="outline-4">
+<h4 id="sec-1-21-6"><span class="section-number-4">1.21.6</span> Switch between Emacs major modes</h4>
+<div class="outline-text-4" id="text-1-21-6">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">helm-switch-mode</span> ()
-  <span class="org-doc">"</span>
-<span class="org-doc">   Switch between all major programming modes available in Emacs.</span>
-
-<span class="org-doc">   Usage: M-x helm-switch-mode</span>
-<span class="org-doc">  "</span>
+  <span class="org-doc">"Switch between all major programming modes available in Emacs.</span>
+<span class="org-doc">Usage: M-x helm-switch-mode."</span>
   (<span class="org-keyword">interactive</span>)
-
   (<span class="org-keyword">cl-flet</span> ((unique (xs)
                     (<span class="org-keyword">let</span>
                         ((result nil))
-
                       (<span class="org-keyword">dolist</span> (x xs)
                         (<span class="org-keyword">if</span> (not (member x result))
-                            (<span class="org-keyword">push</span> x result)
-                          ))
-                      (reverse result)
-                      )
-
-                    ))
-
+                            (<span class="org-keyword">push</span> x result)))
+                      (reverse result))))
     (helm
      <span class="org-builtin">:prompt</span> <span class="org-string">"Mode: "</span>
      <span class="org-builtin">:sources</span>  `((
                   (name       . <span class="org-string">"Emacs Major Modes"</span>)
-
                   (candidates . ,(unique (mapcar #'symbol-name
                                                  (remove-if-not #'symbolp
                                                    (mapcar #'cdr auto-mode-alist)))))
-
-
-
-                  (action     . ,(<span class="org-keyword">lambda</span> (m) (funcall (intern-soft m))))
-
-                  )))
-    )
-  )
+                  (action     . ,(<span class="org-keyword">lambda</span> (m) (funcall (intern-soft m)))))))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-20-7" class="outline-4">
-<h4 id="sec-1-20-7"><span class="section-number-4">1.20.7</span> Open a list of web sites</h4>
-<div class="outline-text-4" id="text-1-20-7">
+<div id="outline-container-sec-1-21-7" class="outline-4">
+<h4 id="sec-1-21-7"><span class="section-number-4">1.21.7</span> Open a list of web sites</h4>
+<div class="outline-text-4" id="text-1-21-7">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">setq</span> helm-url-default-url-list
-
       '(
         (<span class="org-string">"google"</span> . <span class="org-string">"http://www.google.ca"</span>)
         (<span class="org-string">"yandex"</span>  . <span class="org-string">"http://www.yandex.com"</span>)
@@ -4878,9 +4780,7 @@ Switch between buffers associated with files.
         (<span class="org-string">"/r/haskell"</span>. <span class="org-string">"http://www.reddit.com/r/haskell"</span>)
         (<span class="org-string">"/r/emacs"</span> . <span class="org-string">"http://www.reddit.com/r/emacs"</span>)
         (<span class="org-string">"/r/csharp"</span> . <span class="org-string">"http://www.reddit.com/r/csharp"</span>)
-        )
-
-      )
+        ))
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">helm-web</span> ()
   (<span class="org-keyword">interactive</span>)
@@ -4890,15 +4790,14 @@ Switch between buffers associated with files.
                   (name       . <span class="org-string">"Bookmarks"</span>)
                   (candidates . helm-url-default-url-list)
                   (action     . (<span class="org-keyword">lambda</span> (c) (browse-url (cdr c))) )
-                  )))
-  )
+                  ))))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-20-8" class="outline-4">
-<h4 id="sec-1-20-8"><span class="section-number-4">1.20.8</span> Interface Makefile</h4>
-<div class="outline-text-4" id="text-1-20-8">
+<div id="outline-container-sec-1-21-8" class="outline-4">
+<h4 id="sec-1-21-8"><span class="section-number-4">1.21.8</span> Interface Makefile</h4>
+<div class="outline-text-4" id="text-1-21-8">
 <p>
 This command extracts the build tasks from a Makefile and shows it as a
 helm menu where the user can select the task to be executed. It will be
@@ -4927,13 +4826,16 @@ Version1:
         (<span class="org-keyword">setq</span> pos (match-end 0)))
       matches)))
 
+
 (<span class="org-keyword">defun</span> <span class="org-function-name">helm-make</span> ()
   (<span class="org-keyword">interactive</span>)
-  (<span class="org-keyword">let</span> ((tasks    (re-seq <span class="org-string">"^\\w+"</span>
-                          (<span class="org-keyword">with-temp-buffer</span>
-                            (insert-file <span class="org-string">"Makefile"</span>)
-                            (buffer-substring-no-properties (point-min)
-                                                            (point-max)                                                            )))))
+  (<span class="org-keyword">let</span> ((tasks
+         (re-seq <span class="org-string">"^\\w+"</span>
+                 (<span class="org-keyword">with-temp-buffer</span>
+                   (insert-file <span class="org-string">"Makefile"</span>)
+                   (buffer-substring-no-properties
+                    (point-min)
+                    (point-max))))))
     (helm
      <span class="org-builtin">:prompt</span> <span class="org-string">"Makefile task: "</span>
      <span class="org-builtin">:sources</span>  `((
@@ -4943,8 +4845,7 @@ Version1:
                                   (start-process  <span class="org-string">"make"</span>
                                                   <span class="org-string">"*make*"</span>
                                                   <span class="org-string">"make"</span> task
-                                                  )))
-                  )))
+                                                  ))))))
     (switch-to-buffer <span class="org-string">"*make*"</span>)))
 </pre>
 </div>
@@ -4957,7 +4858,6 @@ Version2: Remove dependency re-seq.
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">helm-make2</span> ()
   (<span class="org-keyword">interactive</span>)
-
   (<span class="org-keyword">flet</span> ((re-seq2 (regexp string) (<span class="org-keyword">save-match-data</span>
                                     (<span class="org-keyword">let</span> ((pos 0)
                                           matches)
@@ -4965,12 +4865,13 @@ Version2: Remove dependency re-seq.
                                         (<span class="org-keyword">push</span> (match-string 0 string) matches)
                                         (<span class="org-keyword">setq</span> pos (match-end 0)))
                                       matches))))
-
     (<span class="org-keyword">let</span> ((tasks    (re-seq2 <span class="org-string">"^\\w+"</span>
                             (<span class="org-keyword">with-temp-buffer</span>
                               (insert-file <span class="org-string">"Makefile"</span>)
-                              (buffer-substring-no-properties (point-min)
-                                                              (point-max)                                                            )))))
+                              (buffer-substring-no-properties
+                               (point-min)
+                               (point-max)
+                               )))))
       (helm
        <span class="org-builtin">:prompt</span> <span class="org-string">"Makefile task: "</span>
        <span class="org-builtin">:sources</span>  `((
@@ -4980,8 +4881,7 @@ Version2: Remove dependency re-seq.
                                     (start-process  <span class="org-string">"make"</span>
                                                     <span class="org-string">"*make*"</span>
                                                     <span class="org-string">"make"</span> task
-                                                    )))
-                    )))
+                                                    ))))))
       (switch-to-buffer <span class="org-string">"*make*"</span>))))
 </pre>
 </div>
@@ -5013,12 +4913,12 @@ browse and clean.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-21" class="outline-3">
-<h3 id="sec-1-21"><span class="section-number-3">1.21</span> Persistence</h3>
-<div class="outline-text-3" id="text-1-21">
-</div><div id="outline-container-sec-1-21-1" class="outline-4">
-<h4 id="sec-1-21-1"><span class="section-number-4">1.21.1</span> Save and Reload Current Session</h4>
-<div class="outline-text-4" id="text-1-21-1">
+<div id="outline-container-sec-1-22" class="outline-3">
+<h3 id="sec-1-22"><span class="section-number-3">1.22</span> Persistence</h3>
+<div class="outline-text-3" id="text-1-22">
+</div><div id="outline-container-sec-1-22-1" class="outline-4">
+<h4 id="sec-1-22-1"><span class="section-number-4">1.22.1</span> Save and Reload Current Session</h4>
+<div class="outline-text-4" id="text-1-22-1">
 <p>
 Interactive Developement
 </p>
@@ -5143,9 +5043,9 @@ M-x load-session ;; All previous files in the session
 </div>
 </div>
 
-<div id="outline-container-sec-1-21-2" class="outline-4">
-<h4 id="sec-1-21-2"><span class="section-number-4">1.21.2</span> Save and Restore Current Window Configuration</h4>
-<div class="outline-text-4" id="text-1-21-2">
+<div id="outline-container-sec-1-22-2" class="outline-4">
+<h4 id="sec-1-22-2"><span class="section-number-4">1.22.2</span> Save and Restore Current Window Configuration</h4>
+<div class="outline-text-4" id="text-1-22-2">
 <p>
 Press &lt;F7&gt; to save the curren window configuration and &lt;F8&gt; to restore. The functions can also be executed with A-x save-view or A-x restore-view.
 </p>
@@ -5172,12 +5072,12 @@ Press &lt;F7&gt; to save the curren window configuration and &lt;F8&gt; to resto
 </div>
 </div>
 
-<div id="outline-container-sec-1-22" class="outline-3">
-<h3 id="sec-1-22"><span class="section-number-3">1.22</span> Non categorized</h3>
-<div class="outline-text-3" id="text-1-22">
-</div><div id="outline-container-sec-1-22-1" class="outline-4">
-<h4 id="sec-1-22-1"><span class="section-number-4">1.22.1</span> Save the scratch buffer and reload every Emacs startup</h4>
-<div class="outline-text-4" id="text-1-22-1">
+<div id="outline-container-sec-1-23" class="outline-3">
+<h3 id="sec-1-23"><span class="section-number-3">1.23</span> Non categorized</h3>
+<div class="outline-text-3" id="text-1-23">
+</div><div id="outline-container-sec-1-23-1" class="outline-4">
+<h4 id="sec-1-23-1"><span class="section-number-4">1.23.1</span> Save the scratch buffer and reload every Emacs startup</h4>
+<div class="outline-text-4" id="text-1-23-1">
 <p>
 Saves the scratch buffer to a file every times Emacs is closed.
 </p>
@@ -5224,9 +5124,9 @@ Source: <a href="https://gist.github.com/kobapan/034d5123321b32bb68ca">scratch.e
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-22-2" class="outline-4">
-<h4 id="sec-1-22-2"><span class="section-number-4">1.22.2</span> Code Navigation with Occur&#xa0;&#xa0;&#xa0;<span class="tag"><span class="edit">edit</span></span></h4>
-<div class="outline-text-4" id="text-1-22-2">
+<div id="outline-container-sec-1-23-2" class="outline-4">
+<h4 id="sec-1-23-2"><span class="section-number-4">1.23.2</span> Code Navigation with Occur&#xa0;&#xa0;&#xa0;<span class="tag"><span class="edit">edit</span></span></h4>
+<div class="outline-text-4" id="text-1-23-2">
 <p>
 The function <b>occur</b> is useful for code navigation and scan code
 statements, this function is invoked by M-x occur.
@@ -5247,8 +5147,7 @@ right side.
 <pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">python/scan-functions</span> ()
   (<span class="org-keyword">interactive</span>)
   (split-window-horizontally)
-  (occur <span class="org-string">"def"</span>)
-  )
+  (occur <span class="org-string">"def"</span>))
 </pre>
 </div>
 
@@ -5275,10 +5174,7 @@ Example:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">scan-code-tags</span> ()
-     <span class="org-doc">"</span>
-<span class="org-doc">     Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:</span>
-
-<span class="org-doc">     "</span>
+     <span class="org-doc">"Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:."</span>
      (<span class="org-keyword">interactive</span>)
      (split-window-horizontally)
      (occur <span class="org-string">"@FIXME:</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">@TODO:</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">@BUG:</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">@NOTE:"</span>))
@@ -5294,9 +5190,9 @@ Example:
 </div>
 </div>
 
-<div id="outline-container-sec-1-22-3" class="outline-4">
-<h4 id="sec-1-22-3"><span class="section-number-4">1.22.3</span> Quick edit and reload Emacs Configuration File.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="customization">customization</span></span></h4>
-<div class="outline-text-4" id="text-1-22-3">
+<div id="outline-container-sec-1-23-3" class="outline-4">
+<h4 id="sec-1-23-3"><span class="section-number-4">1.23.3</span> Quick edit and reload Emacs Configuration File.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="customization">customization</span></span></h4>
+<div class="outline-text-4" id="text-1-23-3">
 <p>
 It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. Those functions can be put in the init.el file.
 </p>
@@ -5306,30 +5202,27 @@ It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. T
 <pre class="src src-elisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Usage: M-x reload-init-file</span>
 <span class="org-comment-delimiter">;;</span>
 (<span class="org-keyword">defun</span> <span class="org-function-name">reload-init-file</span> ()
-  <span class="org-doc">"Reload init.el file"</span>
+  <span class="org-doc">"Reload init.el file."</span>
   (<span class="org-keyword">interactive</span>)
   (load user-init-file)
-  (message <span class="org-string">"Reloaded init.el OK."</span>)
-)
+  (message <span class="org-string">"Reloaded init.el OK."</span>))
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Usage: M-x open-init-file</span>
 <span class="org-comment-delimiter">;;</span>
 (<span class="org-keyword">defun</span> <span class="org-function-name">open-init-file</span> ()
     (<span class="org-keyword">interactive</span>)
-    (find-file user-init-file)
-)
+    (find-file user-init-file))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-22-4" class="outline-4">
-<h4 id="sec-1-22-4"><span class="section-number-4">1.22.4</span> Refresh / Revert buffer without confirmation.</h4>
-<div class="outline-text-4" id="text-1-22-4">
+<div id="outline-container-sec-1-23-4" class="outline-4">
+<h4 id="sec-1-23-4"><span class="section-number-4">1.23.4</span> Refresh / Revert buffer without confirmation.</h4>
+<div class="outline-text-4" id="text-1-23-4">
 <p>
 Source: <a href="http://www.emacswiki.org/emacs-en/download/misc-cmds.el">http://www.emacswiki.org/emacs-en/download/misc-cmds.el</a>
 </p>
-
 
 <div class="org-src-container">
 
@@ -5352,9 +5245,9 @@ M-x refresh
 </div>
 </div>
 
-<div id="outline-container-sec-1-22-5" class="outline-4">
-<h4 id="sec-1-22-5"><span class="section-number-4">1.22.5</span> Create a menu with all color themes available</h4>
-<div class="outline-text-4" id="text-1-22-5">
+<div id="outline-container-sec-1-23-5" class="outline-4">
+<h4 id="sec-1-23-5"><span class="section-number-4">1.23.5</span> Create a menu with all color themes available</h4>
+<div class="outline-text-4" id="text-1-23-5">
 
 <div class="figure">
 <p><a href="images/colortheme_menu.png"><img src="images/colortheme_menu.png" alt="colortheme_menu.png" /></a>
@@ -5377,8 +5270,7 @@ Copy and paste the code below to the scratch buffer and enter M-x eval-buffer. T
  (mapcar
    (<span class="org-keyword">lambda</span> (x)
       (format <span class="org-string">"[\"%s\" (load-theme '%s)]"</span>  (symbol-name x) (symbol-name x) ))
-   (custom-available-themes))
- )
+   (custom-available-themes)))
 
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">make-color-menu-code</span> ()
@@ -5390,10 +5282,7 @@ Copy and paste the code below to the scratch buffer and enter M-x eval-buffer. T
 <span class="org-string">      )</span>
 <span class="org-string">   )</span>
 <span class="org-string">   "</span>
-  (mapconcat 'identity (make-menu-rows) <span class="org-string">"\n"</span>)
-
-  ) <span class="org-comment-delimiter">;; </span><span class="org-comment">End of format</span>
-) <span class="org-comment-delimiter">;; </span><span class="org-comment">End of make-color-menu</span>
+  (mapconcat 'identity (make-menu-rows) <span class="org-string">"\n"</span>))) 
 
 
 
@@ -5520,9 +5409,7 @@ Final code
       `(<span class="org-keyword">easy-menu-define</span> djcb-menu global-map <span class="org-string">"Color Themes"</span>
          '(<span class="org-string">"Color Themes"</span>
            ,@(make-menu-rows))))
-
-    (make-color-menu)
-)
+    (make-color-menu))
 
 
 <span class="org-comment-delimiter">;;;; </span><span class="org-comment">Testing the macro expansion</span>
@@ -6044,8 +5931,7 @@ Hyperlink syntax:  <code>dir:&lt;file-path&gt;</code>
 
 <pre class="src src-elisp">(add-hook 'org-mode-hook
           (<span class="org-keyword">lambda</span> ()
-              (org-add-link-type <span class="org-string">"dir"</span> #'dired nil)
-              ))
+              (org-add-link-type <span class="org-string">"dir"</span> #'dired nil)))
 </pre>
 </div>
 
@@ -6083,8 +5969,7 @@ Hyperlink format: <code>dire:&lt;directory-path&gt;</code>
 
 (add-hook 'org-mode-hook
           (<span class="org-keyword">lambda</span> ()
-              (org-add-link-type <span class="org-string">"dire"</span> #'org/protocol-dire nil)
-              ))
+              (org-add-link-type <span class="org-string">"dire"</span> #'org/protocol-dire nil)))
 </pre>
 </div>
 
@@ -6171,9 +6056,7 @@ Hyperlink format:  <code>elisp-doc:&lt;function-name&gt;</code> or <code>[elisp-
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">org/protocol-elisp-doc</span> (function-symbol)
   (princ function-symbol)
-  (describe-function (intern-soft function-symbol))
-
-  )
+  (describe-function (intern-soft function-symbol)))
 
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">org/protocol-elisp-doc-html</span> (path desc backend)
@@ -6183,13 +6066,11 @@ Hyperlink format:  <code>elisp-doc:&lt;function-name&gt;</code> or <code>[elisp-
             (documentation (intern-soft path))
             (<span class="org-keyword">or</span> desc path)))))
 
-
 (add-hook 'org-mode-hook
-
-          (<span class="org-keyword">lambda</span> ()
-
-            (org-add-link-type <span class="org-string">"elisp-doc"</span> #'org/protocol-elisp-doc #'org/protocol-elisp-doc-html)
-            ))
+      (<span class="org-keyword">lambda</span> ()
+        (org-add-link-type <span class="org-string">"elisp-doc"</span>
+                           #'org/protocol-elisp-doc
+                           #'org/protocol-elisp-doc-html)))
 </pre>
 </div>
 
@@ -6297,7 +6178,6 @@ Enable source code block in org files
 </pre>
 </div>
 
-
 <p>
 Disable Security confirmation:
 </p>
@@ -6373,8 +6253,8 @@ a rails console </a>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2017-08-05 sáb 20:30</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="date">Created: 2017-10-02 Mon 20:11</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -6,6 +6,11 @@
 #+STARTUP: content
 
 * Elisp Snippets
+** Overview
+
+This section provides Elisp snippets and examples about Emacs
+API to help developers find what they need quickly.
+
 ** Strings
 *** Concatenate strings
 
@@ -160,10 +165,8 @@ From: [[https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d][jidaikob
 *** Copy string to clipboard
 
 #+BEGIN_SRC elisp
-
 (defun clipboard/set (astring)
   "Copy a string to clipboard"
-
    (with-temp-buffer
     (insert astring)
     (clipboard-kill-region (point-min) (point-max))))
@@ -173,15 +176,10 @@ From: [[https://gist.github.com/jidaikobo-shibata/ee6b2f8ef659ed58605d][jidaikob
 
 #+BEGIN_SRC elisp
 (defun clipboard/get ()
-
     "Return the content of clipboard as string"
-
     (interactive)
-
     (with-temp-buffer
-
       (clipboard-yank)
-
       (buffer-substring-no-properties (point-min) (point-max))))
 #+END_SRC
 
@@ -206,38 +204,33 @@ nil
 *** Copy buffer directory to clibpoard
 
 #+BEGIN_SRC elisp
+  (defun buffer/copy-path ()
+    (interactive)
+    (clipboard/set (file-name-directory (buffer-file-name)))
+    (message "Copied file path to clipboard"))
 
-(defun buffer/copy-path ()
-  (interactive)
-  (clipboard/set (file-name-directory (buffer-file-name)))
-  (message "Copied file path to clipboard")
-  )
-
-;; Eval using M-x eval-print-last-sexp
-;;
-> (buffer/copy-path)
-"Copied file path to clipboard"
+  ;; Eval using M-x eval-print-last-sexp
+  ;;
+  > (buffer/copy-path)
+  "Copied file path to clipboard"
 
 
-> (clipboard/get)
-"/home/arch/projects/emacs/"
-
-
+  > (clipboard/get)
+  "/home/arch/projects/emacs/"
 #+END_SRC
 
 *** Copy buffer content to clipboard
 
 #+BEGIN_SRC elisp
-(defun buffer/copy-content ()
-  "
-  Copy buffer content to clibpoard
-   Usage: M-x buffer/copy-content
-  "
-  (interactive)
-  (clipboard/set  (buffer-substring-no-properties
-                   (point-min)
-                   (point-max)
-                   )))
+  (defun buffer/copy-content ()
+    "Copy buffer content to clibpoard
+  Usage: M-x buffer/copy-content"
+    (interactive)
+    (clipboard/set
+     (buffer-substring-no-properties
+      (point-min)
+      (point-max)
+      )))
 #+END_SRC
 ** Elisp
 *** Load an Elisp file
@@ -411,16 +404,17 @@ Function Docstring
 *** Reduce (fold left) function
 **** Build a number from a list of digits
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC elisp 
 (require 'cl)
 
 ELISP> (cl-reduce (lambda (acc x) (+ (* 10 acc) x)) '(1 2 3 4 5 6) :initial-value 0)
 123456 (#o361100, #x1e240)
-#+END_SRC
 
+#+END_SRC
 **** Test if all values of a list are true
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC elisp 
+
 (require 'cl)
 
 ELISP> (cl-reduce (lambda (acc x) (and acc x)) '(t nil t t t f) :initial-value t)
@@ -1053,34 +1047,29 @@ Pipes the buffer content to external command =$wc -l= and get the
 output as a string.
 
 #+BEGIN_SRC elisp
-> (with-output-to-string  ;; M-x eval-print-last-sexp
-      (shell-command-on-region (point-min) (point-max) "wc -l"))
-""
+  > (with-output-to-string  ;; M-x eval-print-last-sexp
+        (shell-command-on-region (point-min) (point-max) "wc -l"))
+  ""
 
-(defun pipe-region-to-command (pmin pmax command)
-  (interactive)
+  (defun pipe-region-to-command (pmin pmax command)
+    (interactive)
+    (shell-command-on-region
+     pmin
+     pmax
+     command
+     "*shell-output*")
+    (let ((output
+           (with-current-buffer "*shell-output*"
+             (buffer-substring-no-properties
+              (point-min)
+              (point-max)))))
+      (kill-buffer "*shell-output*")
+      output
+      ))
 
-  (shell-command-on-region
-   pmin
-   pmax
-   command
-   "*shell-output*"
-   )
-
-  (let (
-        (output  (with-current-buffer "*shell-output*"
-                    (buffer-substring-no-properties (point-min) (point-max))))
-        )
-
-    (kill-buffer "*shell-output*")
-    output
-    )
-  )
-
-
-> (pipe-region-to-command (point-min) (point-max) "wc -l") ;; M-x eval-print-last-sexp
-"1515
-"
+  > (pipe-region-to-command (point-min) (point-max) "wc -l") ;; M-x eval-print-last-sexp
+  "1515
+  "
 #+END_SRC
 
 **** Apply an external command to buffer
@@ -1089,11 +1078,10 @@ The command below will pipe the buffer ~*scratch*~ to the command =$
 sed 's/foo.*/bar/g'= which replaces all values of foo for bar.
 
 #+BEGIN_SRC elisp
-
-(with-current-buffer "*scratch*"
-    (shell-command-on-region (point-min) (point-max) "sed 's/foo.*/bar/g'" "*shell-output*" t )
-
-) ;; M-x eval-last-sexp
+  (with-current-buffer "*scratch*"
+    (shell-command-on-region
+     (point-min)
+     (point-max) "sed 's/foo.*/bar/g'" "*shell-output*" t )) ;; M-x eval-last-sexp
 #+END_SRC
 
 Before the form evaluation
@@ -1229,38 +1217,21 @@ Usage: M-x ping-host or (ping-host <hostname>)
 
 #+BEGIN_SRC elisp
 
-(defun ping-host (&optional hostname)
-  "
-  Ping a hostname.
-
+  (defun ping-host (&optional hostname)
+    "Ping a hostname.  
   Usage:
-        - Interactive: M-x ping-host
-        - Command:     (ping-host <hostname>)
-
-  Example: (ping-host \"www.google.com\")
-           (ping-host \"192.168.0.1\")
-  "
-  (interactive)
-
-  (let
-      (
-       (hostname- (if hostname hostname (read-string "host to ping: ")))
-       )
-
-    ;; (with-selected-frame (make-frame)
-    ;;   ;;
-    ;;   ;; Process name:    ping
-    ;;   ;; Process buffer: *ping*
-    ;;   ;; Command:         ping <hostname>
-    ;;   ;;
-
-    ;;   (start-process "ping" "*ping*" "ping" hostname-)
-
-    ;;   )
-
-    (start-process "ping" "*ping*" "ping" hostname-)
-    (switch-to-buffer-other-frame "*ping*")
-    ))
+  - Interactive: M-x ping-host
+  - Command:     (ping-host <hostname>)
+  Examples: 
+   (ping-host \"www.google.com\")
+   (ping-host \"192.168.0.1\")"
+    (interactive)
+    (let ((hostname-
+           (if hostname
+               hostname
+             (read-string "host to ping: "))))
+      (start-process "ping" "*ping*" "ping" hostname-)
+      (switch-to-buffer-other-frame "*ping*")))
 
 #+END_SRC
 
@@ -1269,29 +1240,18 @@ file:images/emacs_shell_ping_hostname.png
 **** Tracerote a host
 
 #+BEGIN_SRC elisp
-
-(defun traceroute-host (&optional hostname)
-  "
-  Ping a hostname.
-
+  (defun traceroute-host (&optional hostname)
+    "Run traceroute command to test connection.
   Usage:
-        - Interactive: M-x traceroute-host [Enter the hostname]
-        - Command:     (traceroute-host <hostname>)
-
-  Example: (traceroute-host \"www.yahoo.co.uk\")
-
-  "
-  (interactive)
-
-  (let
-      (
-       (hostname- (if hostname hostname (read-string "host to traceroute: ")))
-       )
-
-    (start-process "traceroute" "*traceroute*" "traceroute" hostname-)
-    (switch-to-buffer-other-frame "*traceroute*")
-    ))
-
+  - Interactive: M-x traceroute-host [Enter the hostname]
+  - Command:     (traceroute-host <hostname>)
+  Example: (traceroute-host \"www.yahoo.co.uk\")."
+    (interactive)
+    (let ((hostname- (if hostname
+                         hostname
+                       (read-string "host to traceroute: "))))
+      (start-process "traceroute" "*traceroute*" "traceroute" hostname-)
+      (switch-to-buffer-other-frame "*traceroute*")))
 #+END_SRC
 
 *** Run a ncurses / terminal app inside Emacs
@@ -1323,8 +1283,7 @@ terminal emulator.
    "termx"
    nil
    ;; Change this for your terminal.
-   "xfce4-terminal" "-e" (read-shell-command "Shell: ")
-   ))
+   "xfce4-terminal" "-e" (read-shell-command "Shell: ")))
 #+END_SRC
 
 #+RESULTS:
@@ -1338,8 +1297,7 @@ terminal emulator.
    "termx"
    nil
    ;; Change this for your terminal.
-   "xfce4-terminal" "-e" command
-   ))
+   "xfce4-terminal" "-e" command))
 #+END_SRC
 
 #+RESULTS:
@@ -1527,7 +1485,7 @@ Example:
 
 #+CAPTION: Demonstration of M-x shell/buffer-repl-frame and shell/insert-region
 [[file:images/shell-demo2.gif][file:images/shell-demo2.gif]]
-** Compilation
+** Compilation                          :compile:tool:building:shell:process:
 *** Enhanced Compilation Command 
 
 This command is similar to emacs M-x compile, however it expands '%f'
@@ -1610,8 +1568,7 @@ and run M-x cpp/compile-run-dired.
 (defun cpp/compile-run-dired ()
   "Compile single c++ file at point in dired mode.
 Usage: Position the cursor at the file to be compiled and
-run M-x cpp/compile-dired.
-"
+run M-x cpp/compile-dired."
   (interactive)
   (let* ((file-name  (file-name-nondirectory (dired-file-name-at-point)))
         ;; Change file name extension to .bin
@@ -1947,16 +1904,15 @@ Source: [[https://gist.github.com/hiroina/4702961][hiroina/.emacs]]
  - Copy path of file at point.
 
 #+BEGIN_SRC elisp
-(defun dired-copy-path ()
-  "In dired, copy file path to kill-buffer.  At 2nd time it copy current directory to kill-buffer."
-  (interactive)
-  (let (path)
-    (setq path (dired-file-name-at-point))
-	(if (string= path (current-kill 0 1)) (setq path (dired-current-directory)))
-    (message path)
-    (kill-new path)
-  )
-)
+  (defun dired-copy-path ()
+    "In dired, copy file path to kill-buffer.  
+  At 2nd time it copy current directory to kill-buffer."
+    (interactive)
+    (let (path)
+      (setq path (dired-file-name-at-point))
+      (if (string= path (current-kill 0 1)) (setq path (dired-current-directory)))
+      (message path)
+      (kill-new path)))
 #+END_SRC
 
 *** Paste a file from clibpboard
@@ -1971,18 +1927,17 @@ Usage:
  2. M-x  dired-paste-file-from-clipboard
 
 #+BEGIN_SRC elisp
-(defun dired-paste-file-from-clipboard ()
-  "Paste a file from clpboard to current directory."
-  (interactive)
-  (flet ((clipboard-get ()
-                        (with-temp-buffer
-                           (clipboard-yank)
-                           (buffer-substring-no-properties
-                            (point-min)
-                            (point-max)))))
-
-    (copy-file (clipboard-get) ".")
-    (revert-buffer)))
+  (defun dired-paste-file-from-clipboard ()
+    "Paste a file from clpboard to current directory."
+    (interactive)
+    (flet ((clipboard-get ()
+                          (with-temp-buffer
+                             (clipboard-yank)
+                             (buffer-substring-no-properties
+                              (point-min)
+                              (point-max)))))
+      (copy-file (clipboard-get) ".")
+      (revert-buffer)))
 #+END_SRC
 
 *** Create empty file (touch)
@@ -1990,56 +1945,41 @@ Usage:
  - Create empty file at current directory opened in dired mode.
 
 #+BEGIN_SRC elisp
-(defun dired-touch ()
-  "Creates empty file at current directory."
-  (interactive)
-
-  (append-to-file "" nil (read-string "New file: "))
-  (if (equal major-mode 'dired-mode)
-
-      (revert-buffer)
-      ))
+  (defun dired-touch ()
+    "Creates empty file at current directory."
+    (interactive)
+    (append-to-file "" nil (read-string "New file: "))
+    (if (equal major-mode 'dired-mode)
+        (revert-buffer)))
 #+END_SRC
 
 *** Open multiple marked files
 
 #+BEGIN_SRC elisp
-(defun dired-open-files (files)
-  "
-  Open all marked files in dired mode with m.
-
+  (defun dired-open-files (files)
+    "Open all marked files in dired mode with m.
   Usage:
-        1. Mark the files with m
-        2. M-x dired-open-files
-  "
-  (interactive  (list (dired-get-marked-files)) )
-
-  (mapc #'find-file files)
-
-  )
+  1. Mark the files with m
+  2. M-x dired-open-files"
+    (interactive
+     (list (dired-get-marked-files)) )
+    (mapc #'find-file files))
 #+END_SRC
 
 *** Close multiple marked files
 
 #+BEGIN_SRC elisp
+  (setq lexical-binding t)
 
-(setq lexical-binding t)
+  (defun compose (fn1 fn2)
+    (let ((lexical-binding t))
+      (lambda (x)
+         (funcall fn2 (funcall fn1 x)))))
 
-(defun compose (fn1 fn2)
-  (let ((lexical-binding t))
 
-    (lambda (x)
-       (funcall fn2 (funcall fn1 x))
-    )
-  ))
-
-(defun dired-close-files (files)
-
-  (interactive  (list (dired-get-marked-files)) )
-
-  (mapc (compose #'get-file-buffer #'kill-buffer) files)
-
-  )
+  (defun dired-close-files (files)
+    (interactive  (list (dired-get-marked-files)) )
+    (mapc (compose #'get-file-buffer #'kill-buffer) files))
 #+END_SRC
 
 *** Open a file with default system application      :dired:file:open:system:
@@ -2050,45 +1990,41 @@ Function: xdg-open. Open any file with system's default
 application.
 
 #+BEGIN_SRC elisp
-(defun xdg-open (filename)
-    "Open a file FILENAME with default system application.
-  This function is operating system independent."
-    (cl-case system-type
+  (defun xdg-open (filename)
+      "Open a file FILENAME with default system application.
+    This function is operating system independent."
+      (cl-case system-type
 
-      ;;; Linux
-      (gnu/linux      (let ((process-connection-type  nil))
+        ;;; Linux
+        (gnu/linux      (let ((process-connection-type  nil))
+                          (start-process
+                              "proc"
+                              nil
+                              ;; Command
+                              "xdg-open" (expand-file-name filename))))
 
-                        (start-process
-                            "proc"
-                            nil
-                                          ;; Command
-                            "xdg-open" (expand-file-name filename))))
+        ;;; Free BSD OS
+        (gnu/kfreebsd    (let ((process-connection-type  nil))
+                          (start-process
+                              "proc"
+                              nil
+                              ;; Command
+                              "xdg-open" (expand-file-name filename))))
 
-      ;;; Free BSD OS
-      (gnu/kfreebsd    (let ((process-connection-type  nil))
+        ;; Mac OSX - (Not tested )
+        (darwing        (start-process
+                         "proc"
+                         nil
+                         ;; Command
+                         "open" (concat  (expand-file-name filename))))
 
-                        (start-process
-                            "proc"
-                            nil
-                                          ;; Command
-                            "xdg-open" (expand-file-name filename))))
-
-      ;; Mac OSX - (Not tested )
-      (darwing        (start-process
+        ;; Windows 7, 8, 10 - Kernel NT
+        (windows-nt   (start-process
                        "proc"
                        nil
                        ;; Command
-                       "open" (concat  (expand-file-name filename))))
-
-      ;; Windows 7, 8, 10 - Kernel NT
-      (windows-nt   (start-process
-                     "proc"
-                     nil
-                     ;; Command
-                     "cmd"  "/C"  "start" "" (expand-file-name filename)
-                      )
-
-         )))
+                       "cmd"  "/C"  "start" "" (expand-file-name filename)
+                        ))))
 #+END_SRC
 
 Function: dired-xdg
@@ -2215,18 +2151,16 @@ only show file names ending with .pdf. To display all files again type 'g'.
 *** Open directory at point with Microsoft Explorer in Windows OS.
 
 #+BEGIN_SRC elisp
-(defun dired-exec-explorer ()
-  "In dired, execute Explorer"
-  (interactive)
-  (let (path)
-    (setq path (dired-file-name-at-point))
-    (setq path (replace-regexp-in-string "~" "c:/home" path))
-    (setq path (replace-regexp-in-string "/" "\\\\" path))
-    (message path)
-    ;(kill-new path)
-    (start-process "explorer" nil "explorer" (concat "/select," path))
-  )
-)
+  (defun dired-exec-explorer ()
+    "In dired, execute Explorer"
+    (interactive)
+    (let (path)
+      (setq path (dired-file-name-at-point))
+      (setq path (replace-regexp-in-string "~" "c:/home" path))
+      (setq path (replace-regexp-in-string "/" "\\\\" path))
+      (message path)
+      ;(kill-new path)
+      (start-process "explorer" nil "explorer" (concat "/select," path))))
 
 #+END_SRC
 ** Date Time
@@ -2359,10 +2293,9 @@ Function to open Yandex.com. Usage M-x _open-yandex_
 
 #+BEGIN_SRC elisp
 (defun open-yandex ()
-  "Open the web site http://www.yandex.com"
+  "Open the web site http://www.yandex.com."
   (interactive)
-  (browse-url "http://www.yandex.com")
-  )
+  (browse-url "http://www.yandex.com"))
 #+END_SRC
 
 *** Browser Url setting the web browser
@@ -2407,19 +2340,22 @@ Open url with Emacs eww browser
 (setq browse-url-browser-function 'eww-browse-url)
 #+END_SRC
 
-*** Search Web sites with Emacs
+*** Search Web sites with Emacs                      :web:search:url:browser:
 **** Search google
 
 Usage: M-x search-google
 
 #+BEGIN_SRC  elisp
-
 (require 'url-util)
 
 (defun search-google ()
    (interactive)
-   "Search www.google.ca"
-   (browse-url (format "http://www.google.ca?gws_rd=ssl#q=%s" (url-encode-url (read-string "Google: ")))))
+   "Search www.google.ca."
+   (browse-url
+    (format "http://www.google.ca?gws_rd=ssl#q=%s"
+            (url-encode-url
+             (read-string "Google: ")))))
+
 
 #+END_SRC
 
@@ -2460,41 +2396,53 @@ Usage: M-x search-google
 **** Search github
 
 #+BEGIN_SRC elisp
-(require 'url-util)
+  (require 'url-util)
 
-(defun search-github ()
-   (interactive)
-   "Search www.google.ca"
-   (browse-url (format "https://github.com/search?q=%s" (url-encode-url (read-string "Github Search: ")))))
+  (defun search-github ()
+     (interactive)
+     "Search www.google.ca"
+     (browse-url
+      (format "https://github.com/search?q=%s"
+              (url-encode-url
+               (read-string "Github Search: ")))))
 #+END_SRC
 
 **** Search gisthub
 
-#+BEGIN_SRC  elisp
+#+BEGIN_SRC  emacs-lisp
 (require 'url-util)
 
 (defun search-gisthub ()
-   "
-    Search gisthub : http://gist.github.com
-    Usage: M-x search-gisthub
-   "
+   "Search gisthub : http://gist.github.com.
+Usage: M-x search-gisthub"
    (interactive)
-   (browse-url (format "https://gist.github.com/search?p=50&q=%s&ref=searchresults" (url-encode-url (read-string "Gisthub Search: ")))))
+   (browse-url
+    (format "https://gist.github.com/search?p=50&q=%s&ref=searchresults"
+            (url-encode-url
+             (read-string "Gisthub Search: ")))))
 #+END_SRC
 
 **** Open Emacs Web Manual
 
 #+BEGIN_SRC elisp
-(defun open-emacs-manual ()
-  "
-  Open Emacs online Manual
+  (defun open-emacs-manual ()
+    "Open Emacs online Manual.
+Usage: M-x open-emacs-manual.
+It opens the web site: https://www.gnu.org/software/emacs/manual"
+    (interactive)
+    (browse-url "https://www.gnu.org/software/emacs/manual/"))
+#+END_SRC
 
-  Usage: M-x open-emacs-manual
+**** Search words in Merrian Webster dictionary
 
-  It opens the web site: https://www.gnu.org/software/emacs/manual
-  "
+#+BEGIN_SRC elisp
+(defun search/dictionary ()
+  "Search Merrian Webster Dictionary·"
   (interactive)
-  (browse-url "https://www.gnu.org/software/emacs/manual/"))
+  (browse-url
+    (format "https://www.merriam-webster.com/dictionary/%s"
+            (url-encode-url
+             (read-string "Dictionary: ")))))
 #+END_SRC
 
 *** Browser Inside Emacs
@@ -2604,6 +2552,7 @@ Output:
 
 #+RESULTS:
 #+begin_example
+
 HTTP/1.1 200 OK
 Server: nginx
 Date: Fri, 23 Sep 2016 23:44:21 GMT
@@ -2891,17 +2840,18 @@ This command switches between buffer with files that are in current directory.
      :prompt "Buffer switch: "
      :sources  `((
                   (name       . "Dir: ")
-                  (candidates . ,(mapcar (lambda (b) (cons (buffer-name b) b))
-                                         ;; filter buffers not in this directory (code bellow)
-                                         (remove-if-not  (lambda (b)
-                                                           (buffer/with-file-in-directory-p
-                                                            (or (file-name-directory (buffer-file-name))
-                                                                default-directory
-                                                                )
-                                                            b
-                                                            ))
-                                                    (buffer-list)
-                                                    )))
+                  (candidates . ,(mapcar
+                                  (lambda (b) (cons (buffer-name b) b))
+                                  ;; filter buffers not in this directory (code bellow)
+                                  (remove-if-not  (lambda (b)
+                                                    (buffer/with-file-in-directory-p
+                                                     (or (file-name-directory (buffer-file-name))
+                                                         default-directory
+                                                         )
+                                                     b
+                                                     ))
+                                                  (buffer-list)
+                                                  )))
                   (action     . switch-to-buffer)
                   ))))
 
@@ -2916,7 +2866,6 @@ Usage: M-x helm-recent-files
 
 (defun helm-recent-files ()
   (interactive)
-
   (helm
    :prompt "File: "
    :sources  `((
@@ -2933,38 +2882,30 @@ Usage: M-x helm-recent-files
 Usage M-x helm-recent-dirs
 
 #+BEGIN_SRC elisp
+  (require 'helm)
 
-
-(require 'helm)
-
-(defun unique (xs)
-  "Remove repeated elements from list xs
-
+  (defun unique (xs)
+    "Remove repeated elements from list xs
   Example:
-
   > (unique '(x y a b 21 21 10 21 x y a ))
-  (x y a b 21 10)
-  "
-  (let
-    ((result nil))
+  (x y a b 21 10)."
+    (let ((result nil))
+      (dolist (x xs)
+        (if (not (member x result))
+            (push x result)))
+      (reverse result)))
 
-    (dolist (x xs)
-      (if (not (member x result))
-          (push x result)
-        ))
-    (reverse result)
-    ))
 
-(defun helm-recent-dirs ()
-  (interactive)
-
-  (helm
-   :prompt "Dir: "
-   :sources  `((
-                (name       . "Dir: ")
-                (candidates . (lambda () (unique (map #'file-name-directory recentf-list))))
-                (action     . dired)
-                ))))
+  (defun helm-recent-dirs ()
+    (interactive)
+    (helm
+     :prompt "Dir: "
+     :sources  `((
+                  (name       . "Dir: ")
+                  (candidates . (lambda ()
+                                  (unique
+                                   (map #'file-name-directory recentf-list))))
+                  (action     . dired)))))
 #+END_SRC
 
 *** Launch ansync shell command with helm
@@ -2976,89 +2917,60 @@ is useful to launch applications without block Emacs.
 Usage: M-x helm-laucher
 
 #+BEGIN_SRC elisp
-(defun get-executables ()
-
-  "
-  Returns a list of all files available in the directories of the $PATH
-  variable.
-  "
-  (apply #'append
-   (mapcar  (lambda (p) (directory-files p t))
-            (remove-if-not #'file-exists-p
-                        (split-string (getenv "PATH") ":")))))
+  (defun get-executables ()
+    "Returns a list of all files available in the directories of the $PATH variable."
+    (apply #'append
+     (mapcar  (lambda (p) (directory-files p t))
+              (remove-if-not #'file-exists-p
+                          (split-string (getenv "PATH") ":")))))
 
 
-(defun run-async  (&optional command)
+  (defun run-async  (&optional command)
+    "Run a shell command in asynchronous mode.
+  It doesn't block Emacs while the command is running.
+  Usage:  (run-async \"python -m http.server\")
+  M-x run-async  -> User enters a command."
+    (interactive)
+    (apply #'start-process
+           `(
+             "proc-any"          ;; We don't care about the application name
+             nil                 ;; Don't name the buffer
+             ,@(split-string-and-unquote
+                (if  command
+                     command
+                     (read-string "Command: "  )
+                    )))))
 
-  "Run a shell command in asynchronous mode.
-   It doesn't block Emacs while the command
-   is running.
 
-   Usage:  (run-async \"python -m http.server\")
-           M-x run-async  -> User enters a command.
-  "
-
-  (interactive)
-
-  (apply #'start-process
-
-         `(
-
-
-           "proc-any"          ;; We don't care about the application name
-
-           nil                 ;; Don't name the buffer
-
-           ,@(split-string-and-unquote
-
-              (if  command
-                   command
-                   (read-string "Command: "  )
-                  ))
-
-           )))
-
-(defun run-async-lst (&rest commands)
-  "
-  Run a shell command in asynchronus mode, not blocking Emacs.
-
+  (defun run-async-lst (&rest commands)
+    "Run a shell command in asynchronus mode, not blocking Emacs.
   Usage:    > (run-async-lst <program> <argument 1> <agurment2> ...)
-  Example:  > (run-async \"thunar\" \"/usr/share/applications\")
-  "
-  (apply #'start-process
-
-         `(
-           "dontcare"          ;; We don't care about the application name
-           nil                 ;; Don't name the buffer
-           ,@commands
-
-           )))
+  Example:  > (run-async \"thunar\" \"/usr/share/applications\")"
+    (apply #'start-process
+           `(
+             "dontcare"          ;; We don't care about the application name
+             nil                 ;; Don't name the buffer
+             ,@commands
+             )))
 
 
-(defun helm-launcher ()
-
-  " Launches applications available in $PATH directories in
-    asynchronous mode without Emacs wait for it.
-    Usage M-x heml-launcher
-  "
-  (interactive)
-
-  (let
-      ((data      (mapcar (lambda (p) (cons  (file-name-nondirectory p)
-                                             p
-                                             ))
-
-                          (get-executables)
-                          )
-        ))
-
-   (helm
-   :prompt "Shell: "
-   :sources  `((
-                (name       . "Shell: ")
-                (candidates . ,data)
-                (action     . run-async)
-                )))))
+  (defun helm-launcher ()
+    "Launches apps available in $PATH without blocking Emacs.
+  Usage M-x heml-launcher"
+    (interactive)
+    (let ((data  (mapcar (lambda (p)
+                           (cons (file-name-nondirectory p)
+                                 p
+                                 ))
+                         (get-executables)
+                         )))
+     (helm
+     :prompt "Shell: "
+     :sources  `((
+                  (name       . "Shell: ")
+                  (candidates . ,data)
+                  (action     . run-async)
+                  )))))
 
 #+END_SRC
 
@@ -3070,102 +2982,71 @@ Usage: M-x helm-laucher
 Switch between buffers associated with files.
 
 #+BEGIN_SRC elisp
-(defun switch-file ()
-  "
-  Switch between buffers that are associated with files.
-  Depends on helm.
-
-
-  Usage: M-x switch file.
-
-  "
-  (interactive)
-
-  (let ((data  (mapcar (lambda (b)  (cons (buffer-file-name b) b ))
-                       (remove-if-not #'buffer-file-name (buffer-list)))))
-    (helm
-     :prompt "Buffer: "
-     :sources  `((
-                  (name       . "File Buffers")
-                  (candidates . ,data)
-                  (action     . switch-to-buffer)
-                  )))
-
-    ))
-
+  (defun switch-file ()
+    "Switch between buffers that are associated with files.
+  Usage: M-x switch file."
+    (interactive)
+    (let ((data
+           (mapcar (lambda (b)
+                     (cons (buffer-file-name b) b ))
+                   (remove-if-not #'buffer-file-name (buffer-list)))))
+      (helm
+       :prompt "Buffer: "
+       :sources  `((
+                    (name       . "File Buffers")
+                    (candidates . ,data)
+                    (action     . switch-to-buffer)
+                    )))))
 #+END_SRC
 
 *** Switch between Emacs major modes
 
 #+BEGIN_SRC elisp
-(defun helm-switch-mode ()
-  "
-   Switch between all major programming modes available in Emacs.
+  (defun helm-switch-mode ()
+    "Switch between all major programming modes available in Emacs.
+  Usage: M-x helm-switch-mode."
+    (interactive)
+    (cl-flet ((unique (xs)
+                      (let
+                          ((result nil))
+                        (dolist (x xs)
+                          (if (not (member x result))
+                              (push x result)))
+                        (reverse result))))
+      (helm
+       :prompt "Mode: "
+       :sources  `((
+                    (name       . "Emacs Major Modes")
+                    (candidates . ,(unique (mapcar #'symbol-name
+                                                   (remove-if-not #'symbolp
+                                                     (mapcar #'cdr auto-mode-alist)))))
+                    (action     . ,(lambda (m) (funcall (intern-soft m)))))))))
 
-   Usage: M-x helm-switch-mode
-  "
-  (interactive)
-
-  (cl-flet ((unique (xs)
-                    (let
-                        ((result nil))
-
-                      (dolist (x xs)
-                        (if (not (member x result))
-                            (push x result)
-                          ))
-                      (reverse result)
-                      )
-
-                    ))
-
-    (helm
-     :prompt "Mode: "
-     :sources  `((
-                  (name       . "Emacs Major Modes")
-
-                  (candidates . ,(unique (mapcar #'symbol-name
-                                                 (remove-if-not #'symbolp
-                                                   (mapcar #'cdr auto-mode-alist)))))
-
-
-
-                  (action     . ,(lambda (m) (funcall (intern-soft m))))
-
-                  )))
-    )
-  )
 #+END_SRC
 
 *** Open a list of web sites
 
 #+BEGIN_SRC elisp
 
-(setq helm-url-default-url-list
+  (setq helm-url-default-url-list
+        '(
+          ("google" . "http://www.google.ca")
+          ("yandex"  . "http://www.yandex.com")
+          ("reddit" . "http://www.reddit.com")
+          ("/r/haskell". "http://www.reddit.com/r/haskell")
+          ("/r/emacs" . "http://www.reddit.com/r/emacs")
+          ("/r/csharp" . "http://www.reddit.com/r/csharp")
+          ))
 
-      '(
-        ("google" . "http://www.google.ca")
-        ("yandex"  . "http://www.yandex.com")
-        ("reddit" . "http://www.reddit.com")
-        ("/r/haskell". "http://www.reddit.com/r/haskell")
-        ("/r/emacs" . "http://www.reddit.com/r/emacs")
-        ("/r/csharp" . "http://www.reddit.com/r/csharp")
-        )
-
-      )
-
-(defun helm-web ()
-  (interactive)
-  (helm
-     :prompt "Web Site: "
-     :sources  `((
-                  (name       . "Bookmarks")
-                  (candidates . helm-url-default-url-list)
-                  (action     . (lambda (c) (browse-url (cdr c))) )
-                  )))
-  )
-
-
+  (defun helm-web ()
+    (interactive)
+    (helm
+       :prompt "Web Site: "
+       :sources  `((
+                    (name       . "Bookmarks")
+                    (candidates . helm-url-default-url-list)
+                    (action     . (lambda (c) (browse-url (cdr c))) )
+                    ))))
 #+END_SRC
 *** Interface Makefile
 
@@ -3179,57 +3060,27 @@ Usage: M-x helm-make
 Version1:
 
 #+BEGIN_SRC elisp
-;; Taken from: http://emacs.stackexchange.com/questions/7148/get-all-regexp-matches-in-buffer-as-a-list
-(defun re-seq (regexp string)
-  "Get a list of all regexp matches in a string"
-  (save-match-data
-    (let ((pos 0)
-          matches)
-      (while (string-match regexp string pos)
-        (push (match-string 0 string) matches)
-        (setq pos (match-end 0)))
-      matches)))
+  ;; Taken from: http://emacs.stackexchange.com/questions/7148/get-all-regexp-matches-in-buffer-as-a-list
+  (defun re-seq (regexp string)
+    "Get a list of all regexp matches in a string"
+    (save-match-data
+      (let ((pos 0)
+            matches)
+        (while (string-match regexp string pos)
+          (push (match-string 0 string) matches)
+          (setq pos (match-end 0)))
+        matches)))
 
-(defun helm-make ()
-  (interactive)
-  (let ((tasks    (re-seq "^\\w+"
-                          (with-temp-buffer
-                            (insert-file "Makefile")
-                            (buffer-substring-no-properties (point-min)
-                                                            (point-max)                                                            )))))
-    (helm
-     :prompt "Makefile task: "
-     :sources  `((
-                  (name       . "Task")
-                  (candidates . ,tasks)
-                  (action     . (lambda (task)
-                                  (start-process  "make"
-                                                  "*make*"
-                                                  "make" task
-                                                  )))
-                  )))
-    (switch-to-buffer "*make*")))
-#+END_SRC
 
-Version2: Remove dependency re-seq.
-
-#+BEGIN_SRC elisp
-(defun helm-make2 ()
-  (interactive)
-
-  (flet ((re-seq2 (regexp string) (save-match-data
-                                    (let ((pos 0)
-                                          matches)
-                                      (while (string-match regexp string pos)
-                                        (push (match-string 0 string) matches)
-                                        (setq pos (match-end 0)))
-                                      matches))))
-
-    (let ((tasks    (re-seq2 "^\\w+"
-                            (with-temp-buffer
-                              (insert-file "Makefile")
-                              (buffer-substring-no-properties (point-min)
-                                                              (point-max)                                                            )))))
+  (defun helm-make ()
+    (interactive)
+    (let ((tasks
+           (re-seq "^\\w+"
+                   (with-temp-buffer
+                     (insert-file "Makefile")
+                     (buffer-substring-no-properties
+                      (point-min)
+                      (point-max))))))
       (helm
        :prompt "Makefile task: "
        :sources  `((
@@ -3239,9 +3090,40 @@ Version2: Remove dependency re-seq.
                                     (start-process  "make"
                                                     "*make*"
                                                     "make" task
-                                                    )))
-                    )))
-      (switch-to-buffer "*make*"))))
+                                                    ))))))
+      (switch-to-buffer "*make*")))
+#+END_SRC
+
+Version2: Remove dependency re-seq.
+
+#+BEGIN_SRC elisp
+  (defun helm-make2 ()
+    (interactive)
+    (flet ((re-seq2 (regexp string) (save-match-data
+                                      (let ((pos 0)
+                                            matches)
+                                        (while (string-match regexp string pos)
+                                          (push (match-string 0 string) matches)
+                                          (setq pos (match-end 0)))
+                                        matches))))
+      (let ((tasks    (re-seq2 "^\\w+"
+                              (with-temp-buffer
+                                (insert-file "Makefile")
+                                (buffer-substring-no-properties
+                                 (point-min)
+                                 (point-max)
+                                 )))))
+        (helm
+         :prompt "Makefile task: "
+         :sources  `((
+                      (name       . "Task")
+                      (candidates . ,tasks)
+                      (action     . (lambda (task)
+                                      (start-process  "make"
+                                                      "*make*"
+                                                      "make" task
+                                                      ))))))
+        (switch-to-buffer "*make*"))))
 #+END_SRC
 
 Example: Assuming that the current directory has the Makefile with
@@ -3457,11 +3339,10 @@ right side.
 
 #+BEGIN_SRC emacs-lisp
 
-(defun python/scan-functions ()
-  (interactive)
-  (split-window-horizontally)
-  (occur "def")
-  )
+  (defun python/scan-functions ()
+    (interactive)
+    (split-window-horizontally)
+    (occur "def"))
 
 #+END_SRC
 
@@ -3476,16 +3357,11 @@ It can also be useful to Scan code tags like: @FIXME, @TODO, @README,
 Example:
 
 #+BEGIN_SRC emacs-lisp
-
 (defun scan-code-tags ()
-     "
-     Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:
-
-     "
+     "Scan code tags: @TODO: , @FIXME:, @BUG:, @NOTE:."
      (interactive)
      (split-window-horizontally)
      (occur "@FIXME:\\|@TODO:\\|@BUG:\\|@NOTE:"))
-
 #+END_SRC
 
 
@@ -3500,27 +3376,23 @@ It is useful to quick edit and reload ~/emacs.d/init.el without restart emacs. T
 ;; Usage: M-x reload-init-file
 ;;
 (defun reload-init-file ()
-  "Reload init.el file"
+  "Reload init.el file."
   (interactive)
   (load user-init-file)
-  (message "Reloaded init.el OK.")
-)
+  (message "Reloaded init.el OK."))
 
 ;; Usage: M-x open-init-file
 ;;
 (defun open-init-file ()
     (interactive)
-    (find-file user-init-file)
-)
+    (find-file user-init-file))
 #+END_SRC
 
 *** Refresh / Revert buffer without confirmation.
 
 Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
 
-
 #+BEGIN_SRC elisp
-
 (defun refresh ()
     "Revert buffer without confirmation."
     (interactive)
@@ -3543,40 +3415,36 @@ Copy and paste the code below to the scratch buffer and enter M-x eval-buffer. T
 
 #+BEGIN_SRC elisp
 
-(defun eval-string (str) (eval (read str)))
+  (defun eval-string (str) (eval (read str)))
 
-(defun make-menu-rows ()
- (mapcar
-   (lambda (x)
-      (format "[\"%s\" (load-theme '%s)]"  (symbol-name x) (symbol-name x) ))
-   (custom-available-themes))
- )
+  (defun make-menu-rows ()
+   (mapcar
+     (lambda (x)
+        (format "[\"%s\" (load-theme '%s)]"  (symbol-name x) (symbol-name x) ))
+     (custom-available-themes)))
 
 
-(defun make-color-menu-code ()
-  (format
-   "
-   (easy-menu-define djcb-menu global-map \"Color Themes\"
-     '(\"Color Themes\"
-        %s
-      )
-   )
-   "
-  (mapconcat 'identity (make-menu-rows) "\n")
-
-  ) ;; End of format
-) ;; End of make-color-menu
+  (defun make-color-menu-code ()
+    (format
+     "
+     (easy-menu-define djcb-menu global-map \"Color Themes\"
+       '(\"Color Themes\"
+          %s
+        )
+     )
+     "
+    (mapconcat 'identity (make-menu-rows) "\n"))) 
 
 
 
-;;
-;; "Eval is evil". It must be avoided, because, it is hard to refactor,
-;; hard to debug and vulnerable to code injection on Web Apps, so a better
-;; way to write it is to use Elisp macros.
-;;
-;; @DONE: Change eval-string to an Elisp macro.
-;;
-(eval-string (make-color-menu-code))
+  ;;
+  ;; "Eval is evil". It must be avoided, because, it is hard to refactor,
+  ;; hard to debug and vulnerable to code injection on Web Apps, so a better
+  ;; way to write it is to use Elisp macros.
+  ;;
+  ;; @DONE: Change eval-string to an Elisp macro.
+  ;;
+  (eval-string (make-color-menu-code))
 
 #+END_SRC
 
@@ -3686,9 +3554,7 @@ Final code
       `(easy-menu-define djcb-menu global-map "Color Themes"
          '("Color Themes"
            ,@(make-menu-rows))))
-
-    (make-color-menu)
-)
+    (make-color-menu))
 
 
 ;;;; Testing the macro expansion
@@ -4051,8 +3917,7 @@ Hyperlink syntax:  ~dir:<file-path>~
 #+BEGIN_SRC elisp
 (add-hook 'org-mode-hook
           (lambda ()
-	      (org-add-link-type "dir" #'dired nil)
-	      ))
+	      (org-add-link-type "dir" #'dired nil)))
 #+END_SRC
 
 
@@ -4081,8 +3946,7 @@ Hyperlink format: ~dire:<directory-path>~
 
 (add-hook 'org-mode-hook
           (lambda ()
-	      (org-add-link-type "dire" #'org/protocol-dire nil)
-	      ))
+	      (org-add-link-type "dire" #'org/protocol-dire nil)))
 #+END_SRC
 
 Example:
@@ -4141,27 +4005,23 @@ documentation when clicked.
 Hyperlink format:  ~elisp-doc:<function-name>~ or ~[elisp-doc:<function-name>]~
 
 #+BEGIN_SRC elisp
-(defun org/protocol-elisp-doc (function-symbol)
-  (princ function-symbol)
-  (describe-function (intern-soft function-symbol))
-
-  )
+  (defun org/protocol-elisp-doc (function-symbol)
+    (princ function-symbol)
+    (describe-function (intern-soft function-symbol)))
 
 
-(defun org/protocol-elisp-doc-html (path desc backend)
-   (cl-case backend
-     (html (format
-            "<a href='' title='%s'>%s</a>"
-            (documentation (intern-soft path))
-            (or desc path)))))
+  (defun org/protocol-elisp-doc-html (path desc backend)
+     (cl-case backend
+       (html (format
+              "<a href='' title='%s'>%s</a>"
+              (documentation (intern-soft path))
+              (or desc path)))))
 
-
-(add-hook 'org-mode-hook
-
-	  (lambda ()
-
-	    (org-add-link-type "elisp-doc" #'org/protocol-elisp-doc #'org/protocol-elisp-doc-html)
-	    ))
+  (add-hook 'org-mode-hook
+        (lambda ()
+          (org-add-link-type "elisp-doc"
+                             #'org/protocol-elisp-doc
+                             #'org/protocol-elisp-doc-html)))
 
 #+END_SRC
 
@@ -4230,7 +4090,6 @@ Enable source code block in org files
    (maxima . t)
   ))
 #+END_SRC
-
 
 Disable Security confirmation:
 
