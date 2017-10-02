@@ -6,6 +6,11 @@
 #+STARTUP: content
 
 * Elisp Snippets
+** Overview
+
+This section provides Elisp snippets and examples about Emacs
+API to help developers find what they need quickly.
+
 ** Strings
 *** Concatenate strings
 
@@ -2359,10 +2364,9 @@ Function to open Yandex.com. Usage M-x _open-yandex_
 
 #+BEGIN_SRC elisp
 (defun open-yandex ()
-  "Open the web site http://www.yandex.com"
+  "Open the web site http://www.yandex.com."
   (interactive)
-  (browse-url "http://www.yandex.com")
-  )
+  (browse-url "http://www.yandex.com"))
 #+END_SRC
 
 *** Browser Url setting the web browser
@@ -2407,19 +2411,22 @@ Open url with Emacs eww browser
 (setq browse-url-browser-function 'eww-browse-url)
 #+END_SRC
 
-*** Search Web sites with Emacs
+*** Search Web sites with Emacs                      :web:search:url:browser:
 **** Search google
 
 Usage: M-x search-google
 
 #+BEGIN_SRC  elisp
-
 (require 'url-util)
 
 (defun search-google ()
    (interactive)
-   "Search www.google.ca"
-   (browse-url (format "http://www.google.ca?gws_rd=ssl#q=%s" (url-encode-url (read-string "Google: ")))))
+   "Search www.google.ca."
+   (browse-url
+    (format "http://www.google.ca?gws_rd=ssl#q=%s"
+            (url-encode-url
+             (read-string "Google: ")))))
+
 
 #+END_SRC
 
@@ -2470,31 +2477,40 @@ Usage: M-x search-google
 
 **** Search gisthub
 
-#+BEGIN_SRC  elisp
+#+BEGIN_SRC  emacs-lisp
 (require 'url-util)
 
 (defun search-gisthub ()
-   "
-    Search gisthub : http://gist.github.com
-    Usage: M-x search-gisthub
-   "
+   "Search gisthub : http://gist.github.com.
+Usage: M-x search-gisthub"
    (interactive)
-   (browse-url (format "https://gist.github.com/search?p=50&q=%s&ref=searchresults" (url-encode-url (read-string "Gisthub Search: ")))))
+   (browse-url
+    (format "https://gist.github.com/search?p=50&q=%s&ref=searchresults"
+            (url-encode-url
+             (read-string "Gisthub Search: ")))))
 #+END_SRC
 
 **** Open Emacs Web Manual
 
 #+BEGIN_SRC elisp
-(defun open-emacs-manual ()
-  "
-  Open Emacs online Manual
-
+  (defun open-emacs-manual ()
+    "Open Emacs online Manual
   Usage: M-x open-emacs-manual
+  It opens the web site: https://www.gnu.org/software/emacs/manual"
+    (interactive)
+    (browse-url "https://www.gnu.org/software/emacs/manual/"))
+#+END_SRC
 
-  It opens the web site: https://www.gnu.org/software/emacs/manual
-  "
+**** Search words in Merrian Webster dictionary
+
+#+BEGIN_SRC elisp
+(defun search/dictionary ()
+  "Search Merrian Webster Dictionary·"
   (interactive)
-  (browse-url "https://www.gnu.org/software/emacs/manual/"))
+  (browse-url
+    (format "https://www.merriam-webster.com/dictionary/%s"
+            (url-encode-url
+             (read-string "Dictionary: ")))))
 #+END_SRC
 
 *** Browser Inside Emacs
