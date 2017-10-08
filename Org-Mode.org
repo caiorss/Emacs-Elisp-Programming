@@ -261,20 +261,6 @@ Output:
 x^2 + \left(\frac{y}{z}\right)^4 = 0
 \end{eqnarray}
 #+END_LaTeX
-** Relevant Info nodes
-
-#+BEGIN_SRC elisp 
-(info "(org)Library of Babel") 
-
-(info "(org)Previewing LaTeX fragments")
-
-(info "(org)Exporting code blocks") 
-
-(info "(org)The export dispatcher") 
-
-(info "(org)noweb") 
-#+END_SRC
-
 ** Resources 
 *** References
 
@@ -393,6 +379,23 @@ execute code."
 
       * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]
 * Org-mode Elisp Snippets and Org-mode API
+** Org-mode API documentation 
+
+To access org-mode API documentation inside Emacs, copy the code below
+to the scratch buffer, then place the cursor at the end of any of
+those s-expressions and type C-x C-e or type M-x eval-last-sexp.
+
+#+BEGIN_SRC elisp 
+(info "(org)Library of Babel") 
+
+(info "(org)Previewing LaTeX fragments")
+
+(info "(org)Exporting code blocks") 
+
+(info "(org)The export dispatcher") 
+
+(info "(org)noweb") 
+#+END_SRC
 ** Code Block Templates
 
 When the user writes '<p'in org-mode and hits tab key it expands to a
@@ -430,7 +433,7 @@ Elisp code:
       instead of ~*ielm*~.
 
 
-In this section is supposed that the org-buffer has this code block:
+In this section, it is supposed that the org-buffer has this code block:
 
 #+BEGIN_SRC org
   ,#+BEGIN_SRC scala :tangle /tmp/scalatest.scala
