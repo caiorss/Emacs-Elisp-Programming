@@ -3,3 +3,8 @@ images-imgur
 *#
 /dist/
 *.html
+/codes/scriptUnix.jar
+*.tar
+*.jar
+*.exe
+*.bin
