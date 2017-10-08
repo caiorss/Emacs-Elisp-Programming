@@ -65,13 +65,15 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
 *Objectives* 
 
- - Increase Emacs discoverability
+ - Increase Emacs API discoverability;
 
  - Empower Emacs users to create their own extensions and
-   customization
+   customization;
 
  - Provide self-contained working examples about Emacs API and Elisp
-   programming. 
+   programming.
+
+ - Unleash all Emacs potentials.
 
 ** Contents
 *** Elisp Programing
@@ -100,7 +102,6 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 *** Emacs Utilities
 
  - [[file:Utilities.org][Utilities]]  Emacs utilities and goodness like Calculator, Magit, Helm and so on.
-
 
  - [[file:Org-Mode.org][Org-mode]] Org-mode notes.
 
