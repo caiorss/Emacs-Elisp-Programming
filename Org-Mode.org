@@ -44,9 +44,26 @@ result printed in the document or displayed in the minibuffer.
 
 file:images/document_in_org_mode2.png
 
-** Useful Key bindings for org-mode                    :mode:org:key:binding:
+** Key bindings and commands for org-mode              :mode:org:key:binding:
+*** Useful Commands 
 
-*Hyperlink*
+| Command                       | Description                         |
+|-------------------------------+-------------------------------------|
+|                               |                                     |
+| *Display*                     |                                     |
+| M-x org-toggle-inline-images  | Toggle images display               |
+| M-x org-toggle-latex-fragment | Toggle latex formulas display       |
+| M-x org-toggle-link-display   | Toggle hyperlink display            |
+|                               |                                     |
+| *Export*                      |                                     |
+| M-x org-html-export-to-html   | Export buffer to html file.         |
+| M-x org-latex-export-to-pdf   | Export buffer to pdf file.          |
+|                               |                                     |
+| *Search*                      |                                     |
+| heml-occur                    | Useful quick search and navigation. |
+| helm-org-in-buffer-headings   | Filter org-mode files by headlines. |
+|                               |                                     |
+*** Hyperlink
 
 | Key binding | Description               |
 |-------------+---------------------------|
@@ -54,8 +71,7 @@ file:images/document_in_org_mode2.png
 | C-c C-o     | Open hyperlink at point   |
 |             |                           |
 
-
-*Move within headlines*
+*** Move within headlines
 
 | Key Binding  | Description                                        |
 |--------------+----------------------------------------------------|
@@ -68,8 +84,7 @@ file:images/document_in_org_mode2.png
 | M-[left]     | Demote  list item or headline                      |
 | M-[right]    | Promote list item or headline                      |
 
-
-*Buffer Subtree*
+*** Buffer Subtree
 
 | Key Binding | Description                                   |
 |-------------+-----------------------------------------------|
@@ -78,41 +93,20 @@ file:images/document_in_org_mode2.png
 | C-c n w     | Widen the view back                           |
 |             |                                               |
 
-*Table*
+*** Table
 
 | Key Binding | Description                 |
 |-------------+-----------------------------|
 | C-c-!       | Convert region into a table |
 |             |                             |
 
-*Hyperlinks*
+*** Hyperlinks
 
 | Key Binding | Description         |
 |-------------+---------------------|
 | C-c-C-o     | Open a link         |
 | C-c-C-l     | Insert/ Edit a link |
-|             |                     |
-
-*Markdown*
-
-Text formating
-
-| Markdown      | View        |
-|---------------+-------------|
-| =*bold*=      | *bold*      |
-| =_underline_= | _underline_ |
-| =/italic/=    | /italic/    |
-| =+strike it+= | +strike it+ |
-
-Hyperlinks
-
-| Markdown                         | View                | Description                     |
-|----------------------------------+---------------------+---------------------------------|
-| :http://www.bing.com             | http://www.bing.com | Link to  web page               |
-| :ftp://something.net             |                     | Link to ftp                     |
-| :file:/etc/fstab                 | file:/etc/fstab     | Link to file /{/etc/fstab}/     |
-| :shell:uname%20-a                | shell:uname%20-a    | Execute Shell Command: uname -a |
-| :elisp:(message%20"Hello world") |                     |                                 |
+|             |                     |  
 
 ** Markdown Summary 
 *** Text Formatting
@@ -149,8 +143,7 @@ Hyperlinks from org-contrib:
 |-----------------+------------+--------------------|
 | Link to manpage | =man:sed=  | (require 'org-man) |
 
-
-*** Blocks 
+*** Code Blocks 
 **** Summary 
 
 | Description        | Shortcut | Code                                |
@@ -237,7 +230,6 @@ aligned to the right!
 ,#+end_right
 #+END_SRC
 
-
 **** Latex Code Block 
 
 *Example1*
@@ -269,26 +261,6 @@ Output:
 x^2 + \left(\frac{y}{z}\right)^4 = 0
 \end{eqnarray}
 #+END_LaTeX
-    
-** Useful Commands 
-
-| Command                       | Description                         |
-|-------------------------------+-------------------------------------|
-|                               |                                     |
-| *Display*                     |                                     |
-| M-x org-toggle-inline-images  | Toggle images display               |
-| M-x org-toggle-latex-fragment | Toggle latex formulas display       |
-| M-x org-toggle-link-display   | Toggle hyperlink display            |
-|                               |                                     |
-| *Export*                      |                                     |
-| M-x org-html-export-to-html   | Export buffer to html file.         |
-| M-x org-latex-export-to-pdf   | Export buffer to pdf file.          |
-|                               |                                     |
-| *Search*                      |                                     |
-| heml-occur                    | Useful quick search and navigation. |
-| helm-org-in-buffer-headings   | Filter org-mode files by headlines. |
-|                               |                                     |
-
 ** Relevant Info nodes
 
 #+BEGIN_SRC elisp 
@@ -303,7 +275,8 @@ x^2 + \left(\frac{y}{z}\right)^4 = 0
 (info "(org)noweb") 
 #+END_SRC
 
-** References
+** Resources 
+*** References
 
 Manual:
 
@@ -371,32 +344,32 @@ Non Categorized:
 
    * [[http://www.totherme.org/configs/org-stuff.html][Gareth's Org-Mode Config]]
 
-** Videos
-*** Tutorials
+*** Videos
+**** Tutorials
 
 *Org Mode in Depth - by Rick Dillon*
 
    - [[https://www.youtube.com/watch?v=nsGYet02bEk][Hack Emacs - Org Mode In Depth: Managing Structure - YouTube]]
 
-Description: Part of the Org Mode In Depth series. In this episode, we
+Description: "Part of the Org Mode In Depth series. In this episode, we
 examine methods for exploiting the structure of an Org Mode file to
 focus on specific subtrees, control visibility by folding and
 unfolding headlines, navigate among headlines efficiently and
-reorganize headlines my moving and/or promoting and demoting them.
+reorganize headlines my moving and/or promoting and demoting them."
 
    - [[https://www.youtube.com/watch?v=fTJVLJd_gz0][Org Mode In Depth: Tables - YouTube]]
 
-Description: Actually recorded a few months back, I never got around
+Description: "Actually recorded a few months back, I never got around
 to uploading this. I give a brief demo of some of the functionality
 Org Mode tables offer, and an explanation of some of the commands that
-enable it.
+enable it."
 
    - [[https://www.youtube.com/watch?v=VTh_Xgt69-E][Hack Emacs - Org Mode in Depth: Markup and Links - YouTube]]
 
-Description: Part of the Org Mode in Depth series. In this episode, I
+Description: "Part of the Org Mode in Depth series. In this episode, I
 examine ways of marking up text in Org Mode, as well as various link
 types that connect Org headlines and files, as well as links that can
-execute code.
+execute code."
 
  *NOn-Programmer's Emacs: Studying in Emacs pt 3: Annotation with Orgmode by Tory S. Anderson*
 
@@ -404,18 +377,18 @@ execute code.
    -
    -
 
-*** Presentations
+**** Presentations
 
-     * [[(info "(emacs) Misc Help")][Emacs Org-Mode - A system for note-taking and project planning]] -  Talk given by Carsten Dominik.
+      * [[(info "(emacs) Misc Help")][Emacs Org-Mode - A system for note-taking and project planning]] -  Talk given by Carsten Dominik.
 
-     * [[https://www.youtube.com/watch?v=lsYdK0C2RvQ][Embedding Code Snippets In Org Mode]]
+      * [[https://www.youtube.com/watch?v=lsYdK0C2RvQ][Embedding Code Snippets In Org Mode]]
 
-     * [[https://www.youtube.com/watch?v=VIuOwIBL-ZU][Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)]]
+      * [[https://www.youtube.com/watch?v=VIuOwIBL-ZU][Emacs Tutorial - Overview of Init Files Using Org-Mode and Use-Package (Part 1 of 2)]]
 
-     * [[https://www.youtube.com/watch?v=fgizHHd7nOo][Org mode is awesome]]
+      * [[https://www.youtube.com/watch?v=fgizHHd7nOo][Org mode is awesome]]
 
-     * [[https://www.youtube.com/watch?v=oJTwQvgfgMM][Emacs Org-mode - a system for note-taking and project planning]]
+      * [[https://www.youtube.com/watch?v=oJTwQvgfgMM][Emacs Org-mode - a system for note-taking and project planning]]
 
-     * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
+      * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
 
-     * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]
+      * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]
