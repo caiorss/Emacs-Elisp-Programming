@@ -11,6 +11,50 @@
 This section provides useful org-mode code blocks examples that can
 used for literate programming and creating executable snippets. 
 
+** Example: Runnable shell-script code block 
+
+Code block source code 
+
+#+BEGIN_SRC org 
+  ,#+BEGIN_SRC sh :results verbatim :exports both 
+    echo "Language LC_ALL   = "$LC_ALL
+    echo "Kernel version    = $(uname -r)"
+    echo "Hostname          = $(hostanme)"
+    echo "Username          = $(whoami)"
+    echo "Current Date      = $(date)"
+    echo "Current directory = $(pwd)"
+  ,#+END_SRC
+
+  ,#+RESULTS:
+  : Language LC_ALL   = 
+  : Kernel version    = 4.9.52-1-MANJARO
+  : Hostname          = 
+  : Username          = archbox
+  : Current Date      = Sun Oct  8 00:53:19 -03 2017
+  : Current directory = /home/archbox/Documents/projects/emacs
+#+END_SRC
+
+Code block - to run the code block, place the cursor within it and
+type C-c C-c. 
+
+#+BEGIN_SRC sh :results verbatim :exports both 
+  echo "Language LC_ALL   = "$LC_ALL
+  echo "Kernel version    = $(uname -r)"
+  echo "Hostname          = $(hostanme)"
+  echo "Username          = $(whoami)"
+  echo "Current Date      = $(date)"
+  echo "Current directory = $(pwd)"
+#+END_SRC
+
+#+RESULTS:
+: Language LC_ALL   = 
+: Kernel version    = 4.9.52-1-MANJARO
+: Hostname          = 
+: Username          = archbox
+: Current Date      = Sun Oct  8 00:53:19 -03 2017
+: Current directory = /home/archbox/Documents/projects/emacs
+
+
 ** Example: Runnable C++ Code block 
 
 Code block source 
@@ -155,4 +199,3 @@ arg[2] = arg2
 arg[3] = arg3
 
 #+END_SRC 
-

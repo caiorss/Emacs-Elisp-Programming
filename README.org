@@ -1,7 +1,7 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org 
 #+TITLE: Emacs In a Box
-#+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor
+#+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor, org-mode
 #+STARTUP: content
 #+DESCRIPTION: Emacs in self-contained box!
 
