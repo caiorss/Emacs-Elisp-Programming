@@ -1,0 +1,246 @@
+# -*- mode: org; -*-
+#+INCLUDE: theme/style.org
+#+STARTUP: content 
+#+DESCRIPTION: org-mode features and summary 
+#+KEYWORDS: org-mode emacs summary literate programming documentation 
+#+TITLE: Org-mode - Literate Programming Recipes 
+
+* Org-mode Literate Programming Recipes 
+** Overview 
+
+This section provides useful org-mode code blocks examples that can
+used for literate programming and creating executable snippets. 
+
+Documentation: 
+
+ - [[http://orgmode.org/manual/Specific-header-arguments.html#Specific-header-arguments][Specific header arguments - The Org Manual]]
+
+ - 
+
+** Example: Runnable shell-script block 
+
+Code block source code 
+
+#+BEGIN_SRC org 
+  ,#+BEGIN_SRC sh :results verbatim :exports both 
+    echo "Language LC_ALL   = "$LC_ALL
+    echo "Kernel version    = $(uname -r)"
+    echo "Hostname          = $(hostanme)"
+    echo "Username          = $(whoami)"
+    echo "Current Date      = $(date)"
+    echo "Current directory = $(pwd)"
+  ,#+END_SRC
+
+  ,#+RESULTS:
+  : Language LC_ALL   = 
+  : Kernel version    = 4.9.52-1-MANJARO
+  : Hostname          = 
+  : Username          = archbox
+  : Current Date      = Sun Oct  8 00:53:19 -03 2017
+  : Current directory = /home/archbox/Documents/projects/emacs
+#+END_SRC
+
+Code block - to run the code block, place the cursor within it and
+type C-c C-c. 
+
+#+BEGIN_SRC sh :results verbatim :exports both 
+  echo "Language LC_ALL   = "$LC_ALL
+  echo "Kernel version    = $(uname -r)"
+  echo "Hostname          = $(hostanme)"
+  echo "Username          = $(whoami)"
+  echo "Current Date      = $(date)"
+  echo "Current directory = $(pwd)"
+#+END_SRC
+
+#+RESULTS:
+: Language LC_ALL   = 
+: Kernel version    = 4.9.52-1-MANJARO
+: Hostname          = 
+: Username          = archbox
+: Current Date      = Sun Oct  8 00:53:19 -03 2017
+: Current directory = /home/archbox/Documents/projects/emacs
+
+** Example: Runnable shell-script block - export output to file 
+
+Source 
+
+#+BEGIN_SRC org 
+  ,#+BEGIN_SRC sh :exports both :file codes/report.txt 
+    echo -e "Language LC_ALL   = "$LC_ALL
+    echo -e "Kernel version    = $(uname -r)"
+    echo -e "Hostname          = $(hostanme)"
+    echo -e "Username          = $(whoami)"
+    echo -e "Current Date      = $(date)"
+    echo -e "Current directory = $(pwd)"
+  ,#+END_SRC
+#+END_SRC
+
+The output is exported to the file [[file:codes/report.txt][file:codes/report.txt]]
+
+#+BEGIN_SRC sh :exports both :file codes/report.txt 
+  echo -e "Language LC_ALL   = "$LC_ALL
+  echo -e "Kernel version    = $(uname -r)"
+  echo -e "Hostname          = $(hostanme)"
+  echo -e "Username          = $(whoami)"
+  echo -e "Current Date      = $(date)"
+  echo -e "Current directory = $(pwd)"
+#+END_SRC
+
+#+RESULTS:
+[[file:codes/report.txt]]
+
+
+
+** Example: Runnable C++ Code block 
+
+Code block source 
+
+#+BEGIN_SRC org 
+  ,#+BEGIN_SRC c++ 
+  #include <iostream>
+
+  int main(int argc, char** argv)
+  {
+       std::cout << "Hello, world." << std::endl;
+       return 0;
+  }
+  ,#+END_SRC
+#+END_SRC 
+
+Code block rendered
+
+ - To run this code block, place the cursor within it and type C-c C-c 
+
+#+BEGIN_SRC cpp 
+#include <iostream>
+
+int main(int argc, char** argv)
+{
+     std::cout << "Hello, world." << std::endl;
+     return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Hello | world. |
+
+** Example: Exporting/Tangling code block to file 
+   :PROPERTIES:
+   :ID:       29d349ac-64f6-471c-8bef-247c71024fda
+   :END:
+
+ - Properties:
+   - =tangle: codes/scriptUnix.scala=
+     + exports the code block to file [[file:codes/scriptUnix.scala][file:codes/scriptUnix.scala]]
+
+   - =:tangle-mode (identity #o755)=
+     + sets the file as "unix"-executable.
+
+   - =:padline no= -
+     - Remove new line characters from the top of the file 
+
+Code block source 
+
+#+BEGIN_SRC org
+  ,#+BEGIN_SRC scala  :tangle codes/scriptUnix.scala   :tangle-mode (identity #o755) :padline no
+    #!/bin/sh
+    exec scala -save "$0" "$@"
+    !#
+
+    // Display text in a GUI 
+    def displayText(text: String) = {
+      import javax.swing.{JFrame, JTextArea, JScrollPane}
+      val tarea = new JTextArea()
+      val frame = new JFrame()
+      frame.add(new JScrollPane(tarea))
+      frame.setSize(400, 500)
+      frame.setVisible(true)
+      frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE)
+      tarea.setText(text)
+    }
+
+    def readFile(file: String) = {
+      val src = scala.io.Source.fromFile(file)
+      val txt = src.mkString
+      src.close()
+      txt 
+    }
+
+    println("Testing Scala script")
+
+    println("Arguments passed by user")
+
+    args.foldLeft(0){(acc, a) =>
+      println(s"arg[${acc}] = ${a}")
+      acc + 1
+    }
+
+    displayText(readFile(args(0)))
+  ,#+END_SRC
+#+END_SRC
+
+Code block rendered
+
+ - To tangle(aka export) this code block to the script
+   [[file:codes/scriptUnix.scala][file:codes/scriptUnix.scala]], run =M-x org-babel-tangle= 
+
+
+#+BEGIN_SRC scala  :tangle codes/scriptUnix.scala   :tangle-mode (identity #o755) :padline no
+  #!/bin/sh
+  exec scala -save "$0" "$@"
+  !#
+
+  // Display text in a GUI 
+  def displayText(text: String) = {
+    import javax.swing.{JFrame, JTextArea, JScrollPane}
+    val tarea = new JTextArea()
+    val frame = new JFrame()
+    frame.add(new JScrollPane(tarea))
+    frame.setSize(400, 500)
+    frame.setVisible(true)
+    frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE)
+    tarea.setText(text)
+  }
+
+  def readFile(file: String) = {
+    val src = scala.io.Source.fromFile(file)
+    val txt = src.mkString
+    src.close()
+    txt 
+  }
+
+  println("Testing Scala script")
+
+  println("Arguments passed by user")
+
+  args.foldLeft(0){(acc, a) =>
+    println(s"arg[${acc}] = ${a}")
+    acc + 1
+  }
+
+  displayText(readFile(args(0)))
+#+END_SRC
+
+To run the script [[file:codes/scriptUnix.scala][file:codes/scriptUnix.scala]], that displays the
+command line arguments and displays a file passed as first argument in
+a GUI, go to a terminal and run the command below.
+
+#+BEGIN_SRC sh 
+$ codes/scriptUnix.scala /etc/protocols arg1 arg2 arg3
+Testing Scala script
+Arguments passed by user
+arg[0] = /etc/protocols
+arg[1] = arg1
+arg[2] = arg2
+arg[3] = arg3
+
+#+END_SRC 
+** Bookmarks to other examples 
+
+ - [[http://ehneilsen.net/notebook/orgExamples/org-examples.html][Emacs org-mode examples and cookbook]]
+
+ - [[http://www.howardism.org/Technical/Emacs/literate-programming-tutorial.html][Introduction to Literate Programming]] - Howardism 
+
+ - [[http://www.star.bris.ac.uk/bjm/org-basics.html][Org-mode Basics]]
+
+ - 

@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Org-mode - Literate Programming Recipes</title>
+<!-- 2017-10-08 Sun 12:17 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="description" content="Emacs programming and customization.
+org-mode features and summary"
+ />
+<meta  name="keywords" content="org-mode emacs summary literate programming documentation" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link href="theme/style2.css" rel="stylesheet">
+
+<script type="text/javascript" src="theme/org-info.js">
+/**
+ *
+ * @source: theme/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in theme/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in theme/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Org-mode - Literate Programming Recipes</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Org-mode Literate Programming Recipes</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Overview</a></li>
+<li><a href="#sec-1-2">1.2. Example: Runnable shell-script block</a></li>
+<li><a href="#sec-1-3">1.3. Example: Runnable shell-script block - export output to file</a></li>
+<li><a href="#sec-1-4">1.4. Example: Runnable C++ Code block</a></li>
+<li><a href="#sec-1-5">1.5. Example: Exporting/Tangling code block to file</a></li>
+<li><a href="#sec-1-6">1.6. Bookmarks to other examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<a href="index.html">Top</a>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Org-mode Literate Programming Recipes</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Overview</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+This section provides useful org-mode code blocks examples that can
+used for literate programming and creating executable snippets. 
+</p>
+
+<p>
+Documentation: 
+</p>
+
+<ul class="org-ul">
+<li><a href="http://orgmode.org/manual/Specific-header-arguments.html#Specific-header-arguments">Specific header arguments - The Org Manual</a>
+</li>
+
+<li></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Example: Runnable shell-script block</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Code block source code 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+BEGIN_SRC sh :results verbatim :exports both </span>
+<span class="org-org-block">  echo "Language LC_ALL   = "$LC_ALL</span>
+<span class="org-org-block">  echo "Kernel version    = $(uname -r)"</span>
+<span class="org-org-block">  echo "Hostname          = $(hostanme)"</span>
+<span class="org-org-block">  echo "Username          = $(whoami)"</span>
+<span class="org-org-block">  echo "Current Date      = $(date)"</span>
+<span class="org-org-block">  echo "Current directory = $(pwd)"</span>
+<span class="org-org-block-end-line">#+END_SRC</span>
+
+<span class="org-org-meta-line">#+RESULTS:</span>
+<span class="org-org-code">: Language LC_ALL   = </span>
+<span class="org-org-code">: Kernel version    = 4.9.52-1-MANJARO</span>
+<span class="org-org-code">: Hostname          = </span>
+<span class="org-org-code">: Username          = archbox</span>
+<span class="org-org-code">: Current Date      = Sun Oct  8 00:53:19 -03 2017</span>
+<span class="org-org-code">: Current directory = /home/archbox/Documents/projects/emacs</span>
+</pre>
+</div>
+
+<p>
+Code block - to run the code block, place the cursor within it and
+type C-c C-c. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-builtin">echo</span> <span class="org-string">"Language LC_ALL   = "</span>$<span class="org-variable-name">LC_ALL</span>
+<span class="org-builtin">echo</span> <span class="org-string">"Kernel version    = $(</span><span class="org-sh-quoted-exec">uname</span><span class="org-string"> -r)"</span>
+<span class="org-builtin">echo</span> <span class="org-string">"Hostname          = $(</span><span class="org-sh-quoted-exec">hostanme</span><span class="org-string">)"</span>
+<span class="org-builtin">echo</span> <span class="org-string">"Username          = $(</span><span class="org-sh-quoted-exec">whoami</span><span class="org-string">)"</span>
+<span class="org-builtin">echo</span> <span class="org-string">"Current Date      = $(</span><span class="org-sh-quoted-exec">date</span><span class="org-string">)"</span>
+<span class="org-builtin">echo</span> <span class="org-string">"Current directory = $(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)"</span>
+</pre>
+</div>
+
+<pre class="example">
+Language LC_ALL   = 
+Kernel version    = 4.9.52-1-MANJARO
+Hostname          = 
+Username          = archbox
+Current Date      = Sun Oct  8 00:53:19 -03 2017
+Current directory = /home/archbox/Documents/projects/emacs
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Example: Runnable shell-script block - export output to file</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Source 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+BEGIN_SRC sh :exports both :file codes/report.txt </span>
+<span class="org-org-block">  echo -e "Language LC_ALL   = "$LC_ALL</span>
+<span class="org-org-block">  echo -e "Kernel version    = $(uname -r)"</span>
+<span class="org-org-block">  echo -e "Hostname          = $(hostanme)"</span>
+<span class="org-org-block">  echo -e "Username          = $(whoami)"</span>
+<span class="org-org-block">  echo -e "Current Date      = $(date)"</span>
+<span class="org-org-block">  echo -e "Current directory = $(pwd)"</span>
+<span class="org-org-block-end-line">#+END_SRC</span>
+</pre>
+</div>
+
+<p>
+The output is exported to the file <a href="codes/report.txt"><a href="codes/report.txt">codes/report.txt</a></a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-builtin">echo</span> -e <span class="org-string">"Language LC_ALL   = "</span>$<span class="org-variable-name">LC_ALL</span>
+<span class="org-builtin">echo</span> -e <span class="org-string">"Kernel version    = $(</span><span class="org-sh-quoted-exec">uname</span><span class="org-string"> -r)"</span>
+<span class="org-builtin">echo</span> -e <span class="org-string">"Hostname          = $(</span><span class="org-sh-quoted-exec">hostanme</span><span class="org-string">)"</span>
+<span class="org-builtin">echo</span> -e <span class="org-string">"Username          = $(</span><span class="org-sh-quoted-exec">whoami</span><span class="org-string">)"</span>
+<span class="org-builtin">echo</span> -e <span class="org-string">"Current Date      = $(</span><span class="org-sh-quoted-exec">date</span><span class="org-string">)"</span>
+<span class="org-builtin">echo</span> -e <span class="org-string">"Current directory = $(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)"</span>
+</pre>
+</div>
+
+<p>
+<a href="codes/report.txt">codes/report.txt</a>
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Example: Runnable C++ Code block</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Code block source 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+BEGIN_SRC c++ </span>
+<span class="org-org-block">#include &lt;iostream&gt;</span>
+
+<span class="org-org-block">int main(int argc, char** argv)</span>
+<span class="org-org-block">{</span>
+<span class="org-org-block">     std::cout &lt;&lt; "Hello, world." &lt;&lt; std::endl;</span>
+<span class="org-org-block">     return 0;</span>
+<span class="org-org-block">}</span>
+<span class="org-org-block-end-line">#+END_SRC</span>
+</pre>
+</div>
+
+<p>
+Code block rendered
+</p>
+
+<ul class="org-ul">
+<li>To run this code block, place the cursor within it and type C-c C-c 
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-cpp"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>(<span class="org-type">int</span> <span class="org-variable-name">argc</span>, <span class="org-type">char</span>** <span class="org-variable-name">argv</span>)
+{
+     <span class="org-constant">std</span>::cout &lt;&lt; <span class="org-string">"Hello, world."</span> &lt;&lt; <span class="org-constant">std</span>::endl;
+     <span class="org-keyword">return</span> 0;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><a id="ID-29d349ac-64f6-471c-8bef-247c71024fda" name="ID-29d349ac-64f6-471c-8bef-247c71024fda"></a><span class="section-number-3">1.5</span> Example: Exporting/Tangling code block to file</h3>
+<div class="outline-text-3" id="text-1-5">
+
+<ul class="org-ul">
+<li>Properties:
+<ul class="org-ul">
+<li><code>tangle: codes/scriptUnix.scala</code>
+<ul class="org-ul">
+<li>exports the code block to file <a href="codes/scriptUnix.scala"><a href="codes/scriptUnix.scala">codes/scriptUnix.scala</a></a>
+</li>
+</ul>
+</li>
+
+<li><code>:tangle-mode (identity #o755)</code>
+<ul class="org-ul">
+<li>sets the file as "unix"-executable.
+</li>
+</ul>
+</li>
+
+<li><code>:padline no</code> -
+<ul class="org-ul">
+<li>Remove new line characters from the top of the file 
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+Code block source 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span class="org-org-block-begin-line">#+BEGIN_SRC scala  :tangle codes/scriptUnix.scala   :tangle-mode (identity #o755) :padline no</span>
+<span class="org-org-block">  #!/bin/sh</span>
+<span class="org-org-block">  exec scala -save "$0" "$@"</span>
+<span class="org-org-block">  !#</span>
+
+<span class="org-org-block">  // Display text in a GUI </span>
+<span class="org-org-block">  def displayText(text: String) = {</span>
+<span class="org-org-block">    import javax.swing.{JFrame, JTextArea, JScrollPane}</span>
+<span class="org-org-block">    val tarea = new JTextArea()</span>
+<span class="org-org-block">    val frame = new JFrame()</span>
+<span class="org-org-block">    frame.add(new JScrollPane(tarea))</span>
+<span class="org-org-block">    frame.setSize(400, 500)</span>
+<span class="org-org-block">    frame.setVisible(true)</span>
+<span class="org-org-block">    frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE)</span>
+<span class="org-org-block">    tarea.setText(text)</span>
+<span class="org-org-block">  }</span>
+
+<span class="org-org-block">  def readFile(file: String) = {</span>
+<span class="org-org-block">    val src = scala.io.Source.fromFile(file)</span>
+<span class="org-org-block">    val txt = src.mkString</span>
+<span class="org-org-block">    src.close()</span>
+<span class="org-org-block">    txt </span>
+<span class="org-org-block">  }</span>
+
+<span class="org-org-block">  println("Testing Scala script")</span>
+
+<span class="org-org-block">  println("Arguments passed by user")</span>
+
+<span class="org-org-block">  args.foldLeft(0){(acc, a) =&gt;</span>
+<span class="org-org-block">    println(s"arg[${acc}] = ${a}")</span>
+<span class="org-org-block">    acc + 1</span>
+<span class="org-org-block">  }</span>
+
+<span class="org-org-block">  displayText(readFile(args(0)))</span>
+<span class="org-org-block-end-line">#+END_SRC</span>
+</pre>
+</div>
+
+<p>
+Code block rendered
+</p>
+
+<ul class="org-ul">
+<li>To tangle(aka export) this code block to the script
+<a href="codes/scriptUnix.scala"><a href="codes/scriptUnix.scala">codes/scriptUnix.scala</a></a>, run <code>M-x org-babel-tangle</code> 
+</li>
+</ul>
+
+
+<div class="org-src-container">
+
+<pre class="src src-scala"><span class="org-comment">#!/bin/sh</span>
+exec scala -save <span class="org-string">"$0"</span> <span class="org-string">"$@"</span>
+!#
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Display text in a GUI </span>
+<span class="org-keyword">def</span> <span class="org-function-name">displayText</span>(text<span class="org-keyword">:</span> <span class="org-type">String</span>) <span class="org-keyword">=</span> {
+  <span class="org-keyword">import</span> javax.swing.{<span class="org-constant">JFrame</span>, <span class="org-constant">JTextArea</span>, <span class="org-constant">JScrollPane</span>}
+  <span class="org-keyword">val</span> <span class="org-variable-name">tarea</span> <span class="org-keyword">=</span> <span class="org-keyword">new</span> <span class="org-type">JTextArea</span>()
+  <span class="org-keyword">val</span> <span class="org-variable-name">frame</span> <span class="org-keyword">=</span> <span class="org-keyword">new</span> <span class="org-type">JFrame</span>()
+  frame.add(<span class="org-keyword">new</span> <span class="org-type">JScrollPane</span>(tarea))
+  frame.setSize(<span class="org-constant">400</span>, <span class="org-constant">500</span>)
+  frame.setVisible(<span class="org-constant">true</span>)
+  frame.setDefaultCloseOperation(javax.swing.<span class="org-constant">WindowConstants</span>.<span class="org-constant">EXIT_ON_CLOSE</span>)
+  tarea.setText(text)
+}
+
+<span class="org-keyword">def</span> <span class="org-function-name">readFile</span>(file<span class="org-keyword">:</span> <span class="org-type">String</span>) <span class="org-keyword">=</span> {
+  <span class="org-keyword">val</span> <span class="org-variable-name">src</span> <span class="org-keyword">=</span> scala.io.<span class="org-constant">Source</span>.fromFile(file)
+  <span class="org-keyword">val</span> <span class="org-variable-name">txt</span> <span class="org-keyword">=</span> src.mkString
+  src.close()
+  txt 
+}
+
+println(<span class="org-string">"Testing Scala script"</span>)
+
+println(<span class="org-string">"Arguments passed by user"</span>)
+
+args.foldLeft(<span class="org-constant">0</span>){(acc, a) <span class="org-keyword">=&gt;</span>
+  println(s<span class="org-string">"arg[</span><span class="org-variable-name">${acc}</span><span class="org-string">] = </span><span class="org-variable-name">${a}</span><span class="org-string">"</span>)
+  acc + <span class="org-constant">1</span>
+}
+
+displayText(readFile(args(<span class="org-constant">0</span>)))
+</pre>
+</div>
+
+<p>
+To run the script <a href="codes/scriptUnix.scala"><a href="codes/scriptUnix.scala">codes/scriptUnix.scala</a></a>, that displays the
+command line arguments and displays a file passed as first argument in
+a GUI, go to a terminal and run the command below.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ codes/scriptUnix.scala /etc/protocols arg1 arg2 arg3
+Testing Scala script
+Arguments passed by user
+arg[0] = /etc/protocols
+arg[1] = arg1
+arg[2] = arg2
+arg[3] = arg3
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Bookmarks to other examples</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li><a href="http://ehneilsen.net/notebook/orgExamples/org-examples.html">Emacs org-mode examples and cookbook</a>
+</li>
+
+<li><a href="http://www.howardism.org/Technical/Emacs/literate-programming-tutorial.html">Introduction to Literate Programming</a> - Howardism 
+</li>
+
+<li><a href="http://www.star.bris.ac.uk/bjm/org-basics.html">Org-mode Basics</a>
+</li>
+
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2017-10-08 Sun 12:17</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
