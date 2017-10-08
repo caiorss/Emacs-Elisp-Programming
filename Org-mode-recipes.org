@@ -11,7 +11,7 @@
 This section provides useful org-mode code blocks examples that can
 used for literate programming and creating executable snippets. 
 
-** Example: Runnable shell-script code block 
+** Example: Runnable shell-script block 
 
 Code block source code 
 
@@ -53,6 +53,37 @@ type C-c C-c.
 : Username          = archbox
 : Current Date      = Sun Oct  8 00:53:19 -03 2017
 : Current directory = /home/archbox/Documents/projects/emacs
+
+** Example: Runnable shell-script block - export output to file 
+
+Source 
+
+#+BEGIN_SRC org 
+  ,#+BEGIN_SRC sh :exports both :file codes/report.txt 
+    echo -e "Language LC_ALL   = "$LC_ALL
+    echo -e "Kernel version    = $(uname -r)"
+    echo -e "Hostname          = $(hostanme)"
+    echo -e "Username          = $(whoami)"
+    echo -e "Current Date      = $(date)"
+    echo -e "Current directory = $(pwd)"
+  ,#+END_SRC
+#+END_SRC
+
+The output is exported to the file [[file:codes/report.txt][file:codes/report.txt]]
+
+#+BEGIN_SRC sh :exports both :file codes/report.txt 
+  echo -e "Language LC_ALL   = "$LC_ALL
+  echo -e "Kernel version    = $(uname -r)"
+  echo -e "Hostname          = $(hostanme)"
+  echo -e "Username          = $(whoami)"
+  echo -e "Current Date      = $(date)"
+  echo -e "Current directory = $(pwd)"
+#+END_SRC
+
+#+RESULTS:
+[[file:codes/report.txt]]
+
+
 
 
 ** Example: Runnable C++ Code block 
@@ -199,3 +230,12 @@ arg[2] = arg2
 arg[3] = arg3
 
 #+END_SRC 
+** Bookmarks to other examples 
+
+ - [[http://ehneilsen.net/notebook/orgExamples/org-examples.html][Emacs org-mode examples and cookbook]]
+
+ - [[http://www.howardism.org/Technical/Emacs/literate-programming-tutorial.html][Introduction to Literate Programming]] - Howardism 
+
+ - 
+
+ - 
