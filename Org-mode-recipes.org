@@ -91,7 +91,6 @@ The output is exported to the file [[file:codes/report.txt][file:codes/report.tx
 
 
 
-
 ** Example: Runnable C++ Code block 
 
 Code block source 
@@ -183,7 +182,7 @@ Code block source
 Code block rendered
 
  - To tangle(aka export) this code block to the script
-   [[file:codes/scriptUnix.scala][file:codes/scriptUnix.scala]], run =M-x org-bable-tangle= 
+   [[file:codes/scriptUnix.scala][file:codes/scriptUnix.scala]], run =M-x org-babel-tangle= 
 
 
 #+BEGIN_SRC scala  :tangle codes/scriptUnix.scala   :tangle-mode (identity #o755) :padline no
