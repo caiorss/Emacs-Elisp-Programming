@@ -1,14 +1,14 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org 
 #+TITLE: Emacs In a Box
-#+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor
+#+KEYWORDS: emacs, elisp, lisp, programming, eshell, editor, org-mode
 #+STARTUP: content
 #+DESCRIPTION: Emacs in self-contained box!
 
 * Emacs - Elisp Programming and Customization
 ** Overview
 
-[[file:images/emacs_logo.png][file:images/emacs_logo.png]]
+# [[file:images/emacs_logo.png][file:images/emacs_logo.png]]
 
 
 Emacs doesn't need any presentation. Emacs is a software [[https://en.wikipedia.org/wiki/Lisp_machine]["Lisp
@@ -65,13 +65,15 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
 *Objectives* 
 
- - Increase Emacs discoverability
+ - Increase Emacs API discoverability;
 
  - Empower Emacs users to create their own extensions and
-   customization
+   customization;
 
  - Provide self-contained working examples about Emacs API and Elisp
-   programming. 
+   programming.
+
+ - Unleash all Emacs potentials.
 
 ** Contents
 *** Elisp Programing
@@ -101,8 +103,9 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
  - [[file:Utilities.org][Utilities]]  Emacs utilities and goodness like Calculator, Magit, Helm and so on.
 
-
  - [[file:Org-Mode.org][Org-mode]] Org-mode notes.
+
+ - [[file:Org-mode-recipes.org][Org-mode recipes]] - Org-mode literate programming recipes.
 
 *** Miscellaneous
 

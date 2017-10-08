@@ -1,0 +1,6 @@
+Language	LC_ALL	=						
+Kernel	version	=	4.9.52-1-MANJARO					
+Hostname	=							
+Username	=	archbox						
+Current	Date	=	Sun	Oct	8	01:09:01	-3	2017
+Current	directory	=	/home/archbox/Documents/projects/emacs					
