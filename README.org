@@ -8,7 +8,7 @@
 * Emacs - Elisp Programming and Customization
 ** Overview
 
-[[file:images/emacs_logo.png][file:images/emacs_logo.png]]
+# [[file:images/emacs_logo.png][file:images/emacs_logo.png]]
 
 
 Emacs doesn't need any presentation. Emacs is a software [[https://en.wikipedia.org/wiki/Lisp_machine]["Lisp
@@ -103,6 +103,8 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
 
  - [[file:Org-Mode.org][Org-mode]] Org-mode notes.
+
+ - [[file:Org-mode-recipes.org][Org-mode recipes]] - Org-mode literate programming recipes.
 
 *** Miscellaneous
 
