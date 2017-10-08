@@ -1,6 +1,8 @@
 # -*- mode: org; -*-
 #+INCLUDE: theme/style.org
 #+STARTUP: content 
+#+DESCRIPTION: org-mode features and summary 
+#+KEYWORDS: org-mode emacs summary literate programming documentation 
 #+TITLE: Org-mode 
 
 * Org-Mode
@@ -261,6 +263,10 @@ Output:
 x^2 + \left(\frac{y}{z}\right)^4 = 0
 \end{eqnarray}
 #+END_LaTeX
+** Literate Programming Recipes 
+
+See: [[file:Org-mode-recipes.org][file:Org-mode-recipes.org]]
+
 ** Resources 
 *** References
 
