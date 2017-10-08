@@ -11,6 +11,12 @@
 This section provides useful org-mode code blocks examples that can
 used for literate programming and creating executable snippets. 
 
+Documentation: 
+
+ - [[http://orgmode.org/manual/Specific-header-arguments.html#Specific-header-arguments][Specific header arguments - The Org Manual]]
+
+ - 
+
 ** Example: Runnable shell-script block 
 
 Code block source code 
@@ -236,6 +242,6 @@ arg[3] = arg3
 
  - [[http://www.howardism.org/Technical/Emacs/literate-programming-tutorial.html][Introduction to Literate Programming]] - Howardism 
 
- - 
+ - [[http://www.star.bris.ac.uk/bjm/org-basics.html][Org-mode Basics]]
 
  - 
