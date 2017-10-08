@@ -392,3 +392,425 @@ execute code."
       * [[https://youtu.be/6W82EdwQhxU][Hack-Emacs an Overview of Org-Mode]]
 
       * [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Teaching with Emacs+org-mode - YouTube]]
+* Org-mode Elisp Snippets and Org-mode API
+** Code Block Templates
+
+When the user writes '<p'in org-mode and hits tab key it expands to a
+python source code block like this:
+
+#+BEGIN_SRC org
+,#+BEGIN_SRC python :results value
+
+,#+END_SRC
+#+END_SRC
+
+
+Elisp code:
+
+#+BEGIN_SRC elisp
+(add-to-list 'org-structure-template-alist
+	     '("p" "#+BEGIN_SRC python :results ?value\n\n#+END_SRC"))
+#+END_SRC
+** Code Blocks API
+*** Overview
+
+ 1. To test this the code block API divide the window in two parts,
+    one cointaining a org buffer with some org-mode file and other one
+    the emacs shell, IELM, that can be invoked with M-x ielm.
+
+ 2. At the org-mode buffer position the cursor at the code block.
+
+ 3. Go to the IELM buffer and run C-c C-b or type =M-x ielm-change-working-buffer=
+    and change the working buffer to the org-mode buffer by typing its
+    name and hitting tab to complete it.
+
+ 4. Run the commands at the IELM shell. If it was done the command
+
+    - (buffer-name) will return the name of the org-mode buffer
+      instead of ~*ielm*~.
+
+
+In this section is supposed that the org-buffer has this code block:
+
+#+BEGIN_SRC org
+  ,#+BEGIN_SRC scala :tangle /tmp/scalatest.scala
+    import java.awt.BorderLayout
+    import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+    val frame = new JFrame("Border Layout")
+    val btn1  = new JButton("North")
+    val btn2  = new JButton("South")
+    val btn3  = new JButton("Center")
+    val btn4  = new JButton("West")
+    val btn5  = new JButton("East")
+
+    frame.setLayout(new BorderLayout())
+    frame.add(btn1, BorderLayout.NORTH)
+    frame.add(btn2, BorderLayout.SOUTH)
+    frame.add(btn3, BorderLayout.CENTER)
+    frame.add(btn4, BorderLayout.WEST)
+    frame.add(btn5, BorderLayout.EAST)
+
+    frame.setSize(300, 400)
+    frame.setVisible(true)
+  ,#+END_SRC
+#+END_SRC
+
+It would be rendered as:
+
+#+BEGIN_SRC scala :tangle /tmp/scalatest.scala
+  import java.awt.BorderLayout
+  import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+  val frame = new JFrame("Border Layout")
+  val btn1  = new JButton("North")
+  val btn2  = new JButton("South")
+  val btn3  = new JButton("Center")
+  val btn4  = new JButton("West")
+  val btn5  = new JButton("East")
+
+  frame.setLayout(new BorderLayout())
+  frame.add(btn1, BorderLayout.NORTH)
+  frame.add(btn2, BorderLayout.SOUTH)
+  frame.add(btn3, BorderLayout.CENTER)
+  frame.add(btn4, BorderLayout.WEST)
+  frame.add(btn5, BorderLayout.EAST)
+
+  frame.setSize(300, 400)
+  frame.setVisible(true)
+#+END_SRC
+
+*** Get information about code block
+
+#+BEGIN_SRC elisp
+ELISP> (org-babel-get-src-block-info)
+("scala" "import java.awt.BorderLayout\nimport javax.swing.{JFrame, JPanel, JButton, JTextArea}\n\nval frame = new JFrame(\"Border Layout\")\nval btn1  = new JButton(\"North\")\nval btn2  = new JButton(\"South\")\nval btn3  = new JButton(\"Center\")\nval btn4  = new JButton(\"West\")\nval btn5  = new JButton(\"East\")\n\nframe.setLayout(new BorderLayout())\nframe.add(btn1, BorderLayout.NORTH)\nframe.add(btn2, BorderLayout.SOUTH)\nframe.add(btn3, BorderLayout.CENTER)\nframe.add(btn4, BorderLayout.WEST)\nframe.add(btn5, BorderLayout.EAST)\n\nframe.setSize(300, 400)\nframe.setVisible(true)"
+ ((:colname-names)
+  (:rowname-names)
+  (:result-params "replace")
+  (:result-type . value)
+  (:comments . "")
+  (:shebang . "")
+  (:cache . "no")
+  (:padline . "")
+  (:noweb . "no")
+  (:tangle . "/tmp/scalatest.scala")
+  (:exports . "code")
+  (:results . "replace")
+  (:hlines . "no")
+  (:session . "none"))
+ "" nil 0 2257)
+
+ELISP>
+#+END_SRC
+
+*** Getting the programming language of the code block
+
+#+BEGIN_SRC elisp
+ELISP> (car (org-babel-get-src-block-info))
+"scala"
+ELISP>
+#+END_SRC
+
+*** Getting the source code of the code block
+
+#+BEGIN_SRC elisp
+ELISP> (cadr (org-babel-get-src-block-info))
+"import java.awt.BorderLayout\nimport javax.swing.{JFrame, JPanel, JButton, JTextArea}\n\nval frame = ..."
+ELISP>
+
+ELISP> (print (cadr (org-babel-get-src-block-info)))
+
+"import java.awt.BorderLayout
+import javax.swing.{JFrame, JPanel, JButton, JTextArea}
+
+val frame = new JFrame(\"Border Layout\")
+val btn1  = new JButton(\"North\")
+val btn2  = new JButton(\"South\")
+val btn3  = new JButton(\"Center\")
+val btn4  = new JButton(\"West\")
+val btn5  = new JButton(\"East\")
+
+frame.setLayout(new BorderLayout())
+frame.add(btn1, BorderLayout.NORTH)
+frame.add(btn2, BorderLayout.SOUTH)
+frame.add(btn3, BorderLayout.CENTER)
+frame.add(btn4, BorderLayout.WEST)
+frame.add(btn5, BorderLayout.EAST)
+
+frame.setSize(300, 400)
+frame.setVisible(true)"
+
+#+END_SRC
+
+*** Getting code block attributes
+
+#+BEGIN_SRC elisp
+  ELISP> (caddr (org-babel-get-src-block-info))
+  ((:colname-names)
+   (:rowname-names)
+   (:result-params "replace")
+   (:result-type . value)
+   (:comments . "")
+   (:shebang . "")
+   (:cache . "no")
+   (:padline . "")
+   (:noweb . "no")
+   (:tangle . "/tmp/scalatest.scala")
+   (:exports . "code")
+   (:results . "replace")
+   (:hlines . "no")
+   (:session . "none"))
+
+  ELISP> (assoc :exports (caddr (org-babel-get-src-block-info)))
+  (:exports . "code")
+
+  ELISP> (cdr (assoc :exports (caddr (org-babel-get-src-block-info))))
+  "code"
+  ELISP>
+
+  ELISP> (assoc :tangle (caddr (org-babel-get-src-block-info)))
+  (:tangle . "/tmp/scalatest.scala")
+
+  ELISP> (cdr (assoc :tangle (caddr (org-babel-get-src-block-info))))
+  "/tmp/scalatest.scala"
+  ELISP>
+#+END_SRC
+*** Run a Scala code block 
+
+This example is specific for the Scala language, but can be easily
+adapated to other languages.
+
+Usage: 
+
+ 1. Place the cursos at the some scala code block
+ 2. run M-x org/run-scala-block
+
+It will run save the code block content to the file /tmp/scala-snippet.scala
+and run the command =$ scala /tmp/scala-snippet.scala= in the
+compiling mode.
+
+#+BEGIN_SRC elisp 
+  (defun org/run-scala-block ()
+    (interactive)
+           ;; Org-mode block contents 
+    (let* ((content (cadr (org-babel-get-src-block-info)))
+           ;; File in that the contents will be saved.
+           (file    "/tmp/scala-snippet.scala"))
+      ;; Execute the commands inside this special form
+      ;; in a temporary buffer 
+      (with-temp-buffer
+        ;; Delete file if it exists
+        (if (file-exists-p file) (delete-file file))
+        ;; Insert the code block contents in the temporary buffer 
+        (insert content)
+        ;; Write the buffer contents to fil.
+        (append-to-file (point-min) (point-max) file))    
+      ;; Run the compilation command 
+      (compile (format "scala %s" file))))
+#+END_SRC
+
+** Custom Protocols
+*** Open directory with dired mode
+
+Org-mode already provides the protocol ~file:<filename>~ to open a
+directory or file. The motivation to implement this protocol is that it
+is unambiguous like file protocol and easy to search.
+
+Hyperlink syntax:  ~dir:<file-path>~
+
+
+#+BEGIN_SRC elisp
+(add-hook 'org-mode-hook
+          (lambda ()
+	      (org-add-link-type "dir" #'dired nil)))
+#+END_SRC
+
+
+Org-mode file example:
+
+#+BEGIN_SRC
+Log directory      -  dir:/var/log  -  [[dir:/var/log][Log directory]]
+
+System cofiguration - dir:/etc
+#+END_SRC
+
+*** Open directory with system file manager
+
+Hyperlink format: ~dire:<directory-path>~
+
+#+BEGIN_SRC elisp
+(defvar default-file-manager-app "pcmanfm-qt")
+
+(defun org/protocol-dire (input)
+  (start-process  "proc" ;; Process name
+		  nil    ;; Buffer name
+
+		  default-file-manager
+		  input
+		  ))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+	      (org-add-link-type "dire" #'org/protocol-dire nil)))
+#+END_SRC
+
+Example:
+
+#+BEGIN_SRC
+
+To open the directory file:/var/log in the system file
+manager click on the hyperlink bellow.
+
+
+ - Hyperlink1:   dire:/var/log
+
+ - Hyperlink2:   [[dire:/var/log][System Log directory]]
+
+#+END_SRC
+
+
+[[file:images/org-mode-protocol-file-manager.png][file:images/org-mode-protocol-file-manager.png]]
+
+*** Man page
+
+Provides a hyperlink that displays a man page when clicked.
+
+
+#+BEGIN_SRC elisp
+(add-hook 'org-mode-hook
+          (lambda ()
+	         (org-add-link-type  "man" #'woman nil)))
+#+END_SRC
+
+Example:
+
+file test.org
+
+#+BEGIN_SRC
+Click on the hyperlinks bellow to open the man pages:
+
+Gcc Man Page:
+
+ - man:gcc
+
+C-function cbrt Man Page
+
+ - man:cbrt
+
+ - [[man:cbrt][C-function cbrt Man Page]]
+#+END_SRC
+
+*** Elisp Documentation
+
+Provides clickable link that shows the the Elisp documentation.
+
+A link of format ~elisp-doc:add-hook~ will show the =add-hook=
+documentation when clicked.
+
+Hyperlink format:  ~elisp-doc:<function-name>~ or ~[elisp-doc:<function-name>]~
+
+#+BEGIN_SRC elisp
+  (defun org/protocol-elisp-doc (function-symbol)
+    (princ function-symbol)
+    (describe-function (intern-soft function-symbol)))
+
+
+  (defun org/protocol-elisp-doc-html (path desc backend)
+     (cl-case backend
+       (html (format
+              "<a href='' title='%s'>%s</a>"
+              (documentation (intern-soft path))
+              (or desc path)))))
+
+  (add-hook 'org-mode-hook
+        (lambda ()
+          (org-add-link-type "elisp-doc"
+                             #'org/protocol-elisp-doc
+                             #'org/protocol-elisp-doc-html)))
+
+#+END_SRC
+
+Example:
+
+file: ~/tmp/test.org~
+
+#+BEGIN_SRC org-mode
+Elisp documentation protocol:
+
+[[elisp-doc:add-hook][Function Add hook]]
+
+The function elisp-doc:start-process is used to start an asynchronous process.
+#+END_SRC
+
+
+This screenshot show what happens when the user clicks in the hyperlink.
+
+[[file:images/elisp-doc-org-mode-protocol-click.png][file:images/elisp-doc-org-mode-protocol-click.png]]
+
+Exported to html with: =M-x org-html-export-to-html=
+
+[[file:images/elisp-doc-org-mode-protocol.png][file:images/elisp-doc-org-mode-protocol.png]]
+** Settings
+*** General Settings
+
+Syntax highlight for code blocks  ~#+BEGIN_SRC .. #+END_SRC~
+
+#+BEGIN_SRC elisp
+;; Syntax highlight for code blocks  #+BEGIN_SRC .. #+END_SRC
+;;
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+Syntax highlight for latex fragments
+
+#+BEGIN_SRC elisp
+(setq org-highlight-latex-and-related '(latex script entities))
+#+END_SRC
+
+*** Code Block - Org-babel
+
+Enable source code block in org files
+
+#+BEGIN_SRC elisp
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (sh . t)
+   (python . t)
+   (scheme . t)
+   (lisp . t)
+   (clojure . t)
+   (R . t)
+   (latex . t)
+   (ruby . t)
+   (C . t)
+   ;;; (C++ . t)
+   (ditaa . t)
+   (haskell . t)
+ ;;  (fsharp . t)
+ ;;  (java . t)
+ ;;  (scala . t)
+;;   (javascript . t)
+   (maxima . t)
+  ))
+#+END_SRC
+
+Disable Security confirmation:
+
+#+BEGIN_SRC elisp
+;; Disable security confirmations
+;;
+
+(setq   ;; Confirmation for running coide blocks
+        org-confirm-babel-evaluate      nil
+        ;; Confirmation for elisp links
+        org-confirm-elisp-link-function nil
+        ;; Confirmation for shell links
+        org-confirm-shell-link-function nil
+
+        org-export-babel-evaluate       nil
+        )
+#+END_SRC 
+
