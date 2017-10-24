@@ -1,180 +1,263 @@
+/**
+    - Author: Caio Rodrigues Soares Silva
 
-/*========== @group Fundamentals ============*/
+    - Public Domain CSS Style for org-mode.
 
-* { margin: 0; padding: 0 }
+    - Description: CSS for long-org mode documents exported to html with long table of contents.
+                   This style creates a scrollable table of contents at the left side.
 
-/* Is this portable? */
-html {
-  
-  background:#252525;
-  width: 100%;
-  height: 100%;
-  font-family: serif;
-  /* font-size:  12pt; */
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2.0em;
-  
- 
+   ----------------------------------------------------------------------------------------
+*/
+
+
+/** Variables */
+
+:root {
+
+    /** Table of contents settings */
+    --toc-width:   25%;        
+    --toc-bgcolor:  lightcyan;
+
+    
+    /** Content lenght */
+    --main-width: 70%;
+
+    --header-color:  #1572AE;
+
+
+    --max-image-width: 600px;
+    
+    --max-text-width: 90%;  /* Max paragraph length and text in bullet lists. */
 }
 
-body {
-    margin-left:  3%;
-    margin-right: 3%;
-    /* font-size: 12px sans-serif; */
-    font-size: 14pt;
-    font-family: serif;
-	/* font:13px/1.4 sans-serif; */
-	*font-size:small; /* for IE */
-	*font:x-small; /* for IE in quirks mode */
-    background: white;
-    color: black;
-    text-align: left;
-    min-height: 100%;
-    position: relative;    
-}
-
-
-body>div {
-	background:   white;
-	border-bottom:1px solid #bfbfbf;
-    background:#f2f2f2;                      
-}
-
-body>div>div {
-	background:#f8f8f8 top left;
-	border-right:1px solid #e0e0e0
-}
-
-
-
-/* ======= Headlines ======== */
 
 
 h1 {
-    /* font-size: 200%; */
-    font-size: 2.6em;
-   }
-
-body>header h1 {
-	font-size:2.2em;
-	font-family:"PT Serif","Georgia","Helvetica Neue",Arial,sans-serif;
-	font-weight:normal;
-	line-height:1.2em;
-	margin-bottom:0.6667em
+    text-align: center;
 }
 
-h2 { font-size: 131%;  }
-h3 { font-size: 116%;  }
-h4 { font-size: 100%;  }
-h5 { font-size: 100%;  }
-
-h1,h2,h3,h4,h5,h6 {
-	text-rendering:optimizelegibility;
-	margin-bottom:1em;
-	font-weight:bold
+h1, ul#tabs, h2, h3, h4, h5 {
+    font-family: "Trebuchet MS",Verdana,sans-serif;
 }
 
-.caption, h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
-  color: rgb(78,98,114);
-  margin: 0.8em 0 0.4em;
-}
-
-/* * + h1, * + h2, * + h3, * + h4, * + h5, * + h6 { */
-/*   margin-top: 2em; */
-/* } */
-
-h1 + h2, h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
-  margin-top: inherit;
+h3, h4, h5, h6 {
+    color: #1572AE;
 }
 
 
-.index-button {
-  font: bold 100% Arial;
-  text-decoration: none;
-  background-color: #EEEEEE;
-  color: #333333;
-  padding: 2px 6px 2px 6px;
-  border-top: 1px solid #CCCCCC;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
+/** Hyperlink General Styles */
+a {
+    color: #007bb8;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-transition: none 86ms ease-out;
+    transition: none 86ms ease-out;
+}
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
 }
 
 
-/* ============= Table ================== */
 
+body {
+    font:           16px/1.385 arial,helvetica,clean,sans-serif;
+    text-rendering: optimizeLegibility;
 
-table {
-	font-size:inherit;
-	font:100%;
-    /* display: block; */
-    overflow: auto;
-    border-spacing: 0;
-    border-collapse: collapse;
-    width: 100%;
+    /* margin-left:  50%; */
+    float:            right;
+    /* position:         relative; */
+    width:            var(--main-width);
+    padding-left:     35%;
+    /* overflow-x:       scroll; */
+    background-color: rgba(255,255,255,1.0);
+    z-index:          9999;
 }
 
-table td {
-    padding: 6px 13px;  
+
+
+#table-of-contents {
+    /* background-color: rgba(229,229,229,1.0); */
+    border-color: #CCCCCC #BBBBBB #888888;
+    /* background-image: linear-gradient(to bottom, #7b0105 0%, #b8282c 100%); */
+    
+    color: var(--header-color);    
+    width: var(--toc-width);
+    height: 100%;
+    float: left;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    /* background-color: rgba(125, 125, 125, 0.29); */
+    overflow-y: scroll;
+    display: block;
 }
 
-/* ========= p ================= */
 
+#table-of-contents ul {
+    padding-left: 0px;
+    padding-top:  5px;
+    padding-bottom: 10px;
+    list-style-type:     none;
+    list-style-position: inside;
+}
+
+#table-of-contents li {
+    padding-left: 10px;
+    padding-top:  15px;
+    font-size: 10pt;
+}
+
+#table-of-contents  a {
+    /* color:          rgba(0,0,0,1); */
+    font-weight:    700;
+    color:          #364149;
+    position:       relative;
+    text-overflow:  ellipsis;
+}
+
+#table-of-contents a:hover {
+    color:            rgba(51,102,204,1.0);
+    text-decoration:  underline;
+}
+
+
+/* ======== Paragraph formatting =================== */
 
 p {
-    margin: 0.8em 0;
-    font-fize: 14pt;
+    text-indent: 25px;
+    text-align:  justify;
+    line-height: 1.5;
+    width:       var(--max-text-width);
+
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    text-rendering: optimizelegibility !important;
+    letter-spacing: .03em;
+
+    font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
 }
 
+/* ======== Image ================================== */
 
-/* ========== Code and Pre ================ */
+img{
+    width:     100%;
+    max-width: var(--max-image-width);
+}
+
+/* ======== Table ================================== */
+
+table {
+	border-collapse: collapse;
+	border-spacing:  0;
+    width:           90%;
+    margin-top:      20px;
+    margin-bottom:   20px;
+}
+
+th {
+    /* padding-top: 30px; */
+    font-weight: bold;
+    background-color: #cccccc;
+    /* text-align: justified; */
+}
+
+th.left {
+    text-align: left;
+}
+
+td,th {
+	padding: 0;
+    /* width: 100%; */
+}
+
+/**========= Blockquote and citations ============ */
+
+blockquote {
+    font-family: Georgia, serif;
+    font-style: italic;
+    line-height: 1.45;
+    color: #383838;
+    /* text-align: center; */
+
+    margin: 0.25em 0;
+
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+
+    /* margin: 1.5em 10px; */
+    padding: 0.25em 40px;
+    width: 80%;
+
+    /* padding: 0.5em 10px; */
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+  color:           #ccc;
+  content:         open-quote;
+  font-size:       4em;
+  line-height:     0.1em;
+  margin-right:    0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
+/* ======= Code block style ======================= */
 
 
 code {
-    padding: 0;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    margin: 0;
-    font-size: 85%;
-    /* background-color: lightskyblue; */
-    background:#fff;
-    color:#555;
-    /* border-radius: 3px; */
-    border-radius: 0.3em;    
-    /* margin: 10px 0; */
-    
-    
-    display:inline-block;
-    margin-bottom: 2.1em;
+    background-color: #dbdfe0;
+    border: 1px solid #DEDEDE;
+    /* color: #444444; */
+    font-family: monospace;
+    font-size:  10pt;
+    margin: 0px 1px;
+    padding: 0px 2px;
+    overflow-x: scroll;
 }
 
-
-/* ======= Pre ================== * 
-
-
-/* pre                                      {background-color:#f3f5f7;} */
+/* ======== Code block Syntax Highlight ======================= */
 
 
 pre {
+    font-family: "Operator Mono SSm A", "Operator Mono SSm B", 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
+    /* font-family: monospace,monospace; */
+    font-size: 10pt;
+
+	/* background-color:#292929; */
     background:#fff;
-    color:#555;
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+
+    /* background: #333;    */
+
+    display: block;
+
+	/* color:#fff; */
+    /* color:#555; */
+
+    padding:2em 28px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     
-    font-family: monospace,monospace;
-   
-    /* overflow: auto; */
-    /* overflow: scroll; */
-    overflow-y: hidden;
-    padding: 8pt;
-    background-color:#f3f5f7;
-    font-size: 85%;
-    border-radius: 0.5em;
-    margin: 1.2em;
-    margin-bottom: 2.1em;
+	margin:0;
+	width:95%;
+	/* float:right; */
+	/* clear:right; */
+    line-height: 25.6px;
+    border-radius: 16px;
+    border: 1px solid #777;
+	box-sizing:border-box;
+	/* text-shadow:0px 1px 2px rgba(0,0,0,0.4) */
+
+    overflow-x: scroll;
 }
+
 
 pre span.org-builtin                     {color:#006FE0;font-weight:bold;}
 pre span.org-string                      {color:#008000;}
@@ -206,518 +289,6 @@ pre span.org-rainbow-delimiters-depth-8  {color:#80a880;}
 pre span.org-rainbow-delimiters-depth-9  {color:#887070;}
 pre span.org-sh-quoted-exec              {color:#FF1493;}
 
-
-
-/*====================*/
-
-
-ul, ol {
-  margin: 0.8em 0 0.8em 2em;
+pre {
+    filter: invert(80%);
 }
-
-dl {
-  margin: 0.8em 0;
-}
-
-dt {
-  font-weight: bold;
-}
-
-dd {
-  margin-left: 2em;
-}
-
-
-
-img {
-    max-width: 1000px;
-    width: 100%;
-    clear: both;
-}
-
-
-
-
-
-
-ul li { padding: 5px 0px; }
-
-
-a:hover{
-  color: blue;
-}
-
-div.wrapper {
-  width: 500px;
-  height: 500px;
-  overflow: auto;
-}
-
-
-
-#table-of-contents {
-    float: right;
-    border: 1px solid #CCC;
-    max-width: 50%;
-    overflow: auto;
-}
-
-#table-of-contents {
-    /* font-size: 9pt; */
-    display: none;
-    visibility: hidden;
-    position: fixed;
-    right: 0em;
-    top: 0em;
-    background: white;
-    /* -webkit-box-shadow: 0 0 1em #777777; */
-    /* -moz-box-shadow: 0 0 1em #777777; */
-    /* -webkit-border-bottom-left-radius: 5px; */
-    /* -moz-border-radius-bottomleft: 5px; */
-    /* text-align: right; */
-    max-height: 80%;
-    overflow: auto;
-    z-index: 200;
-}
-
-#table-of-contents ul {
-    margin-left: 14pt; 
-    margin-bottom: 10pt;
-    padding: 0
-}
-
-#table-of-contents li {
-    padding: 0;
-    margin: 1px;
-    list-style: none;
-}
-
-
-#text-table-of-contents {
-    display: none;
-    visibility: hidden;
-    text-align: left;
-}
-
-/* #table-of-contents:hover #text-table-of-contents { */
-/*     display: block; */
-/*     margin-top: -1.5em; */
-/*     padding: 0.5em; */
-/* } */
-
-
-
-#org-info-js-window
-{
-    position:absolute;
-    top:140px;
-    /* margin-left:10%; */
-    margin-right: 10%;
-}
-
-
-
-
-
-/* =============================================== */
-
-
-
-a { text-decoration: none; }
-
-a[href]:link { color: rgb(196,69,29); }
-a[href]:visited { color: rgb(171,105,84); }
-a[href]:hover { text-decoration:underline; }
-
-a[href].def:link, a[href].def:visited { color: black; }
-a[href].def:hover { color: rgb(78, 98, 114); }
-
-select, input, button, textarea {
-	font:99% sans-serif;}
-
-kbd, samp, tt, .src {
-	font-family:monospace;
-	*font-size:108%;
-	line-height: 124%;
-}
-
-.links, .link {
-  font-size: 85%; /* 11pt */}
-
-#module-header .caption {
-  font-size: 182%; /* 24pt */
-}
-
-.info  {
-  font-size: 85%; /* 11pt */
-}
-
-#table-of-contents, #synopsis  {
-  /* font-size: 85%; /* 11pt */
-}
-
-
-/* @end */
-
-/* @group Common */
-
-ul.links {
-  list-style: none;
-  text-align: left;
-  float: right;
-  display: inline-table;
-  margin: 0 0 0 1em;
-}
-
-ul.links li {
-  display: inline;
-  border-left: 1px solid #d5d5d5;
-  white-space: nowrap;
-  padding: 0;
-}
-
-ul.links li a {
-  padding: 0.2em 0.5em;
-}
-
-.hide { display: none; }
-.show { display: inherit; }
-.clear { clear: both; }
-
-.collapser {
-  background-image: url(minus.gif);
-  background-repeat: no-repeat;
-}
-.expander {
-  background-image: url(plus.gif);
-  background-repeat: no-repeat;
-}
-.collapser, .expander {
-  padding-left: 14px;
-  margin-left: -14px;
-  cursor: pointer;
-}
-
-p.caption.expander {
-  background-position: 0 0.4em;
-}
-
-.instance.collapser, .instance.expander {
-  margin-left: 0px;
-  background-position: left center;
-  min-width: 9px;
-  min-height: 9px;
-}
-
-
-.src {
-  background: #f0f0f0;
-  padding: 0.2em 0.5em;
-}
-
-.keyword { font-weight: normal; }
-.def { font-weight: bold; }
-
-@media print {
-  #footer { display: none; }
-}
-
-/* @end */
-
-/* @group Page Structure */
-
-#content {
-  margin: 0 auto;
-  padding: 0 2em 6em;
-}
-
-#package-header {
-  background: rgb(41,56,69);
-  border-top: 5px solid rgb(78,98,114);
-  color: #ddd;
-  padding: 0.2em;
-  position: relative;
-  text-align: left;
-}
-
-#package-header .caption {
-  background: url(hslogo-16.png) no-repeat 0em;
-  color: white;
-  margin: 0 2em;
-  font-weight: normal;
-  font-style: normal;
-  padding-left: 2em;
-}
-
-#package-header a:link, #package-header a:visited { color: white; }
-#package-header a:hover { background: rgb(78,98,114); }
-
-#module-header .caption {
-  color: rgb(78,98,114);
-  font-weight: bold;
-  border-bottom: 1px solid #ddd;
-}
-
-
-div#style-menu-holder {
-  position: relative;
-  z-index: 2;
-  display: inline;
-}
-
-#style-menu {
-  position: absolute;
-  z-index: 1;
-  overflow: visible;
-  background: #374c5e;
-  margin: 0;
-  text-align: center;
-  right: 0;
-  padding: 0;
-  top: 1.25em;
-}
-
-#style-menu li {
-	display: list-item;
-	border-style: none;
-	margin: 0;
-	padding: 0;
-	color: #000;
-	list-style-type: none;
-}
-
-#style-menu li + li {
-	border-top: 1px solid #919191;
-}
-
-#style-menu a {
-  width: 6em;
-  padding: 3px;
-  display: block;
-}
-
-#footer {
-  background: #ddd;
-  border-top: 1px solid #aaa;
-  padding: 0.5em 0;
-  color: #666;
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 3em;
-}
-
-/* @end */
-
-/* @group Front Matter */
-
-#table-of-contents {
-  float: right;
-  clear: right;
-  background: #faf9dc;
-  border: 1px solid #d8d7ad;
-  padding: 0.5em 1em;
-  max-width: 20em;
-  margin: 0.5em 0 1em 1em;
-}
-
-#table-of-contents .caption {
-  text-align: center;
-  margin: 0;
-}
-
-#table-of-contents ul {
-  list-style: none;
-  margin: 0;
-}
-
-#table-of-contents ul ul {
-  margin-left: 2em;
-}
-
-#description .caption {
-  display: none;
-}
-
-#synopsis {
-  display: none;
-}
-
-.no-frame #synopsis {
-  display: block;
-  position: fixed;
-  right: 0;
-  height: 80%;
-  top: 10%;
-  padding: 0;
-  max-width: 75%;
-}
-
-#synopsis .caption {
-  float: left;
-  width: 29px;
-  color: rgba(255,255,255,0);
-  height: 110px;
-  margin: 0;
-  font-size: 1px;
-  padding: 0;
-}
-
-#synopsis p.caption.collapser {
-  background: url(synopsis.png) no-repeat -64px -8px;
-}
-
-#synopsis p.caption.expander {
-  background: url(synopsis.png) no-repeat 0px -8px;
-}
-
-#synopsis ul {
-  height: 100%;
-  overflow: auto;
-  padding: 0.5em;
-  margin: 0;
-}
-
-#synopsis ul ul {
-  overflow: hidden;
-}
-
-#synopsis ul,
-#synopsis ul li.src {
-  background-color: #faf9dc;
-  white-space: nowrap;
-  list-style: none;
-  margin-left: 0;
-}
-
-/* @end */
-
-/* @group Main Content */
-
-
-.clearfix:after {
-  clear: both;
-  content: " ";
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
-
-.subs ul {
-  list-style: none;
-  display: table;
-  margin: 0;
-}
-
-.subs ul li {
-  display: table-row;
-}
-
-.subs ul li dfn {
-  display: table-cell;
-  font-style: normal;
-  font-weight: bold;
-  margin: 1px 0;
-  white-space: nowrap;
-}
-
-.subs ul li > .doc {
-  display: table-cell;
-  padding-left: 0.5em;
-  margin-bottom: 0.5em;
-}
-
-.subs ul li > .doc p {
-  margin: 0;
-}
-
-/* Render short-style data instances */
-.inst ul {
-  height: 100%;
-  padding: 0.5em;
-  margin: 0;
-}
-
-.inst, .inst li {
-  list-style: none;
-  margin-left: 1em;
-}
-
-/* Workaround for bug in Firefox (issue #384) */
-.inst-left {
-  float: left;
-}
-
-.top p.src {
-  border-top: 1px solid #ccc;
-}
-
-.subs, .doc {
-  /* use this selector for one level of indent */
-  padding-left: 2em;
-}
-
-.warning {
-  color: red;
-}
-
-.arguments {
-  margin-top: -0.4em;
-}
-.arguments .caption {
-  display: none;
-}
-
-.fields { padding-left: 1em; }
-
-.fields .caption { display: none; }
-
-.fields p { margin: 0 0; }
-
-/* this seems bulky to me
-.methods, .constructors {
-  background: #f8f8f8;
-  border: 1px solid #eee;
-}
-*/
-
-/* @end */
-
-/* @group Auxillary Pages */
-
-
-.extension-list {
-    list-style-type: none;
-    margin-left: 0;
-}
-
-
-
-#index .caption,
-#module-list .caption { font-size: 131%; /* 17pt */ }
-
-#index table {
-  margin-left: 10em;
-  border-collapse:collapse;
-	border-spacing:0
-}
-
-#index .src {
-  font-weight: bold;
-}
-#index .alt {
-  font-size: 77%; /* 10pt */
-  font-style: italic;
-  padding-left: 2em;
-}
-
-#index td + td {
-  padding-left: 1em;
-}
-
-
-.highlight code {
-	background:#000
-}
-
