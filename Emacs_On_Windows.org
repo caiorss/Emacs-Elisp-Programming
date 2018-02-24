@@ -7,7 +7,7 @@
 * Emacs on Microsoft Windows 
 ** Overview 
 
-*Why Emacs ?* 
+*Why Emacs on Windows ?* 
 
 Emacs provides many useful tools for Windows developers or anyone that
 have to use Windows for professional reasons or use Windows at work
@@ -109,8 +109,9 @@ GNU Make is an useful build-automation tool and can be got from:
 $ choco install make
 #+END_SRC
 
-** Set Environments Variables 
-*** Set HOME 
+** Useful Tweaking 
+*** Setting Environments Variables 
+**** Set HOME 
 
 The HOME environment variable that has the default value
 _/home/<username>)_ on Linux sets the user's directory path.
@@ -155,7 +156,7 @@ To open directory (C:\Users\arch\Desktop)
 
  - C-x C-d ~/Desktop 
 
-*** Set PATH
+**** Set PATH
 
 Executables located in directories listed in PATH environment variable
 can be invoked without its full path like ls, echo and who in
@@ -180,6 +181,28 @@ be done with:
 It makes easeir to call C:\Users\<user>\bin\curl.exe from any
 directory. Instead of write its full path the user can just run =$
 curl.exe= or =$ curl=.
+
+*** Invert Control and Capslock 
+
+The Ctrl (Control) key is one of the most used keys, although it is
+one of the most inconvenient and ergonomically bad key to type
+possible leading to strain injury when used often as in Emacs. On the
+other hand, Capslock while in a convenient position is one of the most
+useless keys as it is not used often and upper case letters can be
+typed just by holding the shift key while typing the underlying
+letter. Those problems can be overcome by mapping the Capslock key to
+Ctrl and Ctrl to Capslock. On Windows it can be done by running the
+commands below in the powershell as administrator and then rebooting or
+by entering in the cmd.exe shell and typing $ powershell and then
+pasting the mentioned commands.
+
+ - Source: [[https://superuser.com/questions/949385/map-capslock-to-control-in-windows-10][Map capslock to ctrl - Stack Overflow]]
+
+#+BEGIN_SRC sh 
+  $hexified = "00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00".Split(',') | % { "0x$_"};
+  $kbLayout = 'HKLM:\System\CurrentControlSet\Control\Keyboard Layout';
+  New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Value ([byte[]]$hexified);
+#+END_SRC
 
 ** Unix utilities 
 
@@ -382,13 +405,12 @@ c:/Users/arch/.emacs.d/elpa/helm-20160824.745
 This command runs Powershell on Emacs:
 
 #+BEGIN_SRC elisp 
-(defun run-powershell ()
-  "Run powershell"
-  (interactive)
-  (async-shell-command "c:/windows/system32/WindowsPowerShell/v1.0/powershell.exe -Command -"
-		       nil
-		       nil)
-  )
+  (defun run-powershell ()
+    "Run powershell"
+    (interactive)
+    (async-shell-command "c:/windows/system32/WindowsPowerShell/v1.0/powershell.exe -Command -"
+                 nil
+                 nil))
 #+END_SRC
 
 Usage: M-x run-powershell. 
