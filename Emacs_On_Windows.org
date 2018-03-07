@@ -257,7 +257,6 @@ pitfalls and annoyances.
   (load custom-file 'noerror)
 #+END_SRC
 
-
 ** Unix utilities 
 
 You can bash install with Chocolately package manager or download GIT
@@ -314,8 +313,9 @@ PATH system environment variable the path to their directories like this:
          ))
 #+END_SRC
 
-** Eshell 
-*** Overview 
+** Shells 
+*** Eshell 
+**** Overview 
 
 Eshell provides many benefits to Windows users: 
 
@@ -330,18 +330,18 @@ Eshell provides many benefits to Windows users:
  - Integration with Eamcs since it can run Emacs commands (interactive
    functions) like shell commands.
 
-*** Screenshots
+**** Screenshots
 
 [[file:images/eshell-windows-demo1.png][file:images/eshell-windows-demo1.png]]
 
-*** Demonstrations
-**** Commands and history 
+**** Demonstrations
+***** Commands and history 
 
 To open the history type: C-c C-l 
 
 [[file:images/eshell-windows-demo1.gif][file:images/eshell-windows-demo1.gif]]
 
-**** Emacs Integration 
+***** Emacs Integration 
 
 # http://i.imgur.com/0kVYnXO.gif
 
@@ -369,13 +369,13 @@ Open directory:
  - dired-other-window 
  - dired-other-frame
 
-**** Asyncrhonous Commands 
+***** Asyncrhonous Commands 
 
 #+BEGIN_SRC 
 ~/Desktop $ notepad.exe &
 #+END_SRC
 
-**** Copy command output to clibpoard 
+***** Copy command output to clibpoard 
 
 Eshell comes with a pseudo clipboard device /dev/kill that is useful
 to handle clipboard.
@@ -389,7 +389,7 @@ to handle clipboard.
 
 *Show clibpoard content*
 
-**** Shell Commands mixed with Emacs commands 
+***** Shell Commands mixed with Emacs commands 
 
 Note: split-string Is an Emacs function.
 
@@ -454,7 +454,7 @@ c:/Users/arch/.emacs.d/elpa/helm-20160824.745
 ...
 #+END_SRC
 
-** Powershell 
+*** Powershell 
 
 This command runs Powershell on Emacs:
 
