@@ -666,6 +666,121 @@ Test file: test.cpp
     return 0;
   }
 #+END_SRC
+*** Commands for MSVC2015 
+
+M-x msbuild-2015-x86-setup and Set environment variables to allow
+calling cl.exe for x86 build target and other tools from M-x
+compile and shell commands.
+
+#+BEGIN_SRC elisp 
+(defun msbuild-2015-x86-setup ()
+  (interactive)
+  "Set enviorment variables to load Microsoft Visual C++ Compiler 2015 (MSVC) 32 bits"
+  (setenv "PATH" msbuild-old-path-var)
+  (setenv "INCLUDE"
+          (concat 
+           "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/INCLUDE"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/ucrt"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/include/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/shared"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/winrt"
+           ))
+  (setenv "LIB"
+          (concat
+           "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/LIB"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/ucrt/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/lib/um/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/um/x86"
+           ))
+  (setenv "LIBPATH"
+          (concat 
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/LIB"
+           ";" "C:/WINDOWS/Microsoft.NET/Framework/v4.0.30319"
+           ";" "C:/WINDOWS/Microsoft.NET/Framework/"
+           ";" "C:/Program Files (x86)/Windows Kits/10/UnionMetadata"
+           ";" "C:/Program Files (x86)/Windows Kits/10/References"
+           ";" "C:/Program Files (x86)/Windows Kits/10/References/Windows.Foundation.UniversalApiContract/1.0.0.0"
+           ";" "C:/Program Files (x86)/Windows Kits/10/References/Windows.Foundation.FoundationContract/1.0.0.0"
+           )) 
+  (setenv "PATH"
+          (concat
+           (getenv "PATH")
+           ";" "C:/Program Files (x86)/MSBuild/14.0/bin"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/BIN"
+           ";" "C:/WINDOWS/Microsoft.NET/Framework/v4.0.30319"
+           ";" "C:/WINDOWS/Microsoft.NET/Framework/"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/x86"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.6.1 Tools/"
+           )))
+#+END_SRC
+
+M-x msbuild-215-x64-setup - Similar to previous command. 
+
+#+BEGIN_SRC elisp 
+  (defun msbuild-2015-x64-setup ()
+    (interactive)
+    "Set enviorment variables to load Microsoft Visual C++ Compiler 2015 (MSVC) 64 bits"
+    (setenv "PATH" msbuild-old-path-var)
+    (setenv "INCLUDE"
+            (concat 
+             "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/INCLUDE"
+             ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/ucrt"
+             ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/include/um"
+             ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/shared"
+             ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/um"
+             ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/winrt"
+             ))
+    (setenv "LIB"
+            (concat
+             "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/LIB/amd64"
+             ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/ucrt/x64"
+             ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/lib/um/x64"
+             ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/um/x64"
+             ))
+    (setenv "LIBPATH"
+            (concat 
+             "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/LIB/amd64"
+             ";" "C:/WINDOWS/Microsoft.NET/Framework64/v4.0.30319"
+             ";" "C:/WINDOWS/Microsoft.NET/Framework64/"
+             ";" "C:/Program Files (x86)/Windows Kits/10/UnionMetadata"
+             ";" "C:/Program Files (x86)/Windows Kits/10/References"
+             ";" "C:/Program Files (x86)/Windows Kits/10/References/Windows.Foundation.UniversalApiContract/1.0.0.0"
+             ";" "C:/Program Files (x86)/Windows Kits/10/References/Windows.Foundation.FoundationContract/1.0.0.0"           
+             )) 
+    (setenv "PATH"
+            (concat
+             (getenv "PATH")
+             ";" "C:/Program Files (x86)/MSBuild/14.0/bin/amd64"
+             ";" "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/BIN/amd64"
+             ";" "C:/WINDOWS/Microsoft.NET/Framework64/v4.0.30319"
+             ";" "C:/WINDOWS/Microsoft.NET/Framework64/"
+             ";" "C:/Program Files (x86)/Windows Kits/10/bin/x64"
+             ";" "C:/Program Files (x86)/Windows Kits/10/bin/x86"
+             ";" "C:/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.6.1 Tools/x64/"
+             )))
+
+#+END_SRC
+
+Commands to compile file related to current c++ buffer. 
+
+#+BEGIN_SRC elisp 
+  (defun compile-msvc-2015-x86()
+    (interactive)
+    (msbuild-2015-x86-setup)
+    (let ((compile-command (format "cl.exe \"%s\""
+                                   (file-name-nondirectory (buffer-file-name))))
+          (compilation-ask-about-save nil))
+      (call-interactively #'compile )))
+
+  (defun compile-msvc-2015-x64 ()
+    (interactive)
+    (msbuild-2015-x64-setup)
+    (let ((compile-command (format "cl.exe \"%s\""
+                                   (file-name-nondirectory (buffer-file-name))))
+          (compilation-ask-about-save nil))
+      (call-interactively #'compile )))
+#+END_SRC
 *** Install C++ Compilers and MSVC Building Tools 
 
 The esiest and fastest way to install MSVC building tools is by using
