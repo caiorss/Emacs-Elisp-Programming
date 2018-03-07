@@ -469,6 +469,7 @@ This command runs Powershell on Emacs:
 
 Usage: M-x run-powershell. 
 ** Visual C++ MSVC Building Tools 
+*** Calling MSVC tools from Emacs
 
 Calling the default and official Windows' C++ compiler MSVC (Microsoft
 Visual C++) from command line is not easy as calling gcc, mingw or
@@ -650,4 +651,41 @@ used:
 
 [[file:images/emacs-msvc-windows.png][file:images/emacs-msvc-windows.png]]
 
+Test file: test.cpp 
 
+#+BEGIN_SRC cpp 
+  #include <iostream>
+
+  using namespace std;
+
+  int main(){
+
+    for(int i = 1 ; i < 10; i ++)
+      cout << "Testing C++ on Emacs in Windows VM" << endl;
+
+    return 0;
+  }
+#+END_SRC
+*** Install C++ Compilers and MSVC Building Tools 
+
+The esiest and fastest way to install MSVC building tools is by using
+the [[https://chocolatey.org/][chocolately]] package manager which provides a Linux-like experience
+for installing packages. 
+
+Install [[https://chocolatey.org/packages/VisualCppBuildTools][Visual C++ Build Tools 2015 14.0.25420.1]]
+
+#+BEGIN_SRC sh 
+  $ choco install visualcppbuildtools
+#+END_SRC
+
+Install  [[https://chocolatey.org/packages/visualstudio2017buildtools][Visual Studio 2017 Build Tools 15.2.26430.20170650]]
+
+#+BEGIN_SRC sh 
+ $ choco installvisualstudio2017buildtools 
+#+END_SRC
+
+Install [[https://chocolatey.org/packages/mingw][Mingw]] - gcc/g++ GNU C/C++ Compiler ported for Windows  
+
+#+BEGIN_SRC sh 
+ $ choco install mingw 
+#+END_SRC
