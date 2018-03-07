@@ -2313,6 +2313,7 @@ ELISP>
 #+END_SRC
 
 ** Control Structures                              :loop:control:iteration:
+*** Overview 
 
 See also:
 
@@ -2320,7 +2321,7 @@ See also:
   - [[http://www.gigamonkeys.com/book/loop-for-black-belts.html][LOOP for Black Belts]]
   - [[http://www.ai.sri.com/pkarp/loop.html][Tutorial for the Common Lisp Loop Macro]]
 
-***** Conditional Statement
+*** Conditional Statement
 
 *If Else Statement*
 
@@ -2442,7 +2443,7 @@ ELISP>
 
 #+END_SRC
 
-***** Cond - Case Switch
+*** Cond - Case Switch
 
 #+BEGIN_SRC elisp
 
@@ -2460,7 +2461,7 @@ ELISP> (cond
 ELISP>
 #+END_SRC
 
-***** CL-Case - Case Switch
+*** CL-Case - Case Switch
 
 #+BEGIN_SRC elisp
 (defun test-cl-case (operation x y)
@@ -2487,8 +2488,7 @@ nil
 
 #+END_SRC
 
-***** Loops
-
+*** Loops
 
 *Dolist*
 

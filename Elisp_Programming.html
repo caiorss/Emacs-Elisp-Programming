@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Elisp Programming</title>
-<!-- 2017-10-24 Tue 18:09 -->
+<!-- 2018-03-07 Wed 08:05 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="description" content="Emacs programming and customization."
@@ -231,7 +231,15 @@ for the JavaScript code in this tag.
 <li><a href="#sec-1-11">1.11. Types Conversion</a></li>
 <li><a href="#sec-1-12">1.12. Eval</a></li>
 <li><a href="#sec-1-13">1.13. Defalias</a></li>
-<li><a href="#sec-1-14">1.14. Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></a></li>
+<li><a href="#sec-1-14">1.14. Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></a>
+<ul>
+<li><a href="#sec-1-14-1">1.14.1. Overview</a></li>
+<li><a href="#sec-1-14-2">1.14.2. Conditional Statement</a></li>
+<li><a href="#sec-1-14-3">1.14.3. Cond - Case Switch</a></li>
+<li><a href="#sec-1-14-4">1.14.4. CL-Case - Case Switch</a></li>
+<li><a href="#sec-1-14-5">1.14.5. Loops</a></li>
+</ul>
+</li>
 <li><a href="#sec-1-15">1.15. Functional Programming</a></li>
 <li><a href="#sec-1-16">1.16. Structures</a></li>
 </ul>
@@ -3180,6 +3188,9 @@ ELISP&gt;
 <div id="outline-container-sec-1-14" class="outline-3">
 <h3 id="sec-1-14"><span class="section-number-3">1.14</span> Control Structures&#xa0;&#xa0;&#xa0;<span class="tag"><span class="loop">loop</span>&#xa0;<span class="control">control</span>&#xa0;<span class="iteration">iteration</span></span></h3>
 <div class="outline-text-3" id="text-1-14">
+</div><div id="outline-container-sec-1-14-1" class="outline-4">
+<h4 id="sec-1-14-1"><span class="section-number-4">1.14.1</span> Overview</h4>
+<div class="outline-text-4" id="text-1-14-1">
 <p>
 See also:
 </p>
@@ -3193,8 +3204,11 @@ See also:
 </li>
 </ul>
 </div>
+</div>
 
-<ol class="org-ol"><li><a id="sec-1-14-0-0-1" name="sec-1-14-0-0-1"></a>Conditional Statement<br  /><div class="outline-text-6" id="text-1-14-0-0-1">
+<div id="outline-container-sec-1-14-2" class="outline-4">
+<h4 id="sec-1-14-2"><span class="section-number-4">1.14.2</span> Conditional Statement</h4>
+<div class="outline-text-4" id="text-1-14-2">
 <p>
 <b>If Else Statement</b>
 </p>
@@ -3315,9 +3329,11 @@ ELISP&gt;
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="sec-1-14-0-0-2" name="sec-1-14-0-0-2"></a>Cond - Case Switch<br  /><div class="outline-text-6" id="text-1-14-0-0-2">
+<div id="outline-container-sec-1-14-3" class="outline-4">
+<h4 id="sec-1-14-3"><span class="section-number-4">1.14.3</span> Cond - Case Switch</h4>
+<div class="outline-text-4" id="text-1-14-3">
 <div class="org-src-container">
 
 <pre class="src src-elisp">ELISP&gt; (<span class="org-keyword">setq</span> a 3)       <span class="org-comment-delimiter">;; </span><span class="org-comment">a = 3</span>
@@ -3335,9 +3351,11 @@ ELISP&gt;
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="sec-1-14-0-0-3" name="sec-1-14-0-0-3"></a>CL-Case - Case Switch<br  /><div class="outline-text-6" id="text-1-14-0-0-3">
+<div id="outline-container-sec-1-14-4" class="outline-4">
+<h4 id="sec-1-14-4"><span class="section-number-4">1.14.4</span> CL-Case - Case Switch</h4>
+<div class="outline-text-4" id="text-1-14-4">
 <div class="org-src-container">
 
 <pre class="src src-elisp">(<span class="org-keyword">defun</span> <span class="org-function-name">test-cl-case</span> (operation x y)
@@ -3364,9 +3382,11 @@ nil
 </pre>
 </div>
 </div>
-</li>
+</div>
 
-<li><a id="sec-1-14-0-0-4" name="sec-1-14-0-0-4"></a>Loops<br  /><div class="outline-text-6" id="text-1-14-0-0-4">
+<div id="outline-container-sec-1-14-5" class="outline-4">
+<h4 id="sec-1-14-5"><span class="section-number-4">1.14.5</span> Loops</h4>
+<div class="outline-text-4" id="text-1-14-5">
 <p>
 <b>Dolist</b>
 </p>
@@ -3592,7 +3612,7 @@ nil
 </pre>
 </div>
 </div>
-</li></ol>
+</div>
 </div>
 <div id="outline-container-sec-1-15" class="outline-3">
 <h3 id="sec-1-15"><span class="section-number-3">1.15</span> Functional Programming</h3>
@@ -9945,7 +9965,7 @@ or by entering the command below in the shell IELM or by putting it in the confi
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2017-10-24 Tue 18:09</p>
+<p class="date">Created: 2018-03-07 Wed 08:05</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -7,7 +7,7 @@
 * Emacs on Microsoft Windows 
 ** Overview 
 
-*Why Emacs ?* 
+*Why Emacs on Windows ?* 
 
 Emacs provides many useful tools for Windows developers or anyone that
 have to use Windows for professional reasons or use Windows at work
@@ -109,8 +109,9 @@ GNU Make is an useful build-automation tool and can be got from:
 $ choco install make
 #+END_SRC
 
-** Set Environments Variables 
-*** Set HOME 
+** Useful Tweaking 
+*** Setting Environments Variables 
+**** Set HOME 
 
 The HOME environment variable that has the default value
 _/home/<username>)_ on Linux sets the user's directory path.
@@ -155,7 +156,7 @@ To open directory (C:\Users\arch\Desktop)
 
  - C-x C-d ~/Desktop 
 
-*** Set PATH
+**** Set PATH
 
 Executables located in directories listed in PATH environment variable
 can be invoked without its full path like ls, echo and who in
@@ -180,6 +181,81 @@ be done with:
 It makes easeir to call C:\Users\<user>\bin\curl.exe from any
 directory. Instead of write its full path the user can just run =$
 curl.exe= or =$ curl=.
+
+*** Invert Control and Capslock 
+
+The Ctrl (Control) key is one of the most used keys, although it is
+one of the most inconvenient and ergonomically bad key to type
+possible leading to strain injury when used often as in Emacs. On the
+other hand, Capslock while in a convenient position is one of the most
+useless keys as it is not used often and upper case letters can be
+typed just by holding the shift key while typing the underlying
+letter. Those problems can be overcome by mapping the Capslock key to
+Ctrl and Ctrl to Capslock. On Windows it can be done by running the
+commands below in the powershell as administrator and then rebooting or
+by entering in the cmd.exe shell and typing $ powershell and then
+pasting the mentioned commands.
+
+ - Source: [[https://superuser.com/questions/949385/map-capslock-to-control-in-windows-10][Map capslock to ctrl - Stack Overflow]]
+
+#+BEGIN_SRC sh 
+  $hexified = "00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00".Split(',') | % { "0x$_"};
+  $kbLayout = 'HKLM:\System\CurrentControlSet\Control\Keyboard Layout';
+  New-ItemProperty -Path $kbLayout -Name "Scancode Map" -PropertyType Binary -Value ([byte[]]$hexified);
+#+END_SRC
+
+*** Initialization - init.el file. 
+
+This section provides a minimal configuration for Windows to deal with
+pitfalls and annoyances. 
+
+ - Suppress startup screen
+
+#+BEGIN_SRC emacs-lisp 
+ (setq inhibit-startup-message t)
+#+END_SRC
+
+ - Suppress Windows annoying beep or bell - Visible bell 
+
+#+BEGIN_SRC emacs-lisp 
+  (setq-default visible-bell t)
+#+END_SRC
+
+ - Do not open file or user dialog.
+
+#+BEGIN_SRC emacs-lisp 
+ (setq use-file-dialog nil)
+ (setq use-dialog-box nil)
+#+END_SRC
+
+ - Use Unix's ~\n~ (LF- Line Feed) and utf instead of Windows ~\r\n~
+   (CRLF - Carriage Return and Line Feed) as end of line character. It
+   may not be desirable if most files or project edited are for
+   Windows or building tools that may fail if the source file doens't
+   CRLF as line ending. 
+
+#+BEGIN_SRC emacs-lisp 
+  (setq-default buffer-file-coding-system 'utf-8-unix)
+#+END_SRC
+
+ - UTF8 Everywhere 
+
+#+BEGIN_SRC emacs-lisp 
+  (set-terminal-coding-system 'utf-8)
+  (set-language-environment 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+  (setq locale-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+#+END_SRC
+
+ - Separate Customization file from init.el 
+
+#+BEGIN_SRC emacs-lisp 
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file 'noerror)
+#+END_SRC
 
 ** Unix utilities 
 
@@ -237,8 +313,9 @@ PATH system environment variable the path to their directories like this:
          ))
 #+END_SRC
 
-** Eshell 
-*** Overview 
+** Shells 
+*** Eshell 
+**** Overview 
 
 Eshell provides many benefits to Windows users: 
 
@@ -253,18 +330,18 @@ Eshell provides many benefits to Windows users:
  - Integration with Eamcs since it can run Emacs commands (interactive
    functions) like shell commands.
 
-*** Screenshots
+**** Screenshots
 
 [[file:images/eshell-windows-demo1.png][file:images/eshell-windows-demo1.png]]
 
-*** Demonstrations
-**** Commands and history 
+**** Demonstrations
+***** Commands and history 
 
 To open the history type: C-c C-l 
 
 [[file:images/eshell-windows-demo1.gif][file:images/eshell-windows-demo1.gif]]
 
-**** Emacs Integration 
+***** Emacs Integration 
 
 # http://i.imgur.com/0kVYnXO.gif
 
@@ -292,13 +369,13 @@ Open directory:
  - dired-other-window 
  - dired-other-frame
 
-**** Asyncrhonous Commands 
+***** Asyncrhonous Commands 
 
 #+BEGIN_SRC 
 ~/Desktop $ notepad.exe &
 #+END_SRC
 
-**** Copy command output to clibpoard 
+***** Copy command output to clibpoard 
 
 Eshell comes with a pseudo clipboard device /dev/kill that is useful
 to handle clipboard.
@@ -312,7 +389,7 @@ to handle clipboard.
 
 *Show clibpoard content*
 
-**** Shell Commands mixed with Emacs commands 
+***** Shell Commands mixed with Emacs commands 
 
 Note: split-string Is an Emacs function.
 
@@ -377,18 +454,238 @@ c:/Users/arch/.emacs.d/elpa/helm-20160824.745
 ...
 #+END_SRC
 
-** Powershell 
+*** Powershell 
 
 This command runs Powershell on Emacs:
 
 #+BEGIN_SRC elisp 
-(defun run-powershell ()
-  "Run powershell"
-  (interactive)
-  (async-shell-command "c:/windows/system32/WindowsPowerShell/v1.0/powershell.exe -Command -"
-		       nil
-		       nil)
-  )
+  (defun run-powershell ()
+    "Run powershell"
+    (interactive)
+    (async-shell-command "c:/windows/system32/WindowsPowerShell/v1.0/powershell.exe -Command -"
+                 nil
+                 nil))
 #+END_SRC
 
 Usage: M-x run-powershell. 
+** Visual C++ MSVC Building Tools 
+*** Calling MSVC tools from Emacs
+
+Calling the default and official Windows' C++ compiler MSVC (Microsoft
+Visual C++) from command line is not easy as calling gcc, mingw or
+clang as MSVC needs environment variables INCLUDE, LIB, LIBPATH and
+PATH to be properly set with correct paths. Those settings depends on
+the version of the compiler and the building target x86 (32 bits) or
+x64 (64 bits), so the path settings of MSVC 2015 are different from
+MSVC 2017. This section provides useful commands that solve this
+problem by allowing the user call the compiler directly which may be
+useful for studying c++ on Windows, learning about Windows API, testing
+the compiler, building simple C++ programs or creating
+proof-of-concepts.
+
+Note: It was tested with MSVC 2017 and Windows10. 
+
+To use it just copy the functions to the file ~/.init.el or emacs
+intialization file.
+
+- Porgram: 
+
+Saves the original PATH variable 
+
+#+BEGIN_SRC elisp 
+  (defvar msbuild-old-path-var (getenv "PATH"))
+#+END_SRC
+
+This command sets environments variables for MSVC - 2017 Building tools and x68
+building target. If the user runs _M-x msbuild-2017-x86-setup_, it will
+allows to call the msvc compiler cl.exe with _M-x compile cl.exe file.cpp_. 
+Then, the code will be compiled for x86 target. It is also possible to
+call with M-x compile the commands msbuild.exe, link.exe (MSVC's linker) 
+and dumpbin.exe (similar to GNU objdump).
+
+
+#+BEGIN_SRC emacs-lisp  
+  (defun msbuild-2017-x86-setup ()
+    "Set enviorment variables to load Microsoft Visual C++ Compiler (MSVC 32 bits)"
+    (interactive)
+    (message "Setting 32 bits MSVC building tools.")
+    (setenv "PATH" msbuild-old-path-var)
+    (setenv "INCLUDE"
+          (concat
+               "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/include"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/include"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/include/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/ucrt"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/shared"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/winrt"
+           ))
+
+    (setenv "LIB"
+          (concat
+               "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/lib/x86"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/lib/um/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/ucrt/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/um/x86"             
+           ))
+
+    (setenv  "LIBPATH"
+           (concat
+                "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/lib/x86"
+            ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x86"
+            ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x86/store/references"
+            ";" "C:/Program Files (x86)/Windows Kits/10/UnionMetadata/10.0.16299.0"
+            ";" "C:/Program Files (x86)/Windows Kits/10/References/10.0.16299.0"
+            ";" "C:/Windows/Microsoft.NET/Framework/v4.0.30319"
+            ))
+
+    (setenv "PATH"
+          (concat
+           (getenv "PATH")
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/bin/HostX86/x86"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/VC/VCPackages"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/MSBuild/15.0/bin/Roslyn"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Team Tools/Performance Tools"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/Shared/Common/VSPerfCollectionTools/"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.6.1 Tools/"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/F#/4.1/Framework/v4.0/"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/10.0.16299.0/x86"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community//MSBuild/15.0/bin"
+           ";" "C:/Windows/Microsoft.NET/Framework/v4.0.30319"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/Tools/"
+           )))
+
+#+END_SRC
+
+The command below sets enviroment variable for MSVC - 2017 and x64
+building target and its similar to msbuild-2017-x86-setup. 
+
+#+BEGIN_SRC emacs-lisp 
+  (defun msbuild-2017-x64-setup ()
+    "Set enviorment variables to load Microsoft Visual C++ Compiler (MSVC) 64 bits"
+    (interactive)
+    (message "Setting 64 bits building tools.")
+    (setenv "PATH" msbuild-old-path-var)
+    (setenv "INCLUDE"
+          (concat
+               "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/include"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/include"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/include/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/ucrt"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/shared"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/winrt"
+           ))
+
+    (setenv "LIB"
+          (concat
+               "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/lib/x64"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x64"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/lib/um/x64"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/ucrt/x64"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/um/x64"             
+           ))
+
+    (setenv  "LIBPATH"
+           (concat
+                "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/lib/x64"
+            ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x64"
+            ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x64/store/references"
+            ";" "C:/Program Files (x86)/Windows Kits/10/UnionMetadata/10.0.16299.0"
+            ";" "C:/Program Files (x86)/Windows Kits/10/References/10.0.16299.0"
+            ";" "C:/Windows/Microsoft.NET/Framework/v4.0.30319"
+            ))
+
+    (setenv "PATH"
+          (concat
+           (getenv "PATH")
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/bin/HostX86/x64"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/VC/VCPackages"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/MSBuild/15.0/bin/Roslyn"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Team Tools/Performance Tools"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/Shared/Common/VSPerfCollectionTools/"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.6.1 Tools/"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/F#/4.1/Framework/v4.0/"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/x64"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/10.0.16299.0/x64"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community//MSBuild/15.0/bin"
+           ";" "C:/Windows/Microsoft.NET/Framework/v4.0.30319"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/Tools/"
+           )))
+
+#+END_SRC
+
+This command allows to compile the current buffer. For instance, if
+the current buffer is associated to a file test1.cpp and user types
+_M-x compile-msvc-x86_, it will show a prompt with _cl.exe test1.cpp_
+asking the user to confirm or complement the compilation command.
+
+#+BEGIN_SRC emacs-lisp 
+(defun compile-msvc-x86()
+  (interactive)
+  (msbuild-2017-x86-setup)
+  (let ((compile-command (format "cl.exe \"%s\""
+                                 (file-name-nondirectory (buffer-file-name))))
+        (compilation-ask-about-save nil))
+    (call-interactively #'compile )))
+        
+(defun compile-msvc-x64 ()
+  (interactive)
+  (msbuild-2017-x64-setup)
+  (let ((compile-command (format "cl.exe \"%s\""
+                                 (file-name-nondirectory (buffer-file-name))))
+        (compilation-ask-about-save nil))
+    (call-interactively #'compile )))
+#+END_SRC
+
+The screenshot below shows an example about how those commands can be
+used: 
+
+[[file:images/emacs-msvc-windows.png][file:images/emacs-msvc-windows.png]]
+
+Test file: test.cpp 
+
+#+BEGIN_SRC cpp 
+  #include <iostream>
+
+  using namespace std;
+
+  int main(){
+
+    for(int i = 1 ; i < 10; i ++)
+      cout << "Testing C++ on Emacs in Windows VM" << endl;
+
+    return 0;
+  }
+#+END_SRC
+*** Install C++ Compilers and MSVC Building Tools 
+
+The esiest and fastest way to install MSVC building tools is by using
+the [[https://chocolatey.org/][chocolately]] package manager which provides a Linux-like experience
+for installing packages. 
+
+Install [[https://chocolatey.org/packages/VisualCppBuildTools][Visual C++ Build Tools 2015 14.0.25420.1]]
+
+#+BEGIN_SRC sh 
+  $ choco install visualcppbuildtools
+#+END_SRC
+
+Install  [[https://chocolatey.org/packages/visualstudio2017buildtools][Visual Studio 2017 Build Tools 15.2.26430.20170650]]
+
+#+BEGIN_SRC sh 
+ $ choco installvisualstudio2017buildtools 
+#+END_SRC
+
+Install [[https://chocolatey.org/packages/mingw][Mingw]] - gcc/g++ GNU C/C++ Compiler ported for Windows  
+
+#+BEGIN_SRC sh 
+ $ choco install mingw 
+#+END_SRC
