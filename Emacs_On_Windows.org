@@ -468,3 +468,186 @@ This command runs Powershell on Emacs:
 #+END_SRC
 
 Usage: M-x run-powershell. 
+** Visual C++ MSVC Building Tools 
+
+Calling the default and official Windows' C++ compiler MSVC (Microsoft
+Visual C++) from command line is not easy as calling gcc, mingw or
+clang as MSVC needs environment variables INCLUDE, LIB, LIBPATH and
+PATH to be properly set with correct paths. Those settings depends on
+the version of the compiler and the building target x86 (32 bits) or
+x64 (64 bits), so the path settings of MSVC 2015 are different from
+MSVC 2017. This section provides useful commands that solve this
+problem by allowing the user call the compiler directly which may be
+useful for studying c++ on Windows, learning about Windows API, testing
+the compiler, building simple C++ programs or creating
+proof-of-concepts.
+
+Note: It was tested with MSVC 2017 and Windows10. 
+
+To use it just copy the functions to the file ~/.init.el or emacs
+intialization file.
+
+- Porgram: 
+
+Saves the original PATH variable 
+
+#+BEGIN_SRC elisp 
+  (defvar msbuild-old-path-var (getenv "PATH"))
+#+END_SRC
+
+This command sets environments variables for MSVC - 2017 Building tools and x68
+building target. If the user runs _M-x msbuild-2017-x86-setup_, it will
+allows to call the msvc compiler cl.exe with _M-x compile cl.exe file.cpp_. 
+Then, the code will be compiled for x86 target. It is also possible to
+call with M-x compile the commands msbuild.exe, link.exe (MSVC's linker) 
+and dumpbin.exe (similar to GNU objdump).
+
+
+#+BEGIN_SRC emacs-lisp  
+  (defun msbuild-2017-x86-setup ()
+    "Set enviorment variables to load Microsoft Visual C++ Compiler (MSVC 32 bits)"
+    (interactive)
+    (message "Setting 32 bits MSVC building tools.")
+    (setenv "PATH" msbuild-old-path-var)
+    (setenv "INCLUDE"
+          (concat
+               "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/include"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/include"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/include/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/ucrt"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/shared"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/winrt"
+           ))
+
+    (setenv "LIB"
+          (concat
+               "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/lib/x86"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/lib/um/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/ucrt/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/um/x86"             
+           ))
+
+    (setenv  "LIBPATH"
+           (concat
+                "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/lib/x86"
+            ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x86"
+            ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x86/store/references"
+            ";" "C:/Program Files (x86)/Windows Kits/10/UnionMetadata/10.0.16299.0"
+            ";" "C:/Program Files (x86)/Windows Kits/10/References/10.0.16299.0"
+            ";" "C:/Windows/Microsoft.NET/Framework/v4.0.30319"
+            ))
+
+    (setenv "PATH"
+          (concat
+           (getenv "PATH")
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/bin/HostX86/x86"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/VC/VCPackages"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/MSBuild/15.0/bin/Roslyn"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Team Tools/Performance Tools"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/Shared/Common/VSPerfCollectionTools/"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.6.1 Tools/"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/F#/4.1/Framework/v4.0/"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/x86"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/10.0.16299.0/x86"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community//MSBuild/15.0/bin"
+           ";" "C:/Windows/Microsoft.NET/Framework/v4.0.30319"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/Tools/"
+           )))
+
+#+END_SRC
+
+The command below sets enviroment variable for MSVC - 2017 and x64
+building target and its similar to msbuild-2017-x86-setup. 
+
+#+BEGIN_SRC emacs-lisp 
+  (defun msbuild-2017-x64-setup ()
+    "Set enviorment variables to load Microsoft Visual C++ Compiler (MSVC) 64 bits"
+    (interactive)
+    (message "Setting 64 bits building tools.")
+    (setenv "PATH" msbuild-old-path-var)
+    (setenv "INCLUDE"
+          (concat
+               "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/include"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/include"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/include/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/ucrt"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/shared"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/um"
+           ";" "C:/Program Files (x86)/Windows Kits/10/include/10.0.16299.0/winrt"
+           ))
+
+    (setenv "LIB"
+          (concat
+               "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/lib/x64"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x64"
+           ";" "C:/Program Files (x86)/Windows Kits/NETFXSDK/4.6.1/lib/um/x64"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/ucrt/x64"
+           ";" "C:/Program Files (x86)/Windows Kits/10/lib/10.0.16299.0/um/x64"             
+           ))
+
+    (setenv  "LIBPATH"
+           (concat
+                "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/ATLMFC/lib/x64"
+            ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x64"
+            ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/lib/x64/store/references"
+            ";" "C:/Program Files (x86)/Windows Kits/10/UnionMetadata/10.0.16299.0"
+            ";" "C:/Program Files (x86)/Windows Kits/10/References/10.0.16299.0"
+            ";" "C:/Windows/Microsoft.NET/Framework/v4.0.30319"
+            ))
+
+    (setenv "PATH"
+          (concat
+           (getenv "PATH")
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.12.25827/bin/HostX86/x64"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/VC/VCPackages"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/MSBuild/15.0/bin/Roslyn"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Team Tools/Performance Tools"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/Shared/Common/VSPerfCollectionTools/"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.6.1 Tools/"
+           ";" "C:/Program Files (x86)/Microsoft SDKs/F#/4.1/Framework/v4.0/"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/x64"
+           ";" "C:/Program Files (x86)/Windows Kits/10/bin/10.0.16299.0/x64"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community//MSBuild/15.0/bin"
+           ";" "C:/Windows/Microsoft.NET/Framework/v4.0.30319"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/"
+           ";" "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/Tools/"
+           )))
+
+#+END_SRC
+
+This command allows to compile the current buffer. For instance, if
+the current buffer is associated to a file test1.cpp and user types
+_M-x compile-msvc-x86_, it will show a prompt with _cl.exe test1.cpp_
+asking the user to confirm or complement the compilation command.
+
+#+BEGIN_SRC emacs-lisp 
+(defun compile-msvc-x86()
+  (interactive)
+  (msbuild-2017-x86-setup)
+  (let ((compile-command (format "cl.exe \"%s\""
+                                 (file-name-nondirectory (buffer-file-name))))
+        (compilation-ask-about-save nil))
+    (call-interactively #'compile )))
+        
+(defun compile-msvc-x64 ()
+  (interactive)
+  (msbuild-2017-x64-setup)
+  (let ((compile-command (format "cl.exe \"%s\""
+                                 (file-name-nondirectory (buffer-file-name))))
+        (compilation-ask-about-save nil))
+    (call-interactively #'compile )))
+#+END_SRC
+
+The screenshot below shows an example about how those commands can be
+used: 
+
+[[file:images/emacs-msvc-windows.png][file:images/emacs-msvc-windows.png]]
+
+
