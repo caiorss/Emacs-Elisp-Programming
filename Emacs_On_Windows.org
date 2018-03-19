@@ -470,6 +470,9 @@ This command runs Powershell on Emacs:
 Usage: M-x run-powershell. 
 ** Visual C++ MSVC Building Tools 
 *** Calling MSVC tools from Emacs
+    :PROPERTIES:
+    :ID:       ea73a629-5cf0-4bd5-8b0f-ef0a418773f2
+    :END:
 
 Calling the default and official Windows' C++ compiler MSVC (Microsoft
 Visual C++) from command line is not easy as calling gcc, mingw or
@@ -651,9 +654,9 @@ used:
 
 [[file:images/emacs-msvc-windows.png][file:images/emacs-msvc-windows.png]]
 
-Test file: test.cpp 
+Test file: [[file:codes/test.cpp][file:codes/test.cpp]]
 
-#+BEGIN_SRC cpp 
+#+BEGIN_SRC cpp :tangle codes/test.cpp
   #include <iostream>
 
   using namespace std;
@@ -804,3 +807,95 @@ Install [[https://chocolatey.org/packages/mingw][Mingw]] - gcc/g++ GNU C/C++ Com
 #+BEGIN_SRC sh 
  $ choco install mingw 
 #+END_SRC
+*** Build automation tools and batch files
+    :PROPERTIES:
+    :ID:       20becc36-1726-4965-a9ec-0977c5b7b11d
+    :END:
+
+Batch files (*.bat extensions) can be used as *nix Makefiles to
+perform build-automation on Windows, compile C++, C, and C# programs
+and also perform a wide variety of tasks.
+
+Example: This file _build.bat_ compiles and run the file test1.cpp with
+Visual C++ compiler. To build the C++ file [[file:codes/test.cpp][file:codes/test.cpp]], it
+just to put this file to the directory to the directory where is
+test.cpp and then type in Emacs _M-x build_ or _M-x build.bat_. The build
+script can also be executed using the Windows shell cmd.exe, by
+entering $ cd <project> and then typing build or build.bat.
+
+File: [[file:codes/build.bat][file:codes/build.bat]]
+
+#+BEGIN_SRC bat :tangle codes/build.bat
+  @echo off
+
+  rem  Compile for x86 or x64 bits 
+  rem ------------------------------
+  set MODE=x86          
+  rem set MODE=x64   
+
+  @REM Visual studio building tools path - Install it with chocolately 
+  set VS2017="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
+  set VS2015="C:\Program Files (x86)\Microsoft Visual C++ Build Tools\vcbuildtools.bat" 
+
+  rem Save current directory     
+  pushd %CD%
+
+  @REM Set visual Studio 2017 
+  call %VS2017% %MODE% 
+
+  @REM Restore saved directory     
+  popd 
+
+  @REM ------------------ User Command Goes Here ----------------- @REM     
+         
+  @REM Build solution in Debug mode
+  cl.exe  test.cpp && test.exe 
+
+  @REM Set /p Wait=Build Process Completed...    
+#+END_SRC
+
+This build script can be adapted to use other Windows building tools,
+for instance, the line where is cl.exe could be replaced with: 
+
+ + $ msbuild WpfAppLearning.sln /p:Configuration=Release /p:Platform="Any CPU"
+   * To build a Visual studio solution (aka project).
+
+ + $ Devenv WpfAppLearning.sln /Rebuild Debug
+   * Rebuild applicatio with Visual Studio Command line switch.
+
+ + $ fsc.exe app1.fsx <flags>
+   * Compile a F# application
+
+ + $ csc.exe app1.cs
+   * Compile a C# application
+
+ + $ scalac app1.scala -d app1.jar && scala app1.jar
+   * Compile a Scala application and run it.
+
+It is also worth knowing some DOS / Windows command line tools for
+compiling applications on Windows. 
+
+
+| Action                                                 | Windows command prompt window   | OS X Terminal or X11 window |
+|--------------------------------------------------------+---------------------------------+-----------------------------|
+| Clear terminal                                         | cls                             | clear                       |
+| Change to a different directory                        | cd                              | cd                          |
+| Make a new directory                                   | mkdir or md                     | mkdir                       |
+| Delete a directory                                     | rmdir or rd                     | rmdir                       |
+| List file directory in chronological order with detail | dir /od                         | ls -ltr                     |
+| Copy a file, preserving its date-time stamp            | copy <file> <dest>              | cp -p                       |
+| Display contents of a text file                        | type <file>                     | cat <file>                  |
+| Delete a file                                          | erase                           | rm                          |
+| Move a file                                            | move                            | mv                          |
+| Rename a file                                          | ren                             | mv                          |
+| Find a file                                            | dir /s                          | find                        |
+| Grep a file                                            | findstr                         | grep                        |
+| Display differences between two text files             | fc                              | diff                        |
+| Change file attributes                                 | attrib                          | chmod                       |
+| “Super-user” root authorization                        | N/A                             | sudo                        |
+| Create symbolic link to a file or directory            | N/A                             | ln                          |
+| Shrink executable file size                            | strip (included w/ Free Pascal) | strip                       |
+| Show environment variables                             | set                             | env                         |
+| Set environment variable                               | set PATH=%PATH%;E:/dir/bin      | export PATH=$PATH:/dir/bin  |
+|                                                        |                                 |                             |
+
