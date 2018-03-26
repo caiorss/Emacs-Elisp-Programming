@@ -89,7 +89,7 @@ function =next-buffer= that can be executed with M-x next-buffer.
 
 To learn which function is bound to key type: =M-x describe-key= and
 then type the key binding like =C-x <right>= to pop up a window that
-shows the function bound to that key or just type =C-h-k= and type the
+shows the function bound to that key or just type =C-h k= and type the
 key combination.
 
 [[file:images/function_keybind_describe.png][file:images/function_keybind_describe.png]]
