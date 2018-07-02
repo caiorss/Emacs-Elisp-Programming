@@ -10,7 +10,7 @@ html:
 	cp -r -v images/* dist/images/
 	cp -r *.org  dist/
 	cp -r theme/* dist/theme 
-	cp -r -v codes dist/codes
+	cp -r -v codes/* dist/codes
 
 browse:
 	firefox dist/index.html
