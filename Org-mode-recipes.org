@@ -90,13 +90,13 @@ The output is exported to the file [[file:codes/report.txt][file:codes/report.tx
 [[file:codes/report.txt]]
 
 
-
 ** Example: Runnable C++ Code block 
+*** Complete C++ minimum program 
 
 Code block source 
 
 #+BEGIN_SRC org 
-  ,#+BEGIN_SRC c++ 
+  ,#+BEGIN_SRC c++ :exports both 
   #include <iostream>
 
   int main(int argc, char** argv)
@@ -111,7 +111,7 @@ Code block rendered
 
  - To run this code block, place the cursor within it and type C-c C-c 
 
-#+BEGIN_SRC cpp 
+#+BEGIN_SRC cpp :exports both 
 #include <iostream>
 
 int main(int argc, char** argv)
@@ -123,6 +123,52 @@ int main(int argc, char** argv)
 
 #+RESULTS:
 | Hello | world. |
+
+*** Runnable C++ Snippet 
+
+Code block source 
+
+#+BEGIN_SRC org 
+  ,#+HEADER: :includes (list "<iostream>" "<iomanip>" "<cmath>" "<string>")
+  ,#+HEADER: :exports both 
+  ,#+BEGIN_SRC cpp 
+    for(int i = -4; i < 10; i++){
+      std::cout << std::setw(10) << std::fixed << std::setprecision(2) << static_cast<double>(i)
+                << std::setw(10) << std::fixed << std::setprecision(3) << log(i)
+                << "\n";
+    }
+  ,#+END_SRC
+#+END_SRC
+
+Code redered - after the user paste the code in Emacs.
+
+#+HEADER: :includes (list "<iostream>" "<iomanip>" "<cmath>" "<string>")
+#+HEADER: :exports both 
+#+BEGIN_SRC cpp 
+  for(int i = -4; i < 10; i++){
+    std::cout << std::setw(10) << std::fixed << std::setprecision(2) << static_cast<double>(i)
+              << std::setw(10) << std::fixed << std::setprecision(3) << log(i)
+              << "\n";
+  }
+#+END_SRC
+
+Program output:
+
+#+RESULTS:
+| -4.0 |   nan |
+| -3.0 |   nan |
+| -2.0 |   nan |
+| -1.0 |   nan |
+|  0.0 |  -inf |
+|  1.0 |   0.0 |
+|  2.0 | 0.693 |
+|  3.0 | 1.099 |
+|  4.0 | 1.386 |
+|  5.0 | 1.609 |
+|  6.0 | 1.792 |
+|  7.0 | 1.946 |
+|  8.0 | 2.079 |
+|  9.0 | 2.197 |
 
 ** Example: Exporting/Tangling code block to file 
    :PROPERTIES:

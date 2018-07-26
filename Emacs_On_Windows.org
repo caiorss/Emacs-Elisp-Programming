@@ -257,6 +257,21 @@ pitfalls and annoyances.
   (load custom-file 'noerror)
 #+END_SRC
 
+ - Handy key bindings for invoking compilation command.
+   + Type F9 to call M-x compile
+   + Type Ctrl + F9 to call M-x recompile - running the compilation
+     command again. 
+
+#+BEGIN_SRC emacs-lisp 
+  (global-set-key (kbd "<f9>") #'compile)
+
+  (global-set-key (kbd "<C-f9>")
+                  (lambda () (interactive)
+                    (save-buffer)
+                    (recompile)                
+                    ))
+#+END_SRC
+
 ** Unix utilities 
 
 You can bash install with Chocolately package manager or download GIT
@@ -819,38 +834,32 @@ and also perform a wide variety of tasks.
 Example: This file _build.bat_ compiles and run the file test1.cpp with
 Visual C++ compiler. To build the C++ file [[file:codes/test.cpp][file:codes/test.cpp]], it
 just to put this file to the directory to the directory where is
-test.cpp and then type in Emacs _M-x build_ or _M-x build.bat_. The build
-script can also be executed using the Windows shell cmd.exe, by
-entering $ cd <project> and then typing build or build.bat.
+test.cpp and then type in Emacs _M-x build_ or _M-x build.bat_. 
+
+The build script can also be executed using the Windows shell cmd.exe,
+by entering $ cd <project> and then typing build or build.bat. It can
+also be run by double clicking at the file build.bat.
 
 File: [[file:codes/build.bat][file:codes/build.bat]]
 
 #+BEGIN_SRC bat :tangle codes/build.bat
   @echo off
-
   rem  Compile for x86 or x64 bits 
   rem ------------------------------
   set MODE=x86          
   rem set MODE=x64   
-
   @REM Visual studio building tools path - Install it with chocolately 
   set VS2017="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
   set VS2015="C:\Program Files (x86)\Microsoft Visual C++ Build Tools\vcbuildtools.bat" 
-
   rem Save current directory     
   pushd %CD%
-
   @REM Set visual Studio 2017 
   call %VS2017% %MODE% 
-
   @REM Restore saved directory     
   popd 
-
-  @REM ------------------ User Command Goes Here ----------------- @REM     
-         
+  @REM ------------------ User Command Goes Here ----------------- @REM             
   @REM Build solution in Debug mode
   cl.exe  test.cpp && test.exe 
-
   @REM Set /p Wait=Build Process Completed...    
 #+END_SRC
 
@@ -876,26 +885,47 @@ It is also worth knowing some DOS / Windows command line tools for
 compiling applications on Windows. 
 
 
-| Action                                                 | Windows command prompt window   | OS X Terminal or X11 window |
-|--------------------------------------------------------+---------------------------------+-----------------------------|
-| Clear terminal                                         | cls                             | clear                       |
-| Change to a different directory                        | cd                              | cd                          |
-| Make a new directory                                   | mkdir or md                     | mkdir                       |
-| Delete a directory                                     | rmdir or rd                     | rmdir                       |
-| List file directory in chronological order with detail | dir /od                         | ls -ltr                     |
-| Copy a file, preserving its date-time stamp            | copy <file> <dest>              | cp -p                       |
-| Display contents of a text file                        | type <file>                     | cat <file>                  |
-| Delete a file                                          | erase                           | rm                          |
-| Move a file                                            | move                            | mv                          |
-| Rename a file                                          | ren                             | mv                          |
-| Find a file                                            | dir /s                          | find                        |
-| Grep a file                                            | findstr                         | grep                        |
-| Display differences between two text files             | fc                              | diff                        |
-| Change file attributes                                 | attrib                          | chmod                       |
-| “Super-user” root authorization                        | N/A                             | sudo                        |
-| Create symbolic link to a file or directory            | N/A                             | ln                          |
-| Shrink executable file size                            | strip (included w/ Free Pascal) | strip                       |
-| Show environment variables                             | set                             | env                         |
-| Set environment variable                               | set PATH=%PATH%;E:/dir/bin      | export PATH=$PATH:/dir/bin  |
-|                                                        |                                 |                             |
+| Description                                             | Unix, Linux, MacOSX and BSD | Windows, MSDOS and OS/2         |
+|---------------------------------------------------------+-----------------------------+---------------------------------|
+| Show Command Help                                       | bash --help                 | set /?, cl.exe /? ..            |
+|                                                         |                             |                                 |
+| Show current User                                       | whoami                      | whoami                          |
+| Show path of application or executable                  | which bash                  | where notepad.exe               |
+| Clear terminal                                          | clear                       | cls                             |
+|                                                         |                             |                                 |
+| Go to directory, aka path                               | cd <path>;                  | cd <path>                       |
+| Go to Disk or Mount Point                               | $ cd /mnt/mount-point       | $ C:, $ D:, $ E: ..             |
+| Change to a different directory                         | cd                          | cd                              |
+|                                                         |                             |                                 |
+| List directory                                          | ls <dir>                    | dir <dir>                       |
+| List file directory in chronological order with detail  | ls -ltr                     | dir /od                         |
+| Make a new directory                                    | mkdir                       | mkdir or md                     |
+| Delete a directory                                      | rmdir                       | rmdir or rd                     |
+|                                                         |                             |                                 |
+| Display contents of a text file                         | cat <file>                  | type <file>                     |
+| Copy a file, preserving its date-time stamp             | cp -p                       | copy <file> <dest>              |
+| Delete a file                                           | rm <file>                   | erase <file> OR del <file>      |
+| Move a file                                             | mv <file> <new-name>        | move                            |
+| Rename a file                                           | mv                          | ren                             |
+| Find a file                                             | find                        | dir /s                          |
+| Grep a file                                             | grep                        | findstr                         |
+| Display differences between two text files              | diff                        | fc                              |
+| Change file attributes                                  | chmod                       | attrib                          |
+| “Super-user” root authorization                         | sudo                        | N/A                             |
+| Create symbolic link to a file or directory             | ln                          | N/A                             |
+|                                                         |                             |                                 |
+| Show environment variables                              | env                         | set                             |
+| Set environment variable                                | export PATH=$PATH:/dir/bin  | set PATH=%PATH%;E:/dir/bin      |
+| Set environment variable permanently                    | N/A                         | setx <VARIABLE>=<VALUE>         |
+| Redirect command output to file                         |                             | set                             |
+|                                                         |                             |                                 |
+| Open file dor directory with default system application | xdg-open file1.ppt          | start file1.ppt                 |
+|                                                         |                             |                                 |
+| Shrink executable file size                             | strip                       | strip (included w/ Free Pascal) |
+|                                                         |                             |                                 |
+|---------------------------------------------------------+-----------------------------+---------------------------------|
+
+ + Note:
+   + xdg-open only exists on Linux or BSD with X11
+   + On MacOSX the equivalent is _open_ 
 

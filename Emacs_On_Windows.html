@@ -4,11 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs on Microsoft Windows</title>
-<!-- 2018-03-19 Mon 14:23 -->
+<!-- 2018-07-26 Thu 07:42 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="description" content="Emacs programming and customization."
- />
 <meta  name="keywords" content="emacs, shell, eshell, windows, microsoft, cmd.exe" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -90,7 +88,9 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link href="theme/style.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+<link href="theme/org-nav-theme.css" rel="stylesheet">
+<script src="theme/org-nav-theme.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -644,6 +644,30 @@ CRLF as line ending.
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">setq</span> custom-file <span class="org-string">"~/.emacs.d/custom.el"</span>)
 (load custom-file 'noerror)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Handy key bindings for invoking compilation command.
+<ul class="org-ul">
+<li>Type F9 to call M-x compile
+</li>
+<li>Type Ctrl + F9 to call M-x recompile - running the compilation
+command again. 
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"&lt;f9&gt;"</span>) #'compile)
+
+(global-set-key (kbd <span class="org-string">"&lt;C-f9&gt;"</span>)
+                (<span class="org-keyword">lambda</span> () (<span class="org-keyword">interactive</span>)
+                  (save-buffer)
+                  (recompile)                
+                  ))
 </pre>
 </div>
 </div>
@@ -1384,9 +1408,13 @@ and also perform a wide variety of tasks.
 Example: This file <span class="underline">build.bat</span> compiles and run the file test1.cpp with
 Visual C++ compiler. To build the C++ file <a href="codes/test.cpp"><a href="codes/test.cpp">codes/test.cpp</a></a>, it
 just to put this file to the directory to the directory where is
-test.cpp and then type in Emacs <span class="underline">M-x build</span> or <span class="underline">M-x build.bat</span>. The build
-script can also be executed using the Windows shell cmd.exe, by
-entering $ cd &lt;project&gt; and then typing build or build.bat.
+test.cpp and then type in Emacs <span class="underline">M-x build</span> or <span class="underline">M-x build.bat</span>. 
+</p>
+
+<p>
+The build script can also be executed using the Windows shell cmd.exe,
+by entering $ cd &lt;project&gt; and then typing build or build.bat. It can
+also be run by double clicking at the file build.bat.
 </p>
 
 <p>
@@ -1396,30 +1424,22 @@ File: <a href="codes/build.bat"><a href="codes/build.bat">codes/build.bat</a></a
 <div class="org-src-container">
 
 <pre class="src src-bat">@<span class="org-builtin">echo</span> off
-
 <span class="org-comment">rem  Compile for x86 or x64 bits </span>
 <span class="org-comment">rem ------------------------------</span>
 <span class="org-builtin">set</span> <span class="org-variable-name">MODE</span>=x86          
 <span class="org-comment">rem set MODE=x64   </span>
-
 <span class="org-comment">@REM Visual studio building tools path - Install it with chocolately </span>
 <span class="org-builtin">set</span> <span class="org-variable-name">VS2017</span>=<span class="org-string">"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat"</span>
 <span class="org-builtin">set</span> <span class="org-variable-name">VS2015</span>=<span class="org-string">"C:\Program Files (x86)\Microsoft Visual C++ Build Tools\vcbuildtools.bat"</span> 
-
 <span class="org-comment">rem Save current directory     </span>
 <span class="org-builtin">pushd</span> %<span class="org-variable-name">CD</span>%
-
 <span class="org-comment">@REM Set visual Studio 2017 </span>
 <span class="org-keyword">call</span> %<span class="org-constant">VS2017</span>% %<span class="org-variable-name">MODE</span>% 
-
 <span class="org-comment">@REM Restore saved directory     </span>
 <span class="org-builtin">popd</span> 
-
-<span class="org-comment">@REM ------------------ User Command Goes Here ----------------- @REM     </span>
-
+<span class="org-comment">@REM ------------------ User Command Goes Here ----------------- @REM             </span>
 <span class="org-comment">@REM Build solution in Debug mode</span>
 cl.exe  test.cpp &amp;&amp; test.exe 
-
 <span class="org-comment">@REM Set /</span><span class="org-type"><span class="org-comment">p</span></span><span class="org-comment"> Wait=Build Process Completed...</span>
 </pre>
 </div>
@@ -1484,16 +1504,58 @@ compiling applications on Windows.
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">Action</th>
-<th scope="col" class="left">Windows command prompt window</th>
-<th scope="col" class="left">OS X Terminal or X11 window</th>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="left">Unix, Linux, MacOSX and BSD</th>
+<th scope="col" class="left">Windows, MSDOS and OS/2</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td class="left">Show Command Help</td>
+<td class="left">bash &#x2013;help</td>
+<td class="left">set /?, cl.exe /? ..</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Show current User</td>
+<td class="left">whoami</td>
+<td class="left">whoami</td>
+</tr>
+
+<tr>
+<td class="left">Show path of application or executable</td>
+<td class="left">which bash</td>
+<td class="left">where notepad.exe</td>
+</tr>
+
+<tr>
 <td class="left">Clear terminal</td>
-<td class="left">cls</td>
 <td class="left">clear</td>
+<td class="left">cls</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Go to directory, aka path</td>
+<td class="left">cd &lt;path&gt;;</td>
+<td class="left">cd &lt;path&gt;</td>
+</tr>
+
+<tr>
+<td class="left">Go to Disk or Mount Point</td>
+<td class="left">$ cd /mnt/mount-point</td>
+<td class="left">$ C:, $ D:, $ E: ..</td>
 </tr>
 
 <tr>
@@ -1503,105 +1565,159 @@ compiling applications on Windows.
 </tr>
 
 <tr>
-<td class="left">Make a new directory</td>
-<td class="left">mkdir or md</td>
-<td class="left">mkdir</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left">Delete a directory</td>
-<td class="left">rmdir or rd</td>
-<td class="left">rmdir</td>
+<td class="left">List directory</td>
+<td class="left">ls &lt;dir&gt;</td>
+<td class="left">dir &lt;dir&gt;</td>
 </tr>
 
 <tr>
 <td class="left">List file directory in chronological order with detail</td>
-<td class="left">dir /od</td>
 <td class="left">ls -ltr</td>
+<td class="left">dir /od</td>
 </tr>
 
 <tr>
-<td class="left">Copy a file, preserving its date-time stamp</td>
-<td class="left">copy &lt;file&gt; &lt;dest&gt;</td>
-<td class="left">cp -p</td>
+<td class="left">Make a new directory</td>
+<td class="left">mkdir</td>
+<td class="left">mkdir or md</td>
+</tr>
+
+<tr>
+<td class="left">Delete a directory</td>
+<td class="left">rmdir</td>
+<td class="left">rmdir or rd</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left">Display contents of a text file</td>
-<td class="left">type &lt;file&gt;</td>
 <td class="left">cat &lt;file&gt;</td>
+<td class="left">type &lt;file&gt;</td>
+</tr>
+
+<tr>
+<td class="left">Copy a file, preserving its date-time stamp</td>
+<td class="left">cp -p</td>
+<td class="left">copy &lt;file&gt; &lt;dest&gt;</td>
 </tr>
 
 <tr>
 <td class="left">Delete a file</td>
-<td class="left">erase</td>
-<td class="left">rm</td>
+<td class="left">rm &lt;file&gt;</td>
+<td class="left">erase &lt;file&gt; OR del &lt;file&gt;</td>
 </tr>
 
 <tr>
 <td class="left">Move a file</td>
+<td class="left">mv &lt;file&gt; &lt;new-name&gt;</td>
 <td class="left">move</td>
-<td class="left">mv</td>
 </tr>
 
 <tr>
 <td class="left">Rename a file</td>
-<td class="left">ren</td>
 <td class="left">mv</td>
+<td class="left">ren</td>
 </tr>
 
 <tr>
 <td class="left">Find a file</td>
-<td class="left">dir /s</td>
 <td class="left">find</td>
+<td class="left">dir /s</td>
 </tr>
 
 <tr>
 <td class="left">Grep a file</td>
-<td class="left">findstr</td>
 <td class="left">grep</td>
+<td class="left">findstr</td>
 </tr>
 
 <tr>
 <td class="left">Display differences between two text files</td>
-<td class="left">fc</td>
 <td class="left">diff</td>
+<td class="left">fc</td>
 </tr>
 
 <tr>
 <td class="left">Change file attributes</td>
-<td class="left">attrib</td>
 <td class="left">chmod</td>
+<td class="left">attrib</td>
 </tr>
 
 <tr>
 <td class="left">“Super-user” root authorization</td>
-<td class="left">N/A</td>
 <td class="left">sudo</td>
+<td class="left">N/A</td>
 </tr>
 
 <tr>
 <td class="left">Create symbolic link to a file or directory</td>
-<td class="left">N/A</td>
 <td class="left">ln</td>
+<td class="left">N/A</td>
 </tr>
 
 <tr>
-<td class="left">Shrink executable file size</td>
-<td class="left">strip (included w/ Free Pascal)</td>
-<td class="left">strip</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="left">Show environment variables</td>
-<td class="left">set</td>
 <td class="left">env</td>
+<td class="left">set</td>
 </tr>
 
 <tr>
 <td class="left">Set environment variable</td>
-<td class="left">set PATH=%PATH%;E:/dir/bin</td>
 <td class="left">export PATH=$PATH:/dir/bin</td>
+<td class="left">set PATH=%PATH%;E:/dir/bin</td>
+</tr>
+
+<tr>
+<td class="left">Set environment variable permanently</td>
+<td class="left">N/A</td>
+<td class="left">setx &lt;VARIABLE&gt;=&lt;VALUE&gt;</td>
+</tr>
+
+<tr>
+<td class="left">Redirect command output to file</td>
+<td class="left">&#xa0;</td>
+<td class="left">set</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Open file dor directory with default system application</td>
+<td class="left">xdg-open file1.ppt</td>
+<td class="left">start file1.ppt</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Shrink executable file size</td>
+<td class="left">strip</td>
+<td class="left">strip (included w/ Free Pascal)</td>
 </tr>
 
 <tr>
@@ -1611,13 +1727,24 @@ compiling applications on Windows.
 </tr>
 </tbody>
 </table>
+
+<ul class="org-ul">
+<li>Note:
+<ul class="org-ul">
+<li>xdg-open only exists on Linux or BSD with X11
+</li>
+<li>On MacOSX the equivalent is <span class="underline">open</span> 
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2018-03-19 Mon 14:23</p>
+<p class="date">Created: 2018-07-26 Thu 07:42</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
