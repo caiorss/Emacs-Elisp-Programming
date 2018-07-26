@@ -834,38 +834,32 @@ and also perform a wide variety of tasks.
 Example: This file _build.bat_ compiles and run the file test1.cpp with
 Visual C++ compiler. To build the C++ file [[file:codes/test.cpp][file:codes/test.cpp]], it
 just to put this file to the directory to the directory where is
-test.cpp and then type in Emacs _M-x build_ or _M-x build.bat_. The build
-script can also be executed using the Windows shell cmd.exe, by
-entering $ cd <project> and then typing build or build.bat.
+test.cpp and then type in Emacs _M-x build_ or _M-x build.bat_. 
+
+The build script can also be executed using the Windows shell cmd.exe,
+by entering $ cd <project> and then typing build or build.bat. It can
+also be run by double clicking at the file build.bat.
 
 File: [[file:codes/build.bat][file:codes/build.bat]]
 
 #+BEGIN_SRC bat :tangle codes/build.bat
   @echo off
-
   rem  Compile for x86 or x64 bits 
   rem ------------------------------
   set MODE=x86          
   rem set MODE=x64   
-
   @REM Visual studio building tools path - Install it with chocolately 
   set VS2017="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat"
   set VS2015="C:\Program Files (x86)\Microsoft Visual C++ Build Tools\vcbuildtools.bat" 
-
   rem Save current directory     
   pushd %CD%
-
   @REM Set visual Studio 2017 
   call %VS2017% %MODE% 
-
   @REM Restore saved directory     
   popd 
-
-  @REM ------------------ User Command Goes Here ----------------- @REM     
-         
+  @REM ------------------ User Command Goes Here ----------------- @REM             
   @REM Build solution in Debug mode
   cl.exe  test.cpp && test.exe 
-
   @REM Set /p Wait=Build Process Completed...    
 #+END_SRC
 
