@@ -9,7 +9,7 @@ html:
     ## Prepare files for upload.
 	cp -r -v images/* dist/images/
 	cp -r *.org  dist/
-	cp -r theme/* dist/theme 
+	# cp -r theme/* dist/theme 
 	cp -r -v codes/* dist/codes
 
 browse:
