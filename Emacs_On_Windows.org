@@ -257,6 +257,21 @@ pitfalls and annoyances.
   (load custom-file 'noerror)
 #+END_SRC
 
+ - Handy key bindings for invoking compilation command.
+   + Type F9 to call M-x compile
+   + Type Ctrl + F9 to call M-x recompile - running the compilation
+     command again. 
+
+#+BEGIN_SRC emacs-lisp 
+  (global-set-key (kbd "<f9>") #'compile)
+
+  (global-set-key (kbd "<C-f9>")
+                  (lambda () (interactive)
+                    (save-buffer)
+                    (recompile)                
+                    ))
+#+END_SRC
+
 ** Unix utilities 
 
 You can bash install with Chocolately package manager or download GIT
