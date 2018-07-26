@@ -876,26 +876,47 @@ It is also worth knowing some DOS / Windows command line tools for
 compiling applications on Windows. 
 
 
-| Action                                                 | Windows command prompt window   | OS X Terminal or X11 window |
-|--------------------------------------------------------+---------------------------------+-----------------------------|
-| Clear terminal                                         | cls                             | clear                       |
-| Change to a different directory                        | cd                              | cd                          |
-| Make a new directory                                   | mkdir or md                     | mkdir                       |
-| Delete a directory                                     | rmdir or rd                     | rmdir                       |
-| List file directory in chronological order with detail | dir /od                         | ls -ltr                     |
-| Copy a file, preserving its date-time stamp            | copy <file> <dest>              | cp -p                       |
-| Display contents of a text file                        | type <file>                     | cat <file>                  |
-| Delete a file                                          | erase                           | rm                          |
-| Move a file                                            | move                            | mv                          |
-| Rename a file                                          | ren                             | mv                          |
-| Find a file                                            | dir /s                          | find                        |
-| Grep a file                                            | findstr                         | grep                        |
-| Display differences between two text files             | fc                              | diff                        |
-| Change file attributes                                 | attrib                          | chmod                       |
-| “Super-user” root authorization                        | N/A                             | sudo                        |
-| Create symbolic link to a file or directory            | N/A                             | ln                          |
-| Shrink executable file size                            | strip (included w/ Free Pascal) | strip                       |
-| Show environment variables                             | set                             | env                         |
-| Set environment variable                               | set PATH=%PATH%;E:/dir/bin      | export PATH=$PATH:/dir/bin  |
-|                                                        |                                 |                             |
+| Description                                             | Unix, Linux, MacOSX and BSD | Windows, MSDOS and OS/2         |
+|---------------------------------------------------------+-----------------------------+---------------------------------|
+| Show Command Help                                       | bash --help                 | set /?, cl.exe /? ..            |
+|                                                         |                             |                                 |
+| Show current User                                       | whoami                      | whoami                          |
+| Show path of application or executable                  | which bash                  | where notepad.exe               |
+| Clear terminal                                          | clear                       | cls                             |
+|                                                         |                             |                                 |
+| Go to directory, aka path                               | cd <path>;                  | cd <path>                       |
+| Go to Disk or Mount Point                               | $ cd /mnt/mount-point       | $ C:, $ D:, $ E: ..             |
+| Change to a different directory                         | cd                          | cd                              |
+|                                                         |                             |                                 |
+| List directory                                          | ls <dir>                    | dir <dir>                       |
+| List file directory in chronological order with detail  | ls -ltr                     | dir /od                         |
+| Make a new directory                                    | mkdir                       | mkdir or md                     |
+| Delete a directory                                      | rmdir                       | rmdir or rd                     |
+|                                                         |                             |                                 |
+| Display contents of a text file                         | cat <file>                  | type <file>                     |
+| Copy a file, preserving its date-time stamp             | cp -p                       | copy <file> <dest>              |
+| Delete a file                                           | rm <file>                   | erase <file> OR del <file>      |
+| Move a file                                             | mv <file> <new-name>        | move                            |
+| Rename a file                                           | mv                          | ren                             |
+| Find a file                                             | find                        | dir /s                          |
+| Grep a file                                             | grep                        | findstr                         |
+| Display differences between two text files              | diff                        | fc                              |
+| Change file attributes                                  | chmod                       | attrib                          |
+| “Super-user” root authorization                         | sudo                        | N/A                             |
+| Create symbolic link to a file or directory             | ln                          | N/A                             |
+|                                                         |                             |                                 |
+| Show environment variables                              | env                         | set                             |
+| Set environment variable                                | export PATH=$PATH:/dir/bin  | set PATH=%PATH%;E:/dir/bin      |
+| Set environment variable permanently                    | N/A                         | setx <VARIABLE>=<VALUE>         |
+| Redirect command output to file                         |                             | set                             |
+|                                                         |                             |                                 |
+| Open file dor directory with default system application | xdg-open file1.ppt          | start file1.ppt                 |
+|                                                         |                             |                                 |
+| Shrink executable file size                             | strip                       | strip (included w/ Free Pascal) |
+|                                                         |                             |                                 |
+|---------------------------------------------------------+-----------------------------+---------------------------------|
+
+ + Note:
+   + xdg-open only exists on Linux or BSD with X11
+   + On MacOSX the equivalent is _open_ 
 
