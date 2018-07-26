@@ -135,7 +135,7 @@ Emacs codes along with IELM - Emacs Lisp interactive shell.
 
  - [ ] Add more examples about org-mode API.
 
- - [ ] Add a better layout.
+ - [X] Add a better layout.
 
 ** Downloading it
 
