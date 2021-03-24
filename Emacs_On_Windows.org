@@ -342,7 +342,7 @@ Eshell provides many benefits to Windows users:
 
  - Easy copy and paste unlike cmd.exe
 
- - Integration with Eamcs since it can run Emacs commands (interactive
+ - Integration with Emacs since it can run Emacs commands (interactive
    functions) like shell commands.
 
 **** Screenshots
