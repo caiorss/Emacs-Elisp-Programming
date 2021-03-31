@@ -342,7 +342,7 @@ Eshell provides many benefits to Windows users:
 
  - Easy copy and paste unlike cmd.exe
 
- - Integration with Eamcs since it can run Emacs commands (interactive
+ - Integration with Emacs since it can run Emacs commands (interactive
    functions) like shell commands.
 
 **** Screenshots
@@ -506,7 +506,7 @@ Note: It was tested with MSVC 2017 and Windows10.
 To use it just copy the functions to the file ~/.init.el or emacs
 intialization file.
 
-- Porgram: 
+- Program: 
 
 Saves the original PATH variable 
 
