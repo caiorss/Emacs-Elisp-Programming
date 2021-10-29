@@ -264,7 +264,7 @@ key binding.
 |--------------------------+------------------------------------------------|
 | C-x C-f                  | Open a new file or a existing file.            |
 | C-x C-s                  | Save current buffer                            |
-| C-x b                    | Swithc Buffer                                  |
+| C-x b                    | Switch Buffer                                  |
 | M-;                      | Comment/ Uncomment Selected Code               |
 | M-/                      | Autocomplete word (Equivalent to VIM Ctrl + p) |
 | C-g                      | Cancel any Emacs command                       |
